@@ -3,9 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-WebAPI", "01-WebAPI", "{F51BDDF5-940B-4123-B59A-EB17F6D82914}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{35020BD9-BD5E-4F50-8DBD-A44F6E3A8D43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infra", "03-Infra", "{24DA0FCE-C19A-4ACA-A18D-448078E6E53C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-ExternalProjects", "04-ExternalProjects", "{E6A74E0D-375D-4665-85CF-4518BA904D47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Tests", "05-Tests", "{E14373F0-6A98-4823-9961-A55A08FABFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agilis.Domain", "src\Agilis.Domain\Agilis.Domain.csproj", "{DBAB77AB-EA18-420A-88B7-3EE815BB023C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBAB77AB-EA18-420A-88B7-3EE815BB023C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBAB77AB-EA18-420A-88B7-3EE815BB023C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBAB77AB-EA18-420A-88B7-3EE815BB023C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBAB77AB-EA18-420A-88B7-3EE815BB023C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DBAB77AB-EA18-420A-88B7-3EE815BB023C} = {35020BD9-BD5E-4F50-8DBD-A44F6E3A8D43}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D1F5422-CB19-4C0A-85AC-7134E720B6CC}
