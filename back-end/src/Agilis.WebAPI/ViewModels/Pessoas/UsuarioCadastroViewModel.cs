@@ -2,7 +2,7 @@
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 
-namespace Agilis.WebAPI.ViewModels.Seguranca
+namespace Agilis.WebAPI.ViewModels.Pessoas
 {
     /// <summary>
     /// View model usada para cadastrar novos usuários ou para alterar os dados do mesmo

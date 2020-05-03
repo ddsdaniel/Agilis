@@ -13,11 +13,13 @@ using DDS.WebAPI.Abstractions.Controllers;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.WebAPI.Extensions;
+using Agilis.Domain.Abstractions.Services.Pessoas;
+using Agilis.WebAPI.ViewModels.Pessoas;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
     /// <summary>
-    /// Menutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
+    /// Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]

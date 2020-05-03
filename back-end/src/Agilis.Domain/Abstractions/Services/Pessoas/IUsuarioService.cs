@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
 
-namespace Agilis.Domain.Abstractions.Services.Seguranca
+namespace Agilis.Domain.Abstractions.Services.Pessoas
 {
     public interface IUsuarioService : ICrudService<Usuario>
     {

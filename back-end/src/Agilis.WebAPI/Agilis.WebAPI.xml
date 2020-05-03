@@ -83,12 +83,24 @@
             <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline</param>
             <returns>app atualizado</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtorController">
             <summary>
-            Menutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
+            Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.#ctor(Agilis.Domain.Abstractions.Services.Seguranca.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtorController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
+            <summary>
+            Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -97,7 +109,7 @@
             <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
             <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Post(Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Post(Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel)">
             <summary>
             Realiza alguns procedimentos e validações com a senha antes de chamar o Post da classe base
             </summary>
@@ -118,6 +130,18 @@
             <param name="id">Id da entidade que será alterada</param>
             <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
             <returns>OK (201)</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoryController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoryController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
         </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
@@ -175,6 +199,91 @@
             <param name="logger">A generic interface for logging</param>
             <param name="serviceProvider">Defines a mechanism for retrieving a service object; that is, an object that provides custom support to other objects.</param>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel">
+            <summary>
+            Representa um ator, uma persona do universo Agilis
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.Id">
+            <summary>
+            Id do ator
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.Nome">
+            <summary>
+            Nome do ator
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">
+            <summary>
+            View model usada para cadastrar novos usuários ou para alterar os dados do mesmo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Id">
+            <summary>
+            Identificador único do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Email">
+            <summary>
+            E-mail do usuário, usado para login e recuperação de senha
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Nome">
+            <summary>
+            Nome do usuário, será concatenado com o sobrenome quando necessário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Sobrenome">
+            <summary>
+            Sobrenome, será concatenado com o nome quando necessário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Regra">
+            <summary>
+            Perfil do usuário, consultar valores possíveis
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.Senha">
+            <summary>
+            Senha de acesso, não cifrada
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel.ConfirmaSenha">
+            <summary>
+            Validação para conferir se o usuário não errou na digitação da senha
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel">
+            <summary>
+            Classe usada nos métodos que retornam dados ao front
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel.Id">
+            <summary>
+            Id do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel.Email">
+            <summary>
+            E-mail do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel.Nome">
+            <summary>
+            Nome do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel.Sobrenome">
+            <summary>
+            Sobrenome do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel.Regra">
+            <summary>
+            Indica o perfil do usuário
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel">
             <summary>
             Classe que repsenta a requisição de troca de senha do usuário
@@ -210,74 +319,84 @@
             Senha para realizar o login
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel">
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel">
             <summary>
-            View model usada para cadastrar novos usuários ou para alterar os dados do mesmo
+            Representa um comentário dentro do sistema, usado como value object em várias entidades
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Id">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Id">
             <summary>
-            Identificador único do usuário
+            Id do comentário
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Email">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Texto">
             <summary>
-            E-mail do usuário, usado para login e recuperação de senha
+            Texto do comentário
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Nome">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.DataCriacao">
             <summary>
-            Nome do usuário, será concatenado com o sobrenome quando necessário
+            Data de criação do comentário
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Sobrenome">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Autor">
             <summary>
-            Sobrenome, será concatenado com o nome quando necessário
+            Autor do comentário
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Regra">
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
             <summary>
-            Perfil do usuário, consultar valores possíveis
+            Marco histórico, ponto significativo na linha do tempo
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.Senha">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Id">
             <summary>
-            Senha de acesso, não cifrada
+            Id do milestone
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel.ConfirmaSenha">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Nome">
             <summary>
-            Validação para conferir se o usuário não errou na digitação da senha
+            Nome do Milestone
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Marco">
             <summary>
-            Classe usada nos métodos que retornam dados ao front
+            Data do marco histórico
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Id">
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">
             <summary>
-            Id do usuário
+            Representa uma história do usuário, ou seja, uma funcionalidade que ele deseja
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Email">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Nome">
             <summary>
-            E-mail do usuário
+            Nome curto da user story
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Nome">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Ator">
             <summary>
-            Nome do usuário
+            Persona para qual a história será útil
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Sobrenome">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Narrativa">
             <summary>
-            Sobrenome do usuário
+            O que se deseja
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Regra">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Objetivo">
             <summary>
-            Indica o perfil do usuário
+            Para que serve
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Comentarios">
+            <summary>
+            Comentários da user story
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Milestone">
+            <summary>
+            Milestone (opcional) da user story
             </summary>
         </member>
     </members>

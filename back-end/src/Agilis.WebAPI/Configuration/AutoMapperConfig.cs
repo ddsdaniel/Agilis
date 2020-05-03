@@ -4,6 +4,10 @@ using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
 using Agilis.WebAPI.ViewModels.Seguranca;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
+using Agilis.WebAPI.ViewModels.Pessoas;
+using Agilis.Domain.Models.ValueObjects;
+using Agilis.WebAPI.ViewModels.Trabalho;
+using Agilis.Domain.Models.Entities.Trabalho;
 
 namespace Agilis.WebAPI.Configuration
 {
@@ -37,9 +41,19 @@ namespace Agilis.WebAPI.Configuration
             CreateMap<string, SenhaMedia>()
                 .ConstructUsing(senha => new SenhaMedia(senha, Usuario.TAMANHO_MINIMO_SENHA));
 
+            //Trabalho
+            CreateMap<Comentario, ComentarioViewModel>()
+                .ReverseMap();
 
-            //Seguranca
-            CreateMap<LoginViewModel, Login>();
+            CreateMap<Milestone, MilestoneViewModel>()
+                .ReverseMap();
+
+            CreateMap<UserStory, UserStoryViewModel>()
+                .ReverseMap();
+
+            //Pessoas            
+            CreateMap<Ator, AtorViewModel>()
+                .ReverseMap();
 
             CreateMap<Usuario, UsuarioConsultaViewModel>();
 
@@ -53,6 +67,9 @@ namespace Agilis.WebAPI.Configuration
                         regra: vm.Regra
                         )
                  );
+
+            //Seguranca
+            CreateMap<LoginViewModel, Login>();
         }
     }
 }

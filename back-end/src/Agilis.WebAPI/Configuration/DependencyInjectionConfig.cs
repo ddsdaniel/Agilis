@@ -7,13 +7,19 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Agilis.Domain.Abstractions.Repositories;
-using Agilis.Domain.Abstractions.Repositories.Seguranca;
 using Agilis.Domain.Abstractions.Services.Seguranca;
 using Agilis.Domain.Abstractions.ValueObjects;
 using Agilis.Infra.Data.Repositories;
-using Agilis.Infra.Data.Repositories.Seguranca;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Services.Seguranca;
+using Agilis.Domain.Abstractions.Services.Pessoas;
+using Agilis.Domain.Abstractions.Repositories.Pessoas;
+using Agilis.Infra.Data.Reopositories.Pessoas;
+using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.Domain.Abstractions.Repositories.Trabalho;
+using Agilis.Domain.Services.Trabalho;
+using Agilis.Infra.Data.Reopositories.Trabalho;
+using Agilis.Domain.Services.Pessoas;
 
 namespace Agilis.WebAPI.Configuration
 {
@@ -36,12 +42,21 @@ namespace Agilis.WebAPI.Configuration
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //Seguranca
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            //Pessoas
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+			 services.AddScoped<IAtorService, AtorService>();
+            services.AddScoped<IAtorRepository, AtorRepository>();
+
+            //Seguranca
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICriptografiaSimetrica, AdvancedEncryptionStandard>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //Trabalho
+            services.AddScoped<IUserStoryService, UserStoryService>();
+            services.AddScoped<IUserStoryRepository, UserStoryRepository>();
 
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));

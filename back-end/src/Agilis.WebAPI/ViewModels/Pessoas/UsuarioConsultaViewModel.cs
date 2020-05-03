@@ -2,7 +2,7 @@
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 
-namespace Agilis.WebAPI.ViewModels.Seguranca
+namespace Agilis.WebAPI.ViewModels.Pessoas
 {
     /// <summary>
     /// Classe usada nos métodos que retornam dados ao front

@@ -2,14 +2,14 @@
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
-using Agilis.Domain.Abstractions.Services.Seguranca;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
+using Agilis.Domain.Abstractions.Services.Pessoas;
 
-namespace Agilis.Domain.Services.Seguranca
+namespace Agilis.Domain.Services.Pessoas
 {
     public class UsuarioService : CrudService<Usuario>, IUsuarioService
     {

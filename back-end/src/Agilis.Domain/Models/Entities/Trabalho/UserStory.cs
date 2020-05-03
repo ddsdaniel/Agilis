@@ -13,6 +13,11 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     public class UserStory : Entity
     {
         /// <summary>
+        /// Nome curto da user story
+        /// </summary>
+        public string Nome { get; private set; }
+
+        /// <summary>
         /// Persona para qual a história será útil
         /// </summary>
         public Ator Ator { get; private set; }
@@ -48,18 +53,21 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// <summary>
         /// Construtor completo, com validações
         /// </summary>
+        /// <param name="nome">Nome da user story</param>
         /// <param name="ator">Persona para qual a história será útil</param>
         /// <param name="narrativa">O que se deseja</param>
         /// <param name="objetivo">Para que serve</param>
         /// <param name="comentarios">Comentários da user story</param>
         /// <param name="milestone">Milestone (opcional) da user story</param>
-        public UserStory(Ator ator,
+        public UserStory(string nome,
+                         Ator ator,
                          string narrativa,
                          string objetivo,
                          ICollection<Comentario> comentarios,
                          Milestone milestone)
         {
             AddNotifications(new Contract()
+                .IsNotNullOrEmpty(nome, nameof(Nome), "NOME_INVALIDA")
                 .IsNotNull(ator, nameof(Ator), "ATOR_INVALIDO")
                 .IfNotNull(ator, c => c.Join(ator))
                 .IsNotNullOrEmpty(narrativa, nameof(Narrativa), "NARRATIVA_INVALIDA")
@@ -69,6 +77,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IfNotNull(milestone, c => c.Join(milestone))                
                 );
 
+            Nome = nome;
             Ator = ator;
             Narrativa = narrativa;
             Objetivo = objetivo;
