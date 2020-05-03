@@ -37,6 +37,9 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// </summary>
         public Milestone Milestone { get; private set; }
 
+        /// <summary>
+        /// Construtor usado apenas para a serialização e desserialização
+        /// </summary>
         protected UserStory()
         {
 

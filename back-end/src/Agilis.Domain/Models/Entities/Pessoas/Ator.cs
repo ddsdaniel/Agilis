@@ -13,6 +13,9 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         /// </summary>
         public string Nome { get; private set; }
 
+        /// <summary>
+        /// Construtor usado apenas para a serialização e desserialização
+        /// </summary>
         protected Ator()
         {
 

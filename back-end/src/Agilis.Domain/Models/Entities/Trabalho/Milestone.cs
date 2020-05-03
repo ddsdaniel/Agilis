@@ -19,6 +19,9 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// </summary>
         public DateTime Marco { get; private set; }
 
+        /// <summary>
+        /// Construtor usado apenas para a serialização e desserialização
+        /// </summary>
         protected Milestone()
         {
 

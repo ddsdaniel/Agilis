@@ -25,6 +25,9 @@ namespace Agilis.Domain.Models.ValueObjects
         /// </summary>
         public Usuario Autor { get; private set; }
 
+        /// <summary>
+        /// Construtor usado apenas para a serialização e desserialização
+        /// </summary>
         protected Comentario()
         {
 

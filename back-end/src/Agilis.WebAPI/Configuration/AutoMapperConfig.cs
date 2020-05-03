@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
-using Agilis.Domain.Models.Entities;
-using Agilis.Domain.Models.ValueObjects;
 using Agilis.WebAPI.ViewModels.Seguranca;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
