@@ -8,6 +8,7 @@ namespace Agilis.Domain.Abstractions.Repositories
     {
         IUserStoryRepository UserStoryRepository { get; }
         IAtorRepository AtorRepository { get; }
+        IMilestoneRepository MilestoneRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
         Task Commit();
     }

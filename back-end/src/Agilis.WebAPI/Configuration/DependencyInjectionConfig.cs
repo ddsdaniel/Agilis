@@ -46,7 +46,7 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-			 services.AddScoped<IAtorService, AtorService>();
+			services.AddScoped<IAtorService, AtorService>();
             services.AddScoped<IAtorRepository, AtorRepository>();
 
             //Seguranca
@@ -57,6 +57,9 @@ namespace Agilis.WebAPI.Configuration
             //Trabalho
             services.AddScoped<IUserStoryService, UserStoryService>();
             services.AddScoped<IUserStoryRepository, UserStoryRepository>();
+
+            services.AddScoped<IMilestoneService, MilestoneService>();
+            services.AddScoped<IMilestoneRepository, MilestoneRepository>();
 
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));

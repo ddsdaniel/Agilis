@@ -16,6 +16,7 @@ namespace Agilis.Infra.Data.Repositories
         public IUsuarioRepository UsuarioRepository { get; }
         public IUserStoryRepository UserStoryRepository { get; }
         public IAtorRepository AtorRepository { get; }
+        public IMilestoneRepository MilestoneRepository { get; }
 
         public UnitOfWork(IMongoDatabase database)
         {
@@ -23,6 +24,7 @@ namespace Agilis.Infra.Data.Repositories
             _session.StartTransaction();
 
             UsuarioRepository = new UsuarioRepository(database, _session);
+            MilestoneRepository = new MilestoneRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);
         }

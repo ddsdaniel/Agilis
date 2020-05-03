@@ -143,6 +143,18 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestoneController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestoneController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IMilestoneService,AutoMapper.IMapper)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+        </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
             Classe que provê métodos de extensão para IHttpContextAccessor

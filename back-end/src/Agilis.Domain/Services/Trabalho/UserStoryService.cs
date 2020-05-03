@@ -16,7 +16,9 @@ namespace Agilis.Domain.Services.Trabalho
 
         public override async Task Adicionar(UserStory entity)
         {
-            if (_unitOfWork.AtorRepository.ConsultarSeExiste(entity.Ator.Id) == false)
+            if (_unitOfWork.MilestoneRepository.ConsultarSeExiste(entity.Milestone.Id) == false)
+                AddNotification(nameof(entity.Milestone), "MILESTONE_NAO_ENCONTRADO");
+            else if (_unitOfWork.AtorRepository.ConsultarSeExiste(entity.Ator.Id) == false)
                 AddNotification(nameof(entity.Ator), "ATOR_NAO_ENCONTRADO");
             else
                 await base.Adicionar(entity);
