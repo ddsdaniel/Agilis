@@ -10,11 +10,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
     public class ComentarioViewModel:IViewModel
     {
         /// <summary>
-        /// Id do comentário
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
         /// Texto do comentário
         /// </summary>
         public string Texto { get;  set; }

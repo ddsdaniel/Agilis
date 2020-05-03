@@ -336,11 +336,6 @@
             Representa um comentário dentro do sistema, usado como value object em várias entidades
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Id">
-            <summary>
-            Id do comentário
-            </summary>
-        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Texto">
             <summary>
             Texto do comentário
