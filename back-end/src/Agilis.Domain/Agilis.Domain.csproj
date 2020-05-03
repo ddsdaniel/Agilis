@@ -6,14 +6,12 @@
 
   <ItemGroup>
     <Folder Include="Abstractions\Entities\" />
-    <Folder Include="Abstractions\ValueObjects\" />
-    <Folder Include="Abstractions\Services\" />
-    <Folder Include="Abstractions\Reopositories\" />
-    <Folder Include="Services\Seguranca\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Flunt" Version="1.0.5" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
