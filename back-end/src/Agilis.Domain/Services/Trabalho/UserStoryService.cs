@@ -14,14 +14,30 @@ namespace Agilis.Domain.Services.Trabalho
             
         }
 
-        public override async Task Adicionar(UserStory entity)
+        public override async Task Adicionar(UserStory userStory)
         {
-            if (_unitOfWork.MilestoneRepository.ConsultarSeExiste(entity.Milestone.Id) == false)
-                AddNotification(nameof(entity.Milestone), "MILESTONE_NAO_ENCONTRADO");
-            else if (_unitOfWork.AtorRepository.ConsultarSeExiste(entity.Ator.Id) == false)
-                AddNotification(nameof(entity.Ator), "ATOR_NAO_ENCONTRADO");
+            if (TestarEntidadesExistes(userStory))            
+                await base.Adicionar(userStory);
+        }
+
+        public override async Task Atualizar(UserStory userStory)
+        {
+            if (TestarEntidadesExistes(userStory))
+                await base.Atualizar(userStory);
+        }
+
+        private bool TestarEntidadesExistes(UserStory userStory)
+        {
+            if (userStory.Milestone != null && _unitOfWork.MilestoneRepository.ConsultarSeExiste(userStory.Milestone.Id) == false)
+                AddNotification(nameof(userStory.Milestone), "MILESTONE_NAO_ENCONTRADO");
+
+            else if (_unitOfWork.AtorRepository.ConsultarSeExiste(userStory.Ator.Id) == false)
+                AddNotification(nameof(userStory.Ator), "ATOR_NAO_ENCONTRADO");
+
             else
-                await base.Adicionar(entity);
+                return true;
+
+            return false;
         }
     }
 }
