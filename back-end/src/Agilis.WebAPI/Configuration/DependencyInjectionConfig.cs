@@ -31,7 +31,7 @@ namespace Agilis.WebAPI.Configuration
         public static IServiceCollection AddDependencyInjectionConfig(this IServiceCollection services, IConfiguration configuration)
         {
             //Banco de dados
-            var mongoDatabase = new MongoClient(new MongoClientSettings { ReplicaSetName = "rs1" }).GetDatabase("Agilis");
+            var mongoDatabase = new MongoClient(new MongoClientSettings { ReplicaSetName = "rs1" }).GetDatabase("agilis");
             services.TryAddScoped(x => mongoDatabase);
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

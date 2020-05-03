@@ -83,6 +83,72 @@
             <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline</param>
             <returns>app atualizado</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
+            <summary>
+            Menutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.#ctor(Agilis.Domain.Abstractions.Services.Seguranca.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="usuarioService">Serviço para validação e manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
+            <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Post(Agilis.WebAPI.ViewModels.Seguranca.UsuarioCadastroViewModel)">
+            <summary>
+            Realiza alguns procedimentos e validações com a senha antes de chamar o Post da classe base
+            </summary>
+            <param name="novoUsuarioViewModel">Dados do novo usuário</param>
+            <returns>Id do usuário recém cadastrado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)">
+            <summary>
+            Realiza a autenticação do usuário
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns>Dados do usuário + token da autenticação</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.AlterarSenha(System.Guid,Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel)">
+            <summary>
+            Altera a senha do usuário do repositório
+            </summary>
+            <param name="id">Id da entidade que será alterada</param>
+            <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
+            <returns>OK (201)</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
+            <summary>
+            Classe que provê métodos de extensão para IHttpContextAccessor
+            </summary>
+        </member>
+        <member name="M:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions.ObterEmail(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Obtém o e-mail do usuário logado
+            </summary>
+            <param name="httpContextAccessor">Variável injetada que contém os dados do usuário logado</param>
+            <returns></returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Program">
+            <summary>
+            Classe de inicialização da aplicação
+            </summary>
+        </member>
+        <member name="M:Agilis.WebAPI.Program.Main(System.String[])">
+            <summary>
+            Método por onde a aplicação inicia
+            </summary>
+            <param name="args">Parâmetros opcionais passados para a inicialização da aplicação</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Cria um builder default e configura o uso da Startup
+            </summary>
+            <param name="args">Lista de parâmetros</param>
+            <returns>IHostBuilder</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Startup">
             <summary>
             Classe que define as principais configurações da API
@@ -187,6 +253,31 @@
         <member name="T:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel">
             <summary>
             Classe usada nos métodos que retornam dados ao front
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Id">
+            <summary>
+            Id do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Email">
+            <summary>
+            E-mail do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Nome">
+            <summary>
+            Nome do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Sobrenome">
+            <summary>
+            Sobrenome do usuário
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioConsultaViewModel.Regra">
+            <summary>
+            Indica o perfil do usuário
             </summary>
         </member>
     </members>
