@@ -1,8 +1,8 @@
 form {
   margin: 16px;
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+  //min-width: 150px;
+  // max-width: 500px;
+  width: calc(100% - 36px);
 }
 
 .full-width {
