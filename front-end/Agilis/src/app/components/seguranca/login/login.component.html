@@ -1,9 +1,9 @@
-<form class="my-form">
-  <mat-card class="my-card">
+<form fxLayout="column" fxFlexAlign="center">
+  <mat-card>
     <mat-card-content>
       <mat-form-field class="full-width">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="E-mail" name="email">
+        <input matInput placeholder="E-mail" name="email" type="email">
         <div matPrefix fxLayout="row">
           <mat-icon color="accent">alternate_email</mat-icon>
           &nbsp;
@@ -11,7 +11,7 @@
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Senha</mat-label>
-        <input matInput placeholder="Senha" name="password">
+        <input matInput placeholder="Senha" name="password" type="password">
         <div matPrefix fxLayout="row">
           <mat-icon color="accent">vpn_key</mat-icon>
           &nbsp;
