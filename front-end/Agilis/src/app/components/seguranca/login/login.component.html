@@ -1,7 +1,25 @@
-<p>login works!</p>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
-  </mat-form-field>
+<form class="my-form">
+  <mat-card class="my-card">
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput placeholder="E-mail" name="email">
+        <div matPrefix fxLayout="row">
+          <mat-icon color="accent">alternate_email</mat-icon>
+          &nbsp;
+        </div>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput placeholder="Senha" name="password">
+        <div matPrefix fxLayout="row">
+          <mat-icon color="accent">vpn_key</mat-icon>
+          &nbsp;
+        </div>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">LOGIN</button>
+    </mat-card-actions>
+  </mat-card>
 </form>
