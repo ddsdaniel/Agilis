@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Agilis';
+  myWorkRoutes = [
+
+    {
+      icon: 'assignment',
+      route: 'sales/activities',
+      title: 'ACTIVITIES'
+    },
+    {
+      icon: 'dashboard',
+      route: 'sales/dashboards',
+      title: 'DASHBOARDS'
+    }
+  ];
 }

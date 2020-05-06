@@ -1,5 +1,57 @@
-<a [routerLink]="['/login']">Login</a><br/>
- <a [routerLink]="['/user-stories']">User Stories</a><br/>
- <a [routerLink]="['/user-stories/form']">User Stories New</a><br/>
- <a [routerLink]="['/user-stories/form/123']">User Stories Edit</a><br/>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="over">
+
+    <!-- <mat-nav-list>
+      <h2 matSubheader>Meu Trabalho</h2>
+      <a mat-list-item routerLink="/" style="height: 0;"></a>
+    </mat-nav-list>
+
+    <p>menu</p>
+    <p>opcao 1</p>
+    <p>opcao 2</p> -->
+
+    <mat-nav-list>
+
+      <h2 matSubheader>My work</h2>
+
+      <a *ngFor="let item of myWorkRoutes"
+        mat-list-item
+        (click)="sidenav.close()"
+        [routerLink]="[item.route]"
+        routerLinkActive="list-item-active">
+        <mat-icon matListIcon> {{ item.icon }} </mat-icon>
+        {{item.title}}
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <h2 matSubheader>My work</h2>
+
+      <a *ngFor="let item of myWorkRoutes"
+        mat-list-item
+        (click)="sidenav.close()"
+        [routerLink]="[item.route]"
+        routerLinkActive="list-item-active">
+        <mat-icon matListIcon> {{ item.icon }} </mat-icon>
+        {{item.title}}
+      </a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Agilis</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 <router-outlet></router-outlet>
