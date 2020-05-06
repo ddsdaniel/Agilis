@@ -42,6 +42,8 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// </summary>
         public Milestone Milestone { get; private set; }
 
+        //TODO: critérios de aceitação
+
         /// <summary>
         /// Construtor usado apenas para a serialização e desserialização
         /// </summary>
