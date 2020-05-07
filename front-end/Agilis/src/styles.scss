@@ -35,9 +35,12 @@ body {
   width: 100%;
 }
 
-mat-label {
-  color: mat-color($styles-theme-text);
+mat-sidenav h1{
+  color: mat-color($styles-theme-primary) !important;
 }
+// mat-label {
+//   color: mat-color($styles-theme-text);
+// }
 
 // magin-----------------------------------------------
 $spacer: 1rem !default;
