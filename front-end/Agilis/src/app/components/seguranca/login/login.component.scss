@@ -3,10 +3,6 @@ form {
   width: calc(100% - 36px);
 }
 
-.full-width {
-  width: 100%;
-}
-
 .logo {
   display: flex;
   justify-content: center;
@@ -22,5 +18,9 @@ h1 {
   text-align: center;
   margin-bottom: 32px;
   margin-top: 8px;
+  font-weight: normal;
+}
+
+h2 {
   font-weight: normal;
 }

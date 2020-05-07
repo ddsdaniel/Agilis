@@ -1,40 +1,25 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="over">
-
-    <!-- <mat-nav-list>
-      <h2 matSubheader>Meu Trabalho</h2>
-      <a mat-list-item routerLink="/" style="height: 0;"></a>
-    </mat-nav-list>
-
-    <p>menu</p>
-    <p>opcao 1</p>
-    <p>opcao 2</p> -->
-
+    <h1>AGILIS</h1>
     <mat-nav-list>
 
-      <h2 matSubheader>My work</h2>
+      <div *ngFor="let grupo of menu">
 
-      <a *ngFor="let item of myWorkRoutes"
-        mat-list-item
-        (click)="sidenav.close()"
-        [routerLink]="[item.route]"
-        routerLinkActive="list-item-active">
-        <mat-icon matListIcon> {{ item.icon }} </mat-icon>
-        {{item.title}}
-      </a>
+        <h2 matSubheader>{{grupo.nome}}</h2>
 
-      <mat-divider></mat-divider>
+        <a *ngFor="let item of grupo.itens"
+          mat-list-item
+          (click)="sidenav.close()"
+          [routerLink]="[item.rota]"
 
-      <h2 matSubheader>My work</h2>
+          routerLinkActive="list-item-active">
+          <mat-icon matListIcon> {{ item.icone }} </mat-icon>
+          {{item.nome}}
+        </a>
 
-      <a *ngFor="let item of myWorkRoutes"
-        mat-list-item
-        (click)="sidenav.close()"
-        [routerLink]="[item.route]"
-        routerLinkActive="list-item-active">
-        <mat-icon matListIcon> {{ item.icon }} </mat-icon>
-        {{item.title}}
-      </a>
+        <mat-divider></mat-divider>
+
+      </div>
 
     </mat-nav-list>
 
@@ -47,11 +32,11 @@
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <span>Agilis</span>
+        <span>AGILIS</span>
       </mat-toolbar-row>
     </mat-toolbar>
 
+    <router-outlet></router-outlet>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<router-outlet></router-outlet>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GrupoMenu } from './models/menu/grupo-menu';
 
 @Component({
   selector: 'app-root',
@@ -6,17 +7,37 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  myWorkRoutes = [
 
+  menu: GrupoMenu[] = [
     {
-      icon: 'assignment',
-      route: 'sales/activities',
-      title: 'ACTIVITIES'
+      nome: 'Segurança',
+      itens: [
+        {
+          nome: 'Login',
+          icone: 'vpn_key',
+          rota: '/login'
+        }
+      ]
     },
     {
-      icon: 'dashboard',
-      route: 'sales/dashboards',
-      title: 'DASHBOARDS'
+      nome: 'Trabalho',
+      itens: [
+        {
+          nome: 'User Stories',
+          icone: 'vpn_key',
+          rota: '/user-stories'
+        },
+        {
+          nome: 'User Stories',
+          icone: 'vpn_key',
+          rota: '/user-stories'
+        },
+        {
+          nome: 'User Stories',
+          icone: 'vpn_key',
+          rota: '/user-stories'
+        }
+      ]
     }
   ];
 }
