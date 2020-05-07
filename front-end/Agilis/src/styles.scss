@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+
+// import our custom theme
+@import 'styles-theme.scss';
+
+// specify theme class eg: <body class="styles-theme"> ... </body>
+.styles-theme {
+
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($styles-theme);
+}
 
 html,
 body {
@@ -19,6 +33,10 @@ body {
 
 .full-width {
   width: 100%;
+}
+
+mat-label {
+  color: mat-color($styles-theme-text);
 }
 
 // magin-----------------------------------------------
