@@ -9,6 +9,7 @@ import { LoginComponent } from './components/seguranca/login/login.component';
 import { UserStoriesFormComponent } from './components/user-stories/user-stories-form/user-stories-form.component';
 import { UserStoriesHomeComponent } from './components/user-stories/user-stories-home/user-stories-home.component';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AngularMaterialModule } from './modules/angular-material/angular-materi
     LoginComponent,
     UserStoriesHomeComponent,
     UserStoriesFormComponent,
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,
