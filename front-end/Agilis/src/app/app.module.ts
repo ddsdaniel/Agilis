@@ -10,6 +10,7 @@ import { UserStoriesFormComponent } from './components/user-stories/user-stories
 import { UserStoriesHomeComponent } from './components/user-stories/user-stories-home/user-stories-home.component';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     AutofocusDirective,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

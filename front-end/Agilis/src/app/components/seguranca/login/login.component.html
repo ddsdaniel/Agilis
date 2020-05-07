@@ -1,5 +1,5 @@
 <form fxLayout="column" class="mt-5">
-
+<span>teste</span>
   <mat-card fxFlexAlign="center">
 
     <mat-card-content>
@@ -10,7 +10,7 @@
 
       <mat-form-field class="full-width mt-4">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="E-mail" name="email" type="email" appAutofocus required>
+        <input matInput [(ngModel)]="login.email" placeholder="E-mail" name="email" type="email" appAutofocus required >
         <div matPrefix fxLayout="row">
           <mat-icon>alternate_email</mat-icon>
           &nbsp;
@@ -19,7 +19,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>Senha</mat-label>
-        <input matInput placeholder="Senha" name="password" type="password" required>
+        <input [(ngModel)]="login.senha" matInput placeholder="Senha" name="password" type="password" required>
         <div matPrefix fxLayout="row">
           <mat-icon>vpn_key</mat-icon>
           &nbsp;
@@ -29,7 +29,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="accent">Login</button>
+      <button mat-raised-button color="accent" (click)="autenticar()">Login</button>
       <button mat-raised-button>Cadastre-se</button>
     </mat-card-actions>
   </mat-card>
