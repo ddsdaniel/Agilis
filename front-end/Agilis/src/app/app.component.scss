@@ -17,3 +17,7 @@ mat-sidenav h1{
 mat-sidenav h1{
   background-color: var(--accent);
 }
+
+mat-sidenav {
+  min-width: 20%;
+}
