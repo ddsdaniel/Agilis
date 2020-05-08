@@ -39,6 +39,10 @@ mat-sidenav h1{
   color: mat-color($styles-theme-primary) !important;
 }
 
+mat-form-field mat-icon {
+  color: mat-color($styles-theme-primary);
+}
+
 // magin-----------------------------------------------
 $spacer: 1rem !default;
 // bottom
