@@ -11,6 +11,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ],
   exports: [
     MatFormFieldModule,
@@ -37,7 +39,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' } }

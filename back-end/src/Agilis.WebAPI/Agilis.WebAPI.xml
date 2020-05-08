@@ -331,6 +331,26 @@
             Senha para realizar o login
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel">
+            <summary>
+            Dados do usuário logado e token, retornado apenas em caso de sucesso
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel.Usuario">
+            <summary>
+            Usuário logado
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel.Token">
+            <summary>
+            Token correspondente ao login
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel.TipoToken">
+            <summary>
+            Tipo do token
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel">
             <summary>
             Representa um comentário dentro do sistema, usado como value object em várias entidades

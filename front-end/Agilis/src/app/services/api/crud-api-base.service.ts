@@ -7,7 +7,7 @@ import { ApiRestBaseService } from './api-rest-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export abstract class CrudBaseService<TEntity> extends ApiRestBaseService {
+export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
 
   constructor(http: HttpClient, recurso: string) {
     super(http, recurso);

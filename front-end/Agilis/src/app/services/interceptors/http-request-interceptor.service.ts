@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { UsuarioService } from '../pessoas/usuario.service';
+import { UsuarioApiService } from '../api/pessoas/usuario-api.service';
 
 @Injectable()
 export class HttpsRequestInterceptorService implements HttpInterceptor {
@@ -12,13 +12,13 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
   constructor(
     private router: Router,
     private ngZone: NgZone,
-    private usuarioService: UsuarioService,
+    private usuarioApiService: UsuarioApiService,
   ) { }
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (this.usuarioService.usuarioLogado) {
-      const logado = this.usuarioService.usuarioLogado;
+    if (this.usuarioApiService.usuarioLogado) {
+      const logado = this.usuarioApiService.usuarioLogado;
 
       httpRequest = httpRequest.clone({
         setHeaders: { Authorization: `${logado.tipoToken} ${logado.token}` }
@@ -35,8 +35,16 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
           },
           (err: any) => {
             if (err instanceof HttpErrorResponse) {
-              if (err.status === 401 && !this.usuarioService.usuarioLogado) {
+              if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
                 this.ngZone.run(() => this.router.navigate(['login']));
+              } else {
+
+                if (err.error) {
+                  err['message' as any] = Array.isArray(err.error)
+                    ? err.error.map(e => e.message).join(' ')
+                    : (err.error.message ? err.error.message : err.statusText);
+                  err['statusText' as any] = err['message' as any];
+                }
               }
             }
           })

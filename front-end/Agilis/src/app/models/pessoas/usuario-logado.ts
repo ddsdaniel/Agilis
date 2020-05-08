@@ -1,6 +1,7 @@
 import { Usuario } from './usuario';
 
-export interface UsuarioLogado extends Usuario {
+export interface UsuarioLogado {
+  usuario: Usuario;
   token: string;
   tipoToken: string;
 }

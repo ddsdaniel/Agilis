@@ -37,10 +37,10 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="mapper">Automapper</param>
         /// <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
         /// <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
-        public UsuarioController(IUsuarioService usuarioService, 
+        public UsuarioController(IUsuarioService usuarioService,
                                  IMapper mapper,
                                  ITokenService tokenService,
-                                 IHttpContextAccessor httpContextAccessor) 
+                                 IHttpContextAccessor httpContextAccessor)
             : base(usuarioService, mapper)
         {
             _usuarioService = usuarioService;
@@ -73,7 +73,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <returns>Dados do usuário + token da autenticação</returns>
         [HttpPost("login")]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UsuarioLogadoViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
         public IActionResult Login([FromBody]LoginViewModel loginViewModel)
         {
@@ -88,7 +88,12 @@ namespace Agilis.WebAPI.Controllers.Pessoas
 
             var usuarioLogado = _mapper.Map<UsuarioConsultaViewModel>(usuario);
 
-            return Ok(new { Usuario = usuarioLogado, Token = token });
+            return Ok(new UsuarioLogadoViewModel
+            {
+                Usuario = usuarioLogado,
+                Token = token,
+                TipoToken = "Bearer"
+            });
         }
 
         /// <summary>

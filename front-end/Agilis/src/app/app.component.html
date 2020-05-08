@@ -1,6 +1,11 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="over">
-    <h1>AGILIS</h1>
+
+    <mat-icon>person</mat-icon>
+    <h3 *ngIf="usuarioApiService.usuarioLogado">{{ usuarioApiService.usuarioLogado.usuario.nome }}</h3>
+    <p *ngIf="usuarioApiService.usuarioLogado">{{ usuarioApiService.usuarioLogado.usuario.email }}</p>
+    <mat-divider></mat-divider>
+
     <mat-nav-list>
 
       <div *ngFor="let grupo of menu">

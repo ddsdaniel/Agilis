@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GrupoMenu } from './models/menu/grupo-menu';
+import { UsuarioApiService } from './services/api/pessoas/usuario-api.service';
 
 @Component({
   selector: 'app-root',
@@ -40,4 +41,11 @@ export class AppComponent {
       ]
     }
   ];
+
+  constructor(
+    public usuarioApiService: UsuarioApiService
+  ) {
+
+  }
+
 }
