@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { UserStoryApiService } from 'src/app/services/api/trabalho/user-story-api.service';
 
@@ -9,15 +10,14 @@ import { UserStoryApiService } from 'src/app/services/api/trabalho/user-story-ap
 })
 export class UserStoriesComponent implements OnInit {
 
-  userStories: UserStory[];
+  userStories: Observable<UserStory[]>;
 
   constructor(
     private userStoryApiService: UserStoryApiService
   ) { }
 
   ngOnInit() {
-    this.userStoryApiService.obteTodos()
-      .subscribe(userStories => this.userStories = userStories);
+    this.userStories = this.userStoryApiService.obteTodos();
   }
 
 }

@@ -1,4 +1,9 @@
-mat-card{
-  max-width: 300px;
-  margin: 8px;
+mat-card {
+  margin: 4px 0;
+  float: left;
+
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
 }

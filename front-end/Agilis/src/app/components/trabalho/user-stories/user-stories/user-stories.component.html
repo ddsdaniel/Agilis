@@ -1,16 +1,24 @@
-<mat-card *ngFor="let us of userStories">
+<div fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
+  <ng-container *ngFor="let us of userStories | async">
 
-  <mat-card-header>
-    <mat-card-title>{{us.nome}}</mat-card-title>
-  </mat-card-header>
+    <mat-card fxFlex="0 1 calc((100% / 6) - 16px)"
+              fxFlex.lt-md="0 1 calc((100% / 3) - 16px)"
+              fxFlex.lt-sm="100%">
 
-  <mat-card-content>
-    <p>{{us.historia}}</p>
-  </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>{{us.nome}}</mat-card-title>
+      </mat-card-header>
 
-  <mat-card-actions>
-    <button mat-button>Editar</button>
-    <button mat-button>Excluir</button>
-  </mat-card-actions>
+      <mat-card-content>
+        <p>{{us.historia}}</p>
+      </mat-card-content>
 
-</mat-card>
+      <mat-card-actions>
+        <button mat-button>Editar</button>
+        <button mat-button color="warn">Excluir</button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </ng-container>
+</div>
