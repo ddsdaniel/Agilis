@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UsuarioApiService } from '../api/pessoas/usuario-api.service';
+import { ProcessandoService } from '../processando.service';
 
 @Injectable()
 export class HttpsRequestInterceptorService implements HttpInterceptor {
@@ -13,6 +14,7 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
     private router: Router,
     private ngZone: NgZone,
     private usuarioApiService: UsuarioApiService,
+    private processandoService: ProcessandoService,
   ) { }
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,15 +27,23 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
       });
     }
 
+    this.processandoService.push();
     return httpHandler.handle(httpRequest)
       .pipe(
         tap(
           (event: HttpEvent<any>) => {
+
+            // tratamento de requests com sucesso
             if (event instanceof HttpResponse) {
-              // tratamento de requests com sucesso
+              this.processandoService.pop();
+              console.log('sucesso');
             }
+
           },
           (err: any) => {
+
+            this.processandoService.pop();
+
             if (err instanceof HttpErrorResponse) {
               if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
                 this.ngZone.run(() => this.router.navigate(['login']));

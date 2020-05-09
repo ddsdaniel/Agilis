@@ -1,9 +1,21 @@
+@import '../../src/styles.scss';
+
 .example-container {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+
+.cabecalho {
+  padding: 16px;
+  background-color: mat-color($styles-theme-accent);
+}
+
+mat-nav-list mat-icon {
+  color: mat-color($styles-theme-primary) !important;
 }
 
 mat-nav-list{
@@ -14,10 +26,11 @@ mat-sidenav h1{
   margin: 16px;
 }
 
-mat-sidenav h1{
-  background-color: var(--accent);
-}
-
 mat-sidenav {
   min-width: 20%;
+}
+
+mat-progress-bar{
+  position: fixed;
+  bottom: 0;
 }

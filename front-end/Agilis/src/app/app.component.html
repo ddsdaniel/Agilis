@@ -1,9 +1,17 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="over">
 
-    <mat-icon>person</mat-icon>
-    <h3 *ngIf="usuarioApiService.usuarioLogado">{{ usuarioApiService.usuarioLogado.usuario.nome }}</h3>
-    <p *ngIf="usuarioApiService.usuarioLogado">{{ usuarioApiService.usuarioLogado.usuario.email }}</p>
+    <div class="cabecalho">
+      <div *ngIf="!usuarioApiService.usuarioLogado">
+        <h1>AGILIS</h1>
+      </div>
+      <div *ngIf="usuarioApiService.usuarioLogado">
+        <mat-icon>person</mat-icon>
+        <div><strong>{{ usuarioApiService?.usuarioLogado.usuario.nome }}</strong></div>
+        <small>{{ usuarioApiService?.usuarioLogado.usuario.email }}</small>
+      </div>
+    </div>
+
     <mat-divider></mat-divider>
 
     <mat-nav-list>
@@ -12,11 +20,7 @@
 
         <h2 matSubheader>{{grupo.nome}}</h2>
 
-        <a *ngFor="let item of grupo.itens"
-          mat-list-item
-          (click)="sidenav.close()"
-          [routerLink]="[item.rota]"
-
+        <a *ngFor="let item of grupo.itens" mat-list-item (click)="sidenav.close()" [routerLink]="[item.rota]"
           routerLinkActive="list-item-active">
           <mat-icon matListIcon> {{ item.icone }} </mat-icon>
           {{item.nome}}
@@ -41,6 +45,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate"></mat-progress-bar>
     <router-outlet></router-outlet>
 
   </mat-sidenav-content>

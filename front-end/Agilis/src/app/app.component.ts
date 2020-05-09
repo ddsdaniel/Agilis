@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GrupoMenu } from './models/menu/grupo-menu';
 import { UsuarioApiService } from './services/api/pessoas/usuario-api.service';
+import { ProcessandoService } from './services/processando.service';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +44,8 @@ export class AppComponent {
   ];
 
   constructor(
-    public usuarioApiService: UsuarioApiService
+    public usuarioApiService: UsuarioApiService,
+    public processandoService: ProcessandoService,
   ) {
 
   }
