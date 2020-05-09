@@ -19,45 +19,59 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (this.usuarioApiService.usuarioLogado) {
-      const logado = this.usuarioApiService.usuarioLogado;
-
-      httpRequest = httpRequest.clone({
-        setHeaders: { Authorization: `${logado.tipoToken} ${logado.token}` }
-      });
-    }
+    httpRequest = this.adicionarTokenAoRequest(httpRequest);
 
     this.processandoService.push();
     return httpHandler.handle(httpRequest)
       .pipe(
         tap(
-          (event: HttpEvent<any>) => {
-
-            // tratamento de requests com sucesso
-            if (event instanceof HttpResponse) {
-              this.processandoService.pop();
-              console.log('sucesso');
-            }
-
-          },
-          (err: any) => {
-
-            this.processandoService.pop();
-
-            if (err instanceof HttpErrorResponse) {
-              if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
-                this.ngZone.run(() => this.router.navigate(['login']));
-              } else {
-
-                if (err.error) {
-                  err['message' as any] = Array.isArray(err.error)
-                    ? err.error.map(e => e.message).join(' ')
-                    : (err.error.message ? err.error.message : err.statusText);
-                  err['statusText' as any] = err['message' as any];
-                }
-              }
-            }
-          })
+          (event: HttpEvent<any>) => this.tratarSucessoRequest(event),
+          (err: any) => this.tratarErroRequest(err)
+        )
       );
+  }
+
+  private tratarSucessoRequest(event: HttpEvent<any>) {
+    if (event instanceof HttpResponse) {
+      this.processandoService.pop();
+    }
+  }
+
+  private tratarErroRequest(err: any) {
+    this.processandoService.pop();
+
+    if (!(err instanceof HttpErrorResponse)) {
+      return;
+    }
+
+    if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
+      this.ngZone.run(() => this.router.navigate(['login']));
+    } else {
+      this.padronizarMensagem(err);
+    }
+
+  }
+
+  private padronizarMensagem(err: HttpErrorResponse) {
+    if (!err.error) {
+      return;
+    }
+
+    err['message' as any] = Array.isArray(err.error)
+      ? err.error.map(e => e.message).join(' ')
+      : (err.error.message ? err.error.message : err.statusText);
+    err['statusText' as any] = err['message' as any];
+  }
+
+  private adicionarTokenAoRequest(httpRequest: HttpRequest<any>) {
+
+    if (this.usuarioApiService.usuarioLogado) {
+      const logado = this.usuarioApiService.usuarioLogado;
+      httpRequest = httpRequest.clone({
+        setHeaders: { Authorization: `${logado.tipoToken} ${logado.token}` }
+      });
+    }
+
+    return httpRequest;
   }
 }

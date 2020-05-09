@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { menuPrincipal } from 'src/assets/constantes/menu-principal';
+
 import { GrupoMenu } from './models/menu/grupo-menu';
 import { UsuarioApiService } from './services/api/pessoas/usuario-api.service';
 import { ProcessandoService } from './services/processando.service';
@@ -10,38 +12,7 @@ import { ProcessandoService } from './services/processando.service';
 })
 export class AppComponent {
 
-  menu: GrupoMenu[] = [
-    {
-      nome: 'Segurança',
-      itens: [
-        {
-          nome: 'Login',
-          icone: 'vpn_key',
-          rota: '/login'
-        }
-      ]
-    },
-    {
-      nome: 'Trabalho',
-      itens: [
-        {
-          nome: 'User Stories',
-          icone: 'vpn_key',
-          rota: '/user-stories'
-        },
-        {
-          nome: 'User Stories',
-          icone: 'vpn_key',
-          rota: '/user-stories'
-        },
-        {
-          nome: 'User Stories',
-          icone: 'vpn_key',
-          rota: '/user-stories'
-        }
-      ]
-    }
-  ];
+  menu: GrupoMenu[] = menuPrincipal;
 
   constructor(
     public usuarioApiService: UsuarioApiService,
