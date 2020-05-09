@@ -6,19 +6,19 @@ import { UsuarioApiService } from './services/api/pessoas/usuario-api.service';
 import { ProcessandoService } from './services/processando.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
-  menu: GrupoMenu[] = menuPrincipal;
+    menu: GrupoMenu[] = menuPrincipal;
 
-  constructor(
-    public usuarioApiService: UsuarioApiService,
-    public processandoService: ProcessandoService,
-  ) {
+    constructor(
+        public usuarioApiService: UsuarioApiService,
+        public processandoService: ProcessandoService,
+    ) {
 
-  }
+    }
 
 }

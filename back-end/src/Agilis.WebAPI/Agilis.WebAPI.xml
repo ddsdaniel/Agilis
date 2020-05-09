@@ -416,6 +416,11 @@
             Para que serve
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Historia">
+            <summary>
+            Descrição no formato padrão de uma user story
+            </summary>
+        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Comentarios">
             <summary>
             Comentários da user story

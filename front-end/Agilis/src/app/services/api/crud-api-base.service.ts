@@ -14,7 +14,12 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
   }
 
   obteUm(): Observable<TEntity> {
+    // TODO: passar o id
     return this.get<TEntity>();
+  }
+
+  obteTodos(): Observable<TEntity[]> {
+    return this.get<TEntity[]>();
   }
 
   obterSubrecurso(subrecurso: string): Observable<TEntity> {

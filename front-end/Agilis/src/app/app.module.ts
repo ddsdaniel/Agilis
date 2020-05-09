@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
-import { UserStoriesHomeComponent } from './components/trabalho/user-stories/user-stories-home/user-stories-home.component';
+import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
 import { AppLoadService } from './services/app-load.service';
@@ -22,7 +22,7 @@ export function InitApp(appLoadService: AppLoadService) {
   declarations: [
     AppComponent,
     LoginComponent,
-    UserStoriesHomeComponent,
+    UserStoriesComponent,
     UserStoriesFormComponent,
   ],
   imports: [

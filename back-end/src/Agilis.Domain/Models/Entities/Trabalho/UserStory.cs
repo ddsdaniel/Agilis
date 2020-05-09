@@ -33,6 +33,11 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public string Objetivo { get; private set; }
 
         /// <summary>
+        /// Descrição no formato padrão de uma user story
+        /// </summary>
+        public string Historia => $"Eu, enquanto {Ator.Nome}, gostaria {Narrativa} para {Objetivo}";
+
+        /// <summary>
         /// Comentários da user story
         /// </summary>
         public ICollection<Comentario> Comentarios { get; private set; }

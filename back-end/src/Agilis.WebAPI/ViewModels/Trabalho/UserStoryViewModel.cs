@@ -30,6 +30,11 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Objetivo { get;  set; }
 
         /// <summary>
+        /// Descrição no formato padrão de uma user story
+        /// </summary>
+        public string Historia { get; set; }
+
+        /// <summary>
         /// Comentários da user story
         /// </summary>
         public ICollection<ComentarioViewModel> Comentarios { get;  set; }
