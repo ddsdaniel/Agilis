@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UsuarioApiService } from '../api/pessoas/usuario-api.service';
+import { TratadorErrosService } from '../api/tratador-erros.service';
 import { ProcessandoService } from '../processando.service';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
     private ngZone: NgZone,
     private usuarioApiService: UsuarioApiService,
     private processandoService: ProcessandoService,
+    private tratadorErrosService: TratadorErrosService,
   ) { }
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
@@ -47,20 +49,8 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
     if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
       this.ngZone.run(() => this.router.navigate(['login']));
     } else {
-      this.padronizarMensagem(err);
+      this.tratadorErrosService.padronizarHttpErrorResponse(err);
     }
-
-  }
-
-  private padronizarMensagem(err: HttpErrorResponse) {
-    if (!err.error) {
-      return;
-    }
-
-    err['message' as any] = Array.isArray(err.error)
-      ? err.error.map(e => e.message).join(' ')
-      : (err.error.message ? err.error.message : err.statusText);
-    err['statusText' as any] = err['message' as any];
   }
 
   private adicionarTokenAoRequest(httpRequest: HttpRequest<any>) {

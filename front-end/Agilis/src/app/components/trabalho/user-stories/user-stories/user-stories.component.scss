@@ -1,9 +1,22 @@
 mat-card {
   margin: 4px 0;
   float: left;
-
 }
 
 ::ng-deep .mat-card-header-text {
   margin: 0 !important;
+}
+
+mat-card mat-icon {
+  cursor: pointer;
+}
+
+.pesquisa mat-form-field,
+.pesquisa button {
+  margin: 0 8px;
+}
+
+.pesquisa mat-form-field {
+  width: 40%;
+  min-width: 200px;
 }
