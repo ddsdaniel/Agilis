@@ -16,7 +16,8 @@ mat-card mat-icon {
   margin: 0 8px;
 }
 
-.pesquisa mat-form-field {
-  width: 40%;
-  min-width: 200px;
+.pesquisa button{
+  height: 36px !important;
+  margin-bottom: 20px;
+  width: 100%;
 }

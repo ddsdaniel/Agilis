@@ -1,7 +1,7 @@
 <!-- Pesquisa e novo -->
 <div class="pesquisa">
 
-  <mat-form-field>
+  <mat-form-field  fxFlex.xs="50%" fxFlex.sm="75%" fxFlex.md="85%" fxFlex.lg="90%" fxFlex.xl="90%">
     <mat-label>Pesquisa</mat-label>
     <input matInput placeholder="Pesquisa" type="search">
     <div matPrefix fxLayout="row">
@@ -10,9 +10,15 @@
     </div>
   </mat-form-field>
 
-  <button mat-raised-button color="accent">Adicionar</button>
+  <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="50%" fxFlex.sm="25%" fxFlex.md="15%" fxFlex.lg="10%" fxFlex.xl="10%">
+    <button mat-raised-button>Pesquisar</button>
+  </div>
 
 </div>
+
+<button mat-fab color="accent">
+  <mat-icon>add</mat-icon>
+</button>
 
 <!-- Grade -->
 <div fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">

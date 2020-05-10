@@ -39,6 +39,13 @@ mat-form-field mat-icon {
   color: mat-color($styles-theme-primary);
 }
 
+button.mat-fab {
+  position: fixed !important;
+  right: 23px;
+  bottom: 23px;
+  z-index: 1;
+}
+
 // magin-----------------------------------------------
 $spacer: 1rem !default;
 // bottom
