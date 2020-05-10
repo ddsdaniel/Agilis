@@ -18,7 +18,8 @@
 
       <mat-form-field class="full-width">
         <mat-label>Senha</mat-label>
-        <input [(ngModel)]="login.senha" matInput placeholder="Senha" name="password" type="password" required>
+        <input [(ngModel)]="login.senha" matInput placeholder="Senha" name="password"
+          type="password" required (keyup.enter)="autenticar()">
         <div matPrefix fxLayout="row">
           <mat-icon>vpn_key</mat-icon>
           &nbsp;
