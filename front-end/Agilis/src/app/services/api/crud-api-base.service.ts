@@ -30,4 +30,8 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
     return this.get<TEntity[]>('', this.buildParams({ filtro }));
   }
 
+  adicionar(entity: TEntity): Observable<string> {
+    return super.post<TEntity, string>(entity);
+  }
+
 }

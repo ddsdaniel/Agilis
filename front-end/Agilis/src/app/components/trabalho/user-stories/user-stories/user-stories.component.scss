@@ -3,10 +3,6 @@ mat-card {
   float: left;
 }
 
-::ng-deep .mat-card-header-text {
-  margin: 0 !important;
-}
-
 mat-card mat-icon {
   cursor: pointer;
 }

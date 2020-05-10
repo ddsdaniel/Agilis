@@ -13,9 +13,16 @@ export class TratadorErrosService {
       return;
     }
 
-    let mensagem = Array.isArray(err.error)
-      ? err.error.map(e => e.message).join(' ')
-      : (err.error.message ? err.error.message : err.statusText);
+    let mensagem = '';
+    if (Array.isArray(err.error)) {
+      mensagem = err.error.map(e => e.message).join(' ');
+    } else if (err.error.title) {
+      mensagem = err.error.title;
+    } else if (err.error.message) {
+      mensagem = err.error.message;
+    } else {
+      mensagem = err.statusText;
+    };
 
     mensagem = this.traduzir(mensagem);
 
@@ -26,6 +33,7 @@ export class TratadorErrosService {
   private traduzir(mensagem: any): any {
     switch (mensagem) {
       case 'Unknown Error': return 'Erro desconhecido';
+      case 'One or more validation errors occurred.': return 'Uma ou mais validações falharam.';
       default: return mensagem;
     }
   }
