@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas;
 using Agilis.Domain.Tests.Unidade.Mocks.Entities.Trabalho;
+using System;
 using Xunit;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
@@ -23,31 +24,21 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var produto = new Produto(UsuarioMock.ObterValido(),
-                                      nome);
+            var produto = new Produto(Guid.NewGuid(), nome);
 
             //Assert
             Assert.True(produto.Invalid);
         }
         
         [Fact]
-        public void Construtor_UsuarioNulo_Invalid()
+        public void Construtor_UsuarioIdEmpty_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(null, "Produto 1");
+            var produto = new Produto(Guid.Empty, "Produto 1");
 
             //Assert
             Assert.True(produto.Invalid);
         }
 
-        [Fact]
-        public void Construtor_UsuarioInvalid_Invalid()
-        {
-            //Arrange & Act
-            var produto = new Produto(UsuarioMock.ObterInvalido(), "Produto 1");
-
-            //Assert
-            Assert.True(produto.Invalid);
-        }
     }
 }

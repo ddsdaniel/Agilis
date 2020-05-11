@@ -27,7 +27,7 @@ namespace Agilis.Domain.Services.Trabalho
         public ICollection<Produto> ConsultarTodos(IUsuario usuario)
             => _unitOfWork.ProdutoRepository
                 .AsQueryable()
-                .Where(p => p.Usuario.Id == usuario.Id)
+                .Where(p => p.UsuarioId == usuario.Id)
                 .ToList();
     }
 }

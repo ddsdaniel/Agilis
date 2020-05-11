@@ -1,15 +1,16 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.Entities;
+using System;
 
 namespace Agilis.Domain.Abstractions.Entities
 {
     public abstract class MultiTenancyEntity : Entity
     {
-        public Usuario Usuario { get; private set; }
+        public Guid UsuarioId { get; private set; }
         
-        protected MultiTenancyEntity(Usuario usuario)
+        protected MultiTenancyEntity(Guid usuarioId)
         {
-            Usuario = usuario;
+            UsuarioId = usuarioId;
         }
     }
 }

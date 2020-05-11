@@ -27,6 +27,7 @@ export class UserStoriesFormComponent implements OnInit {
 
   ngOnInit() {
     this.userStory = {
+      id: '',
       nome: '',
       ator: {
         id: '',

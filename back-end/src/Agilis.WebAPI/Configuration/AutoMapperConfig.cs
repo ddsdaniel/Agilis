@@ -8,6 +8,7 @@ using Agilis.WebAPI.ViewModels.Pessoas;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
+using System;
 
 namespace Agilis.WebAPI.Configuration
 {

@@ -1,12 +1,10 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
+import { UsuarioApiService } from 'src/app/services/api/pessoas/usuario-api.service';
 import { ProdutoApiService } from 'src/app/services/api/trabalho/produto-api.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
-import { Ator } from 'src/app/models/pessoas/ator';
-import { AtorApiService } from 'src/app/services/api/pessoas/ator-api.service';
 
 @Component({
   selector: 'app-produtos-form',
@@ -16,29 +14,21 @@ import { AtorApiService } from 'src/app/services/api/pessoas/ator-api.service';
 export class ProdutosFormComponent implements OnInit {
 
   produto: Produto;
-  atores: Observable<Ator[]>;
 
   constructor(
     private router: Router,
     private produtoApiService: ProdutoApiService,
     private snackBar: MatSnackBar,
-    private atorApiService: AtorApiService,
+    private usuarioApiService: UsuarioApiService,
   ) { }
 
   ngOnInit() {
     this.produto = {
+      id: '00000000000000000000000000000000',
       nome: '',
-      ator: {
-        id: '',
-        nome: ''
-      },
-      narrativa: '',
-      objetivo: '',
-      historia: '',
+      usuarioId: this.usuarioApiService.usuarioLogado.usuario.id
     };
 
-    this.atores = this.atorApiService.obteTodos();
-    this.atores.subscribe(atores => this.produto.ator.id = atores[0].id);
   }
 
   salvar() {

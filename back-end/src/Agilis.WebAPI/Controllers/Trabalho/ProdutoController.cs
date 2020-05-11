@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
+using System.Threading.Tasks;
+using System;
+using Agilis.Domain.Models.Entities.Pessoas;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -48,6 +51,14 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             var listaViewModel = _mapper.Map<List<ProdutoViewModel>>(lista);
 
             return Ok(listaViewModel);
+        }
+
+        public override async Task<ActionResult<Guid>> Post(ProdutoViewModel novaEntidadeViewModel)
+        {
+            if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
+                return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
+
+            return await base.Post(novaEntidadeViewModel);
         }
     }
 }

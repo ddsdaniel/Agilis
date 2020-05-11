@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Abstractions.Entities;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Flunt.Validations;
+using System;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
@@ -8,12 +9,16 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     {
         public string Nome { get; private set; }
 
-        public Produto(Usuario usuario, string nome) : base(usuario)
+        protected Produto() : base(Guid.Empty)
+        {
+
+        }
+
+        public Produto(Guid usuarioId, string nome) : base(usuarioId)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
-                .IsNotNull(usuario, nameof(Usuario), "Usuário não deve ser nulo")
-                .IfNotNull(usuario, c => c.Join(usuario))
+                .IsNotNull(usuarioId, nameof(Usuario), "ID do Usuário não deve ser nulo")                
                 );
 
             Nome = nome;

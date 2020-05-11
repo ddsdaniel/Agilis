@@ -425,6 +425,11 @@
             Nome do produto
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.UsuarioId">
+            <summary>
+            Proprietário do produto
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">
             <summary>
             Representa uma história do usuário, ou seja, uma funcionalidade que ele deseja

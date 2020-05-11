@@ -1,9 +1,7 @@
-﻿import { Ator } from '../../pessoas/ator';
+﻿import { Usuario } from '../../pessoas/usuario';
 
 export interface Produto {
+  id: string;
   nome: string;
-  ator: Ator;
-  narrativa: string;
-  objetivo: string;
-  historia: string;
+  usuarioId: string;
 }

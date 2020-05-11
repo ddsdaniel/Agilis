@@ -12,27 +12,6 @@
         <input matInput [(ngModel)]="produto.nome" placeholder="Nome" name="nome" type="text" required >
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Eu, enquanto</mat-label>
-        <mat-select [(ngModel)]="produto.ator.id" name="ator">
-          <mat-option *ngFor="let ator of atores | async" [value]="ator.id">
-            {{ator.nome}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>gostaria</mat-label>
-        <input [(ngModel)]="produto.narrativa" matInput placeholder="Narrativa" name="narrativa"
-          type="text" required>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>para</mat-label>
-        <input [(ngModel)]="produto.objetivo" matInput placeholder="Objetivo" name="objetivo"
-          type="text" required>
-      </mat-form-field>
-
     </mat-card-content>
 
     <mat-card-actions>
