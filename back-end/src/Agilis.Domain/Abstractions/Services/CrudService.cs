@@ -66,6 +66,9 @@ namespace Agilis.Domain.Abstractions.Services
         /// <returns></returns>
         public async Task Commit() => await _unitOfWork.Commit();
 
+        public IQueryable<TEntity> Consultar()
+            => _repository.AsQueryable();
+
         /// <summary>
         /// Recupera uma entidade do repositório a partir do seu id
         /// </summary>

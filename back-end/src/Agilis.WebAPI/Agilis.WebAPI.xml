@@ -155,6 +155,25 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutoController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.ConsultarTodos">
+            <summary>
+            Consulta todos os produtos do usuário logado
+            </summary>
+            <returns>Retorna todos os produtos do usuário logado</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
             Classe que provê métodos de extensão para IHttpContextAccessor
@@ -389,6 +408,21 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Marco">
             <summary>
             Data do marco histórico
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel">
+            <summary>
+            Representa um produto, um software
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Id">
+            <summary>
+            Id do produto
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Nome">
+            <summary>
+            Nome do produto
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

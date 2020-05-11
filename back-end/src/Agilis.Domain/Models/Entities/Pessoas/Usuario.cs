@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Enums;
+﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Agilis.Domain.Enums;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using DDS.Domain.Core.Model.ValueObjects;
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
@@ -9,7 +10,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
     /// <summary>
     /// Usuário do Agilis
     /// </summary>
-    public class Usuario : Entity
+    public class Usuario : Entity, IUsuario
     {
         /// <summary>
         /// Tamanho mínimo para a senha do usuário
@@ -64,13 +65,13 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                        RegraUsuario regra)
         {
             AddNotifications(new Contract()
-                .IsNotNullOrEmpty(nome, nameof(Nome), "NOME_INVALIDO")
-                .IsNotNullOrEmpty(sobrenome, nameof(Sobrenome), "SOBRENOME_INVALIDO")
-                .IsNotNull(email, nameof(Email), "EMAIL_INVALIDO")
-                .IsNotNull(senha, nameof(Senha), "SENHA_INVALIDA")
+                .IsNotNullOrEmpty(nome, nameof(Nome), "Nome do usuário inválido")
+                .IsNotNullOrEmpty(sobrenome, nameof(Sobrenome), "Sobrenome inválido")
+                .IsNotNull(email, nameof(Email), "E-mail inválido")
+                .IfNotNull(email, c => c.Join(email))
+                .IsNotNull(senha, nameof(Senha), "Senha inválida")
+                .IfNotNull(senha, c => c.Join(senha))
                 );
-
-            AddNotifications(email, senha);
 
             Email = email;
             Nome = nome;
@@ -83,13 +84,13 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         {
             if (Senha.Conteudo != senhaAtual.Conteudo)
             {
-                AddNotification(nameof(senhaAtual), "SENHA_ATUAL_INCORRETA");
+                AddNotification(nameof(senhaAtual), "Senha atual está incorreta");
                 return;
             }
 
             if (novaSenha.Conteudo != confirmaNovaSenha.Conteudo)
             {
-                AddNotification(nameof(novaSenha), "SENHAS_NAO_CONFEREM");
+                AddNotification(nameof(novaSenha), "As senhas não conferem");
                 return;
             }
 

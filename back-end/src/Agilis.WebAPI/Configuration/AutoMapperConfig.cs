@@ -51,6 +51,10 @@ namespace Agilis.WebAPI.Configuration
             CreateMap<UserStory, UserStoryViewModel>()
                 .ReverseMap();
 
+            //Trabalho            
+            CreateMap<Produto, ProdutoViewModel>()
+                .ReverseMap();
+
             //Pessoas            
             CreateMap<Ator, AtorViewModel>()
                 .ReverseMap();

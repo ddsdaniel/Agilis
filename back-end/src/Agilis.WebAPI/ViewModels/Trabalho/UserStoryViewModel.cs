@@ -18,6 +18,7 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// Persona para qual a história será útil
         /// </summary>
         public AtorViewModel Ator { get;  set; }
+        public ProdutoViewModel Produto { get;  set; }
 
         /// <summary>
         /// O que se deseja

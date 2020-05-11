@@ -31,6 +31,8 @@ namespace Agilis.Domain.Services.Trabalho
             if (userStory.Milestone != null && _unitOfWork.MilestoneRepository.ConsultarSeExiste(userStory.Milestone.Id) == false)
                 AddNotification(nameof(userStory.Milestone), "MILESTONE_NAO_ENCONTRADO");
 
+            else if (_unitOfWork.ProdutoRepository.ConsultarSeExiste(userStory.Produto.Id) == false)
+                AddNotification(nameof(userStory.Produto), "PRODUTO_NAO_ENCONTRADO");
             else if (_unitOfWork.AtorRepository.ConsultarSeExiste(userStory.Ator.Id) == false)
                 AddNotification(nameof(userStory.Ator), "ATOR_NAO_ENCONTRADO");
 

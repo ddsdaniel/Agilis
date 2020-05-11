@@ -4,7 +4,9 @@ using System;
 using System.Threading.Tasks;
 using Agilis.Domain.Abstractions.Repositories.Pessoas;
 using Agilis.Domain.Abstractions.Repositories.Trabalho;
+using Agilis.Domain.Abstractions.Repositories.Trabalho;
 using Agilis.Infra.Data.Reopositories.Pessoas;
+using Agilis.Infra.Data.Reopositories.Trabalho;
 using Agilis.Infra.Data.Reopositories.Trabalho;
 
 namespace Agilis.Infra.Data.Repositories
@@ -15,6 +17,7 @@ namespace Agilis.Infra.Data.Repositories
         private bool _disposed = false;
         public IUsuarioRepository UsuarioRepository { get; }
         public IUserStoryRepository UserStoryRepository { get; }
+        public IProdutoRepository ProdutoRepository { get; }
         public IAtorRepository AtorRepository { get; }
         public IMilestoneRepository MilestoneRepository { get; }
 
@@ -25,6 +28,7 @@ namespace Agilis.Infra.Data.Repositories
 
             UsuarioRepository = new UsuarioRepository(database, _session);
             MilestoneRepository = new MilestoneRepository(database, _session);
+            ProdutoRepository = new ProdutoRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);
         }

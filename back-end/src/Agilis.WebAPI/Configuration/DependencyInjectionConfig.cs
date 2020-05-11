@@ -20,6 +20,9 @@ using Agilis.Domain.Abstractions.Repositories.Trabalho;
 using Agilis.Domain.Services.Trabalho;
 using Agilis.Infra.Data.Reopositories.Trabalho;
 using Agilis.Domain.Services.Pessoas;
+using System;
+using Agilis.Domain.Abstractions.Entities.Pessoas;
+using DDS.Domain.Core.Model.ValueObjects;
 
 namespace Agilis.WebAPI.Configuration
 {
@@ -46,6 +49,9 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
+			services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
 			services.AddScoped<IAtorService, AtorService>();
             services.AddScoped<IAtorRepository, AtorRepository>();
 
@@ -53,6 +59,7 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICriptografiaSimetrica, AdvancedEncryptionStandard>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton(serviceProvider => ObterUsuarioLogado(serviceProvider));
 
             //Trabalho
             services.AddScoped<IUserStoryService, UserStoryService>();
@@ -66,6 +73,21 @@ namespace Agilis.WebAPI.Configuration
             services.AddSingleton<IAppSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value);
 
             return services;
+        }
+
+        private static IUsuario ObterUsuarioLogado(IServiceProvider serviceProvider)
+        {
+            var httpContextAccessor = serviceProvider.GetService<IHttpContextAccessor>();
+            var email = new Email(httpContextAccessor.HttpContext.User.Identity.Name);
+
+            var scope = serviceProvider.CreateScope();
+            var usuarioRepository = scope.ServiceProvider.GetRequiredService<IUsuarioRepository>();
+
+            var usuario = usuarioRepository.ConsultarPorEmail(email);
+
+            scope.Dispose();
+
+            return usuario;
         }
     }
 }
