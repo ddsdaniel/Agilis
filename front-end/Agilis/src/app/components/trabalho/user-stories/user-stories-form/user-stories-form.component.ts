@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { UserStoryApiService } from 'src/app/services/api/trabalho/user-story-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Ator } from 'src/app/models/pessoas/ator';
 import { AtorApiService } from 'src/app/services/api/pessoas/ator-api.service';
+import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -17,17 +18,23 @@ export class UserStoriesFormComponent implements OnInit {
 
   userStory: UserStory;
   atores: Observable<Ator[]>;
+  operacao: OperacaoFormCrud;
 
   constructor(
     private router: Router,
     private userStoryApiService: UserStoryApiService,
     private snackBar: MatSnackBar,
     private atorApiService: AtorApiService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+
+    const id = this.activatedRoute.snapshot.paramMap.get('userStoryId');
+    this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
+
     this.userStory = {
-      id: '',
+      id: id ? id : '',
       nome: '',
       ator: {
         id: '',
@@ -44,16 +51,25 @@ export class UserStoriesFormComponent implements OnInit {
 
   salvar() {
 
-    console.log(this.userStory);
-
-    this.userStoryApiService.adicionar(this.userStory)
-      .subscribe(
-        (id: string) => this.router.navigateByUrl('user-stories'),
-        (error: HttpErrorResponse) => {
-          console.log(error);
-          this.snackBar.open(error.message);
-        }
-      );
+    if (this.operacao === OperacaoFormCrud.adicionando) {
+      this.userStoryApiService.adicionar(this.userStory)
+        .subscribe(
+          (id: string) => this.router.navigateByUrl('user-stories'),
+          (error: HttpErrorResponse) => {
+            console.log(error);
+            this.snackBar.open(error.message);
+          }
+        );
+    } else {
+      this.userStoryApiService.alterar(this.userStory.id, this.userStory)
+        .subscribe(
+          () => this.router.navigateByUrl('user-stories'),
+          (error: HttpErrorResponse) => {
+            console.log(error);
+            this.snackBar.open(error.message);
+          }
+        );
+    }
   }
 
   cancelar() {

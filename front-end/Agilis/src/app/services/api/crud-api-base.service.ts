@@ -13,9 +13,8 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
     super(http, recurso);
   }
 
-  obteUm(): Observable<TEntity> {
-    // TODO: passar o id
-    return this.get<TEntity>();
+  obterUm(id: string): Observable<TEntity> {
+    return this.get<TEntity>(`${id}`);
   }
 
   obteTodos(): Observable<TEntity[]> {
@@ -32,6 +31,10 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
 
   adicionar(entity: TEntity): Observable<string> {
     return super.post<TEntity, string>(entity);
+  }
+
+  alterar(id: string, entity: TEntity): Observable<void> {
+    return super.put<TEntity, void>(entity, `${id}`);
   }
 
 }
