@@ -20,14 +20,9 @@ export const menuPrincipal: GrupoMenu[] = [
         rota: '/user-stories'
       },
       {
-        nome: 'User Stories',
+        nome: 'Produtos',
         icone: 'vpn_key',
-        rota: '/user-stories'
-      },
-      {
-        nome: 'User Stories',
-        icone: 'vpn_key',
-        rota: '/user-stories'
+        rota: '/produtos'
       }
     ]
   }
