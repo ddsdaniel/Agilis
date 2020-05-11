@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
+import { TimesFormComponent } from './components/trabalho/times/times-form/times-form.component';
+import { TimesComponent } from './components/trabalho/times/times/times.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
@@ -24,6 +26,8 @@ export function InitApp(appLoadService: AppLoadService) {
   declarations: [
     AppComponent,
     LoginComponent,
+    TimesComponent,
+    TimesFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
     UserStoriesComponent,

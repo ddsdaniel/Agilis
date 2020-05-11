@@ -52,6 +52,9 @@ namespace Agilis.WebAPI.Configuration
 			services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
+			services.AddScoped<ITimeService, TimeService>();
+            services.AddScoped<ITimeRepository, TimeRepository>();
+
 			services.AddScoped<IAtorService, AtorService>();
             services.AddScoped<IAtorRepository, AtorRepository>();
 

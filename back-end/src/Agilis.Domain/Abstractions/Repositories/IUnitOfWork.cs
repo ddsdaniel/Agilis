@@ -7,6 +7,7 @@ namespace Agilis.Domain.Abstractions.Repositories
     public interface IUnitOfWork
     {
         IUserStoryRepository UserStoryRepository { get; }
+        ITimeRepository TimeRepository { get; }
         IProdutoRepository ProdutoRepository { get; }
         IAtorRepository AtorRepository { get; }
         IMilestoneRepository MilestoneRepository { get; }

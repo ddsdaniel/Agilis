@@ -17,6 +17,7 @@ namespace Agilis.Infra.Data.Repositories
         private bool _disposed = false;
         public IUsuarioRepository UsuarioRepository { get; }
         public IUserStoryRepository UserStoryRepository { get; }
+        public ITimeRepository TimeRepository { get; }
         public IProdutoRepository ProdutoRepository { get; }
         public IAtorRepository AtorRepository { get; }
         public IMilestoneRepository MilestoneRepository { get; }
@@ -28,6 +29,7 @@ namespace Agilis.Infra.Data.Repositories
 
             UsuarioRepository = new UsuarioRepository(database, _session);
             MilestoneRepository = new MilestoneRepository(database, _session);
+            TimeRepository = new TimeRepository(database, _session);
             ProdutoRepository = new ProdutoRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);

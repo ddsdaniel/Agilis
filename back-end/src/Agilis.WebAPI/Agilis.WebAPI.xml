@@ -95,6 +95,25 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimeController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.ConsultarTodos">
+            <summary>
+            Consulta todos os times do usuário logado
+            </summary>
+            <returns>Retorna todos os times do usuário logado</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
             <summary>
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
@@ -243,6 +262,26 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.Nome">
             <summary>
             Nome do ator
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel">
+            <summary>
+            Representa um time, um software
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Id">
+            <summary>
+            Id do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Nome">
+            <summary>
+            Nome do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.UsuarioId">
+            <summary>
+            Proprietário do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">

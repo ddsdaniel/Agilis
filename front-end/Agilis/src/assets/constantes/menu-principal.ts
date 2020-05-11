@@ -12,6 +12,17 @@ export const menuPrincipal: GrupoMenu[] = [
     ]
   },
   {
+    nome: 'Pessoas',
+    itens: [
+
+      {
+        nome: 'Times',
+        icone: 'vpn_key',
+        rota: '/times'
+      }
+    ]
+  },
+  {
     nome: 'Trabalho',
     itens: [
       {

@@ -6,11 +6,17 @@ import { UserStoriesFormComponent } from './components/trabalho/user-stories/use
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
+import { TimesFormComponent } from './components/trabalho/times/times-form/times-form.component';
+import { TimesComponent } from './components/trabalho/times/times/times.component';
 
 const routes: Routes = [
   { path: 'produtos', component: ProdutosComponent },
   { path: 'produtos/form', component: ProdutosFormComponent },
   { path: 'produtos/form/:produtoId', component: ProdutosFormComponent },
+
+  { path: 'times', component: TimesComponent },
+  { path: 'times/form', component: TimesFormComponent },
+  { path: 'times/form/:timeId', component: TimesFormComponent },
 
   { path: 'user-stories', component: UserStoriesComponent },
   { path: 'user-stories/form', component: UserStoriesFormComponent },

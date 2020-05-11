@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using DDS.WebAPI.Abstractions.Controllers;
-using Agilis.WebAPI.ViewModels.Trabalho;
-using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.WebAPI.ViewModels.Pessoas;
+using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Services.Pessoas;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 using System;
 using Agilis.Domain.Models.Entities.Pessoas;
 
-namespace Agilis.WebAPI.Controllers.Trabalho
+namespace Agilis.WebAPI.Controllers.Pessoas
 {
     /// <summary>
     /// Manutenção do repositório
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutoController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
+    public class TimeController : CrudController<TimeViewModel, TimeViewModel, Time>
     {
-        private readonly IProdutoService _service;
+        private readonly ITimeService _service;
         private readonly IUsuario _usuarioLogado;
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        public ProdutoController(IProdutoService service, 
-                                 IMapper mapper,
-                                 IUsuario usuarioLogado) 
+        public TimeController(ITimeService service, 
+                              IMapper mapper,
+                              IUsuario usuarioLogado) 
             : base(service, mapper)
         {
             _service = service;
@@ -40,20 +40,20 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
-        /// Consulta todos os produtos do usuário logado
+        /// Consulta todos os times do usuário logado
         /// </summary>
-        /// <returns>Retorna todos os produtos do usuário logado</returns>
-        public override ActionResult<ICollection<ProdutoViewModel>> ConsultarTodos()
+        /// <returns>Retorna todos os times do usuário logado</returns>
+        public override ActionResult<ICollection<TimeViewModel>> ConsultarTodos()
         {
 
-            var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(p => p.Nome);
+            var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(t => t.Nome);
 
-            var listaViewModel = _mapper.Map<List<ProdutoViewModel>>(lista);
+            var listaViewModel = _mapper.Map<List<TimeViewModel>>(lista);
 
             return Ok(listaViewModel);
         }
 
-        public override async Task<ActionResult<Guid>> Post(ProdutoViewModel novaEntidadeViewModel)
+        public override async Task<ActionResult<Guid>> Post(TimeViewModel novaEntidadeViewModel)
         {
             if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
                 return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
