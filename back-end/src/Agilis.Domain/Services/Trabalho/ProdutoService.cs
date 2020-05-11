@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {
-    public class ProdutoService : CrudService<Produto>, IProdutoService
+    public class ProdutoService : MultiTenancyCrudService<Produto>, IProdutoService
     {
         
         public ProdutoService(IUnitOfWork unitOfWork)
@@ -18,16 +18,5 @@ namespace Agilis.Domain.Services.Trabalho
             
         }
 
-        public override Task Adicionar(Produto entity)
-        {
-            
-            return base.Adicionar(entity);
-        }
-
-        public ICollection<Produto> ConsultarTodos(IUsuario usuario)
-            => _unitOfWork.ProdutoRepository
-                .AsQueryable()
-                .Where(p => p.UsuarioId == usuario.Id)
-                .ToList();
     }
 }

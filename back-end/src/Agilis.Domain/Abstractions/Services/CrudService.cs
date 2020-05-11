@@ -21,7 +21,7 @@ namespace Agilis.Domain.Abstractions.Services
         /// </summary>
         protected readonly IUnitOfWork _unitOfWork;
 
-        private readonly IRepository<TEntity> _repository;
+        protected readonly IRepository<TEntity> _repository;
 
         /// <summary>
         /// Construtor completo
