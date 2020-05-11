@@ -11,16 +11,16 @@ import { TimesComponent } from './components/trabalho/times/times/times.componen
 
 const routes: Routes = [
   { path: 'produtos', component: ProdutosComponent },
-  { path: 'produtos/form', component: ProdutosFormComponent },
-  { path: 'produtos/form/:produtoId', component: ProdutosFormComponent },
+  { path: 'produtos/new', component: ProdutosFormComponent },
+  { path: 'produtos/:produtoId', component: ProdutosFormComponent },
 
   { path: 'times', component: TimesComponent },
-  { path: 'times/form', component: TimesFormComponent },
-  { path: 'times/form/:timeId', component: TimesFormComponent },
+  { path: 'times/new', component: TimesFormComponent },
+  { path: 'times/:timeId', component: TimesFormComponent },
 
   { path: 'user-stories', component: UserStoriesComponent },
-  { path: 'user-stories/form', component: UserStoriesFormComponent },
-  { path: 'user-stories/form/:userStoryId', component: UserStoriesFormComponent },
+  { path: 'user-stories/new', component: UserStoriesFormComponent },
+  { path: 'user-stories/:userStoryId', component: UserStoriesFormComponent },
 
   { path: 'login', component: LoginComponent },
 ];

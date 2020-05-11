@@ -30,6 +30,10 @@ export class TimesComponent implements OnInit {
   }
 
   adicionar() {
-    this.router.navigateByUrl('times/form');
+    this.router.navigateByUrl('times/new');
+  }
+
+  editar(id: string){
+    this.router.navigateByUrl('times/' + id);
   }
 }

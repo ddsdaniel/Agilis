@@ -30,6 +30,6 @@ export class UserStoriesComponent implements OnInit {
   }
 
   adicionar() {
-    this.router.navigateByUrl('user-stories/form');
+    this.router.navigateByUrl('user-stories/new');
   }
 }

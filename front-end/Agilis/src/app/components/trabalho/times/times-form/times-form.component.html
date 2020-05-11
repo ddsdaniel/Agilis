@@ -1,5 +1,8 @@
-﻿<form fxLayout="column" class="mt-5">
-  <mat-card fxFlexAlign="center">
+﻿<form fxLayout="row" class="mt-5">
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
+
+  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
 
     <mat-card-header>
       <mat-card-title>Cadastro de Times</mat-card-title>
@@ -9,7 +12,7 @@
 
       <mat-form-field class="full-width mt-4">
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="time.nome" placeholder="Nome" name="nome" type="text" required >
+        <input matInput [(ngModel)]="time.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
 
     </mat-card-content>
@@ -20,5 +23,7 @@
     </mat-card-actions>
 
   </mat-card>
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
 
 </form>

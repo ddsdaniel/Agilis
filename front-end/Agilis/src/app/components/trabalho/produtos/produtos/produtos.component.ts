@@ -30,6 +30,6 @@ export class ProdutosComponent implements OnInit {
   }
 
   adicionar() {
-    this.router.navigateByUrl('produtos/form');
+    this.router.navigateByUrl('produtos/new');
   }
 }
