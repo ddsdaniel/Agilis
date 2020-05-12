@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { constantes } from 'src/app/constantes/constantes';
 import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { Time } from 'src/app/models/trabalho/times/time';
 import { UsuarioApiService } from 'src/app/services/api/pessoas/usuario-api.service';
@@ -48,7 +49,7 @@ export class TimesFormComponent implements OnInit {
 
   sugerirNovo() {
     this.time =  {
-      id: '00000000000000000000000000000000',
+      id: constantes.newGuid,
       nome: '',
       usuarioId: this.usuarioApiService.usuarioLogado.usuario.id
     };
