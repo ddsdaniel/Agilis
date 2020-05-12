@@ -14,17 +14,22 @@ import { TimeApiService } from 'src/app/services/api/trabalho/time-api.service';
 export class TimesComponent implements OnInit {
 
   times: Observable<Time[]>;
+  private listaTimes: Time[];
 
   constructor(
-    private userStoryApiService: TimeApiService,
+    private timeApiService: TimeApiService,
     private snackBar: MatSnackBar,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.times = this.userStoryApiService.obteTodos();
+    this.atualizarTimes();
+  }
+
+  private atualizarTimes() {
+    this.times = this.timeApiService.obteTodos();
     this.times.subscribe(
-      () => { },
+      (times: Time[]) => this.listaTimes = times,
       (error: HttpErrorResponse) => this.snackBar.open(error.message)
     );
   }
@@ -33,7 +38,33 @@ export class TimesComponent implements OnInit {
     this.router.navigateByUrl('times/new');
   }
 
-  editar(id: string){
+  editar(id: string) {
     this.router.navigateByUrl('times/' + id);
+  }
+
+  excluir(index: number) {
+
+    const time = this.listaTimes[index];
+
+    this.timeApiService.excluir(time.id)
+      .subscribe(
+        () => {
+
+          this.atualizarTimes();
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            this.timeApiService.adicionar(time)
+              .subscribe(
+                () => this.atualizarTimes(),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 }

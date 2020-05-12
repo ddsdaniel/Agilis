@@ -14,19 +14,19 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
   }
 
   obterUm(id: string): Observable<TEntity> {
-    return this.get<TEntity>(`${id}`);
+    return super.get<TEntity>(`${id}`);
   }
 
   obteTodos(): Observable<TEntity[]> {
-    return this.get<TEntity[]>();
+    return super.get<TEntity[]>();
   }
 
   obterSubrecurso(subrecurso: string): Observable<TEntity> {
-    return this.get<any>(subrecurso);
+    return super.get<any>(subrecurso);
   }
 
   pesquisar(filtro?: string): Observable<TEntity[]> {
-    return this.get<TEntity[]>('', this.buildParams({ filtro }));
+    return super.get<TEntity[]>('', this.buildParams({ filtro }));
   }
 
   adicionar(entity: TEntity): Observable<string> {
@@ -35,6 +35,10 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
 
   alterar(id: string, entity: TEntity): Observable<void> {
     return super.put<TEntity, void>(entity, `${id}`);
+  }
+
+  excluir(id: string): Observable<void> {
+    return super.delete(`${id}`);
   }
 
 }

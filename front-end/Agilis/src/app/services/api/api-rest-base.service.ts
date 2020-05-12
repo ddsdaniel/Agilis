@@ -79,10 +79,9 @@ export abstract class ApiRestBaseService {
    * Executa o método DELETE no recurso desse service
    *
    * @param subRecurso caminho adicional no final da URL padrão do service
-   * @typeparam TRetorno  tipo de objeto retornado
    */
-  protected delete<TRetorno>(subRecurso?: string): Observable<TRetorno> {
-    return this.http.delete<TRetorno>(this.getUrl(subRecurso));
+  protected delete(subRecurso?: string): Observable<void> {
+    return this.http.delete<void>(this.getUrl(subRecurso));
   }
 
   protected buildParams(object: any) {

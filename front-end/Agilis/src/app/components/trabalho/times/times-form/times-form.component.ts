@@ -48,7 +48,7 @@ export class TimesFormComponent implements OnInit {
 
   sugerirNovo() {
     this.time =  {
-      id: '',
+      id: '00000000000000000000000000000000',
       nome: '',
       usuarioId: this.usuarioApiService.usuarioLogado.usuario.id
     };

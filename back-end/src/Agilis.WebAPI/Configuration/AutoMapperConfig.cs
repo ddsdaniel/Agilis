@@ -22,6 +22,10 @@ namespace Agilis.WebAPI.Configuration
         /// </summary>
         public AutoMapperConfig()
         {
+            //Tipos nativos
+            //CreateMap<string, Guid>()
+            //    .ConstructUsing(guidString => guidString == Guid.Empty.ToString() ? Guid.NewGuid() : Guid.Parse(guidString));
+
             //DDS.Domain.Core
             CreateMap<Email, string>()
                .ConvertUsing(c => c.Endereco);

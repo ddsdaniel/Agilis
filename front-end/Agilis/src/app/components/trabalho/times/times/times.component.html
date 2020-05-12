@@ -22,7 +22,7 @@
 
 <!-- Grade -->
 <div fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
-  <ng-container *ngFor="let time of times | async">
+  <ng-container *ngFor="let time of times | async; let i = index">
 
     <mat-card fxFlex="0 1 calc((100% / 6) - 16px)" fxFlex.lt-md="0 1 calc((100% / 3) - 16px)" fxFlex.lt-sm="100%">
 
@@ -37,7 +37,7 @@
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-around none">
         <mat-icon title="Editar" (click)="editar(time.id)">edit</mat-icon>
         <mat-icon title="Favorito" color="accent">star_outline</mat-icon>
-        <mat-icon title="Excluir" color="warn">delete_forever</mat-icon>
+        <mat-icon title="Excluir" color="warn" (click)="excluir(i)">delete_forever</mat-icon>
       </mat-card-actions>
 
     </mat-card>
