@@ -6,8 +6,8 @@ import { UserStoriesFormComponent } from './components/trabalho/user-stories/use
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
-import { TimesFormComponent } from './components/trabalho/times/times-form/times-form.component';
-import { TimesComponent } from './components/trabalho/times/times/times.component';
+import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
+import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { AutenticacaoGuard } from './guards/autenticacao.guard';
 
 const routes: Routes = [

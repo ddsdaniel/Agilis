@@ -1,4 +1,4 @@
-﻿import { Usuario } from '../../pessoas/usuario';
+﻿import { Usuario } from './usuario';
 
 export interface Time {
   id: string;

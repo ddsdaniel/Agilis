@@ -2,9 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { constantes } from 'src/app/constantes/constantes';
+import { constantes } from 'src/app/constants/constantes';
 import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
-import { Time } from 'src/app/models/trabalho/times/time';
+import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioApiService } from 'src/app/services/api/pessoas/usuario-api.service';
 import { TimeApiService } from 'src/app/services/api/trabalho/time-api.service';
 

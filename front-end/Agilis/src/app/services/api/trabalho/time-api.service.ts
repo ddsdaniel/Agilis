@@ -1,6 +1,6 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Time } from 'src/app/models/trabalho/times/time';
+import { Time } from 'src/app/models/pessoas/time';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
 import { Observable } from 'rxjs';

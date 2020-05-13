@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Favorito } from 'src/app/models/favorito';
-import { Time } from 'src/app/models/trabalho/times/time';
+import { Time } from 'src/app/models/pessoas/time';
 import { TimeApiService } from 'src/app/services/api/trabalho/time-api.service';
 
 @Component({
