@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.usuarioApiService.usuarioLogado = logado;
         this.localStorageService.setJSON<UsuarioLogado>(localStorageKeys.usuarioLogado, logado);
 
-        this.router.navigate(['user-stories']);
+        this.router.navigate(['times']);
     }
 
 }

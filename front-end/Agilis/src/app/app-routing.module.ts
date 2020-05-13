@@ -8,19 +8,20 @@ import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-f
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { TimesFormComponent } from './components/trabalho/times/times-form/times-form.component';
 import { TimesComponent } from './components/trabalho/times/times/times.component';
+import { AutenticacaoGuard } from './guards/autenticacao.guard';
 
 const routes: Routes = [
-  { path: 'produtos', component: ProdutosComponent },
-  { path: 'produtos/new', component: ProdutosFormComponent },
-  { path: 'produtos/:produtoId', component: ProdutosFormComponent },
+  { path: 'produtos', component: ProdutosComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'produtos/new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'produtos/:produtoId', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
 
-  { path: 'times', component: TimesComponent },
-  { path: 'times/new', component: TimesFormComponent },
-  { path: 'times/:timeId', component: TimesFormComponent },
+  { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'times/new', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'times/:timeId', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
 
-  { path: 'user-stories', component: UserStoriesComponent },
-  { path: 'user-stories/new', component: UserStoriesFormComponent },
-  { path: 'user-stories/:userStoryId', component: UserStoriesFormComponent },
+  { path: 'user-stories', component: UserStoriesComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'user-stories/new', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'user-stories/:userStoryId', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'login', component: LoginComponent },
 ];
