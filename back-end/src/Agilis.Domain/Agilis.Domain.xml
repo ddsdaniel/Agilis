@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Agilis.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Agilis.Domain.Enums.RegraUsuario">
+            <summary>
+            Define o tipo do usuário, por consequência quais serão as suas regras e permissões
+            </summary>
+        </member>
+        <member name="T:Agilis.Domain.Models.Entities.Pessoas.Ator">
+            <summary>
+            Representa um ator, uma persona do universo Agilis
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Pessoas.Ator.Nome">
+            <summary>
+            Nome do ator
+            </summary>
+        </member>
+        <member name="M:Agilis.Domain.Models.Entities.Pessoas.Ator.#ctor(System.String)">
+            <summary>
+            Construtor completo, com validações
+            </summary>
+            <param name="nome">Nome do ator</param>
+        </member>
+        <member name="T:Agilis.Domain.Models.Entities.Trabalho.Milestone">
+            <summary>
+            Marco histórico, ponto significativo na linha do tempo
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.Milestone.Nome">
+            <summary>
+            Nome do Milestone
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.Milestone.Marco">
+            <summary>
+            Data do marco histórico
+            </summary>
+        </member>
+        <member name="M:Agilis.Domain.Models.Entities.Trabalho.Milestone.#ctor(System.String,System.DateTime)">
+            <summary>
+            Construtor completo, com validações
+            </summary>
+            <param name="nome">Nome do Milestone</param>
+            <param name="marco">Data do marco histórico</param>
+        </member>
+        <member name="T:Agilis.Domain.Models.Entities.Trabalho.UserStory">
+            <summary>
+            Representa uma história do usuário, ou seja, uma funcionalidade que ele deseja
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.UserStory.Ator">
+            <summary>
+            Persona para qual a história será útil
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.UserStory.Narrativa">
+            <summary>
+            O que se deseja
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.UserStory.Objetivo">
+            <summary>
+            Para que serve
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.UserStory.Comentarios">
+            <summary>
+            Comentários da user story
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.Entities.Trabalho.UserStory.Milestone">
+            <summary>
+            Milestone (opcional) da user story
+            </summary>
+        </member>
+        <member name="M:Agilis.Domain.Models.Entities.Trabalho.UserStory.#ctor(Agilis.Domain.Models.Entities.Pessoas.Ator,System.String,System.String,System.Collections.Generic.ICollection{Agilis.Domain.Models.ValueObjects.Comentario},Agilis.Domain.Models.Entities.Trabalho.Milestone)">
+            <summary>
+            Construtor completo, com validações
+            </summary>
+            <param name="ator">Persona para qual a história será útil</param>
+            <param name="narrativa">O que se deseja</param>
+            <param name="objetivo">Para que serve</param>
+            <param name="comentarios">Comentários da user story</param>
+            <param name="milestone">Milestone (opcional) da user story</param>
+        </member>
+        <member name="T:Agilis.Domain.Models.ValueObjects.Comentario">
+            <summary>
+            Representa um comentário dentro do sistema, usado como value object em várias entidades
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.ValueObjects.Comentario.Texto">
+            <summary>
+            Texto do comentário
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.ValueObjects.Comentario.DataCriacao">
+            <summary>
+            Data de criação do comentário
+            </summary>
+        </member>
+        <member name="P:Agilis.Domain.Models.ValueObjects.Comentario.Autor">
+            <summary>
+            Autor do comentário
+            </summary>
+        </member>
+        <member name="M:Agilis.Domain.Models.ValueObjects.Comentario.#ctor(System.String,System.DateTime,Agilis.Domain.Models.Entities.Pessoas.Usuario)">
+            <summary>
+            Construtor completo, com validações
+            </summary>
+            <param name="texto">Texto do comentário</param>
+            <param name="dataCriacao">Data de criação do comentário</param>
+            <param name="autor">Autor do comentário</param>
+        </member>
+        <member name="M:Agilis.Domain.Services.Seguranca.TokenService.Gerar(Agilis.Domain.Models.Entities.Pessoas.Usuario)">
+            <summary>
+            Gera um token baseado no usuário
+            </summary>
+            <param name="usuario"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

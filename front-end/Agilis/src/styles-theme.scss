@@ -1,0 +1,9 @@
+$styles-theme-primary: mat-palette($mat-light-blue, 700);
+$styles-theme-accent: mat-palette($mat-amber, 600);
+$styles-theme-warn: mat-palette($mat-red, A700);
+
+$styles-theme: mat-light-theme(
+    $styles-theme-primary,
+    $styles-theme-accent,
+    $styles-theme-warn
+);

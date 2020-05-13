@@ -1,0 +1,92 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+
+// import our custom theme
+@import 'styles-theme.scss';
+
+// specify theme class eg: <body class="styles-theme"> ... </body>
+.styles-theme {
+
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($styles-theme);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-button-wrapper {
+  text-transform: uppercase;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field mat-icon {
+  color: mat-color($styles-theme-primary);
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+button.mat-fab {
+  position: fixed !important;
+  right: 23px;
+  bottom: 23px;
+  z-index: 1;
+}
+
+// magin-----------------------------------------------
+$spacer: 1rem !default;
+// bottom
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-1 {
+  margin-bottom: 0.25 * $spacer !important;
+}
+.mb-2 {
+  margin-bottom: 0.5 * $spacer !important;
+}
+.mb-3 {
+  margin-bottom: $spacer !important;
+}
+.mb-4 {
+  margin-bottom: 1.5 * $spacer !important;
+}
+.mb-5 {
+  margin-bottom: 3 * $spacer !important;
+}
+// top
+.mt-0 {
+  margin-top: 0 !important;
+}
+.mt-1 {
+  margin-top: 0.25 * $spacer !important;
+}
+.mt-2 {
+  margin-top: 0.5 * $spacer !important;
+}
+.mt-3 {
+  margin-top: $spacer !important;
+}
+.mt-4 {
+  margin-top: 1.5 * $spacer !important;
+}
+.mt-5 {
+  margin-top: 3 * $spacer !important;
+}

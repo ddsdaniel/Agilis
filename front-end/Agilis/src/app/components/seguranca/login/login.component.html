@@ -1,0 +1,37 @@
+<form fxLayout="column" class="mt-5">
+  <mat-card fxFlexAlign="center">
+
+    <mat-card-content>
+
+      <div class="logo">
+        <img src="../../../../assets/images/logo_light.png" alt="Logo do sistema" />
+      </div>
+
+      <mat-form-field class="full-width mt-4">
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="login.email" placeholder="E-mail" name="email" type="email" required >
+        <div matPrefix fxLayout="row">
+          <mat-icon>alternate_email</mat-icon>
+          &nbsp;
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Senha</mat-label>
+        <input [(ngModel)]="login.senha" matInput placeholder="Senha" name="password"
+          type="password" required (keyup.enter)="autenticar()">
+        <div matPrefix fxLayout="row">
+          <mat-icon>vpn_key</mat-icon>
+          &nbsp;
+        </div>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="autenticar()">Login</button>
+      <button mat-raised-button>Cadastre-se</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>

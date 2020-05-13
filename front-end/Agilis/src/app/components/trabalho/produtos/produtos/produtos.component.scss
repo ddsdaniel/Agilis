@@ -1,0 +1,19 @@
+mat-card {
+  margin: 4px 0;
+  float: left;
+}
+
+mat-card mat-icon {
+  cursor: pointer;
+}
+
+.pesquisa mat-form-field,
+.pesquisa button {
+  margin: 0 8px;
+}
+
+.pesquisa button{
+  height: 36px !important;
+  margin-bottom: 20px;
+  width: 100%;
+}
