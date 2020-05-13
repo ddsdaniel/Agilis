@@ -49,7 +49,7 @@ export class TimesComponent implements OnInit {
       .subscribe(
         () => {
 
-          this.atualizarTimes();
+          this.times.removeAt(index);
 
           const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 
@@ -57,7 +57,7 @@ export class TimesComponent implements OnInit {
 
             this.timeApiService.adicionar(time)
               .subscribe(
-                () => this.atualizarTimes(),
+                () => this.times.insert(index, time),
                 (error: HttpErrorResponse) => this.snackBar.open(error.message)
               );
 
