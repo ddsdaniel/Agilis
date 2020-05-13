@@ -4,4 +4,5 @@ export interface Time {
   id: string;
   nome: string;
   usuarioId: string;
+  favorito: boolean;
 }

@@ -23,5 +23,7 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// Proprietário do time
         /// </summary>
         public Guid UsuarioId { get; set; }
+
+        public bool Favorito { get; set; }
     }
 }

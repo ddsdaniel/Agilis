@@ -24,7 +24,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var time = new Time(Guid.NewGuid(), nome);
+            var time = new Time(Guid.NewGuid(), nome, true);
 
             //Assert
             Assert.True(time.Invalid);
@@ -34,7 +34,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
         public void Construtor_UsuarioIdEmpty_Invalid()
         {
             //Arrange & Act
-            var time = new Time(Guid.Empty, "Time 1");
+            var time = new Time(Guid.Empty, "Time 1", false);
 
             //Assert
             Assert.True(time.Invalid);

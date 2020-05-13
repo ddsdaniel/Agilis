@@ -51,7 +51,8 @@ export class TimesFormComponent implements OnInit {
     this.time =  {
       id: constantes.newGuid,
       nome: '',
-      usuarioId: this.usuarioApiService.usuarioLogado.usuario.id
+      usuarioId: this.usuarioApiService.usuarioLogado.usuario.id,
+      favorito: false
     };
   }
 

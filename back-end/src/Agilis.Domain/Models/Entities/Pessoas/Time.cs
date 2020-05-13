@@ -1,19 +1,21 @@
 ﻿using Agilis.Domain.Abstractions.Entities;
 using Flunt.Validations;
 using System;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Models.Entities.Pessoas
 {
     public class Time : MultiTenancyEntity
     {
         public string Nome { get; private set; }
+        public bool Favorito { get; private set; }
 
         protected Time() : base(Guid.Empty)
         {
 
         }
 
-        public Time(Guid usuarioId, string nome) : base(usuarioId)
+        public Time(Guid usuarioId, string nome, bool favorito) : base(usuarioId)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
@@ -21,7 +23,17 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 );
 
             Nome = nome;
+            Favorito = favorito;
         }
 
+        internal void Desfavoritar()
+        {
+            Favorito = false;
+        }
+
+        public void Favoritar()
+        {
+            Favorito = true;
+        }
     }
 }

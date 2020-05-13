@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Favorito } from 'src/app/models/favorito';
 import { Time } from 'src/app/models/trabalho/times/time';
 import { TimeApiService } from 'src/app/services/api/trabalho/time-api.service';
 
@@ -13,8 +13,7 @@ import { TimeApiService } from 'src/app/services/api/trabalho/time-api.service';
 })
 export class TimesComponent implements OnInit {
 
-  times: Observable<Time[]>;
-  private listaTimes: Time[];
+  times: Time[];
 
   constructor(
     private timeApiService: TimeApiService,
@@ -27,11 +26,11 @@ export class TimesComponent implements OnInit {
   }
 
   private atualizarTimes() {
-    this.times = this.timeApiService.obteTodos();
-    this.times.subscribe(
-      (times: Time[]) => this.listaTimes = times,
-      (error: HttpErrorResponse) => this.snackBar.open(error.message)
-    );
+    this.timeApiService.obteTodos()
+      .subscribe(
+        (times: Time[]) => this.times = times,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
   adicionar() {
@@ -44,7 +43,7 @@ export class TimesComponent implements OnInit {
 
   excluir(index: number) {
 
-    const time = this.listaTimes[index];
+    const time = this.times[index];
 
     this.timeApiService.excluir(time.id)
       .subscribe(
@@ -63,6 +62,22 @@ export class TimesComponent implements OnInit {
               );
 
           });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  favoritar(id: string, marcado: boolean) {
+
+    const favorito: Favorito = {
+      marcado
+    };
+
+    this.timeApiService.favoritar(id, favorito)
+      .subscribe(
+        () => {
+          const time = this.times.find(t => t.id === id);
+          time.favorito = marcado;
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );

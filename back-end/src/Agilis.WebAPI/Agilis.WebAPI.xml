@@ -114,6 +114,14 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.Favoritar(System.Guid,Agilis.WebAPI.ViewModels.FavoritoViewModel)">
+            <summary>
+            Marca/desmarca um time como favorito
+            </summary>
+            <param name="id">Id do time que será marcado/desmarcado como favorito</param>
+            <param name="favorito">True para favoritar ou false para desfavoritar</param>
+            <returns>Ok, sem parâmetros</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
             <summary>
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.

@@ -2,6 +2,7 @@
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Models.Entities.Pessoas;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -14,5 +15,19 @@ namespace Agilis.Domain.Services.Pessoas
             
         }
 
+        public async Task Favoritar(Time time)
+        {
+            time.Favoritar();
+            
+            await Atualizar(time);
+        }
+
+
+        public async Task Desfavoritar(Time time)
+        {
+            time.Desfavoritar();
+
+            await Atualizar(time);
+        }
     }
 }

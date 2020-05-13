@@ -11,6 +11,7 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
 using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.WebAPI.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -46,7 +47,9 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         public override ActionResult<ICollection<TimeViewModel>> ConsultarTodos()
         {
 
-            var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(t => t.Nome);
+            var lista = _service.ConsultarTodos(_usuarioLogado)
+                .OrderByDescending(t => t.Favorito)
+                .ThenBy(t => t.Nome);
 
             var listaViewModel = _mapper.Map<List<TimeViewModel>>(lista);
 
@@ -60,5 +63,37 @@ namespace Agilis.WebAPI.Controllers.Pessoas
 
             return await base.Post(novaEntidadeViewModel);
         }
+
+        /// <summary>
+        /// Marca/desmarca um time como favorito
+        /// </summary>
+        /// <param name="id">Id do time que será marcado/desmarcado como favorito</param>
+        /// <param name="favorito">True para favoritar ou false para desfavoritar</param>
+        /// <returns>Ok, sem parâmetros</returns>
+        [HttpPatch("{id:guid}/favorito")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public virtual async Task<ActionResult> Favoritar(Guid id, FavoritoViewModel favorito)
+        {
+            var time = await _service.ConsultarPorId(id);
+
+            if (time == null)
+                return CustomNotFound(nameof(Time), "Time não encontrado");
+
+            if (favorito.Marcado)
+                await _service.Favoritar(time);
+            else
+                await _service.Desfavoritar(time);
+
+            if (_service.Invalid)
+                return BadRequest(_service.Notifications); 
+            
+            await _service.Commit();
+
+            return base.Ok();
+        }
+
+        
     }
 }
