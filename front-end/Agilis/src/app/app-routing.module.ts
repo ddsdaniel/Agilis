@@ -13,15 +13,15 @@ import { AutenticacaoGuard } from './guards/autenticacao.guard';
 const routes: Routes = [
   { path: 'produtos', component: ProdutosComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'produtos/:produtoId', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'produtos/:id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'times/new', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'times/:timeId', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'user-stories', component: UserStoriesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'user-stories/new', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'user-stories/:userStoryId', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'user-stories/:id', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'login', component: LoginComponent },
 ];

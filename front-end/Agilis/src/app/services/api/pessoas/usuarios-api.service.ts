@@ -11,12 +11,12 @@ import { CrudApiBaseService } from '../crud-api-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioApiService extends CrudApiBaseService<Usuario> {
+export class UsuariosApiService extends CrudApiBaseService<Usuario> {
 
   usuarioLogado: UsuarioLogado;
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'Usuario');
+    super(httpClient, 'usuarios');
   }
 
   autenticar(login: LoginDados): Observable<UsuarioLogado> {

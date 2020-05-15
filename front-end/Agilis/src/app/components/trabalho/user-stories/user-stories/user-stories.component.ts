@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
-import { UserStoryApiService } from 'src/app/services/api/trabalho/user-story-api.service';
+import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 
 @Component({
   selector: 'app-user-stories',
@@ -22,7 +22,7 @@ export class UserStoriesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStories = this.userStoryApiService.obteTodos();
+    this.userStories = this.userStoryApiService.obterTodos();
     this.userStories.subscribe(
       () => { },
       (error: HttpErrorResponse) => this.snackBar.open(error.message)

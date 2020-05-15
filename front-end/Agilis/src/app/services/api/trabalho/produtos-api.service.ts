@@ -10,6 +10,6 @@ import { CrudApiBaseService } from '../crud-api-base.service';
 export class ProdutoApiService extends CrudApiBaseService<Produto> {
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'Produto');
+    super(httpClient, 'produtos');
   }
 }

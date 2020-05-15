@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
-import { UserStoryApiService } from 'src/app/services/api/trabalho/user-story-api.service';
+import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Ator } from 'src/app/models/pessoas/ator';
-import { AtorApiService } from 'src/app/services/api/pessoas/ator-api.service';
+import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
 import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 
 @Component({
@@ -24,13 +24,13 @@ export class UserStoriesFormComponent implements OnInit {
     private router: Router,
     private userStoryApiService: UserStoryApiService,
     private snackBar: MatSnackBar,
-    private atorApiService: AtorApiService,
+    private atorApiService: AtoresApiService,
     private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
 
-    const id = this.activatedRoute.snapshot.paramMap.get('userStoryId');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
 
     this.userStory = {
@@ -45,7 +45,7 @@ export class UserStoriesFormComponent implements OnInit {
       historia: '',
     };
 
-    this.atores = this.atorApiService.obteTodos();
+    this.atores = this.atorApiService.obterTodos();
     this.atores.subscribe(atores => this.userStory.ator.id = atores[0].id);
   }
 

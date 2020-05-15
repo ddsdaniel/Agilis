@@ -2,6 +2,8 @@
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Models.Entities.Pessoas;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Pessoas
@@ -29,5 +31,12 @@ namespace Agilis.Domain.Services.Pessoas
 
             await Atualizar(time);
         }
+
+        public override ICollection<Time> Pesquisar(string filtro)
+             => _unitOfWork.TimeRepository
+                    .AsQueryable()
+                    .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(t => t.Nome)
+                    .ToList();
     }
 }

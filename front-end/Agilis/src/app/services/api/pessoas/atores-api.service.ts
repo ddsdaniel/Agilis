@@ -7,9 +7,9 @@ import { CrudApiBaseService } from '../crud-api-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AtorApiService extends CrudApiBaseService<Ator> {
+export class AtoresApiService extends CrudApiBaseService<Ator> {
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'Ator');
+    super(httpClient, 'atores');
   }
 }

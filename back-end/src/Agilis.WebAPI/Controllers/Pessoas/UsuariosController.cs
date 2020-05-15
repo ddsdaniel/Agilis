@@ -15,6 +15,7 @@ using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.WebAPI.Extensions;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.WebAPI.ViewModels.Pessoas;
+using System.Linq;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -23,7 +24,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : CrudController<UsuarioCadastroViewModel, UsuarioConsultaViewModel, Usuario>
+    public class UsuariosController : CrudController<UsuarioCadastroViewModel, UsuarioConsultaViewModel, Usuario>
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
@@ -37,7 +38,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="mapper">Automapper</param>
         /// <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
         /// <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
-        public UsuarioController(IUsuarioService usuarioService,
+        public UsuariosController(IUsuarioService usuarioService,
                                  IMapper mapper,
                                  ITokenService tokenService,
                                  IHttpContextAccessor httpContextAccessor)
@@ -125,5 +126,14 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         //[Route("manager")]//apenas managers podem autenticar
         //[Authorize(Roles = "Admin")]
         //public string Manager() => "Admin";
+
+        /// <summary>
+        /// Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+        /// </summary>
+        /// <param name="lista">Lista a ser ordenada</param>
+        /// <returns>Lista já ordenada</returns>
+        protected override ICollection<UsuarioConsultaViewModel> Ordenar(ICollection<UsuarioConsultaViewModel> lista)
+                => lista.OrderBy(u => u.Nome)
+                        .ToList();
     }
 }

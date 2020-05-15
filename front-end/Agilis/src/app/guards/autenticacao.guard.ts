@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UsuarioApiService } from '../services/api/pessoas/usuario-api.service';
+import { UsuariosApiService } from '../services/api/pessoas/usuarios-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { UsuarioApiService } from '../services/api/pessoas/usuario-api.service';
 export class AutenticacaoGuard implements CanActivate {
 
   constructor(
-    private autenticacaoService: UsuarioApiService,
+    private autenticacaoService: UsuariosApiService,
     private router: Router
   ) { }
 

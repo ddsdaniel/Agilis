@@ -19,7 +19,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutoController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
+    public class ProdutosController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
     {
         private readonly IProdutoService _service;
         private readonly IUsuario _usuarioLogado;
@@ -30,7 +30,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        public ProdutoController(IProdutoService service, 
+        public ProdutosController(IProdutoService service, 
                                  IMapper mapper,
                                  IUsuario usuarioLogado) 
             : base(service, mapper)
@@ -60,5 +60,14 @@ namespace Agilis.WebAPI.Controllers.Trabalho
 
             return await base.Post(novaEntidadeViewModel);
         }
+
+        /// <summary>
+        /// Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+        /// </summary>
+        /// <param name="lista">Lista a ser ordenada</param>
+        /// <returns>Lista já ordenada</returns>
+        protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
+                => lista.OrderBy(p => p.Nome)
+                        .ToList();
     }
 }

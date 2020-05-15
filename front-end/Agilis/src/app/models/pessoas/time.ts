@@ -1,8 +1,5 @@
-﻿import { Usuario } from './usuario';
+﻿import { EntidadeFavorita } from '../entidade-favorita';
 
-export interface Time {
-  id: string;
-  nome: string;
+export interface Time extends EntidadeFavorita {
   usuarioId: string;
-  favorito: boolean;
 }
