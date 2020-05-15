@@ -88,5 +88,6 @@ namespace Agilis.Domain.Abstractions.Services
         /// <param name="id">Id da entidade a ser excluída</param>
         /// <returns>Task correspondente à exclusão</returns>
         public async Task Excluir(Guid id) => await _repository.Excluir(id);
+        public abstract ICollection<TEntity> Pesquisar(string filtro);
     }
 }

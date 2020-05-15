@@ -4,7 +4,7 @@
 
   <mat-form-field  fxFlex.xs="50%" fxFlex.sm="75%" fxFlex.md="85%" fxFlex.lg="90%" fxFlex.xl="90%">
     <mat-label>Pesquisa</mat-label>
-    <input matInput placeholder="Pesquisa" type="search">
+    <input matInput placeholder="Pesquisa" type="search" [(ngModel)]="filtro" (keyup.enter)="atualizarDados()">
     <div matPrefix fxLayout="row">
       <mat-icon>search</mat-icon>
       &nbsp;
@@ -12,7 +12,7 @@
   </mat-form-field>
 
   <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="50%" fxFlex.sm="25%" fxFlex.md="15%" fxFlex.lg="10%" fxFlex.xl="10%">
-    <button mat-raised-button>Pesquisar</button>
+    <button mat-raised-button (click)="atualizarDados()">Pesquisar</button>
   </div>
 
 </div>

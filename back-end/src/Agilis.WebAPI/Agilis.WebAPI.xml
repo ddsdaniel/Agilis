@@ -14,6 +14,18 @@
             Construtor que configura o mapeamento das propriedades
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.Configuration.CorsConfig">
+            <summary>
+            Classe de extensão para separar as configurações de Cors
+            </summary>
+        </member>
+        <member name="M:Agilis.WebAPI.Configuration.CorsConfig.UseCorsConfig(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configura o Cors
+            </summary>
+            <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline</param>
+            <returns>app atualizado</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Configuration.DependencyInjectionConfig">
             <summary>
             Classe de configuração das injeções de dependências
@@ -95,6 +107,13 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtorController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimeController">
             <summary>
             Manutenção do repositório
@@ -158,6 +177,13 @@
             <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
             <returns>OK (201)</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoryController">
             <summary>
             Manutenção do repositório
@@ -170,6 +196,13 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoryController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestoneController">
             <summary>
             Manutenção do repositório
@@ -181,6 +214,13 @@
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestoneController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutoController">
             <summary>
@@ -200,6 +240,13 @@
             Consulta todos os produtos do usuário logado
             </summary>
             <returns>Retorna todos os produtos do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
         </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>

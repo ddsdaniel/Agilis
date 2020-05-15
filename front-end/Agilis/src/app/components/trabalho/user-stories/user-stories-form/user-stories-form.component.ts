@@ -45,7 +45,7 @@ export class UserStoriesFormComponent implements OnInit {
       historia: '',
     };
 
-    this.atores = this.atorApiService.obteTodos();
+    this.atores = this.atorApiService.obterTodos();
     this.atores.subscribe(atores => this.userStory.ator.id = atores[0].id);
   }
 

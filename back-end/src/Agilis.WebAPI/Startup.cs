@@ -63,12 +63,8 @@ namespace Agilis.WebAPI
             }
 
             app.UseRouting();
-
-            //TODO: restringir mais em produção
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            
+            app.UseCorsConfig();
 
             app.UseAuthentication();
             app.UseAuthorization();

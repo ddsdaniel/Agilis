@@ -22,7 +22,7 @@ export class ProdutosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.produtos = this.userStoryApiService.obteTodos();
+    this.produtos = this.userStoryApiService.obterTodos();
     this.produtos.subscribe(
       () => { },
       (error: HttpErrorResponse) => this.snackBar.open(error.message)

@@ -10,6 +10,7 @@ import { CrudFavoritoApiBaseService } from '../services/api/crud-favorito-api-ba
 export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
 
   lista: TEntity[];
+  filtro = '';
 
   constructor(
     private apiService: CrudFavoritoApiBaseService<TEntity>,
@@ -22,12 +23,22 @@ export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
     this.atualizarDados();
   }
 
-  private atualizarDados() {
-    this.apiService.obteTodos()
-      .subscribe(
-        (lista: TEntity[]) => this.lista = lista,
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
+  atualizarDados() {
+    console.log('filtro: ' + this.filtro);
+
+    if (this.filtro) {
+      this.apiService.pesquisar(this.filtro)
+        .subscribe(
+          (lista: TEntity[]) => this.lista = lista,
+          (error: HttpErrorResponse) => this.snackBar.open(error.message)
+        );
+    } else {
+      this.apiService.obterTodos()
+        .subscribe(
+          (lista: TEntity[]) => this.lista = lista,
+          (error: HttpErrorResponse) => this.snackBar.open(error.message)
+        );
+    }
   }
 
   adicionar() {
@@ -73,8 +84,8 @@ export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
     this.apiService.favoritar(id, favorito)
       .subscribe(
         () => {
-          const time = this.lista.find(t => t.id === id);
-          time.favorito = marcado;
+          const entidade = this.lista.find(t => t.id === id);
+          entidade.favorito = marcado;
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );

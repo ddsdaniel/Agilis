@@ -2,6 +2,8 @@
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Models.Entities.Pessoas;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Pessoas
@@ -14,10 +16,11 @@ namespace Agilis.Domain.Services.Pessoas
         {
         }
 
-        public override Task Adicionar(Ator entity)
-        {
-            
-            return base.Adicionar(entity);
-        }
+        public override ICollection<Ator> Pesquisar(string filtro)
+            => _unitOfWork.AtorRepository
+                    .AsQueryable()
+                    .Where(a => a.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(a => a.Nome)
+                    .ToList();
     }
 }

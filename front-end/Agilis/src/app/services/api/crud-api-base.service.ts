@@ -17,7 +17,7 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
     return super.get<TEntity>(`${id}`);
   }
 
-  obteTodos(): Observable<TEntity[]> {
+  obterTodos(): Observable<TEntity[]> {
     return super.get<TEntity[]>();
   }
 
@@ -26,7 +26,7 @@ export abstract class CrudApiBaseService<TEntity> extends ApiRestBaseService {
   }
 
   pesquisar(filtro?: string): Observable<TEntity[]> {
-    return super.get<TEntity[]>('', this.buildParams({ filtro }));
+    return super.get<TEntity[]>('pesquisa', this.buildParams({ filtro }));
   }
 
   adicionar(entity: TEntity): Observable<string> {

@@ -4,6 +4,8 @@ using DDS.WebAPI.Abstractions.Controllers;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Abstractions.Services.Trabalho;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -24,6 +26,14 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             : base(service, mapper)
         {            
         }
-        
+
+        /// <summary>
+        /// Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+        /// </summary>
+        /// <param name="lista">Lista a ser ordenada</param>
+        /// <returns>Lista já ordenada</returns>
+        protected override ICollection<MilestoneViewModel> Ordenar(ICollection<MilestoneViewModel> lista)
+                => lista.OrderBy(m => m.Nome)
+                        .ToList();
     }
 }

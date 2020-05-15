@@ -22,7 +22,7 @@ export class UserStoriesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStories = this.userStoryApiService.obteTodos();
+    this.userStories = this.userStoryApiService.obterTodos();
     this.userStories.subscribe(
       () => { },
       (error: HttpErrorResponse) => this.snackBar.open(error.message)

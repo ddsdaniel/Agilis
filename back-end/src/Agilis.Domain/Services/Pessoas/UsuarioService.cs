@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.Domain.Abstractions.Services.Pessoas;
+using System.Collections.Generic;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -98,5 +99,12 @@ namespace Agilis.Domain.Services.Pessoas
                 }
             }
         }
+
+        public override ICollection<Usuario> Pesquisar(string filtro)
+             => _unitOfWork.UsuarioRepository
+                    .AsQueryable()
+                    .Where(u => u.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(u => u.Nome)
+                    .ToList();
     }
 }

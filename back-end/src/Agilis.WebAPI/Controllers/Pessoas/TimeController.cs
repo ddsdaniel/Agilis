@@ -10,7 +10,6 @@ using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
-using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.WebAPI.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
@@ -94,6 +93,9 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return base.Ok();
         }
 
-        
+        protected override ICollection<TimeViewModel> Ordenar(ICollection<TimeViewModel> lista)
+                => lista.OrderByDescending(t => t.Favorito)
+                        .ThenBy(t => t.Nome)
+                        .ToList();
     }
 }
