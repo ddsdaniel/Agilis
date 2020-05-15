@@ -1,0 +1,49 @@
+<form fxLayout="row" class="mt-5 mb-4">
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
+
+  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
+
+    <mat-card-header>
+      <mat-card-title>Cadastre-se</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-form-field class="full-width mt-4">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="usuario.nome" placeholder="Nome" name="nome" type="text" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput [(ngModel)]="usuario.sobrenome" placeholder="Sobrenome" name="sobrenome" type="text" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="usuario.email" placeholder="E-mail" name="email" type="email" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="usuario.senha" placeholder="Senha" name="senha" type="password" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Confirme a sua senha</mat-label>
+        <input matInput [(ngModel)]="usuario.confirmaSenha" placeholder="Confirme a sua senha" name="confirmaSenha" type="password" required>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+      <button mat-raised-button (click)="cancelar()">Cancelar</button>
+    </mat-card-actions>
+
+  </mat-card>
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
+
+</form>

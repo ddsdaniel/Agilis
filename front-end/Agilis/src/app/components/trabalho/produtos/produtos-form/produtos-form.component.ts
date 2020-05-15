@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
-import { UsuariosApiService } from 'src/app/services/api/pessoas/usuarios-api.service';
 import { ProdutoApiService } from 'src/app/services/api/trabalho/produtos-api.service';
+import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
 
 @Component({
   selector: 'app-produtos-form',
@@ -19,14 +19,14 @@ export class ProdutosFormComponent implements OnInit {
     private router: Router,
     private produtoApiService: ProdutoApiService,
     private snackBar: MatSnackBar,
-    private usuariosApiService: UsuariosApiService,
+    private autenticacaoService: AutenticacaoService,
   ) { }
 
   ngOnInit() {
     this.produto = {
       id: '00000000000000000000000000000000',
       nome: '',
-      usuarioId: this.usuariosApiService.usuarioLogado.usuario.id
+      usuarioId: this.autenticacaoService.usuarioLogado.usuario.id
     };
 
   }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UsuariosApiService } from '../services/api/pessoas/usuarios-api.service';
+
+import { AutenticacaoService } from '../services/seguranca/autenticacao.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { UsuariosApiService } from '../services/api/pessoas/usuarios-api.service
 export class AutenticacaoGuard implements CanActivate {
 
   constructor(
-    private autenticacaoService: UsuariosApiService,
+    private autenticacaoService: AutenticacaoService,
     private router: Router
   ) { }
 

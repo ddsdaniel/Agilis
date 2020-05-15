@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { localStorageKeys } from 'src/assets/constantes/local-storage-keys';
 
 import { UsuarioLogado } from '../models/pessoas/usuario-logado';
-import { UsuariosApiService } from './api/pessoas/usuarios-api.service';
 import { LocalStorageService } from './local-storage.service';
+import { AutenticacaoService } from './seguranca/autenticacao.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { LocalStorageService } from './local-storage.service';
 export class AppLoadService {
 
   constructor(
-    private usuariosApiService: UsuariosApiService,
+    private autenticacaoService: AutenticacaoService,
     private localStorageService: LocalStorageService,
   ) { }
 
@@ -20,12 +20,12 @@ export class AppLoadService {
   }
 
   private recuperarUsuarioLogadoDoLocalStorage() {
-    if (this.usuariosApiService.usuarioLogado) {
+    if (this.autenticacaoService.usuarioLogado) {
       return;
     }
 
     const logado = this.localStorageService.getJson<UsuarioLogado>(localStorageKeys.usuarioLogado);
-    this.usuariosApiService.usuarioLogado = logado;
+    this.autenticacaoService.usuarioLogado = logado;
 
   }
 

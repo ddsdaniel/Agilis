@@ -18,6 +18,7 @@ import { AngularMaterialModule } from './modules/angular-material/angular-materi
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
 import './prototypes/array-prototypes';
+import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -33,6 +34,7 @@ export function InitApp(appLoadService: AppLoadService) {
     ProdutosFormComponent,
     UserStoriesComponent,
     UserStoriesFormComponent,
+    UsuariosFormComponent,
   ],
   imports: [
     FormsModule,
