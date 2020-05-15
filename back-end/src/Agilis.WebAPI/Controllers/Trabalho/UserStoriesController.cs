@@ -15,14 +15,14 @@ namespace Agilis.WebAPI.Controllers.Pessoas
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class UserStoryController : CrudController<UserStoryViewModel, UserStoryViewModel, UserStory>
+    public class UserStoriesController : CrudController<UserStoryViewModel, UserStoryViewModel, UserStory>
     {
         /// <summary>
         /// Construtor com parâmetros injetados
         /// </summary>
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
-        public UserStoryController(IUserStoryService service, 
+        public UserStoriesController(IUserStoryService service, 
                                    IMapper mapper) 
             : base(service, mapper)
         {            

@@ -19,7 +19,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class TimeController : CrudController<TimeViewModel, TimeViewModel, Time>
+    public class TimesController : CrudController<TimeViewModel, TimeViewModel, Time>
     {
         private readonly ITimeService _service;
         private readonly IUsuario _usuarioLogado;
@@ -30,7 +30,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        public TimeController(ITimeService service, 
+        public TimesController(ITimeService service, 
                               IMapper mapper,
                               IUsuario usuarioLogado) 
             : base(service, mapper)

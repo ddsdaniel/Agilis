@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CrudComponent } from 'src/app/components/crud-component';
 import { Time } from 'src/app/models/pessoas/time';
-import { TimeApiService } from 'src/app/services/api/pessoas/time-api.service';
+import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 
 @Component({
   selector: 'app-times',
@@ -13,7 +13,7 @@ import { TimeApiService } from 'src/app/services/api/pessoas/time-api.service';
 export class TimesComponent extends CrudComponent<Time> {
 
   constructor(
-    timeApiService: TimeApiService,
+    timeApiService: TimesApiService,
     snackBar: MatSnackBar,
     router: Router,
   ) {

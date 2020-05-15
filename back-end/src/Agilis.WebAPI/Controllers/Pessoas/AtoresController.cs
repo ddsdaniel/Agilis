@@ -1,27 +1,27 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using DDS.WebAPI.Abstractions.Controllers;
-using Agilis.WebAPI.ViewModels.Trabalho;
-using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.WebAPI.ViewModels.Pessoas;
+using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Services.Pessoas;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Agilis.WebAPI.Controllers.Trabalho
+namespace Agilis.WebAPI.Controllers.Pessoas
 {
     /// <summary>
     /// Manutenção do repositório
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class MilestoneController : CrudController<MilestoneViewModel, MilestoneViewModel, Milestone>
+    public class AtoresController : CrudController<AtorViewModel, AtorViewModel, Ator>
     {
         /// <summary>
         /// Construtor com parâmetros injetados
         /// </summary>
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
-        public MilestoneController(IMilestoneService service, 
+        public AtoresController(IAtorService service, 
                               IMapper mapper) 
             : base(service, mapper)
         {            
@@ -32,8 +32,8 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// </summary>
         /// <param name="lista">Lista a ser ordenada</param>
         /// <returns>Lista já ordenada</returns>
-        protected override ICollection<MilestoneViewModel> Ordenar(ICollection<MilestoneViewModel> lista)
-                => lista.OrderBy(m => m.Nome)
+        protected override ICollection<AtorViewModel> Ordenar(ICollection<AtorViewModel> lista)
+                => lista.OrderBy(a => a.Nome)
                         .ToList();
     }
 }

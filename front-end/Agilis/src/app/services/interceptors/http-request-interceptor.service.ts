@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { UsuarioApiService } from '../api/pessoas/usuario-api.service';
+import { UsuariosApiService } from '../api/pessoas/usuarios-api.service';
 import { TratadorErrosService } from '../api/tratador-erros.service';
 import { ProcessandoService } from '../processando.service';
 
@@ -14,7 +14,7 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
   constructor(
     private router: Router,
     private ngZone: NgZone,
-    private usuarioApiService: UsuarioApiService,
+    private usuariosApiService: UsuariosApiService,
     private processandoService: ProcessandoService,
     private tratadorErrosService: TratadorErrosService,
   ) { }
@@ -46,7 +46,7 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
       return;
     }
 
-    if (err.status === 401 && !this.usuarioApiService.usuarioLogado) {
+    if (err.status === 401 && !this.usuariosApiService.usuarioLogado) {
       this.ngZone.run(() => this.router.navigate(['login']));
     } else {
       this.tratadorErrosService.padronizarHttpErrorResponse(err);
@@ -55,8 +55,8 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
 
   private adicionarTokenAoRequest(httpRequest: HttpRequest<any>) {
 
-    if (this.usuarioApiService.usuarioLogado) {
-      const logado = this.usuarioApiService.usuarioLogado;
+    if (this.usuariosApiService.usuarioLogado) {
+      const logado = this.usuariosApiService.usuarioLogado;
       httpRequest = httpRequest.clone({
         setHeaders: { Authorization: `${logado.tipoToken} ${logado.token}` }
       });

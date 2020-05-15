@@ -2,7 +2,7 @@ import { Component, AfterContentChecked, ChangeDetectorRef } from '@angular/core
 import { menuPrincipal } from 'src/assets/constantes/menu-principal';
 
 import { GrupoMenu } from './models/menu/grupo-menu';
-import { UsuarioApiService } from './services/api/pessoas/usuario-api.service';
+import { UsuariosApiService } from './services/api/pessoas/usuarios-api.service';
 import { ProcessandoService } from './services/processando.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent implements AfterContentChecked {
   menu: GrupoMenu[] = menuPrincipal;
 
   constructor(
-    public usuarioApiService: UsuarioApiService,
+    public usuariosApiService: UsuariosApiService,
     public processandoService: ProcessandoService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {

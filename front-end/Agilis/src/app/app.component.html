@@ -2,13 +2,13 @@
   <mat-sidenav #sidenav mode="over">
 
     <div class="cabecalho">
-      <div *ngIf="!usuarioApiService.usuarioLogado">
+      <div *ngIf="!usuariosApiService.usuarioLogado">
         <h1>AGILIS</h1>
       </div>
-      <div *ngIf="usuarioApiService.usuarioLogado">
+      <div *ngIf="usuariosApiService.usuarioLogado">
         <mat-icon>person</mat-icon>
-        <div><strong>{{ usuarioApiService?.usuarioLogado.usuario.nome }}</strong></div>
-        <small>{{ usuarioApiService?.usuarioLogado.usuario.email }}</small>
+        <div><strong>{{ usuariosApiService?.usuarioLogado.usuario.nome }}</strong></div>
+        <small>{{ usuariosApiService?.usuarioLogado.usuario.email }}</small>
       </div>
     </div>
 

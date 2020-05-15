@@ -24,7 +24,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : CrudController<UsuarioCadastroViewModel, UsuarioConsultaViewModel, Usuario>
+    public class UsuariosController : CrudController<UsuarioCadastroViewModel, UsuarioConsultaViewModel, Usuario>
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
@@ -38,7 +38,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="mapper">Automapper</param>
         /// <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
         /// <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
-        public UsuarioController(IUsuarioService usuarioService,
+        public UsuariosController(IUsuarioService usuarioService,
                                  IMapper mapper,
                                  ITokenService tokenService,
                                  IHttpContextAccessor httpContextAccessor)

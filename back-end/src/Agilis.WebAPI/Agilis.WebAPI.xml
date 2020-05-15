@@ -95,31 +95,31 @@
             <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline</param>
             <returns>app atualizado</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtorController">
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtoresController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtorController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtorController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimeController">
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimesController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -127,13 +127,13 @@
             <param name="mapper">Automapper</param>
             <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.ConsultarTodos">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ConsultarTodos">
             <summary>
             Consulta todos os times do usuário logado
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimeController.Favoritar(System.Guid,Agilis.WebAPI.ViewModels.FavoritoViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Favoritar(System.Guid,Agilis.WebAPI.ViewModels.FavoritoViewModel)">
             <summary>
             Marca/desmarca um time como favorito
             </summary>
@@ -141,12 +141,12 @@
             <param name="favorito">True para favoritar ou false para desfavoritar</param>
             <returns>Ok, sem parâmetros</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuarioController">
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
             <summary>
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -155,21 +155,21 @@
             <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
             <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Post(Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Post(Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel)">
             <summary>
             Realiza alguns procedimentos e validações com a senha antes de chamar o Post da classe base
             </summary>
             <param name="novoUsuarioViewModel">Dados do novo usuário</param>
             <returns>Id do usuário recém cadastrado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)">
             <summary>
             Realiza a autenticação do usuário
             </summary>
             <param name="loginViewModel"></param>
             <returns>Dados do usuário + token da autenticação</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.AlterarSenha(System.Guid,Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.AlterarSenha(System.Guid,Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel)">
             <summary>
             Altera a senha do usuário do repositório
             </summary>
@@ -177,57 +177,57 @@
             <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
             <returns>OK (201)</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuarioController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoryController">
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoryController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoryController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestoneController">
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestonesController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestoneController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IMilestoneService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IMilestoneService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestoneController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutoController">
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -235,13 +235,13 @@
             <param name="mapper">Automapper</param>
             <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.ConsultarTodos">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ConsultarTodos">
             <summary>
             Consulta todos os produtos do usuário logado
             </summary>
             <returns>Retorna todos os produtos do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutoController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>

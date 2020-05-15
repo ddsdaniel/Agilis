@@ -7,10 +7,10 @@ import { CrudFavoritoApiBaseService } from '../crud-favorito-api-base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TimeApiService extends CrudFavoritoApiBaseService<Time> {
+export class TimesApiService extends CrudFavoritoApiBaseService<Time> {
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'Time');
+    super(httpClient, 'times');
   }
 
 }

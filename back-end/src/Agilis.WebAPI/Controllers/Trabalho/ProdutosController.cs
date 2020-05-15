@@ -19,7 +19,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
     /// </summary>    
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutoController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
+    public class ProdutosController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
     {
         private readonly IProdutoService _service;
         private readonly IUsuario _usuarioLogado;
@@ -30,7 +30,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        public ProdutoController(IProdutoService service, 
+        public ProdutosController(IProdutoService service, 
                                  IMapper mapper,
                                  IUsuario usuarioLogado) 
             : base(service, mapper)
