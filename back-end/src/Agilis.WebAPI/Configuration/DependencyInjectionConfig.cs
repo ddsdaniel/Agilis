@@ -62,7 +62,7 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICriptografiaSimetrica, AdvancedEncryptionStandard>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton(serviceProvider => ObterUsuarioLogado(serviceProvider));
+            services.AddScoped(serviceProvider => ObterUsuarioLogado(serviceProvider));
 
             //Trabalho
             services.AddScoped<IUserStoryService, UserStoryService>();

@@ -11,5 +11,6 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         ICollection<Time> ConsultarTodos(IUsuario usuario);
         Task Favoritar(Time time);
         Task Desfavoritar(Time time);
+        ICollection<Time> Pesquisar(string filtro, IUsuario usuario);
     }
 }

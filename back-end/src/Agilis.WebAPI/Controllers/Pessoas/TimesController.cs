@@ -93,6 +93,24 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return base.Ok();
         }
 
+        /// <summary>
+        /// Pesquisa sobre os registros do repositório
+        /// </summary>
+        /// <param name="filtro">Filtro inserido pelo usuário</param>
+        /// <returns>Lista de registros correspondentes ao filtro</returns>
+        [HttpGet("pesquisa")]
+        [ProducesResponseType(typeof(ICollection<TimeViewModel>), StatusCodes.Status200OK)]
+        public override ActionResult<ICollection<TimeViewModel>> Pesquisar([FromQuery] string filtro)
+        {
+            var lista = _service.Pesquisar(filtro, _usuarioLogado);
+
+            var listaViewModel = _mapper.Map<ICollection<TimeViewModel>>(lista);
+
+            listaViewModel = Ordenar(listaViewModel);
+
+            return Ok(listaViewModel);
+        }
+
         protected override ICollection<TimeViewModel> Ordenar(ICollection<TimeViewModel> lista)
                 => lista.OrderByDescending(t => t.Favorito)
                         .ThenBy(t => t.Nome)

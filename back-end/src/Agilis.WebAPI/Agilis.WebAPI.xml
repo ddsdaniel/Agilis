@@ -141,6 +141,13 @@
             <param name="favorito">True para favoritar ou false para desfavoritar</param>
             <returns>Ok, sem parâmetros</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
             <summary>
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.

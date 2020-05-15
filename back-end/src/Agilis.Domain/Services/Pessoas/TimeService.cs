@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Abstractions.Repositories;
+﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Models.Entities.Pessoas;
@@ -36,6 +37,14 @@ namespace Agilis.Domain.Services.Pessoas
              => _unitOfWork.TimeRepository
                     .AsQueryable()
                     .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(t => t.Nome)
+                    .ToList();
+
+        public ICollection<Time> Pesquisar(string filtro, IUsuario usuario)
+            => _unitOfWork.TimeRepository
+                    .AsQueryable()
+                    .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()) &&
+                        t.UsuarioId == usuario.Id)
                     .OrderBy(t => t.Nome)
                     .ToList();
     }
