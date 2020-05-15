@@ -30,6 +30,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ITimeService _timeService;
 
         /// <summary>
         /// Construtor com parâmetros injetados
@@ -41,13 +42,15 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         public UsuariosController(IUsuarioService usuarioService,
                                  IMapper mapper,
                                  ITokenService tokenService,
-                                 IHttpContextAccessor httpContextAccessor)
+                                 IHttpContextAccessor httpContextAccessor,
+                                 ITimeService timeService)
             : base(usuarioService, mapper)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
             _tokenService = tokenService;
             _httpContextAccessor = httpContextAccessor;
+            _timeService = timeService;
         }
 
         /// <summary>
@@ -64,7 +67,25 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             if (novoUsuarioViewModel.Senha != novoUsuarioViewModel.ConfirmaSenha)
                 return CustomBadRequest(nameof(novoUsuarioViewModel.ConfirmaSenha), "As senhas digitadas são diferentes.");
 
-            return await base.Post(novoUsuarioViewModel);
+            var usuario = _mapper.Map<Usuario>(novoUsuarioViewModel);
+
+            if (usuario.Invalid)
+                return BadRequest(usuario.Notifications);
+
+            await _usuarioService.Adicionar(usuario);
+
+            if (_usuarioService.Invalid)
+                return BadRequest(_usuarioService.Notifications);
+
+            var timePessoal = new Time(usuario.Id, "Pessoal", false);
+            await _timeService.Adicionar(timePessoal);
+
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
+
+            await _usuarioService.Commit();
+
+            return Ok(new { usuario.Id });
         }
 
         /// <summary>

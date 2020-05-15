@@ -153,7 +153,7 @@
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor,Agilis.Domain.Abstractions.Services.Pessoas.ITimeService)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
