@@ -7,6 +7,7 @@ import { UsuarioLogado } from 'src/app/models/pessoas/usuario-logado';
 import { LoginDados } from 'src/app/models/seguranca/login-dados';
 import { UsuariosApiService } from 'src/app/services/api/pessoas/usuarios-api.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
+import { RegraUsuario } from 'src/app/enums/pessoas/regra-usuario.enum';
 
 @Component({
   selector: 'app-usuarios-form',
@@ -34,7 +35,8 @@ export class UsuariosFormComponent implements OnInit {
       sobrenome: '',
       email: '',
       confirmaSenha: '',
-      senha: ''
+      senha: '',
+      regra: RegraUsuario.Usuario
     };
   }
 
