@@ -30,7 +30,7 @@ export class UserStoriesFormComponent implements OnInit {
 
   ngOnInit() {
 
-    const id = this.activatedRoute.snapshot.paramMap.get('userStoryId');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
 
     this.userStory = {

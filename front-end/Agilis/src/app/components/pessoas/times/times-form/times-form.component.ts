@@ -7,81 +7,32 @@ import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioApiService } from 'src/app/services/api/pessoas/usuario-api.service';
 import { TimeApiService } from 'src/app/services/api/pessoas/time-api.service';
+import { CrudFormComponent } from 'src/app/components/crud-form-component';
 
 @Component({
   selector: 'app-times-form',
   templateUrl: './times-form.component.html',
   styleUrls: ['./times-form.component.scss']
 })
-export class TimesFormComponent implements OnInit {
-
-  time: Time;
-  operacao: OperacaoFormCrud;
+export class TimesFormComponent extends CrudFormComponent<Time> {
 
   constructor(
-    private router: Router,
-    private timeApiService: TimeApiService,
-    private snackBar: MatSnackBar,
+    router: Router,
+    timeApiService: TimeApiService,
+    snackBar: MatSnackBar,
+    activatedRoute: ActivatedRoute,
     private usuarioApiService: UsuarioApiService,
-    private activatedRoute: ActivatedRoute,
-  ) { }
-
-  ngOnInit() {
-
-    const id = this.activatedRoute.snapshot.paramMap.get('timeId');
-    this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
-
-    if (this.operacao === OperacaoFormCrud.adicionando) {
-      this.sugerirNovo();
-    } else {
-      this.recuperarTime(id);
-    }
-
+  ) {
+    super(router, timeApiService, snackBar, activatedRoute, 'times');
   }
 
-  recuperarTime(id: string) {
-    this.timeApiService.obterUm(id)
-    .subscribe(
-      (time: Time) => this.time = time,
-      (error: HttpErrorResponse) => this.snackBar.open(error.message)
-    );
-  }
-
-  sugerirNovo() {
-    this.time =  {
+  sugerirNovo(): void {
+    this.entidade = {
       id: constantes.newGuid,
       nome: '',
       usuarioId: this.usuarioApiService.usuarioLogado.usuario.id,
       favorito: false
     };
-  }
-
-  salvar() {
-
-    if (this.operacao === OperacaoFormCrud.adicionando) {
-      this.timeApiService.adicionar(this.time)
-        .subscribe(
-          (id: string) => this.router.navigateByUrl('times'),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-    } else {
-      this.timeApiService.alterar(this.time.id, this.time)
-        .subscribe(
-          () => this.router.navigateByUrl('times'),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-    }
-  }
-
-  cancelar() {
-    // TODO: mater o estado da pesquisa
-    this.router.navigateByUrl('times');
   }
 
 }
