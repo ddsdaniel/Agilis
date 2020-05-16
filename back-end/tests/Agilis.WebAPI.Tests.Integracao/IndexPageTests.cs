@@ -1,14 +1,8 @@
 ﻿using Agilis.WebAPI.Tests.Integracao.Extensions;
-using Agilis.Domain.Abstractions.Services.Pessoas;
-using Agilis.Domain.Abstractions.Services.Seguranca;
-using Agilis.WebAPI.Controllers.Pessoas;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
-using Agilis.Domain.Mocks.Entities.Pessoas;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using Agilis.Domain.Enums;
 using System.Net;
@@ -20,7 +14,7 @@ namespace Agilis.WebAPI.Tests.Integracao
         private readonly HttpClient _client;
         private readonly CustomWebApplicationFactory<WebAPI.Startup> _customWebApplicationFactory;
 
-        public IndexPageTests(CustomWebApplicationFactory<WebAPI.Startup> customWebApplicationFactory)
+        public IndexPageTests(CustomWebApplicationFactory<Startup> customWebApplicationFactory)
         {
             _customWebApplicationFactory = customWebApplicationFactory;
             _client = _customWebApplicationFactory.CreateClient(
