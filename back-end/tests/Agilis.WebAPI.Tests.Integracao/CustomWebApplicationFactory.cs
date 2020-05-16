@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Agilis.Domain.Abstractions.Repositories;
 using Microsoft.Extensions.Logging;
 using Agilis.WebAPI.Tests.Integracao.Helpers;
+using Microsoft.Extensions.Hosting;
 
 namespace Agilis.WebAPI.Tests.Integracao
 {
@@ -15,6 +16,8 @@ namespace Agilis.WebAPI.Tests.Integracao
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            builder.UseEnvironment(Environments.Staging);
+
             builder.ConfigureServices(services =>
             {
                 var mongoDatabase = new MongoClient(

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 
@@ -17,7 +19,7 @@ namespace Agilis.WebAPI.Configuration
         /// </summary>
         /// <param name="services">Specifies the contract for a collection of service descriptors</param>
         /// <returns>services atualizado</returns>
-        public static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
+        public static IServiceCollection AddSwaggerConfig(this IServiceCollection services, IWebHostEnvironment environment)
         {
             services.AddSwaggerGen(c =>
             {
@@ -31,11 +33,14 @@ namespace Agilis.WebAPI.Configuration
                          License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                      });
 
-                string caminhoAplicacao = PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao = PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc = Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
+                if (!environment.IsStaging())
+                {
+                    string caminhoAplicacao = PlatformServices.Default.Application.ApplicationBasePath;
+                    string nomeAplicacao = PlatformServices.Default.Application.ApplicationName;
+                    string caminhoXmlDoc = Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
 
-                c.IncludeXmlComments(caminhoXmlDoc);
+                    c.IncludeXmlComments(caminhoXmlDoc);
+                }
             });
 
             return services;

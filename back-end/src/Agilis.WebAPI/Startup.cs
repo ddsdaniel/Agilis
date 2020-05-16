@@ -18,14 +18,16 @@ namespace Agilis.WebAPI
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
 
         /// <summary>
         /// Construtor principal
         /// </summary>
         /// <param name="configuration">Permite acesso aos parâmetros configurados no arquivo appsettings.json</param>
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace Agilis.WebAPI
                 .AddNewtonsoftJson()
                 .AddNewtonsoftConfig();
 
-            services.AddSwaggerConfig();
+            services.AddSwaggerConfig(_environment);
             services.AddAutoMapper(typeof(Startup));
             services.AddDependencyInjectionConfig(_configuration);
             services.AddJwtConfig();

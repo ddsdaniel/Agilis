@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Agilis.WebAPI.Tests.Integracao</name>
+    </assembly>
+    <members>
+        <member name="M:Agilis.WebAPI.Tests.Integracao.Extensions.HttpClientExtensions.PostAsync``1(System.Net.Http.HttpClient,System.String,``0)">
+            <summary>
+            Envia um POST para a URL especificada
+            </summary>
+            <typeparam name="TBody">Tipo de objeto passado para o body</typeparam>
+            <param name="requestUri">URL em que o POST será executado</param>
+            <param name="bodyObject">Corpo da requisição</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Tests.Integracao.Extensions.HttpClientExtensions.PutAsync``1(System.Net.Http.HttpClient,System.String,``0)">
+            <summary>
+            Envia um PUT para a URL especificada
+            </summary>
+            <typeparam name="TBody">Tipo de objeto passado para o body</typeparam>
+            <param name="requestUri">URL em que o PUT será executado</param>
+            <param name="bodyObject">Corpo da requisição</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Tests.Integracao.Extensions.HttpClientExtensions.PatchAsync``1(System.Net.Http.HttpClient,System.String,``0)">
+            <summary>
+            Envia um PATCH para a URL especificada
+            </summary>
+            <typeparam name="TBody">Tipo de objeto passado para o body</typeparam>
+            <param name="requestUri">URL em que o PATCH será executado</param>
+            <param name="bodyObject">Corpo da requisição</param>
+        </member>
+        <member name="T:Agilis.WebAPI.Tests.Integracao.Helpers.InitializeDbForTests">
+            <summary>
+            Seed the database with test data.
+            </summary>
+        </member>
+    </members>
+</doc>

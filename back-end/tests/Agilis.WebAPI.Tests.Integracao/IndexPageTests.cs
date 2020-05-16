@@ -39,7 +39,7 @@ namespace Agilis.WebAPI.Tests.Integracao
             };
             
             //Act
-            var response = await _client.PostAsync("api/Entrar", admin);
+            var response = await _client.PostAsync("api/Usuarios", admin);
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);            
