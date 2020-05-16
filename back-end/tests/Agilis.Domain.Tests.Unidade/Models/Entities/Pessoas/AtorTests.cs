@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas;
+using Agilis.Domain.Mocks.Entities.Pessoas;
 using Xunit;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas

@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas;
-using Agilis.Domain.Tests.Unidade.Mocks.ValueObjects;
+using Agilis.Domain.Mocks.Entities.Pessoas;
+using Agilis.Domain.Mocks.ValueObjects;
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
 using Xunit;
 

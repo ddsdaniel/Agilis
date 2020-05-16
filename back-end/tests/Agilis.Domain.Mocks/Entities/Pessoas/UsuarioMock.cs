@@ -1,11 +1,10 @@
 ﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Tests.Unidade.Mocks.ValueObjects;
-using Agilis.Domain.Tests.Unidade.Mocks.ValueObjects.Seguranca.Senhas;
+using Agilis.Domain.Mocks.ValueObjects.Seguranca.Senhas;
 using Bogus;
-using System;
 
-namespace Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas
+namespace Agilis.Domain.Mocks.Entities.Pessoas
 {
     public static class UsuarioMock
     {
@@ -26,5 +25,15 @@ namespace Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas
                            null,
                            RegraUsuario.Usuario
                            );
+
+        public static Usuario ObterAdminValido()
+          => new Faker<Usuario>()
+             .CustomInstantiator(p => new Usuario(EmailMock.ObterValido(),
+                                                  p.Person.FirstName,
+                                                  p.Person.LastName,
+                                                  SenhaMock.ObterValida(),
+                                                  RegraUsuario.Admin
+                                                  ))
+             .Generate();
     }
 }

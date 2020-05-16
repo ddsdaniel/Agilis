@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Agilis.Domain\Agilis.Domain.csproj" />
+    <ProjectReference Include="..\Agilis.Domain.Mocks\Agilis.Domain.Mocks.csproj" />
   </ItemGroup>
 
 </Project>
