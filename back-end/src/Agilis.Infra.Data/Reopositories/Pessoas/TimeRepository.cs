@@ -11,5 +11,6 @@ namespace Agilis.Infra.Data.Reopositories.Pessoas
             : base(mongoDatabase, session)
         {
         }
+
     }
 }

@@ -9,6 +9,7 @@ using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using System.Collections.Generic;
+using Agilis.Domain.Enums;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -32,6 +33,9 @@ namespace Agilis.Domain.Services.Pessoas
                 }
             }
             await _unitOfWork.UsuarioRepository.Adicionar(entity);
+
+            var timePessoal = new Time(entity.Id, "Pessoal", false, EscopoTime.Pessoal);
+            await _unitOfWork.TimeRepository.Adicionar(timePessoal);
         }
 
         public async Task AlterarSenha(Guid id, Email emailLogado, SenhaMedia senhaAtual, SenhaMedia novaSenha, SenhaMedia confirmaNovaSenha)
@@ -106,5 +110,6 @@ namespace Agilis.Domain.Services.Pessoas
                     .Where(u => u.Nome.ToLower().Contains(filtro.ToLower()))
                     .OrderBy(u => u.Nome)
                     .ToList();
+        
     }
 }

@@ -2,7 +2,9 @@
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
+using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,18 +13,17 @@ namespace Agilis.Domain.Services.Pessoas
 {
     public class TimeService : MultiTenancyCrudService<Time>, ITimeService
     {
-        
+
         public TimeService(IUnitOfWork unitOfWork)
             : base(unitOfWork, unitOfWork.TimeRepository)
         {
-            
+
         }
 
         public async Task Favoritar(Time time)
         {
             time.Favoritar();
-            
-            await Atualizar(time);
+            await _repository.Atualizar(time);
         }
 
 
@@ -30,7 +31,7 @@ namespace Agilis.Domain.Services.Pessoas
         {
             time.Desfavoritar();
 
-            await Atualizar(time);
+            await _repository.Atualizar(time);
         }
 
         public override ICollection<Time> Pesquisar(string filtro)
@@ -47,5 +48,40 @@ namespace Agilis.Domain.Services.Pessoas
                         t.UsuarioId == usuario.Id)
                     .OrderBy(t => t.Nome)
                     .ToList();
+
+        public override async Task Excluir(Guid id)
+        {
+            var time = await ConsultarPorId(id);
+
+            if (time != null && time.Escopo == EscopoTime.Pessoal)
+            {
+                AddNotification(nameof(time.Escopo), "O time pessoal não pode ser excluído");
+                return;
+            }
+
+            await base.Excluir(id);
+        }
+
+        public override async Task Atualizar(Time time)
+        {
+            if (time.Escopo == EscopoTime.Pessoal)
+            {
+                AddNotification(nameof(time.Escopo), "O time pessoal não pode ser alterado");
+                return;
+            }
+
+            await base.Atualizar(time);
+        }
+
+        public override async Task Adicionar(Time time)
+        {
+            if (time.Escopo == EscopoTime.Pessoal)
+            {
+                AddNotification(nameof(time.Escopo), "Cada usuário pode ter apenas um time pessoal");
+                return;
+            }
+
+            await base.Adicionar(time);
+        }
     }
 }

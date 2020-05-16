@@ -153,7 +153,7 @@
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor,Agilis.Domain.Abstractions.Services.Pessoas.ITimeService)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -344,6 +344,16 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.UsuarioId">
             <summary>
             Proprietário do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Favorito">
+            <summary>
+            Um time favorito aparece primeiro nos listagens
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Escopo">
+            <summary>
+            Indica se o time é pessoal ou colaborativo
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">

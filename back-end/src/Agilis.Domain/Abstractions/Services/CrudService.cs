@@ -66,7 +66,7 @@ namespace Agilis.Domain.Abstractions.Services
         /// <returns></returns>
         public async Task Commit() => await _unitOfWork.Commit();
 
-        public IQueryable<TEntity> Consultar()
+        public virtual IQueryable<TEntity> Consultar()
             => _repository.AsQueryable();
 
         /// <summary>
@@ -74,20 +74,20 @@ namespace Agilis.Domain.Abstractions.Services
         /// </summary>
         /// <param name="id">Id da entidade a ser recuperada</param>
         /// <returns>Task correspondente à entidade consultada, também pode retorna null, caso a entidade não seja encontrada</returns>
-        public async Task<TEntity> ConsultarPorId(Guid id) => await _repository.ConsultarPorId(id);
+        public virtual async Task<TEntity> ConsultarPorId(Guid id) => await _repository.ConsultarPorId(id);
 
         /// <summary>
         /// Retorna todas as entidades desse repositório
         /// </summary>
         /// <returns>Lista de todas as entidades desse repositório</returns>
-        public ICollection<TEntity> ConsultarTodos() => _repository.AsQueryable().ToList();
+        public virtual ICollection<TEntity> ConsultarTodos() => _repository.AsQueryable().ToList();
 
         /// <summary>
         /// Exclui a entidade do repositório
         /// </summary>
         /// <param name="id">Id da entidade a ser excluída</param>
         /// <returns>Task correspondente à exclusão</returns>
-        public async Task Excluir(Guid id) => await _repository.Excluir(id);
+        public virtual async Task Excluir(Guid id) => await _repository.Excluir(id);
         public abstract ICollection<TEntity> Pesquisar(string filtro);
     }
 }

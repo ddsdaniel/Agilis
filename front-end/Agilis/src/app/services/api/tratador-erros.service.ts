@@ -21,8 +21,12 @@ export class TratadorErrosService {
     } else if (err.error.message) {
       mensagem = err.error.message;
     } else {
-      mensagem = err.statusText;
-    };
+      if (err.statusText === 'OK') {
+        mensagem = err.error;
+      } else {
+        mensagem = err.statusText;
+      }
+    }
 
     mensagem = this.traduzir(mensagem);
 

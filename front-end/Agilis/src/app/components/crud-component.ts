@@ -13,9 +13,9 @@ export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
   filtro = '';
 
   constructor(
-    private apiService: CrudFavoritoApiBaseService<TEntity>,
-    private snackBar: MatSnackBar,
-    private router: Router,
+    public apiService: CrudFavoritoApiBaseService<TEntity>,
+    public snackBar: MatSnackBar,
+    public router: Router,
     private rota: string,
   ) { }
 

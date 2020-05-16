@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
+import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Time } from 'src/app/models/pessoas/time';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
@@ -29,7 +30,8 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       id: constantes.newGuid,
       nome: '',
       usuarioId: this.autenticacaoService.usuarioLogado.usuario.id,
-      favorito: false
+      favorito: false,
+      escopo: EscopoTime.Pessoal
     };
   }
 
