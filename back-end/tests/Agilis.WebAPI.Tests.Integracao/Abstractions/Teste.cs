@@ -1,8 +1,10 @@
-﻿using Xunit;
+﻿using Agilis.WebAPI.Tests.Integracao.Helpers;
+using Xunit;
 
 namespace Agilis.WebAPI.Tests.Integracao.Abstractions
 {
-    public abstract class Teste: IClassFixture<CustomWebApplicationFactory<Startup>>
+    [Collection(UniqueContextCollection.NAME)]
+    public abstract class Teste
     {
         protected readonly CustomWebApplicationFactory<Startup> _customWebApplicationFactory;
 

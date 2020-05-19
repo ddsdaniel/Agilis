@@ -1,7 +1,6 @@
 ﻿using Agilis.WebAPI.Tests.Integracao.Extensions;
 using Agilis.WebAPI.ViewModels.Seguranca;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
