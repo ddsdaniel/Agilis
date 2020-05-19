@@ -7,6 +7,7 @@ using Agilis.Domain.Abstractions.Repositories;
 using Microsoft.Extensions.Logging;
 using Agilis.WebAPI.Tests.Integracao.Helpers;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace Agilis.WebAPI.Tests.Integracao
 {
@@ -20,11 +21,20 @@ namespace Agilis.WebAPI.Tests.Integracao
 
             builder.ConfigureServices(services =>
             {
-                var mongoDatabase = new MongoClient(
+                const string TEST_DATABASE_NAME = "agilis-testes";
+
+                var mongoClient = new MongoClient(
                     new MongoClientSettings
                     {
                         ReplicaSetName = "rs1"
-                    }).GetDatabase("agilis-testes");
+                    });
+
+                var databases = mongoClient.ListDatabaseNames().ToList();
+                if (databases.Any(d => d == TEST_DATABASE_NAME))
+                    mongoClient.DropDatabase(TEST_DATABASE_NAME);
+
+                var mongoDatabase = mongoClient.GetDatabase(TEST_DATABASE_NAME);
+
                 services.ReplaceScoped(mongoDatabase);
 
                 // Build the service provider.

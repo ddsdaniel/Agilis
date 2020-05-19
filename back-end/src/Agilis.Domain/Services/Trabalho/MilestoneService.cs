@@ -14,6 +14,7 @@ namespace Agilis.Domain.Services.Trabalho
         public MilestoneService(IUnitOfWork unitOfWork)
             : base(unitOfWork, unitOfWork.MilestoneRepository)
         {
+            
         }
 
         public override ICollection<Milestone> Pesquisar(string filtro)

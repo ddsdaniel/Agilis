@@ -50,5 +50,12 @@ namespace Agilis.WebAPI.Tests.Integracao.Extensions
             HttpContent content = CreateHttpContent(bodyObject);
             return httpClient.PatchAsync(requestUri, content);
         }
+
+        public static async Task<T> ReadAsAsync<T>(this HttpContent content)
+        {
+            string json = await content.ReadAsStringAsync();
+            T value = JsonConvert.DeserializeObject<T>(json);
+            return value;
+        }
     }
 }
