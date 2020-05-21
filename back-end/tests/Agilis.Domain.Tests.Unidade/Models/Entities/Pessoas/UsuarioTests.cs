@@ -78,5 +78,67 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             //Assert
             Assert.True(usuario.Invalid);
         }
+
+        [Fact]
+        public void AlterarSenha_DadosValidos_SenhaAlterada()
+        {
+            //Arrange
+            var usuario = UsuarioMock.ObterValido();
+            var novaSenha = new SenhaMedia("abc123%¨&*(", Usuario.TAMANHO_MINIMO_SENHA);
+
+            //Act
+            usuario.AlterarSenha(usuario.Senha, novaSenha, novaSenha);
+
+            //Assert
+            Assert.True(usuario.Valid);
+            Assert.Equal(novaSenha.Conteudo, usuario.Senha.Conteudo);
+        }
+
+        [Fact]
+        public void AlterarSenha_ErroSenhaAtual_NaoAlterarSenha()
+        {
+            //Arrange
+            var usuario = UsuarioMock.ObterValido();
+            var novaSenha = new SenhaMedia("abc123%¨&*(", Usuario.TAMANHO_MINIMO_SENHA);
+            var senhaAtualErrada = new SenhaMedia("abc123%¨&*(", Usuario.TAMANHO_MINIMO_SENHA);
+
+            //Act
+            usuario.AlterarSenha(senhaAtualErrada, novaSenha, novaSenha);
+
+            //Assert
+            Assert.True(usuario.Invalid);
+            Assert.NotEqual(novaSenha.Conteudo, usuario.Senha.Conteudo);
+        }
+
+        [Fact]
+        public void AlterarSenha_SenhasNaoConferem_NaoAlterarSenha()
+        {
+            //Arrange
+            var usuario = UsuarioMock.ObterValido();
+            var novaSenha = new SenhaMedia("abc123%¨&*(", Usuario.TAMANHO_MINIMO_SENHA);
+            var confirmaSenha = new SenhaMedia("abc12345678", Usuario.TAMANHO_MINIMO_SENHA);
+
+            //Act
+            usuario.AlterarSenha(usuario.Senha, novaSenha, confirmaSenha);
+
+            //Assert
+            Assert.True(usuario.Invalid);
+            Assert.NotEqual(novaSenha.Conteudo, usuario.Senha.Conteudo);
+        }
+
+        [Fact]
+        public void AlterarSenha_NovaSenhaInvalida_NaoAlterarSenha()
+        {
+            //Arrange
+            var usuario = UsuarioMock.ObterValido();
+            var novaSenha = new SenhaMedia("123", Usuario.TAMANHO_MINIMO_SENHA);            
+
+            //Act
+            usuario.AlterarSenha(usuario.Senha, novaSenha, novaSenha);
+
+            //Assert
+            Assert.True(usuario.Invalid);
+            Assert.NotEqual(novaSenha.Conteudo, usuario.Senha.Conteudo);
+        }
     }
 }

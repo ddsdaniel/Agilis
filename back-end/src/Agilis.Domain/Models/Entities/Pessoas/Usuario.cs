@@ -80,7 +80,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Regra = regra;
         }
 
-        internal void AlterarSenha(SenhaMedia senhaAtual, SenhaMedia novaSenha, SenhaMedia confirmaNovaSenha)
+        public void AlterarSenha(SenhaMedia senhaAtual, SenhaMedia novaSenha, SenhaMedia confirmaNovaSenha)
         {
             if (Senha.Conteudo != senhaAtual.Conteudo)
             {
