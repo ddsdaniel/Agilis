@@ -46,7 +46,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         public override ActionResult<ICollection<ProdutoViewModel>> ConsultarTodos()
         {
 
-            var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(p => p.Nome);
+            var lista = _service.ConsultarTodos().OrderBy(p => p.Nome);
 
             var listaViewModel = _mapper.Map<List<ProdutoViewModel>>(lista);
 

@@ -24,17 +24,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var produto = new Produto(Guid.NewGuid(), nome);
-
-            //Assert
-            Assert.True(produto.Invalid);
-        }
-        
-        [Fact]
-        public void Construtor_UsuarioIdEmpty_Invalid()
-        {
-            //Arrange & Act
-            var produto = new Produto(Guid.Empty, "Produto 1");
+            var produto = new Produto(nome);
 
             //Assert
             Assert.True(produto.Invalid);

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Agilis.Domain.Services.Trabalho
 {
-    public class ProdutoService : MultiTenancyCrudService<Produto>, IProdutoService
+    public class ProdutoService : CrudService<Produto>, IProdutoService
     {
         
         public ProdutoService(IUnitOfWork unitOfWork)
