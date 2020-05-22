@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Bogus;
 
-namespace Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas
+namespace Agilis.Domain.Mocks.Entities.Pessoas
 {
     public static class AtorMock
     {

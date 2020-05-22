@@ -81,7 +81,7 @@
             Classe de extensões para configurações do Swagger
             </summary>
         </member>
-        <member name="M:Agilis.WebAPI.Configuration.SwaggerConfig.AddSwaggerConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Agilis.WebAPI.Configuration.SwaggerConfig.AddSwaggerConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             Configura os dados de Open Api Info, versão e caminho do XML
             </summary>
@@ -290,7 +290,7 @@
             Classe que define as principais configurações da API
             </summary>
         </member>
-        <member name="M:Agilis.WebAPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Agilis.WebAPI.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             Construtor principal
             </summary>

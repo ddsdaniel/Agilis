@@ -81,7 +81,13 @@ namespace Agilis.WebAPI.Configuration
                  );
 
             //Seguranca
-            CreateMap<LoginViewModel, Login>();
+            CreateMap<LoginViewModel, Login>()
+                .ConstructUsing((vm, context) =>
+                    new Login(
+                        email: new Email(vm.Email),
+                        senha: new SenhaMedia(vm.Senha, Usuario.TAMANHO_MINIMO_SENHA)
+                        )
+                 );
         }
     }
 }

@@ -21,7 +21,8 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
-                .IsNotNull(usuarioId, nameof(Usuario), "ID do Usuário não deve ser nulo")                
+                .IsNotNull(usuarioId, nameof(Usuario), "ID do usuário não deve ser nulo")
+                .IsNotEmpty(usuarioId, nameof(Usuario), "ID do usuário não deve ser vazio")
                 );
 
             Nome = nome;

@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using DDS.Domain.Core.Model.ValueObjects;
 
-namespace Agilis.Domain.Tests.Unidade.Mocks.ValueObjects
+namespace Agilis.Domain.Mocks.ValueObjects
 {
     public static class EmailMock
     {

@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Tests.Unidade.Mocks.Entities.Pessoas;
-using Agilis.Domain.Tests.Unidade.Mocks.Entities.Trabalho;
+using Agilis.Domain.Mocks.Entities.Pessoas;
+using Agilis.Domain.Mocks.Entities.Trabalho;
 using System;
 using Xunit;
 

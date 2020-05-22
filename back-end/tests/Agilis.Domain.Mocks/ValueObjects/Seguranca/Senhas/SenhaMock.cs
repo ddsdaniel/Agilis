@@ -2,7 +2,7 @@
 using Bogus;
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
 
-namespace Agilis.Domain.Tests.Unidade.Mocks.ValueObjects.Seguranca.Senhas
+namespace Agilis.Domain.Mocks.ValueObjects.Seguranca.Senhas
 {
     public static class SenhaMock
     {

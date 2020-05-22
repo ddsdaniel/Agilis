@@ -31,7 +31,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       nome: '',
       usuarioId: this.autenticacaoService.usuarioLogado.usuario.id,
       favorito: false,
-      escopo: EscopoTime.Pessoal
+      escopo: EscopoTime.Colaborativo
     };
   }
 

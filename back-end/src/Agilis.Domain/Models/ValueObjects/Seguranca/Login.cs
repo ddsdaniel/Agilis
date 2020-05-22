@@ -10,6 +10,11 @@ namespace Agilis.Domain.Models.ValueObjects.Seguranca
         public Email Email { get; private set; }
         public SenhaMedia Senha { get; private set; }
 
+        protected Login()
+        {
+
+        }
+
         public Login(Email email, SenhaMedia senha)
         {
             AddNotifications(new Contract()
