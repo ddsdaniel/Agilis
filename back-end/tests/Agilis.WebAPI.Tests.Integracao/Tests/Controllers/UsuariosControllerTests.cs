@@ -7,6 +7,7 @@ using System.Net;
 using Bogus;
 using Agilis.WebAPI.Tests.Integracao.Abstractions;
 using Agilis.WebAPI.ViewModels.Seguranca;
+using Flunt.Notifications;
 
 namespace Agilis.WebAPI.Tests.Integracao.Tests.Controllers
 {
@@ -106,6 +107,37 @@ namespace Agilis.WebAPI.Tests.Integracao.Tests.Controllers
             Assert.Equal(HttpStatusCode.OK, responsePost.StatusCode);
             Assert.Equal(HttpStatusCode.OK, responsePatch.StatusCode);
 
+        }
+
+        [Fact]
+        public async Task Autenticar_SenhaInvalida_BadRequest()
+        {
+            //Arrange
+            var novoUsuario = new Faker<UsuarioCadastroViewModel>()
+               .CustomInstantiator(p => new UsuarioCadastroViewModel
+               {
+                   Email = p.Internet.Email(),
+                   Nome = p.Person.FirstName,
+                   Sobrenome = p.Person.LastName,
+                   Regra = RegraUsuario.Usuario,
+                   Senha = "123456aa",
+                   ConfirmaSenha = "123456aa"
+               })
+               .Generate();
+
+            var responseCadastro = await _client.PostAsync("api/Usuarios", novoUsuario);
+
+            var login = new LoginViewModel { Email = novoUsuario.Email,Senha = "senha-errada-1234"};
+
+            //Act
+            var responseLogin = await _client.PostAsync("api/Usuarios/login", login);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, responseCadastro.StatusCode); 
+            Assert.Equal(HttpStatusCode.BadRequest, responseLogin.StatusCode);
+
+            var notitications = await responseLogin.Content.ReadAsAsync<Notification[]>();
+            Assert.NotEmpty(notitications);
         }
     }
 }

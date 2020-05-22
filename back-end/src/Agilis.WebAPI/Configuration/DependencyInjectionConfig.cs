@@ -43,33 +43,33 @@ namespace Agilis.WebAPI.Configuration
             var mongoDatabase = new MongoClient(new MongoClientSettings { ReplicaSetName = "rs1" }).GetDatabase("agilis");
             services.TryAddScoped(x => mongoDatabase);
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             //Pessoas
-            services.AddScoped<IUsuarioService, UsuarioService>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-			services.AddScoped<IProdutoService, ProdutoService>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+			services.AddTransient<IProdutoService, ProdutoService>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
-			services.AddScoped<ITimeService, TimeService>();
-            services.AddScoped<ITimeRepository, TimeRepository>();
+			services.AddTransient<ITimeService, TimeService>();
+            services.AddTransient<ITimeRepository, TimeRepository>();
 
-			services.AddScoped<IAtorService, AtorService>();
-            services.AddScoped<IAtorRepository, AtorRepository>();
+			services.AddTransient<IAtorService, AtorService>();
+            services.AddTransient<IAtorRepository, AtorRepository>();
 
             //Seguranca
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<ICriptografiaSimetrica, AdvancedEncryptionStandard>();
+            services.AddTransient<ICriptografiaSimetrica, AdvancedEncryptionStandard>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(serviceProvider => ObterUsuarioLogado(serviceProvider));
 
             //Trabalho
-            services.AddScoped<IUserStoryService, UserStoryService>();
-            services.AddScoped<IUserStoryRepository, UserStoryRepository>();
+            services.AddTransient<IUserStoryService, UserStoryService>();
+            services.AddTransient<IUserStoryRepository, UserStoryRepository>();
 
-            services.AddScoped<IMilestoneService, MilestoneService>();
-            services.AddScoped<IMilestoneRepository, MilestoneRepository>();
+            services.AddTransient<IMilestoneService, MilestoneService>();
+            services.AddTransient<IMilestoneRepository, MilestoneRepository>();
 
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));

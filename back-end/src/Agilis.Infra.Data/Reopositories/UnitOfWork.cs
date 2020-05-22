@@ -4,9 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Agilis.Domain.Abstractions.Repositories.Pessoas;
 using Agilis.Domain.Abstractions.Repositories.Trabalho;
-using Agilis.Domain.Abstractions.Repositories.Trabalho;
 using Agilis.Infra.Data.Reopositories.Pessoas;
-using Agilis.Infra.Data.Reopositories.Trabalho;
 using Agilis.Infra.Data.Reopositories.Trabalho;
 
 namespace Agilis.Infra.Data.Repositories
@@ -37,7 +35,8 @@ namespace Agilis.Infra.Data.Repositories
 
         public async Task Commit()
         {
-            await _session.CommitTransactionAsync();
+            if (_session.IsInTransaction)
+                await _session.CommitTransactionAsync();
         }
 
         public void Dispose()
