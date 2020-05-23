@@ -52,10 +52,17 @@ namespace Agilis.Infra.Data.Repositories
 
             if (disposing)
             {
-                if (_session.IsInTransaction)
-                    _session.AbortTransaction();
+                try
+                {
+                    if (_session.IsInTransaction)
+                        _session.AbortTransaction();
 
-                _session.Dispose();
+                    _session.Dispose();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             _disposed = true;

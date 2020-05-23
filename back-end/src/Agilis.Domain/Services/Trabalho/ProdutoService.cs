@@ -65,5 +65,25 @@ namespace Agilis.Domain.Services.Trabalho
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }
+
+        public async Task AtualizarDescricaoRNF(Guid produtoId, int numeroRnf, string descricao)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.AtualizarDescricaoRnf(numeroRnf, descricao);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
     }
 }

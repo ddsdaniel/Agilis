@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Models.Entities.Pessoas;
+﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
@@ -22,11 +23,11 @@ namespace Agilis.Domain.Models.Entities.Trabalho
 
         }
 
-        public Produto(string nome, ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais) 
+        public Produto(string nome, ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
-                .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")                
+                .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")
                 );
 
             if (requisitosNaoFuncionais != null)
@@ -70,6 +71,60 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             }
 
             RequisitosNaoFuncionais.Remove(rnf);
+        }
+
+        public void AtualizarDescricaoRnf(int numeroRnf, string descricao)
+        {
+            var rnf = RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == numeroRnf);
+            if (rnf == null)
+            {
+                AddNotification(nameof(numeroRnf), "RNF não encontrado");
+                return;
+            }
+
+            var indice = RequisitosNaoFuncionais.ToList().FindIndex(r => r.Numero == numeroRnf);
+
+            var rnfAtualizado = new RequisitoNaoFuncional(rnf.Numero, descricao, rnf.Tipo, rnf.Autor);
+
+            if (rnfAtualizado.Invalid)
+            {
+                AddNotifications(rnfAtualizado);
+                return;
+            }
+
+            RequisitosNaoFuncionais.Remove(rnf);
+            RequisitosNaoFuncionais.Add(rnfAtualizado);
+
+            RequisitosNaoFuncionais = RequisitosNaoFuncionais
+                .OrderBy(r => r.Numero)
+                .ToList();
+        }
+
+        public void AtualizarTipoRnf(int numeroRnf, TipoRequisitoNaoFuncional tipo)
+        {
+            var rnf = RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == numeroRnf);
+            if (rnf == null)
+            {
+                AddNotification(nameof(numeroRnf), "RNF não encontrado");
+                return;
+            }
+
+            var indice = RequisitosNaoFuncionais.ToList().FindIndex(r => r.Numero == numeroRnf);
+
+            var rnfAtualizado = new RequisitoNaoFuncional(rnf.Numero, rnf.Descricao, tipo, rnf.Autor);
+
+            if (rnfAtualizado.Invalid)
+            {
+                AddNotifications(rnf);
+                return;
+            }
+
+            RequisitosNaoFuncionais.Remove(rnf);
+            RequisitosNaoFuncionais.Add(rnfAtualizado);
+
+            RequisitosNaoFuncionais = RequisitosNaoFuncionais
+                .OrderBy(r => r.Numero)
+                .ToList();
         }
     }
 }

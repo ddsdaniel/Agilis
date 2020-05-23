@@ -155,5 +155,38 @@ namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Trabalho
             var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
             Assert.Null(produtoConsultado);
         }
+
+        [Fact]
+        public async void AtualizarDescricaoRnf_DescricaoValida_DescricaoAtualizada()
+        {
+            //Arrange
+            var produtoService = _customWebApplicationFactory.Services.GetService<IProdutoService>();
+            
+            var produtoNovo = ProdutoMock.ObterValido();
+            await produtoService.Adicionar(produtoNovo);
+            
+            var rnf = RequisitoNaoFuncionalMock.ObterValido(1);
+            await produtoService.AdicionarRNF(produtoNovo.Id, rnf);
+
+            const string NOVA_DESCRICAO = "Nova Descrição do RNF";
+
+            //Act
+            await produtoService.AtualizarDescricaoRNF(produtoNovo.Id, 1, NOVA_DESCRICAO);
+
+            //Assert
+            Assert.True(rnf.Valid);
+            Assert.True(produtoNovo.Valid);
+            Assert.True(produtoService.Valid);
+
+            var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
+            Assert.NotNull(produtoConsultado);
+
+            Assert.NotEmpty(produtoConsultado.RequisitosNaoFuncionais);
+
+            var rnfAtualizado = produtoConsultado.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero);
+            Assert.NotNull(rnfAtualizado);
+
+            Assert.Equal(NOVA_DESCRICAO, rnfAtualizado.Descricao);
+        }
     }
 }

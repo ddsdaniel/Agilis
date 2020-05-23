@@ -3,6 +3,8 @@ using Agilis.Domain.Models.Entities.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.ValueObjects;
 using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
+using System;
+using System.Security.Cryptography;
 
 namespace Agilis.Domain.Models.ValueObjects.Trabalho
 {

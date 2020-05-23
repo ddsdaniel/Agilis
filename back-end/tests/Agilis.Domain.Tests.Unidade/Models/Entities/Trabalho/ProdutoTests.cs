@@ -171,5 +171,50 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             Assert.True(produto.Invalid);
             Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count);
         }
+
+        [Fact]
+        public void AtualizarDescricaoRnf_DadosValidos_DescricaoAtualizada()
+        {
+            //Arrange
+            var rnf = RequisitoNaoFuncionalMock.ObterValido(1);
+
+            var produto = ProdutoMock.ObterValido();
+            produto.AdicionarRNF(rnf);
+
+            const string NOVA_DESCRICAO = "Nova descrição do RNF";
+
+            //Act
+            produto.AtualizarDescricaoRnf(1, NOVA_DESCRICAO);
+
+            //Assert
+            Assert.True(rnf.Valid);
+            Assert.True(produto.Valid);
+
+            var novoRNF = produto.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero);
+            Assert.NotNull(novoRNF);
+            Assert.Equal(NOVA_DESCRICAO, novoRNF.Descricao);
+        }
+
+        [Fact]
+        public void AtualizarDescricaoRnf_DescricaoInvalida_NaoAtualizar()
+        {
+            //Arrange
+            var rnf = RequisitoNaoFuncionalMock.ObterValido(1);
+            var descricaoOriginal = rnf.Descricao;
+
+            var produto = ProdutoMock.ObterValido();
+            produto.AdicionarRNF(rnf);
+
+            //Act
+            produto.AtualizarDescricaoRnf(1, null);
+
+            //Assert
+            Assert.True(rnf.Valid);
+            Assert.True(produto.Invalid);
+
+            var novoRNF = produto.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero);
+            Assert.NotNull(novoRNF);
+            Assert.Equal(descricaoOriginal, novoRNF.Descricao);
+        }
     }
 }

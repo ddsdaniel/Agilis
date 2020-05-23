@@ -10,5 +10,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
     {
         public Task AdicionarRNF(Guid produtoId, RequisitoNaoFuncional rnf);
         public Task RemoverRNF(Guid produtoId, int numero);
+        public Task AtualizarDescricaoRNF(Guid produtoId, int numeroRnf, string descricao);
     }
 }
