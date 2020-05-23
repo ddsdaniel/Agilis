@@ -1,12 +1,10 @@
 ﻿using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.Domain.Enums;
 using Agilis.Domain.Mocks.Entities.Trabalho;
 using Agilis.Domain.Mocks.ValueObjects.Trabalho;
 using Agilis.WebAPI.Tests.Integracao.Abstractions;
 using Agilis.WebAPI.Tests.Integracao.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Trabalho
@@ -187,6 +185,39 @@ namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Trabalho
             Assert.NotNull(rnfAtualizado);
 
             Assert.Equal(NOVA_DESCRICAO, rnfAtualizado.Descricao);
+        }
+
+        [Fact]
+        public async void AtualizarTipoRnf_TipoValido_TipoAtualizado()
+        {
+            //Arrange
+            var produtoService = _customWebApplicationFactory.Services.GetService<IProdutoService>();
+
+            var produtoNovo = ProdutoMock.ObterValido();
+            await produtoService.Adicionar(produtoNovo);
+
+            var rnf = RequisitoNaoFuncionalMock.ObterValido(1);
+            await produtoService.AdicionarRNF(produtoNovo.Id, rnf);
+
+            var novoTipo = (TipoRequisitoNaoFuncional)(rnf.Tipo == 0 ? 1 : ((int)rnf.Tipo) - 1);
+
+            //Act
+            await produtoService.AtualizarTipoRNF(produtoNovo.Id, 1, novoTipo);
+
+            //Assert
+            Assert.True(rnf.Valid);
+            Assert.True(produtoNovo.Valid);
+            Assert.True(produtoService.Valid);
+
+            var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
+            Assert.NotNull(produtoConsultado);
+
+            Assert.NotEmpty(produtoConsultado.RequisitosNaoFuncionais);
+
+            var rnfAtualizado = produtoConsultado.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero);
+            Assert.NotNull(rnfAtualizado);
+
+            Assert.Equal(novoTipo, rnfAtualizado.Tipo);
         }
     }
 }

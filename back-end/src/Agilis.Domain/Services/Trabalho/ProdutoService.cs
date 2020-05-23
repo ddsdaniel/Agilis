@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System;
@@ -76,6 +77,26 @@ namespace Agilis.Domain.Services.Trabalho
             }
 
             produto.AtualizarDescricaoRnf(numeroRnf, descricao);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
+
+        public async Task AtualizarTipoRNF(Guid produtoId, int numeroRnf, TipoRequisitoNaoFuncional tipo)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.AtualizarTipoRnf(numeroRnf, tipo);
             if (produto.Invalid)
             {
                 AddNotifications(produto);

@@ -3,6 +3,7 @@ using Agilis.Domain.Models.Entities.Trabalho;
 using System.Threading.Tasks;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System;
+using Agilis.Domain.Enums;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
@@ -11,5 +12,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         public Task AdicionarRNF(Guid produtoId, RequisitoNaoFuncional rnf);
         public Task RemoverRNF(Guid produtoId, int numero);
         public Task AtualizarDescricaoRNF(Guid produtoId, int numeroRnf, string descricao);
+        public Task AtualizarTipoRNF(Guid produtoId, int numeroRnf, TipoRequisitoNaoFuncional tipo);
     }
 }

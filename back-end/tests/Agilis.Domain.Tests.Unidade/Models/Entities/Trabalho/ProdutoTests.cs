@@ -7,6 +7,7 @@ using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System.Collections.Generic;
 using Agilis.Domain.Mocks.ValueObjects.Trabalho;
 using System.Linq;
+using Agilis.Domain.Enums;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -215,6 +216,29 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var novoRNF = produto.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero);
             Assert.NotNull(novoRNF);
             Assert.Equal(descricaoOriginal, novoRNF.Descricao);
+        }
+
+        [Fact]
+        public void AtualizarTipoRnf_DadosValidos_TipoAtualizado()
+        {
+            //Arrange
+            var produto = ProdutoMock.ObterValido();
+
+            var rnfOriginal = RequisitoNaoFuncionalMock.ObterValido(1);
+            produto.AdicionarRNF(rnfOriginal);
+            var novoTipo = (TipoRequisitoNaoFuncional)(rnfOriginal.Tipo == 0 ? 1 : ((int)rnfOriginal.Tipo) - 1);
+
+            //Act
+            produto.AtualizarTipoRnf(1, novoTipo);
+
+            //Assert
+            Assert.True(rnfOriginal.Valid);
+            Assert.True(produto.Valid);
+
+            var novoRNF = produto.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnfOriginal.Numero);
+            Assert.NotNull(novoRNF);
+            Assert.Equal(novoTipo, novoRNF.Tipo);
+            Assert.NotEqual(novoTipo, rnfOriginal.Tipo);
         }
     }
 }
