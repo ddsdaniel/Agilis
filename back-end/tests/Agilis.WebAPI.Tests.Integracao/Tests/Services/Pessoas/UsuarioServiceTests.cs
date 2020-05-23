@@ -9,7 +9,7 @@ using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
 using Xunit;
 
-namespace Agilis.WebAPI.Tests.Integracao.Tests.Services
+namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Pessoas
 {
     public class UsuarioServiceTests : Teste
     {
