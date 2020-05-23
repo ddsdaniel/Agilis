@@ -2,6 +2,7 @@
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -56,6 +57,19 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             }
 
             RequisitosNaoFuncionais.Add(rnf);
+        }
+
+        public void RemoverRNF(int numero)
+        {
+            var rnf = RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == numero);
+
+            if (rnf == null)
+            {
+                AddNotification(nameof(numero), "RNF não encontrado");
+                return;
+            }
+
+            RequisitosNaoFuncionais.Remove(rnf);
         }
     }
 }

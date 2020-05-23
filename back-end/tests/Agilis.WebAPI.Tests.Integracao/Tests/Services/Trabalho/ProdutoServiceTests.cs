@@ -90,5 +90,70 @@ namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Trabalho
             Assert.Equal(contRNF, produtoNovo.RequisitosNaoFuncionais.Count);
             
         }
+
+        [Fact]
+        public async void RemoverRnf_DadosValidos_RnfRemovido()
+        {
+            //Arrange
+            var produtoService = _customWebApplicationFactory.Services.GetService<IProdutoService>();
+            var produtoNovo = ProdutoMock.ObterValido();
+            await produtoService.Adicionar(produtoNovo);
+            var rnf = RequisitoNaoFuncionalMock.ObterValido();
+            await produtoService.AdicionarRNF(produtoNovo.Id, rnf);
+
+            //Act
+            await produtoService.RemoverRNF(produtoNovo.Id, rnf.Numero);
+
+            //Assert
+            Assert.True(produtoNovo.Valid);
+            Assert.True(rnf.Valid);
+            Assert.True(produtoService.Valid);
+
+            var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
+            Assert.NotNull(produtoConsultado);
+
+            Assert.Null(produtoConsultado.RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == rnf.Numero));
+        }
+
+        [Fact]
+        public async void RemoverRnf_RnfNaoEncontrado_Invalid()
+        {
+            //Arrange
+            var produtoService = _customWebApplicationFactory.Services.GetService<IProdutoService>();
+            var produtoNovo = ProdutoMock.ObterValido();
+            await produtoService.Adicionar(produtoNovo);
+            var rnfNaoEncontrado = produtoNovo.RequisitosNaoFuncionais.Max(r => r.Numero) + 1;
+            var contRNF = produtoNovo.RequisitosNaoFuncionais.Count;
+
+            //Act
+            await produtoService.RemoverRNF(produtoNovo.Id, rnfNaoEncontrado);
+
+            //Assert
+            Assert.True(produtoNovo.Valid);
+            Assert.True(produtoService.Invalid);
+
+            var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
+            Assert.NotNull(produtoConsultado);
+
+            Assert.Equal(contRNF, produtoConsultado.RequisitosNaoFuncionais.Count);
+        }
+
+        [Fact]
+        public async void RemoverRnf_ProdutoNaoEncontrado_Invalid()
+        {
+            //Arrange
+            var produtoService = _customWebApplicationFactory.Services.GetService<IProdutoService>();
+            var produtoNovo = ProdutoMock.ObterValido();
+
+            //Act
+            await produtoService.RemoverRNF(produtoNovo.Id, 1);
+
+            //Assert
+            Assert.True(produtoNovo.Valid);
+            Assert.True(produtoService.Invalid);
+
+            var produtoConsultado = await produtoService.ConsultarPorId(produtoNovo.Id);
+            Assert.Null(produtoConsultado);
+        }
     }
 }

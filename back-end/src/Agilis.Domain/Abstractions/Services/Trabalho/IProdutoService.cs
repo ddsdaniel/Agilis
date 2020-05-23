@@ -9,5 +9,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
     public interface IProdutoService : ICrudService<Produto>
     {
         public Task AdicionarRNF(Guid produtoId, RequisitoNaoFuncional rnf);
+        public Task RemoverRNF(Guid produtoId, int numero);
     }
 }

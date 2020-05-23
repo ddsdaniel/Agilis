@@ -45,5 +45,25 @@ namespace Agilis.Domain.Services.Trabalho
                    .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
                    .OrderBy(p => p.Nome)
                    .ToList();
+
+        public async Task RemoverRNF(Guid produtoId, int numero)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.RemoverRNF(numero);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
     }
 }
