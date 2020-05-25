@@ -5,7 +5,6 @@ using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;

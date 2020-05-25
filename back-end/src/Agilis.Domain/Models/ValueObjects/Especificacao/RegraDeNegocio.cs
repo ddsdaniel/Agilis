@@ -1,25 +1,17 @@
-﻿using Agilis.Domain.Enums;
-using Agilis.Domain.Models.Entities.Pessoas;
+﻿using Agilis.Domain.Models.Entities.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.ValueObjects;
-using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
-using System;
-using System.Security.Cryptography;
 
-namespace Agilis.Domain.Models.ValueObjects.Trabalho
+namespace Agilis.Domain.Models.ValueObjects.Especificacao
 {
-    /// <summary>
-    /// Representam qualidades, propriedades e/ou restrições do produto
-    /// </summary>
-    public class RequisitoNaoFuncional : ValueObject<RequisitoNaoFuncional>
+    public class RegraDeNegocio : ValueObject<RegraDeNegocio>
     {
         public int Numero { get; private set; }
-        public string Codigo => $"RNF{Numero}";
+        public string Codigo => $"RN{Numero}";
         public string Descricao { get; private set; }
-        public TipoRequisitoNaoFuncional Tipo { get; private set; }
         public Usuario Autor { get; private set; }
 
-        public RequisitoNaoFuncional(int numero, string descricao, TipoRequisitoNaoFuncional tipo, Usuario autor)
+        public RegraDeNegocio(int numero, string descricao, Usuario autor)
         {
             AddNotifications(new Contract()
                 .IsGreaterThan(numero, 0, nameof(Numero), "Número deve ser maior que zero")
@@ -30,11 +22,10 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
             Numero = numero;
             Descricao = descricao;
-            Tipo = tipo;
             Autor = autor;
         }
 
-        public override string ToString() => $"{Codigo} - {Tipo.GetDescription()}: {Descricao}";
+        public override string ToString() => $"{Codigo}: {Descricao}";
 
     }
 }

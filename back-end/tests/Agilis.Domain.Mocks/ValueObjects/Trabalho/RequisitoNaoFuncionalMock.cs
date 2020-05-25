@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Mocks.Entities.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Bogus;
 
 namespace Agilis.Domain.Mocks.ValueObjects.Trabalho

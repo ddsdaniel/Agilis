@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Mocks.Entities.Pessoas;
 using Agilis.Domain.Mocks.ValueObjects.Trabalho;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Xunit;
 
 namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Trabalho

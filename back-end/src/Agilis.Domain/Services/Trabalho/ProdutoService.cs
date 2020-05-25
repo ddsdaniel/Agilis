@@ -3,6 +3,7 @@ using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,79 @@ namespace Agilis.Domain.Services.Trabalho
         {
 
         }
+
+        public override ICollection<Produto> Pesquisar(string filtro)
+            => _unitOfWork.ProdutoRepository
+                   .AsQueryable()
+                   .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
+                   .OrderBy(p => p.Nome)
+                   .ToList();
+
+        #region Módulos
+
+        public async Task AdicionarModulo(Guid produtoId, Modulo modulo)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.AdicionarModulo(modulo);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
+
+        public async Task RemoverModulo(Guid produtoId, int numero)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.RemoverModulo(numero);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
+
+        public async Task AtualizarNomeModulo(Guid produtoId, int numero, string nome)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado.");
+                return;
+            }
+
+            produto.AtualizarNomeModulo(numero, nome);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
+
+        #endregion
+
+        #region Regras de Negócio
 
         public async Task AdicionarRNF(Guid produtoId, RequisitoNaoFuncional rnf)
         {
@@ -39,13 +113,6 @@ namespace Agilis.Domain.Services.Trabalho
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }
-
-        public override ICollection<Produto> Pesquisar(string filtro)
-            => _unitOfWork.ProdutoRepository
-                   .AsQueryable()
-                   .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
-                   .OrderBy(p => p.Nome)
-                   .ToList();
 
         public async Task RemoverRNF(Guid produtoId, int numero)
         {
@@ -106,5 +173,7 @@ namespace Agilis.Domain.Services.Trabalho
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }
+
+        #endregion
     }
 }
