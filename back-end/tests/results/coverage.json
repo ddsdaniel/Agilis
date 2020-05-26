@@ -30,7 +30,12 @@
             "21": 0,
             "22": 0,
             "23": 0,
-            "24": 0
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0
           },
           "Branches": []
         },
@@ -38,9 +43,390 @@
           "Lines": {
             "14": 0,
             "15": 0,
-            "17": 0
+            "17": 0,
+            "19": 30,
+            "20": 30,
+            "22": 30
           },
           "Branches": []
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<AdicionarModulo>d__2": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<AdicionarModulo>d__2::MoveNext()": {
+          "Lines": {
+            "34": 10,
+            "35": 10,
+            "36": 10,
+            "37": 2,
+            "38": 2,
+            "39": 2,
+            "42": 8,
+            "43": 8,
+            "44": 2,
+            "45": 2,
+            "46": 2,
+            "49": 6,
+            "50": 6,
+            "51": 10
+          },
+          "Branches": [
+            {
+              "Line": 36,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 36,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 8
+            },
+            {
+              "Line": 43,
+              "Offset": 255,
+              "EndOffset": 257,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 43,
+              "Offset": 255,
+              "EndOffset": 281,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 6
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<RemoverModulo>d__3": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<RemoverModulo>d__3::MoveNext()": {
+          "Lines": {
+            "54": 6,
+            "55": 6,
+            "56": 6,
+            "57": 2,
+            "58": 2,
+            "59": 2,
+            "62": 4,
+            "63": 4,
+            "64": 2,
+            "65": 2,
+            "66": 2,
+            "69": 2,
+            "70": 2,
+            "71": 6
+          },
+          "Branches": [
+            {
+              "Line": 56,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 56,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 4
+            },
+            {
+              "Line": 63,
+              "Offset": 255,
+              "EndOffset": 257,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 63,
+              "Offset": 255,
+              "EndOffset": 281,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarNomeModulo>d__4": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarNomeModulo>d__4::MoveNext()": {
+          "Lines": {
+            "74": 2,
+            "75": 2,
+            "76": 2,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "82": 2,
+            "83": 2,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "89": 2,
+            "90": 2,
+            "91": 2
+          },
+          "Branches": [
+            {
+              "Line": 76,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 76,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 83,
+              "Offset": 261,
+              "EndOffset": 263,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 83,
+              "Offset": 261,
+              "EndOffset": 287,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<AdicionarRNF>d__5": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<AdicionarRNF>d__5::MoveNext()": {
+          "Lines": {
+            "98": 12,
+            "99": 12,
+            "100": 12,
+            "101": 2,
+            "102": 2,
+            "103": 2,
+            "106": 10,
+            "107": 10,
+            "108": 2,
+            "109": 2,
+            "110": 2,
+            "113": 8,
+            "114": 8,
+            "115": 12
+          },
+          "Branches": [
+            {
+              "Line": 100,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 100,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 10
+            },
+            {
+              "Line": 107,
+              "Offset": 255,
+              "EndOffset": 257,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 107,
+              "Offset": 255,
+              "EndOffset": 281,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 8
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<RemoverRNF>d__6": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<RemoverRNF>d__6::MoveNext()": {
+          "Lines": {
+            "118": 6,
+            "119": 6,
+            "120": 6,
+            "121": 2,
+            "122": 2,
+            "123": 2,
+            "126": 4,
+            "127": 4,
+            "128": 2,
+            "129": 2,
+            "130": 2,
+            "133": 2,
+            "134": 2,
+            "135": 6
+          },
+          "Branches": [
+            {
+              "Line": 120,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 120,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 4
+            },
+            {
+              "Line": 127,
+              "Offset": 255,
+              "EndOffset": 257,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 127,
+              "Offset": 255,
+              "EndOffset": 281,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarDescricaoRNF>d__7": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarDescricaoRNF>d__7::MoveNext()": {
+          "Lines": {
+            "138": 2,
+            "139": 2,
+            "140": 2,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "146": 2,
+            "147": 2,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "153": 2,
+            "154": 2,
+            "155": 2
+          },
+          "Branches": [
+            {
+              "Line": 140,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 140,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 147,
+              "Offset": 261,
+              "EndOffset": 263,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 147,
+              "Offset": 261,
+              "EndOffset": 287,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
+        }
+      },
+      "Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarTipoRNF>d__8": {
+        "System.Void Agilis.Domain.Services.Trabalho.ProdutoService/<AtualizarTipoRNF>d__8::MoveNext()": {
+          "Lines": {
+            "158": 2,
+            "159": 2,
+            "160": 2,
+            "161": 0,
+            "162": 0,
+            "163": 0,
+            "166": 2,
+            "167": 2,
+            "168": 0,
+            "169": 0,
+            "170": 0,
+            "173": 2,
+            "174": 2,
+            "175": 2
+          },
+          "Branches": [
+            {
+              "Line": 160,
+              "Offset": 192,
+              "EndOffset": 194,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 160,
+              "Offset": 192,
+              "EndOffset": 222,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 167,
+              "Offset": 261,
+              "EndOffset": 263,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 167,
+              "Offset": 261,
+              "EndOffset": 287,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            }
+          ]
         }
       }
     },
@@ -206,31 +592,31 @@
       "Agilis.Domain.Services.Seguranca.TokenService": {
         "System.String Agilis.Domain.Services.Seguranca.TokenService::Gerar(Agilis.Domain.Models.Entities.Pessoas.Usuario)": {
           "Lines": {
-            "28": 11,
-            "29": 11,
-            "30": 11,
-            "31": 11,
-            "32": 11,
-            "33": 11,
-            "34": 11,
-            "35": 11,
-            "36": 11,
-            "37": 11,
-            "38": 11,
-            "39": 11,
-            "40": 11,
-            "41": 11,
-            "42": 11,
-            "43": 11
+            "28": 13,
+            "29": 13,
+            "30": 13,
+            "31": 13,
+            "32": 13,
+            "33": 13,
+            "34": 13,
+            "35": 13,
+            "36": 13,
+            "37": 13,
+            "38": 13,
+            "39": 13,
+            "40": 13,
+            "41": 13,
+            "42": 13,
+            "43": 13
           },
           "Branches": []
         },
         "System.Void Agilis.Domain.Services.Seguranca.TokenService::.ctor(Agilis.Domain.Abstractions.ValueObjects.IAppSettings)": {
           "Lines": {
-            "17": 66,
-            "18": 66,
-            "19": 66,
-            "20": 66
+            "17": 82,
+            "18": 82,
+            "19": 82,
+            "20": 82
           },
           "Branches": []
         }
@@ -427,20 +813,20 @@
       "Agilis.Domain.Services.Pessoas.UsuarioService": {
         "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Services.Pessoas.UsuarioService::Autenticar(Agilis.Domain.Models.ValueObjects.Seguranca.Login)": {
           "Lines": {
-            "86": 13,
-            "87": 13,
-            "88": 1,
-            "89": 1,
-            "90": 1,
-            "93": 12,
-            "94": 12,
-            "95": 12,
-            "96": 1,
-            "97": 1,
-            "98": 1,
-            "101": 11,
-            "102": 11,
-            "105": 13
+            "86": 21,
+            "87": 21,
+            "88": 3,
+            "89": 3,
+            "90": 3,
+            "93": 18,
+            "94": 18,
+            "95": 18,
+            "96": 5,
+            "97": 5,
+            "98": 5,
+            "101": 13,
+            "102": 13,
+            "105": 21
           },
           "Branches": [
             {
@@ -449,7 +835,7 @@
               "EndOffset": 11,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 1
+              "Hits": 3
             },
             {
               "Line": 87,
@@ -457,7 +843,7 @@
               "EndOffset": 24,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 12
+              "Hits": 18
             },
             {
               "Line": 95,
@@ -465,7 +851,7 @@
               "EndOffset": 51,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 12
+              "Hits": 18
             },
             {
               "Line": 95,
@@ -481,7 +867,7 @@
               "EndOffset": 85,
               "Path": 0,
               "Ordinal": 4,
-              "Hits": 1
+              "Hits": 5
             },
             {
               "Line": 95,
@@ -489,7 +875,7 @@
               "EndOffset": 107,
               "Path": 1,
               "Ordinal": 5,
-              "Hits": 11
+              "Hits": 13
             }
           ]
         },
@@ -505,9 +891,9 @@
         },
         "System.Void Agilis.Domain.Services.Pessoas.UsuarioService::.ctor(Agilis.Domain.Abstractions.Repositories.IUnitOfWork)": {
           "Lines": {
-            "20": 83,
-            "21": 83,
-            "22": 83
+            "20": 113,
+            "21": 113,
+            "22": 113
           },
           "Branches": []
         }
@@ -515,19 +901,19 @@
       "Agilis.Domain.Services.Pessoas.UsuarioService/<Adicionar>d__1": {
         "System.Void Agilis.Domain.Services.Pessoas.UsuarioService/<Adicionar>d__1::MoveNext()": {
           "Lines": {
-            "25": 61,
-            "26": 61,
-            "27": 61,
-            "28": 61,
-            "29": 61,
-            "30": 11,
-            "31": 11,
-            "32": 11,
-            "34": 50,
-            "35": 50,
-            "37": 50,
-            "38": 50,
-            "39": 61
+            "25": 85,
+            "26": 85,
+            "27": 85,
+            "28": 85,
+            "29": 85,
+            "30": 13,
+            "31": 13,
+            "32": 13,
+            "34": 72,
+            "35": 72,
+            "37": 72,
+            "38": 72,
+            "39": 85
           },
           "Branches": [
             {
@@ -536,7 +922,7 @@
               "EndOffset": 44,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 61
+              "Hits": 85
             },
             {
               "Line": 29,
@@ -544,7 +930,7 @@
               "EndOffset": 96,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 11
+              "Hits": 13
             },
             {
               "Line": 29,
@@ -552,7 +938,7 @@
               "EndOffset": 124,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 50
+              "Hits": 72
             },
             {
               "Line": 26,
@@ -560,7 +946,7 @@
               "EndOffset": 132,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 50
+              "Hits": 72
             }
           ]
         }
@@ -568,24 +954,24 @@
       "Agilis.Domain.Services.Pessoas.UsuarioService/<AlterarSenha>d__2": {
         "System.Void Agilis.Domain.Services.Pessoas.UsuarioService/<AlterarSenha>d__2::MoveNext()": {
           "Lines": {
-            "42": 14,
-            "43": 14,
-            "44": 14,
-            "45": 2,
-            "47": 2,
-            "48": 2,
-            "51": 12,
+            "42": 20,
+            "43": 20,
+            "44": 20,
+            "45": 4,
+            "47": 4,
+            "48": 4,
+            "51": 16,
             "52": 0,
             "53": 0,
             "54": 0,
-            "57": 12,
-            "58": 12,
-            "59": 1,
-            "60": 1,
-            "61": 1,
-            "64": 11,
-            "65": 11,
-            "66": 14
+            "57": 16,
+            "58": 16,
+            "59": 3,
+            "60": 3,
+            "61": 3,
+            "64": 13,
+            "65": 13,
+            "66": 20
           },
           "Branches": [
             {
@@ -594,7 +980,7 @@
               "EndOffset": 184,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 2
+              "Hits": 4
             },
             {
               "Line": 44,
@@ -602,7 +988,7 @@
               "EndOffset": 212,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 12
+              "Hits": 16
             },
             {
               "Line": 51,
@@ -618,7 +1004,7 @@
               "EndOffset": 278,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 12
+              "Hits": 16
             },
             {
               "Line": 58,
@@ -626,7 +1012,7 @@
               "EndOffset": 325,
               "Path": 0,
               "Ordinal": 4,
-              "Hits": 1
+              "Hits": 3
             },
             {
               "Line": 58,
@@ -634,7 +1020,7 @@
               "EndOffset": 349,
               "Path": 1,
               "Ordinal": 5,
-              "Hits": 11
+              "Hits": 13
             }
           ]
         }
@@ -642,19 +1028,19 @@
       "Agilis.Domain.Services.Pessoas.UsuarioService/<Atualizar>d__3": {
         "System.Void Agilis.Domain.Services.Pessoas.UsuarioService/<Atualizar>d__3::MoveNext()": {
           "Lines": {
-            "69": 2,
-            "70": 2,
-            "71": 2,
-            "72": 2,
-            "73": 2,
-            "74": 2,
-            "76": 2,
-            "77": 1,
-            "78": 1,
-            "79": 1,
-            "81": 1,
-            "82": 1,
-            "83": 2
+            "69": 6,
+            "70": 6,
+            "71": 6,
+            "72": 6,
+            "73": 6,
+            "74": 6,
+            "76": 6,
+            "77": 3,
+            "78": 3,
+            "79": 3,
+            "81": 3,
+            "82": 3,
+            "83": 6
           },
           "Branches": [
             {
@@ -663,7 +1049,7 @@
               "EndOffset": 69,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 2
+              "Hits": 6
             },
             {
               "Line": 76,
@@ -671,7 +1057,7 @@
               "EndOffset": 378,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 1
+              "Hits": 3
             },
             {
               "Line": 76,
@@ -679,7 +1065,7 @@
               "EndOffset": 406,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 1
+              "Hits": 3
             },
             {
               "Line": 70,
@@ -687,7 +1073,7 @@
               "EndOffset": 407,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 1
+              "Hits": 3
             }
           ]
         }
@@ -697,7 +1083,7 @@
       "Agilis.Domain.Models.ValueObjects.AppSettings": {
         "System.String Agilis.Domain.Models.ValueObjects.AppSettings::get_Segredo()": {
           "Lines": {
-            "13": 121
+            "13": 153
           },
           "Branches": []
         }
@@ -750,17 +1136,127 @@
         }
       }
     },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Trabalho\\Modulo.cs": {
+      "Agilis.Domain.Models.ValueObjects.Trabalho.Modulo": {
+        "System.Int32 Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::get_Numero()": {
+          "Lines": {
+            "17": 426
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::get_Nome()": {
+          "Lines": {
+            "22": 276
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio> Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::get_RegrasDeNegocio()": {
+          "Lines": {
+            "27": 186
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional> Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::get_RequisitosFuncionais()": {
+          "Lines": {
+            "32": 186
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::ToString()": {
+          "Lines": {
+            "63": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::<.ctor>b__17_0(Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio)": {
+          "Lines": {
+            "52": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::<.ctor>b__17_1(Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional)": {
+          "Lines": {
+            "55": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::.ctor()": {
+          "Lines": {
+            "34": 90,
+            "35": 90,
+            "37": 90
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Trabalho.Modulo::.ctor(System.Int32,System.String,System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio>,System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional>)": {
+          "Lines": {
+            "39": 120,
+            "40": 120,
+            "41": 120,
+            "42": 120,
+            "43": 120,
+            "44": 120,
+            "45": 120,
+            "46": 120,
+            "47": 120,
+            "48": 120,
+            "49": 120,
+            "51": 120,
+            "54": 120,
+            "57": 120,
+            "58": 120,
+            "59": 120,
+            "60": 120,
+            "61": 120
+          },
+          "Branches": [
+            {
+              "Line": 51,
+              "Offset": 92,
+              "EndOffset": 94,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 114
+            },
+            {
+              "Line": 51,
+              "Offset": 92,
+              "EndOffset": 118,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 120
+            },
+            {
+              "Line": 54,
+              "Offset": 125,
+              "EndOffset": 127,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 114
+            },
+            {
+              "Line": 54,
+              "Offset": 125,
+              "EndOffset": 152,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 120
+            }
+          ]
+        }
+      }
+    },
     "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Seguranca\\Login.cs": {
       "Agilis.Domain.Models.ValueObjects.Seguranca.Login": {
         "DDS.Domain.Core.Model.ValueObjects.Email Agilis.Domain.Models.ValueObjects.Seguranca.Login::get_Email()": {
           "Lines": {
-            "10": 36
+            "10": 54
           },
           "Branches": []
         },
         "DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia Agilis.Domain.Models.ValueObjects.Seguranca.Login::get_Senha()": {
           "Lines": {
-            "11": 36
+            "11": 54
           },
           "Branches": []
         },
@@ -774,16 +1270,326 @@
         },
         "System.Void Agilis.Domain.Models.ValueObjects.Seguranca.Login::.ctor(DDS.Domain.Core.Model.ValueObjects.Email,DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia)": {
           "Lines": {
-            "18": 13,
-            "19": 13,
-            "20": 13,
-            "21": 13,
-            "22": 13,
-            "23": 13,
-            "25": 13,
-            "27": 13,
-            "28": 13,
-            "29": 13
+            "18": 21,
+            "19": 21,
+            "20": 21,
+            "21": 21,
+            "22": 21,
+            "23": 21,
+            "25": 21,
+            "27": 21,
+            "28": 21,
+            "29": 21
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Especificacao\\JargaoDoNegocio.cs": {
+      "Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio": {
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio::get_Jargao()": {
+          "Lines": {
+            "8": 49
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio::get_Significado()": {
+          "Lines": {
+            "9": 48
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio::ToString()": {
+          "Lines": {
+            "22": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio::.ctor(System.String,System.String)": {
+          "Lines": {
+            "11": 93,
+            "12": 93,
+            "13": 93,
+            "14": 93,
+            "15": 93,
+            "16": 93,
+            "18": 93,
+            "19": 93,
+            "20": 93
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Especificacao\\LinguagemUbiqua.cs": {
+      "Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua": {
+        "System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio> Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua::get_Jargoes()": {
+          "Lines": {
+            "10": 74
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua::Adicionar(System.String,System.String)": {
+          "Lines": {
+            "23": 12,
+            "24": 12,
+            "25": 12,
+            "27": 12,
+            "28": 8,
+            "29": 8,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "34": 7,
+            "35": 7,
+            "36": 7,
+            "37": 8,
+            "38": 12
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 8
+            },
+            {
+              "Line": 29,
+              "Offset": 37,
+              "EndOffset": 39,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 37,
+              "EndOffset": 60,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 7
+            },
+            {
+              "Line": 27,
+              "Offset": 25,
+              "EndOffset": 76,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 12
+            }
+          ]
+        },
+        "System.Boolean Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua::ContainsKey(System.String)": {
+          "Lines": {
+            "40": 9
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua::Remover(System.String)": {
+          "Lines": {
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": [
+            {
+              "Line": 44,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 44,
+              "Offset": 31,
+              "EndOffset": 54,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua::.ctor(System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio>)": {
+          "Lines": {
+            "12": 86,
+            "13": 86,
+            "14": 86,
+            "15": 86,
+            "16": 86,
+            "17": 86,
+            "19": 86,
+            "20": 86
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Especificacao\\RegraDeNegocio.cs": {
+      "Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio": {
+        "System.Int32 Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::get_Numero()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::get_Codigo()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::get_Descricao()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::get_Autor()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::ToString()": {
+          "Lines": {
+            "28": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.RegraDeNegocio::.ctor(System.Int32,System.String,Agilis.Domain.Models.Entities.Pessoas.Usuario)": {
+          "Lines": {
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Especificacao\\RequisitoFuncional.cs": {
+      "Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional": {
+        "System.Int32 Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::get_Numero()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::get_Codigo()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::get_Descricao()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::get_Autor()": {
+          "Lines": {
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::ToString()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoFuncional::.ctor(System.Int32,System.String,Agilis.Domain.Models.Entities.Pessoas.Usuario)": {
+          "Lines": {
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\src\\Agilis.Domain\\Models\\ValueObjects\\Especificacao\\RequisitoNaoFuncional.cs": {
+      "Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional": {
+        "System.Int32 Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::get_Numero()": {
+          "Lines": {
+            "16": 492
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::get_Codigo()": {
+          "Lines": {
+            "17": 0
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::get_Descricao()": {
+          "Lines": {
+            "18": 302
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Enums.TipoRequisitoNaoFuncional Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::get_Tipo()": {
+          "Lines": {
+            "19": 310
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::get_Autor()": {
+          "Lines": {
+            "20": 300
+          },
+          "Branches": []
+        },
+        "System.String Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::ToString()": {
+          "Lines": {
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional::.ctor(System.Int32,System.String,Agilis.Domain.Enums.TipoRequisitoNaoFuncional,Agilis.Domain.Models.Entities.Pessoas.Usuario)": {
+          "Lines": {
+            "22": 132,
+            "23": 132,
+            "24": 132,
+            "25": 132,
+            "26": 132,
+            "27": 132,
+            "28": 132,
+            "29": 132,
+            "31": 132,
+            "32": 132,
+            "33": 132,
+            "34": 132,
+            "35": 132
           },
           "Branches": []
         }
@@ -830,15 +1636,438 @@
       "Agilis.Domain.Models.Entities.Trabalho.Produto": {
         "System.String Agilis.Domain.Models.Entities.Trabalho.Produto::get_Nome()": {
           "Lines": {
-            "10": 0
+            "10": 0,
+            "14": 154
           },
           "Branches": []
+        },
+        "Agilis.Domain.Models.Entities.Pessoas.Time Agilis.Domain.Models.Entities.Trabalho.Produto::get_Time()": {
+          "Lines": {
+            "15": 124
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional> Agilis.Domain.Models.Entities.Trabalho.Produto::get_RequisitosNaoFuncionais()": {
+          "Lines": {
+            "16": 384
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Trabalho.Modulo> Agilis.Domain.Models.Entities.Trabalho.Produto::get_Modulos()": {
+          "Lines": {
+            "17": 346
+          },
+          "Branches": []
+        },
+        "System.Int32 Agilis.Domain.Models.Entities.Trabalho.Produto::get_produckBacklog()": {
+          "Lines": {
+            "18": 124
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua Agilis.Domain.Models.Entities.Trabalho.Produto::get_LinguagemUbiqua()": {
+          "Lines": {
+            "19": 124
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::AdicionarModulo(Agilis.Domain.Models.ValueObjects.Trabalho.Modulo)": {
+          "Lines": {
+            "47": 32,
+            "48": 32,
+            "49": 2,
+            "50": 2,
+            "51": 2,
+            "54": 30,
+            "55": 4,
+            "56": 4,
+            "57": 4,
+            "60": 60,
+            "61": 2,
+            "62": 2,
+            "63": 2,
+            "66": 24,
+            "67": 32
+          },
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 48,
+              "Offset": 25,
+              "EndOffset": 47,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 30
+            },
+            {
+              "Line": 54,
+              "Offset": 60,
+              "EndOffset": 62,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 4
+            },
+            {
+              "Line": 54,
+              "Offset": 60,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 26
+            },
+            {
+              "Line": 60,
+              "Offset": 103,
+              "EndOffset": 105,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 60,
+              "Offset": 103,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 24
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::RemoverModulo(System.Int32)": {
+          "Lines": {
+            "70": 10,
+            "71": 30,
+            "73": 10,
+            "74": 4,
+            "75": 4,
+            "76": 4,
+            "79": 6,
+            "80": 10
+          },
+          "Branches": [
+            {
+              "Line": 73,
+              "Offset": 44,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4
+            },
+            {
+              "Line": 73,
+              "Offset": 44,
+              "EndOffset": 66,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::AtualizarNomeModulo(System.Int32,System.String)": {
+          "Lines": {
+            "83": 6,
+            "84": 18,
+            "85": 6,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "91": 18,
+            "93": 6,
+            "95": 6,
+            "96": 2,
+            "97": 2,
+            "98": 2,
+            "101": 4,
+            "102": 4,
+            "104": 4,
+            "105": 12,
+            "106": 4,
+            "107": 6
+          },
+          "Branches": [
+            {
+              "Line": 85,
+              "Offset": 46,
+              "EndOffset": 48,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 85,
+              "Offset": 46,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            },
+            {
+              "Line": 95,
+              "Offset": 133,
+              "EndOffset": 135,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 95,
+              "Offset": 133,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 4
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::AdicionarRNF(Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional)": {
+          "Lines": {
+            "110": 36,
+            "111": 36,
+            "112": 2,
+            "113": 2,
+            "114": 2,
+            "117": 34,
+            "118": 4,
+            "119": 4,
+            "120": 4,
+            "123": 68,
+            "124": 2,
+            "125": 2,
+            "126": 2,
+            "129": 28,
+            "130": 36
+          },
+          "Branches": [
+            {
+              "Line": 111,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 111,
+              "Offset": 25,
+              "EndOffset": 47,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 34
+            },
+            {
+              "Line": 117,
+              "Offset": 60,
+              "EndOffset": 62,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 4
+            },
+            {
+              "Line": 117,
+              "Offset": 60,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 30
+            },
+            {
+              "Line": 123,
+              "Offset": 103,
+              "EndOffset": 105,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 123,
+              "Offset": 103,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 28
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::RemoverRNF(System.Int32)": {
+          "Lines": {
+            "133": 10,
+            "134": 30,
+            "136": 10,
+            "137": 4,
+            "138": 4,
+            "139": 4,
+            "142": 6,
+            "143": 10
+          },
+          "Branches": [
+            {
+              "Line": 136,
+              "Offset": 44,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 4
+            },
+            {
+              "Line": 136,
+              "Offset": 44,
+              "EndOffset": 66,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::AtualizarDescricaoRnf(System.Int32,System.String)": {
+          "Lines": {
+            "146": 6,
+            "147": 18,
+            "148": 6,
+            "149": 0,
+            "150": 0,
+            "151": 0,
+            "154": 18,
+            "156": 6,
+            "158": 6,
+            "159": 2,
+            "160": 2,
+            "161": 2,
+            "164": 4,
+            "165": 4,
+            "167": 4,
+            "168": 12,
+            "169": 4,
+            "170": 6
+          },
+          "Branches": [
+            {
+              "Line": 148,
+              "Offset": 46,
+              "EndOffset": 48,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 148,
+              "Offset": 46,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            },
+            {
+              "Line": 158,
+              "Offset": 135,
+              "EndOffset": 137,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 158,
+              "Offset": 135,
+              "EndOffset": 148,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 4
+            }
+          ]
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::AtualizarTipoRnf(System.Int32,Agilis.Domain.Enums.TipoRequisitoNaoFuncional)": {
+          "Lines": {
+            "173": 4,
+            "174": 12,
+            "175": 4,
+            "176": 0,
+            "177": 0,
+            "178": 0,
+            "181": 12,
+            "183": 4,
+            "185": 4,
+            "186": 0,
+            "187": 0,
+            "188": 0,
+            "191": 4,
+            "192": 4,
+            "194": 4,
+            "195": 12,
+            "196": 4,
+            "197": 4
+          },
+          "Branches": [
+            {
+              "Line": 175,
+              "Offset": 46,
+              "EndOffset": 48,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 175,
+              "Offset": 46,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 4
+            },
+            {
+              "Line": 185,
+              "Offset": 135,
+              "EndOffset": 137,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 185,
+              "Offset": 135,
+              "EndOffset": 148,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 4
+            }
+          ]
         },
         "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::.ctor()": {
           "Lines": {
             "12": 0,
             "13": 0,
-            "15": 0
+            "15": 0,
+            "21": 78,
+            "22": 78,
+            "24": 78
+          },
+          "Branches": []
+        },
+        "System.Void Agilis.Domain.Models.Entities.Trabalho.Produto::.ctor(System.String,System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional>,System.Collections.Generic.ICollection`1<Agilis.Domain.Models.ValueObjects.Trabalho.Modulo>,Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua)": {
+          "Lines": {
+            "26": 74,
+            "27": 74,
+            "28": 74,
+            "29": 74,
+            "30": 74,
+            "31": 74,
+            "32": 74,
+            "33": 74,
+            "34": 74,
+            "35": 74,
+            "36": 74,
+            "37": 74,
+            "38": 74,
+            "39": 74,
+            "41": 74,
+            "42": 74,
+            "43": 74,
+            "44": 74
           },
           "Branches": []
         },
@@ -969,13 +2198,13 @@
         },
         "System.Void Agilis.Domain.Models.Entities.Pessoas.Ator::.ctor(System.String)": {
           "Lines": {
-            "28": 33,
-            "29": 33,
-            "30": 33,
-            "31": 33,
-            "32": 33,
-            "34": 33,
-            "35": 33
+            "28": 39,
+            "29": 39,
+            "30": 39,
+            "31": 39,
+            "32": 39,
+            "34": 39,
+            "35": 39
           },
           "Branches": []
         }
@@ -985,19 +2214,19 @@
       "Agilis.Domain.Models.Entities.Pessoas.Time": {
         "System.String Agilis.Domain.Models.Entities.Pessoas.Time::get_Nome()": {
           "Lines": {
-            "11": 100
+            "11": 144
           },
           "Branches": []
         },
         "System.Boolean Agilis.Domain.Models.Entities.Pessoas.Time::get_Favorito()": {
           "Lines": {
-            "12": 100
+            "12": 144
           },
           "Branches": []
         },
         "Agilis.Domain.Enums.EscopoTime Agilis.Domain.Models.Entities.Pessoas.Time::get_Escopo()": {
           "Lines": {
-            "13": 100
+            "13": 144
           },
           "Branches": []
         },
@@ -1063,17 +2292,17 @@
         },
         "System.Void Agilis.Domain.Models.Entities.Pessoas.Time::.ctor(System.Guid,System.String,System.Boolean,Agilis.Domain.Enums.EscopoTime)": {
           "Lines": {
-            "20": 94,
-            "21": 94,
-            "22": 94,
-            "23": 94,
-            "24": 94,
-            "25": 94,
-            "26": 94,
-            "28": 94,
-            "29": 94,
-            "30": 94,
-            "31": 94
+            "20": 124,
+            "21": 124,
+            "22": 124,
+            "23": 124,
+            "24": 124,
+            "25": 124,
+            "26": 124,
+            "28": 124,
+            "29": 124,
+            "30": 124,
+            "31": 124
           },
           "Branches": []
         }
@@ -1083,51 +2312,51 @@
       "Agilis.Domain.Models.Entities.Pessoas.Usuario": {
         "DDS.Domain.Core.Model.ValueObjects.Email Agilis.Domain.Models.Entities.Pessoas.Usuario::get_Email()": {
           "Lines": {
-            "23": 385
+            "23": 739
           },
           "Branches": []
         },
         "System.String Agilis.Domain.Models.Entities.Pessoas.Usuario::get_Nome()": {
           "Lines": {
-            "28": 293
+            "28": 603
           },
           "Branches": []
         },
         "System.String Agilis.Domain.Models.Entities.Pessoas.Usuario::get_Sobrenome()": {
           "Lines": {
-            "33": 292
+            "33": 600
           },
           "Branches": []
         },
         "DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia Agilis.Domain.Models.Entities.Pessoas.Usuario::get_Senha()": {
           "Lines": {
-            "38": 399
+            "38": 859
           },
           "Branches": []
         },
         "Agilis.Domain.Enums.RegraUsuario Agilis.Domain.Models.Entities.Pessoas.Usuario::get_Regra()": {
           "Lines": {
-            "43": 303
+            "43": 613
           },
           "Branches": []
         },
         "System.Void Agilis.Domain.Models.Entities.Pessoas.Usuario::AlterarSenha(DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia,DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia,DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia)": {
           "Lines": {
-            "84": 24,
-            "85": 24,
-            "86": 3,
-            "87": 3,
-            "88": 3,
-            "91": 21,
-            "92": 4,
-            "93": 4,
-            "94": 4,
-            "97": 17,
-            "98": 3,
-            "99": 3,
-            "100": 3,
-            "103": 14,
-            "104": 24
+            "84": 36,
+            "85": 36,
+            "86": 5,
+            "87": 5,
+            "88": 5,
+            "91": 31,
+            "92": 8,
+            "93": 8,
+            "94": 8,
+            "97": 23,
+            "98": 5,
+            "99": 5,
+            "100": 5,
+            "103": 18,
+            "104": 36
           },
           "Branches": [
             {
@@ -1136,7 +2365,7 @@
               "EndOffset": 27,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 3
+              "Hits": 5
             },
             {
               "Line": 85,
@@ -1144,7 +2373,7 @@
               "EndOffset": 47,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 21
+              "Hits": 31
             },
             {
               "Line": 91,
@@ -1152,7 +2381,7 @@
               "EndOffset": 68,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 4
+              "Hits": 8
             },
             {
               "Line": 91,
@@ -1160,7 +2389,7 @@
               "EndOffset": 88,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 17
+              "Hits": 23
             },
             {
               "Line": 97,
@@ -1168,7 +2397,7 @@
               "EndOffset": 98,
               "Path": 0,
               "Ordinal": 4,
-              "Hits": 3
+              "Hits": 5
             },
             {
               "Line": 97,
@@ -1176,40 +2405,40 @@
               "EndOffset": 109,
               "Path": 1,
               "Ordinal": 5,
-              "Hits": 14
+              "Hits": 18
             }
           ]
         },
         "System.Void Agilis.Domain.Models.Entities.Pessoas.Usuario::.ctor()": {
           "Lines": {
-            "48": 62,
-            "49": 62,
-            "51": 62
+            "48": 184,
+            "49": 184,
+            "51": 184
           },
           "Branches": []
         },
         "System.Void Agilis.Domain.Models.Entities.Pessoas.Usuario::.ctor(DDS.Domain.Core.Model.ValueObjects.Email,System.String,System.String,DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia,Agilis.Domain.Enums.RegraUsuario)": {
           "Lines": {
-            "61": 176,
-            "62": 176,
-            "63": 176,
-            "64": 176,
-            "65": 176,
-            "66": 176,
-            "67": 176,
-            "68": 176,
-            "69": 176,
-            "70": 176,
-            "71": 176,
-            "72": 176,
-            "73": 176,
-            "74": 176,
-            "76": 176,
-            "77": 176,
-            "78": 176,
-            "79": 176,
-            "80": 176,
-            "81": 176
+            "61": 348,
+            "62": 348,
+            "63": 348,
+            "64": 348,
+            "65": 348,
+            "66": 348,
+            "67": 348,
+            "68": 348,
+            "69": 348,
+            "70": 348,
+            "71": 348,
+            "72": 348,
+            "73": 348,
+            "74": 348,
+            "76": 348,
+            "77": 348,
+            "78": 348,
+            "79": 348,
+            "80": 348,
+            "81": 348
           },
           "Branches": []
         }
@@ -1231,11 +2460,11 @@
         },
         "System.Void Agilis.Domain.Abstractions.Services.CrudService`1::.ctor(Agilis.Domain.Abstractions.Repositories.IUnitOfWork,DDS.Domain.Core.Abstractions.Repositories.IRepository`1<TEntity>)": {
           "Lines": {
-            "31": 83,
-            "32": 83,
-            "33": 83,
-            "34": 83,
-            "35": 83
+            "31": 143,
+            "32": 143,
+            "33": 143,
+            "34": 143,
+            "35": 143
           },
           "Branches": []
         }
@@ -1243,11 +2472,11 @@
       "Agilis.Domain.Abstractions.Services.CrudService`1/<Adicionar>d__3": {
         "System.Void Agilis.Domain.Abstractions.Services.CrudService`1/<Adicionar>d__3::MoveNext()": {
           "Lines": {
-            "43": 0,
-            "44": 0,
+            "43": 22,
+            "44": 22,
             "45": 0,
-            "47": 0,
-            "48": 0
+            "47": 22,
+            "48": 22
           },
           "Branches": [
             {
@@ -1264,7 +2493,7 @@
               "EndOffset": 63,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 0
+              "Hits": 22
             }
           ]
         }
@@ -1301,7 +2530,7 @@
       "Agilis.Domain.Abstractions.Services.CrudService`1/<Commit>d__5": {
         "System.Void Agilis.Domain.Abstractions.Services.CrudService`1/<Commit>d__5::MoveNext()": {
           "Lines": {
-            "67": 49
+            "67": 69
           },
           "Branches": []
         }
@@ -1309,7 +2538,7 @@
       "Agilis.Domain.Abstractions.Services.CrudService`1/<ConsultarPorId>d__7": {
         "System.Void Agilis.Domain.Abstractions.Services.CrudService`1/<ConsultarPorId>d__7::MoveNext()": {
           "Lines": {
-            "77": 30
+            "77": 72
           },
           "Branches": []
         }
@@ -1348,16 +2577,16 @@
       "Agilis.Domain.Abstractions.Entities.MultiTenancyEntity": {
         "System.Guid Agilis.Domain.Abstractions.Entities.MultiTenancyEntity::get_UsuarioId()": {
           "Lines": {
-            "9": 100
+            "9": 144
           },
           "Branches": []
         },
         "System.Void Agilis.Domain.Abstractions.Entities.MultiTenancyEntity::.ctor(System.Guid)": {
           "Lines": {
-            "11": 138,
-            "12": 138,
-            "13": 138,
-            "14": 138
+            "11": 168,
+            "12": 168,
+            "13": 168,
+            "14": 168
           },
           "Branches": []
         }
@@ -1369,9 +2598,81 @@
       "Agilis.Domain.Mocks.ValueObjects.EmailMock": {
         "DDS.Domain.Core.Model.ValueObjects.Email Agilis.Domain.Mocks.ValueObjects.EmailMock::ObterValido()": {
           "Lines": {
-            "9": 130,
-            "10": 260,
-            "11": 130
+            "9": 286,
+            "10": 572,
+            "11": 286
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\tests\\Agilis.Domain.Mocks\\ValueObjects\\Trabalho\\ModuloMock.cs": {
+      "Agilis.Domain.Mocks.ValueObjects.Trabalho.ModuloMock": {
+        "Agilis.Domain.Models.ValueObjects.Trabalho.Modulo Agilis.Domain.Mocks.ValueObjects.Trabalho.ModuloMock::ObterValido(System.Int32)": {
+          "Lines": {
+            "11": 96,
+            "12": 96,
+            "13": 192,
+            "14": 192,
+            "15": 192,
+            "16": 192,
+            "17": 192,
+            "18": 96,
+            "19": 96
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Trabalho.Modulo Agilis.Domain.Mocks.ValueObjects.Trabalho.ModuloMock::ObterValido()": {
+          "Lines": {
+            "22": 74,
+            "23": 74,
+            "24": 148,
+            "25": 74,
+            "26": 74
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Trabalho.Modulo Agilis.Domain.Mocks.ValueObjects.Trabalho.ModuloMock::ObterInvalido()": {
+          "Lines": {
+            "29": 6,
+            "30": 6,
+            "31": 6
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\tests\\Agilis.Domain.Mocks\\ValueObjects\\Trabalho\\RequisitoNaoFuncionalMock.cs": {
+      "Agilis.Domain.Mocks.ValueObjects.Trabalho.RequisitoNaoFuncionalMock": {
+        "Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional Agilis.Domain.Mocks.ValueObjects.Trabalho.RequisitoNaoFuncionalMock::ObterValido(System.Int32)": {
+          "Lines": {
+            "11": 100,
+            "12": 100,
+            "13": 200,
+            "14": 200,
+            "15": 200,
+            "16": 200,
+            "17": 200,
+            "18": 100,
+            "19": 100
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional Agilis.Domain.Mocks.ValueObjects.Trabalho.RequisitoNaoFuncionalMock::ObterValido()": {
+          "Lines": {
+            "22": 74,
+            "23": 74,
+            "24": 148,
+            "25": 74,
+            "26": 74
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Especificacao.RequisitoNaoFuncional Agilis.Domain.Mocks.ValueObjects.Trabalho.RequisitoNaoFuncionalMock::ObterInvalido()": {
+          "Lines": {
+            "29": 6,
+            "30": 6,
+            "31": 6
           },
           "Branches": []
         }
@@ -1381,13 +2682,48 @@
       "Agilis.Domain.Mocks.ValueObjects.Seguranca.Senhas.SenhaMock": {
         "DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia Agilis.Domain.Mocks.ValueObjects.Seguranca.Senhas.SenhaMock::ObterValida()": {
           "Lines": {
-            "10": 64,
-            "11": 128,
-            "12": 128,
-            "13": 128,
-            "14": 128,
-            "15": 128,
-            "16": 64
+            "10": 208,
+            "11": 416,
+            "12": 416,
+            "13": 416,
+            "14": 416,
+            "15": 416,
+            "16": 208
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\tests\\Agilis.Domain.Mocks\\ValueObjects\\Especificacao\\JargaoDoNegocioMock.cs": {
+      "Agilis.Domain.Mocks.ValueObjects.Especificacao.JargaoDoNegocioMock": {
+        "Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio Agilis.Domain.Mocks.ValueObjects.Especificacao.JargaoDoNegocioMock::ObterValido()": {
+          "Lines": {
+            "8": 76,
+            "9": 76,
+            "10": 76,
+            "11": 76,
+            "12": 76,
+            "13": 76
+          },
+          "Branches": []
+        },
+        "Agilis.Domain.Models.ValueObjects.Especificacao.JargaoDoNegocio Agilis.Domain.Mocks.ValueObjects.Especificacao.JargaoDoNegocioMock::ObterInvalido()": {
+          "Lines": {
+            "16": 1,
+            "17": 1,
+            "18": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\Agilis\\back-end\\tests\\Agilis.Domain.Mocks\\ValueObjects\\Especificacao\\LinguagemUbiquaMock.cs": {
+      "Agilis.Domain.Mocks.ValueObjects.Especificacao.LinguagemUbiquaMock": {
+        "Agilis.Domain.Models.ValueObjects.Especificacao.LinguagemUbiqua Agilis.Domain.Mocks.ValueObjects.Especificacao.LinguagemUbiquaMock::ObterValida()": {
+          "Lines": {
+            "9": 75,
+            "10": 75,
+            "11": 75
           },
           "Branches": []
         }
@@ -1399,7 +2735,14 @@
           "Lines": {
             "11": 11,
             "12": 22,
-            "13": 11
+            "13": 11,
+            "14": 66,
+            "15": 132,
+            "16": 132,
+            "17": 132,
+            "18": 132,
+            "19": 132,
+            "20": 66
           },
           "Branches": []
         }
@@ -1409,9 +2752,9 @@
       "Agilis.Domain.Mocks.Entities.Pessoas.AtorMock": {
         "Agilis.Domain.Models.Entities.Pessoas.Ator Agilis.Domain.Mocks.Entities.Pessoas.AtorMock::ObterValido()": {
           "Lines": {
-            "9": 11,
-            "10": 22,
-            "11": 11
+            "9": 13,
+            "10": 26,
+            "11": 13
           },
           "Branches": []
         },
@@ -1427,12 +2770,12 @@
       "Agilis.Domain.Mocks.Entities.Pessoas.TimeMock": {
         "Agilis.Domain.Models.Entities.Pessoas.Time Agilis.Domain.Mocks.Entities.Pessoas.TimeMock::ObterTimePessoalValido()": {
           "Lines": {
-            "11": 11,
-            "12": 22,
-            "13": 22,
-            "14": 22,
-            "15": 22,
-            "16": 11
+            "11": 13,
+            "12": 26,
+            "13": 26,
+            "14": 26,
+            "15": 26,
+            "16": 13
           },
           "Branches": []
         },
@@ -1453,38 +2796,38 @@
       "Agilis.Domain.Mocks.Entities.Pessoas.UsuarioMock": {
         "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Mocks.Entities.Pessoas.UsuarioMock::ObterValido()": {
           "Lines": {
-            "12": 42,
-            "13": 84,
-            "14": 84,
-            "15": 84,
-            "16": 84,
-            "17": 84,
-            "18": 84,
-            "19": 42
+            "12": 180,
+            "13": 360,
+            "14": 360,
+            "15": 360,
+            "16": 360,
+            "17": 360,
+            "18": 360,
+            "19": 180
           },
           "Branches": []
         },
         "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Mocks.Entities.Pessoas.UsuarioMock::ObterInvalido()": {
           "Lines": {
-            "22": 0,
-            "23": 0,
-            "24": 0,
-            "25": 0,
-            "26": 0,
-            "27": 0
+            "22": 2,
+            "23": 2,
+            "24": 2,
+            "25": 2,
+            "26": 2,
+            "27": 2
           },
           "Branches": []
         },
         "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Domain.Mocks.Entities.Pessoas.UsuarioMock::ObterAdminValido()": {
           "Lines": {
-            "30": 22,
-            "31": 44,
-            "32": 44,
-            "33": 44,
-            "34": 44,
-            "35": 44,
-            "36": 44,
-            "37": 22
+            "30": 28,
+            "31": 56,
+            "32": 56,
+            "33": 56,
+            "34": 56,
+            "35": 56,
+            "36": 56,
+            "37": 28
           },
           "Branches": []
         }
@@ -1496,7 +2839,7 @@
       "Agilis.Infra.Data.Repositories.UnitOfWork": {
         "Agilis.Domain.Abstractions.Repositories.Pessoas.IUsuarioRepository Agilis.Infra.Data.Repositories.UnitOfWork::get_UsuarioRepository()": {
           "Lines": {
-            "16": 42,
+            "16": 138,
             "18": 200
           },
           "Branches": []
@@ -1510,14 +2853,14 @@
         },
         "Agilis.Domain.Abstractions.Repositories.Pessoas.ITimeRepository Agilis.Infra.Data.Repositories.UnitOfWork::get_TimeRepository()": {
           "Lines": {
-            "18": 10,
+            "18": 32,
             "20": 40
           },
           "Branches": []
         },
         "Agilis.Domain.Abstractions.Repositories.Trabalho.IProdutoRepository Agilis.Infra.Data.Repositories.UnitOfWork::get_ProdutoRepository()": {
           "Lines": {
-            "19": 0,
+            "19": 94,
             "21": 0
           },
           "Branches": []
@@ -1538,31 +2881,36 @@
         },
         "System.Void Agilis.Infra.Data.Repositories.UnitOfWork::Dispose()": {
           "Lines": {
-            "43": 15,
-            "44": 105,
-            "45": 105,
-            "46": 105,
+            "43": 81,
+            "44": 171,
+            "45": 171,
+            "46": 171,
             "47": 90
           },
           "Branches": []
         },
         "System.Void Agilis.Infra.Data.Repositories.UnitOfWork::Dispose(System.Boolean)": {
           "Lines": {
-            "49": 15,
-            "50": 105,
+            "49": 81,
+            "50": 171,
             "51": 90,
             "52": 0,
-            "53": 15,
-            "54": 105,
+            "53": 81,
+            "54": 171,
             "55": 105,
-            "56": 96,
-            "57": 40,
-            "58": 15,
+            "56": 162,
+            "57": 106,
+            "58": 47,
             "59": 105,
-            "60": 90,
-            "61": 15,
-            "62": 105,
-            "63": 90
+            "60": 154,
+            "61": 79,
+            "62": 107,
+            "63": 92,
+            "64": 2,
+            "65": 2,
+            "66": 66,
+            "68": 66,
+            "69": 66
           },
           "Branches": [
             {
@@ -1571,7 +2919,7 @@
               "EndOffset": 13,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 15
+              "Hits": 81
             },
             {
               "Line": 53,
@@ -1579,7 +2927,39 @@
               "EndOffset": 18,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 15
+              "Hits": 81
+            },
+            {
+              "Line": 57,
+              "Offset": 33,
+              "EndOffset": 35,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 32
+            },
+            {
+              "Line": 57,
+              "Offset": 33,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 64
+            },
+            {
+              "Line": 53,
+              "Offset": 16,
+              "EndOffset": 86,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 66
+            },
+            {
+              "Line": 50,
+              "Offset": 9,
+              "EndOffset": 93,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 66
             },
             {
               "Line": 55,
@@ -1665,20 +3045,20 @@
         },
         "System.Void Agilis.Infra.Data.Repositories.UnitOfWork::.ctor(MongoDB.Driver.IMongoDatabase)": {
           "Lines": {
-            "15": 15,
+            "15": 81,
             "17": 90,
-            "23": 15,
-            "24": 15,
-            "25": 105,
-            "26": 105,
+            "23": 81,
+            "24": 81,
+            "25": 171,
+            "26": 171,
             "27": 90,
-            "28": 105,
-            "29": 15,
-            "30": 105,
-            "31": 105,
-            "32": 105,
-            "33": 105,
-            "34": 105,
+            "28": 171,
+            "29": 81,
+            "30": 171,
+            "31": 171,
+            "32": 171,
+            "33": 171,
+            "34": 171,
             "35": 90,
             "36": 90
           },
@@ -1688,10 +3068,10 @@
       "Agilis.Infra.Data.Repositories.UnitOfWork/<Commit>d__21": {
         "System.Void Agilis.Infra.Data.Repositories.UnitOfWork/<Commit>d__21::MoveNext()": {
           "Lines": {
-            "37": 11,
-            "38": 11,
-            "39": 70,
-            "40": 70,
+            "37": 61,
+            "38": 61,
+            "39": 108,
+            "40": 118,
             "41": 50
           },
           "Branches": [
@@ -1701,7 +3081,7 @@
               "EndOffset": 35,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 10
+              "Hits": 48
             },
             {
               "Line": 38,
@@ -1709,7 +3089,7 @@
               "EndOffset": 148,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 10
+              "Hits": 58
             }
           ]
         }
@@ -1719,9 +3099,9 @@
       "Agilis.Infra.Data.Reopositories.Trabalho.MilestoneRepository": {
         "System.Void Agilis.Infra.Data.Reopositories.Trabalho.MilestoneRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "11": 105,
-            "12": 105,
-            "13": 105
+            "11": 171,
+            "12": 171,
+            "13": 171
           },
           "Branches": []
         }
@@ -1731,9 +3111,9 @@
       "Agilis.Infra.Data.Reopositories.Trabalho.ProdutoRepository": {
         "System.Void Agilis.Infra.Data.Reopositories.Trabalho.ProdutoRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "11": 105,
-            "12": 105,
-            "13": 105
+            "11": 171,
+            "12": 171,
+            "13": 171
           },
           "Branches": []
         }
@@ -1743,9 +3123,9 @@
       "Agilis.Infra.Data.Reopositories.Trabalho.UserStoryRepository": {
         "System.Void Agilis.Infra.Data.Reopositories.Trabalho.UserStoryRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "11": 105,
-            "12": 105,
-            "13": 105
+            "11": 171,
+            "12": 171,
+            "13": 171
           },
           "Branches": []
         }
@@ -1755,9 +3135,9 @@
       "Agilis.Infra.Data.Reopositories.Pessoas.AtorRepository": {
         "System.Void Agilis.Infra.Data.Reopositories.Pessoas.AtorRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "11": 105,
-            "12": 105,
-            "13": 105
+            "11": 171,
+            "12": 171,
+            "13": 171
           },
           "Branches": []
         }
@@ -1767,9 +3147,9 @@
       "Agilis.Infra.Data.Reopositories.Pessoas.TimeRepository": {
         "System.Void Agilis.Infra.Data.Reopositories.Pessoas.TimeRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "11": 105,
-            "12": 105,
-            "13": 105
+            "11": 171,
+            "12": 171,
+            "13": 171
           },
           "Branches": []
         }
@@ -1779,19 +3159,19 @@
       "Agilis.Infra.Data.Reopositories.Pessoas.UsuarioRepository": {
         "Agilis.Domain.Models.Entities.Pessoas.Usuario Agilis.Infra.Data.Reopositories.Pessoas.UsuarioRepository::ConsultarPorEmail(DDS.Domain.Core.Model.ValueObjects.Email)": {
           "Lines": {
-            "18": 73,
-            "19": 73,
-            "20": 73,
-            "21": 73,
-            "22": 73
+            "18": 103,
+            "19": 103,
+            "20": 103,
+            "21": 103,
+            "22": 103
           },
           "Branches": []
         },
         "System.Void Agilis.Infra.Data.Reopositories.Pessoas.UsuarioRepository::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "13": 105,
-            "14": 105,
-            "15": 105
+            "13": 171,
+            "14": 171,
+            "15": 171
           },
           "Branches": []
         }
@@ -1871,12 +3251,12 @@
       "Agilis.Infra.Data.Configuration.Providers.DomainProvider": {
         "MongoDB.Bson.Serialization.IBsonSerializer Agilis.Infra.Data.Configuration.Providers.DomainProvider::GetSerializer(System.Type)": {
           "Lines": {
-            "22": 33,
-            "23": 33,
+            "22": 67,
+            "23": 67,
             "24": 0,
             "25": 0,
-            "28": 33,
-            "29": 33
+            "28": 67,
+            "29": 67
           },
           "Branches": [
             {
@@ -1893,17 +3273,17 @@
               "EndOffset": 42,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 33
+              "Hits": 67
             }
           ]
         },
         "System.Void Agilis.Infra.Data.Configuration.Providers.DomainProvider::.ctor(DDS.Domain.Core.Abstractions.Services.Seguranca.Criptografia.ICriptografiaSimetrica,Agilis.Domain.Abstractions.ValueObjects.IAppSettings)": {
           "Lines": {
-            "15": 22,
-            "16": 22,
-            "17": 22,
-            "18": 22,
-            "19": 22
+            "15": 28,
+            "16": 28,
+            "17": 28,
+            "18": 28,
+            "19": 28
           },
           "Branches": []
         }
@@ -1923,11 +3303,11 @@
         },
         "Microsoft.Extensions.Hosting.IHostBuilder Agilis.WebAPI.Program::CreateHostBuilder(System.String[])": {
           "Lines": {
-            "26": 22,
-            "27": 22,
-            "28": 44,
-            "29": 44,
-            "30": 44
+            "26": 28,
+            "27": 28,
+            "28": 56,
+            "29": 56,
+            "30": 56
           },
           "Branches": []
         }
@@ -1937,37 +3317,37 @@
       "Agilis.WebAPI.Startup": {
         "System.Void Agilis.WebAPI.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
           "Lines": {
-            "38": 22,
-            "39": 22,
-            "41": 22,
-            "42": 22,
-            "43": 22,
-            "45": 22,
-            "46": 22,
-            "47": 22,
-            "48": 22,
-            "49": 22
+            "38": 28,
+            "39": 28,
+            "41": 28,
+            "42": 28,
+            "43": 28,
+            "45": 28,
+            "46": 28,
+            "47": 28,
+            "48": 28,
+            "49": 28
           },
           "Branches": []
         },
         "System.Void Agilis.WebAPI.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger`1<Agilis.WebAPI.Startup>,System.IServiceProvider)": {
           "Lines": {
-            "59": 22,
-            "60": 22,
-            "62": 22,
+            "59": 28,
+            "60": 28,
+            "62": 28,
             "63": 0,
             "64": 0,
             "65": 0,
-            "67": 22,
-            "69": 22,
-            "71": 22,
-            "72": 22,
-            "74": 22,
-            "76": 22,
-            "77": 44,
-            "78": 44,
-            "79": 44,
-            "80": 22
+            "67": 28,
+            "69": 28,
+            "71": 28,
+            "72": 28,
+            "74": 28,
+            "76": 28,
+            "77": 56,
+            "78": 56,
+            "79": 56,
+            "80": 28
           },
           "Branches": [
             {
@@ -1984,17 +3364,17 @@
               "EndOffset": 29,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 22
+              "Hits": 28
             }
           ]
         },
         "System.Void Agilis.WebAPI.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)": {
           "Lines": {
-            "27": 22,
-            "28": 22,
-            "29": 22,
-            "30": 22,
-            "31": 22
+            "27": 28,
+            "28": 28,
+            "29": 28,
+            "30": 28,
+            "31": 28
           },
           "Branches": []
         }
@@ -2132,19 +3512,19 @@
       "Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel": {
         "System.String Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel::get_SenhaAtual()": {
           "Lines": {
-            "13": 44
+            "13": 52
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel::get_NovaSenha()": {
           "Lines": {
-            "18": 44
+            "18": 52
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel::get_ConfirmaSenha()": {
           "Lines": {
-            "23": 44
+            "23": 52
           },
           "Branches": []
         }
@@ -2154,13 +3534,13 @@
       "Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel": {
         "System.String Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel::get_Email()": {
           "Lines": {
-            "13": 55
+            "13": 75
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel::get_Senha()": {
           "Lines": {
-            "18": 55
+            "18": 75
           },
           "Branches": []
         }
@@ -2170,19 +3550,19 @@
       "Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel": {
         "Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel::get_Usuario()": {
           "Lines": {
-            "14": 55
+            "14": 65
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel::get_Token()": {
           "Lines": {
-            "19": 44
+            "19": 52
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Seguranca.UsuarioLogadoViewModel::get_TipoToken()": {
           "Lines": {
-            "24": 44
+            "24": 52
           },
           "Branches": []
         }
@@ -2242,43 +3622,43 @@
       "Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel": {
         "System.Guid Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Id()": {
           "Lines": {
-            "15": 136
+            "15": 174
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Email()": {
           "Lines": {
-            "20": 226
+            "20": 290
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Nome()": {
           "Lines": {
-            "25": 215
+            "25": 275
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Sobrenome()": {
           "Lines": {
-            "30": 215
+            "30": 275
           },
           "Branches": []
         },
         "Agilis.Domain.Enums.RegraUsuario Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Regra()": {
           "Lines": {
-            "35": 259
+            "35": 329
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_Senha()": {
           "Lines": {
-            "40": 303
+            "40": 381
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel::get_ConfirmaSenha()": {
           "Lines": {
-            "45": 167
+            "45": 209
           },
           "Branches": []
         }
@@ -2288,31 +3668,31 @@
       "Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel": {
         "System.Guid Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel::get_Id()": {
           "Lines": {
-            "15": 44
+            "15": 52
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel::get_Email()": {
           "Lines": {
-            "20": 33
+            "20": 39
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel::get_Nome()": {
           "Lines": {
-            "25": 33
+            "25": 39
           },
           "Branches": []
         },
         "System.String Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel::get_Sobrenome()": {
           "Lines": {
-            "30": 33
+            "30": 39
           },
           "Branches": []
         },
         "Agilis.Domain.Enums.RegraUsuario Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel::get_Regra()": {
           "Lines": {
-            "35": 33
+            "35": 39
           },
           "Branches": []
         }
@@ -2322,10 +3702,10 @@
       "Agilis.WebAPI.Extensions.HttpContextAccessorExtensions": {
         "DDS.Domain.Core.Model.ValueObjects.Email Agilis.WebAPI.Extensions.HttpContextAccessorExtensions::ObterEmail(Microsoft.AspNetCore.Http.IHttpContextAccessor)": {
           "Lines": {
-            "17": 11,
-            "18": 11,
-            "19": 11,
-            "20": 11
+            "17": 13,
+            "18": 13,
+            "19": 13,
+            "20": 13
           },
           "Branches": []
         }
@@ -2354,9 +3734,13 @@
       "Agilis.WebAPI.Controllers.Trabalho.ProdutosController": {
         "Microsoft.AspNetCore.Mvc.ActionResult`1<System.Collections.Generic.ICollection`1<Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel>> Agilis.WebAPI.Controllers.Trabalho.ProdutosController::ConsultarTodos()": {
           "Lines": {
+            "46": 0,
             "47": 0,
+            "48": 0,
             "49": 0,
+            "50": 0,
             "51": 0,
+            "52": 0,
             "53": 0,
             "54": 0
           },
@@ -2364,6 +3748,7 @@
         },
         "System.Collections.Generic.ICollection`1<Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel> Agilis.WebAPI.Controllers.Trabalho.ProdutosController::Ordenar(System.Collections.Generic.ICollection`1<Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel>)": {
           "Lines": {
+            "69": 0,
             "70": 0,
             "71": 0
           },
@@ -2371,6 +3756,7 @@
         },
         "System.Void Agilis.WebAPI.Controllers.Trabalho.ProdutosController::.ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)": {
           "Lines": {
+            "35": 0,
             "36": 0,
             "37": 0,
             "38": 0,
@@ -2383,13 +3769,31 @@
       "Agilis.WebAPI.Controllers.Trabalho.ProdutosController/<Post>d__4": {
         "System.Void Agilis.WebAPI.Controllers.Trabalho.ProdutosController/<Post>d__4::MoveNext()": {
           "Lines": {
+            "56": 0,
             "57": 0,
             "58": 0,
             "59": 0,
+            "60": 0,
             "61": 0,
             "62": 0
           },
           "Branches": [
+            {
+              "Line": 57,
+              "Offset": 52,
+              "EndOffset": 54,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 52,
+              "EndOffset": 86,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
             {
               "Line": 58,
               "Offset": 52,
@@ -2575,20 +3979,20 @@
       "Agilis.WebAPI.Controllers.Pessoas.UsuariosController": {
         "Microsoft.AspNetCore.Mvc.IActionResult Agilis.WebAPI.Controllers.Pessoas.UsuariosController::Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)": {
           "Lines": {
-            "80": 11,
-            "81": 11,
-            "83": 11,
-            "85": 11,
-            "86": 0,
-            "88": 11,
-            "90": 11,
-            "92": 11,
-            "93": 11,
-            "94": 11,
-            "95": 11,
-            "96": 11,
-            "97": 11,
-            "98": 11
+            "80": 15,
+            "81": 15,
+            "83": 15,
+            "85": 15,
+            "86": 2,
+            "88": 13,
+            "90": 13,
+            "92": 13,
+            "93": 13,
+            "94": 13,
+            "95": 13,
+            "96": 13,
+            "97": 13,
+            "98": 15
           },
           "Branches": [
             {
@@ -2597,7 +4001,7 @@
               "EndOffset": 44,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 0
+              "Hits": 2
             },
             {
               "Line": 85,
@@ -2605,7 +4009,7 @@
               "EndOffset": 65,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 11
+              "Hits": 13
             }
           ]
         },
@@ -2618,13 +4022,13 @@
         },
         "System.Void Agilis.WebAPI.Controllers.Pessoas.UsuariosController::.ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)": {
           "Lines": {
-            "45": 66,
-            "46": 66,
-            "47": 66,
-            "48": 66,
-            "49": 66,
-            "50": 66,
-            "51": 66
+            "45": 82,
+            "46": 82,
+            "47": 82,
+            "48": 82,
+            "49": 82,
+            "50": 82,
+            "51": 82
           },
           "Branches": []
         }
@@ -2632,11 +4036,11 @@
       "Agilis.WebAPI.Controllers.Pessoas.UsuariosController/<Post>d__5": {
         "System.Void Agilis.WebAPI.Controllers.Pessoas.UsuariosController/<Post>d__5::MoveNext()": {
           "Lines": {
-            "63": 44,
-            "64": 44,
+            "63": 54,
+            "64": 54,
             "65": 0,
-            "67": 44,
-            "68": 44
+            "67": 54,
+            "68": 54
           },
           "Branches": [
             {
@@ -2653,7 +4057,7 @@
               "EndOffset": 81,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 44
+              "Hits": 54
             }
           ]
         }
@@ -2661,16 +4065,16 @@
       "Agilis.WebAPI.Controllers.Pessoas.UsuariosController/<AlterarSenha>d__7": {
         "System.Void Agilis.WebAPI.Controllers.Pessoas.UsuariosController/<AlterarSenha>d__7::MoveNext()": {
           "Lines": {
-            "110": 11,
-            "111": 11,
-            "112": 11,
-            "113": 11,
-            "114": 11,
-            "116": 11,
-            "118": 11,
+            "110": 13,
+            "111": 13,
+            "112": 13,
+            "113": 13,
+            "114": 13,
+            "116": 13,
+            "118": 13,
             "119": 0,
-            "121": 11,
-            "122": 11
+            "121": 13,
+            "122": 13
           },
           "Branches": [
             {
@@ -2687,7 +4091,7 @@
               "EndOffset": 327,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 11
+              "Hits": 13
             }
           ]
         }
@@ -2716,51 +4120,51 @@
       "Agilis.WebAPI.Configuration.AutoMapperConfig": {
         "System.Void Agilis.WebAPI.Configuration.AutoMapperConfig::.ctor()": {
           "Lines": {
-            "23": 12,
-            "24": 12,
-            "30": 12,
-            "31": 12,
-            "33": 12,
-            "34": 12,
-            "37": 12,
-            "38": 12,
-            "40": 12,
-            "41": 12,
-            "43": 12,
-            "44": 12,
-            "46": 12,
-            "47": 12,
-            "50": 12,
-            "51": 12,
-            "53": 12,
-            "54": 12,
-            "56": 12,
-            "57": 12,
-            "60": 12,
-            "61": 12,
-            "63": 12,
-            "64": 12,
-            "67": 12,
-            "68": 12,
-            "70": 12,
-            "72": 12,
-            "73": 12,
-            "74": 58,
-            "75": 58,
-            "76": 58,
-            "77": 58,
-            "78": 58,
-            "79": 58,
-            "80": 58,
-            "81": 12,
-            "84": 12,
-            "85": 12,
-            "86": 23,
-            "87": 23,
-            "88": 23,
-            "89": 23,
-            "90": 12,
-            "91": 12
+            "23": 16,
+            "24": 16,
+            "30": 16,
+            "31": 16,
+            "33": 16,
+            "34": 16,
+            "37": 16,
+            "38": 16,
+            "40": 16,
+            "41": 16,
+            "43": 16,
+            "44": 16,
+            "46": 16,
+            "47": 16,
+            "50": 16,
+            "51": 16,
+            "53": 16,
+            "54": 16,
+            "56": 16,
+            "57": 16,
+            "60": 16,
+            "61": 16,
+            "63": 16,
+            "64": 16,
+            "67": 16,
+            "68": 16,
+            "70": 16,
+            "72": 16,
+            "73": 16,
+            "74": 76,
+            "75": 76,
+            "76": 76,
+            "77": 76,
+            "78": 76,
+            "79": 76,
+            "80": 76,
+            "81": 16,
+            "84": 16,
+            "85": 16,
+            "86": 31,
+            "87": 31,
+            "88": 31,
+            "89": 31,
+            "90": 16,
+            "91": 16
           },
           "Branches": []
         }
@@ -2770,22 +4174,22 @@
       "Agilis.WebAPI.Configuration.CorsConfig": {
         "Microsoft.AspNetCore.Builder.IApplicationBuilder Agilis.WebAPI.Configuration.CorsConfig::UseCorsConfig(Microsoft.AspNetCore.Builder.IApplicationBuilder)": {
           "Lines": {
-            "16": 22,
-            "17": 22,
-            "18": 22,
-            "19": 22,
-            "20": 22,
-            "21": 22,
-            "22": 22,
-            "23": 22,
-            "26": 44,
-            "27": 44,
-            "28": 44,
-            "29": 44,
-            "30": 44,
-            "31": 44,
-            "33": 22,
-            "34": 22
+            "16": 28,
+            "17": 28,
+            "18": 28,
+            "19": 28,
+            "20": 28,
+            "21": 28,
+            "22": 28,
+            "23": 28,
+            "26": 56,
+            "27": 56,
+            "28": 56,
+            "29": 56,
+            "30": 56,
+            "31": 56,
+            "33": 28,
+            "34": 28
           },
           "Branches": []
         }
@@ -2795,30 +4199,30 @@
       "Agilis.WebAPI.Configuration.DependencyInjectionConfig": {
         "Microsoft.Extensions.DependencyInjection.IServiceCollection Agilis.WebAPI.Configuration.DependencyInjectionConfig::AddDependencyInjectionConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)": {
           "Lines": {
-            "41": 22,
-            "43": 22,
+            "41": 28,
+            "43": 28,
             "44": 0,
-            "46": 22,
-            "49": 22,
-            "50": 22,
-            "52": 22,
-            "53": 22,
-            "55": 22,
-            "56": 22,
-            "58": 22,
-            "59": 22,
-            "62": 22,
-            "63": 22,
-            "64": 22,
+            "46": 28,
+            "49": 28,
+            "50": 28,
+            "52": 28,
+            "53": 28,
+            "55": 28,
+            "56": 28,
+            "58": 28,
+            "59": 28,
+            "62": 28,
+            "63": 28,
+            "64": 28,
             "65": 0,
-            "68": 22,
-            "69": 22,
-            "71": 22,
-            "72": 22,
-            "75": 22,
-            "76": 66,
-            "78": 22,
-            "79": 22
+            "68": 28,
+            "69": 28,
+            "71": 28,
+            "72": 28,
+            "75": 28,
+            "76": 84,
+            "78": 28,
+            "79": 28
           },
           "Branches": []
         },
@@ -2842,28 +4246,28 @@
       "Agilis.WebAPI.Configuration.JwtConfig": {
         "Microsoft.Extensions.DependencyInjection.IServiceCollection Agilis.WebAPI.Configuration.JwtConfig::AddJwtConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
           "Lines": {
-            "20": 22,
-            "21": 22,
-            "22": 22,
-            "24": 22,
-            "25": 44,
-            "26": 44,
-            "27": 44,
-            "28": 44,
-            "29": 22,
-            "30": 33,
-            "31": 33,
-            "32": 33,
-            "33": 33,
-            "34": 33,
-            "35": 33,
-            "36": 33,
-            "37": 33,
-            "38": 33,
-            "39": 33,
-            "40": 33,
-            "42": 22,
-            "43": 22
+            "20": 28,
+            "21": 28,
+            "22": 28,
+            "24": 28,
+            "25": 56,
+            "26": 56,
+            "27": 56,
+            "28": 56,
+            "29": 28,
+            "30": 41,
+            "31": 41,
+            "32": 41,
+            "33": 41,
+            "34": 41,
+            "35": 41,
+            "36": 41,
+            "37": 41,
+            "38": 41,
+            "39": 41,
+            "40": 41,
+            "42": 28,
+            "43": 28
           },
           "Branches": []
         }
@@ -2873,12 +4277,12 @@
       "Agilis.WebAPI.Configuration.MongoConfig": {
         "Microsoft.AspNetCore.Builder.IApplicationBuilder Agilis.WebAPI.Configuration.MongoConfig::UseMongoConfig(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.IServiceProvider)": {
           "Lines": {
-            "23": 22,
-            "24": 22,
-            "25": 22,
-            "27": 22,
-            "29": 22,
-            "30": 22
+            "23": 28,
+            "24": 28,
+            "25": 28,
+            "27": 28,
+            "29": 28,
+            "30": 28
           },
           "Branches": []
         }
@@ -2888,18 +4292,18 @@
       "Agilis.WebAPI.Configuration.NewtonsoftConfig": {
         "Microsoft.Extensions.DependencyInjection.IMvcBuilder Agilis.WebAPI.Configuration.NewtonsoftConfig::AddNewtonsoftConfig(Microsoft.Extensions.DependencyInjection.IMvcBuilder)": {
           "Lines": {
-            "20": 22,
-            "21": 22,
-            "22": 44,
-            "23": 44,
-            "24": 44,
-            "25": 22,
-            "26": 44,
-            "27": 22,
-            "28": 44,
-            "29": 44,
-            "31": 22,
-            "32": 22
+            "20": 28,
+            "21": 28,
+            "22": 56,
+            "23": 56,
+            "24": 56,
+            "25": 28,
+            "26": 56,
+            "27": 28,
+            "28": 56,
+            "29": 56,
+            "31": 28,
+            "32": 28
           },
           "Branches": []
         }
@@ -2909,30 +4313,30 @@
       "Agilis.WebAPI.Configuration.SwaggerConfig": {
         "Microsoft.Extensions.DependencyInjection.IServiceCollection Agilis.WebAPI.Configuration.SwaggerConfig::AddSwaggerConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)": {
           "Lines": {
-            "23": 22,
-            "24": 22,
-            "25": 33,
-            "26": 33,
-            "27": 33,
-            "28": 33,
-            "29": 33,
-            "30": 33,
-            "31": 33,
-            "32": 33,
-            "33": 33,
-            "34": 33,
-            "35": 22,
-            "36": 33,
+            "23": 28,
+            "24": 28,
+            "25": 41,
+            "26": 41,
+            "27": 41,
+            "28": 41,
+            "29": 41,
+            "30": 41,
+            "31": 41,
+            "32": 41,
+            "33": 41,
+            "34": 41,
+            "35": 28,
+            "36": 41,
             "37": 0,
             "38": 0,
             "39": 0,
             "40": 0,
-            "41": 22,
+            "41": 28,
             "42": 0,
             "43": 0,
-            "44": 33,
-            "46": 22,
-            "47": 22
+            "44": 41,
+            "46": 28,
+            "47": 28
           },
           "Branches": [
             {
@@ -2949,20 +4353,20 @@
               "EndOffset": 220,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 11
+              "Hits": 13
             }
           ]
         },
         "Microsoft.AspNetCore.Builder.IApplicationBuilder Agilis.WebAPI.Configuration.SwaggerConfig::UseSwaggerConfig(Microsoft.AspNetCore.Builder.IApplicationBuilder)": {
           "Lines": {
-            "55": 22,
-            "56": 22,
-            "57": 22,
-            "58": 44,
-            "59": 44,
-            "60": 44,
-            "62": 22,
-            "63": 22
+            "55": 28,
+            "56": 28,
+            "57": 28,
+            "58": 56,
+            "59": 56,
+            "60": 56,
+            "62": 28,
+            "63": 28
           },
           "Branches": []
         }
@@ -3143,19 +4547,19 @@
       "DDS.Domain.Core.Model.ValueObjects.Email": {
         "System.String DDS.Domain.Core.Model.ValueObjects.Email::get_Endereco()": {
           "Lines": {
-            "10": 437
+            "10": 803
           },
           "Branches": []
         },
         "System.Boolean DDS.Domain.Core.Model.ValueObjects.Email::Validar(System.String)": {
           "Lines": {
-            "29": 255,
-            "30": 255,
+            "29": 449,
+            "30": 449,
             "31": 0,
-            "33": 255,
-            "34": 255,
-            "35": 255,
-            "36": 255
+            "33": 449,
+            "34": 449,
+            "35": 449,
+            "36": 449
           },
           "Branches": [
             {
@@ -3172,7 +4576,7 @@
               "EndOffset": 15,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 255
+              "Hits": 449
             }
           ]
         },
@@ -3184,23 +4588,23 @@
         },
         "System.Void DDS.Domain.Core.Model.ValueObjects.Email::.ctor()": {
           "Lines": {
-            "12": 62,
-            "13": 62,
-            "15": 62
+            "12": 184,
+            "13": 184,
+            "15": 184
           },
           "Branches": []
         },
         "System.Void DDS.Domain.Core.Model.ValueObjects.Email::.ctor(System.String)": {
           "Lines": {
-            "17": 255,
-            "18": 255,
-            "19": 255,
-            "20": 255,
-            "21": 255,
-            "22": 255,
-            "24": 255,
-            "25": 255,
-            "26": 255
+            "17": 449,
+            "18": 449,
+            "19": 449,
+            "20": 449,
+            "21": 449,
+            "22": 449,
+            "24": 449,
+            "25": 449,
+            "26": 449
           },
           "Branches": [
             {
@@ -3209,7 +4613,7 @@
               "EndOffset": 70,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 255
+              "Hits": 449
             },
             {
               "Line": 24,
@@ -3217,7 +4621,7 @@
               "EndOffset": 83,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 255
+              "Hits": 449
             }
           ]
         }
@@ -3248,13 +4652,13 @@
       "DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaFraca": {
         "System.Int32 DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaFraca::get_TamanhoMinimo()": {
           "Lines": {
-            "8": 342
+            "8": 670
           },
           "Branches": []
         },
         "System.String DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaFraca::get_Conteudo()": {
           "Lines": {
-            "9": 543
+            "9": 1073
           },
           "Branches": []
         },
@@ -3266,16 +4670,16 @@
         },
         "System.Void DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaFraca::.ctor(System.String,System.Int32)": {
           "Lines": {
-            "11": 292,
-            "12": 292,
-            "13": 292,
-            "14": 292,
-            "15": 292,
-            "16": 292,
-            "17": 292,
-            "19": 292,
-            "20": 292,
-            "21": 292
+            "11": 512,
+            "12": 512,
+            "13": 512,
+            "14": 512,
+            "15": 512,
+            "16": 512,
+            "17": 512,
+            "19": 512,
+            "20": 512,
+            "21": 512
           },
           "Branches": []
         }
@@ -3285,29 +4689,102 @@
       "DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia": {
         "System.Boolean DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia::ContemLetras(System.String)": {
           "Lines": {
-            "19": 1503
+            "19": 2289
           },
           "Branches": []
         },
         "System.Boolean DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia::ContemNumeros(System.String)": {
           "Lines": {
-            "20": 783
+            "20": 1333
           },
           "Branches": []
         },
         "System.Void DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas.SenhaMedia::.ctor(System.String,System.Int32)": {
           "Lines": {
-            "9": 292,
-            "10": 292,
-            "11": 292,
-            "12": 292,
-            "13": 292,
-            "14": 292,
-            "15": 292,
-            "16": 292,
-            "17": 292
+            "9": 512,
+            "10": 512,
+            "11": 512,
+            "12": 512,
+            "13": 512,
+            "14": 512,
+            "15": 512,
+            "16": 512,
+            "17": 512
           },
           "Branches": []
+        }
+      }
+    },
+    "C:\\Projetos\\Pessoal\\DDS.Domain.Core\\src\\DDS.Domain.Core\\Extensions\\EnumExtensions.cs": {
+      "DDS.Domain.Core.Extensions.EnumExtensions": {
+        "System.String DDS.Domain.Core.Extensions.EnumExtensions::GetDescription(T)": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": [
+            {
+              "Line": 12,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 12,
+              "Offset": 26,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 72,
+              "EndOffset": 74,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 106,
+              "EndOffset": 108,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 106,
+              "EndOffset": 127,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 72,
+              "EndOffset": 128,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
         }
       }
     },
@@ -3315,30 +4792,30 @@
       "DDS.Domain.Core.Abstractions.Model.Entities.Entity": {
         "System.Guid DDS.Domain.Core.Abstractions.Model.Entities.Entity::get_Id()": {
           "Lines": {
-            "8": 725
+            "8": 1657
           },
           "Branches": []
         },
         "System.DateTime DDS.Domain.Core.Abstractions.Model.Entities.Entity::get_DataCriacao()": {
           "Lines": {
-            "10": 1014
+            "10": 2336
           },
           "Branches": []
         },
         "System.DateTime DDS.Domain.Core.Abstractions.Model.Entities.Entity::get_DataUltimaAlteracao()": {
           "Lines": {
-            "12": 395
+            "12": 1081
           },
           "Branches": []
         },
         "System.Void DDS.Domain.Core.Abstractions.Model.Entities.Entity::.ctor()": {
           "Lines": {
-            "14": 409,
-            "15": 409,
-            "16": 409,
-            "17": 409,
-            "18": 409,
-            "19": 409
+            "14": 891,
+            "15": 891,
+            "16": 891,
+            "17": 891,
+            "18": 891,
+            "19": 891
           },
           "Branches": []
         }
@@ -3350,9 +4827,9 @@
       "DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1": {
         "System.Linq.IQueryable`1<TEntity> DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1::AsQueryable()": {
           "Lines": {
-            "44": 75,
-            "45": 75,
-            "46": 75
+            "44": 109,
+            "45": 109,
+            "46": 109
           },
           "Branches": []
         },
@@ -3364,15 +4841,15 @@
         },
         "System.Void DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1::.ctor(MongoDB.Driver.IMongoDatabase,MongoDB.Driver.IClientSessionHandle)": {
           "Lines": {
-            "19": 630,
-            "20": 630,
-            "21": 630,
-            "22": 630,
-            "24": 630,
-            "26": 2703,
-            "27": 132,
-            "29": 630,
-            "30": 630
+            "19": 1026,
+            "20": 1026,
+            "21": 1026,
+            "22": 1026,
+            "24": 1026,
+            "26": 4449,
+            "27": 168,
+            "29": 1026,
+            "30": 1026
           },
           "Branches": [
             {
@@ -3381,7 +4858,7 @@
               "EndOffset": 67,
               "Path": 0,
               "Ordinal": 0,
-              "Hits": 66
+              "Hits": 78
             },
             {
               "Line": 26,
@@ -3389,7 +4866,7 @@
               "EndOffset": 90,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 2703
+              "Hits": 4449
             },
             {
               "Line": 26,
@@ -3397,7 +4874,7 @@
               "EndOffset": 102,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 132
+              "Hits": 168
             },
             {
               "Line": 26,
@@ -3405,7 +4882,7 @@
               "EndOffset": 134,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 630
+              "Hits": 1026
             }
           ]
         }
@@ -3413,9 +4890,9 @@
       "DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<Adicionar>d__4": {
         "System.Void DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<Adicionar>d__4::MoveNext()": {
           "Lines": {
-            "33": 122,
-            "34": 122,
-            "35": 122
+            "33": 194,
+            "34": 194,
+            "35": 194
           },
           "Branches": []
         }
@@ -3423,10 +4900,10 @@
       "DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<Atualizar>d__5": {
         "System.Void DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<Atualizar>d__5::MoveNext()": {
           "Lines": {
-            "38": 12,
-            "39": 12,
-            "40": 12,
-            "41": 12
+            "38": 40,
+            "39": 40,
+            "40": 40,
+            "41": 40
           },
           "Branches": []
         }
@@ -3434,9 +4911,9 @@
       "DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<ConsultarPorId>d__8": {
         "System.Void DDS.Infra.Data.Mongo.Abstractions.Repositories.MongoRepository`1/<ConsultarPorId>d__8::MoveNext()": {
           "Lines": {
-            "52": 30,
-            "53": 30,
-            "54": 30
+            "52": 112,
+            "53": 112,
+            "54": 112
           },
           "Branches": []
         }
@@ -3511,12 +4988,12 @@
         },
         "System.Void DDS.WebAPI.Abstractions.Controllers.CrudController`3::.ctor(DDS.Domain.Core.Abstractions.Services.ICrudService`1<TEntity>,AutoMapper.IMapper)": {
           "Lines": {
-            "34": 66,
-            "35": 66,
-            "36": 66,
-            "37": 66,
-            "38": 66,
-            "39": 66
+            "34": 82,
+            "35": 82,
+            "36": 82,
+            "37": 82,
+            "38": 82,
+            "39": 82
           },
           "Branches": []
         }
@@ -3605,16 +5082,16 @@
       "DDS.WebAPI.Abstractions.Controllers.CrudController`3/<Post>d__7": {
         "System.Void DDS.WebAPI.Abstractions.Controllers.CrudController`3/<Post>d__7::MoveNext()": {
           "Lines": {
-            "131": 44,
-            "133": 44,
-            "135": 44,
+            "131": 54,
+            "133": 54,
+            "135": 54,
             "136": 0,
-            "138": 44,
-            "140": 44,
-            "141": 11,
-            "143": 33,
-            "145": 33,
-            "146": 44
+            "138": 54,
+            "140": 54,
+            "141": 13,
+            "143": 41,
+            "145": 41,
+            "146": 54
           },
           "Branches": [
             {
@@ -3631,7 +5108,7 @@
               "EndOffset": 120,
               "Path": 1,
               "Ordinal": 1,
-              "Hits": 44
+              "Hits": 54
             },
             {
               "Line": 140,
@@ -3639,7 +5116,7 @@
               "EndOffset": 255,
               "Path": 0,
               "Ordinal": 2,
-              "Hits": 11
+              "Hits": 13
             },
             {
               "Line": 140,
@@ -3647,7 +5124,7 @@
               "EndOffset": 293,
               "Path": 1,
               "Ordinal": 3,
-              "Hits": 33
+              "Hits": 41
             }
           ]
         }

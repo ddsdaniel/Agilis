@@ -24,6 +24,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public Produto(string nome,
+                       Time time,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
                        ICollection<Modulo> modulos,
                        LinguagemUbiqua linguagemUbiqua)
@@ -36,11 +37,15 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IfNotNull(modulos, c => c.Join(modulos.ToArray()))
                 .IsNotNull(linguagemUbiqua, nameof(LinguagemUbiqua), "Linguagem Ubíqua não pode ser nula")
                 .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
+                .IsNotNull(time, nameof(Time), "Time não deve ser nulo")
+                .IfNotNull(time, c => c.Join(time))
                 );
 
             Nome = nome;
+            Time = time;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
             Modulos = modulos;
+            LinguagemUbiqua = linguagemUbiqua;
         }
 
         public void AdicionarModulo(Modulo modulo)

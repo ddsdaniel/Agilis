@@ -11,5 +11,10 @@ namespace Agilis.Domain.Mocks.ValueObjects.Especificacao
                significado: "Documento que especifica a linguagem do negócio, comum a todos os envolvidos, sejam eles, experts do negócio ou da tecnologia"
                );
         }
+
+        public static JargaoDoNegocio ObterInvalido()
+        {
+            return new JargaoDoNegocio(null, null);
+        }
     }
 }
