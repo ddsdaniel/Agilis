@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Mocks.ValueObjects.Trabalho;
+﻿using Agilis.Domain.Mocks.ValueObjects.Especificacao;
+using Agilis.Domain.Mocks.ValueObjects.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
@@ -13,7 +14,8 @@ namespace Agilis.Domain.Mocks.Entities.Trabalho
             => new Faker<Produto>()
                .CustomInstantiator(p => new Produto(p.Commerce.Product(),
                                                     new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterValido() },
-                                                    new List<Modulo> { ModuloMock.ObterValido() }
+                                                    new List<Modulo> { ModuloMock.ObterValido() },
+                                                    LinguagemUbiquaMock.ObterValida()
                                                    )
                ).Generate();
     }

@@ -7,6 +7,7 @@ using Agilis.Domain.Mocks.ValueObjects.Trabalho;
 using System.Linq;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
+using Agilis.Domain.Mocks.ValueObjects.Especificacao;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -30,7 +31,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var produto = new Produto(nome, 
                                       new List<RequisitoNaoFuncional>(),
-                                      new List<Modulo>());
+                                      new List<Modulo>(),
+                                      LinguagemUbiquaMock.ObterValida());
 
             //Assert
             Assert.True(produto.Invalid);
@@ -40,7 +42,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_RnfNulo_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(nameof(Produto), null, new List<Modulo>());
+            var produto = new Produto(nameof(Produto), null, new List<Modulo>(), LinguagemUbiquaMock.ObterValida());
 
             //Assert
             Assert.True(produto.Invalid);
@@ -52,7 +54,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var produto = new Produto(nameof(Produto),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
-                                      new List<Modulo> { ModuloMock.ObterInvalido() }
+                                      new List<Modulo> { ModuloMock.ObterInvalido() },
+                                      LinguagemUbiquaMock.ObterValida()
                                       );
 
             //Assert

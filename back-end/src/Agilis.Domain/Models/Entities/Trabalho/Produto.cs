@@ -16,28 +16,27 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public ICollection<Modulo> Modulos { get; private set; }
         public int produckBacklog { get; private set; } // > us > criterios aceitacao
-        public int LinguagemUbiqua { get; private set; }
+        public LinguagemUbiqua LinguagemUbiqua { get; private set; }
 
         protected Produto()
         {
 
         }
 
-        public Produto(string nome, 
+        public Produto(string nome,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
-                       ICollection<Modulo> modulos)
+                       ICollection<Modulo> modulos,
+                       LinguagemUbiqua linguagemUbiqua)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")
+                .IfNotNull(requisitosNaoFuncionais, c => c.Join(requisitosNaoFuncionais.ToArray()))
                 .IsNotNull(modulos, nameof(Modulos), "Lista de Módulos não pode ser nula")
+                .IfNotNull(modulos, c => c.Join(modulos.ToArray()))
+                .IsNotNull(linguagemUbiqua, nameof(LinguagemUbiqua), "Linguagem Ubíqua não pode ser nula")
+                .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
                 );
-
-            if (modulos != null)
-                modulos.ToList().ForEach(modulo => AddNotifications(modulo));
-
-            if (requisitosNaoFuncionais != null)
-                requisitosNaoFuncionais.ToList().ForEach(rnf => AddNotifications(rnf));
 
             Nome = nome;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;

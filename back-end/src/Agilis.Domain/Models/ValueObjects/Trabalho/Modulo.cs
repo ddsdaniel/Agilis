@@ -45,7 +45,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
                 .IsGreaterThan(numero, 0, nameof(Numero), "Número deve ser maior que zero")
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Descrição não deve ser nula ou vazia")
                 .IsNotNull(regraDeNegocios, nameof(RegrasDeNegocio), "A lista de regras de negócio não deve ser nula")
-                .IsNotNull(requisitoFuncionais, nameof(RequisitosFuncionais), "A lista de requisitos funcionais não deve ser nula")
+                .IsNotNull(requisitoFuncionais, nameof(RequisitosFuncionais), "A lista de requisitos funcionais não deve ser nula")                
                 );
 
             if (regraDeNegocios != null)
