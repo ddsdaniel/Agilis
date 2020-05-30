@@ -29,4 +29,10 @@ export class AutenticacaoService {
         })
       );
   }
+
+  limparUsuarioLogado() {
+    this.usuarioLogado = null;
+    this.localStorageService.removeItem(localStorageKeys.usuarioLogado);
+  }
+
 }

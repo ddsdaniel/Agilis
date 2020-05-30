@@ -46,7 +46,8 @@ export class HttpsRequestInterceptorService implements HttpInterceptor {
       return;
     }
 
-    if (err.status === 401 && !this.autenticacaoService.usuarioLogado) {
+    if (err.status === 401) {
+      this.autenticacaoService.limparUsuarioLogado();
       this.ngZone.run(() => this.router.navigate(['login']));
     } else {
       this.tratadorErrosService.padronizarHttpErrorResponse(err);
