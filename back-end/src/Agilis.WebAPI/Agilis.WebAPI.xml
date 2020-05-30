@@ -536,9 +536,9 @@
             Nome do produto
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.UsuarioId">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Time">
             <summary>
-            Proprietário do produto
+            Time ao qual o produto pertence
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

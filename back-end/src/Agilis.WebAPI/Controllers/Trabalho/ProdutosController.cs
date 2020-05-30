@@ -52,14 +52,6 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             return Ok(listaViewModel);
         }
 
-        public override async Task<ActionResult<Guid>> Post(ProdutoViewModel novaEntidadeViewModel)
-        {
-            if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
-                return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
-
-            return await base.Post(novaEntidadeViewModel);
-        }
-
         /// <summary>
         /// Método abstrato, no qual cada controller implementa a ordenação de forma customizada
         /// </summary>

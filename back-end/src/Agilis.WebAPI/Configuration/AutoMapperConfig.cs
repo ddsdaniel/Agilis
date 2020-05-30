@@ -9,6 +9,9 @@ using Agilis.Domain.Models.ValueObjects;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using System;
+using System.Collections.Generic;
+using Agilis.Domain.Models.ValueObjects.Especificacao;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.WebAPI.Configuration
 {
@@ -57,8 +60,18 @@ namespace Agilis.WebAPI.Configuration
                 .ReverseMap();
 
             //Trabalho            
-            CreateMap<Produto, ProdutoViewModel>()
-                .ReverseMap();
+            CreateMap<Produto, ProdutoViewModel>();
+
+            CreateMap<ProdutoViewModel, Produto>()
+                 .ConstructUsing((vm, context) =>
+                    new Produto(
+                        nome: vm.Nome,
+                        time: context.Mapper.Map<Time>(vm.Time),
+                        requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
+                        modulos: new List<Modulo>(),
+                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                        )
+                 );
 
             CreateMap<Time, TimeViewModel>()
                 .ReverseMap();

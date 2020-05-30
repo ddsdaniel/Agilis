@@ -8,6 +8,7 @@ using System.Linq;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.ValueObjects.Especificacao;
+using Agilis.Domain.Mocks.Entities.Pessoas;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -29,7 +30,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var produto = new Produto(nome, 
+            var produto = new Produto(nome,
+                                      TimeMock.ObterTimePessoalValido(),
                                       new List<RequisitoNaoFuncional>(),
                                       new List<Modulo>(),
                                       LinguagemUbiquaMock.ObterValida());
@@ -42,7 +44,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_RnfNulo_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(nameof(Produto), null, new List<Modulo>(), LinguagemUbiquaMock.ObterValida());
+            var produto = new Produto(nameof(Produto), null, null, new List<Modulo>(), LinguagemUbiquaMock.ObterValida());
 
             //Assert
             Assert.True(produto.Invalid);
@@ -53,6 +55,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange & Act
             var produto = new Produto(nameof(Produto),
+                                      TimeMock.ObterTimePessoalValido(),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
                                       new List<Modulo> { ModuloMock.ObterInvalido() },
                                       LinguagemUbiquaMock.ObterValida()

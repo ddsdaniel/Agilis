@@ -3,8 +3,6 @@ using Agilis.Domain.Models.Entities.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.ValueObjects;
 using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
-using System;
-using System.Security.Cryptography;
 
 namespace Agilis.Domain.Models.ValueObjects.Especificacao
 {
@@ -23,7 +21,7 @@ namespace Agilis.Domain.Models.ValueObjects.Especificacao
         {
             AddNotifications(new Contract()
                 .IsGreaterThan(numero, 0, nameof(Numero), "Número deve ser maior que zero")
-                .IsNotNullOrEmpty(descricao, nameof(Descricao), "Descrição não deve ser nula ou vazia")
+                .IsNotNullOrEmpty(descricao, nameof(Descricao), "Descrição não deve ser nula ou vazia")                
                 .IsNotNull(autor, nameof(Autor), "Autor não deve ser nulo")
                 .IfNotNull(autor, c => c.Join(autor))
                 );

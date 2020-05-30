@@ -2,12 +2,12 @@
 import { Injectable } from '@angular/core';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
 
-import { CrudApiBaseService } from '../crud-api-base.service';
+import { CrudFavoritoApiBaseService } from '../crud-favorito-api-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoApiService extends CrudApiBaseService<Produto> {
+export class ProdutosApiService extends CrudFavoritoApiBaseService<Produto> {
 
   constructor(httpClient: HttpClient) {
     super(httpClient, 'produtos');

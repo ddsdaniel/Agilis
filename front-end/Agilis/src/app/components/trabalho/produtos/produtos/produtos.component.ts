@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
-import { ProdutoApiService } from 'src/app/services/api/trabalho/produtos-api.service';
+import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
 
 @Component({
   selector: 'app-produtos',
@@ -16,7 +16,7 @@ export class ProdutosComponent implements OnInit {
   produtos: Observable<Produto[]>;
 
   constructor(
-    private userStoryApiService: ProdutoApiService,
+    private userStoryApiService: ProdutosApiService,
     private snackBar: MatSnackBar,
     private router: Router,
   ) { }

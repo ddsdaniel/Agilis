@@ -15,7 +15,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public Time Time { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public ICollection<Modulo> Modulos { get; private set; }
-        public int produckBacklog { get; private set; } // > us > criterios aceitacao
+        //TODO: public int produckBacklog { get; private set; } // > us > criterios aceitacao
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
 
         protected Produto()

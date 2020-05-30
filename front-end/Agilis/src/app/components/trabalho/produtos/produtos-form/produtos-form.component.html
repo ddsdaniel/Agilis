@@ -9,7 +9,16 @@
 
       <mat-form-field class="full-width mt-4">
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="produto.nome" placeholder="Nome" name="nome" type="text" required >
+        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Time</mat-label>
+        <mat-select [(ngModel)]="timeId" name="time">
+          <mat-option *ngFor="let time of times" [value]="time.id">
+            {{time.nome}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
     </mat-card-content>

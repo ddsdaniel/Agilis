@@ -149,5 +149,6 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
             Assert.True(linguagemUbiqua.Invalid);
             Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count);
         }
+       
     }
 }

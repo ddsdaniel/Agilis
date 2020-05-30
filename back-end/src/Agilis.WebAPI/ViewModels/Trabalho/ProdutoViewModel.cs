@@ -20,8 +20,8 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Nome { get; set; }
 
         /// <summary>
-        /// Proprietário do produto
+        /// Time ao qual o produto pertence
         /// </summary>
-        public Guid UsuarioId { get; set; }
+        public TimeViewModel Time { get; set; }
     }
 }
