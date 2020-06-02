@@ -14,7 +14,7 @@
 
       <mat-form-field>
         <mat-label>Time</mat-label>
-        <mat-select [(ngModel)]="timeId" name="time">
+        <mat-select [(ngModel)]="entidade?.time.id" name="time">
           <mat-option *ngFor="let time of times" [value]="time.id">
             {{time.nome}}
           </mat-option>
