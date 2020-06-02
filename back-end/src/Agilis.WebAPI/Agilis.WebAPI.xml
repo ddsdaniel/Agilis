@@ -240,6 +240,13 @@
             </summary>
             <returns>Retorna todos os produtos do usuário logado</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Pesquisar(System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada

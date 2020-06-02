@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Abstractions.Repositories;
+﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Enums;
@@ -173,6 +174,21 @@ namespace Agilis.Domain.Services.Trabalho
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }
+
+        public ICollection<Produto> ConsultarTodos(IUsuario usuario)
+           => _unitOfWork.ProdutoRepository
+                    .AsQueryable()
+                    .Where(p => p.Time.UsuarioId == usuario.Id)
+                    .OrderBy(p => p.Nome)
+                    .ToList();
+
+        public ICollection<Produto> Pesquisar(string filtro, IUsuario usuario)
+            => _unitOfWork.ProdutoRepository
+                    .AsQueryable()
+                    .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()) &&
+                        p.Time.UsuarioId == usuario.Id)
+                    .OrderBy(p => p.Nome)
+                    .ToList();
 
         #endregion
     }

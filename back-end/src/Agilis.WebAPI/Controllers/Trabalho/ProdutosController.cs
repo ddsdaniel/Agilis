@@ -10,6 +10,7 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
 using Agilis.Domain.Models.Entities.Pessoas;
+using Microsoft.AspNetCore.Http;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -45,9 +46,27 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         public override ActionResult<ICollection<ProdutoViewModel>> ConsultarTodos()
         {
 
-            var lista = _service.ConsultarTodos().OrderBy(p => p.Nome);
+            var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(p => p.Nome);
 
             var listaViewModel = _mapper.Map<List<ProdutoViewModel>>(lista);
+
+            return Ok(listaViewModel);
+        }
+
+        /// <summary>
+        /// Pesquisa sobre os registros do repositório
+        /// </summary>
+        /// <param name="filtro">Filtro inserido pelo usuário</param>
+        /// <returns>Lista de registros correspondentes ao filtro</returns>
+        [HttpGet("pesquisa")]
+        [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]
+        public override ActionResult<ICollection<ProdutoViewModel>> Pesquisar([FromQuery] string filtro)
+        {
+            var lista = _service.Pesquisar(filtro, _usuarioLogado);
+
+            var listaViewModel = _mapper.Map<ICollection<ProdutoViewModel>>(lista);
+
+            listaViewModel = Ordenar(listaViewModel);
 
             return Ok(listaViewModel);
         }
