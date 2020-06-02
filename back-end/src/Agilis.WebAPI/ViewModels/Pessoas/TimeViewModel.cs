@@ -26,11 +26,6 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         public Guid UsuarioId { get; set; }
 
         /// <summary>
-        /// Um time favorito aparece primeiro nos listagens
-        /// </summary>
-        public bool Favorito { get; set; }
-
-        /// <summary>
         /// Indica se o time é pessoal ou colaborativo
         /// </summary>
         public EscopoTime Escopo { get; set; }

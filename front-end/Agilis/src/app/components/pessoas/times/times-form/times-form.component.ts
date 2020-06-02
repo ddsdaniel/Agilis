@@ -23,6 +23,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     private autenticacaoService: AutenticacaoService,
   ) {
     super(router, timeApiService, snackBar, activatedRoute, 'times');
+    this.sugerirNovo();
   }
 
   sugerirNovo(): void {
@@ -30,7 +31,6 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       id: constantes.newGuid,
       nome: '',
       usuarioId: this.autenticacaoService.usuarioLogado.usuario.id,
-      favorito: false,
       escopo: EscopoTime.Colaborativo
     };
   }

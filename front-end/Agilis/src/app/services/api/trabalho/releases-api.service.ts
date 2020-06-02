@@ -1,16 +1,15 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Time } from 'src/app/models/pessoas/time';
+import { Release } from 'src/app/models/trabalho/releases/release';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TimesApiService extends CrudApiBaseService<Time> {
+export class ReleasesApiService extends CrudApiBaseService<Release> {
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'times');
+    super(httpClient, 'releases');
   }
-
 }

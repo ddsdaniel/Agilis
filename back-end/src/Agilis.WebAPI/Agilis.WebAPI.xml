@@ -133,14 +133,6 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Favoritar(System.Guid,Agilis.WebAPI.ViewModels.FavoritoViewModel)">
-            <summary>
-            Marca/desmarca um time como favorito
-            </summary>
-            <param name="id">Id do time que será marcado/desmarcado como favorito</param>
-            <param name="favorito">True para favoritar ou false para desfavoritar</param>
-            <returns>Ok, sem parâmetros</returns>
-        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
             <summary>
             Pesquisa sobre os registros do repositório
@@ -255,6 +247,31 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarTodos">
+            <summary>
+            Consulta todos os releases do usuário logado
+            </summary>
+            <returns>Retorna todas as releases do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
             Classe que provê métodos de extensão para IHttpContextAccessor
@@ -344,11 +361,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.UsuarioId">
             <summary>
             Proprietário do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Favorito">
-            <summary>
-            Um time favorito aparece primeiro nos listagens
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Escopo">

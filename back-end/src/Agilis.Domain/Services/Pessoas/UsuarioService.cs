@@ -34,7 +34,7 @@ namespace Agilis.Domain.Services.Pessoas
             }
             await _unitOfWork.UsuarioRepository.Adicionar(entity);
 
-            var timePessoal = new Time(entity.Id, "Pessoal", false, EscopoTime.Pessoal);
+            var timePessoal = new Time(entity.Id, "Pessoal", EscopoTime.Pessoal);
             await _unitOfWork.TimeRepository.Adicionar(timePessoal);
         }
 

@@ -4,17 +4,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OperacaoFormCrud } from '../enums/operacao-form-crud.enum';
-import { EntidadeFavorita } from '../models/entidade-favorita';
-import { CrudFavoritoApiBaseService } from '../services/api/crud-favorito-api-base.service';
+import { Entidade } from '../models/entidade';
+import { CrudApiBaseService } from '../services/api/crud-api-base.service';
 
-export abstract class CrudFormComponent<TEntity extends EntidadeFavorita> implements OnInit {
+export abstract class CrudFormComponent<TEntity extends Entidade> implements OnInit {
 
   entidade: TEntity;
   operacao: OperacaoFormCrud;
 
   constructor(
     private router: Router,
-    private apiService: CrudFavoritoApiBaseService<TEntity>,
+    private apiService: CrudApiBaseService<TEntity>,
     private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private rotaPesquisa: string

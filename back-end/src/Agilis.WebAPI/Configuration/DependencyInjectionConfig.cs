@@ -71,6 +71,9 @@ namespace Agilis.WebAPI.Configuration
             services.AddTransient<IMilestoneService, MilestoneService>();
             services.AddTransient<IMilestoneRepository, MilestoneRepository>();
 
+            services.AddTransient<IReleaseService, ReleaseService>();
+            services.AddTransient<IReleaseRepository, ReleaseRepository>();
+
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
             services.AddSingleton<IAppSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value);

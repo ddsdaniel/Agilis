@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
+import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
+import { ReleasesComponent } from './components/trabalho/releases/releases/releases.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
@@ -30,6 +32,8 @@ export function InitApp(appLoadService: AppLoadService) {
     LoginComponent,
     TimesComponent,
     TimesFormComponent,
+    ReleasesComponent,
+    ReleasesFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
     UserStoriesComponent,

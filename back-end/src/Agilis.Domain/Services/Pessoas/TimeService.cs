@@ -11,27 +11,13 @@ using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Pessoas
 {
-    public class TimeService : MultiTenancyCrudService<Time>, ITimeService
+    public class TimeService : CrudService<Time>, ITimeService
     {
 
         public TimeService(IUnitOfWork unitOfWork)
             : base(unitOfWork, unitOfWork.TimeRepository)
         {
 
-        }
-
-        public async Task Favoritar(Time time)
-        {
-            time.Favoritar();
-            await _repository.Atualizar(time);
-        }
-
-
-        public async Task Desfavoritar(Time time)
-        {
-            time.Desfavoritar();
-
-            await _repository.Atualizar(time);
         }
 
         public override ICollection<Time> Pesquisar(string filtro)
@@ -83,5 +69,12 @@ namespace Agilis.Domain.Services.Pessoas
 
             await base.Adicionar(time);
         }
+
+        public ICollection<Time> ConsultarTodos(IUsuario usuario)
+           => _unitOfWork.TimeRepository
+                    .AsQueryable()
+                    .Where(t => t.UsuarioId == usuario.Id)
+                    .OrderBy(t => t.Nome)
+                    .ToList();
     }
 }

@@ -37,8 +37,6 @@
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-around none">
         <mat-icon title="Editar" (click)="editar(time.id)">edit</mat-icon>
-        <mat-icon *ngIf="!time.favorito" title="Marcar como favorito" color="accent" (click)="favoritar(time.id, true)">star_outline</mat-icon>
-        <mat-icon *ngIf="time.favorito" title="Desmarcar como favorito" color="accent" (click)="favoritar(time.id, false)">star</mat-icon>
         <mat-icon title="Excluir" color="warn" (click)="excluir(i)">clear_forever</mat-icon>
       </mat-card-actions>
 

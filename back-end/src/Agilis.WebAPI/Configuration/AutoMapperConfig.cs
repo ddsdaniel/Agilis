@@ -73,8 +73,26 @@ namespace Agilis.WebAPI.Configuration
                         )
                  );
 
-            CreateMap<Time, TimeViewModel>()
-                .ReverseMap();
+            CreateMap<Release, ReleaseViewModel>();
+
+            CreateMap<ReleaseViewModel, Release>()
+                 .ConstructUsing((vm, context) =>
+                    new Release(
+                        nome: vm.Nome,
+                        time: context.Mapper.Map<Time>(vm.Time)
+                        )
+                 );
+
+            CreateMap<Time, TimeViewModel>();
+
+            CreateMap<TimeViewModel, Time>()
+                  .ConstructUsing((vm, context) =>
+                    new Time(
+                        usuarioId: vm.UsuarioId,
+                        nome: vm.Nome,
+                        escopo: vm.Escopo
+                        )
+                 );
 
             //Pessoas            
             CreateMap<Ator, AtorViewModel>()
