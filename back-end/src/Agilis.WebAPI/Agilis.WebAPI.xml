@@ -128,6 +128,15 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+            <summary>
+            Adiciona um usuário administrador ao time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
             <summary>
             Pesquisa sobre os registros do repositório

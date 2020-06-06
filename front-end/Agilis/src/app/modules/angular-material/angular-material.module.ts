@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -31,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatRadioModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   exports: [
     MatFormFieldModule,
@@ -46,7 +48,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatRadioModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' } }

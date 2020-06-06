@@ -12,5 +12,6 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
     {
         public Usuario Autenticar(Login login);
         public Task AlterarSenha(Guid id, Email emailLogado, SenhaMedia senhaAtual, SenhaMedia novaSenha, SenhaMedia confirmaNovaSenha);
+        public Usuario ConsultarPorEmail(Email email);
     }
 }

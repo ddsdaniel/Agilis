@@ -46,6 +46,14 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 
             CreateMap<UsuarioVO, UsuarioBasicViewModel>();
 
+            CreateMap<Usuario, UsuarioVO>()
+                 .ConstructUsing((entity, context) =>
+                    new UsuarioVO(
+                        id: entity.Id,
+                        nome: entity.NomeCompleto
+                        )
+                 );
+
             CreateMap<UsuarioBasicViewModel, UsuarioVO>()
                  .ConstructUsing((vm, context) =>
                     new UsuarioVO(

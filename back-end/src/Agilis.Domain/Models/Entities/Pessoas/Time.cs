@@ -3,8 +3,10 @@ using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Models.Entities.Pessoas
 {
@@ -63,6 +65,36 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Administradores = administradores;
             Colaboradores = colaboradores;
             Produtos = produtos;
+        }
+
+        internal void AdicionarAdmin(UsuarioVO admin)
+        {
+            if (Administradores.Any(a => a.Id == admin.Id))
+            {
+                AddNotification(nameof(admin), "Admin já adicionado neste time");
+                return;
+            }
+
+            var novaLista = Administradores.ToList();
+            novaLista.Add(admin);
+
+            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
+
+            Administradores = novaLista;
+        }
+
+        internal void ExcluirAdmin(Usuario admin)
+        {
+            if (!Administradores.Any(a => a.Id == admin.Id))
+                AddNotification(nameof(admin.Id), "Administrador não encontrado");
+            else
+            {
+                Administradores = Administradores
+                    .Where(a => a.Id != admin.Id);
+
+                if (Administradores.Count() == 0)
+                    AddNotification(nameof(admin.Id), "O time deve ter pelo menos um administrador");
+            }
         }
     }
 }

@@ -111,6 +111,8 @@ namespace Agilis.Domain.Services.Pessoas
             }
         }
 
+        public Usuario ConsultarPorEmail(Email email) => _unitOfWork.UsuarioRepository.ConsultarPorEmail(email);
+
         public override ICollection<Usuario> Pesquisar(string filtro)
              => _unitOfWork.UsuarioRepository
                     .AsQueryable()

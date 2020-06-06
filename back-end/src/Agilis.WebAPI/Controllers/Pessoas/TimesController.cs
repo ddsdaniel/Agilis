@@ -11,6 +11,7 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
 using Agilis.WebAPI.ViewModels;
+using DDS.Domain.Core.Model.ValueObjects;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -45,13 +46,55 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <returns>Retorna todos os times do usuário logado</returns>
         public override ActionResult<ICollection<TimeViewModel>> ConsultarTodos()
         {
-
             var lista = _service.ConsultarTodos(_usuarioLogado)
                 .OrderBy(t => t.Nome);
 
             var listaViewModel = _mapper.Map<List<TimeViewModel>>(lista);
 
             return Ok(listaViewModel);
+        }
+
+        /// <summary>
+        /// Adiciona um usuário administrador ao time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="emailViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("{timeId:guid}/admin")]
+        [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarAdmin([FromServices] ITimeService timeService, 
+                                                       [FromServices] IMapper autoMapper,
+                                                       Guid timeId, 
+                                                       EmailViewModel emailViewModel)
+        {
+            var email = new Email(emailViewModel.Endereco);
+            var adminVO = await timeService.AdicionarAdmin(timeId, email);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            var adminViewModel = autoMapper.Map<UsuarioBasicViewModel>(adminVO);
+
+            return Ok(adminViewModel);
+        }
+
+        [HttpDelete("{timeId:guid}/admin/{adminId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirAdmin([FromServices] ITimeService timeService,
+                                                     Guid timeId,
+                                                     Guid adminId)
+        {
+            await timeService.ExcluirAdmin(timeId, adminId);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            return Ok();
         }
 
         //public override async Task<ActionResult<Guid>> Post(TimeViewModel novaEntidadeViewModel)
