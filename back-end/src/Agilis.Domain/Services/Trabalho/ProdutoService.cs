@@ -3,6 +3,7 @@ using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Enums;
+using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
@@ -176,19 +177,28 @@ namespace Agilis.Domain.Services.Trabalho
         }
 
         public ICollection<Produto> ConsultarTodos(IUsuario usuario)
-           => _unitOfWork.ProdutoRepository
-                    .AsQueryable()
-                    .Where(p => p.Time.UsuarioId == usuario.Id)
-                    .OrderBy(p => p.Nome)
-                    .ToList();
+        {
+            var times = _unitOfWork.TimeRepository.ObterTimes(usuario);
+
+            return _unitOfWork.ProdutoRepository
+                     .AsQueryable()
+                     .Where(p => times.Any(t => t.Id == p.Time.Id))
+                     .OrderBy(p => p.Nome)
+                     .ToList();
+        }
 
         public ICollection<Produto> Pesquisar(string filtro, IUsuario usuario)
-            => _unitOfWork.ProdutoRepository
+        {
+            var times = _unitOfWork.TimeRepository.ObterTimes(usuario);
+
+            return _unitOfWork.ProdutoRepository
                     .AsQueryable()
-                    .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()) &&
-                        p.Time.UsuarioId == usuario.Id)
+                    .Where(p => times.Any(t => t.Id == p.Time.Id) &&
+                                p.Nome.ToLower().Contains(filtro.ToLower())
+                        )
                     .OrderBy(p => p.Nome)
                     .ToList();
+        }
 
         #endregion
     }

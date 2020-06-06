@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Enums;
-using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
+using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
@@ -12,7 +12,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     public class Produto : Entity
     {
         public string Nome { get; private set; }
-        public Time Time { get; private set; }
+        public TimeVO Time { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public ICollection<Modulo> Modulos { get; private set; }
         //TODO: public int produckBacklog { get; private set; } // > us > criterios aceitacao
@@ -24,7 +24,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public Produto(string nome,
-                       Time time,
+                       TimeVO time,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
                        ICollection<Modulo> modulos,
                        LinguagemUbiqua linguagemUbiqua)

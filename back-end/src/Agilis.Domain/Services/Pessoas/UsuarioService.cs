@@ -10,6 +10,8 @@ using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using System.Collections.Generic;
 using Agilis.Domain.Enums;
+using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -21,20 +23,25 @@ namespace Agilis.Domain.Services.Pessoas
         {
         }
 
-        public override async Task Adicionar(Usuario entity)
+        public override async Task Adicionar(Usuario usuario)
         {
-            if (entity.Valid)
+            if (usuario.Valid)
             {
-                var jaExiste = _unitOfWork.UsuarioRepository.ConsultarPorEmail(entity.Email);
+                var jaExiste = _unitOfWork.UsuarioRepository.ConsultarPorEmail(usuario.Email);
                 if (jaExiste != null)
                 {
                     AddNotification(nameof(Email), "E-mail já cadastrado");
                     return;
                 }
             }
-            await _unitOfWork.UsuarioRepository.Adicionar(entity);
+            await _unitOfWork.UsuarioRepository.Adicionar(usuario);
 
-            var timePessoal = new Time(entity.Id, "Pessoal", EscopoTime.Pessoal);
+            var timePessoal = new Time("Pessoal",
+                                       EscopoTime.Pessoal,
+                                       new List<UsuarioVO>(),
+                                       new List<UsuarioVO> { new UsuarioVO(usuario.Id, usuario.Nome) },
+                                       new List<ProdutoVO>()
+                                       );
             await _unitOfWork.TimeRepository.Adicionar(timePessoal);
         }
 

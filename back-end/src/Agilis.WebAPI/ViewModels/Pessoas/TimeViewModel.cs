@@ -1,7 +1,8 @@
 ﻿using Agilis.Domain.Enums;
-using Agilis.WebAPI.ViewModels.Pessoas;
+using Agilis.WebAPI.ViewModels.Trabalho;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Pessoas
 {
@@ -21,13 +22,14 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         public string Nome { get; set; }
 
         /// <summary>
-        /// Proprietário do time
-        /// </summary>
-        public Guid UsuarioId { get; set; }
-
-        /// <summary>
         /// Indica se o time é pessoal ou colaborativo
         /// </summary>
         public EscopoTime Escopo { get; set; }
+
+        public IEnumerable<UsuarioBasicViewModel> Administradores { get; set; }
+
+        public IEnumerable<UsuarioBasicViewModel> Colaboradores { get; set; }
+
+        public IEnumerable<ProdutoBasicViewModel> Produtos { get; set; }        
     }
 }

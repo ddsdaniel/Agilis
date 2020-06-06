@@ -9,6 +9,8 @@ using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.Entities.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Pessoas;
+using System;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -31,7 +33,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange & Act
             var produto = new Produto(nome,
-                                      TimeMock.ObterTimePessoalValido(),
+                                      new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional>(),
                                       new List<Modulo>(),
                                       LinguagemUbiquaMock.ObterValida());
@@ -55,7 +57,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange & Act
             var produto = new Produto(nameof(Produto),
-                                      TimeMock.ObterTimePessoalValido(),
+                                      new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
                                       new List<Modulo> { ModuloMock.ObterInvalido() },
                                       LinguagemUbiquaMock.ObterValida()

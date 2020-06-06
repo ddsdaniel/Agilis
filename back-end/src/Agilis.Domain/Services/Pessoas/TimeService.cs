@@ -29,9 +29,8 @@ namespace Agilis.Domain.Services.Pessoas
 
         public ICollection<Time> Pesquisar(string filtro, IUsuario usuario)
             => _unitOfWork.TimeRepository
-                    .AsQueryable()
-                    .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()) &&
-                        t.UsuarioId == usuario.Id)
+                    .ObterTimes(usuario)
+                    .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
                     .OrderBy(t => t.Nome)
                     .ToList();
 
@@ -72,8 +71,7 @@ namespace Agilis.Domain.Services.Pessoas
 
         public ICollection<Time> ConsultarTodos(IUsuario usuario)
            => _unitOfWork.TimeRepository
-                    .AsQueryable()
-                    .Where(t => t.UsuarioId == usuario.Id)
+                    .ObterTimes(usuario)
                     .OrderBy(t => t.Nome)
                     .ToList();
     }

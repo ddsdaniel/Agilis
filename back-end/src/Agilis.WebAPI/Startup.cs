@@ -43,7 +43,7 @@ namespace Agilis.WebAPI
                 .AddNewtonsoftConfig();
 
             services.AddSwaggerConfig(_environment);
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapperConfig();
             services.AddDependencyInjectionConfig(_configuration);
             services.AddJwtConfig();
         }

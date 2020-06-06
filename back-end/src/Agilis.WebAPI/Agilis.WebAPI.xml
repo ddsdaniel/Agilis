@@ -9,11 +9,6 @@
             Define o mapeamento entre as entidades e as view models, bem como alguns value objects específicos
             </summary>
         </member>
-        <member name="M:Agilis.WebAPI.Configuration.AutoMapperConfig.#ctor">
-            <summary>
-            Construtor que configura o mapeamento das propriedades
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.Configuration.CorsConfig">
             <summary>
             Classe de extensão para separar as configurações de Cors
@@ -363,11 +358,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Nome">
             <summary>
             Nome do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.UsuarioId">
-            <summary>
-            Proprietário do time
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Escopo">

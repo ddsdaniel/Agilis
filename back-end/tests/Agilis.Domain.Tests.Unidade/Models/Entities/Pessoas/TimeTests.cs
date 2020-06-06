@@ -1,8 +1,11 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Mocks.Entities.Pessoas;
-using System;
 using Xunit;
+using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
+using System.Collections.Generic;
+using System;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -24,17 +27,27 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var time = new Time(Guid.NewGuid(), nome, true, EscopoTime.Pessoal);
+            var time = new Time(nome: nome,
+                                escopo: EscopoTime.Pessoal,
+                                colaboradores: new List<UsuarioVO>(),
+                                administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                produtos: new List<ProdutoVO>()
+                                );
 
             //Assert
             Assert.True(time.Invalid);
         }
         
         [Fact]
-        public void Construtor_UsuarioIdEmpty_Invalid()
+        public void Construtor_SemAdministrador_Invalid()
         {
             //Arrange & Act
-            var time = new Time(Guid.Empty, "Time 1", false, EscopoTime.Pessoal);
+            var time = new Time(nome: "Time 1",
+                                escopo: EscopoTime.Pessoal,
+                                colaboradores: new List<UsuarioVO>(),
+                                administradores: new List<UsuarioVO> { },
+                                produtos: new List<ProdutoVO>()
+                                );
 
             //Assert
             Assert.True(time.Invalid);

@@ -54,13 +54,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return Ok(listaViewModel);
         }
 
-        public override async Task<ActionResult<Guid>> Post(TimeViewModel novaEntidadeViewModel)
-        {
-            if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
-                return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
+        //public override async Task<ActionResult<Guid>> Post(TimeViewModel novaEntidadeViewModel)
+        //{
+        //    if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
+        //        return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
 
-            return await base.Post(novaEntidadeViewModel);
-        }       
+        //    return await base.Post(novaEntidadeViewModel);
+        //}       
 
         /// <summary>
         /// Pesquisa sobre os registros do repositório
