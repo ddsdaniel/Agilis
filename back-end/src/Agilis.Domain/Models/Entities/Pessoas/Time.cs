@@ -37,9 +37,25 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 .IfNotNull(produtos, c => c.Join(produtos.ToArray()))
                 );
 
-            if (administradores != null && !administradores.Any())
+            if (administradores != null)
             {
-                AddNotification(nameof(Administradores), "O time deve ter pelo menos um administrador");
+                if (!administradores.Any())
+                {
+                    AddNotification(nameof(Administradores), "O time deve ter pelo menos um administrador");
+                }
+                
+                if (escopo == EscopoTime.Pessoal)
+                {
+                    if (administradores.Count() != 1)
+                    {
+                        AddNotification(nameof(Administradores), "O time pessoal deve ter um e apenas um administrador");
+                    }
+
+                    if (colaboradores.Any())
+                    {
+                        AddNotification(nameof(Colaboradores), "O time pessoal não deve ter colaboradores");
+                    }
+                }
             }
 
             Nome = nome;

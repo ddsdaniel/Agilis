@@ -1,6 +1,6 @@
 ﻿import { Entidade } from '../../entidade';
-import { Time } from '../../pessoas/time';
+import { TimeVO } from '../../pessoas/time-vo';
 
 export interface Produto extends Entidade {
-  time: Time;
+  time: TimeVO;
 }

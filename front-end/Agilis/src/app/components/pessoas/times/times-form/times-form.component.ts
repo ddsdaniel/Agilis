@@ -30,8 +30,13 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      usuarioId: this.autenticacaoService.usuarioLogado.usuario.id,
-      escopo: EscopoTime.Colaborativo
+      administradores: [{
+        id: this.autenticacaoService.usuarioLogado.usuario.id,
+        nome: this.autenticacaoService.usuarioLogado.usuario.nome
+      }],
+      colaboradores: [],
+      produtos: [],
+      escopo: EscopoTime.Colaborativo,
     };
   }
 

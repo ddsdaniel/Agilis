@@ -3,6 +3,7 @@ using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
 using System;
@@ -25,7 +26,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<UserStory, UserStoryViewModel>()
                 .ReverseMap();
 
-            //Trabalho            
+            //Produto            
             CreateMap<Produto, ProdutoViewModel>();
 
             CreateMap<ProdutoViewModel, Produto>()
@@ -36,6 +37,16 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
                         modulos: null, //TODO: remover modulos
                         linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                        )
+                 );
+
+            CreateMap<ProdutoVO, ProdutoBasicViewModel>();
+
+            CreateMap<ProdutoBasicViewModel, ProdutoVO>()
+                 .ConstructUsing((vm, context) =>
+                    new ProdutoVO(
+                        id: vm.Id,
+                        nome: vm.Nome
                         )
                  );
 

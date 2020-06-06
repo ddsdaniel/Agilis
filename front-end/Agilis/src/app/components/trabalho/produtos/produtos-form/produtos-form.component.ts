@@ -1,14 +1,12 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
-import { Time } from 'src/app/models/pessoas/time';
+import { TimeVO } from 'src/app/models/pessoas/time-vo';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
-import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 
 @Component({
   selector: 'app-produtos-form',
@@ -17,7 +15,7 @@ import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 })
 export class ProdutosFormComponent extends CrudFormComponent<Produto> implements OnInit {
 
-  times: Time[];
+  times: TimeVO[];
 
   constructor(
     router: Router,
@@ -42,9 +40,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
       nome: '',
       time: {
         id: constantes.newGuid,
-        nome: '',
-        escopo: EscopoTime.Pessoal,
-        usuarioId: constantes.newGuid,
+        nome: ''
       },
     };
   }
