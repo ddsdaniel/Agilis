@@ -61,7 +61,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="timeId"></param>
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
-        [HttpPost("{timeId:guid}/admin")]
+        [HttpPost("{timeId:guid}/administradores")]
         [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,7 +81,14 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return Ok(adminViewModel);
         }
 
-        [HttpDelete("{timeId:guid}/admin/{adminId:guid}")]
+        /// <summary>
+        /// Remove um administrador do time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
+        [HttpDelete("{timeId:guid}/administradores/{adminId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,6 +97,56 @@ namespace Agilis.WebAPI.Controllers.Pessoas
                                                      Guid adminId)
         {
             await timeService.ExcluirAdmin(timeId, adminId);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adiciona um colaborador ao time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="emailViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("{timeId:guid}/colaboradores")]
+        [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarColaborador([FromServices] ITimeService timeService,
+                                                             [FromServices] IMapper autoMapper,
+                                                             Guid timeId,
+                                                             EmailViewModel emailViewModel)
+        {
+            var email = new Email(emailViewModel.Endereco);
+            var colabVO = await timeService.AdicionarColaborador(timeId, email);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            var colabViewModel = autoMapper.Map<UsuarioBasicViewModel>(colabVO);
+
+            return Ok(colabViewModel);
+        }
+
+        /// <summary>
+        /// Remove um colaborador do time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="colabId"></param>
+        /// <returns></returns>
+        [HttpDelete("{timeId:guid}/colaboradores/{colabId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirColaborador([FromServices] ITimeService timeService,
+                                                           Guid timeId,
+                                                           Guid colabId)
+        {
+            await timeService.ExcluirColaborador(timeId, colabId);
 
             if (timeService.Invalid)
                 return BadRequest(timeService.Notifications);

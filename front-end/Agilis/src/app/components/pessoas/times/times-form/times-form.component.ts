@@ -19,6 +19,7 @@ import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 export class TimesFormComponent extends CrudFormComponent<Time> {
 
   emailAdmin: string;
+  emailColaborador: string;
   timeApiService: TimesApiService;
 
   constructor(
@@ -68,6 +69,31 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         (novoAdmin: UsuarioVO) => {
           this.entidade.administradores.push(novoAdmin);
           this.emailAdmin = '';
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  excluirColaborador(colabId: string){
+    this.timeApiService.excluirColaborador(this.entidade.id, colabId)
+      .subscribe(
+        () => {
+          const index = this.entidade.colaboradores.findIndex(c => c.id === colabId);
+          this.entidade.colaboradores.removeAt(index);
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  adicionarColaborador() {
+    const email: Email = {
+      endereco: this.emailColaborador
+    };
+    this.timeApiService.adicionarColaborador(this.entidade.id, email)
+      .subscribe(
+        (novoColab: UsuarioVO) => {
+          this.entidade.colaboradores.push(novoColab);
+          this.emailColaborador = '';
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );

@@ -21,18 +21,18 @@
         <mat-tab label="Administradores">
           <div class="admin">
 
-            <mat-form-field fxFlex.xs="50%" fxFlex.sm="75%" fxFlex.md="80%" fxFlex.lg="85%" fxFlex.xl="85%">
-              <mat-label>Administradores</mat-label>
+            <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
+              <mat-label>E-mail</mat-label>
               <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailAdmin"
                 (keyup.enter)="adicionarAdmin()" name="emailAdmin">
               <div matPrefix fxLayout="row">
-                <mat-icon>email</mat-icon>
+                <mat-icon>alternate_email</mat-icon>
                 &nbsp;
               </div>
             </mat-form-field>
 
-            <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="50%" fxFlex.sm="25%" fxFlex.md="20%" fxFlex.lg="15%"
-              fxFlex.xl="15%">
+            <div fxLayout="row" fxLayoutAlign="end end"
+                 fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%" fxFlex.xl="15%">
               <button mat-raised-button (click)="adicionarAdmin()">Adicionar</button>
             </div>
 
@@ -47,7 +47,35 @@
           </div>
         </mat-tab>
 
-        <mat-tab label="Colaboradores"> Colab </mat-tab>
+        <mat-tab label="Colaboradores">
+          <div class="admin">
+
+            <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailColaborador"
+                (keyup.enter)="adicionarColaborador()" name="emailColaborador">
+              <div matPrefix fxLayout="row">
+                <mat-icon>alternate_email</mat-icon>
+                &nbsp;
+              </div>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="end end"
+                 fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%" fxFlex.xl="15%">
+              <button mat-raised-button (click)="adicionarColaborador()">Adicionar</button>
+            </div>
+
+          </div>
+          <div>
+            <mat-list>
+              <mat-list-item *ngFor="let colab of entidade.colaboradores">
+                <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
+                <div mat-line>{{colab.nome}}</div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+
         <mat-tab label="Produtos"> Prod </mat-tab>
       </mat-tab-group>
 

@@ -142,5 +142,71 @@ namespace Agilis.Domain.Services.Pessoas
                 await _unitOfWork.Commit();
             }
         }
+
+        public async Task<UsuarioVO> AdicionarColaborador(Guid timeId, Email email)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return null;
+            }
+
+            if (email.Invalid)
+            {
+                AddNotification(nameof(email), "E-mail inválido");
+                return null;
+            }
+
+            var colab = _unitOfWork.UsuarioRepository.ConsultarPorEmail(email);
+            if (colab == null)
+            {
+                AddNotification(nameof(colab), "Usuário não encontrado, revise o e-mail digitado");
+                return null;
+            }
+
+            var colabVO = new UsuarioVO(colab.Id, colab.NomeCompleto);
+            time.AdicionarColaborador(colabVO);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return null;
+            }
+            else
+            {
+                await Atualizar(time);
+                await _unitOfWork.Commit();
+                return colabVO;
+            }
+        }
+
+        public async Task ExcluirColaborador(Guid timeId, Guid colabId)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return;
+            }
+
+            var colab = await _unitOfWork.UsuarioRepository.ConsultarPorId(colabId);
+            if (colab == null)
+            {
+                AddNotification(nameof(colab), "Usuário não encontrado, revise o e-mail digitado");
+                return;
+            }
+
+            time.ExcluirColaborador(colab);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+            else
+            {
+                await Atualizar(time);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

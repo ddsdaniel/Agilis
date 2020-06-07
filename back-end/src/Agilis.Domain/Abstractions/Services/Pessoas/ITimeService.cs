@@ -15,5 +15,7 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         ICollection<Time> Pesquisar(string filtro, IUsuario usuario);
         Task<UsuarioVO> AdicionarAdmin(Guid timeId, Email email);
         Task ExcluirAdmin(Guid timeId, Guid adminId);
+        Task<UsuarioVO> AdicionarColaborador(Guid timeId, Email email);
+        Task ExcluirColaborador(Guid timeId, Guid colabId);
     }
 }

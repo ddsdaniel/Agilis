@@ -17,10 +17,18 @@ export class TimesApiService extends CrudApiBaseService<Time> {
   }
 
   adicionarAdmin(timeId: string, email: Email): Observable<UsuarioVO> {
-    return super.post<Email, UsuarioVO>(email, `${timeId}/admin`);
+    return super.post<Email, UsuarioVO>(email, `${timeId}/administradores`);
   }
 
   excluirAdmin(timeId: string, adminId: string): Observable<void> {
-    return super.delete(`${timeId}/admin/${adminId}`);
+    return super.delete(`${timeId}/administradores/${adminId}`);
+  }
+
+  adicionarColaborador(timeId: string, email: Email): Observable<UsuarioVO> {
+    return super.post<Email, UsuarioVO>(email, `${timeId}/colaboradores`);
+  }
+
+  excluirColaborador(timeId: string, colabId: string): Observable<void> {
+    return super.delete(`${timeId}/colaboradores/${colabId}`);
   }
 }

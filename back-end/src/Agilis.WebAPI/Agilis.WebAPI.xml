@@ -137,6 +137,33 @@
             <param name="emailViewModel"></param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+            <summary>
+            Remove um administrador do time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="adminId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+            <summary>
+            Adiciona um colaborador ao time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+            <summary>
+            Remove um colaborador do time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="colabId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
             <summary>
             Pesquisa sobre os registros do repositório

@@ -58,6 +58,11 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                         AddNotification(nameof(Colaboradores), "O time pessoal não deve ter colaboradores");
                     }
                 }
+
+                if (colaboradores != null)
+                {
+                    ValidarColaboradorEAdmin();
+                }
             }
 
             Nome = nome;
@@ -81,6 +86,8 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             novaLista = novaLista.OrderBy(a => a.Nome).ToList();
 
             Administradores = novaLista;
+
+            ValidarColaboradorEAdmin();
         }
 
         internal void ExcluirAdmin(Usuario admin)
@@ -93,7 +100,42 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                     .Where(a => a.Id != admin.Id);
 
                 if (Administradores.Count() == 0)
-                    AddNotification(nameof(admin.Id), "O time deve ter pelo menos um administrador");
+                    AddNotification(nameof(admin.Id), "O time deve ter pelo menos um administrador");                
+            }
+        }
+
+        private void ValidarColaboradorEAdmin()
+        {
+            if (Administradores.Any(a => Colaboradores.Any(c => c.Id == a.Id)) ||
+                Colaboradores.Any(c => Administradores.Any(a => a.Id == c.Id)))
+                AddNotification(nameof(Administradores), "Um usuário deve estar na lista colaboradores ou de administradores");
+        }
+
+        internal void AdicionarColaborador(UsuarioVO colab)
+        {
+            if (Colaboradores.Any(a => a.Id == colab.Id))
+            {
+                AddNotification(nameof(colab), "Colaborador já adicionado neste time");
+                return;
+            }
+
+            var novaLista = Colaboradores.ToList();
+            novaLista.Add(colab);
+
+            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
+
+            Colaboradores = novaLista;
+            ValidarColaboradorEAdmin();
+        }
+
+        internal void ExcluirColaborador(Usuario colab)
+        {
+            if (!Colaboradores.Any(a => a.Id == colab.Id))
+                AddNotification(nameof(colab.Id), "Colaborador não encontrado");
+            else
+            {
+                Colaboradores = Colaboradores
+                    .Where(a => a.Id != colab.Id);
             }
         }
     }
