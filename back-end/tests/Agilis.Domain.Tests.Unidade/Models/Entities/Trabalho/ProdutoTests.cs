@@ -1,14 +1,12 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Mocks.Entities.Trabalho;
 using Xunit;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System.Collections.Generic;
 using Agilis.Domain.Mocks.ValueObjects.Trabalho;
 using System.Linq;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.ValueObjects.Especificacao;
-using Agilis.Domain.Mocks.Entities.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using System;
 
@@ -35,7 +33,6 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nome,
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional>(),
-                                      new List<Modulo>(),
                                       LinguagemUbiquaMock.ObterValida());
 
             //Assert
@@ -46,7 +43,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_RnfNulo_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(nameof(Produto), null, null, new List<Modulo>(), LinguagemUbiquaMock.ObterValida());
+            var produto = new Produto(nameof(Produto), null, null, LinguagemUbiquaMock.ObterValida());
 
             //Assert
             Assert.True(produto.Invalid);
@@ -59,173 +56,11 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nameof(Produto),
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
-                                      new List<Modulo> { ModuloMock.ObterInvalido() },
                                       LinguagemUbiquaMock.ObterValida()
                                       );
 
             //Assert
             Assert.True(produto.Invalid);
-        }
-
-        [Fact]
-        public void AdicionarModulo_RnfValido_Valid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var contModulo = produto.Modulos.Count;            
-            var modulo1 = ModuloMock.ObterValido(1);
-            var modulo2 = ModuloMock.ObterValido(2);
-
-            //Act
-            produto.AdicionarModulo(modulo1);
-            produto.AdicionarModulo(modulo2);
-
-            //Assert
-            Assert.True(modulo1.Valid);
-            Assert.True(modulo2.Valid);
-            Assert.True(produto.Valid);
-            Assert.Equal(contModulo + 2, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void AdicionarModulo_RnfNulo_Invalid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var contModulo = produto.Modulos.Count;
-
-            //Act
-            produto.AdicionarModulo(null);
-
-            //Assert
-            Assert.True(produto.Invalid);
-            Assert.Equal(contModulo, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void AdicionarModulo_RnfInvalido_Invalid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var contModulo = produto.Modulos.Count;
-            var modulo = ModuloMock.ObterInvalido();
-
-            //Act
-            produto.AdicionarModulo(modulo);
-
-            //Assert
-            Assert.True(modulo.Invalid);
-            Assert.True(produto.Invalid);
-            Assert.Equal(contModulo, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void AdicionarModulo_NumeroDuplicado_Invalid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var contModulo = produto.Modulos.Count;
-            var moduloPrimeiro = ModuloMock.ObterValido(1);
-            var moduloDuplicado = ModuloMock.ObterValido(1);
-
-            //Act
-            produto.AdicionarModulo(moduloPrimeiro);
-            produto.AdicionarModulo(moduloDuplicado);
-
-            //Assert
-            Assert.True(moduloPrimeiro.Valid);
-            Assert.True(moduloDuplicado.Valid);
-            Assert.True(produto.Invalid);
-            Assert.Equal(contModulo + 1, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void RemoverModulo_RnfValido_Valid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var modulo1 = ModuloMock.ObterValido(1);
-            var modulo2 = ModuloMock.ObterValido(2);
-            produto.AdicionarModulo(modulo1);
-            produto.AdicionarModulo(modulo2);
-            var contModulo = produto.Modulos.Count;
-
-            //Act
-            produto.RemoverModulo(1);
-            produto.RemoverModulo(2);
-
-            //Assert
-            Assert.True(modulo1.Valid);
-            Assert.True(modulo2.Valid);
-            Assert.True(produto.Valid);
-            Assert.Equal(contModulo - 2, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void RemoverModulo_RnNaoEncontrado_Valid()
-        {
-            //Arrange
-            var produto = ProdutoMock.ObterValido();
-            var modulo1 = ModuloMock.ObterValido(1);
-            var modulo2 = ModuloMock.ObterValido(2);
-            produto.AdicionarModulo(modulo1);
-            produto.AdicionarModulo(modulo2);
-            var contModulo = produto.Modulos.Count;
-
-            //Act
-            var moduloNaoEncontrado = produto.Modulos.Max(r => r.Numero) + 1;
-            produto.RemoverModulo(moduloNaoEncontrado);
-
-            //Assert
-            Assert.True(modulo1.Valid);
-            Assert.True(modulo2.Valid);
-            Assert.True(produto.Invalid);
-            Assert.Equal(contModulo, produto.Modulos.Count);
-        }
-
-        [Fact]
-        public void AtualizarNomeModulo_DadosValidos_DescricaoAtualizada()
-        {
-            //Arrange
-            var modulo = ModuloMock.ObterValido(1);
-
-            var produto = ProdutoMock.ObterValido();
-            produto.AdicionarModulo(modulo);
-
-            const string NOVO_NOME = "Novo nome do módulo";
-
-            //Act
-            produto.AtualizarNomeModulo(1, NOVO_NOME);
-
-            //Assert
-            Assert.True(modulo.Valid);
-            Assert.True(produto.Valid);
-
-            var novoModulo = produto.Modulos.FirstOrDefault(r => r.Numero == modulo.Numero);
-            Assert.NotNull(novoModulo);
-            Assert.Equal(NOVO_NOME, novoModulo.Nome);
-        }
-
-        [Fact]
-        public void AtualizarNomeModulo_DescricaoInvalida_NaoAtualizar()
-        {
-            //Arrange
-            var modulo = ModuloMock.ObterValido(1);
-            var nomeOriginal = modulo.Nome;
-
-            var produto = ProdutoMock.ObterValido();
-            produto.AdicionarModulo(modulo);
-
-            //Act
-            produto.AtualizarNomeModulo(1, null);
-
-            //Assert
-            Assert.True(modulo.Valid);
-            Assert.True(produto.Invalid);
-
-            var novoModulo = produto.Modulos.FirstOrDefault(r => r.Numero == modulo.Numero);
-            Assert.NotNull(novoModulo);
-            Assert.Equal(nomeOriginal, novoModulo.Nome);
         }
 
         [Fact]

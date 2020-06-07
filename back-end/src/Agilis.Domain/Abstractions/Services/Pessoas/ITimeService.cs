@@ -6,6 +6,8 @@ using DDS.Domain.Core.Model.ValueObjects;
 using System;
 using System.Threading.Tasks;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Abstractions.Services.Pessoas
 {
@@ -17,5 +19,7 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         Task ExcluirAdmin(Guid timeId, Guid adminId);
         Task<UsuarioVO> AdicionarColaborador(Guid timeId, Email email);
         Task ExcluirColaborador(Guid timeId, Guid colabId);
+        Task<ProdutoVO> AdicionarProduto(Guid timeId, Produto produto);
+        Task ExcluirProduto(Guid timeId, Guid prodId);
     }
 }

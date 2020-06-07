@@ -14,8 +14,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public string Nome { get; private set; }
         public TimeVO Time { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
-        public ICollection<Modulo> Modulos { get; private set; }
-        //TODO: public int produckBacklog { get; private set; } // > us > criterios aceitacao
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
 
         protected Produto()
@@ -26,15 +24,12 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public Produto(string nome,
                        TimeVO time,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
-                       ICollection<Modulo> modulos,
                        LinguagemUbiqua linguagemUbiqua)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")
                 .IfNotNull(requisitosNaoFuncionais, c => c.Join(requisitosNaoFuncionais.ToArray()))
-                .IsNotNull(modulos, nameof(Modulos), "Lista de Módulos não pode ser nula")
-                .IfNotNull(modulos, c => c.Join(modulos.ToArray()))
                 .IsNotNull(linguagemUbiqua, nameof(LinguagemUbiqua), "Linguagem Ubíqua não pode ser nula")
                 .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
                 .IsNotNull(time, nameof(Time), "Time não deve ser nulo")
@@ -44,71 +39,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Nome = nome;
             Time = time;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
-            Modulos = modulos;
             LinguagemUbiqua = linguagemUbiqua;
-        }
-
-        public void AdicionarModulo(Modulo modulo)
-        {
-            if (modulo == null)
-            {
-                AddNotification(nameof(modulo), "Modulo não pode ser nulo");
-                return;
-            }
-
-            if (modulo.Invalid)
-            {
-                AddNotifications(modulo);
-                return;
-            }
-
-            if (Modulos.Any(r => r.Numero == modulo.Numero))
-            {
-                AddNotification(nameof(modulo.Numero), $"Já existe um módulo com o número {modulo.Numero}");
-                return;
-            }
-
-            Modulos.Add(modulo);
-        }
-
-        public void RemoverModulo(int numero)
-        {
-            var modulo = Modulos.FirstOrDefault(r => r.Numero == numero);
-
-            if (modulo == null)
-            {
-                AddNotification(nameof(numero), "Modulo não encontrado");
-                return;
-            }
-
-            Modulos.Remove(modulo);
-        }
-
-        public void AtualizarNomeModulo(int numero, string nome)
-        {
-            var modulo = Modulos.FirstOrDefault(r => r.Numero == numero);
-            if (modulo == null)
-            {
-                AddNotification(nameof(numero), "Modulo não encontrado");
-                return;
-            }
-
-            var indice = Modulos.ToList().FindIndex(r => r.Numero == numero);
-
-            var moduloAtualizado = new Modulo(modulo.Numero, nome, new List<RegraDeNegocio>(), new List<RequisitoFuncional>());
-
-            if (moduloAtualizado.Invalid)
-            {
-                AddNotifications(moduloAtualizado);
-                return;
-            }
-
-            Modulos.Remove(modulo);
-            Modulos.Add(moduloAtualizado);
-
-            Modulos = Modulos
-                .OrderBy(r => r.Numero)
-                .ToList();
         }
 
         public void AdicionarRNF(RequisitoNaoFuncional rnf)

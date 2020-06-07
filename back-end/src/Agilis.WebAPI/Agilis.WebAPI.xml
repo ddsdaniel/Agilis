@@ -164,6 +164,24 @@
             <param name="colabId"></param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
+            <summary>
+            Adiciona um produto ao time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="produtoViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+            <summary>
+            Remove um produto do time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="prodId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
             <summary>
             Pesquisa sobre os registros do repositório

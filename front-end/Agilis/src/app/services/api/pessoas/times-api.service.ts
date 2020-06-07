@@ -6,6 +6,8 @@ import { CrudApiBaseService } from '../crud-api-base.service';
 import { Email } from 'src/app/models/pessoas/email';
 import { Observable } from 'rxjs';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
+import { Produto } from 'src/app/models/trabalho/produtos/produto';
+import { ProdutoVO } from 'src/app/models/trabalho/produtos/produto-vo';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,13 @@ export class TimesApiService extends CrudApiBaseService<Time> {
 
   excluirColaborador(timeId: string, colabId: string): Observable<void> {
     return super.delete(`${timeId}/colaboradores/${colabId}`);
+  }
+
+  adicionarProduto(timeId: string, produto: Produto): Observable<ProdutoVO> {
+    return super.post<Produto, ProdutoVO>(produto, `${timeId}/produtos`);
+  }
+
+  excluirProduto(timeId: string, prodId: string): Observable<void> {
+    return super.delete(`${timeId}/produtos/${prodId}`);
   }
 }

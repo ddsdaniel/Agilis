@@ -26,6 +26,22 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
+            CreateMap<Time, TimeVO>()
+                .ConstructUsing((vm, context) =>
+                  new TimeVO(
+                      id: vm.Id,
+                      nome: vm.Nome
+                      )
+               );
+
+            CreateMap<TimeViewModel, TimeVO>()
+               .ConstructUsing((vm, context) =>
+                 new TimeVO(
+                     id: vm.Id,
+                     nome: vm.Nome
+                     )
+              );
+
             //Ator
             CreateMap<Ator, AtorViewModel>()
                 .ReverseMap();

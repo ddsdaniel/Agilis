@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System;
 using Agilis.WebAPI.ViewModels;
 using DDS.Domain.Core.Model.ValueObjects;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.WebAPI.ViewModels.Trabalho;
+using Agilis.Domain.Models.Entities.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -31,9 +34,9 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="service">Serviço para manipulação da entidade</param>       
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        public TimesController(ITimeService service, 
+        public TimesController(ITimeService service,
                               IMapper mapper,
-                              IUsuario usuarioLogado) 
+                              IUsuario usuarioLogado)
             : base(service, mapper)
         {
             _service = service;
@@ -65,9 +68,9 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarAdmin([FromServices] ITimeService timeService, 
+        public async Task<ActionResult> AdicionarAdmin([FromServices] ITimeService timeService,
                                                        [FromServices] IMapper autoMapper,
-                                                       Guid timeId, 
+                                                       Guid timeId,
                                                        EmailViewModel emailViewModel)
         {
             var email = new Email(emailViewModel.Endereco);
@@ -147,6 +150,56 @@ namespace Agilis.WebAPI.Controllers.Pessoas
                                                            Guid colabId)
         {
             await timeService.ExcluirColaborador(timeId, colabId);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adiciona um produto ao time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="produtoViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("{timeId:guid}/produtos")]
+        [ProducesResponseType(typeof(ICollection<ProdutoBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarProduto([FromServices] ITimeService timeService,
+                                                         [FromServices] IMapper autoMapper,
+                                                         Guid timeId,
+                                                         ProdutoViewModel produtoViewModel)
+        {
+            var produto = autoMapper.Map<Produto>(produtoViewModel);
+            var produtoVO = await timeService.AdicionarProduto(timeId, produto);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            var produtoBasicViewModel = autoMapper.Map<ProdutoBasicViewModel>(produtoVO);
+
+            return Ok(produtoBasicViewModel);
+        }
+
+        /// <summary>
+        /// Remove um produto do time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="prodId"></param>
+        /// <returns></returns>
+        [HttpDelete("{timeId:guid}/produtos/{prodId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirProduto([FromServices] ITimeService timeService,
+                                                       Guid timeId,
+                                                       Guid prodId)
+        {
+            await timeService.ExcluirProduto(timeId, prodId);
 
             if (timeService.Invalid)
                 return BadRequest(timeService.Notifications);

@@ -1,12 +1,11 @@
 ﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Agilis.Domain.Models.Entities.Pessoas
 {
@@ -136,6 +135,32 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             {
                 Colaboradores = Colaboradores
                     .Where(a => a.Id != colab.Id);
+            }
+        }
+
+        internal void AdicionarProduto(ProdutoVO produto)
+        {
+            if (Produtos.Any(p => p.Id == produto.Id))
+            {
+                AddNotification(nameof(produto), "Produto já adicionado neste time");
+                return;
+            }
+
+            var novaLista = Produtos.ToList();
+            novaLista.Add(produto);
+
+            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
+
+            Produtos = novaLista;
+        }
+
+        internal void ExcluirProduto(Produto produto)
+        {
+            if (!Produtos.Any(p => p.Id == produto.Id))
+                AddNotification(nameof(produto.Id), "Produto não encontrado");
+            else
+            {
+                Produtos = Produtos.Where(a => a.Id != produto.Id);
             }
         }
     }

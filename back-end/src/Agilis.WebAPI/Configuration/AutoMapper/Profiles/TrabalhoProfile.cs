@@ -35,7 +35,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         time: context.Mapper.Map<TimeVO>(vm.Time),
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
-                        modulos: null, //TODO: remover modulos
                         linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
                         )
                  );

@@ -4,7 +4,9 @@ using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Model.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -88,7 +90,7 @@ namespace Agilis.Domain.Services.Pessoas
 
             if (email.Invalid)
             {
-                AddNotification(nameof(email), "E-mail inválido");
+                AddNotifications(email);
                 return null;
             }
 
@@ -154,7 +156,7 @@ namespace Agilis.Domain.Services.Pessoas
 
             if (email.Invalid)
             {
-                AddNotification(nameof(email), "E-mail inválido");
+                AddNotifications(email);
                 return null;
             }
 
@@ -204,6 +206,69 @@ namespace Agilis.Domain.Services.Pessoas
             }
             else
             {
+                await Atualizar(time);
+                await _unitOfWork.Commit();
+            }
+        }
+
+        public async Task<ProdutoVO> AdicionarProduto(Guid timeId, Produto produto)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return null;
+            }
+
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return null;
+            }
+
+            await _unitOfWork.ProdutoRepository.Adicionar(produto);
+
+            var produtoVO = new ProdutoVO(produto.Id, produto.Nome);
+            time.AdicionarProduto(produtoVO);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return null;
+            }
+            else
+            {
+                await Atualizar(time);
+                await _unitOfWork.Commit();
+                return produtoVO;
+            }
+        }
+
+        public async Task ExcluirProduto(Guid timeId, Guid prodId)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return;
+            }
+
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(prodId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            time.ExcluirProduto(produto);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+            else
+            {
+                await _unitOfWork.ProdutoRepository.Excluir(produto.Id);
+
                 await Atualizar(time);
                 await _unitOfWork.Commit();
             }

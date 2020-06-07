@@ -10,6 +10,8 @@ import { Time } from 'src/app/models/pessoas/time';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
+import { Produto } from 'src/app/models/trabalho/produtos/produto';
+import { ProdutoVO } from 'src/app/models/trabalho/produtos/produto-vo';
 
 @Component({
   selector: 'app-times-form',
@@ -20,6 +22,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
 
   emailAdmin: string;
   emailColaborador: string;
+  nomeProduto: string;
   timeApiService: TimesApiService;
 
   constructor(
@@ -94,6 +97,36 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         (novoColab: UsuarioVO) => {
           this.entidade.colaboradores.push(novoColab);
           this.emailColaborador = '';
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  excluirProduto(prodId: string){
+    this.timeApiService.excluirProduto(this.entidade.id, prodId)
+      .subscribe(
+        () => {
+          const index = this.entidade.produtos.findIndex(p => p.id === prodId);
+          this.entidade.produtos.removeAt(index);
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  adicionarProduto() {
+    const produto: Produto = {
+      id: constantes.newGuid,
+      nome: this.nomeProduto,
+      time: {
+        id: this.entidade.id,
+        nome: this.entidade.nome
+      }
+    };
+    this.timeApiService.adicionarProduto(this.entidade.id, produto)
+      .subscribe(
+        (novoProduto: ProdutoVO) => {
+          this.entidade.produtos.push(novoProduto);
+          this.nomeProduto = '';
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
