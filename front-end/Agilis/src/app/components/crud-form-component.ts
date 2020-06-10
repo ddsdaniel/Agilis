@@ -22,14 +22,18 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
 
   ngOnInit() {
 
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = this.activatedRoute.snapshot.paramMap.get('id');
+        this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
 
-    if (this.operacao === OperacaoFormCrud.adicionando) {
-      this.sugerirNovo();
-    } else {
-      this.recuperarEntidade(id);
-    }
+        if (this.operacao === OperacaoFormCrud.adicionando) {
+          this.sugerirNovo();
+        } else {
+          this.recuperarEntidade(id);
+        }
+      }
+    );
 
   }
 
