@@ -37,6 +37,10 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     this.sugerirNovo();
   }
 
+  podeEditar(): boolean {
+    return this.entidade.escopo === EscopoTime.Colaborativo;
+  }
+
   sugerirNovo(): void {
     this.entidade = {
       id: constantes.newGuid,

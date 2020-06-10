@@ -1,112 +1,98 @@
-﻿<form fxLayout="row" class="mt-5">
+﻿<form>
 
-  <div fxFlex="20" fxFlex.xs="5"></div>
+  <h1>Time {{entidade.nome}}</h1>
 
-  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
+  <mat-tab-group>
+    <mat-tab label="Dados Principais">
+      <mat-form-field class="half-width mt-4">
+        <mat-label>Nome</mat-label>
+        <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="entidade.nome" placeholder="Nome"
+          name="nome" type="text" required>
+      </mat-form-field>
 
-    <mat-card-header>
-      <mat-card-title>Cadastro de Times</mat-card-title>
-    </mat-card-header>
+      <div *ngIf="podeEditar()" class="mb-1">
+        <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+        <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+      </div>
 
-    <mat-card-content>
+    </mat-tab>
 
-      <mat-tab-group>
-        <mat-tab label="Dados Principais">
-          <mat-form-field class="full-width mt-4">
-            <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
-          </mat-form-field>
-        </mat-tab>
+    <mat-tab label="Administradores" *ngIf="podeEditar()">
+      <div class="tab-container">
 
-        <mat-tab label="Administradores">
-          <div class="tab-container">
+        <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailAdmin" (keyup.enter)="adicionarAdmin()"
+            name="emailAdmin">
+        </mat-form-field>
 
-            <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-              <mat-label>E-mail</mat-label>
-              <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailAdmin"
-                (keyup.enter)="adicionarAdmin()" name="emailAdmin">
-            </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%"
+          fxFlex.xl="15%">
+          <button mat-raised-button (click)="adicionarAdmin()">Adicionar</button>
+        </div>
 
-            <div fxLayout="row" fxLayoutAlign="end end"
-                 fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%" fxFlex.xl="15%">
-              <button mat-raised-button (click)="adicionarAdmin()">Adicionar</button>
-            </div>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let admin of entidade.administradores">
+            <mat-icon mat-list-icon title="Remover" (click)="excluirAdmin(admin.id)">delete</mat-icon>
+            <div mat-line>{{admin.nome}}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
 
-          </div>
-          <div>
-            <mat-list>
-              <mat-list-item *ngFor="let admin of entidade.administradores">
-                <mat-icon mat-list-icon title="Remover" (click)="excluirAdmin(admin.id)">delete</mat-icon>
-                <div mat-line>{{admin.nome}}</div>
-              </mat-list-item>
-            </mat-list>
-          </div>
-        </mat-tab>
+    <mat-tab label="Colaboradores" *ngIf="podeEditar()">
+      <div class="tab-container">
 
-        <mat-tab label="Colaboradores">
-          <div class="tab-container">
+        <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailColaborador"
+            (keyup.enter)="adicionarColaborador()" name="emailColaborador">
+        </mat-form-field>
 
-            <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-              <mat-label>E-mail</mat-label>
-              <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailColaborador"
-                (keyup.enter)="adicionarColaborador()" name="emailColaborador">
-            </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%"
+          fxFlex.xl="15%">
+          <button mat-raised-button (click)="adicionarColaborador()">Adicionar</button>
+        </div>
 
-            <div fxLayout="row" fxLayoutAlign="end end"
-                 fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%" fxFlex.xl="15%">
-              <button mat-raised-button (click)="adicionarColaborador()">Adicionar</button>
-            </div>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let colab of entidade.colaboradores">
+            <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
+            <div mat-line>{{colab.nome}}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-tab>
 
-          </div>
-          <div>
-            <mat-list>
-              <mat-list-item *ngFor="let colab of entidade.colaboradores">
-                <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
-                <div mat-line>{{colab.nome}}</div>
-              </mat-list-item>
-            </mat-list>
-          </div>
-        </mat-tab>
+    <mat-tab label="Produtos">
+      <div class="tab-container">
 
-        <mat-tab label="Produtos">
-          <div class="tab-container">
+        <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
+          <mat-label>Nome</mat-label>
+          <input matInput placeholder="Nome" type="text" [(ngModel)]="nomeProduto" (keyup.enter)="adicionarProduto()"
+            name="nomeProduto">
+        </mat-form-field>
 
-            <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-              <mat-label>Nome</mat-label>
-              <input matInput placeholder="Nome" type="text" [(ngModel)]="nomeProduto"
-                (keyup.enter)="adicionarProduto()" name="nomeProduto">
-            </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%"
+          fxFlex.xl="15%">
+          <button mat-raised-button (click)="adicionarProduto()">Adicionar</button>
+        </div>
 
-            <div fxLayout="row" fxLayoutAlign="end end"
-                 fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%" fxFlex.xl="15%">
-              <button mat-raised-button (click)="adicionarProduto()">Adicionar</button>
-            </div>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let prod of entidade.produtos">
+            <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
+            <div mat-line><a [routerLink]="['/produtos/' + prod.id]">{{prod.nome}}</a></div>
+          </mat-list-item>
+        </mat-list>
+      </div>
 
-          </div>
-          <div>
-            <mat-list>
-              <mat-list-item *ngFor="let prod of entidade.produtos">
-                <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
-                <div mat-line><a [routerLink]="['/produtos/' + prod.id]">{{prod.nome}}</a></div>
-              </mat-list-item>
-            </mat-list>
-          </div>
+    </mat-tab>
 
-        </mat-tab>
-
-      </mat-tab-group>
-
-
-
-    </mat-card-content>
-
-    <mat-card-actions>
-      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()">Cancelar</button>
-    </mat-card-actions>
-
-  </mat-card>
-
-  <div fxFlex="20" fxFlex.xs="5"></div>
+  </mat-tab-group>
 
 </form>

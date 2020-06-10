@@ -27,19 +27,4 @@ export class TimesComponent extends CrudComponent<Time> {
     // this.timesApiService = timesApiService;
     // this.snackBar = snackBar;
   }
-
-  editar(id: string): void {
-    this.timesApiService.obterUm(id)
-      .subscribe(
-        (time: Time) => {
-          if (time.escopo === EscopoTime.Pessoal) {
-            this.snackBar.open('O time pessoal não pode ser alterado');
-          } else {
-            super.editar(id);
-          }
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
 }
