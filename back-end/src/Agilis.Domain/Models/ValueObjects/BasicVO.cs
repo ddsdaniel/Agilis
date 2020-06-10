@@ -24,5 +24,15 @@ namespace Agilis.Domain.Models.ValueObjects
             Id = id;
             Nome = nome;
         }
+
+        public void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(nome), "Nome do produto não deve ser nulo ou vazio");
+            else
+                Nome = nome;
+        }
+
+        public override string ToString() => Nome;
     }
 }

@@ -34,5 +34,21 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Assert
             Assert.True(sprint.Invalid);
         }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-2)]
+        public void Construtor_NumeroInvalido_Invalid(int numero)
+        {
+            //Arrange & Act
+            var sprint = new Sprint("Nome válido",
+                                    numero,
+                                    new IntervaloDatas(null, null),
+                                    new ProdutoVO(Guid.NewGuid(), "Produto 1")
+                                    );
+
+            //Assert
+            Assert.True(sprint.Invalid);
+        }
     }
 }

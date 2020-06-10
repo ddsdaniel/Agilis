@@ -1,1 +1,27 @@
-﻿
+﻿.tab-container {
+  margin-top: 16px;
+}
+
+.tab-container mat-form-field,
+.tab-container button {
+  margin: 0 8px;
+}
+
+.tab-container button{
+  height: 36px !important;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.mat-list{
+  width: calc(100% - 8px);
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+}
+
+mat-card button {
+  margin: 8px;
+}

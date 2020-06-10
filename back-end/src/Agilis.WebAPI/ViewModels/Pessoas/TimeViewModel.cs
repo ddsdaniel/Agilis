@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Agilis.WebAPI.ViewModels.Pessoas
 {
     /// <summary>
-    /// Representa um time, um software
+    /// Representa um time
     /// </summary>
     public class TimeViewModel : IViewModel
     {
@@ -26,10 +26,19 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// </summary>
         public EscopoTime Escopo { get; set; }
 
+        /// <summary>
+        /// Administradores do time
+        /// </summary>
         public IEnumerable<UsuarioBasicViewModel> Administradores { get; set; }
 
+        /// <summary>
+        /// Colaboradores do time, exceto administradores
+        /// </summary>
         public IEnumerable<UsuarioBasicViewModel> Colaboradores { get; set; }
 
+        /// <summary>
+        /// Produtos do time
+        /// </summary>
         public IEnumerable<ProdutoBasicViewModel> Produtos { get; set; }        
     }
 }

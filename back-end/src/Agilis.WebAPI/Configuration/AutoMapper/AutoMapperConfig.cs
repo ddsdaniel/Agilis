@@ -13,6 +13,7 @@ namespace Agilis.WebAPI.Configuration
         {
             services.AddSingleton((provider) => new MapperConfiguration(cfg =>
             {
+                cfg.AddProfile<OutrosProfile>();
                 cfg.AddProfile<PessoasProfile>();
                 cfg.AddProfile<SegurancaProfile>();
                 cfg.AddProfile<TrabalhoProfile>();

@@ -189,6 +189,13 @@
             <param name="filtro">Filtro inserido pelo usuário</param>
             <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel})">
+            <summary>
+            Ordena pelo nome do time
+            </summary>
+            <param name="lista">Lista de times a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
             <summary>
             Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
@@ -275,7 +282,7 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario,Agilis.Domain.Abstractions.Services.Pessoas.ITimeService)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
@@ -288,6 +295,14 @@
             Consulta todos os produtos do usuário logado
             </summary>
             <returns>Retorna todos os produtos do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Put(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
+            <summary>
+            Altera o produto em seu repositório em nas demais entidades com a qual se relaciona
+            </summary>
+            <param name="id"></param>
+            <param name="viewModelCadastro"></param>
+            <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Pesquisar(System.String)">
             <summary>
@@ -307,6 +322,7 @@
             <summary>
             Adiciona um sprint ao produto
             </summary>
+            <param name="autoMapper"></param>
             <param name="produtoId"></param>
             <param name="sprintViewModel"></param>
             <returns></returns>
@@ -450,7 +466,7 @@
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel">
             <summary>
-            Representa um time, um software
+            Representa um time
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Id">
@@ -466,6 +482,21 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Escopo">
             <summary>
             Indica se o time é pessoal ou colaborativo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Administradores">
+            <summary>
+            Administradores do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Colaboradores">
+            <summary>
+            Colaboradores do time, exceto administradores
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
+            <summary>
+            Produtos do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">
@@ -653,14 +684,24 @@
             Time ao qual o produto pertence
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Sprints">
+            <summary>
+            Sprints do produto
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
             <summary>
-            Representa um sprint, um software
+            Representa um sprint do produto
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Id">
             <summary>
             Id do sprint
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Numero">
+            <summary>
+            /Número do sprint
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Nome">
@@ -670,7 +711,12 @@
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Produto">
             <summary>
-            Time ao qual o sprint pertence
+            Produto ao qual o sprint pertence
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">
+            <summary>
+            Intervalo de datas do sprint
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

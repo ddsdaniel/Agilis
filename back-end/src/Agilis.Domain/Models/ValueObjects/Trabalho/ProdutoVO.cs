@@ -6,6 +6,6 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
     {
         public ProdutoVO(Guid id, string nome) : base(id, nome)
         {
-        }
+        }        
     }
 }

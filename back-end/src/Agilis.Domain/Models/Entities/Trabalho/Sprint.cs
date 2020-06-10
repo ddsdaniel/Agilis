@@ -9,9 +9,13 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     {
         public int Numero { get; private set; }
         public IntervaloDatas Periodo { get; private set; }
-
         public string Nome { get; private set; }
         public ProdutoVO Produto { get; private set; }
+
+        protected Sprint()
+        {
+
+        }
 
         public Sprint(string nome, int numero, IntervaloDatas periodo, ProdutoVO produto)
         {

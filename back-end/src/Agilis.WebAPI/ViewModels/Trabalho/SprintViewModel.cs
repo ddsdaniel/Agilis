@@ -1,11 +1,10 @@
-﻿using Agilis.WebAPI.ViewModels.Pessoas;
-using DDS.WebAPI.Abstractions.ViewModels;
+﻿using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
     /// <summary>
-    /// Representa um sprint, um software
+    /// Representa um sprint do produto
     /// </summary>
     public class SprintViewModel : IViewModel
     {
@@ -13,6 +12,10 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// Id do sprint
         /// </summary>
         public Guid Id { get; set; }
+        
+        /// <summary>
+        /// /Número do sprint
+        /// </summary>
         public int Numero { get; set; }
 
         /// <summary>
@@ -21,10 +24,13 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Nome { get; set; }
 
         /// <summary>
-        /// Time ao qual o sprint pertence
+        /// Produto ao qual o sprint pertence
         /// </summary>
         public ProdutoBasicViewModel Produto { get; set; }
 
+        /// <summary>
+        /// Intervalo de datas do sprint
+        /// </summary>
         public IntervaloDatasViewModel Periodo { get; set; }
 
     }

@@ -52,7 +52,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     };
   }
 
-  excluirAdmin(adminId: string){
+  excluirAdmin(adminId: string) {
     this.timeApiService.excluirAdmin(this.entidade.id, adminId)
       .subscribe(
         () => {
@@ -77,7 +77,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       );
   }
 
-  excluirColaborador(colabId: string){
+  excluirColaborador(colabId: string) {
     this.timeApiService.excluirColaborador(this.entidade.id, colabId)
       .subscribe(
         () => {
@@ -102,7 +102,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       );
   }
 
-  excluirProduto(prodId: string){
+  excluirProduto(prodId: string) {
     this.timeApiService.excluirProduto(this.entidade.id, prodId)
       .subscribe(
         () => {
@@ -120,7 +120,8 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       time: {
         id: this.entidade.id,
         nome: this.entidade.nome
-      }
+      },
+      sprints: []
     };
     this.timeApiService.adicionarProduto(this.entidade.id, produto)
       .subscribe(

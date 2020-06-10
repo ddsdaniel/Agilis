@@ -10,9 +10,7 @@ using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
-using Agilis.WebAPI.ViewModels;
 using DDS.Domain.Core.Model.ValueObjects;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 
@@ -233,6 +231,11 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return Ok(listaViewModel);
         }
 
+        /// <summary>
+        /// Ordena pelo nome do time
+        /// </summary>
+        /// <param name="lista">Lista de times a ser ordenada</param>
+        /// <returns>Lista já ordenada pelo nome</returns>
         protected override ICollection<TimeViewModel> Ordenar(ICollection<TimeViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();

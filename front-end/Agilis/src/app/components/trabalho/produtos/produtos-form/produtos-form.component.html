@@ -1,5 +1,8 @@
-﻿<form fxLayout="column" class="mt-5">
-  <mat-card fxFlexAlign="center">
+﻿<form fxLayout="row" class="mt-5">
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
+
+  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
 
     <mat-card-header>
       <mat-card-title>Cadastro de Produtos</mat-card-title>
@@ -7,26 +10,70 @@
 
     <mat-card-content>
 
-      <mat-form-field class="full-width mt-4">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required >
-      </mat-form-field>
+      <mat-tab-group>
+        <mat-tab label="Dados Principais">
 
-      <mat-form-field>
-        <mat-label>Time</mat-label>
-        <mat-select [(ngModel)]="entidade?.time.id" name="time">
-          <mat-option *ngFor="let time of times" [value]="time.id">
-            {{time.nome}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-form-field class="full-width mt-4">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Time</mat-label>
+            <mat-select [(ngModel)]="entidade?.time.id" name="time">
+              <mat-option *ngFor="let time of times" [value]="time.id">
+                {{time.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+            <button mat-raised-button (click)="cancelar()">Cancelar</button>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Product Backlogs">
+
+        </mat-tab>
+
+        <mat-tab label="Sprints">
+          <div class="tab-container">
+
+            <mat-form-field fxFlex.xs="10%" fxFlex.sm="10%" fxFlex.md="10%" fxFlex.lg="10%" fxFlex.xl="10%">
+              <mat-label>Número</mat-label>
+              <input matInput placeholder="Número do Sprint" type="number" [(ngModel)]="numeroSprint"
+                name="numeroSprint">
+            </mat-form-field>
+
+            <mat-form-field fxFlex.xs="45%" fxFlex.sm="50%" fxFlex.md="40%" fxFlex.lg="40%" fxFlex.xl="40%">
+              <mat-label>Nome</mat-label>
+              <input matInput placeholder="Nome do Sprint" type="text" [(ngModel)]="nomeSprint"
+                (keyup.enter)="adicionarSprint()" name="nomeSprint">
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%"
+              fxFlex.xl="15%">
+              <button mat-raised-button (click)="adicionarSprint()">Adicionar</button>
+            </div>
+
+          </div>
+          <div>
+            <mat-list>
+              <mat-list-item *ngFor="let sprint of entidade.sprints">
+                <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)">delete</mat-icon>
+                <div mat-line>
+                  <span>{{sprint.numero}}</span>
+                  <span class="ml-5">{{sprint.nome}}</span>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
 
     </mat-card-content>
-
-    <mat-card-actions>
-      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()">Cancelar</button>
-    </mat-card-actions>
 
   </mat-card>
 

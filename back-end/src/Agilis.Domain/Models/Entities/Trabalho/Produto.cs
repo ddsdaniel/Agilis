@@ -139,7 +139,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
 
         internal void AdicionarSprint(SprintVO sprint)
         {
-            if (Sprints.Any(s => s.Id == sprint.Id))
+            if (Sprints.Any(s => s.Id == sprint.Id || s.Numero == sprint.Numero))
             {
                 AddNotification(nameof(sprint), "Sprint já adicionado neste produto");
                 return;
@@ -148,8 +148,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             var novaLista = Sprints.ToList();
             novaLista.Add(sprint);
 
-            //TODO: ordenar pelo número
-            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
+            novaLista = novaLista.OrderBy(s => s.Numero).ToList();
 
             Sprints = novaLista;
         }

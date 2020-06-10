@@ -19,7 +19,7 @@
         </mat-tab>
 
         <mat-tab label="Administradores">
-          <div class="admin">
+          <div class="tab-container">
 
             <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
               <mat-label>E-mail</mat-label>
@@ -44,7 +44,7 @@
         </mat-tab>
 
         <mat-tab label="Colaboradores">
-          <div class="admin">
+          <div class="tab-container">
 
             <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
               <mat-label>E-mail</mat-label>
@@ -69,7 +69,7 @@
         </mat-tab>
 
         <mat-tab label="Produtos">
-          <div class="admin">
+          <div class="tab-container">
 
             <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
               <mat-label>Nome</mat-label>
@@ -87,10 +87,11 @@
             <mat-list>
               <mat-list-item *ngFor="let prod of entidade.produtos">
                 <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
-                <div mat-line>{{prod.nome}}</div>
+                <div mat-line><a [routerLink]="['/produtos/' + prod.id]">{{prod.nome}}</a></div>
               </mat-list-item>
             </mat-list>
           </div>
+
         </mat-tab>
 
       </mat-tab-group>

@@ -18,15 +18,15 @@
 
       <div *ngFor="let grupo of menu">
 
-        <h2 matSubheader>{{grupo.nome}}</h2>
+        <!-- <h2 matSubheader>{{grupo.nome}}</h2> -->
 
         <a *ngFor="let item of grupo.itens" mat-list-item (click)="sidenav.close()" [routerLink]="[item.rota]"
           routerLinkActive="list-item-active">
-          <mat-icon matListIcon> {{ item.icone }} </mat-icon>
+          <!-- <mat-icon matListIcon> {{ item.icone }} </mat-icon> -->
           {{item.nome}}
         </a>
 
-        <mat-divider></mat-divider>
+        <!-- <mat-divider></mat-divider> -->
 
       </div>
 
@@ -46,7 +46,10 @@
     </mat-toolbar>
 
     <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate"></mat-progress-bar>
-    <router-outlet></router-outlet>
+
+    <div class="ph-2">
+      <router-outlet></router-outlet>
+    </div>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

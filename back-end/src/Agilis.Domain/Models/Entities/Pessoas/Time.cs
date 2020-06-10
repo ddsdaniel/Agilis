@@ -4,6 +4,7 @@ using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,7 +45,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 {
                     AddNotification(nameof(Administradores), "O time deve ter pelo menos um administrador");
                 }
-                
+
                 if (escopo == EscopoTime.Pessoal)
                 {
                     if (administradores.Count() != 1)
@@ -69,6 +70,15 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Administradores = administradores;
             Colaboradores = colaboradores;
             Produtos = produtos;
+        }
+
+        public void RenomearProduto(Guid id, string nome)
+        {
+            var produto = Produtos.FirstOrDefault(p => p.Id == id);
+            if (produto == null)
+                AddNotification(nameof(id), "Produto não encontrado no time");
+            else
+                produto.Renomear(nome);
         }
 
         internal void AdicionarAdmin(UsuarioVO admin)
@@ -99,15 +109,20 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                     .Where(a => a.Id != admin.Id);
 
                 if (Administradores.Count() == 0)
-                    AddNotification(nameof(admin.Id), "O time deve ter pelo menos um administrador");                
+                    AddNotification(nameof(admin.Id), "O time deve ter pelo menos um administrador");
             }
         }
 
         private void ValidarColaboradorEAdmin()
         {
-            if (Administradores.Any(a => Colaboradores.Any(c => c.Id == a.Id)) ||
-                Colaboradores.Any(c => Administradores.Any(a => a.Id == c.Id)))
-                AddNotification(nameof(Administradores), "Um usuário deve estar na lista colaboradores ou de administradores");
+            if (Administradores != null && Colaboradores != null)
+            {
+                if (Administradores.Any(a => Colaboradores.Any(c => c.Id == a.Id)) ||
+                    Colaboradores.Any(c => Administradores.Any(a => a.Id == c.Id)))
+                {
+                    AddNotification(nameof(Administradores), "Um usuário deve estar na lista colaboradores ou de administradores");
+                }
+            }
         }
 
         internal void AdicionarColaborador(UsuarioVO colab)
