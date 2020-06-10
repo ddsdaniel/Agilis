@@ -51,17 +51,6 @@ namespace Agilis.Domain.Services.Pessoas
             await base.Excluir(id);
         }
 
-        public override async Task Atualizar(Time time)
-        {
-            if (time.Escopo == EscopoTime.Pessoal)
-            {
-                AddNotification(nameof(time.Escopo), "O time pessoal não pode ser alterado");
-                return;
-            }
-
-            await base.Atualizar(time);
-        }
-
         public override async Task Adicionar(Time time)
         {
             if (time.Escopo == EscopoTime.Pessoal)
@@ -237,7 +226,7 @@ namespace Agilis.Domain.Services.Pessoas
             }
             else
             {
-                await Atualizar(time);
+                await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
                 return produtoVO;
             }
@@ -269,7 +258,7 @@ namespace Agilis.Domain.Services.Pessoas
             {
                 await _unitOfWork.ProdutoRepository.Excluir(produto.Id);
 
-                await Atualizar(time);
+                await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
             }
         }
