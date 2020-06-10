@@ -154,7 +154,7 @@ namespace Agilis.Domain.Services.Trabalho
 
             await _unitOfWork.SprintRepository.Adicionar(sprint);
 
-            var sprintVO = new SprintVO(sprint.Id, sprint.Nome);
+            var sprintVO = new SprintVO(sprint.Id, sprint.Nome, sprint.Numero);
             produto.AdicionarSprint(sprintVO);
             if (produto.Invalid)
             {

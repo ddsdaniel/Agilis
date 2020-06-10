@@ -7,10 +7,7 @@ using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 {
@@ -46,7 +43,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  .ConstructUsing((vm, context) =>
                     new SprintVO(
                         id: vm.Id,
-                        nome: vm.Nome
+                        nome: vm.Nome,
+                        numero: vm.Numero
                         )
                  );
 

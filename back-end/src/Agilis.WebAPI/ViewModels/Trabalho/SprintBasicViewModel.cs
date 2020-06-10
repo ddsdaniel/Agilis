@@ -2,5 +2,6 @@
 {
     public class SprintBasicViewModel : BasicViewModel
     {
+        public int Numero { get; set; }
     }
 }
