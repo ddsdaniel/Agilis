@@ -6,6 +6,7 @@ using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
+using DDS.Domain.Core.Model.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,29 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<UserStory, UserStoryViewModel>()
                 .ReverseMap();
 
+            //Sprint            
+            CreateMap<Sprint, SprintViewModel>();
+
+            CreateMap<SprintViewModel, Sprint>()
+                 .ConstructUsing((vm, context) =>
+                    new Sprint(
+                        nome: vm.Nome,
+                        numero: vm.Numero,
+                        periodo: context.Mapper.Map<IntervaloDatas>(vm.Periodo),
+                        produto: context.Mapper.Map<ProdutoVO>(vm.Produto)
+                        )
+                 );
+
+            CreateMap<SprintVO, SprintBasicViewModel>();
+
+            CreateMap<SprintBasicViewModel, SprintVO>()
+                 .ConstructUsing((vm, context) =>
+                    new SprintVO(
+                        id: vm.Id,
+                        nome: vm.Nome
+                        )
+                 );
+
             //Produto            
             CreateMap<Produto, ProdutoViewModel>();
 
@@ -35,7 +59,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         time: context.Mapper.Map<TimeVO>(vm.Time),
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
-                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>()),
+                        sprints: new List<SprintVO>()
                         )
                  );
 

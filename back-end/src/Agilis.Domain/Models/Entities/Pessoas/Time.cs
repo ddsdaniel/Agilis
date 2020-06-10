@@ -163,5 +163,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 Produtos = Produtos.Where(a => a.Id != produto.Id);
             }
         }
+
+        public override string ToString() => Nome;
     }
 }

@@ -15,6 +15,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public TimeVO Time { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
+        public IEnumerable<SprintVO> Sprints { get; private set; }
 
         protected Produto()
         {
@@ -24,7 +25,8 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public Produto(string nome,
                        TimeVO time,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
-                       LinguagemUbiqua linguagemUbiqua)
+                       LinguagemUbiqua linguagemUbiqua,
+                       IEnumerable<SprintVO> sprints)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
@@ -34,12 +36,15 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
                 .IsNotNull(time, nameof(Time), "Time não deve ser nulo")
                 .IfNotNull(time, c => c.Join(time))
+                .IsNotNull(sprints, nameof(Sprints), "Sprints não deve ser nulo")
+                .IfNotNull(sprints, c => c.Join(sprints.ToArray()))                
                 );
 
             Nome = nome;
             Time = time;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
             LinguagemUbiqua = linguagemUbiqua;
+            Sprints = sprints;
         }
 
         public void AdicionarRNF(RequisitoNaoFuncional rnf)
@@ -131,5 +136,33 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .OrderBy(r => r.Numero)
                 .ToList();
         }
+
+        internal void AdicionarSprint(SprintVO sprint)
+        {
+            if (Sprints.Any(s => s.Id == sprint.Id))
+            {
+                AddNotification(nameof(sprint), "Sprint já adicionado neste produto");
+                return;
+            }
+
+            var novaLista = Sprints.ToList();
+            novaLista.Add(sprint);
+
+            //TODO: ordenar pelo número
+            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
+
+            Sprints = novaLista;
+        }
+
+        internal void ExcluirSprint(Sprint sprint)
+        {
+            if (!Sprints.Any(s => s.Id == sprint.Id))
+                AddNotification(nameof(sprint.Id), "Sprint não encontrado");
+            else
+            {
+                Sprints = Sprints.Where(s => s.Id != sprint.Id);
+            }
+        }
+        public override string ToString() => Nome;
     }
 }

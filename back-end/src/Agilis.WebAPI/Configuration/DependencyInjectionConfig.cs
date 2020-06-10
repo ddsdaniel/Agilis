@@ -49,6 +49,9 @@ namespace Agilis.WebAPI.Configuration
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
+			services.AddTransient<ISprintService, SprintService>();
+            services.AddTransient<ISprintRepository, SprintRepository>();
+
 			services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
 

@@ -5,6 +5,7 @@ using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,5 +136,68 @@ namespace Agilis.Domain.Services.Trabalho
         }
 
         #endregion
+
+        public async Task<SprintVO> AdicionarSprint(Guid produtoId, Sprint sprint)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return null;
+            }
+
+            if (sprint.Invalid)
+            {
+                AddNotifications(sprint);
+                return null;
+            }
+
+            await _unitOfWork.SprintRepository.Adicionar(sprint);
+
+            var sprintVO = new SprintVO(sprint.Id, sprint.Nome);
+            produto.AdicionarSprint(sprintVO);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return null;
+            }
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+                return sprintVO;
+            }
+        }
+
+        public async Task ExcluirSprint(Guid produtoId, Guid sprintId)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var sprint = await _unitOfWork.SprintRepository.ConsultarPorId(sprintId);
+            if (sprint == null)
+            {
+                AddNotification(nameof(sprint), "Sprint não encontrado");
+                return;
+            }
+
+            produto.ExcluirSprint(sprint);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+            else
+            {
+                await _unitOfWork.SprintRepository.Excluir(sprint.Id);
+
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

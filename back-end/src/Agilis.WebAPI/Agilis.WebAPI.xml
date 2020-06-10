@@ -303,6 +303,22 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarSprint(AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel)">
+            <summary>
+            Adiciona um sprint ao produto
+            </summary>
+            <param name="produtoId"></param>
+            <param name="sprintViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirSprint(System.Guid,System.Guid)">
+            <summary>
+            Remove um sprint do produto+
+            </summary>
+            <param name="produtoId"></param>
+            <param name="sprintId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
             <summary>
             Manutenção do repositório
@@ -322,6 +338,39 @@
             <returns>Retorna todas as releases do usuário logado</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ISprintService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.ConsultarTodos">
+            <summary>
+            Consulta todos os sprints do usuário logado
+            </summary>
+            <returns>Retorna todos os sprints do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.Pesquisar(System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
@@ -602,6 +651,26 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Time">
             <summary>
             Time ao qual o produto pertence
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
+            <summary>
+            Representa um sprint, um software
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Id">
+            <summary>
+            Id do sprint
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Nome">
+            <summary>
+            Nome do sprint
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Produto">
+            <summary>
+            Time ao qual o sprint pertence
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

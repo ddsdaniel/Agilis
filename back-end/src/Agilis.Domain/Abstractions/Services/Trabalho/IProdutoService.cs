@@ -6,6 +6,7 @@ using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Collections.Generic;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
@@ -18,5 +19,8 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         public Task RemoverRNF(Guid produtoId, int numero);
         public Task AtualizarDescricaoRNF(Guid produtoId, int numeroRnf, string descricao);
         public Task AtualizarTipoRNF(Guid produtoId, int numeroRnf, TipoRequisitoNaoFuncional tipo);
+
+        Task<SprintVO> AdicionarSprint(Guid produtoId, Sprint sprint);
+        Task ExcluirSprint(Guid produtoId, Guid sprintId);
     }
 }

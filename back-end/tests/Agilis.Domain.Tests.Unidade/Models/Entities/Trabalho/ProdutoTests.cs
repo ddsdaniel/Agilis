@@ -9,6 +9,7 @@ using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using System;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -33,7 +34,9 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nome,
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional>(),
-                                      LinguagemUbiquaMock.ObterValida());
+                                      LinguagemUbiquaMock.ObterValida(),
+                                      new List<SprintVO>()
+                                      );
 
             //Assert
             Assert.True(produto.Invalid);
@@ -43,7 +46,13 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_RnfNulo_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(nameof(Produto), null, null, LinguagemUbiquaMock.ObterValida());
+            var produto = new Produto(
+                nameof(Produto), 
+                null, 
+                null, 
+                LinguagemUbiquaMock.ObterValida(),
+                null
+                );
 
             //Assert
             Assert.True(produto.Invalid);
@@ -56,7 +65,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nameof(Produto),
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
-                                      LinguagemUbiquaMock.ObterValida()
+                                      LinguagemUbiquaMock.ObterValida(),
+                                      new List<SprintVO>()
                                       );
 
             //Assert

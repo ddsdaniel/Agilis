@@ -9,7 +9,6 @@ using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
-using Agilis.Domain.Models.Entities.Pessoas;
 using Microsoft.AspNetCore.Http;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
@@ -79,5 +78,52 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
                 => lista.OrderBy(p => p.Nome)
                         .ToList();
+
+        /// <summary>
+        /// Adiciona um sprint ao produto
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="sprintViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("{timeId:guid}/sprints")]
+        [ProducesResponseType(typeof(ICollection<SprintBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarSprint([FromServices] IMapper autoMapper,
+                                                        Guid produtoId,
+                                                        SprintViewModel sprintViewModel)
+        {
+            
+            var sprint = autoMapper.Map<Sprint>(sprintViewModel);
+            var sprintVO = await _service.AdicionarSprint(produtoId, sprint);
+
+            if (_service.Invalid)
+                return BadRequest(_service.Notifications);
+
+            var sprintBasicViewModel = autoMapper.Map<SprintBasicViewModel>(sprintVO);
+
+            return Ok(sprintBasicViewModel);
+        }
+
+        /// <summary>
+        /// Remove um sprint do produto+
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="sprintId"></param>
+        /// <returns></returns>
+        [HttpDelete("{timeId:guid}/sprints/{prodId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirSprint(Guid produtoId,
+                                                      Guid sprintId)
+        {
+            await _service.ExcluirSprint(produtoId, sprintId);
+
+            if (_service.Invalid)
+                return BadRequest(_service.Notifications);
+
+            return Ok();
+        }
     }
 }
