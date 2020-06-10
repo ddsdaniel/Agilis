@@ -7,8 +7,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
     public class OutrosProfile : Profile
     {
         public OutrosProfile()
-        {
-            //Times
+        {            
             CreateMap<IntervaloDatasViewModel, IntervaloDatas>()
                   .ConstructUsing((vm, context) =>
                     new IntervaloDatas(
@@ -16,6 +15,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         dataFinal: vm.DataFinal
                         )
                  );
+
+            CreateMap<IntervaloDatas, IntervaloDatasViewModel>();
         }
     }
 }

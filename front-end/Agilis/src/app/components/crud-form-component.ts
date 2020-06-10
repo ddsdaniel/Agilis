@@ -13,7 +13,7 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
   operacao: OperacaoFormCrud;
 
   constructor(
-    private router: Router,
+    protected router: Router,
     private apiService: CrudApiBaseService<TEntity>,
     protected snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,

@@ -91,4 +91,8 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
   }
+
+  editarSprint(id: string) {
+    this.router.navigateByUrl(`sprints/${id}`);
+  }
 }

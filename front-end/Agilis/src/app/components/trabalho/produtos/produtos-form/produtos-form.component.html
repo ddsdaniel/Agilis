@@ -63,6 +63,7 @@
             <mat-list>
               <mat-list-item *ngFor="let sprint of entidade.sprints">
                 <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)">delete</mat-icon>
+                <mat-icon mat-list-icon title="Editar" (click)="editarSprint(sprint.id)">edit</mat-icon>
                 <div mat-line>
                   <span>{{sprint.numero}}</span>
                   <span class="ml-5">{{sprint.nome}}</span>

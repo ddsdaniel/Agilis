@@ -23,8 +23,6 @@ export class CrudComponent<TEntity extends Entidade> implements OnInit {
   }
 
   atualizarDados() {
-    console.log('filtro: ' + this.filtro);
-
     if (this.filtro) {
       this.apiService.pesquisar(this.filtro)
         .subscribe(
