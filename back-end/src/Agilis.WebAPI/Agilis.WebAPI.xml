@@ -164,6 +164,24 @@
             <param name="colabId"></param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel)">
+            <summary>
+            Adiciona um release ao time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="releaseViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+            <summary>
+            Remove um release do time
+            </summary>
+            <param name="timeService"></param>
+            <param name="timeId"></param>
+            <param name="prodId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
             <summary>
             Adiciona um produto ao time
@@ -494,6 +512,11 @@
             Colaboradores do time, exceto administradores
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Releases">
+            <summary>
+            Releases do time
+            </summary>
+        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
             <summary>
             Produtos do time
@@ -691,7 +714,7 @@
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
             <summary>
-            Representa um sprint do produto
+            Representa um sprint da release
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Id">
@@ -709,9 +732,9 @@
             Nome do sprint
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Produto">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Release">
             <summary>
-            Produto ao qual o sprint pertence
+            Release ao qual o sprint pertence
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">

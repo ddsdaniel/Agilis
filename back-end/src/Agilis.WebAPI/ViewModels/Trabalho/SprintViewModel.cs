@@ -4,7 +4,7 @@ using System;
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
     /// <summary>
-    /// Representa um sprint do produto
+    /// Representa um sprint da release
     /// </summary>
     public class SprintViewModel : IViewModel
     {
@@ -24,9 +24,9 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Nome { get; set; }
 
         /// <summary>
-        /// Produto ao qual o sprint pertence
+        /// Release ao qual o sprint pertence
         /// </summary>
-        public ProdutoBasicViewModel Produto { get; set; }
+        public ReleaseBasicViewModel Release { get; set; }
 
         /// <summary>
         /// Intervalo de datas do sprint

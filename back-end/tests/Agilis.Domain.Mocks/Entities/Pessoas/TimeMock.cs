@@ -16,7 +16,15 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  escopo: EscopoTime.Pessoal,
                                                  colaboradores: new List<UsuarioVO>(),
                                                  administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                                 releases: new List<ReleaseVO>(),
                                                  produtos: new List<ProdutoVO>()
+                   ))
+               .Generate();
+
+        public static TimeVO ObterTimeVOValido()
+            => new Faker<TimeVO>()
+               .CustomInstantiator(p => new TimeVO(id: Guid.NewGuid(),
+                                                   nome: p.Commerce.Product()
                    ))
                .Generate();
 
@@ -26,6 +34,7 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  escopo: EscopoTime.Colaborativo,
                                                  colaboradores: new List<UsuarioVO>(),
                                                  administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                                 releases: new List<ReleaseVO>(),
                                                  produtos: new List<ProdutoVO>()
                    ))
                .Generate();

@@ -37,8 +37,13 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         public IEnumerable<UsuarioBasicViewModel> Colaboradores { get; set; }
 
         /// <summary>
+        /// Releases do time
+        /// </summary>
+        public IEnumerable<ReleaseBasicViewModel> Releases { get; set; }
+
+        /// <summary>
         /// Produtos do time
         /// </summary>
-        public IEnumerable<ProdutoBasicViewModel> Produtos { get; set; }        
+        public IEnumerable<ProdutoBasicViewModel> Produtos { get; set; }
     }
 }

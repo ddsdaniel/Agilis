@@ -22,6 +22,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         escopo: vm.Escopo,
                         administradores: context.Mapper.Map<UsuarioVO[]>(vm.Administradores),
                         colaboradores: context.Mapper.Map<UsuarioVO[]>(vm.Colaboradores),
+                        releases: context.Mapper.Map<ReleaseVO[]>(vm.Releases),
                         produtos: context.Mapper.Map<ProdutoVO[]>(vm.Produtos)
                         )
                  );

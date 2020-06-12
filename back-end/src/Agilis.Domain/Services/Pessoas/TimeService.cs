@@ -262,5 +262,67 @@ namespace Agilis.Domain.Services.Pessoas
                 await _unitOfWork.Commit();
             }
         }
+        public async Task<ReleaseVO> AdicionarRelease(Guid timeId, Release release)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return null;
+            }
+
+            if (release.Invalid)
+            {
+                AddNotifications(release);
+                return null;
+            }
+
+            await _unitOfWork.ReleaseRepository.Adicionar(release);
+
+            var releaseVO = new ReleaseVO(release.Ordem, release.Id, release.Nome);
+            time.AdicionarRelease(releaseVO);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return null;
+            }
+            else
+            {
+                await _unitOfWork.TimeRepository.Atualizar(time);
+                await _unitOfWork.Commit();
+                return releaseVO;
+            }
+        }
+
+        public async Task ExcluirRelease(Guid timeId, Guid prodId)
+        {
+            var time = await ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return;
+            }
+
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(prodId);
+            if (release == null)
+            {
+                AddNotification(nameof(release), "Release não encontrado");
+                return;
+            }
+
+            time.ExcluirRelease(release);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+            else
+            {
+                await _unitOfWork.ReleaseRepository.Excluir(release.Id);
+
+                await _unitOfWork.TimeRepository.Atualizar(time);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

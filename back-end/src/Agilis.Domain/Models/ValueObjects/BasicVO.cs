@@ -28,7 +28,7 @@ namespace Agilis.Domain.Models.ValueObjects
         public void Renomear(string nome)
         {
             if (String.IsNullOrEmpty(nome))
-                AddNotification(nameof(nome), "Nome do produto não deve ser nulo ou vazio");
+                AddNotification(nameof(nome), "Nome não deve ser nulo ou vazio");
             else
                 Nome = nome;
         }

@@ -1,5 +1,4 @@
-﻿using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Models.Entities.Trabalho;
+﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
@@ -33,7 +32,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         numero: vm.Numero,
                         periodo: context.Mapper.Map<IntervaloDatas>(vm.Periodo),
-                        produto: context.Mapper.Map<ProdutoVO>(vm.Produto)
+                        release: context.Mapper.Map<ReleaseVO>(vm.Release)
                         )
                  );
 
@@ -77,8 +76,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<ReleaseViewModel, Release>()
                  .ConstructUsing((vm, context) =>
                     new Release(
+                        ordem: vm.Ordem,
                         nome: vm.Nome,
-                        time: context.Mapper.Map<Time>(vm.Time)
+                        time: context.Mapper.Map<TimeVO>(vm.Time)
                         )
                  );
         }

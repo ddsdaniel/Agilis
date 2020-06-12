@@ -29,11 +29,11 @@ namespace Agilis.Domain.Services.Trabalho
         public ICollection<Sprint> ConsultarTodos(IUsuario usuario)
         {
             var times = _unitOfWork.TimeRepository.ObterTimes(usuario);
-            var produtos = times.SelectMany(t => t.Produtos).ToList();
+            var releases = times.SelectMany(t => t.Releases).ToList();
 
             return _unitOfWork.SprintRepository
                      .AsQueryable()
-                     .Where(s => produtos.Any(p => p.Id == s.Produto.Id))
+                     .Where(s => releases.Any(p => p.Id == s.Release.Id))
                      .OrderBy(p => p.Nome)
                      .ToList();
         }
@@ -41,11 +41,11 @@ namespace Agilis.Domain.Services.Trabalho
         public ICollection<Sprint> Pesquisar(string filtro, IUsuario usuario)
         {
             var times = _unitOfWork.TimeRepository.ObterTimes(usuario);
-            var produtos = times.SelectMany(t => t.Produtos).ToList();
+            var releases = times.SelectMany(t => t.Releases).ToList();
 
             return _unitOfWork.SprintRepository
                     .AsQueryable()
-                    .Where(s => produtos.Any(p => p.Id == s.Produto.Id) &&
+                    .Where(s => releases.Any(p => p.Id == s.Release.Id) &&
                                 s.Nome.ToLower().Contains(filtro.ToLower())
                         )
                     .OrderBy(p => p.Nome)

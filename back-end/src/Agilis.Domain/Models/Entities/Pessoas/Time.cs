@@ -17,6 +17,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public IEnumerable<UsuarioVO> Colaboradores { get; private set; }
         public IEnumerable<UsuarioVO> Administradores { get; private set; }
         public IEnumerable<ProdutoVO> Produtos { get; private set; }
+        public IEnumerable<ReleaseVO> Releases { get; private set; }
 
         protected Time()
         {
@@ -27,6 +28,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                     EscopoTime escopo,
                     IEnumerable<UsuarioVO> colaboradores,
                     IEnumerable<UsuarioVO> administradores,
+                    IEnumerable<ReleaseVO> releases,
                     IEnumerable<ProdutoVO> produtos)
         {
             AddNotifications(new Contract()
@@ -37,6 +39,8 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 .IfNotNull(administradores, c => c.Join(administradores.ToArray()))
                 .IsNotNull(produtos, nameof(produtos), "Lista de Produtos não deve ser nula")
                 .IfNotNull(produtos, c => c.Join(produtos.ToArray()))
+                .IsNotNull(releases, nameof(releases), "Lista de Releases não deve ser nula")
+                .IfNotNull(releases, c => c.Join(releases.ToArray()))                
                 );
 
             if (administradores != null)
@@ -70,6 +74,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Administradores = administradores;
             Colaboradores = colaboradores;
             Produtos = produtos;
+            Releases = releases;
         }
 
         public void RenomearProduto(Guid id, string nome)
@@ -79,6 +84,15 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 AddNotification(nameof(id), "Produto não encontrado no time");
             else
                 produto.Renomear(nome);
+        }
+
+        public void RenomearRelease(Guid id, string nome)
+        {
+            var release = Releases.FirstOrDefault(r => r.Id == id);
+            if (release == null)
+                AddNotification(nameof(id), "Release não encontrado no time");
+            else
+                release.Renomear(nome);
         }
 
         internal void AdicionarAdmin(UsuarioVO admin)
@@ -176,6 +190,32 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             else
             {
                 Produtos = Produtos.Where(a => a.Id != produto.Id);
+            }
+        }
+
+        internal void AdicionarRelease(ReleaseVO release)
+        {
+            if (Releases.Any(r => r.Id == release.Id))
+            {
+                AddNotification(nameof(release), "Release já adicionada neste time");
+                return;
+            }
+
+            var novaLista = Releases.ToList();
+            novaLista.Add(release);
+
+            novaLista = novaLista.OrderBy(r => r.Ordem).ToList();
+
+            Releases = novaLista;
+        }
+
+        internal void ExcluirRelease(Release release)
+        {
+            if (!Releases.Any(r => r.Id == release.Id))
+                AddNotification(nameof(release.Id), "Release não encontrada");
+            else
+            {
+                Releases = Releases.Where(r => r.Id != release.Id);
             }
         }
 

@@ -21,5 +21,7 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         Task ExcluirColaborador(Guid timeId, Guid colabId);
         Task<ProdutoVO> AdicionarProduto(Guid timeId, Produto produto);
         Task ExcluirProduto(Guid timeId, Guid prodId);
+        Task<ReleaseVO> AdicionarRelease(Guid timeId, Release release);
+        Task ExcluirRelease(Guid timeId, Guid prodId);
     }
 }

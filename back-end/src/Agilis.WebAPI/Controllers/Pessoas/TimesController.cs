@@ -156,6 +156,56 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         }
 
         /// <summary>
+        /// Adiciona um release ao time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="releaseViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("{timeId:guid}/releases")]
+        [ProducesResponseType(typeof(ICollection<ReleaseBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarRelease([FromServices] ITimeService timeService,
+                                                         [FromServices] IMapper autoMapper,
+                                                         Guid timeId,
+                                                         ReleaseViewModel releaseViewModel)
+        {
+            var release = autoMapper.Map<Release>(releaseViewModel);
+            var releaseVO = await timeService.AdicionarRelease(timeId, release);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            var releaseBasicViewModel = autoMapper.Map<ReleaseBasicViewModel>(releaseVO);
+
+            return Ok(releaseBasicViewModel);
+        }
+
+        /// <summary>
+        /// Remove um release do time
+        /// </summary>
+        /// <param name="timeService"></param>
+        /// <param name="timeId"></param>
+        /// <param name="prodId"></param>
+        /// <returns></returns>
+        [HttpDelete("{timeId:guid}/releases/{prodId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirRelease([FromServices] ITimeService timeService,
+                                                       Guid timeId,
+                                                       Guid prodId)
+        {
+            await timeService.ExcluirRelease(timeId, prodId);
+
+            if (timeService.Invalid)
+                return BadRequest(timeService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Adiciona um produto ao time
         /// </summary>
         /// <param name="timeService"></param>

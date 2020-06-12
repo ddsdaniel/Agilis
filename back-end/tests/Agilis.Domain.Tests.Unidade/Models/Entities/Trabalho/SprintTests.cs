@@ -28,7 +28,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var sprint = new Sprint(nome,
                                     1,
                                     new IntervaloDatas(null, null),
-                                    new ProdutoVO(Guid.NewGuid(), "Produto 1")
+                                    new ReleaseVO(1, Guid.NewGuid(), "Release 1")
                                     );
 
             //Assert
@@ -44,7 +44,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var sprint = new Sprint("Nome válido",
                                     numero,
                                     new IntervaloDatas(null, null),
-                                    new ProdutoVO(Guid.NewGuid(), "Produto 1")
+                                    new ReleaseVO(1, Guid.NewGuid(), "Release 1")
                                     );
 
             //Assert

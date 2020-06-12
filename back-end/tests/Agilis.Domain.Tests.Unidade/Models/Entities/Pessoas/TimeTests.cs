@@ -31,6 +31,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioVO>(),
                                 administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                releases: new List<ReleaseVO>(),
                                 produtos: new List<ProdutoVO>()
                                 );
 
@@ -46,6 +47,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioVO>(),
                                 administradores: new List<UsuarioVO> { },
+                                releases: new List<ReleaseVO>(),
                                 produtos: new List<ProdutoVO>()
                                 );
 

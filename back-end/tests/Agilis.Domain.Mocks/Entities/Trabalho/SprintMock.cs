@@ -17,7 +17,7 @@ namespace Agilis.Domain.Mocks.Entities.Trabalho
                        return new Sprint($"Sprint {numero}",
                                         numero,
                                         new IntervaloDatas(p.Date.Past(), p.Date.Future()),
-                                        new ProdutoVO(Guid.NewGuid(), p.Commerce.ProductName())
+                                        new ReleaseVO(1,  Guid.NewGuid(), p.Commerce.ProductName())
                                         );
                    }
                ).Generate();
