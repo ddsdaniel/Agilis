@@ -113,13 +113,16 @@ namespace Agilis.Domain.Services.Trabalho
 
         public ICollection<Produto> ConsultarTodos(IUsuario usuario)
         {
-            var times = _unitOfWork.TimeRepository.ObterTimes(usuario);
+            var times = _unitOfWork.TimeRepository
+                .ObterTimes(usuario)
+                .Select(t => t.Id)
+                .ToArray();
 
             return _unitOfWork.ProdutoRepository
-                     .AsQueryable()
-                     .Where(p => times.Any(t => t.Id == p.Time.Id))
-                     .OrderBy(p => p.Nome)
-                     .ToList();
+                .AsQueryable()
+                .Where(p => times.Contains(p.Time.Id))
+                .OrderBy(p => p.Nome)
+                .ToList();
         }
 
         public ICollection<Produto> Pesquisar(string filtro, IUsuario usuario)
