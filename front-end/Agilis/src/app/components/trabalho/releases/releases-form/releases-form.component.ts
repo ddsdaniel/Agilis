@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
 import { Time } from 'src/app/models/pessoas/time';
@@ -36,11 +35,16 @@ export class ReleasesFormComponent extends CrudFormComponent<Release> implements
     super.ngOnInit();
   }
 
+  recuperouEntidade(release: Release): void {
+    this.timeId = release.time.id;
+  }
+
   sugerirNovo(): void {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
       time: null,
+      ordem: 0 // TODO: Ordem
     };
   }
 

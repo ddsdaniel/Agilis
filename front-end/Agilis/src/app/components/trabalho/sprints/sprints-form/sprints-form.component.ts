@@ -29,7 +29,7 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> {
       nome: '',
       numero: 0,
       periodo: {},
-      produto: {
+      release: {
         id: constantes.newGuid,
         nome: ''
       }

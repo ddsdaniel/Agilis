@@ -74,7 +74,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
     const sprint: Sprint = {
       id: constantes.newGuid,
       nome: this.nomeSprint,
-      produto: {
+      release: {
         id: this.entidade.id,
         nome: this.entidade.nome
       },

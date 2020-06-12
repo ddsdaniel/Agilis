@@ -81,6 +81,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         time: context.Mapper.Map<TimeVO>(vm.Time)
                         )
                  );
+
+            CreateMap<ReleaseVO, ReleaseBasicViewModel>();
         }
     }
 }

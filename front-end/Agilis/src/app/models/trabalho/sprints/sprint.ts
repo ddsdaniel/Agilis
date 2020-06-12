@@ -1,9 +1,9 @@
 ﻿import { Entidade } from '../../entidade';
 import { IntervaloDatas } from '../../intervalo-datas';
-import { ProdutoVO } from '../produtos/produto-vo';
+import { ReleaseVO } from '../releases/release-vo';
 
 export interface Sprint extends Entidade {
-  produto: ProdutoVO;
+  release: ReleaseVO;
   numero: number;
   periodo: IntervaloDatas;
 }

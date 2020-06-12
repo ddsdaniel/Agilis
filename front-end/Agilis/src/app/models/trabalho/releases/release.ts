@@ -1,6 +1,7 @@
 ﻿import { Entidade } from '../../entidade';
-import { Time } from '../../pessoas/time';
+import { TimeVO } from '../../pessoas/time-vo';
 
 export interface Release extends Entidade {
-  time: Time;
+  time: TimeVO;
+  ordem: number;
 }

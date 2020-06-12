@@ -12,6 +12,8 @@ import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.ser
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
 import { ProdutoVO } from 'src/app/models/trabalho/produtos/produto-vo';
+import { Release } from 'src/app/models/trabalho/releases/release';
+import { ReleaseVO } from 'src/app/models/trabalho/releases/release-vo';
 
 @Component({
   selector: 'app-times-form',
@@ -23,6 +25,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   emailAdmin: string;
   emailColaborador: string;
   nomeProduto: string;
+  nomeRelease: string;
   timeApiService: TimesApiService;
 
   constructor(
@@ -52,6 +55,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       }],
       colaboradores: [],
       produtos: [],
+      releases: [],
       escopo: EscopoTime.Colaborativo,
     };
   }
@@ -132,6 +136,36 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         (novoProduto: ProdutoVO) => {
           this.entidade.produtos.push(novoProduto);
           this.nomeProduto = '';
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+  excluirRelease(prodId: string) {
+    this.timeApiService.excluirRelease(this.entidade.id, prodId)
+      .subscribe(
+        () => {
+          const index = this.entidade.releases.findIndex(p => p.id === prodId);
+          this.entidade.releases.removeAt(index);
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  adicionarRelease() {
+    const release: Release = {
+      id: constantes.newGuid,
+      nome: this.nomeRelease,
+      time: {
+        id: this.entidade.id,
+        nome: this.entidade.nome
+      },
+      ordem: 0 // TODO: Ordem
+    };
+    this.timeApiService.adicionarRelease(this.entidade.id, release)
+      .subscribe(
+        (novoRelease: ReleaseVO) => {
+          this.entidade.releases.push(novoRelease);
+          this.nomeRelease = '';
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );

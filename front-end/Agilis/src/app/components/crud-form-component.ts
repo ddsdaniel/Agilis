@@ -40,9 +40,16 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
   recuperarEntidade(id: string): void {
     this.apiService.obterUm(id)
       .subscribe(
-        (entidade: TEntity) => this.entidade = entidade,
+        (entidade: TEntity) => {
+          this.entidade = entidade;
+          this.recuperouEntidade(entidade);
+        },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
+  }
+
+  recuperouEntidade(entidade: TEntity) {
+
   }
 
   abstract sugerirNovo(): void;
