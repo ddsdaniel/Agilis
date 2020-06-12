@@ -6,6 +6,8 @@ using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using System.Collections.Generic;
 using System.Linq;
+using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Microsoft.AspNetCore.Http;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -16,18 +18,40 @@ namespace Agilis.WebAPI.Controllers.Trabalho
     [Route("api/[controller]")]
     public class ReleasesController : CrudController<ReleaseViewModel, ReleaseViewModel, Release>
     {
-        private readonly IReleaseService _service;
+        private readonly IReleaseService _releaseService;
+        private readonly IUsuario _usuarioLogado;
 
         /// <summary>
         /// Construtor com parâmetros injetados
         /// </summary>
         /// <param name="service">Serviço para manipulação da entidade</param>       
-        /// <param name="mapper">Automapper</param>
-        public ReleasesController(IReleaseService service, 
+        /// <param name="usuarioLogado">Instância do usuário logado</param>
+        /// <param name="mapper">Instância do Automapper</param>
+        public ReleasesController(IReleaseService service,
+                                 IUsuario usuarioLogado,
                                  IMapper mapper) 
             : base(service, mapper)
         {
-            _service = service;
+            _releaseService = service;
+            _usuarioLogado = usuarioLogado;
+        }
+
+        /// <summary>
+        /// Pesquisa sobre os registros do repositório
+        /// </summary>
+        /// <param name="filtro">Filtro inserido pelo usuário</param>
+        /// <returns>Lista de registros correspondentes ao filtro</returns>
+        [HttpGet("pesquisa")]
+        [ProducesResponseType(typeof(ICollection<ReleaseViewModel>), StatusCodes.Status200OK)]
+        public override ActionResult<ICollection<ReleaseViewModel>> Pesquisar([FromQuery] string filtro)
+        {
+            var lista = _releaseService.Pesquisar(filtro, _usuarioLogado);
+
+            var listaViewModel = _mapper.Map<ICollection<ReleaseViewModel>>(lista);
+
+            listaViewModel = Ordenar(listaViewModel);
+
+            return Ok(listaViewModel);
         }
 
         /// <summary>
@@ -37,7 +61,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         public override ActionResult<ICollection<ReleaseViewModel>> ConsultarTodos()
         {
 
-            var lista = _service.ConsultarTodos().OrderBy(p => p.Nome);
+            var lista = _releaseService.ConsultarTodos(_usuarioLogado).OrderBy(p => p.Nome);
 
             var listaViewModel = _mapper.Map<List<ReleaseViewModel>>(lista);
 

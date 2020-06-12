@@ -75,58 +75,6 @@
             </div>
           </mat-tab>
 
-          <mat-tab label="Produtos">
-            <div class="tab-container">
-
-              <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" type="text" [(ngModel)]="nomeProduto"
-                  (keyup.enter)="adicionarProduto()" name="nomeProduto">
-              </mat-form-field>
-
-              <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%"
-                fxFlex.lg="15%" fxFlex.xl="15%">
-                <button mat-raised-button (click)="adicionarProduto()">Adicionar</button>
-              </div>
-
-            </div>
-            <div>
-              <mat-list>
-                <mat-list-item *ngFor="let prod of entidade.produtos">
-                  <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
-                  <div mat-line><a [routerLink]="['/produtos/' + prod.id]">{{prod.nome}}</a></div>
-                </mat-list-item>
-              </mat-list>
-            </div>
-
-          </mat-tab>
-
-          <mat-tab label="Releases">
-            <div class="tab-container">
-
-              <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Nome" type="text" [(ngModel)]="nomeRelease"
-                  (keyup.enter)="adicionarRelease()" name="nomeRelease">
-              </mat-form-field>
-
-              <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%"
-                fxFlex.lg="15%" fxFlex.xl="15%">
-                <button mat-raised-button (click)="adicionarRelease()">Adicionar</button>
-              </div>
-
-            </div>
-            <div>
-              <mat-list>
-                <mat-list-item *ngFor="let prod of entidade.releases">
-                  <mat-icon mat-list-icon title="Remover" (click)="excluirRelease(prod.id)">delete</mat-icon>
-                  <div mat-line><a [routerLink]="['/releases/' + prod.id]">{{prod.nome}}</a></div>
-                </mat-list-item>
-              </mat-list>
-            </div>
-
-          </mat-tab>
-
         </mat-tab-group>
 
 

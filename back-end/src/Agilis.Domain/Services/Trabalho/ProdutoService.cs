@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+﻿
+using Agilis.Domain.Abstractions.Entities.Pessoas;
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
@@ -122,6 +123,7 @@ namespace Agilis.Domain.Services.Trabalho
                 .ToList();
         }
 
+        //TODO: abstrair estes métodos do usuário
         private Guid[] ObterTimeIds(IUsuario usuario)
         {
             return _unitOfWork.TimeRepository

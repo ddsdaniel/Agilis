@@ -358,12 +358,20 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Instância do usuário logado</param>
+            <param name="mapper">Instância do Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Pesquisar(System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarTodos">
             <summary>

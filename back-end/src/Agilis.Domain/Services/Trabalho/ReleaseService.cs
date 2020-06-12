@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Abstractions.Repositories;
+﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Enums;
@@ -27,5 +28,37 @@ namespace Agilis.Domain.Services.Trabalho
                    .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
                    .OrderBy(p => p.Nome)
                    .ToList();
+
+        public ICollection<Release> ConsultarTodos(IUsuario usuario)
+        {
+            var timeIds = ObterTimeIds(usuario);
+
+            return _unitOfWork.ReleaseRepository
+                .AsQueryable()
+                .Where(p => timeIds.Contains(p.Time.Id))
+                .OrderBy(p => p.Nome)
+                .ToList();
+        }
+
+        private Guid[] ObterTimeIds(IUsuario usuario)
+        {
+            return _unitOfWork.TimeRepository
+                            .ObterTimes(usuario)
+                            .Select(t => t.Id)
+                            .ToArray();
+        }
+
+        public ICollection<Release> Pesquisar(string filtro, IUsuario usuario)
+        {
+            var timeIds = ObterTimeIds(usuario);
+
+            return _unitOfWork.ReleaseRepository
+                    .AsQueryable()
+                    .Where(p => timeIds.Contains(p.Time.Id) &&
+                                p.Nome.ToLower().Contains(filtro.ToLower())
+                        )
+                    .OrderBy(p => p.Nome)
+                    .ToList();
+        }
     }
 }

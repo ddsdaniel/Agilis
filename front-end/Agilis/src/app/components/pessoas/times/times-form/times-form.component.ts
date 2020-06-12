@@ -7,13 +7,9 @@ import { constantes } from 'src/app/constants/constantes';
 import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Email } from 'src/app/models/pessoas/email';
 import { Time } from 'src/app/models/pessoas/time';
+import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
-import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
-import { Produto } from 'src/app/models/trabalho/produtos/produto';
-import { ProdutoVO } from 'src/app/models/trabalho/produtos/produto-vo';
-import { Release } from 'src/app/models/trabalho/releases/release';
-import { ReleaseVO } from 'src/app/models/trabalho/releases/release-vo';
 
 @Component({
   selector: 'app-times-form',
@@ -105,67 +101,6 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         (novoColab: UsuarioVO) => {
           this.entidade.colaboradores.push(novoColab);
           this.emailColaborador = '';
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
-  excluirProduto(prodId: string) {
-    this.timeApiService.excluirProduto(this.entidade.id, prodId)
-      .subscribe(
-        () => {
-          const index = this.entidade.produtos.findIndex(p => p.id === prodId);
-          this.entidade.produtos.removeAt(index);
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
-  adicionarProduto() {
-    const produto: Produto = {
-      id: constantes.newGuid,
-      nome: this.nomeProduto,
-      time: {
-        id: this.entidade.id,
-        nome: this.entidade.nome
-      },
-      sprints: []
-    };
-    this.timeApiService.adicionarProduto(this.entidade.id, produto)
-      .subscribe(
-        (novoProduto: ProdutoVO) => {
-          this.entidade.produtos.push(novoProduto);
-          this.nomeProduto = '';
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-  excluirRelease(prodId: string) {
-    this.timeApiService.excluirRelease(this.entidade.id, prodId)
-      .subscribe(
-        () => {
-          const index = this.entidade.releases.findIndex(p => p.id === prodId);
-          this.entidade.releases.removeAt(index);
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
-  adicionarRelease() {
-    const release: Release = {
-      id: constantes.newGuid,
-      nome: this.nomeRelease,
-      time: {
-        id: this.entidade.id,
-        nome: this.entidade.nome
-      },
-      ordem: 0 // TODO: Ordem
-    };
-    this.timeApiService.adicionarRelease(this.entidade.id, release)
-      .subscribe(
-        (novoRelease: ReleaseVO) => {
-          this.entidade.releases.push(novoRelease);
-          this.nomeRelease = '';
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
