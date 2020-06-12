@@ -37,6 +37,15 @@
             <mat-datepicker #pickerFinal></mat-datepicker>
           </mat-form-field>
 
+          <mat-form-field class="full-width">
+            <mat-label>Release</mat-label>
+            <mat-select [(ngModel)]="entidade?.release.id" name="release">
+              <mat-option *ngFor="let release of releases" [value]="release.id">
+                {{release.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <div>
             <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
             <button mat-raised-button (click)="cancelar()">Cancelar</button>

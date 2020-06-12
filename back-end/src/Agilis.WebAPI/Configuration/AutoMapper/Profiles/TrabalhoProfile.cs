@@ -83,6 +83,15 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  );
 
             CreateMap<ReleaseVO, ReleaseBasicViewModel>();
+
+            CreateMap<ReleaseBasicViewModel, ReleaseVO>()
+                 .ConstructUsing((vm, context) =>
+                    new ReleaseVO(
+                        ordem: vm.Ordem,
+                        id: vm.Id,
+                        nome: vm.Nome
+                        )
+                 );
         }
     }
 }
