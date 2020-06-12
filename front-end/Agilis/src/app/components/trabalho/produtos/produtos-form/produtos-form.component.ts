@@ -30,7 +30,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
     activatedRoute: ActivatedRoute,
     private timesApiService: TimesApiService,
   ) {
-    super(router, produtoApiService, snackBar, activatedRoute, 'times');
+    super(router, produtoApiService, snackBar, activatedRoute, 'produtos');
     this.produtoApiService = produtoApiService;
     this.sugerirNovo();
   }

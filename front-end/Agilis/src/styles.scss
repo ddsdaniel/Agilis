@@ -111,3 +111,14 @@ $spacer: 1rem !default;
   padding-left: 0.5 * $spacer !important;
   padding-right: 0.5 * $spacer !important;
 }
+
+//crud
+mat-list-item mat-icon {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.pesquisa button{
+  height: 36px !important;
+  margin-bottom: 20px;
+}
