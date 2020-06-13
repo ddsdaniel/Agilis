@@ -3,6 +3,8 @@ using Agilis.Domain.Mocks.Entities.Trabalho;
 using Xunit;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using System;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
+using System.Collections.Generic;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -26,7 +28,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var release = new Release(1, 
                                       nome,
-                                      new TimeVO(Guid.NewGuid(), "Time 1")
+                                      new TimeVO(Guid.NewGuid(), "Time 1"),
+                                      new List<SprintVO>()
                                       );
 
             //Assert
@@ -42,7 +45,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var release = new Release(ordem,
                                       "Nome válido",
-                                      new TimeVO(Guid.NewGuid(), "Time 1")
+                                      new TimeVO(Guid.NewGuid(), "Time 1"),
+                                      new List<SprintVO>()
                                       );
 
             //Assert

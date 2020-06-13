@@ -60,5 +60,68 @@ namespace Agilis.Domain.Services.Trabalho
                     .OrderBy(p => p.Nome)
                     .ToList();
         }
+
+        public async Task<SprintVO> AdicionarSprint(Guid releaseId, Sprint sprint)
+        {
+            var release = await ConsultarPorId(releaseId);
+            if (release == null)
+            {
+                AddNotification(nameof(release), "Release não encontrada");
+                return null;
+            }
+
+            if (sprint.Invalid)
+            {
+                AddNotifications(sprint);
+                return null;
+            }
+
+            await _unitOfWork.SprintRepository.Adicionar(sprint);
+
+            var sprintVO = new SprintVO(sprint.Id, sprint.Nome, sprint.Numero);
+            release.AdicionarSprint(sprintVO);
+            if (release.Invalid)
+            {
+                AddNotifications(release);
+                return null;
+            }
+            else
+            {
+                await Atualizar(release);
+                await _unitOfWork.Commit();
+                return sprintVO;
+            }
+        }
+
+        public async Task ExcluirSprint(Guid releaseId, Guid sprintId)
+        {
+            var release = await ConsultarPorId(releaseId);
+            if (release == null)
+            {
+                AddNotification(nameof(release), "Release não encontrada");
+                return;
+            }
+
+            var sprint = await _unitOfWork.SprintRepository.ConsultarPorId(sprintId);
+            if (sprint == null)
+            {
+                AddNotification(nameof(sprint), "Sprint não encontrado");
+                return;
+            }
+
+            release.ExcluirSprint(sprint);
+            if (release.Invalid)
+            {
+                AddNotifications(release);
+                return;
+            }
+            else
+            {
+                await _unitOfWork.SprintRepository.Excluir(sprint.Id);
+
+                await Atualizar(release);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

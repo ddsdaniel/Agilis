@@ -44,13 +44,18 @@ export class ReleasesFormComponent extends CrudFormComponent<Release> implements
       id: constantes.newGuid,
       nome: '',
       time: null,
-      ordem: 0 // TODO: Ordem
+      ordem: 0, // TODO: Ordem
+      sprints: [],
     };
   }
 
   salvar() {
     this.entidade.time = this.times.find(t => t.id === this.timeId);
     super.salvar();
+  }
+
+  editarSprint(id: string) {
+    this.router.navigateByUrl(`sprints/${id}`);
   }
 
 }

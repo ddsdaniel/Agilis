@@ -12,14 +12,14 @@ export const menuPrincipal: ItemMenu[] = [
     rota: '/produtos'
   },
   {
-    nome: 'Sprints',
-    icone: 'vpn_key',
-    rota: '/sprints'
-  },
-  {
     nome: 'Releases',
     icone: 'vpn_key',
     rota: '/releases'
+  },
+  {
+    nome: 'Sprints',
+    icone: 'vpn_key',
+    rota: '/sprints'
   },
   {
     nome: 'Sair',

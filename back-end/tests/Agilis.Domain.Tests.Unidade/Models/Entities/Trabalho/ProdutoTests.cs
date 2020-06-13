@@ -34,8 +34,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nome,
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional>(),
-                                      LinguagemUbiquaMock.ObterValida(),
-                                      new List<SprintVO>()
+                                      LinguagemUbiquaMock.ObterValida()
                                       );
 
             //Assert
@@ -50,8 +49,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
                 nameof(Produto), 
                 null, 
                 null, 
-                LinguagemUbiquaMock.ObterValida(),
-                null
+                LinguagemUbiquaMock.ObterValida()
                 );
 
             //Assert
@@ -65,8 +63,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(nameof(Produto),
                                       new TimeVO(Guid.NewGuid(), "Time 1"),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
-                                      LinguagemUbiquaMock.ObterValida(),
-                                      new List<SprintVO>()
+                                      LinguagemUbiquaMock.ObterValida()
                                       );
 
             //Assert

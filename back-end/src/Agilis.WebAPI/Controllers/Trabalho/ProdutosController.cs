@@ -101,52 +101,6 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
                 => lista.OrderBy(p => p.Nome)
                         .ToList();
-
-        /// <summary>
-        /// Adiciona um sprint ao produto
-        /// </summary>
-        /// <param name="autoMapper"></param>
-        /// <param name="produtoId"></param>
-        /// <param name="sprintViewModel"></param>
-        /// <returns></returns>
-        [HttpPost("{produtoId:guid}/sprints")]
-        [ProducesResponseType(typeof(ICollection<SprintBasicViewModel>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarSprint([FromServices] IMapper autoMapper,
-                                                        Guid produtoId,
-                                                        SprintViewModel sprintViewModel)
-        {
-            
-            var sprint = autoMapper.Map<Sprint>(sprintViewModel);
-
-            var sprintVO = await _produtoService.AdicionarSprint(produtoId, sprint);
-            if (_produtoService.Invalid)
-                return BadRequest(_produtoService.Notifications);
-
-            var sprintBasicViewModel = autoMapper.Map<SprintBasicViewModel>(sprintVO);
-
-            return Ok(sprintBasicViewModel);
-        }
-
-        /// <summary>
-        /// Remove um sprint do produto+
-        /// </summary>
-        /// <param name="produtoId"></param>
-        /// <param name="sprintId"></param>
-        /// <returns></returns>
-        [HttpDelete("{produtoId:guid}/sprints/{sprintId:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirSprint(Guid produtoId,
-                                                      Guid sprintId)
-        {
-            await _produtoService.ExcluirSprint(produtoId, sprintId);
-            if (_produtoService.Invalid)
-                return BadRequest(_produtoService.Notifications);
-
-            return Ok();
-        }
+      
     }
 }

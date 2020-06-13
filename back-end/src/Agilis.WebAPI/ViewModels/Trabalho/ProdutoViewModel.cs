@@ -24,10 +24,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// Time ao qual o produto pertence
         /// </summary>
         public TimeBasicViewModel Time { get; set; }
-
-        /// <summary>
-        /// Sprints do produto
-        /// </summary>
-        public IEnumerable<SprintBasicViewModel> Sprints { get; set; }
+        
     }
 }

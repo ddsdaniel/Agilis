@@ -17,8 +17,7 @@ namespace Agilis.Domain.Mocks.Entities.Trabalho
                .CustomInstantiator(p => new Produto(p.Commerce.Product(),
                                                     new TimeVO(Guid.NewGuid(), "Time 1"),
                                                     new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterValido() },
-                                                    LinguagemUbiquaMock.ObterValida(),
-                                                    sprints: new List<SprintVO>()
+                                                    LinguagemUbiquaMock.ObterValida()
                                                    )
                ).Generate();
     }

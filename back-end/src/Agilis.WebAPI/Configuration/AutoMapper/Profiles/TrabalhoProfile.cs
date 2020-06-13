@@ -56,8 +56,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         time: context.Mapper.Map<TimeVO>(vm.Time),
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
-                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>()),
-                        sprints: new List<SprintVO>()
+                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
                         )
                  );
 
@@ -78,7 +77,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                     new Release(
                         ordem: vm.Ordem,
                         nome: vm.Nome,
-                        time: context.Mapper.Map<TimeVO>(vm.Time)
+                        time: context.Mapper.Map<TimeVO>(vm.Time),
+                        sprints: new List<SprintVO>()
                         )
                  );
 

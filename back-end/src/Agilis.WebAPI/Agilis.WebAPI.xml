@@ -336,23 +336,6 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarSprint(AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel)">
-            <summary>
-            Adiciona um sprint ao produto
-            </summary>
-            <param name="autoMapper"></param>
-            <param name="produtoId"></param>
-            <param name="sprintViewModel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirSprint(System.Guid,System.Guid)">
-            <summary>
-            Remove um sprint do produto+
-            </summary>
-            <param name="produtoId"></param>
-            <param name="sprintId"></param>
-            <returns></returns>
-        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
             <summary>
             Manutenção do repositório
@@ -385,6 +368,23 @@
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel)">
+            <summary>
+            Adiciona um sprint ao release
+            </summary>
+            <param name="autoMapper"></param>
+            <param name="releaseId"></param>
+            <param name="sprintViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
+            <summary>
+            Remove um sprint do release+
+            </summary>
+            <param name="releaseId"></param>
+            <param name="sprintId"></param>
+            <returns></returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
             <summary>
@@ -715,9 +715,9 @@
             Time ao qual o produto pertence
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Sprints">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
             <summary>
-            Sprints do produto
+            Sprints da release
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
