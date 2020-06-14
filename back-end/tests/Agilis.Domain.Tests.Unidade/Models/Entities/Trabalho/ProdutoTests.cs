@@ -31,8 +31,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var produto = new Produto(nome,
-                                      new TimeVO(Guid.NewGuid(), "Time 1"),
+            var produto = new Produto(Guid.NewGuid(),
+                                      nome,
                                       new List<RequisitoNaoFuncional>(),
                                       LinguagemUbiquaMock.ObterValida()
                                       );
@@ -46,8 +46,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange & Act
             var produto = new Produto(
+                Guid.NewGuid(),
                 nameof(Produto), 
-                null, 
                 null, 
                 LinguagemUbiquaMock.ObterValida()
                 );
@@ -60,8 +60,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_RnfInvalido_Invalid()
         {
             //Arrange & Act
-            var produto = new Produto(nameof(Produto),
-                                      new TimeVO(Guid.NewGuid(), "Time 1"),
+            var produto = new Produto(Guid.NewGuid(),
+                                      nameof(Produto),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
                                       LinguagemUbiquaMock.ObterValida()
                                       );

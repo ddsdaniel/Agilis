@@ -128,74 +128,66 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
             <summary>
             Adiciona um usuário administrador ao time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="emailViewModel"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(System.Guid,System.Guid)">
             <summary>
             Remove um administrador do time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="adminId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
             <summary>
             Adiciona um colaborador ao time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="emailViewModel"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(System.Guid,System.Guid)">
             <summary>
             Remove um colaborador do time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="colabId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel)">
             <summary>
             Adiciona um release ao time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="releaseViewModel"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(System.Guid,System.Guid)">
             <summary>
             Remove um release do time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="prodId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
             <summary>
             Adiciona um produto ao time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="produtoViewModel"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(System.Guid,System.Guid)">
             <summary>
             Remove um produto do time
             </summary>
-            <param name="timeService"></param>
             <param name="timeId"></param>
             <param name="prodId"></param>
             <returns></returns>
@@ -289,47 +281,6 @@
             <param name="mapper">Automapper</param>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
-            <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
-            </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario,Agilis.Domain.Abstractions.Services.Pessoas.ITimeService)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ConsultarTodos">
-            <summary>
-            Consulta todos os produtos do usuário logado
-            </summary>
-            <returns>Retorna todos os produtos do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Put(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
-            <summary>
-            Altera o produto em seu repositório em nas demais entidades com a qual se relaciona
-            </summary>
-            <param name="id"></param>
-            <param name="viewModelCadastro"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Pesquisar(System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>

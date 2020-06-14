@@ -9,7 +9,6 @@ namespace Agilis.Domain.Abstractions.Repositories
         IUserStoryRepository UserStoryRepository { get; }
         ITimeRepository TimeRepository { get; }
         ISprintRepository SprintRepository { get; }
-        IProdutoRepository ProdutoRepository { get; }
         IAtorRepository AtorRepository { get; }
         IMilestoneRepository MilestoneRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }

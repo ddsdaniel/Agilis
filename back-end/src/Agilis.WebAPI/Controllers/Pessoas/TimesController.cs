@@ -23,7 +23,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
     [Route("api/[controller]")]
     public class TimesController : CrudController<TimeViewModel, TimeViewModel, Time>
     {
-        private readonly ITimeService _service;
+        private readonly ITimeService _timeService;
         private readonly IUsuario _usuarioLogado;
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="mapper">Automapper</param>
         /// <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
         public TimesController(ITimeService service,
-                              IMapper mapper,
-                              IUsuario usuarioLogado)
+                               IMapper mapper,
+                               IUsuario usuarioLogado)
             : base(service, mapper)
         {
-            _service = service;
+            _timeService = service;
             _usuarioLogado = usuarioLogado;
         }
 
@@ -47,7 +47,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <returns>Retorna todos os times do usuário logado</returns>
         public override ActionResult<ICollection<TimeViewModel>> ConsultarTodos()
         {
-            var lista = _service.ConsultarTodos(_usuarioLogado)
+            var lista = _timeService.ConsultarTodos(_usuarioLogado)
                 .OrderBy(t => t.Nome);
 
             var listaViewModel = _mapper.Map<List<TimeViewModel>>(lista);
@@ -58,7 +58,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Adiciona um usuário administrador ao time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
@@ -66,18 +65,16 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarAdmin([FromServices] ITimeService timeService,
-                                                       [FromServices] IMapper autoMapper,
-                                                       Guid timeId,
+        public async Task<ActionResult> AdicionarAdmin(Guid timeId,
                                                        EmailViewModel emailViewModel)
         {
             var email = new Email(emailViewModel.Endereco);
-            var adminVO = await timeService.AdicionarAdmin(timeId, email);
+            var adminVO = await _timeService.AdicionarAdmin(timeId, email);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
-            var adminViewModel = autoMapper.Map<UsuarioBasicViewModel>(adminVO);
+            var adminViewModel = _mapper.Map<UsuarioBasicViewModel>(adminVO);
 
             return Ok(adminViewModel);
         }
@@ -85,7 +82,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Remove um administrador do time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="adminId"></param>
         /// <returns></returns>
@@ -93,14 +89,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirAdmin([FromServices] ITimeService timeService,
-                                                     Guid timeId,
+        public async Task<ActionResult> ExcluirAdmin(Guid timeId,
                                                      Guid adminId)
         {
-            await timeService.ExcluirAdmin(timeId, adminId);
+            await _timeService.ExcluirAdmin(timeId, adminId);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
             return Ok();
         }
@@ -108,7 +103,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Adiciona um colaborador ao time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
@@ -116,18 +110,16 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarColaborador([FromServices] ITimeService timeService,
-                                                             [FromServices] IMapper autoMapper,
-                                                             Guid timeId,
+        public async Task<ActionResult> AdicionarColaborador(Guid timeId,
                                                              EmailViewModel emailViewModel)
         {
             var email = new Email(emailViewModel.Endereco);
-            var colabVO = await timeService.AdicionarColaborador(timeId, email);
+            var colabVO = await _timeService.AdicionarColaborador(timeId, email);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
-            var colabViewModel = autoMapper.Map<UsuarioBasicViewModel>(colabVO);
+            var colabViewModel = _mapper.Map<UsuarioBasicViewModel>(colabVO);
 
             return Ok(colabViewModel);
         }
@@ -135,7 +127,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Remove um colaborador do time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="colabId"></param>
         /// <returns></returns>
@@ -143,14 +134,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirColaborador([FromServices] ITimeService timeService,
-                                                           Guid timeId,
+        public async Task<ActionResult> ExcluirColaborador(Guid timeId,
                                                            Guid colabId)
         {
-            await timeService.ExcluirColaborador(timeId, colabId);
+            await _timeService.ExcluirColaborador(timeId, colabId);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
             return Ok();
         }
@@ -158,7 +148,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Adiciona um release ao time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="releaseViewModel"></param>
         /// <returns></returns>
@@ -166,18 +155,16 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(typeof(ICollection<ReleaseBasicViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarRelease([FromServices] ITimeService timeService,
-                                                         [FromServices] IMapper autoMapper,
-                                                         Guid timeId,
+        public async Task<ActionResult> AdicionarRelease(Guid timeId,
                                                          ReleaseViewModel releaseViewModel)
         {
-            var release = autoMapper.Map<Release>(releaseViewModel);
-            var releaseVO = await timeService.AdicionarRelease(timeId, release);
+            var release = _mapper.Map<Release>(releaseViewModel);
+            var releaseVO = await _timeService.AdicionarRelease(timeId, release);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
-            var releaseBasicViewModel = autoMapper.Map<ReleaseBasicViewModel>(releaseVO);
+            var releaseBasicViewModel = _mapper.Map<ReleaseBasicViewModel>(releaseVO);
 
             return Ok(releaseBasicViewModel);
         }
@@ -185,7 +172,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Remove um release do time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="prodId"></param>
         /// <returns></returns>
@@ -193,14 +179,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirRelease([FromServices] ITimeService timeService,
-                                                       Guid timeId,
+        public async Task<ActionResult> ExcluirRelease(Guid timeId,
                                                        Guid prodId)
         {
-            await timeService.ExcluirRelease(timeId, prodId);
+            await _timeService.ExcluirRelease(timeId, prodId);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
             return Ok();
         }
@@ -208,26 +193,23 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Adiciona um produto ao time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="produtoViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/produtos")]
-        [ProducesResponseType(typeof(ICollection<ProdutoBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarProduto([FromServices] ITimeService timeService,
-                                                         [FromServices] IMapper autoMapper,
-                                                         Guid timeId,
+        public async Task<ActionResult> AdicionarProduto(Guid timeId,
                                                          ProdutoViewModel produtoViewModel)
         {
-            var produto = autoMapper.Map<Produto>(produtoViewModel);
-            var produtoVO = await timeService.AdicionarProduto(timeId, produto);
+            var produto = _mapper.Map<Produto>(produtoViewModel);
+            await _timeService.AdicionarProduto(timeId, produto);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
-            var produtoBasicViewModel = autoMapper.Map<ProdutoBasicViewModel>(produtoVO);
+            var produtoBasicViewModel = _mapper.Map<ProdutoViewModel>(produto);
 
             return Ok(produtoBasicViewModel);
         }
@@ -235,7 +217,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <summary>
         /// Remove um produto do time
         /// </summary>
-        /// <param name="timeService"></param>
         /// <param name="timeId"></param>
         /// <param name="prodId"></param>
         /// <returns></returns>
@@ -243,14 +224,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirProduto([FromServices] ITimeService timeService,
-                                                       Guid timeId,
+        public async Task<ActionResult> ExcluirProduto(Guid timeId,
                                                        Guid prodId)
         {
-            await timeService.ExcluirProduto(timeId, prodId);
+            await _timeService.ExcluirProduto(timeId, prodId);
 
-            if (timeService.Invalid)
-                return BadRequest(timeService.Notifications);
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
 
             return Ok();
         }
@@ -272,7 +252,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(typeof(ICollection<TimeViewModel>), StatusCodes.Status200OK)]
         public override ActionResult<ICollection<TimeViewModel>> Pesquisar([FromQuery] string filtro)
         {
-            var lista = _service.Pesquisar(filtro, _usuarioLogado);
+            var lista = _timeService.Pesquisar(filtro, _usuarioLogado);
 
             var listaViewModel = _mapper.Map<ICollection<TimeViewModel>>(lista);
 

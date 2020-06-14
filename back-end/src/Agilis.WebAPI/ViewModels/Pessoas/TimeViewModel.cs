@@ -44,6 +44,6 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// <summary>
         /// Produtos do time
         /// </summary>
-        public IEnumerable<ProdutoBasicViewModel> Produtos { get; set; }
+        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System.Collections.Generic;
 using System;
+using Agilis.Domain.Mocks.ValueObjects;
+using Agilis.Domain.Models.Entities.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -30,9 +32,9 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             var time = new Time(nome: nome,
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioVO>(),
-                                administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido()) },
                                 releases: new List<ReleaseVO>(),
-                                produtos: new List<ProdutoVO>()
+                                produtos: new List<Produto>()
                                 );
 
             //Assert
@@ -48,7 +50,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
                                 colaboradores: new List<UsuarioVO>(),
                                 administradores: new List<UsuarioVO> { },
                                 releases: new List<ReleaseVO>(),
-                                produtos: new List<ProdutoVO>()
+                                produtos: new List<Produto>()
                                 );
 
             //Assert

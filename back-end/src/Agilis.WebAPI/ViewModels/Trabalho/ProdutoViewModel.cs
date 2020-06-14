@@ -1,7 +1,6 @@
 ﻿using Agilis.WebAPI.ViewModels.Pessoas;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
-using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {

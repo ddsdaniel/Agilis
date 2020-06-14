@@ -53,20 +53,10 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<ProdutoViewModel, Produto>()
                  .ConstructUsing((vm, context) =>
                     new Produto(
+                        id: vm.Id,
                         nome: vm.Nome,
-                        time: context.Mapper.Map<TimeVO>(vm.Time),
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
                         linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
-                        )
-                 );
-
-            CreateMap<ProdutoVO, ProdutoBasicViewModel>();
-
-            CreateMap<ProdutoBasicViewModel, ProdutoVO>()
-                 .ConstructUsing((vm, context) =>
-                    new ProdutoVO(
-                        id: vm.Id,
-                        nome: vm.Nome
                         )
                  );
 

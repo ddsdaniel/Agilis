@@ -200,39 +200,28 @@ namespace Agilis.Domain.Services.Pessoas
             }
         }
 
-        public async Task<ProdutoVO> AdicionarProduto(Guid timeId, Produto produto)
+        public async Task AdicionarProduto(Guid timeId, Produto produto)
         {
             var time = await ConsultarPorId(timeId);
             if (time == null)
             {
                 AddNotification(nameof(time), "Time não encontrado");
-                return null;
+                return;
             }
 
-            if (produto.Invalid)
-            {
-                AddNotifications(produto);
-                return null;
-            }
-
-            await _unitOfWork.ProdutoRepository.Adicionar(produto);
-
-            var produtoVO = new ProdutoVO(produto.Id, produto.Nome);
-            time.AdicionarProduto(produtoVO);
+            time.AdicionarProduto(produto);
             if (time.Invalid)
             {
                 AddNotifications(time);
-                return null;
             }
             else
             {
                 await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
-                return produtoVO;
             }
         }
 
-        public async Task ExcluirProduto(Guid timeId, Guid prodId)
+        public async Task ExcluirProduto(Guid timeId, Guid produtoId)
         {
             var time = await ConsultarPorId(timeId);
             if (time == null)
@@ -241,23 +230,13 @@ namespace Agilis.Domain.Services.Pessoas
                 return;
             }
 
-            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(prodId);
-            if (produto == null)
-            {
-                AddNotification(nameof(produto), "Produto não encontrado");
-                return;
-            }
-
-            time.ExcluirProduto(produto);
+            time.ExcluirProduto(produtoId);
             if (time.Invalid)
             {
                 AddNotifications(time);
-                return;
             }
             else
             {
-                await _unitOfWork.ProdutoRepository.Excluir(produto.Id);
-
                 await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
             }

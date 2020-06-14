@@ -1,4 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Pessoas;
@@ -22,7 +23,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         administradores: context.Mapper.Map<UsuarioVO[]>(vm.Administradores),
                         colaboradores: context.Mapper.Map<UsuarioVO[]>(vm.Colaboradores),
                         releases: context.Mapper.Map<ReleaseVO[]>(vm.Releases),
-                        produtos: context.Mapper.Map<ProdutoVO[]>(vm.Produtos)
+                        produtos: context.Mapper.Map<Produto[]>(vm.Produtos)
                         )
                  );
 

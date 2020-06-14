@@ -1,17 +1,17 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
-using DDS.Domain.Core.Abstractions.Model.Entities;
+using DDS.Domain.Core.Abstractions.Model.ValueObjects;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
-    public class Produto : Entity
+    public class Produto : ValueObject<Produto>
     {
+        public Guid Id { get; private set; }
         public string Nome { get; private set; }
-        public TimeVO Time { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
         
@@ -21,23 +21,22 @@ namespace Agilis.Domain.Models.Entities.Trabalho
 
         }
 
-        public Produto(string nome,
-                       TimeVO time,
+        public Produto(Guid id,
+                       string nome,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
                        LinguagemUbiqua linguagemUbiqua)
         {
             AddNotifications(new Contract()
+                .IsNotEmpty(id, nameof(Id), "Id não deve ser vazio")
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")
                 .IfNotNull(requisitosNaoFuncionais, c => c.Join(requisitosNaoFuncionais.ToArray()))
                 .IsNotNull(linguagemUbiqua, nameof(LinguagemUbiqua), "Linguagem Ubíqua não pode ser nula")
                 .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
-                .IsNotNull(time, nameof(Time), "Time não deve ser nulo")
-                .IfNotNull(time, c => c.Join(time))                
                 );
 
+            Id = id;
             Nome = nome;
-            Time = time;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
             LinguagemUbiqua = linguagemUbiqua;
         }
@@ -130,6 +129,14 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             RequisitosNaoFuncionais = RequisitosNaoFuncionais
                 .OrderBy(r => r.Numero)
                 .ToList();
+        }
+
+        public void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(nome), "Nome não deve ser nulo ou vazio");
+            else
+                Nome = nome;
         }
 
         public override string ToString() => Nome;

@@ -1,5 +1,7 @@
 ﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Bogus;
@@ -15,9 +17,11 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                .CustomInstantiator(p => new Time(nome: p.Commerce.Product(),
                                                  escopo: EscopoTime.Pessoal,
                                                  colaboradores: new List<UsuarioVO>(),
-                                                 administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                                 administradores: new List<UsuarioVO> {
+                                                     new UsuarioVO(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido())
+                                                 },
                                                  releases: new List<ReleaseVO>(),
-                                                 produtos: new List<ProdutoVO>()
+                                                 produtos: new List<Produto>()
                    ))
                .Generate();
 
@@ -33,9 +37,11 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                .CustomInstantiator(p => new Time(nome: p.Commerce.Product(),
                                                  escopo: EscopoTime.Colaborativo,
                                                  colaboradores: new List<UsuarioVO>(),
-                                                 administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1") },
+                                                 administradores: new List<UsuarioVO> { 
+                                                     new UsuarioVO(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido()) 
+                                                 },
                                                  releases: new List<ReleaseVO>(),
-                                                 produtos: new List<ProdutoVO>()
+                                                 produtos: new List<Produto>()
                    ))
                .Generate();
     }

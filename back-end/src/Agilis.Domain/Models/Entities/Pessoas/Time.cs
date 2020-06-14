@@ -16,7 +16,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public EscopoTime Escopo { get; private set; }
         public IEnumerable<UsuarioVO> Colaboradores { get; private set; }
         public IEnumerable<UsuarioVO> Administradores { get; private set; }
-        public IEnumerable<ProdutoVO> Produtos { get; private set; }
+        public IEnumerable<Produto> Produtos { get; private set; }
         public IEnumerable<ReleaseVO> Releases { get; private set; }
 
         protected Time()
@@ -29,7 +29,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                     IEnumerable<UsuarioVO> colaboradores,
                     IEnumerable<UsuarioVO> administradores,
                     IEnumerable<ReleaseVO> releases,
-                    IEnumerable<ProdutoVO> produtos)
+                    IEnumerable<Produto> produtos)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
@@ -167,8 +167,14 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             }
         }
 
-        internal void AdicionarProduto(ProdutoVO produto)
+        internal void AdicionarProduto(Produto produto)
         {
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
             if (Produtos.Any(p => p.Id == produto.Id))
             {
                 AddNotification(nameof(produto), "Produto já adicionado neste time");
@@ -183,13 +189,13 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Produtos = novaLista;
         }
 
-        internal void ExcluirProduto(Produto produto)
+        internal void ExcluirProduto(Guid produtoId)
         {
-            if (!Produtos.Any(p => p.Id == produto.Id))
-                AddNotification(nameof(produto.Id), "Produto não encontrado");
+            if (!Produtos.Any(p => p.Id == produtoId))
+                AddNotification(nameof(produtoId), "Produto não encontrado");
             else
             {
-                Produtos = Produtos.Where(a => a.Id != produto.Id);
+                Produtos = Produtos.Where(a => a.Id != produtoId);
             }
         }
 

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.Entities.Trabalho;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -41,7 +42,7 @@ namespace Agilis.Domain.Services.Pessoas
                                        new List<UsuarioVO>(),
                                        new List<UsuarioVO> { new UsuarioVO(usuario.Id, usuario.Nome, usuario.Email) },
                                        new List<ReleaseVO>(),
-                                       new List<ProdutoVO>()
+                                       new List<Produto>()
                                        );
             await _unitOfWork.TimeRepository.Adicionar(timePessoal);
         }
