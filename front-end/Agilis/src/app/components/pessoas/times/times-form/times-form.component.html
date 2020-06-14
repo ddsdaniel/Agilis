@@ -1,6 +1,8 @@
 ﻿<h1>Time {{entidade.nome}}</h1>
 
 <mat-tab-group>
+
+  <!-- Dados Principais -->
   <mat-tab label="Dados Principais">
     <mat-form-field class="half-width mt-4">
       <mat-label>Nome</mat-label>
@@ -15,6 +17,7 @@
 
   </mat-tab>
 
+  <!-- Administradores -->
   <mat-tab *ngIf="podeEditar()">
 
     <ng-template matTabLabel>
@@ -23,29 +26,19 @@
     </ng-template>
 
     <div class="tab-container">
-
-      <mat-form-field fxFlex.xs="55%" fxFlex.sm="60%" fxFlex.md="50%" fxFlex.lg="50%" fxFlex.xl="50%">
-        <mat-label>E-mail</mat-label>
-        <input matInput placeholder="E-mail" type="email" [(ngModel)]="emailAdmin" (keyup.enter)="adicionarAdmin()"
-          name="emailAdmin">
-      </mat-form-field>
-
-      <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="45%" fxFlex.sm="40%" fxFlex.md="20%" fxFlex.lg="15%"
-        fxFlex.xl="15%">
-        <button class="button-input" mat-raised-button (click)="adicionarAdmin()">Adicionar</button>
-      </div>
-
-    </div>
-    <div>
       <mat-list>
         <mat-list-item *ngFor="let admin of entidade.administradores">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirAdmin(admin.id)">delete</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirAdministrador(admin.id)">delete</mat-icon>
           <div mat-line>{{admin.nome}}</div>
         </mat-list-item>
       </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoAdministrador()">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
   </mat-tab>
 
+  <!-- Colaboradores -->
   <mat-tab *ngIf="podeEditar()">
 
     <ng-template matTabLabel>
@@ -66,6 +59,7 @@
     </div>
   </mat-tab>
 
+  <!-- Produtos -->
   <mat-tab>
     <ng-template matTabLabel>
       <span [matBadge]="entidade.produtos.length" matBadgeOverlap="false" matBadgeColor="accent">Produtos</span>
@@ -84,6 +78,7 @@
     </div>
   </mat-tab>
 
+  <!-- Releases -->
   <mat-tab>
     <ng-template matTabLabel>
       <span [matBadge]="entidade.releases.length" matBadgeOverlap="false" matBadgeColor="accent">Releases</span>
