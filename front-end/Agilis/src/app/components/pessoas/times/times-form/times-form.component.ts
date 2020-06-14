@@ -8,8 +8,9 @@ import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
-import { DialogoEmailService } from 'src/app/services/dialogos/dialogo-email.service';
+import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
+import { Produto } from 'src/app/models/trabalho/produto';
 
 @Component({
   selector: 'app-times-form',
@@ -27,7 +28,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     snackBar: MatSnackBar,
     activatedRoute: ActivatedRoute,
     private autenticacaoService: AutenticacaoService,
-    private dialogoEmailService: DialogoEmailService,
+    private dialogoEmailService: DialogoService,
   ) {
     super(router, timeApiService, snackBar, activatedRoute, 'times');
     this.timeApiService = timeApiService;
@@ -58,7 +59,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoColaborador() {
-    this.dialogoEmailService.abrir()
+    this.dialogoEmailService.abrirEmail()
       .subscribe(email => {
         if (email) {
           this.timeApiService.adicionarColaborador(this.entidade.id, email)
@@ -83,7 +84,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
 
             this.timeApiService.adicionarColaborador(this.entidade.id, usuarioExcluido.email)
               .subscribe(
-                () => this.entidade.colaboradores.insert(index, usuarioExcluido),
+                (novoColab) => this.entidade.colaboradores.insert(index, novoColab),
                 (error: HttpErrorResponse) => this.snackBar.open(error.message)
               );
 
@@ -94,7 +95,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoAdministrador() {
-    this.dialogoEmailService.abrir()
+    this.dialogoEmailService.abrirEmail()
       .subscribe(email => {
         if (email) {
           this.timeApiService.adicionarAdmin(this.entidade.id, email)
@@ -119,7 +120,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
 
             this.timeApiService.adicionarAdmin(this.entidade.id, usuarioExcluido.email)
               .subscribe(
-                () => this.entidade.administradores.insert(index, usuarioExcluido),
+                (novoAdmin) => this.entidade.administradores.insert(index, novoAdmin),
                 (error: HttpErrorResponse) => this.snackBar.open(error.message)
               );
 
@@ -127,5 +128,53 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
+  }
+
+  abrirDialogoProduto() {
+    this.dialogoEmailService.abrirTexto('Entre com o nome do produto', 'Nome')
+    .subscribe(result => {
+      if (result) {
+        const produto: Produto = {
+          id: constantes.newGuid,
+          nome: result,
+        };
+        this.timeApiService.adicionarProduto(this.entidade.id, produto)
+          .subscribe(
+            (novoProduto: Produto) => this.entidade.produtos.push(novoProduto),
+            (error: HttpErrorResponse) => this.snackBar.open(error.message)
+          );
+      }
+    });
+  }
+
+  excluirProduto(produtoId: string) {
+    this.timeApiService.excluirProduto(this.entidade.id, produtoId)
+    .subscribe(
+      () => {
+        const index = this.entidade.produtos.findIndex(p => p.id === produtoId);
+        const produtoExcluido = this.entidade.produtos.removeAt<Produto>(index)[0];
+
+        const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+        snackBarRef.onAction().subscribe(() => {
+
+          this.timeApiService.adicionarProduto(this.entidade.id, produtoExcluido)
+            .subscribe(
+              (novoProduto) => this.entidade.produtos.insert(index, novoProduto),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+
+        });
+      },
+      (error: HttpErrorResponse) => this.snackBar.open(error.message)
+    );
+  }
+
+  abrirDialogoRelease() {
+
+  }
+
+  excluirRelease() {
+
   }
 }

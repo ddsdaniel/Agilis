@@ -13,8 +13,7 @@ import { TimesFormComponent } from './components/pessoas/times/times-form/times-
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
-import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
-import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
+import { ProdutosFormComponent } from './components/trabalho/produtos-form/produtos-form.component';
 import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
 import { ReleasesComponent } from './components/trabalho/releases/releases/releases.component';
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
@@ -24,7 +23,8 @@ import { UserStoriesComponent } from './components/trabalho/user-stories/user-st
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
-import { DialogoEmailComponent } from './components/dialogo-email/dialogo-email.component';
+import { DialogoEmailComponent } from './components/dialogos/dialogo-email/dialogo-email.component';
+import { DialogoTextoComponent } from './components/dialogos/dialogo-texto/dialogo-texto.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -38,7 +38,6 @@ export function InitApp(appLoadService: AppLoadService) {
     TimesFormComponent,
     ReleasesComponent,
     ReleasesFormComponent,
-    ProdutosComponent,
     ProdutosFormComponent,
     SprintsComponent,
     SprintsFormComponent,
@@ -46,6 +45,7 @@ export function InitApp(appLoadService: AppLoadService) {
     UserStoriesFormComponent,
     UsuariosFormComponent,
     DialogoEmailComponent,
+    DialogoTextoComponent,
   ],
   imports: [
     FormsModule,
@@ -58,11 +58,13 @@ export function InitApp(appLoadService: AppLoadService) {
     HttpClientModule
   ],
   entryComponents: [
-    DialogoEmailComponent
+    DialogoEmailComponent,
+    DialogoTextoComponent
   ],
   exports: [
     AngularMaterialModule,
-    DialogoEmailComponent
+    DialogoEmailComponent,
+    DialogoTextoComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpsRequestInterceptorService, multi: true, },

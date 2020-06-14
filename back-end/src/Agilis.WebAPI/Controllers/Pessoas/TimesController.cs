@@ -203,7 +203,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         public async Task<ActionResult> AdicionarProduto(Guid timeId,
                                                          ProdutoViewModel produtoViewModel)
         {
-            var produto = _mapper.Map<Produto>(produtoViewModel);
+            var produto = new Produto(produtoViewModel.Nome);
             await _timeService.AdicionarProduto(timeId, produto);
 
             if (_timeService.Invalid)

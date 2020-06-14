@@ -5,8 +5,7 @@ import { TimesFormComponent } from './components/pessoas/times/times-form/times-
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
-import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
-import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
+import { ProdutosFormComponent } from './components/trabalho/produtos-form/produtos-form.component';
 import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
 import { ReleasesComponent } from './components/trabalho/releases/releases/releases.component';
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
@@ -20,8 +19,6 @@ const routes: Routes = [
   { path: 'releases/new', component: ReleasesFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'releases/:id', component: ReleasesFormComponent, canActivate: [AutenticacaoGuard] },
 
-  { path: 'produtos', component: ProdutosComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'produtos/new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/:id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'sprints', component: SprintsComponent, canActivate: [AutenticacaoGuard] },

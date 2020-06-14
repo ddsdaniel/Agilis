@@ -1,15 +1,16 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Time } from 'src/app/models/pessoas/time';
-
-import { CrudApiBaseService } from '../crud-api-base.service';
-import { Email } from 'src/app/models/pessoas/email';
 import { Observable } from 'rxjs';
+import { Email } from 'src/app/models/pessoas/email';
+import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
+import { Produto } from 'src/app/models/trabalho/produto';
 import { Release } from 'src/app/models/trabalho/releases/release';
 import { ReleaseVO } from 'src/app/models/trabalho/releases/release-vo';
-import { Produto } from 'src/app/models/trabalho/produtos/produto';
-import { ProdutoVO } from 'src/app/models/trabalho/produtos/produto-vo';
+import { Sprint } from 'src/app/models/trabalho/sprints/sprint';
+import { SprintVO } from 'src/app/models/trabalho/sprints/sprint-vo';
+
+import { CrudApiBaseService } from '../crud-api-base.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +37,8 @@ export class TimesApiService extends CrudApiBaseService<Time> {
     return super.delete(`${timeId}/colaboradores/${colabId}`);
   }
 
-  adicionarProduto(timeId: string, produto: Produto): Observable<ProdutoVO> {
-    return super.post<Produto, ProdutoVO>(produto, `${timeId}/produtos`);
+  adicionarProduto(timeId: string, produto: Produto): Observable<Produto> {
+    return super.post<Produto, Produto>(produto, `${timeId}/produtos`);
   }
 
   excluirProduto(timeId: string, prodId: string): Observable<void> {
@@ -50,5 +51,13 @@ export class TimesApiService extends CrudApiBaseService<Time> {
 
   excluirRelease(timeId: string, prodId: string): Observable<void> {
     return super.delete(`${timeId}/releases/${prodId}`);
+  }
+
+  adicionarSprint(produtoId: string, sprint: Sprint): Observable<SprintVO> {
+    return super.post<Sprint, SprintVO>(sprint, `${produtoId}/sprints`);
+  }
+
+  excluirSprint(produtoId: string, sprintId: string): Observable<void> {
+    return super.delete(`${produtoId}/sprints/${sprintId}`);
   }
 }

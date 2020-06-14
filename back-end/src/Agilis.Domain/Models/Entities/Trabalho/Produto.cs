@@ -10,13 +10,22 @@ namespace Agilis.Domain.Models.Entities.Trabalho
 {
     public class Produto : ValueObject<Produto>
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
         public string Nome { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
         
-
         protected Produto()
+        {
+            
+        }
+
+        public Produto(string nome)
+            :this(Guid.NewGuid(), 
+                 nome, 
+                 new List<RequisitoNaoFuncional>(), 
+                 new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                 )
         {
 
         }

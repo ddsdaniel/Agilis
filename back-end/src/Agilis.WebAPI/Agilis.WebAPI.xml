@@ -661,11 +661,6 @@
             Nome do produto
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Time">
-            <summary>
-            Time ao qual o produto pertence
-            </summary>
-        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
             <summary>
             Sprints da release
