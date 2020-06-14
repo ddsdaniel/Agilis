@@ -16,6 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -35,7 +37,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatProgressBarModule,
     MatSelectModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatBadgeModule,
+    MatDialogModule
   ],
   exports: [
     MatFormFieldModule,
@@ -53,7 +57,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSelectModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' } },

@@ -24,6 +24,7 @@ import { UserStoriesComponent } from './components/trabalho/user-stories/user-st
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
+import { DialogoEmailComponent } from './components/dialogo-email/dialogo-email.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -44,6 +45,7 @@ export function InitApp(appLoadService: AppLoadService) {
     UserStoriesComponent,
     UserStoriesFormComponent,
     UsuariosFormComponent,
+    DialogoEmailComponent,
   ],
   imports: [
     FormsModule,
@@ -55,8 +57,12 @@ export function InitApp(appLoadService: AppLoadService) {
     FlexLayoutModule,
     HttpClientModule
   ],
+  entryComponents: [
+    DialogoEmailComponent
+  ],
   exports: [
-    AngularMaterialModule
+    AngularMaterialModule,
+    DialogoEmailComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpsRequestInterceptorService, multi: true, },

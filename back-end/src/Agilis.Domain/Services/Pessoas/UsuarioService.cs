@@ -39,7 +39,7 @@ namespace Agilis.Domain.Services.Pessoas
             var timePessoal = new Time("Pessoal",
                                        EscopoTime.Pessoal,
                                        new List<UsuarioVO>(),
-                                       new List<UsuarioVO> { new UsuarioVO(usuario.Id, usuario.Nome) },
+                                       new List<UsuarioVO> { new UsuarioVO(usuario.Id, usuario.Nome, usuario.Email) },
                                        new List<ReleaseVO>(),
                                        new List<ProdutoVO>()
                                        );

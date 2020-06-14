@@ -90,7 +90,7 @@ namespace Agilis.Domain.Services.Pessoas
                 return null;
             }
 
-            var adminVO = new UsuarioVO(admin.Id, admin.NomeCompleto);
+            var adminVO = new UsuarioVO(admin.Id, admin.NomeCompleto, admin.Email);
             time.AdicionarAdmin(adminVO);
             if (time.Invalid)
             {
@@ -156,7 +156,7 @@ namespace Agilis.Domain.Services.Pessoas
                 return null;
             }
 
-            var colabVO = new UsuarioVO(colab.Id, colab.NomeCompleto);
+            var colabVO = new UsuarioVO(colab.Id, colab.NomeCompleto, colab.Email);
             time.AdicionarColaborador(colabVO);
             if (time.Invalid)
             {

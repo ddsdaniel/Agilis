@@ -35,7 +35,7 @@ body {
 }
 
 .full-width {
-  width: 100%;
+  width: 100% !important;
 }
 
 mat-form-field mat-icon {
@@ -111,6 +111,14 @@ $spacer: 1rem !default;
   padding-left: 0.5 * $spacer !important;
   padding-right: 0.5 * $spacer !important;
 }
+.ph-3 {
+  padding-left: $spacer !important;
+  padding-right: $spacer !important;
+}
+.ph-4 {
+  padding-left: 1.5 * $spacer !important;
+  padding-right: 1.5 * $spacer !important;
+}
 
 //crud
 mat-list-item mat-icon {
@@ -118,7 +126,7 @@ mat-list-item mat-icon {
   color: rgba(0, 0, 0, 0.54);
 }
 
-.pesquisa button{
+.pesquisa button {
   height: 36px !important;
   margin-bottom: 20px;
 }

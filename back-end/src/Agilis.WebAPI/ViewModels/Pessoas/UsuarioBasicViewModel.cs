@@ -2,5 +2,6 @@
 {
     public class UsuarioBasicViewModel : BasicViewModel
     {
+        public EmailViewModel Email { get; set; }
     }
 }

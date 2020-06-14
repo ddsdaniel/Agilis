@@ -3,12 +3,14 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
+import { DialogoEmailComponent } from 'src/app/components/dialogo-email/dialogo-email.component';
 import { constantes } from 'src/app/constants/constantes';
 import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Email } from 'src/app/models/pessoas/email';
 import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
+import { DialogoEmailService } from 'src/app/services/dialogos/dialogo-email.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
 
 @Component({
@@ -19,9 +21,6 @@ import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.ser
 export class TimesFormComponent extends CrudFormComponent<Time> {
 
   emailAdmin: string;
-  emailColaborador: string;
-  nomeProduto: string;
-  nomeRelease: string;
   timeApiService: TimesApiService;
 
   constructor(
@@ -30,10 +29,24 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     snackBar: MatSnackBar,
     activatedRoute: ActivatedRoute,
     private autenticacaoService: AutenticacaoService,
+    private dialogoEmailService: DialogoEmailService,
   ) {
     super(router, timeApiService, snackBar, activatedRoute, 'times');
     this.timeApiService = timeApiService;
     this.sugerirNovo();
+  }
+
+  abrirDialogoColaborador() {
+    this.dialogoEmailService.abrir()
+      .subscribe(email => {
+        if (email) {
+          this.timeApiService.adicionarColaborador(this.entidade.id, email)
+            .subscribe(
+              (novoColab: UsuarioVO) => this.entidade.colaboradores.push(novoColab),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
   }
 
   podeEditar(): boolean {
@@ -47,7 +60,10 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       administradores: [{
         id: this.autenticacaoService.usuarioLogado.usuario.id,
         nome: this.autenticacaoService.usuarioLogado.usuario.nome + ' ' +
-          this.autenticacaoService.usuarioLogado.usuario.sobrenome
+          this.autenticacaoService.usuarioLogado.usuario.sobrenome,
+        email: {
+          endereco: this.autenticacaoService.usuarioLogado.usuario.email
+        }
       }],
       colaboradores: [],
       produtos: [],
@@ -86,23 +102,22 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       .subscribe(
         () => {
           const index = this.entidade.colaboradores.findIndex(c => c.id === colabId);
-          this.entidade.colaboradores.removeAt(index);
+          const usuarioExcluido = this.entidade.colaboradores.removeAt<UsuarioVO>(index)[0];
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            this.timeApiService.adicionarColaborador(this.entidade.id, usuarioExcluido.email)
+              .subscribe(
+                () => this.entidade.colaboradores.insert(index, usuarioExcluido),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
   }
 
-  adicionarColaborador() {
-    const email: Email = {
-      endereco: this.emailColaborador
-    };
-    this.timeApiService.adicionarColaborador(this.entidade.id, email)
-      .subscribe(
-        (novoColab: UsuarioVO) => {
-          this.entidade.colaboradores.push(novoColab);
-          this.emailColaborador = '';
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
 }
