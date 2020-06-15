@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Pessoas;
@@ -22,7 +23,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         escopo: vm.Escopo,
                         administradores: context.Mapper.Map<UsuarioVO[]>(vm.Administradores),
                         colaboradores: context.Mapper.Map<UsuarioVO[]>(vm.Colaboradores),
-                        releases: context.Mapper.Map<ReleaseVO[]>(vm.Releases),
+                        releases: context.Mapper.Map<ReleaseFK[]>(vm.Releases),
                         produtos: context.Mapper.Map<Produto[]>(vm.Produtos)
                         )
                  );
@@ -36,15 +37,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                );
 
             CreateMap<TimeVO, TimeViewModel>();
-
-            CreateMap<TimeBasicViewModel, TimeVO>().ConstructUsing((vm, context) =>
-                 new TimeVO(
-                     id: vm.Id,
-                     nome: vm.Nome
-                     )
-              );
-
-            CreateMap<TimeVO, TimeBasicViewModel>();
 
             CreateMap<TimeViewModel, TimeVO>()
                .ConstructUsing((vm, context) =>

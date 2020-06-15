@@ -3,11 +3,11 @@ using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Mocks.Entities.Pessoas;
 using Xunit;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System.Collections.Generic;
 using System;
 using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -33,7 +33,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioVO>(),
                                 administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido()) },
-                                releases: new List<ReleaseVO>(),
+                                releases: new List<ReleaseFK>(),
                                 produtos: new List<Produto>()
                                 );
 
@@ -49,7 +49,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioVO>(),
                                 administradores: new List<UsuarioVO> { },
-                                releases: new List<ReleaseVO>(),
+                                releases: new List<ReleaseFK>(),
                                 produtos: new List<Produto>()
                                 );
 

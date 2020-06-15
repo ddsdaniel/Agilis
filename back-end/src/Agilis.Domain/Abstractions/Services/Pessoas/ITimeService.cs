@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 
 namespace Agilis.Domain.Abstractions.Services.Pessoas
 {
@@ -21,7 +21,9 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         Task ExcluirColaborador(Guid timeId, Guid colabId);
         Task AdicionarProduto(Guid timeId, Produto produto);
         Task ExcluirProduto(Guid timeId, Guid prodId);
-        Task<ReleaseVO> AdicionarRelease(Guid timeId, Release release);
-        Task ExcluirRelease(Guid timeId, Guid prodId);
+
+        Task<ReleaseFK> AdicionarRelease(Guid timeId, string nome);
+        Task ExcluirRelease(Guid timeId, Guid releaseId);  
+
     }
 }

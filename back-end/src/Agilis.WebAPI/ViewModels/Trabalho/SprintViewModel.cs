@@ -14,19 +14,9 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public Guid Id { get; set; }
         
         /// <summary>
-        /// /Número do sprint
-        /// </summary>
-        public int Numero { get; set; }
-
-        /// <summary>
         /// Nome do sprint
         /// </summary>
         public string Nome { get; set; }
-
-        /// <summary>
-        /// Release ao qual o sprint pertence
-        /// </summary>
-        public ReleaseBasicViewModel Release { get; set; }
 
         /// <summary>
         /// Intervalo de datas do sprint

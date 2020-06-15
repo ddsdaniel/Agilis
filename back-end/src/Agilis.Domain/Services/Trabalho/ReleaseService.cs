@@ -1,75 +1,32 @@
-﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
-using Agilis.Domain.Abstractions.Repositories;
-using Agilis.Domain.Abstractions.Services;
+﻿using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services.Trabalho;
-using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ValueObjects.Especificacao;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
+using DDS.Domain.Core.Abstractions.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {
-    public class ReleaseService : CrudService<Release>, IReleaseService
+    public class ReleaseService : Service, IReleaseService
     {
+        private readonly IUnitOfWork _unitOfWork;
 
         public ReleaseService(IUnitOfWork unitOfWork)
-            : base(unitOfWork, unitOfWork.ReleaseRepository)
         {
-
+            _unitOfWork = unitOfWork;
         }
 
-        public override ICollection<Release> Pesquisar(string filtro)
-            => _unitOfWork.ReleaseRepository
-                   .AsQueryable()
-                   .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
-                   .OrderBy(p => p.Nome)
-                   .ToList();
-
-        public ICollection<Release> ConsultarTodos(IUsuario usuario)
+        public async Task<SprintFK> AdicionarSprint(Guid releaseId, string nome)
         {
-            var timeIds = ObterTimeIds(usuario);
-
-            return _unitOfWork.ReleaseRepository
-                .AsQueryable()
-                .Where(p => timeIds.Contains(p.Time.Id))
-                .OrderBy(p => p.Nome)
-                .ToList();
-        }
-
-        private Guid[] ObterTimeIds(IUsuario usuario)
-        {
-            return _unitOfWork.TimeRepository
-                            .ObterTimes(usuario)
-                            .Select(t => t.Id)
-                            .ToArray();
-        }
-
-        public ICollection<Release> Pesquisar(string filtro, IUsuario usuario)
-        {
-            var timeIds = ObterTimeIds(usuario);
-
-            return _unitOfWork.ReleaseRepository
-                    .AsQueryable()
-                    .Where(p => timeIds.Contains(p.Time.Id) &&
-                                p.Nome.ToLower().Contains(filtro.ToLower())
-                        )
-                    .OrderBy(p => p.Nome)
-                    .ToList();
-        }
-
-        public async Task<SprintVO> AdicionarSprint(Guid releaseId, Sprint sprint)
-        {
-            var release = await ConsultarPorId(releaseId);
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
             if (release == null)
             {
                 AddNotification(nameof(release), "Release não encontrada");
                 return null;
             }
 
+            var sprint = new Sprint(nome);
             if (sprint.Invalid)
             {
                 AddNotifications(sprint);
@@ -78,24 +35,22 @@ namespace Agilis.Domain.Services.Trabalho
 
             await _unitOfWork.SprintRepository.Adicionar(sprint);
 
-            var sprintVO = new SprintVO(sprint.Id, sprint.Nome, sprint.Numero);
-            release.AdicionarSprint(sprintVO);
+            var sprintFK = new SprintFK(sprint.Id, sprint.Nome);
+            release.AdicionarSprint(sprintFK);
             if (release.Invalid)
             {
                 AddNotifications(release);
                 return null;
             }
-            else
-            {
-                await Atualizar(release);
-                await _unitOfWork.Commit();
-                return sprintVO;
-            }
+
+            await _unitOfWork.ReleaseRepository.Atualizar(release);
+            await _unitOfWork.Commit();
+            return sprintFK;
         }
 
         public async Task ExcluirSprint(Guid releaseId, Guid sprintId)
         {
-            var release = await ConsultarPorId(releaseId);
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
             if (release == null)
             {
                 AddNotification(nameof(release), "Release não encontrada");
@@ -109,19 +64,17 @@ namespace Agilis.Domain.Services.Trabalho
                 return;
             }
 
-            release.ExcluirSprint(sprint);
+            var sprintFK = new SprintFK(sprint.Id, sprint.Nome);
+            release.ExcluirSprint(sprintFK);
             if (release.Invalid)
             {
                 AddNotifications(release);
                 return;
             }
-            else
-            {
-                await _unitOfWork.SprintRepository.Excluir(sprint.Id);
 
-                await Atualizar(release);
-                await _unitOfWork.Commit();
-            }
+            await _unitOfWork.SprintRepository.Excluir(sprint.Id);
+            await _unitOfWork.ReleaseRepository.Atualizar(release);
+            await _unitOfWork.Commit();
         }
     }
 }

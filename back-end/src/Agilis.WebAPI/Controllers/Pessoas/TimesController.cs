@@ -13,6 +13,8 @@ using System;
 using DDS.Domain.Core.Model.ValueObjects;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
+using DDS.WebAPI.Models.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -146,43 +148,39 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         }
 
         /// <summary>
-        /// Adiciona um release ao time
+        /// Adiciona uma release ao time
         /// </summary>
-        /// <param name="timeId"></param>
-        /// <param name="releaseViewModel"></param>
-        /// <returns></returns>
+        /// <param name="timeId">Id do time em que a release será adicionada</param>
+        /// <param name="nomeViewModel">Container do nome da release</param>
+        /// <returns>ReleaseFK com o id e o nome da release adicionada</returns>
         [HttpPost("{timeId:guid}/releases")]
-        [ProducesResponseType(typeof(ICollection<ReleaseBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ReleaseFK), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarRelease(Guid timeId,
-                                                         ReleaseViewModel releaseViewModel)
+                                                         StringContainerViewModel nomeViewModel)
         {
-            var release = _mapper.Map<Release>(releaseViewModel);
-            var releaseVO = await _timeService.AdicionarRelease(timeId, release);
-
+            var releaseFK = await _timeService.AdicionarRelease(timeId, nomeViewModel.Texto);
             if (_timeService.Invalid)
                 return BadRequest(_timeService.Notifications);
 
-            var releaseBasicViewModel = _mapper.Map<ReleaseBasicViewModel>(releaseVO);
-
-            return Ok(releaseBasicViewModel);
-        }
+            return Ok(releaseFK);
+        }        
 
         /// <summary>
         /// Remove um release do time
         /// </summary>
         /// <param name="timeId"></param>
-        /// <param name="prodId"></param>
+        /// <param name="releaseId"></param>
         /// <returns></returns>
         [HttpDelete("{timeId:guid}/releases/{prodId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ExcluirRelease(Guid timeId,
-                                                       Guid prodId)
+                                                       Guid releaseId)
         {
-            await _timeService.ExcluirRelease(timeId, prodId);
+            await _timeService.ExcluirRelease(timeId, releaseId);
 
             if (_timeService.Invalid)
                 return BadRequest(_timeService.Notifications);

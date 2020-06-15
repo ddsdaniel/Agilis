@@ -13,6 +13,7 @@ using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -41,7 +42,7 @@ namespace Agilis.Domain.Services.Pessoas
                                        EscopoTime.Pessoal,
                                        new List<UsuarioVO>(),
                                        new List<UsuarioVO> { new UsuarioVO(usuario.Id, usuario.Nome, usuario.Email) },
-                                       new List<ReleaseVO>(),
+                                       new List<ReleaseFK>(),
                                        new List<Produto>()
                                        );
             await _unitOfWork.TimeRepository.Adicionar(timePessoal);

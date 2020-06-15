@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
@@ -17,7 +18,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public IEnumerable<UsuarioVO> Colaboradores { get; private set; }
         public IEnumerable<UsuarioVO> Administradores { get; private set; }
         public IEnumerable<Produto> Produtos { get; private set; }
-        public IEnumerable<ReleaseVO> Releases { get; private set; }
+        public IEnumerable<ReleaseFK> Releases { get; private set; }
 
         protected Time()
         {
@@ -28,7 +29,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                     EscopoTime escopo,
                     IEnumerable<UsuarioVO> colaboradores,
                     IEnumerable<UsuarioVO> administradores,
-                    IEnumerable<ReleaseVO> releases,
+                    IEnumerable<ReleaseFK> releases,
                     IEnumerable<Produto> produtos)
         {
             AddNotifications(new Contract()
@@ -40,7 +41,6 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 .IsNotNull(produtos, nameof(produtos), "Lista de Produtos não deve ser nula")
                 .IfNotNull(produtos, c => c.Join(produtos.ToArray()))
                 .IsNotNull(releases, nameof(releases), "Lista de Releases não deve ser nula")
-                .IfNotNull(releases, c => c.Join(releases.ToArray()))                
                 );
 
             if (administradores != null)
@@ -92,7 +92,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             if (release == null)
                 AddNotification(nameof(id), "Release não encontrado no time");
             else
-                release.Renomear(nome);
+                release.Nome = nome;
         }
 
         internal void AdicionarAdmin(UsuarioVO admin)
@@ -199,18 +199,22 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             }
         }
 
-        internal void AdicionarRelease(ReleaseVO release)
+        internal void AdicionarRelease(ReleaseFK releaseFK)
         {
-            if (Releases.Any(r => r.Id == release.Id))
+            if (releaseFK is null)
             {
-                AddNotification(nameof(release), "Release já adicionada neste time");
+                AddNotification(nameof(releaseFK), "Release não deve ser nula");
+                return;
+            }
+
+            if (Releases.Any(r => r.Id == releaseFK.Id))
+            {
+                AddNotification(nameof(releaseFK), "Release já adicionada neste time");
                 return;
             }
 
             var novaLista = Releases.ToList();
-            novaLista.Add(release);
-
-            novaLista = novaLista.OrderBy(r => r.Ordem).ToList();
+            novaLista.Add(releaseFK);
 
             Releases = novaLista;
         }

@@ -1,8 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Bogus;
 using DDS.Domain.Core.Model.ValueObjects;
-using System;
 
 namespace Agilis.Domain.Mocks.Entities.Trabalho
 {
@@ -15,9 +13,7 @@ namespace Agilis.Domain.Mocks.Entities.Trabalho
                        var numero = p.Random.Number(0, 1000);
 
                        return new Sprint($"Sprint {numero}",
-                                        numero,
-                                        new IntervaloDatas(p.Date.Past(), p.Date.Future()),
-                                        new ReleaseVO(1,  Guid.NewGuid(), p.Commerce.ProductName())
+                                        new IntervaloDatas(p.Date.Past(), p.Date.Future())
                                         );
                    }
                ).Generate();

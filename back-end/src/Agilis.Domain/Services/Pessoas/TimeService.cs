@@ -5,8 +5,8 @@ using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys;
 using Agilis.Domain.Models.ValueObjects.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Model.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -125,7 +125,7 @@ namespace Agilis.Domain.Services.Pessoas
             if (time.Invalid)
             {
                 AddNotifications(time);
-                return ;
+                return;
             }
             else
             {
@@ -241,7 +241,7 @@ namespace Agilis.Domain.Services.Pessoas
                 await _unitOfWork.Commit();
             }
         }
-        public async Task<ReleaseVO> AdicionarRelease(Guid timeId, Release release)
+        public async Task<ReleaseFK> AdicionarRelease(Guid timeId, string nome)
         {
             var time = await ConsultarPorId(timeId);
             if (time == null)
@@ -250,6 +250,7 @@ namespace Agilis.Domain.Services.Pessoas
                 return null;
             }
 
+            var release = new Release(nome);
             if (release.Invalid)
             {
                 AddNotifications(release);
@@ -258,19 +259,17 @@ namespace Agilis.Domain.Services.Pessoas
 
             await _unitOfWork.ReleaseRepository.Adicionar(release);
 
-            var releaseVO = new ReleaseVO(release.Ordem, release.Id, release.Nome);
-            time.AdicionarRelease(releaseVO);
+            var releaseFK = new ReleaseFK(release.Id, release.Nome);
+            time.AdicionarRelease(releaseFK);
             if (time.Invalid)
             {
                 AddNotifications(time);
                 return null;
             }
-            else
-            {
-                await _unitOfWork.TimeRepository.Atualizar(time);
-                await _unitOfWork.Commit();
-                return releaseVO;
-            }
+
+            await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.Commit();
+            return releaseFK;
         }
 
         public async Task ExcluirRelease(Guid timeId, Guid prodId)
@@ -302,6 +301,6 @@ namespace Agilis.Domain.Services.Pessoas
                 await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
             }
-        }
+        }        
     }
 }

@@ -27,27 +27,27 @@ namespace Agilis.Domain.Services.Trabalho
 
         #region Regras de Negócio
 
-        public ICollection<Sprint> ConsultarTodos(IUsuario usuario)
-        {
-            var releaseIds = ObterReleaseIds(usuario);
+        //public ICollection<Sprint> ConsultarTodos(IUsuario usuario)
+        //{
+        //    var releaseIds = ObterReleaseIds(usuario);
 
-            return _unitOfWork.SprintRepository
-                .AsQueryable()
-                .Where(s => releaseIds.Contains(s.Release.Id))
-                .OrderBy(s => s.Nome)
-                .ToList();
-        }
+        //    return _unitOfWork.SprintRepository
+        //        .AsQueryable()
+        //        .Where(s => releaseIds.Contains(s.Release.Id))
+        //        .OrderBy(s => s.Nome)
+        //        .ToList();
+        //}
 
-        private Guid[] ObterReleaseIds(IUsuario usuario)
-        {
-            var timeIds = ObterTimeIds(usuario);
+        //private Guid[] ObterReleaseIds(IUsuario usuario)
+        //{
+        //    var timeIds = ObterTimeIds(usuario);
 
-            return _unitOfWork.ReleaseRepository
-                            .AsQueryable()
-                            .Where(r => timeIds.Contains(r.Time.Id))
-                            .Select(r => r.Id)
-                            .ToArray();
-        }
+        //    return _unitOfWork.ReleaseRepository
+        //                    .AsQueryable()
+        //                    .Where(r => timeIds.Contains(r.Time.Id))
+        //                    .Select(r => r.Id)
+        //                    .ToArray();
+        //}
 
         private Guid[] ObterTimeIds(IUsuario usuario)
         {
@@ -57,17 +57,17 @@ namespace Agilis.Domain.Services.Trabalho
                             .ToArray();
         }
 
-        public ICollection<Sprint> Pesquisar(string filtro, IUsuario usuario)
-        {
-            var releaseIds = ObterReleaseIds(usuario);
+        //public ICollection<Sprint> Pesquisar(string filtro, IUsuario usuario)
+        //{
+        //    var releaseIds = ObterReleaseIds(usuario);
 
-            return _unitOfWork.SprintRepository
-                .AsQueryable()
-                .Where(s => releaseIds.Contains(s.Release.Id) &&
-                            s.Nome.ToLower().Contains(filtro.ToLower()))
-                .OrderBy(s => s.Nome)
-                .ToList();
-        }
+        //    return _unitOfWork.SprintRepository
+        //        .AsQueryable()
+        //        .Where(s => releaseIds.Contains(s.Release.Id) &&
+        //                    s.Nome.ToLower().Contains(filtro.ToLower()))
+        //        .OrderBy(s => s.Nome)
+        //        .ToList();
+        //}
 
         #endregion
     }

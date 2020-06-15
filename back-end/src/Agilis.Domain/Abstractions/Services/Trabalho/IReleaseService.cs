@@ -1,19 +1,13 @@
-﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
-using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
-using DDS.Domain.Core.Abstractions.Services;
-using System;
-using System.Collections.Generic;
+﻿using DDS.Domain.Core.Abstractions.Services;
 using System.Threading.Tasks;
+using Agilis.Domain.Models.ForeignKeys;
+using System;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
-    public interface IReleaseService : ICrudService<Release>
+    public interface IReleaseService : IService
     {
-        ICollection<Release> ConsultarTodos(IUsuario usuario);
-        ICollection<Release> Pesquisar(string filtro, IUsuario usuario);
-
-        Task<SprintVO> AdicionarSprint(Guid releaseId, Sprint sprint);
+        Task<SprintFK> AdicionarSprint(Guid releaseId, string nome);
         Task ExcluirSprint(Guid releaseId, Guid sprintId);
     }
 }

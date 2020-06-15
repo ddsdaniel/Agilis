@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Abstractions\Services\Trabalho\I.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Flunt" Version="1.0.5" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />

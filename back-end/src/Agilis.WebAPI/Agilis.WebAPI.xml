@@ -160,20 +160,20 @@
             <param name="colabId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
-            Adiciona um release ao time
+            Adiciona uma release ao time
             </summary>
-            <param name="timeId"></param>
-            <param name="releaseViewModel"></param>
-            <returns></returns>
+            <param name="timeId">Id do time em que a release será adicionada</param>
+            <param name="nomeViewModel">Container do nome da release</param>
+            <returns>ReleaseFK com o id e o nome da release adicionada</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(System.Guid,System.Guid)">
             <summary>
             Remove um release do time
             </summary>
             <param name="timeId"></param>
-            <param name="prodId"></param>
+            <param name="releaseId"></param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
@@ -292,42 +292,19 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="usuarioLogado">Instância do usuário logado</param>
-            <param name="mapper">Instância do Automapper</param>
+            <param name="releaseService">Instância do Automapper</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Pesquisar(System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarTodos">
-            <summary>
-            Consulta todos os releases do usuário logado
-            </summary>
-            <returns>Retorna todas as releases do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel})">
-            <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
-            </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(AutoMapper.IMapper,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um sprint ao release
             </summary>
-            <param name="autoMapper"></param>
-            <param name="releaseId"></param>
-            <param name="sprintViewModel"></param>
-            <returns></returns>
+            <param name="releaseId">Id da release em que o sprint será adicionado</param>
+            <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
+            <returns>Id e nome da sprint adicionada</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
             <summary>
@@ -342,26 +319,12 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ISprintService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ISprintService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.ConsultarTodos">
-            <summary>
-            Consulta todos os sprints do usuário logado
-            </summary>
-            <returns>Retorna todos os sprints do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.Pesquisar(System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel})">
             <summary>
@@ -676,19 +639,9 @@
             Id do sprint
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Numero">
-            <summary>
-            /Número do sprint
-            </summary>
-        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Nome">
             <summary>
             Nome do sprint
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Release">
-            <summary>
-            Release ao qual o sprint pertence
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">
