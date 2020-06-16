@@ -1,8 +1,7 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
@@ -15,9 +14,9 @@ namespace Agilis.Domain.Models.Entities.Pessoas
     {
         public string Nome { get; private set; }
         public EscopoTime Escopo { get; private set; }
-        public IEnumerable<UsuarioVO> Colaboradores { get; private set; }
-        public IEnumerable<UsuarioVO> Administradores { get; private set; }
-        public IEnumerable<Produto> Produtos { get; private set; }
+        public IEnumerable<UsuarioFK> Colaboradores { get; private set; }
+        public IEnumerable<UsuarioFK> Administradores { get; private set; }
+        public IEnumerable<ProdutoFK> Produtos { get; private set; }
         public IEnumerable<ReleaseFK> Releases { get; private set; }
 
         protected Time()
@@ -27,19 +26,16 @@ namespace Agilis.Domain.Models.Entities.Pessoas
 
         public Time(string nome,
                     EscopoTime escopo,
-                    IEnumerable<UsuarioVO> colaboradores,
-                    IEnumerable<UsuarioVO> administradores,
+                    IEnumerable<UsuarioFK> colaboradores,
+                    IEnumerable<UsuarioFK> administradores,
                     IEnumerable<ReleaseFK> releases,
-                    IEnumerable<Produto> produtos)
+                    IEnumerable<ProdutoFK> produtos)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(colaboradores, nameof(colaboradores), "Lista de colaboradores não deve ser nula")
-                .IfNotNull(colaboradores, c => c.Join(colaboradores.ToArray()))
                 .IsNotNull(administradores, nameof(administradores), "Lista de colaboradores não deve ser nula")
-                .IfNotNull(administradores, c => c.Join(administradores.ToArray()))
                 .IsNotNull(produtos, nameof(produtos), "Lista de Produtos não deve ser nula")
-                .IfNotNull(produtos, c => c.Join(produtos.ToArray()))
                 .IsNotNull(releases, nameof(releases), "Lista de Releases não deve ser nula")
                 );
 
@@ -83,7 +79,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             if (produto == null)
                 AddNotification(nameof(id), "Produto não encontrado no time");
             else
-                produto.Renomear(nome);
+                produto.Nome = nome;
         }
 
         public void RenomearRelease(Guid id, string nome)
@@ -95,7 +91,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
                 release.Nome = nome;
         }
 
-        internal void AdicionarAdmin(UsuarioVO admin)
+        internal void AdicionarAdmin(UsuarioFK admin)
         {
             if (Administradores.Any(a => a.Id == admin.Id))
             {
@@ -139,7 +135,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             }
         }
 
-        internal void AdicionarColaborador(UsuarioVO colab)
+        internal void AdicionarColaborador(UsuarioFK colab)
         {
             if (Colaboradores.Any(a => a.Id == colab.Id))
             {
@@ -167,11 +163,11 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             }
         }
 
-        internal void AdicionarProduto(Produto produto)
+        internal void AdicionarProduto(ProdutoFK produto)
         {
-            if (produto.Invalid)
+            if (produto == null)
             {
-                AddNotifications(produto);
+                AddNotification(nameof(produto), "Produto não deve ser nulo");
                 return;
             }
 

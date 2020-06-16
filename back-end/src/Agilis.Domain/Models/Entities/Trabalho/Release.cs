@@ -1,4 +1,4 @@
-﻿using Agilis.Domain.Models.ForeignKeys;
+﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System.Collections.Generic;

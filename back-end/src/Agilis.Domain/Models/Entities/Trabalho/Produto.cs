@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
-using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,8 @@ using System.Linq;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
-    public class Produto : ValueObject<Produto>
+    public class Produto : Entity
     {
-        public Guid Id { get; protected set; }
         public string Nome { get; private set; }
         public ICollection<RequisitoNaoFuncional> RequisitosNaoFuncionais { get; private set; }
         public LinguagemUbiqua LinguagemUbiqua { get; private set; }
@@ -21,22 +20,19 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public Produto(string nome)
-            :this(Guid.NewGuid(), 
-                 nome, 
-                 new List<RequisitoNaoFuncional>(), 
-                 new LinguagemUbiqua(new List<JargaoDoNegocio>())
-                 )
+            :this(nome, 
+                  new List<RequisitoNaoFuncional>(), 
+                  new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                  )
         {
 
         }
 
-        public Produto(Guid id,
-                       string nome,
+        public Produto(string nome,
                        ICollection<RequisitoNaoFuncional> requisitosNaoFuncionais,
                        LinguagemUbiqua linguagemUbiqua)
         {
             AddNotifications(new Contract()
-                .IsNotEmpty(id, nameof(Id), "Id não deve ser vazio")
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(requisitosNaoFuncionais, nameof(RequisitosNaoFuncionais), "Lista de RNF não pode ser nula")
                 .IfNotNull(requisitosNaoFuncionais, c => c.Join(requisitosNaoFuncionais.ToArray()))
@@ -44,7 +40,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IfNotNull(linguagemUbiqua, c => c.Join(linguagemUbiqua))
                 );
 
-            Id = id;
             Nome = nome;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
             LinguagemUbiqua = linguagemUbiqua;

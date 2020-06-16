@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Bogus;
 using System.Collections.Generic;
 

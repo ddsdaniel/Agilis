@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Services;
 using System;
 using System.Threading.Tasks;

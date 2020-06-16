@@ -1,4 +1,4 @@
-﻿using Agilis.Domain.Models.ForeignKeys;
+﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 using System.Collections.Generic;

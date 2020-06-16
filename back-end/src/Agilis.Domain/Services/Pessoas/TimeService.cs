@@ -5,8 +5,8 @@ using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Model.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -68,7 +68,7 @@ namespace Agilis.Domain.Services.Pessoas
                     .OrderBy(t => t.Nome)
                     .ToList();
 
-        public async Task<UsuarioVO> AdicionarAdmin(Guid timeId, Email email)
+        public async Task<UsuarioFK> AdicionarAdmin(Guid timeId, Email email)
         {
             var time = await ConsultarPorId(timeId);
             if (time == null)
@@ -90,7 +90,7 @@ namespace Agilis.Domain.Services.Pessoas
                 return null;
             }
 
-            var adminVO = new UsuarioVO(admin.Id, admin.NomeCompleto, admin.Email);
+            var adminVO = new UsuarioFK(admin.Id, admin.NomeCompleto, admin.Email.Endereco);
             time.AdicionarAdmin(adminVO);
             if (time.Invalid)
             {
@@ -134,7 +134,7 @@ namespace Agilis.Domain.Services.Pessoas
             }
         }
 
-        public async Task<UsuarioVO> AdicionarColaborador(Guid timeId, Email email)
+        public async Task<UsuarioFK> AdicionarColaborador(Guid timeId, Email email)
         {
             var time = await ConsultarPorId(timeId);
             if (time == null)
@@ -156,7 +156,7 @@ namespace Agilis.Domain.Services.Pessoas
                 return null;
             }
 
-            var colabVO = new UsuarioVO(colab.Id, colab.NomeCompleto, colab.Email);
+            var colabVO = new UsuarioFK(colab.Id, colab.NomeCompleto, colab.Email.Endereco);
             time.AdicionarColaborador(colabVO);
             if (time.Invalid)
             {
@@ -202,28 +202,36 @@ namespace Agilis.Domain.Services.Pessoas
 
         public async Task AdicionarProduto(Guid timeId, Produto produto)
         {
-            var time = await ConsultarPorId(timeId);
+            var time = await _unitOfWork.TimeRepository.ConsultarPorId(timeId);
             if (time == null)
             {
                 AddNotification(nameof(time), "Time não encontrado");
                 return;
             }
 
-            time.AdicionarProduto(produto);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
+            await _unitOfWork.ProdutoRepository.Adicionar(produto);
+
+            var produtoFK = new ProdutoFK(produto.Id, produto.Nome);
+            time.AdicionarProduto(produtoFK);
             if (time.Invalid)
             {
                 AddNotifications(time);
+                return;
             }
-            else
-            {
-                await _unitOfWork.TimeRepository.Atualizar(time);
-                await _unitOfWork.Commit();
-            }
+
+            await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.Commit();
         }
 
         public async Task ExcluirProduto(Guid timeId, Guid produtoId)
         {
-            var time = await ConsultarPorId(timeId);
+            var time = await _unitOfWork.TimeRepository.ConsultarPorId(timeId);
             if (time == null)
             {
                 AddNotification(nameof(time), "Time não encontrado");
@@ -234,12 +242,19 @@ namespace Agilis.Domain.Services.Pessoas
             if (time.Invalid)
             {
                 AddNotifications(time);
+                return;
             }
-            else
+
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
             {
-                await _unitOfWork.TimeRepository.Atualizar(time);
-                await _unitOfWork.Commit();
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
             }
+
+            await _unitOfWork.ProdutoRepository.Excluir(produtoId);
+            await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.Commit();            
         }
         public async Task<ReleaseFK> AdicionarRelease(Guid timeId, string nome)
         {
@@ -301,6 +316,6 @@ namespace Agilis.Domain.Services.Pessoas
                 await _unitOfWork.TimeRepository.Atualizar(time);
                 await _unitOfWork.Commit();
             }
-        }        
+        }
     }
 }

@@ -2,12 +2,11 @@
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Mocks.Entities.Pessoas;
 using Xunit;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
 using System.Collections.Generic;
 using System;
 using Agilis.Domain.Mocks.ValueObjects;
-using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -31,10 +30,10 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             //Arrange & Act
             var time = new Time(nome: nome,
                                 escopo: EscopoTime.Pessoal,
-                                colaboradores: new List<UsuarioVO>(),
-                                administradores: new List<UsuarioVO> { new UsuarioVO(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido()) },
+                                colaboradores: new List<UsuarioFK>(),
+                                administradores: new List<UsuarioFK> { new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco) },
                                 releases: new List<ReleaseFK>(),
-                                produtos: new List<Produto>()
+                                produtos: new List<ProdutoFK>()
                                 );
 
             //Assert
@@ -47,10 +46,10 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             //Arrange & Act
             var time = new Time(nome: "Time 1",
                                 escopo: EscopoTime.Pessoal,
-                                colaboradores: new List<UsuarioVO>(),
-                                administradores: new List<UsuarioVO> { },
+                                colaboradores: new List<UsuarioFK>(),
+                                administradores: new List<UsuarioFK> { },
                                 releases: new List<ReleaseFK>(),
-                                produtos: new List<Produto>()
+                                produtos: new List<ProdutoFK>()
                                 );
 
             //Assert

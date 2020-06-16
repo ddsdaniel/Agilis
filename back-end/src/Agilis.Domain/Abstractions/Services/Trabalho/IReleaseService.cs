@@ -1,7 +1,7 @@
 ﻿using DDS.Domain.Core.Abstractions.Services;
 using System.Threading.Tasks;
-using Agilis.Domain.Models.ForeignKeys;
 using System;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {

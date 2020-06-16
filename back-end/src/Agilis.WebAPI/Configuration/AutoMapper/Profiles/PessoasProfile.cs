@@ -1,8 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
@@ -21,26 +19,26 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                     new Time(
                         nome: vm.Nome,
                         escopo: vm.Escopo,
-                        administradores: context.Mapper.Map<UsuarioVO[]>(vm.Administradores),
-                        colaboradores: context.Mapper.Map<UsuarioVO[]>(vm.Colaboradores),
+                        administradores: context.Mapper.Map<UsuarioFK[]>(vm.Administradores),
+                        colaboradores: context.Mapper.Map<UsuarioFK[]>(vm.Colaboradores),
                         releases: context.Mapper.Map<ReleaseFK[]>(vm.Releases),
-                        produtos: context.Mapper.Map<Produto[]>(vm.Produtos)
+                        produtos: context.Mapper.Map<ProdutoFK[]>(vm.Produtos)
                         )
                  );
 
-            CreateMap<Time, TimeVO>()
+            CreateMap<Time, TimeFK>()
                 .ConstructUsing((vm, context) =>
-                  new TimeVO(
+                  new TimeFK(
                       id: vm.Id,
                       nome: vm.Nome
                       )
                );
 
-            CreateMap<TimeVO, TimeViewModel>();
+            CreateMap<TimeFK, TimeViewModel>();
 
-            CreateMap<TimeViewModel, TimeVO>()
+            CreateMap<TimeViewModel, TimeFK>()
                .ConstructUsing((vm, context) =>
-                 new TimeVO(
+                 new TimeFK(
                      id: vm.Id,
                      nome: vm.Nome
                      )

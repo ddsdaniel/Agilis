@@ -3,12 +3,12 @@
 import { Entidade } from '../entidade';
 import { Produto } from '../trabalho/produto';
 import { ReleaseFK } from '../trabalho/releases/release-fk';
-import { UsuarioVO } from './usuario-vo';
+import { UsuarioFK } from './usuario-FK';
 
 export interface Time extends Entidade {
   escopo: EscopoTime;
-  administradores: UsuarioVO[];
-  colaboradores: UsuarioVO[];
+  administradores: UsuarioFK[];
+  colaboradores: UsuarioFK[];
   produtos: Produto[];
   releases: ReleaseFK[];
 }

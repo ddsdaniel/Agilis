@@ -16,7 +16,7 @@ import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.s
 export class ReleasesFormComponent extends CrudFormComponent<Release> implements OnInit {
 
   times: Time[];
-  timeId: string;
+  //timeId: string;
 
   constructor(
     router: Router,
@@ -36,21 +36,21 @@ export class ReleasesFormComponent extends CrudFormComponent<Release> implements
   }
 
   recuperouEntidade(release: Release): void {
-    this.timeId = release.time.id;
+    //this.timeId = release.time.id;
   }
 
   sugerirNovo(): void {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      time: null,
-      ordem: 0, // TODO: Ordem
+      //time: null,
+      //ordem: 0, // TODO: Ordem
       sprints: [],
     };
   }
 
   salvar() {
-    this.entidade.time = this.times.find(t => t.id === this.timeId);
+    //this.entidade.time = this.times.find(t => t.id === this.timeId);
     super.salvar();
   }
 

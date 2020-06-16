@@ -3,6 +3,7 @@ using Agilis.Domain.Mocks.Entities.Trabalho;
 using Xunit;
 using System.Collections.Generic;
 using Agilis.Domain.Models.ForeignKeys;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {

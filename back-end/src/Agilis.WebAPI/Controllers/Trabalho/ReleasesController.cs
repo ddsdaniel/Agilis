@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
 using DDS.WebAPI.Models.ViewModels;
-using Agilis.Domain.Models.ForeignKeys;
 using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {

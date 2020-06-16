@@ -6,7 +6,7 @@ import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
 import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Time } from 'src/app/models/pessoas/time';
-import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
+import { UsuarioFK } from 'src/app/models/pessoas/usuario-FK';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
@@ -64,7 +64,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         if (email) {
           this.timeApiService.adicionarColaborador(this.entidade.id, email)
             .subscribe(
-              (novoColab: UsuarioVO) => this.entidade.colaboradores.push(novoColab),
+              (novoColab: UsuarioFK) => this.entidade.colaboradores.push(novoColab),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
             );
         }
@@ -76,7 +76,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       .subscribe(
         () => {
           const index = this.entidade.colaboradores.findIndex(c => c.id === colabId);
-          const usuarioExcluido = this.entidade.colaboradores.removeAt<UsuarioVO>(index)[0];
+          const usuarioExcluido = this.entidade.colaboradores.removeAt<UsuarioFK>(index)[0];
 
           const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 
@@ -100,7 +100,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
         if (email) {
           this.timeApiService.adicionarAdmin(this.entidade.id, email)
             .subscribe(
-              (novoAdmin: UsuarioVO) => this.entidade.administradores.push(novoAdmin),
+              (novoAdmin: UsuarioFK) => this.entidade.administradores.push(novoAdmin),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
             );
         }
@@ -112,7 +112,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
       .subscribe(
         () => {
           const index = this.entidade.administradores.findIndex(c => c.id === adminId);
-          const usuarioExcluido = this.entidade.administradores.removeAt<UsuarioVO>(index)[0];
+          const usuarioExcluido = this.entidade.administradores.removeAt<UsuarioFK>(index)[0];
 
           const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 

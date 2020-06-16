@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.WebAPI.ViewModels.Trabalho;
@@ -39,7 +39,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<ProdutoViewModel, Produto>()
                  .ConstructUsing((vm, context) =>
                     new Produto(
-                        id: vm.Id,
                         nome: vm.Nome,
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
                         linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())

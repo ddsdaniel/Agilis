@@ -13,8 +13,8 @@ using System;
 using DDS.Domain.Core.Model.ValueObjects;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
-using Agilis.Domain.Models.ForeignKeys;
 using DDS.WebAPI.Models.ViewModels;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {

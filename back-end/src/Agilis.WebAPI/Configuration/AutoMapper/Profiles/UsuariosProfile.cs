@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Models.ValueObjects.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
@@ -24,23 +24,23 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
-            CreateMap<UsuarioVO, UsuarioBasicViewModel>();
+            CreateMap<UsuarioFK, UsuarioBasicViewModel>();
 
-            CreateMap<Usuario, UsuarioVO>()
+            CreateMap<Usuario, UsuarioFK>()
                  .ConstructUsing((usuario, context) =>
-                    new UsuarioVO(
+                    new UsuarioFK(
                         id: usuario.Id,
                         nome: usuario.NomeCompleto,
-                        email: usuario.Email
+                        email: usuario.Email.Endereco
                         )
                  );
 
-            CreateMap<UsuarioBasicViewModel, UsuarioVO>()
+            CreateMap<UsuarioBasicViewModel, UsuarioFK>()
                  .ConstructUsing((vm, context) =>
-                    new UsuarioVO(
+                    new UsuarioFK(
                         id: vm.Id,
                         nome: vm.Nome,
-                        email: context.Mapper.Map<Email>(vm.Email)
+                        email: vm.Email.Endereco
                         )
                  );
         }
