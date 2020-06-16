@@ -3,10 +3,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
+import { ReleaseFK } from 'src/app/models/trabalho/releases/release-fk';
 import { Sprint } from 'src/app/models/trabalho/sprints/sprint';
-import { SprintsApiService } from 'src/app/services/api/trabalho/sprints-api.service';
-import { ReleaseVO } from 'src/app/models/trabalho/releases/release-vo';
 import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.service';
+import { SprintsApiService } from 'src/app/services/api/trabalho/sprints-api.service';
 
 @Component({
   selector: 'app-sprints-form',
@@ -15,7 +15,7 @@ import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.s
 })
 export class SprintsFormComponent extends CrudFormComponent<Sprint> implements OnInit {
 
-  releases: ReleaseVO[];
+  releases: ReleaseFK[];
 
   constructor(
     router: Router,
@@ -39,17 +39,12 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> implements O
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      numero: 0,
       periodo: {},
-      release: {
-        id: constantes.newGuid,
-        nome: ''
-      }
     };
   }
 
   salvar() {
-    this.entidade.release = this.releases.find(r => r.id === this.entidade.release.id);
+    //this.entidade.release = this.releases.find(r => r.id === this.entidade.release.id);
     super.salvar();
   }
 }

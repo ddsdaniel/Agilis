@@ -2,7 +2,7 @@
 
 import { Entidade } from '../entidade';
 import { Produto } from '../trabalho/produto';
-import { ReleaseVO } from '../trabalho/releases/release-vo';
+import { ReleaseFK } from '../trabalho/releases/release-fk';
 import { UsuarioVO } from './usuario-vo';
 
 export interface Time extends Entidade {
@@ -10,5 +10,5 @@ export interface Time extends Entidade {
   administradores: UsuarioVO[];
   colaboradores: UsuarioVO[];
   produtos: Produto[];
-  releases: ReleaseVO[];
+  releases: ReleaseFK[];
 }

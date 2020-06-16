@@ -6,9 +6,9 @@ import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioVO } from 'src/app/models/pessoas/usuario-vo';
 import { Produto } from 'src/app/models/trabalho/produto';
 import { Release } from 'src/app/models/trabalho/releases/release';
-import { ReleaseVO } from 'src/app/models/trabalho/releases/release-vo';
+import { ReleaseFK } from 'src/app/models/trabalho/releases/release-fk';
 import { Sprint } from 'src/app/models/trabalho/sprints/sprint';
-import { SprintVO } from 'src/app/models/trabalho/sprints/sprint-vo';
+import { SprintFK } from 'src/app/models/trabalho/sprints/sprint-fk';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
 
@@ -45,16 +45,16 @@ export class TimesApiService extends CrudApiBaseService<Time> {
     return super.delete(`${timeId}/produtos/${prodId}`);
   }
 
-  adicionarRelease(timeId: string, release: Release): Observable<ReleaseVO> {
-    return super.post<Release, ReleaseVO>(release, `${timeId}/releases`);
+  adicionarRelease(timeId: string, release: Release): Observable<ReleaseFK> {
+    return super.post<Release, ReleaseFK>(release, `${timeId}/releases`);
   }
 
   excluirRelease(timeId: string, prodId: string): Observable<void> {
     return super.delete(`${timeId}/releases/${prodId}`);
   }
 
-  adicionarSprint(produtoId: string, sprint: Sprint): Observable<SprintVO> {
-    return super.post<Sprint, SprintVO>(sprint, `${produtoId}/sprints`);
+  adicionarSprint(produtoId: string, sprint: Sprint): Observable<SprintFK> {
+    return super.post<Sprint, SprintFK>(sprint, `${produtoId}/sprints`);
   }
 
   excluirSprint(produtoId: string, sprintId: string): Observable<void> {

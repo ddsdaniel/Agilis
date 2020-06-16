@@ -1,9 +1,6 @@
 ﻿import { Entidade } from '../../entidade';
-import { TimeVO } from '../../pessoas/time-vo';
-import { SprintVO } from '../sprints/sprint-vo';
+import { SprintFK } from '../sprints/sprint-fk';
 
 export interface Release extends Entidade {
-  time: TimeVO;
-  ordem: number;
-  sprints: SprintVO[];
+  sprints: SprintFK[];
 }

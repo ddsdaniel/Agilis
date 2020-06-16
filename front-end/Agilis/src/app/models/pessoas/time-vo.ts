@@ -1,4 +1,4 @@
-import { BasicVO } from '../basic-vo';
+import { ForeignKey } from '../foreign-key';
 
-export interface TimeVO extends BasicVO {
+export interface TimeVO extends ForeignKey {
 }

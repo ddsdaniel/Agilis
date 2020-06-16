@@ -1,4 +1,4 @@
-export interface BasicVO {
+export interface ForeignKey {
   id: string;
   nome: string;
 }
