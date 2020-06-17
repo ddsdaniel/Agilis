@@ -4,7 +4,6 @@ using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {

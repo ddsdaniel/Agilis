@@ -1,15 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 // always include only once per project
 @include mat-core();
 
 // import our custom theme
-@import 'styles-theme.scss';
+@import "styles-theme.scss";
 
 // specify theme class eg: <body class="styles-theme"> ... </body>
 .styles-theme {
-
   // use our theme with angular-material-theme mixin
   @include angular-material-theme($styles-theme);
 }
@@ -31,8 +30,12 @@ body {
   flex: 1 1 auto;
 }
 
+.half-width {
+  width: 50%;
+}
+
 .full-width {
-  width: 100%;
+  width: 100% !important;
 }
 
 mat-form-field mat-icon {
@@ -89,4 +92,41 @@ $spacer: 1rem !default;
 }
 .mt-5 {
   margin-top: 3 * $spacer !important;
+}
+//margin left
+.ml-2 {
+  margin-left: 0.5 * $spacer !important;
+}
+.ml-3 {
+  margin-left: $spacer !important;
+}
+.ml-4 {
+  margin-left: 1.5 * $spacer !important;
+}
+.ml-5 {
+  margin-left: 3 * $spacer !important;
+}
+//padding
+.ph-2 {
+  padding-left: 0.5 * $spacer !important;
+  padding-right: 0.5 * $spacer !important;
+}
+.ph-3 {
+  padding-left: $spacer !important;
+  padding-right: $spacer !important;
+}
+.ph-4 {
+  padding-left: 1.5 * $spacer !important;
+  padding-right: 1.5 * $spacer !important;
+}
+
+//crud
+mat-list-item mat-icon {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.pesquisa button {
+  height: 36px !important;
+  margin-bottom: 20px;
 }

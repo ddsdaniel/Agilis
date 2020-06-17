@@ -1,0 +1,64 @@
+﻿<form fxLayout="row" class="mt-5">
+
+  <div fxFlex="20" fxFlex.xs="5"></div>
+
+  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
+
+    <mat-card-header>
+      <mat-card-title>Cadastro de Sprints</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-tab-group>
+        <mat-tab label="Dados Principais">
+
+          <mat-form-field class="mt-4">
+            <mat-label>Número</mat-label>
+            <input matInput [(ngModel)]="entidade.numero" placeholder="Número" name="numero" type="number" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Data Inicial</mat-label>
+            <input matInput [matDatepicker]="pickerInicial" [(ngModel)]="entidade.periodo.dataInicial" name="dataInicial">
+            <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicial></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="ml-3">
+            <mat-label>Data Final</mat-label>
+            <input matInput [matDatepicker]="pickerFinal" [(ngModel)]="entidade.periodo.dataFinal" name="dataFinal">
+            <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFinal></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Release</mat-label>
+            <mat-select [(ngModel)]="entidade?.release.id" name="release">
+              <mat-option *ngFor="let release of releases" [value]="release.id">
+                {{release.nome}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+            <button mat-raised-button (click)="cancelar()">Cancelar</button>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Workflow"></mat-tab>
+
+      </mat-tab-group>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</form>

@@ -36,7 +36,7 @@ export class TratadorErrosService {
 
   private traduzir(mensagem: any): any {
     switch (mensagem) {
-      case 'Unknown Error': return 'Erro desconhecido';
+      case 'Unknown Error': return 'Erro desconhecido. Verifique se a API está rodando.';
       case 'One or more validation errors occurred.': return 'Uma ou mais validações falharam.';
       default: return mensagem;
     }

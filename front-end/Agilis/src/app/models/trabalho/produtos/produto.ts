@@ -1,7 +1,5 @@
-﻿import { Usuario } from '../../pessoas/usuario';
+﻿import { Entidade } from '../../entidade';
 
-export interface Produto {
-  id: string;
-  nome: string;
-  usuarioId: string;
+export interface Produto extends Entidade {
+
 }

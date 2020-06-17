@@ -1,29 +1,100 @@
-﻿<form fxLayout="row" class="mt-5">
+﻿<h1>Time {{entidade.nome}}</h1>
 
-  <div fxFlex="20" fxFlex.xs="5"></div>
+<mat-tab-group>
 
-  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
+  <!-- Dados Principais -->
+  <mat-tab label="Dados Principais">
+    <mat-form-field class="half-width mt-4">
+      <mat-label>Nome</mat-label>
+      <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="entidade.nome" placeholder="Nome"
+        name="nome" type="text" required>
+    </mat-form-field>
 
-    <mat-card-header>
-      <mat-card-title>Cadastro de Times</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-
-      <mat-form-field class="full-width mt-4">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
-      </mat-form-field>
-
-    </mat-card-content>
-
-    <mat-card-actions>
+    <div *ngIf="podeEditar()" class="mb-1">
       <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()">Cancelar</button>
-    </mat-card-actions>
+      <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+    </div>
 
-  </mat-card>
+  </mat-tab>
 
-  <div fxFlex="20" fxFlex.xs="5"></div>
+  <!-- Administradores -->
+  <mat-tab *ngIf="podeEditar()">
 
-</form>
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.administradores.length" matBadgeOverlap="false"
+        matBadgeColor="accent">Administradores</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let admin of entidade.administradores">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirAdministrador(admin.id)">delete</mat-icon>
+          <div mat-line>{{admin.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoAdministrador()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
+
+  <!-- Colaboradores -->
+  <mat-tab *ngIf="podeEditar()">
+
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.colaboradores.length" matBadgeOverlap="false"
+        matBadgeColor="accent">Colaboradores</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let colab of entidade.colaboradores">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
+          <div mat-line>{{colab.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoColaborador()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
+
+  <!-- Produtos -->
+  <mat-tab>
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.produtos.length" matBadgeOverlap="false" matBadgeColor="accent">Produtos</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let prod of entidade.produtos">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
+          <div mat-line>{{prod.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoProduto()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
+
+  <!-- Releases -->
+  <mat-tab>
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.releases.length" matBadgeOverlap="false" matBadgeColor="accent">Releases</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let release of entidade.releases">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirRelease(release.id)">delete</mat-icon>
+          <div mat-line>{{release.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoRelease()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-tab>
+
+</mat-tab-group>

@@ -3,17 +3,16 @@ import { OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-import { EntidadeFavorita } from '../models/entidade-favorita';
-import { Favorito } from '../models/favorito';
-import { CrudFavoritoApiBaseService } from '../services/api/crud-favorito-api-base.service';
+import { Entidade } from '../models/entidade';
+import { CrudApiBaseService } from '../services/api/crud-api-base.service';
 
-export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
+export class CrudComponent<TEntity extends Entidade> implements OnInit {
 
   lista: TEntity[];
   filtro = '';
 
   constructor(
-    public apiService: CrudFavoritoApiBaseService<TEntity>,
+    public apiService: CrudApiBaseService<TEntity>,
     public snackBar: MatSnackBar,
     public router: Router,
     private rota: string,
@@ -24,8 +23,6 @@ export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
   }
 
   atualizarDados() {
-    console.log('filtro: ' + this.filtro);
-
     if (this.filtro) {
       this.apiService.pesquisar(this.filtro)
         .subscribe(
@@ -70,22 +67,6 @@ export class CrudComponent<TEntity extends EntidadeFavorita> implements OnInit {
               );
 
           });
-        },
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
-  favoritar(id: string, marcado: boolean) {
-
-    const favorito: Favorito = {
-      marcado
-    };
-
-    this.apiService.favoritar(id, favorito)
-      .subscribe(
-        () => {
-          const entidade = this.lista.find(t => t.id === id);
-          entidade.favorito = marcado;
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );

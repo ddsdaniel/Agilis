@@ -16,9 +16,11 @@ namespace Agilis.Infra.Data.Repositories
         public IUsuarioRepository UsuarioRepository { get; }
         public IUserStoryRepository UserStoryRepository { get; }
         public ITimeRepository TimeRepository { get; }
-        public IProdutoRepository ProdutoRepository { get; }
+        public ISprintRepository SprintRepository { get; }
         public IAtorRepository AtorRepository { get; }
         public IMilestoneRepository MilestoneRepository { get; }
+        public IReleaseRepository ReleaseRepository { get; }
+        public IProdutoRepository ProdutoRepository { get; }
 
         public UnitOfWork(IMongoDatabase database)
         {
@@ -28,9 +30,11 @@ namespace Agilis.Infra.Data.Repositories
             UsuarioRepository = new UsuarioRepository(database, _session);
             MilestoneRepository = new MilestoneRepository(database, _session);
             TimeRepository = new TimeRepository(database, _session);
-            ProdutoRepository = new ProdutoRepository(database, _session);
+            SprintRepository = new SprintRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);
+            ReleaseRepository = new ReleaseRepository(database, _session);
+            ProdutoRepository = new ProdutoRepository(database, _session);
         }
 
         public async Task Commit()
@@ -52,10 +56,17 @@ namespace Agilis.Infra.Data.Repositories
 
             if (disposing)
             {
-                if (_session.IsInTransaction)
-                    _session.AbortTransaction();
+                try
+                {
+                    if (_session.IsInTransaction)
+                        _session.AbortTransaction();
 
-                _session.Dispose();
+                    _session.Dispose();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             _disposed = true;

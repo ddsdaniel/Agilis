@@ -43,14 +43,14 @@ namespace Agilis.WebAPI.Configuration
             var mongoDatabase = new MongoClient(new MongoClientSettings { ReplicaSetName = "rs1" }).GetDatabase("agilis");
             services.TryAddScoped(x => mongoDatabase);
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //Pessoas
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-			services.AddTransient<IProdutoService, ProdutoService>();
-            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+			services.AddTransient<ISprintService, SprintService>();
+            services.AddTransient<ISprintRepository, SprintRepository>();
 
 			services.AddTransient<ITimeService, TimeService>();
             services.AddTransient<ITimeRepository, TimeRepository>();
@@ -70,6 +70,9 @@ namespace Agilis.WebAPI.Configuration
 
             services.AddTransient<IMilestoneService, MilestoneService>();
             services.AddTransient<IMilestoneRepository, MilestoneRepository>();
+
+            services.AddTransient<IReleaseService, ReleaseService>();
+            services.AddTransient<IReleaseRepository, ReleaseRepository>();
 
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));

@@ -1,4 +1,4 @@
-@import '../../src/styles.scss';
+@import "../../src/styles.scss";
 
 .example-container {
   position: absolute;
@@ -7,7 +7,6 @@
   left: 0;
   right: 0;
 }
-
 
 .cabecalho {
   padding: 16px;
@@ -18,11 +17,11 @@ mat-nav-list mat-icon {
   color: mat-color($styles-theme-primary) !important;
 }
 
-mat-nav-list{
+mat-nav-list {
   margin: 0 16px;
 }
 
-mat-sidenav h1{
+mat-sidenav h1 {
   margin: 16px;
 }
 
@@ -30,8 +29,7 @@ mat-sidenav {
   min-width: 20%;
 }
 
-mat-progress-bar{
+mat-progress-bar {
   position: fixed;
   bottom: 0;
-  height: 8px;
 }

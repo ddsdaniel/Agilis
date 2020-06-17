@@ -1,5 +1,4 @@
-﻿using Agilis.WebAPI.ViewModels.Pessoas;
-using DDS.WebAPI.Abstractions.ViewModels;
+﻿using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
@@ -17,11 +16,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// <summary>
         /// Nome do produto
         /// </summary>
-        public string Nome { get; set; }
-
-        /// <summary>
-        /// Proprietário do produto
-        /// </summary>
-        public Guid UsuarioId { get; set; }
+        public string Nome { get; set; }                
     }
 }

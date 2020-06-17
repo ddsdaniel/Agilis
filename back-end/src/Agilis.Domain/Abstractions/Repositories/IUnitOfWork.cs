@@ -8,10 +8,12 @@ namespace Agilis.Domain.Abstractions.Repositories
     {
         IUserStoryRepository UserStoryRepository { get; }
         ITimeRepository TimeRepository { get; }
-        IProdutoRepository ProdutoRepository { get; }
+        ISprintRepository SprintRepository { get; }
         IAtorRepository AtorRepository { get; }
         IMilestoneRepository MilestoneRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
+        IReleaseRepository ReleaseRepository { get; }
+        IProdutoRepository ProdutoRepository { get; }
         Task Commit();
     }
 }

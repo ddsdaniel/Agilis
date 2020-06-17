@@ -5,6 +5,5 @@ namespace Agilis.Domain.Abstractions.Repositories.Trabalho
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
-        
     }
 }

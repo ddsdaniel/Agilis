@@ -9,11 +9,6 @@
             Define o mapeamento entre as entidades e as view models, bem como alguns value objects específicos
             </summary>
         </member>
-        <member name="M:Agilis.WebAPI.Configuration.AutoMapperConfig.#ctor">
-            <summary>
-            Construtor que configura o mapeamento das propriedades
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.Configuration.CorsConfig">
             <summary>
             Classe de extensão para separar as configurações de Cors
@@ -133,13 +128,69 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Favoritar(System.Guid,Agilis.WebAPI.ViewModels.FavoritoViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
             <summary>
-            Marca/desmarca um time como favorito
+            Adiciona um usuário administrador ao time
             </summary>
-            <param name="id">Id do time que será marcado/desmarcado como favorito</param>
-            <param name="favorito">True para favoritar ou false para desfavoritar</param>
-            <returns>Ok, sem parâmetros</returns>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(System.Guid,System.Guid)">
+            <summary>
+            Remove um administrador do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="adminId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+            <summary>
+            Adiciona um colaborador ao time
+            </summary>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(System.Guid,System.Guid)">
+            <summary>
+            Remove um colaborador do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="colabId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma release ao time
+            </summary>
+            <param name="timeId">Id do time em que a release será adicionada</param>
+            <param name="nomeViewModel">Container do nome da release</param>
+            <returns>ReleaseFK com o id e o nome da release adicionada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(System.Guid,System.Guid)">
+            <summary>
+            Remove um release do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="releaseId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona um produto ao time
+            </summary>
+            <param name="timeId"></param>
+            <param name="produtoViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(System.Guid,System.Guid)">
+            <summary>
+            Remove um produto do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="prodId"></param>
+            <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
             <summary>
@@ -147,6 +198,13 @@
             </summary>
             <param name="filtro">Filtro inserido pelo usuário</param>
             <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel})">
+            <summary>
+            Ordena pelo nome do time
+            </summary>
+            <param name="lista">Lista de times a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
             <summary>
@@ -229,26 +287,46 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="releaseService">Instância do Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona um sprint ao release
+            </summary>
+            <param name="releaseId">Id da release em que o sprint será adicionado</param>
+            <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
+            <returns>Id e nome da sprint adicionada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
+            <summary>
+            Remove um sprint do release+
+            </summary>
+            <param name="releaseId"></param>
+            <param name="sprintId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ISprintService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ConsultarTodos">
-            <summary>
-            Consulta todos os produtos do usuário logado
-            </summary>
-            <returns>Retorna todos os produtos do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel})">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.SprintsController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel})">
             <summary>
             Método abstrato, no qual cada controller implementa a ordenação de forma customizada
             </summary>
@@ -328,7 +406,7 @@
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel">
             <summary>
-            Representa um time, um software
+            Representa um time
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Id">
@@ -341,19 +419,29 @@
             Nome do time
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.UsuarioId">
-            <summary>
-            Proprietário do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Favorito">
-            <summary>
-            Um time favorito aparece primeiro nos listagens
-            </summary>
-        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Escopo">
             <summary>
             Indica se o time é pessoal ou colaborativo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Administradores">
+            <summary>
+            Administradores do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Colaboradores">
+            <summary>
+            Colaboradores do time, exceto administradores
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Releases">
+            <summary>
+            Releases do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
+            <summary>
+            Produtos do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">
@@ -536,9 +624,29 @@
             Nome do produto
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.UsuarioId">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
             <summary>
-            Proprietário do produto
+            Sprints da release
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
+            <summary>
+            Representa um sprint da release
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Id">
+            <summary>
+            Id do sprint
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Nome">
+            <summary>
+            Nome do sprint
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">
+            <summary>
+            Intervalo de datas do sprint
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

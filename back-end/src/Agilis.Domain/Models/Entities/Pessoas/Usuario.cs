@@ -32,6 +32,8 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         /// </summary>
         public string Sobrenome { get; private set; }
 
+        public string NomeCompleto => $"{Nome} {Sobrenome}";
+
         /// <summary>
         /// Senha do usuário, descriptografada aqui, mas criptografada explicitamente ao persistir e por HTTPS ao trocar dados com o front
         /// </summary>
@@ -102,5 +104,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
 
             Senha = novaSenha;
         }
+
+        public override string ToString() => NomeCompleto;
     }
 }
