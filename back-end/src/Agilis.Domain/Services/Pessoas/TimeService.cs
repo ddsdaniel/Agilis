@@ -314,5 +314,25 @@ namespace Agilis.Domain.Services.Pessoas
             await _unitOfWork.TimeRepository.Atualizar(time);
             await _unitOfWork.Commit();
         }
+
+        public async Task Renomear(Guid timeId, string nome)
+        {
+            var time = await _unitOfWork.TimeRepository.ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return;
+            }
+
+            time.Renomear(nome);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+
+            await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.Commit();
+        }
     }
 }

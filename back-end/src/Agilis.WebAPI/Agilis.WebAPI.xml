@@ -144,6 +144,14 @@
             <param name="adminId"></param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Renomear(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia o time
+            </summary>
+            <param name="timeId">Id do time</param>
+            <param name="stringContainerViewModel">Novo nome do time</param>
+            <returns>Status200OK</returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
             <summary>
             Adiciona um colaborador ao time
@@ -181,7 +189,7 @@
             Adiciona um produto ao time
             </summary>
             <param name="timeId"></param>
-            <param name="produtoViewModel"></param>
+            <param name="nomeViewModel"></param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(System.Guid,System.Guid)">

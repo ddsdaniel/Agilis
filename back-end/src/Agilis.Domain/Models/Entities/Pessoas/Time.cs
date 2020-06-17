@@ -24,6 +24,18 @@ namespace Agilis.Domain.Models.Entities.Pessoas
 
         }
 
+        public Time(string nome, UsuarioFK admin)
+            : this(nome: nome,
+                   escopo: EscopoTime.Colaborativo,
+                   colaboradores: new List<UsuarioFK>(),
+                   administradores: new List<UsuarioFK> { admin },
+                   releases: new List<ReleaseFK>(),
+                   produtos: new List<ProdutoFK>()
+                   )
+        {
+
+        }
+
         public Time(string nome,
                     EscopoTime escopo,
                     IEnumerable<UsuarioFK> colaboradores,
@@ -226,5 +238,13 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         }
 
         public override string ToString() => Nome;
+
+        internal void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(Nome), "Nome não deve ser vazio ou nulo");
+            else
+                Nome = nome;
+        }
     }
 }

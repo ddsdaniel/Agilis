@@ -23,7 +23,7 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
         Task ExcluirProduto(Guid timeId, Guid prodId);
 
         Task<ReleaseFK> AdicionarRelease(Guid timeId, string nome);
-        Task ExcluirRelease(Guid timeId, Guid releaseId);  
-
+        Task ExcluirRelease(Guid timeId, Guid releaseId);
+        Task Renomear(Guid timeId, string nome);
     }
 }

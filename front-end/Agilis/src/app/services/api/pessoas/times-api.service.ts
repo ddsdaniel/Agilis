@@ -16,7 +16,6 @@ import { CrudApiBaseService } from '../crud-api-base.service';
   providedIn: 'root'
 })
 export class TimesApiService extends CrudApiBaseService<Time> {
-
   constructor(httpClient: HttpClient) {
     super(httpClient, 'times');
   }
@@ -60,4 +59,9 @@ export class TimesApiService extends CrudApiBaseService<Time> {
   excluirSprint(produtoId: string, sprintId: string): Observable<void> {
     return super.delete(`${produtoId}/sprints/${sprintId}`);
   }
+
+  renomear(id: string, nome: string): Observable<void> {
+    return super.patch<StringContainer, void>({ texto: nome }, `${id}`);
+  }
+
 }

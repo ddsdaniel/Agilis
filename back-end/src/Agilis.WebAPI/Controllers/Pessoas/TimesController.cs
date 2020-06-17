@@ -57,6 +57,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
             return Ok(listaViewModel);
         }
 
+
         /// <summary>
         /// Adiciona um usuário administrador ao time
         /// </summary>
@@ -96,6 +97,25 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         {
             await _timeService.ExcluirAdmin(timeId, adminId);
 
+            if (_timeService.Invalid)
+                return BadRequest(_timeService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Renomeia o time
+        /// </summary>
+        /// <param name="timeId">Id do time</param>
+        /// <param name="stringContainerViewModel">Novo nome do time</param>
+        /// <returns>Status200OK</returns>
+        [HttpPatch("{timeId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Renomear(Guid timeId,
+                                                 StringContainerViewModel stringContainerViewModel)
+        {
+            await _timeService.Renomear(timeId, stringContainerViewModel.Texto);
             if (_timeService.Invalid)
                 return BadRequest(_timeService.Notifications);
 
@@ -192,7 +212,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// Adiciona um produto ao time
         /// </summary>
         /// <param name="timeId"></param>
-        /// <param name="produtoViewModel"></param>
+        /// <param name="nomeViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/produtos")]
         [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]

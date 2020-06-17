@@ -1,18 +1,21 @@
-﻿<h1>Time {{entidade.nome}}</h1>
+﻿<h1>Time {{time.nome}}</h1>
 
 <mat-tab-group>
 
   <!-- Dados Principais -->
   <mat-tab label="Dados Principais">
-    <mat-form-field class="half-width mt-4">
-      <mat-label>Nome</mat-label>
-      <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="entidade.nome" placeholder="Nome"
-        name="nome" type="text" required>
-    </mat-form-field>
 
-    <div *ngIf="podeEditar()" class="mb-1">
-      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+    <div style="display: inline-block" class="half-width mt-4">
+
+      <mat-form-field class="half-width">
+        <mat-label>Nome</mat-label>
+        <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="time.nome" placeholder="Nome"
+          name="nome" type="text" required>
+      </mat-form-field>
+
+      <button *ngIf="podeEditar()" class="ml-2" mat-raised-button color="accent"
+          (click)="renomear()">Renomear</button>
+
     </div>
 
   </mat-tab>
@@ -21,13 +24,13 @@
   <mat-tab *ngIf="podeEditar()">
 
     <ng-template matTabLabel>
-      <span [matBadge]="entidade.administradores.length" matBadgeOverlap="false"
+      <span [matBadge]="time.administradores.length" matBadgeOverlap="false"
         matBadgeColor="accent">Administradores</span>
     </ng-template>
 
     <div class="tab-container">
       <mat-list>
-        <mat-list-item *ngFor="let admin of entidade.administradores">
+        <mat-list-item *ngFor="let admin of time.administradores">
           <mat-icon mat-list-icon title="Remover" (click)="excluirAdministrador(admin.id)">delete</mat-icon>
           <div mat-line>{{admin.nome}}</div>
         </mat-list-item>
@@ -42,13 +45,13 @@
   <mat-tab *ngIf="podeEditar()">
 
     <ng-template matTabLabel>
-      <span [matBadge]="entidade.colaboradores.length" matBadgeOverlap="false"
+      <span [matBadge]="time.colaboradores.length" matBadgeOverlap="false"
         matBadgeColor="accent">Colaboradores</span>
     </ng-template>
 
     <div class="tab-container">
       <mat-list>
-        <mat-list-item *ngFor="let colab of entidade.colaboradores">
+        <mat-list-item *ngFor="let colab of time.colaboradores">
           <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
           <div mat-line>{{colab.nome}}</div>
         </mat-list-item>
@@ -62,12 +65,12 @@
   <!-- Produtos -->
   <mat-tab>
     <ng-template matTabLabel>
-      <span [matBadge]="entidade.produtos.length" matBadgeOverlap="false" matBadgeColor="accent">Produtos</span>
+      <span [matBadge]="time.produtos.length" matBadgeOverlap="false" matBadgeColor="accent">Produtos</span>
     </ng-template>
 
     <div class="tab-container">
       <mat-list>
-        <mat-list-item *ngFor="let prod of entidade.produtos">
+        <mat-list-item *ngFor="let prod of time.produtos">
           <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
           <div mat-line>{{prod.nome}}</div>
         </mat-list-item>
@@ -81,12 +84,12 @@
   <!-- Releases -->
   <mat-tab>
     <ng-template matTabLabel>
-      <span [matBadge]="entidade.releases.length" matBadgeOverlap="false" matBadgeColor="accent">Releases</span>
+      <span [matBadge]="time.releases.length" matBadgeOverlap="false" matBadgeColor="accent">Releases</span>
     </ng-template>
 
     <div class="tab-container">
       <mat-list>
-        <mat-list-item *ngFor="let release of entidade.releases">
+        <mat-list-item *ngFor="let release of time.releases">
           <mat-icon mat-list-icon title="Remover" (click)="excluirRelease(release.id)">delete</mat-icon>
           <div mat-line>{{release.nome}}</div>
         </mat-list-item>
