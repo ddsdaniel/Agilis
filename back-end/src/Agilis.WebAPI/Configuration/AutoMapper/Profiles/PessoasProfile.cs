@@ -57,6 +57,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 
             CreateMap<Email, EmailViewModel>();
 
+            CreateMap<string, EmailViewModel>()
+                .ConstructUsing(emailString => new EmailViewModel { Endereco = emailString });
+
             CreateMap<EmailViewModel, Email>()
                 .ConstructUsing(vm => new Email(vm.Endereco));
         }

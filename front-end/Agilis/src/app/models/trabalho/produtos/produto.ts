@@ -1,4 +1,4 @@
-﻿import { Entidade } from '../entidade';
+﻿import { Entidade } from '../../entidade';
 
 export interface Produto extends Entidade {
 

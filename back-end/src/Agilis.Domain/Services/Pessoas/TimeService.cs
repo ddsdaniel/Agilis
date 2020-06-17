@@ -254,7 +254,7 @@ namespace Agilis.Domain.Services.Pessoas
 
             await _unitOfWork.ProdutoRepository.Excluir(produtoId);
             await _unitOfWork.TimeRepository.Atualizar(time);
-            await _unitOfWork.Commit();            
+            await _unitOfWork.Commit();
         }
         public async Task<ReleaseFK> AdicionarRelease(Guid timeId, string nome)
         {
@@ -287,16 +287,16 @@ namespace Agilis.Domain.Services.Pessoas
             return releaseFK;
         }
 
-        public async Task ExcluirRelease(Guid timeId, Guid prodId)
+        public async Task ExcluirRelease(Guid timeId, Guid releaseId)
         {
-            var time = await ConsultarPorId(timeId);
+            var time = await _unitOfWork.TimeRepository.ConsultarPorId(timeId);
             if (time == null)
             {
                 AddNotification(nameof(time), "Time não encontrado");
                 return;
             }
 
-            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(prodId);
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
             if (release == null)
             {
                 AddNotification(nameof(release), "Release não encontrado");
@@ -309,13 +309,10 @@ namespace Agilis.Domain.Services.Pessoas
                 AddNotifications(time);
                 return;
             }
-            else
-            {
-                await _unitOfWork.ReleaseRepository.Excluir(release.Id);
-
-                await _unitOfWork.TimeRepository.Atualizar(time);
-                await _unitOfWork.Commit();
-            }
+         
+            await _unitOfWork.ReleaseRepository.Excluir(release.Id);
+            await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.Commit();
         }
     }
 }

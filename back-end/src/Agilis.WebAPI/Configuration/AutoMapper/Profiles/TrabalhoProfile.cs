@@ -45,6 +45,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
+            CreateMap<ProdutoFK, ProdutoViewModel>();
+
             CreateMap<Release, ReleaseViewModel>();
 
             CreateMap<ReleaseViewModel, Release>()

@@ -173,7 +173,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="timeId"></param>
         /// <param name="releaseId"></param>
         /// <returns></returns>
-        [HttpDelete("{timeId:guid}/releases/{prodId:guid}")]
+        [HttpDelete("{timeId:guid}/releases/{releaseId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -199,9 +199,9 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarProduto(Guid timeId,
-                                                         ProdutoViewModel produtoViewModel)
+                                                         StringContainerViewModel nomeViewModel)
         {
-            var produto = new Produto(produtoViewModel.Nome);
+            var produto = new Produto(nomeViewModel.Texto);
             await _timeService.AdicionarProduto(timeId, produto);
 
             if (_timeService.Invalid)

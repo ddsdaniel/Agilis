@@ -176,7 +176,7 @@
             <param name="releaseId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um produto ao time
             </summary>

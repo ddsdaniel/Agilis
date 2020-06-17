@@ -7,10 +7,11 @@ import { constantes } from 'src/app/constants/constantes';
 import { EscopoTime } from 'src/app/enums/pessoas/escopo-time.enum';
 import { Time } from 'src/app/models/pessoas/time';
 import { UsuarioFK } from 'src/app/models/pessoas/usuario-FK';
+import { ProdutoFK } from 'src/app/models/trabalho/produtos/produto-fk';
+import { ReleaseFK } from 'src/app/models/trabalho/releases/release-fk';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { AutenticacaoService } from 'src/app/services/seguranca/autenticacao.service';
-import { Produto } from 'src/app/models/trabalho/produto';
 
 @Component({
   selector: 'app-times-form',
@@ -28,7 +29,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     snackBar: MatSnackBar,
     activatedRoute: ActivatedRoute,
     private autenticacaoService: AutenticacaoService,
-    private dialogoEmailService: DialogoService,
+    private dialogoService: DialogoService,
   ) {
     super(router, timeApiService, snackBar, activatedRoute, 'times');
     this.timeApiService = timeApiService;
@@ -59,7 +60,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoColaborador() {
-    this.dialogoEmailService.abrirEmail()
+    this.dialogoService.abrirEmail()
       .subscribe(email => {
         if (email) {
           this.timeApiService.adicionarColaborador(this.entidade.id, email)
@@ -95,7 +96,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoAdministrador() {
-    this.dialogoEmailService.abrirEmail()
+    this.dialogoService.abrirEmail()
       .subscribe(email => {
         if (email) {
           this.timeApiService.adicionarAdmin(this.entidade.id, email)
@@ -131,16 +132,12 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoProduto() {
-    this.dialogoEmailService.abrirTexto('Entre com o nome do produto', 'Nome')
-    .subscribe(result => {
-      if (result) {
-        const produto: Produto = {
-          id: constantes.newGuid,
-          nome: result,
-        };
-        this.timeApiService.adicionarProduto(this.entidade.id, produto)
+    this.dialogoService.abrirTexto('Entre com o nome do produto', 'Nome')
+    .subscribe(nome => {
+      if (nome) {
+        this.timeApiService.adicionarProduto(this.entidade.id, nome)
           .subscribe(
-            (novoProduto: Produto) => this.entidade.produtos.push(novoProduto),
+            (novoProduto: ProdutoFK) => this.entidade.produtos.push(novoProduto),
             (error: HttpErrorResponse) => this.snackBar.open(error.message)
           );
       }
@@ -152,13 +149,13 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
     .subscribe(
       () => {
         const index = this.entidade.produtos.findIndex(p => p.id === produtoId);
-        const produtoExcluido = this.entidade.produtos.removeAt<Produto>(index)[0];
+        const produtoExcluido = this.entidade.produtos.removeAt<ProdutoFK>(index)[0];
 
         const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 
         snackBarRef.onAction().subscribe(() => {
 
-          this.timeApiService.adicionarProduto(this.entidade.id, produtoExcluido)
+          this.timeApiService.adicionarProduto(this.entidade.id, produtoExcluido.nome)
             .subscribe(
               (novoProduto) => this.entidade.produtos.insert(index, novoProduto),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
@@ -171,10 +168,38 @@ export class TimesFormComponent extends CrudFormComponent<Time> {
   }
 
   abrirDialogoRelease() {
-
+    this.dialogoService.abrirTexto('Entre com o nome da Release', 'Nome')
+    .subscribe(nome => {
+      if (nome) {
+        this.timeApiService.adicionarRelease(this.entidade.id, nome)
+          .subscribe(
+            (novaRelease: ReleaseFK) => this.entidade.releases.push(novaRelease),
+            (error: HttpErrorResponse) => this.snackBar.open(error.message)
+          );
+      }
+    });
   }
 
-  excluirRelease() {
+  excluirRelease(releaseId: string) {
+    this.timeApiService.excluirRelease(this.entidade.id, releaseId)
+    .subscribe(
+      () => {
+        const index = this.entidade.releases.findIndex(p => p.id === releaseId);
+        const releaseExcluida = this.entidade.releases.removeAt<ReleaseFK>(index)[0];
 
+        const snackBarRef = this.snackBar.open('Excluída', 'Desfazer');
+
+        snackBarRef.onAction().subscribe(() => {
+
+          this.timeApiService.adicionarRelease(this.entidade.id, releaseExcluida.nome)
+            .subscribe(
+              (novoRelease) => this.entidade.releases.insert(index, novoRelease),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+
+        });
+      },
+      (error: HttpErrorResponse) => this.snackBar.open(error.message)
+    );
   }
 }

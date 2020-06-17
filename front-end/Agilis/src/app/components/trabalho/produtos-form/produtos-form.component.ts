@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { constantes } from 'src/app/constants/constantes';
 import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
-import { Produto } from 'src/app/models/trabalho/produto';
+import { Produto } from 'src/app/models/trabalho/produtos/produto';
 
 @Component({
   selector: 'app-produtos-form',
