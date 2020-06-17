@@ -36,7 +36,8 @@ export class TimesComponent extends CrudComponent<Time> {
 
           const admin: UsuarioFK = {
             id: this.autenticacaoService.usuarioLogado.usuario.id,
-            nome: this.autenticacaoService.usuarioLogado.usuario.nome,
+            nome: this.autenticacaoService.usuarioLogado.usuario.nome + '' +
+              this.autenticacaoService.usuarioLogado.usuario.sobrenome,
             email: {
               endereco: this.autenticacaoService.usuarioLogado.usuario.email
             },
