@@ -1,0 +1,27 @@
+$spacer: 1rem !default;
+
+//horizontal
+.ph-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.ph-1 {
+  padding-left: 0.25 * $spacer !important;
+  padding-right: 0.25 * $spacer !important;
+}
+.ph-2 {
+  padding-left: 0.5 * $spacer !important;
+  padding-right: 0.5 * $spacer !important;
+}
+.ph-3 {
+  padding-left: $spacer !important;
+  padding-right: $spacer !important;
+}
+.ph-4 {
+  padding-left: 1.5 * $spacer !important;
+  padding-right: 1.5 * $spacer !important;
+}
+.ph-5 {
+  padding-left: 3 * $spacer !important;
+  padding-right: 3 * $spacer !important;
+}

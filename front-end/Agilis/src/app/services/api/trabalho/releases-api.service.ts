@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiRestBaseService } from '../api-rest-base.service';
 import { StringContainer } from 'src/app/models/string-container';
 import { SprintFK } from 'src/app/models/trabalho/sprints/sprint-fk';
+import { Fase } from 'src/app/models/trabalho/fase';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class ReleasesApiService extends ApiRestBaseService {
 
   obterUm(releaseId: string): Observable<Release> {
     return super.get<Release>(`${releaseId}`);
+  }
+
+  adicionarFase(releaseId: string, nome: string): Observable<Fase> {
+    return super.post<StringContainer, Fase>({ texto: nome }, `${releaseId}/product-backlog/fases`);
   }
 
   adicionarSprint(releaseId: string, nome: string): Observable<SprintFK> {

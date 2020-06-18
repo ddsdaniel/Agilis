@@ -6,6 +6,8 @@ import { Release } from 'src/app/models/trabalho/releases/release';
 import { SprintFK } from 'src/app/models/trabalho/sprints/sprint-fk';
 import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
+import { Fase } from 'src/app/models/trabalho/fase';
+import { PrioridadeProductBacklog } from 'src/app/enums/trabalho/prioridade-product-backlog.enum';
 
 @Component({
   selector: 'app-releases-form',
@@ -83,5 +85,28 @@ export class ReleasesFormComponent implements OnInit {
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
+  }
+
+  abrirDialogoFase() {
+    this.dialogoService.abrirTexto('Entre com o nome da Fase', 'Nome')
+      .subscribe(nome => {
+        if (nome) {
+          this.releaseApiService.adicionarFase(this.release.id, nome)
+            .subscribe(
+              (novaFase: Fase) => this.release.productBacklog.fases.push(novaFase),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
+
+  obterNomePrioridade(prioridade: PrioridadeProductBacklog): string {
+    switch (prioridade) {
+      case PrioridadeProductBacklog.CaixaEntrada: return 'Caixa de Entrada';
+      case PrioridadeProductBacklog.ProximoParSprints: return 'Próximos dois Sprints';
+      case PrioridadeProductBacklog.ProximoSprint: return 'Próximo Sprint';
+      case PrioridadeProductBacklog.SprintsFuturos: return 'Sprints Futuros';
+      default: return 'Não indentificao';
+    }
   }
 }

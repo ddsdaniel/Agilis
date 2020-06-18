@@ -340,6 +340,14 @@
             <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
             <returns>Id e nome da sprint adicionada</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarFasePB(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma fase ao product backlog
+            </summary>
+            <param name="releaseId">Id da release em que o sprint será adicionado</param>
+            <param name="faseStringContainer">Nome da sprint a ser adicionada</param>
+            <returns>Id e nome da sprint adicionada</returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
             <summary>
             Remove um sprint do release+

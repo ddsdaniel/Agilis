@@ -96,6 +96,26 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Adiciona uma fase ao product backlog
+        /// </summary>
+        /// <param name="releaseId">Id da release em que o sprint será adicionado</param>
+        /// <param name="faseStringContainer">Nome da sprint a ser adicionada</param>
+        /// <returns>Id e nome da sprint adicionada</returns>
+        [HttpPost("{releaseId:guid}/product-backlog/fases")]
+        [ProducesResponseType(typeof(SprintFK), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarFasePB(Guid releaseId,
+                                                      StringContainerViewModel faseStringContainer)
+        {
+            var fase = await _releaseService.AdicionarFasePB(releaseId, faseStringContainer.Texto);
+            if (_releaseService.Invalid)
+                return BadRequest(_releaseService.Notifications);
+
+            return Ok(fase);
+        }
+
+        /// <summary>
         /// Remove um sprint do release+
         /// </summary>
         /// <param name="releaseId"></param>

@@ -2,8 +2,10 @@
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
@@ -15,6 +17,28 @@ namespace Agilis.Domain.Services.Trabalho
         public ReleaseService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<Fase> AdicionarFasePB(Guid releaseId, string nome)
+        {
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
+            if (release == null)
+            {
+                AddNotification(nameof(release), "Release não encontrada");
+                return null;
+            }
+
+            var fase = release.ProductBacklog.AdicionarFase(nome);
+
+            if (release.ProductBacklog.Invalid)
+            {
+                AddNotifications(release.ProductBacklog);
+                return null;
+            }
+
+            await _unitOfWork.ReleaseRepository.Atualizar(release);
+            await _unitOfWork.Commit();
+            return fase;
         }
 
         public async Task<SprintFK> AdicionarSprint(Guid releaseId, string nome)

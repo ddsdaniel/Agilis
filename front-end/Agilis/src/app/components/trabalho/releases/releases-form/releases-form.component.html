@@ -22,6 +22,22 @@
   <!-- Product Backlog -->
   <mat-tab label="Product Backlog">
 
+
+    <div fxLayout="row" class="mt-4">
+      <div fxFlex="10">.</div>
+      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="10" class="celula">
+        {{fase.nome}}
+      </div>
+      <div fxFlex="10">
+        <button class="m-2" mat-raised-button (click)="abrirDialogoFase()">+ Fase</button>
+      </div>
+    </div>
+    <div fxLayout="row" *ngFor="let prioridade of release.productBacklog.prioridades">
+      <div fxFlex="10">{{obterNomePrioridade(prioridade)}}</div>
+      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="10" class="celula">
+        {{fase.nome}}
+      </div>
+    </div>
     <!-- <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let sprint of release.sprints">
@@ -44,7 +60,8 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let sprint of release.sprints">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)" color="warn">clear_forever</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)" color="warn">clear_forever
+          </mat-icon>
           <div mat-line>{{sprint.nome}}</div>
         </mat-list-item>
       </mat-list>

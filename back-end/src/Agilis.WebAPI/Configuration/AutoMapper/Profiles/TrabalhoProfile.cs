@@ -56,7 +56,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<ProdutoFK, ProdutoViewModel>();
 
             //Releases
-                        CreateMap<Release, ReleaseViewModel>();
+            CreateMap<Release, ReleaseViewModel>();
 
             CreateMap<ReleaseViewModel, Release>()
                  .ConstructUsing((vm, context) =>
@@ -75,6 +75,16 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         fases: context.Mapper.Map<Fase[]>(vm.Fases),
                         prioridades: vm.Prioridades,
                         itens: context.Mapper.Map<ItemProductBacklog[]>(vm.Itens)
+                        )
+                 );
+
+            CreateMap<Fase, FaseViewModel>();
+
+            CreateMap<FaseViewModel, Fase>()
+                 .ConstructUsing((vm, context) =>
+                    new Fase(
+                        posicao: vm.Posicao,
+                        nome: vm.Nome
                         )
                  );
         }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
@@ -26,5 +27,13 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         /// <param name="nome">Novo nome da release</param>
         /// <returns>Task correspondente à renomeação</returns>
         Task Renomear(Guid timeId, Guid releaseId, string nome);
+
+        /// <summary>
+        /// Adiciona uma fase ao product backlog
+        /// </summary>
+        /// <param name="releaseId">Id da release</param>
+        /// <param name="nome">Nome da fase</param>
+        /// <returns>Retorna a fase adicionada</returns>
+        Task<Fase> AdicionarFasePB(Guid releaseId, string nome);
     }
 }
