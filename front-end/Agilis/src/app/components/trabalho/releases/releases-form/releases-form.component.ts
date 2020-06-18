@@ -1,61 +1,87 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CrudFormComponent } from 'src/app/components/crud-form-component';
-import { constantes } from 'src/app/constants/constantes';
-import { Time } from 'src/app/models/pessoas/time';
 import { Release } from 'src/app/models/trabalho/releases/release';
-import { TimesApiService } from 'src/app/services/api/pessoas/times-api.service';
+import { SprintFK } from 'src/app/models/trabalho/sprints/sprint-fk';
 import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.service';
+import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 
 @Component({
   selector: 'app-releases-form',
   templateUrl: './releases-form.component.html',
   styleUrls: ['./releases-form.component.scss']
 })
-export class ReleasesFormComponent extends CrudFormComponent<Release> implements OnInit {
+export class ReleasesFormComponent implements OnInit {
 
-  times: Time[];
-  //timeId: string;
+  private timeId: string;
+  release: Release;
 
   constructor(
-    router: Router,
-    releaseApiService: ReleasesApiService,
-    snackBar: MatSnackBar,
-    activatedRoute: ActivatedRoute,
-    private timesApiService: TimesApiService,
-  ) {
-    super(router, releaseApiService, snackBar, activatedRoute, 'releases');
-  }
+    private router: Router,
+    private releaseApiService: ReleasesApiService,
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
+    private dialogoService: DialogoService,
+  ) { }
 
   ngOnInit() {
-    this.timesApiService.obterTodos()
-      .subscribe(times => this.times = times);
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.timeId = this.activatedRoute.snapshot.paramMap.get('timeId');
+        const releaseId = this.activatedRoute.snapshot.paramMap.get('releaseId');
 
-    super.ngOnInit();
+        this.releaseApiService.obterUm(releaseId)
+          .subscribe(
+            (entidade: Release) => this.release = entidade,
+            (error: HttpErrorResponse) => this.snackBar.open(error.message)
+          );
+
+      }
+    );
   }
 
-  recuperouEntidade(release: Release): void {
-    //this.timeId = release.time.id;
+  renomear() {
+    this.releaseApiService.renomear(this.timeId, this.release.id, this.release.nome)
+      .subscribe(
+        () => this.router.navigateByUrl(`times/${this.timeId}`),
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
-  sugerirNovo(): void {
-    this.entidade = {
-      id: constantes.newGuid,
-      nome: '',
-      //time: null,
-      //ordem: 0, // TODO: Ordem
-      sprints: [],
-    };
+  abrirDialogoSprint() {
+    this.dialogoService.abrirTexto('Entre com o nome do Sprint', 'Nome')
+      .subscribe(nome => {
+        if (nome) {
+          this.releaseApiService.adicionarSprint(this.release.id, nome)
+            .subscribe(
+              (novoSprint: SprintFK) => this.release.sprints.push(novoSprint),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
   }
 
-  salvar() {
-    //this.entidade.time = this.times.find(t => t.id === this.timeId);
-    super.salvar();
-  }
+  excluirSprint(sprintId: string) {
+    this.releaseApiService.excluirSprint(this.release.id, sprintId)
+      .subscribe(
+        () => {
+          const index = this.release.sprints.findIndex(c => c.id === sprintId);
+          const sprintExcluido = this.release.sprints.removeAt<SprintFK>(index)[0];
 
-  editarSprint(id: string) {
-    this.router.navigateByUrl(`sprints/${id}`);
-  }
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 
+          snackBarRef.onAction().subscribe(() => {
+
+            this.releaseApiService.adicionarSprint(this.release.id, sprintExcluido.nome)
+              .subscribe(
+                (novoSprint) => this.release.sprints.insert(index, novoSprint),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
 }

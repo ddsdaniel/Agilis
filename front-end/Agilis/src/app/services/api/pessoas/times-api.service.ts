@@ -52,14 +52,6 @@ export class TimesApiService extends CrudApiBaseService<Time> {
     return super.delete(`${timeId}/releases/${prodId}`);
   }
 
-  adicionarSprint(produtoId: string, nome: string): Observable<SprintFK> {
-    return super.post<StringContainer, SprintFK>({ texto: nome }, `${produtoId}/sprints`);
-  }
-
-  excluirSprint(produtoId: string, sprintId: string): Observable<void> {
-    return super.delete(`${produtoId}/sprints/${sprintId}`);
-  }
-
   renomear(id: string, nome: string): Observable<void> {
     return super.patch<StringContainer, void>({ texto: nome }, `${id}`);
   }

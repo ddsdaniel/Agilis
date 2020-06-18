@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -72,5 +73,13 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public override string ToString() => Nome;
+
+        public void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(Nome), "Nome não deve ser nulo ou vazio");
+            else
+                Nome = nome;
+        }
     }
 }

@@ -71,6 +71,10 @@ export class TimesFormComponent implements OnInit {
       });
   }
 
+  editarRelease(id: string) {
+    this.router.navigateByUrl(`releases/${this.time.id}/${id}`);
+  }
+
   excluirColaborador(colabId: string) {
     this.timeApiService.excluirColaborador(this.time.id, colabId)
       .subscribe(

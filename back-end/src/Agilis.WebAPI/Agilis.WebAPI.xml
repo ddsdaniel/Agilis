@@ -300,11 +300,27 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="releaseService">Instância do Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarPorId(System.Guid)">
+            <summary>
+            Consulta uma release no repositório
+            </summary>
+            <param name="id">Id da release que está sendo consultada</param>
+            <returns>View model da release</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia a release
+            </summary>
+            <param name="timeId">Id do time</param>
+            <param name="releaseId">Id da release</param>
+            <param name="stringContainerViewModel">Novo nome da release</param>
+            <returns>Status200OK</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>

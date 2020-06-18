@@ -29,8 +29,8 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> implements O
   }
 
   ngOnInit() {
-    this.releasesApiService.obterTodos()
-      .subscribe(releases => this.releases = releases);
+    // this.releasesApiService.obterTodos()
+    //   .subscribe(releases => this.releases = releases);
 
     super.ngOnInit();
   }

@@ -48,6 +48,11 @@ namespace Agilis.Domain.Services.Trabalho
             return sprintFK;
         }
 
+        public async Task<Release> ConsultarPorId(Guid id)
+        {
+            return await _unitOfWork.ReleaseRepository.ConsultarPorId(id);
+        }
+
         public async Task ExcluirSprint(Guid releaseId, Guid sprintId)
         {
             var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
@@ -73,6 +78,41 @@ namespace Agilis.Domain.Services.Trabalho
             }
 
             await _unitOfWork.SprintRepository.Excluir(sprint.Id);
+            await _unitOfWork.ReleaseRepository.Atualizar(release);
+            await _unitOfWork.Commit();
+        }
+
+        public async Task Renomear(Guid timeId, Guid releaseId, string nome)
+        {
+            var release = await _unitOfWork.ReleaseRepository.ConsultarPorId(releaseId);
+            if (release == null)
+            {
+                AddNotification(nameof(release), "Release não encontrada");
+                return;
+            }
+
+            var time = await _unitOfWork.TimeRepository.ConsultarPorId(timeId);
+            if (time == null)
+            {
+                AddNotification(nameof(time), "Time não encontrado");
+                return;
+            }
+
+            release.Renomear(nome);
+            if (release.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+
+            time.RenomearRelease(releaseId, nome);
+            if (time.Invalid)
+            {
+                AddNotifications(time);
+                return;
+            }
+
+            await _unitOfWork.TimeRepository.Atualizar(time);
             await _unitOfWork.ReleaseRepository.Atualizar(release);
             await _unitOfWork.Commit();
         }

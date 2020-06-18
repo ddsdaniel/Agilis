@@ -31,7 +31,7 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let admin of time.administradores">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirAdministrador(admin.id)">delete</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirAdministrador(admin.id)" color="warn">clear_forever</mat-icon>
           <div mat-line>{{admin.nome}}</div>
         </mat-list-item>
       </mat-list>
@@ -52,7 +52,7 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let colab of time.colaboradores">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)">delete</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirColaborador(colab.id)" color="warn">clear_forever</mat-icon>
           <div mat-line>{{colab.nome}}</div>
         </mat-list-item>
       </mat-list>
@@ -71,7 +71,7 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let prod of time.produtos">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)">delete</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)" color="warn">clear_forever</mat-icon>
           <div mat-line>{{prod.nome}}</div>
         </mat-list-item>
       </mat-list>
@@ -90,7 +90,8 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let release of time.releases">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirRelease(release.id)">delete</mat-icon>
+          <mat-icon mat-list-icon title="Remover" (click)="excluirRelease(release.id)" color="warn">clear_forever</mat-icon>
+          <mat-icon mat-list-icon title="Editar" (click)="editarRelease(release.id)">edit</mat-icon>
           <div mat-line>{{release.nome}}</div>
         </mat-list-item>
       </mat-list>

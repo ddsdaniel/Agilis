@@ -9,22 +9,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DialogoEmailComponent } from './components/dialogos/dialogo-email/dialogo-email.component';
+import { DialogoTextoComponent } from './components/dialogos/dialogo-texto/dialogo-texto.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos-form/produtos-form.component';
 import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
-import { ReleasesComponent } from './components/trabalho/releases/releases/releases.component';
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
-import { SprintsComponent } from './components/trabalho/sprints/sprints/sprints.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
-import { DialogoEmailComponent } from './components/dialogos/dialogo-email/dialogo-email.component';
-import { DialogoTextoComponent } from './components/dialogos/dialogo-texto/dialogo-texto.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -36,10 +34,8 @@ export function InitApp(appLoadService: AppLoadService) {
     LoginComponent,
     TimesComponent,
     TimesFormComponent,
-    ReleasesComponent,
     ReleasesFormComponent,
     ProdutosFormComponent,
-    SprintsComponent,
     SprintsFormComponent,
     UserStoriesComponent,
     UserStoriesFormComponent,
