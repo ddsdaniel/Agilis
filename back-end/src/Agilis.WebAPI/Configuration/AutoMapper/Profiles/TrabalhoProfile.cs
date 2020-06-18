@@ -2,6 +2,7 @@
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
@@ -9,13 +10,20 @@ using System.Collections.Generic;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 {
+    /// <summary>
+    /// Configurações do mapeamento (auto-mapper) para as classes do namespace Trabalho
+    /// </summary>
     public class TrabalhoProfile : Profile
     {
+
+        /// <summary>
+        /// Construtor responsável pelos mapeamentos
+        /// </summary>
         public TrabalhoProfile()
         {
             CreateMap<Comentario, ComentarioViewModel>()
-                .ReverseMap(); 
-            
+                .ReverseMap();
+
             CreateMap<Milestone, MilestoneViewModel>()
               .ReverseMap();
 
@@ -47,13 +55,26 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 
             CreateMap<ProdutoFK, ProdutoViewModel>();
 
-            CreateMap<Release, ReleaseViewModel>();
+            //Releases
+                        CreateMap<Release, ReleaseViewModel>();
 
             CreateMap<ReleaseViewModel, Release>()
                  .ConstructUsing((vm, context) =>
                     new Release(
                         nome: vm.Nome,
-                        sprints: new List<SprintFK>()
+                        sprints: context.Mapper.Map<SprintFK[]>(vm.Sprints),
+                        productBacklog: context.Mapper.Map<ProductBacklog>(vm.ProductBacklog)
+                        )
+                 );
+
+            CreateMap<ProductBacklog, ProductBacklogViewModel>();
+
+            CreateMap<ProductBacklogViewModel, ProductBacklog>()
+                 .ConstructUsing((vm, context) =>
+                    new ProductBacklog(
+                        fases: context.Mapper.Map<Fase[]>(vm.Fases),
+                        prioridades: vm.Prioridades,
+                        itens: context.Mapper.Map<ItemProductBacklog[]>(vm.Itens)
                         )
                  );
         }

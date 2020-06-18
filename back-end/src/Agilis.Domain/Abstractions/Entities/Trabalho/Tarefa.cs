@@ -1,0 +1,36 @@
+﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Models.ValueObjects;
+using DDS.Domain.Core.Abstractions.Model.Entities;
+using Flunt.Validations;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Agilis.Domain.Abstractions.Entities.Trabalho
+{
+    public abstract class Tarefa : Entity
+    {
+        public string Nome { get; private set; }
+
+        //TODO: public int Progresso { get; private set; }
+        //TODO: public decimal EsforcoTecnico { get; private set; }
+        //TODO: public decimal ValorNegocio { get; private set; }
+        //TODO: public IEnumerable<Tag> Tags { get; private set; }
+        //TODO: public Nivel Complexidade { get; private set; }
+        //TODO: public Nivel Incerteza { get; private set; }
+
+        protected Tarefa()
+        {
+        }
+
+        protected Tarefa(string nome)
+        {
+            AddNotifications(new Contract()
+                .IsNotNullOrEmpty(nome, nameof(Nome), "Nome não deve ser vazio ou nulo")
+                );
+
+            Nome = nome;
+        }
+
+    }
+}

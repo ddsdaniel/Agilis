@@ -9,6 +9,16 @@
             Define o mapeamento entre as entidades e as view models, bem como alguns value objects específicos
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.Configuration.AutoMapper.Profiles.TrabalhoProfile">
+            <summary>
+            Configurações do mapeamento (auto-mapper) para as classes do namespace Trabalho
+            </summary>
+        </member>
+        <member name="M:Agilis.WebAPI.Configuration.AutoMapper.Profiles.TrabalhoProfile.#ctor">
+            <summary>
+            Construtor responsável pelos mapeamentos
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.Configuration.CorsConfig">
             <summary>
             Classe de extensão para separar as configurações de Cors
@@ -613,6 +623,46 @@
             Autor do comentário
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel">
+            <summary>
+            Representa a fase de um fluxo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Posicao">
+            <summary>
+            Posição da fase dentro do fluxo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Nome">
+            <summary>
+            Nome da fase
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel">
+            <summary>
+            Representa uma tarefa com a sua respectiva fase e prioridade
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Tarefa">
+            <summary>
+            Tarefa a ser priorizada
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Fase">
+            <summary>
+            Fase do refinamento em que a tarefa se encontra
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Prioridade">
+            <summary>
+            Previsão de implementação
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Posicao">
+            <summary>
+            Priorização da tarefa dentro da macro-prioridade e fase
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
             <summary>
             Marco histórico, ponto significativo na linha do tempo
@@ -633,6 +683,26 @@
             Data do marco histórico
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel">
+            <summary>
+            Representa uma item do product backlog
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Fases">
+            <summary>
+            Representa as fases de refinamento do produto
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Prioridades">
+            <summary>
+            Representa as prioridades em que uma tarefa pode ser classificada
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Itens">
+            <summary>
+            Lista de tarefas com a sua respectiva fase e prioridade
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel">
             <summary>
             Representa um produto, um software
@@ -648,9 +718,29 @@
             Nome do produto
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel">
+            <summary>
+            Representa uma release do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Id">
+            <summary>
+            Id da release
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Nome">
+            <summary>
+            Nome da release
+            </summary>
+        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
             <summary>
             Sprints da release
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.ProductBacklog">
+            <summary>
+            Product Backlog da release
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
@@ -671,6 +761,21 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">
             <summary>
             Intervalo de datas do sprint
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel">
+            <summary>
+            Representa uma tarefa
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel.Id">
+            <summary>
+            Id da tarefa
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel.Nome">
+            <summary>
+            Nome da tarefa
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">
