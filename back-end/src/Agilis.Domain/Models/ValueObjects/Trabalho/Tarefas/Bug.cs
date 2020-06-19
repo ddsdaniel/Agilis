@@ -12,7 +12,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho.Tarefas
 
         }
 
-        public Bug(string nome) : base(nome)
+        public Bug(int posicao, string nome) : base(posicao, nome)
         {
         }
     }

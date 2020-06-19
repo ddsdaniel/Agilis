@@ -1,5 +1,8 @@
-﻿using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+﻿using Agilis.Domain.Abstractions.Entities.Trabalho;
+using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
+using System.Collections.Generic;
 
 namespace Agilis.Domain.Models.ValueObjects.Trabalho
 {
@@ -7,12 +10,14 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
     {
         public int Posicao { get; private set; }
         public string Nome { get; private set; }
+        public IEnumerable<Tarefa> Tarefas { get; private set; }
 
-        public Fase(int posicao, string nome)
+        public Fase(int posicao, string nome, IEnumerable<Tarefa> tarefas)
         {
             AddNotifications(new Contract()
                 .IsGreaterThan(posicao, 0, nameof(Posicao), "Posição deve ser maior que zero")
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome não deve ser nulo ou vazio")
+                .IsValidArray(tarefas, nameof(tarefas))
                 );
 
             Posicao = posicao;

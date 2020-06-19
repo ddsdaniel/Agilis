@@ -1,5 +1,6 @@
 import './prototypes/array-prototypes';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -51,7 +52,8 @@ export function InitApp(appLoadService: AppLoadService) {
     BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   entryComponents: [
     DialogoEmailComponent,

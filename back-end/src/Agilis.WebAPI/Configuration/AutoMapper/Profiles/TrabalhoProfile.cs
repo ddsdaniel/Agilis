@@ -1,4 +1,5 @@
-﻿using Agilis.Domain.Models.Entities.Trabalho;
+﻿using Agilis.Domain.Abstractions.Entities.Trabalho;
+using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
@@ -72,9 +73,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<ProductBacklogViewModel, ProductBacklog>()
                  .ConstructUsing((vm, context) =>
                     new ProductBacklog(
-                        fases: context.Mapper.Map<Fase[]>(vm.Fases),
-                        prioridades: vm.Prioridades,
-                        itens: context.Mapper.Map<ItemProductBacklog[]>(vm.Itens)
+                        fases: context.Mapper.Map<Fase[]>(vm.Fases)
                         )
                  );
 
@@ -84,9 +83,12 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  .ConstructUsing((vm, context) =>
                     new Fase(
                         posicao: vm.Posicao,
-                        nome: vm.Nome
+                        nome: vm.Nome,
+                        tarefas: context.Mapper.Map<Tarefa[]>(vm.Tarefas)
                         )
                  );
+
+            CreateMap<Tarefa, TarefaViewModel>();
         }
     }
 }

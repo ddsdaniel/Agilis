@@ -12,7 +12,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho.Tarefas
 
         }
 
-        public Feature(string nome) : base(nome)
+        public Feature(int posicao, string nome) : base(posicao, nome)
         {
         }
     }

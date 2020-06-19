@@ -44,7 +44,6 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> implements O
   }
 
   salvar() {
-    //this.entidade.release = this.releases.find(r => r.id === this.entidade.release.id);
     super.salvar();
   }
 }

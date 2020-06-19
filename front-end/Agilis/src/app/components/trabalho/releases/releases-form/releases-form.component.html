@@ -22,33 +22,28 @@
   <!-- Product Backlog -->
   <mat-tab label="Product Backlog">
 
+    <div cdkDropListGroup fxLayout="row" class="mt-4">
 
-    <div fxLayout="row" class="mt-4">
-      <div fxFlex="10">.</div>
-      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="10" class="celula">
-        {{fase.nome}}
+      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="15">
+
+        <div class="example-container">
+          <h4>{{fase.nome}}</h4>
+          <div cdkDropList [cdkDropListData]="fase.tarefas" class="example-list"
+            (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box" *ngFor="let tarefa of fase.tarefas" cdkDrag>{{tarefa.nome}}</div>
+
+          </div>
+        </div>
+
       </div>
-      <div fxFlex="10">
+
+      <div fxFlex="15">
         <button class="m-2" mat-raised-button (click)="abrirDialogoFase()">+ Fase</button>
       </div>
+
     </div>
-    <div fxLayout="row" *ngFor="let prioridade of release.productBacklog.prioridades">
-      <div fxFlex="10">{{obterNomePrioridade(prioridade)}}</div>
-      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="10" class="celula">
-        {{fase.nome}}
-      </div>
-    </div>
-    <!-- <div class="tab-container">
-      <mat-list>
-        <mat-list-item *ngFor="let sprint of release.sprints">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)" color="warn">clear_forever</mat-icon>
-          <div mat-line>{{sprint.nome}}</div>
-        </mat-list-item>
-      </mat-list>
-      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoSprint()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div> -->
+
   </mat-tab>
 
   <!-- Sprints -->

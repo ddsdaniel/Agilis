@@ -646,29 +646,9 @@
             Nome da fase
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Tarefas">
             <summary>
-            Representa uma tarefa com a sua respectiva fase e prioridade
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Tarefa">
-            <summary>
-            Tarefa a ser priorizada
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Fase">
-            <summary>
-            Fase do refinamento em que a tarefa se encontra
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Prioridade">
-            <summary>
-            Previsão de implementação
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ItemProductBacklogViewModel.Posicao">
-            <summary>
-            Priorização da tarefa dentro da macro-prioridade e fase
+            Lista de tarefas desta fase
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
@@ -699,16 +679,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Fases">
             <summary>
             Representa as fases de refinamento do produto
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Prioridades">
-            <summary>
-            Representa as prioridades em que uma tarefa pode ser classificada
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Itens">
-            <summary>
-            Lista de tarefas com a sua respectiva fase e prioridade
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel">

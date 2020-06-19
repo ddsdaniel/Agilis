@@ -2,12 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Fase } from 'src/app/models/trabalho/fase';
 import { Release } from 'src/app/models/trabalho/releases/release';
 import { SprintFK } from 'src/app/models/trabalho/sprints/sprint-fk';
 import { ReleasesApiService } from 'src/app/services/api/trabalho/releases-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
-import { Fase } from 'src/app/models/trabalho/fase';
-import { PrioridadeProductBacklog } from 'src/app/enums/trabalho/prioridade-product-backlog.enum';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-releases-form',
@@ -100,13 +100,14 @@ export class ReleasesFormComponent implements OnInit {
       });
   }
 
-  obterNomePrioridade(prioridade: PrioridadeProductBacklog): string {
-    switch (prioridade) {
-      case PrioridadeProductBacklog.CaixaEntrada: return 'Caixa de Entrada';
-      case PrioridadeProductBacklog.ProximoParSprints: return 'Próximos dois Sprints';
-      case PrioridadeProductBacklog.ProximoSprint: return 'Próximo Sprint';
-      case PrioridadeProductBacklog.SprintsFuturos: return 'Sprints Futuros';
-      default: return 'Não indentificao';
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
     }
   }
 }
