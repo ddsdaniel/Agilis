@@ -1,36 +1,44 @@
-﻿<form fxLayout="row" class="mt-5">
+﻿<h1>Produto {{produto.nome}}</h1>
 
-  <div fxFlex="20" fxFlex.xs="5"></div>
+<mat-tab-group>
 
-  <mat-card fxFlexAlign="center" fxFlex="60" fxFlex.xs="90">
+  <!-- Dados Principais -->
+  <mat-tab label="Dados Principais">
 
-    <mat-card-header>
-      <mat-card-title>Cadastro de Produtos</mat-card-title>
-    </mat-card-header>
+    <div style="display: inline-block" class="half-width mt-4">
 
-    <mat-card-content>
+      <mat-form-field class="half-width">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="produto.nome" placeholder="Nome"
+          name="nome" type="text" required>
+      </mat-form-field>
 
-          <mat-form-field class="full-width mt-4">
-            <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
-          </mat-form-field>
+      <button class="ml-2" mat-raised-button color="accent"
+          (click)="renomear()">Renomear</button>
 
-          <mat-form-field class="full-width">
-            <mat-label>Time</mat-label>
-            <mat-select [(ngModel)]="entidade?.time.id" name="time">
-              <mat-option *ngFor="let time of times" [value]="time.id">
-                {{time.nome}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+    </div>
 
-          <div>
-            <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-            <button mat-raised-button (click)="cancelar()">Cancelar</button>
+  </mat-tab>
+
+  <!-- Jornadas -->
+  <mat-tab>
+    <ng-template matTabLabel>
+      <span [matBadge]="produto.jornadas.length" matBadgeOverlap="false" matBadgeColor="accent">Jornadas</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let jornada of produto.jornadas">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirJornada(jornada.id)" color="warn">clear_forever</mat-icon>
+          <div mat-line>
+            <a [routerLink]="['/jornadas/' + jornada.nome]"  routerLinkActive="router-link-active">{{jornada.id}}</a>
           </div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoJornada()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
 
-    </mat-card-content>
-
-  </mat-card>
-
-</form>
+</mat-tab-group>

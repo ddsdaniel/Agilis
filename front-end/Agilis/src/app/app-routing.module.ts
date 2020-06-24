@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'releases/:timeId/:releaseId', component: ReleasesFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'produtos/:id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'produtos/:timeId/:produtoId', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'sprints/:id', component: SprintsFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'user-stories', component: UserStoriesComponent, canActivate: [AutenticacaoGuard] },

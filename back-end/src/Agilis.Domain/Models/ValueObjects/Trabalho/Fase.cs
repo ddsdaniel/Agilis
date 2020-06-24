@@ -12,6 +12,11 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
         public string Nome { get; private set; }
         public IEnumerable<Tarefa> Tarefas { get; private set; }
 
+        protected Fase()
+        {
+
+        }
+
         public Fase(int posicao, string nome, IEnumerable<Tarefa> tarefas)
         {
             AddNotifications(new Contract()
@@ -22,6 +27,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
             Posicao = posicao;
             Nome = nome;
+            Tarefas = tarefas;
         }
     }
 }

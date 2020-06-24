@@ -5,23 +5,23 @@ using System.Collections.Generic;
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
     /// <summary>
-    /// Representa um produto, um software
+    /// Representa uma jornada do usuário ou de um dado
     /// </summary>
-    public class ProdutoViewModel : IViewModel
+    public class JornadaViewModel : IViewModel
     {
         /// <summary>
-        /// Id do produto
+        /// Id da jornada
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Nome do produto
+        /// Nome da jornada
         /// </summary>
-        public string Nome { get; set; }
+        public string Nome { get;  set; }
 
         /// <summary>
-        /// Jornadas do produto
+        /// Fases de uma jornada
         /// </summary>
-        public IEnumerable<JornadaViewModel> Jornadas { get; set; }
+        public IEnumerable<FaseViewModel> Fases { get;  set; }
     }
 }

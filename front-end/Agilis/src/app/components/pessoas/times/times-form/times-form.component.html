@@ -72,7 +72,9 @@
       <mat-list>
         <mat-list-item *ngFor="let prod of time.produtos">
           <mat-icon mat-list-icon title="Remover" (click)="excluirProduto(prod.id)" color="warn">clear_forever</mat-icon>
-          <div mat-line>{{prod.nome}}</div>
+          <div mat-line>
+            <a [routerLink]="['/produtos/' + this.time.id + '/' + prod.id]"  routerLinkActive="router-link-active">{{prod.nome}}</a>
+          </div>
         </mat-list-item>
       </mat-list>
       <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoProduto()">

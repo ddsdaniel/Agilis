@@ -50,7 +50,19 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                     new Produto(
                         nome: vm.Nome,
                         requisitosNaoFuncionais: new List<RequisitoNaoFuncional>(),
-                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>())
+                        linguagemUbiqua: new LinguagemUbiqua(new List<JargaoDoNegocio>()),
+                        jornadas: new List<Jornada>()
+                        )
+                 );
+
+            CreateMap<Jornada, JornadaViewModel>();
+
+            CreateMap<JornadaViewModel, Jornada>()
+                 .ConstructUsing((vm, context) =>
+                    new Jornada(
+                        id: vm.Id,
+                        nome: vm.Nome,
+                        fases: context.Mapper.Map<Fase[]>(vm.Fases)
                         )
                  );
 
