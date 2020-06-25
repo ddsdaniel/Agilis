@@ -1,7 +1,7 @@
 import { Fase } from '../fase';
 
 export interface Jornada {
-  id: string;
+  posicao: number;
   nome: string;
   fases: Fase[];
 }

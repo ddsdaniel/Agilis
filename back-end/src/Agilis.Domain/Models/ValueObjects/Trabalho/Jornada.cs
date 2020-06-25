@@ -8,7 +8,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 {
     public class Jornada : ValueObject<Jornada>
     {
-        public Guid Id { get; private set; }
+        public int Posicao { get; private set; }
         public string Nome { get; private set; }
         public IEnumerable<Fase> Fases { get; private set; }
 
@@ -17,21 +17,21 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             
         }
 
-        public Jornada(string nome)
-            : this(Guid.NewGuid(), nome, new List<Fase>())
+        public Jornada(int posicao, string nome)
+            : this(posicao, nome, new List<Fase>())
         {
             
         }
 
-        public Jornada(Guid id, string nome, IEnumerable<Fase> fases)
+        public Jornada(int posicao, string nome, IEnumerable<Fase> fases)
         {
             AddNotifications(new Contract()
-                .IsNotEmpty(id, nameof(Id), "Id não deve ser vazio")
+                .IsGreaterOrEqualsThan(posicao, 0, nameof(Posicao), "Posição não deve ser negativa")
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome não deve ser nulo ou vazio")
                 .IsValidArray(fases, nameof(fases))
                 );
 
-            Id = id;
+            Posicao = posicao;
             Nome = nome;
             Fases = fases;
         }

@@ -48,6 +48,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Nome = nome;
             RequisitosNaoFuncionais = requisitosNaoFuncionais;
             LinguagemUbiqua = linguagemUbiqua;
+            Jornadas = jornadas;
         }
 
         public void AdicionarRNF(RequisitoNaoFuncional rnf)
@@ -75,13 +76,13 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             RequisitosNaoFuncionais = novaLista;
         }
 
-        internal void ExcluirJornada(Guid jornadaId)
+        internal void ExcluirJornada(int posicao)
         {
-            if (!Jornadas.Any(j => j.Id == jornadaId))
-                AddNotification(nameof(jornadaId), "Jornada não encontrada");
+            if (!Jornadas.Any(j => j.Posicao == posicao))
+                AddNotification(nameof(posicao), "Jornada não encontrada");
             else
             {
-                Jornadas = Jornadas.Where(j => j.Id != jornadaId);
+                Jornadas = Jornadas.Where(j => j.Posicao != posicao);
             }
         }
 
@@ -109,15 +110,15 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 return;
             }
 
-            if (Jornadas.Any(j => j.Nome == jornada.Nome))
+            if (Jornadas.Any(j => j.Posicao == jornada.Posicao))
             {
-                AddNotification(nameof(jornada.Nome), $"Já existe uma jornada com o nome {jornada.Nome}");
+                AddNotification(nameof(jornada.Nome), $"Já existe uma jornada com a posição {jornada.Posicao}");
                 return;
             }
 
             var novaLista = Jornadas.ToList();
             novaLista.Add(jornada);
-            Jornadas = novaLista;
+            Jornadas = novaLista.OrderBy(j => j.Posicao);
         }
 
         public void AtualizarDescricaoRnf(int numeroRnf, string descricao)

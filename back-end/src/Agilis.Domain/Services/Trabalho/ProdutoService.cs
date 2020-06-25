@@ -17,7 +17,7 @@ namespace Agilis.Domain.Services.Trabalho
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Jornada> AdicionarJornada(Guid produtoId, string nome)
+        public async Task<Jornada> AdicionarJornada(Guid produtoId, int posicao, string nome)
         {
             var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
             if (produto == null)
@@ -26,7 +26,7 @@ namespace Agilis.Domain.Services.Trabalho
                 return null;
             }
 
-            var jornada = new Jornada(nome);
+            var jornada = new Jornada(posicao, nome);
             if (jornada.Invalid)
             {
                 AddNotifications(jornada);
@@ -50,7 +50,7 @@ namespace Agilis.Domain.Services.Trabalho
             return await _unitOfWork.ProdutoRepository.ConsultarPorId(id);
         }
 
-        public async Task ExcluirJornada(Guid produtoId, Guid jornadaId)
+        public async Task ExcluirJornada(Guid produtoId, int posicao)
         {
             var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
             if (produto == null)
@@ -59,7 +59,7 @@ namespace Agilis.Domain.Services.Trabalho
                 return;
             }
 
-            produto.ExcluirJornada(jornadaId);
+            produto.ExcluirJornada(posicao);
             if (produto.Invalid)
             {
                 AddNotifications(produto);

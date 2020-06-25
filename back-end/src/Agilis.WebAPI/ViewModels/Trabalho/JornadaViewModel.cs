@@ -1,5 +1,4 @@
 ﻿using DDS.WebAPI.Abstractions.ViewModels;
-using System;
 using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
@@ -10,9 +9,9 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
     public class JornadaViewModel : IViewModel
     {
         /// <summary>
-        /// Id da jornada
+        /// Posição da jornada
         /// </summary>
-        public Guid Id { get; set; }
+        public int Posicao { get; set; }
 
         /// <summary>
         /// Nome da jornada

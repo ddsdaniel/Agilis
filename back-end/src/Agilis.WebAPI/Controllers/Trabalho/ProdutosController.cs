@@ -29,7 +29,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// </summary>
         /// <param name="produtoService">Instância do Automapper</param>
         public ProdutosController(IProdutoService produtoService,
-                                  IMapper mapper) 
+                                  IMapper mapper)
         {
             _produtoService = produtoService;
             _mapper = mapper;
@@ -80,16 +80,16 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Adiciona uma jornada ao produto
         /// </summary>
         /// <param name="produtoId">Id do produto em que a jornada será adicionada</param>
-        /// <param name="jornadaViewModel">Nome da jornada a ser adicionada</param>
+        /// <param name="jornadaViewModel">Jornada a ser adicionada</param>
         /// <returns>Id e nome da jornada adicionada</returns>
         [HttpPost("{produtoId:guid}/jornadas")]
         [ProducesResponseType(typeof(Jornada), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarJornada(Guid produtoId,
-                                                        StringContainerViewModel jornadaViewModel)
+                                                         JornadaViewModel jornadaViewModel)
         {
-            var jornada = await _produtoService.AdicionarJornada(produtoId, jornadaViewModel.Texto);
+            var jornada = await _produtoService.AdicionarJornada(produtoId, jornadaViewModel.Posicao, jornadaViewModel.Nome);
             if (_produtoService.Invalid)
                 return BadRequest(_produtoService.Notifications);
 
@@ -100,16 +100,16 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Remove uma jornada do produto
         /// </summary>
         /// <param name="produtoId"></param>
-        /// <param name="jornadaId"></param>
+        /// <param name="posicao"></param>
         /// <returns></returns>
-        [HttpDelete("{produtoId:guid}/jornadas/{jornadaId:guid}")]
+        [HttpDelete("{produtoId:guid}/jornadas/{posicao}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirJornada(Guid produtoId, 
-                                                       Guid jornadaId)
+        public async Task<ActionResult> ExcluirJornada(Guid produtoId,
+                                                       int posicao)
         {
-            await _produtoService.ExcluirJornada(produtoId, jornadaId);
+            await _produtoService.ExcluirJornada(produtoId, posicao);
             if (_produtoService.Invalid)
                 return BadRequest(_produtoService.Notifications);
 

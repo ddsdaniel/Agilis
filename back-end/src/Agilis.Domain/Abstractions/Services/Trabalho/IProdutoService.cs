@@ -8,8 +8,8 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
     public interface IProdutoService : IService
     {
-        Task<Jornada> AdicionarJornada(Guid produtoId, string nome);
-        Task ExcluirJornada(Guid produtoId, Guid jornadaId);
+        Task<Jornada> AdicionarJornada(Guid produtoId, int posicao, string nome);
+        Task ExcluirJornada(Guid produtoId, int posicao);
         
         /// <summary>
         /// Recupera um produto do repositório a partir do seu id

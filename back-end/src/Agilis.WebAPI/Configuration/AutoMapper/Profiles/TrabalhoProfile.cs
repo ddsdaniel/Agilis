@@ -60,7 +60,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<JornadaViewModel, Jornada>()
                  .ConstructUsing((vm, context) =>
                     new Jornada(
-                        id: vm.Id,
+                        posicao: vm.Posicao,
                         nome: vm.Nome,
                         fases: context.Mapper.Map<Fase[]>(vm.Fases)
                         )

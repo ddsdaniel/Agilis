@@ -332,20 +332,20 @@
             <param name="stringContainerViewModel">Novo nome da produto</param>
             <returns>Status200OK</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarJornada(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarJornada(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel)">
             <summary>
             Adiciona uma jornada ao produto
             </summary>
             <param name="produtoId">Id do produto em que a jornada será adicionada</param>
-            <param name="jornadaViewModel">Nome da jornada a ser adicionada</param>
+            <param name="jornadaViewModel">Jornada a ser adicionada</param>
             <returns>Id e nome da jornada adicionada</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirJornada(System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirJornada(System.Guid,System.Int32)">
             <summary>
             Remove uma jornada do produto
             </summary>
             <param name="produtoId"></param>
-            <param name="jornadaId"></param>
+            <param name="posicao"></param>
             <returns></returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
@@ -699,9 +699,9 @@
             Representa uma jornada do usuário ou de um dado
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Id">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Posicao">
             <summary>
-            Id da jornada
+            Posição da jornada
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Nome">

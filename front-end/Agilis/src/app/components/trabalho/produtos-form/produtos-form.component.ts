@@ -13,7 +13,7 @@ import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
   templateUrl: './produtos-form.component.html',
   styleUrls: ['./produtos-form.component.scss']
 })
-export class ProdutosFormComponent  implements OnInit {
+export class ProdutosFormComponent implements OnInit {
 
   private timeId: string;
   produto: Produto;
@@ -54,7 +54,17 @@ export class ProdutosFormComponent  implements OnInit {
     this.dialogoService.abrirTexto('Entre com o nome da Jornada', 'Nome')
       .subscribe(nome => {
         if (nome) {
-          this.produtoApiService.adicionarJornada(this.produto.id, nome)
+
+          const posicao = this.produto.jornadas.length > 0
+            ? Math.max.apply(Math, this.produto.jornadas.map(j => j.posicao)) + 1
+            : 1;
+
+          const jornada: Jornada = {
+            posicao,
+            nome,
+            fases: [],
+          };
+          this.produtoApiService.adicionarJornada(this.produto.id, jornada)
             .subscribe(
               (novaJornada: Jornada) => this.produto.jornadas.push(novaJornada),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
@@ -68,32 +78,32 @@ export class ProdutosFormComponent  implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
   }
 
-  excluirJornada(jornadaId: string) {
-    this.produtoApiService.excluirJornada(this.produto.id, jornadaId)
-    .subscribe(
-      () => {
-        const index = this.produto.jornadas.findIndex(c => c.id === jornadaId);
-        const jornadaExcluido = this.produto.jornadas.removeAt<Jornada>(index)[0];
+  excluirJornada(posicao: number) {
+    this.produtoApiService.excluirJornada(this.produto.id, posicao)
+      .subscribe(
+        () => {
+          const index = this.produto.jornadas.findIndex(c => c.posicao === posicao);
+          const jornadaExcluida = this.produto.jornadas.removeAt<Jornada>(index)[0];
 
-        const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
 
-        snackBarRef.onAction().subscribe(() => {
+          snackBarRef.onAction().subscribe(() => {
 
-          this.produtoApiService.adicionarJornada(this.produto.id, jornadaExcluido.nome)
-            .subscribe(
-              (novoJornada) => this.produto.jornadas.insert(index, novoJornada),
-              (error: HttpErrorResponse) => this.snackBar.open(error.message)
-            );
+            this.produtoApiService.adicionarJornada(this.produto.id, jornadaExcluida)
+              .subscribe(
+                (novoJornada) => this.produto.jornadas.insert(index, novoJornada),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
 
-        });
-      },
-      (error: HttpErrorResponse) => this.snackBar.open(error.message)
-    );
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 }

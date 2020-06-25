@@ -29,11 +29,11 @@ export class ProdutosApiService extends ApiRestBaseService {
     return super.post<StringContainer, Fase>({ texto: nome }, `${produtoId}/fases`);
   }
 
-  adicionarJornada(produtoId: string, nome: string): Observable<Jornada> {
-    return super.post<StringContainer, Jornada>({ texto: nome }, `${produtoId}/jornadas`);
+  adicionarJornada(produtoId: string, jornada: Jornada): Observable<Jornada> {
+    return super.post<Jornada, Jornada>(jornada, `${produtoId}/jornadas`);
   }
 
-  excluirJornada(produtoId: string, jornadaId: string): Observable<void> {
-    return super.delete(`${produtoId}/jornadas/${jornadaId}`);
+  excluirJornada(produtoId: string, posicao: number): Observable<void> {
+    return super.delete(`${produtoId}/jornadas/${posicao}`);
   }
 }
