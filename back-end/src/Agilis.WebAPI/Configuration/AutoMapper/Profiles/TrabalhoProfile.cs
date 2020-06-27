@@ -96,7 +96,7 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                     new Fase(
                         posicao: vm.Posicao,
                         nome: vm.Nome,
-                        tarefas: context.Mapper.Map<Tarefa[]>(vm.Tarefas)
+                        tarefas: context.Mapper.Map<TarefaFK[]>(vm.Tarefas)
                         )
                  );
 

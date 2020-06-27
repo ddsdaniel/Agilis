@@ -1,4 +1,4 @@
-﻿using Agilis.Domain.Abstractions.Entities.Trabalho;
+﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.ValueObjects;
 using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
@@ -36,7 +36,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
             var posicao = Fases.Any() ? Fases.Max(f => f.Posicao) + 1 : 1;
 
-            var fase = new Fase(posicao, nome, new List<Tarefa>());
+            var fase = new Fase(posicao, nome, new List<TarefaFK>());
             if (fase.Invalid)
             {
                 AddNotifications(fase);

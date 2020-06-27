@@ -1,10 +1,5 @@
-﻿using Agilis.Domain.Enums;
-using Agilis.Domain.Models.ValueObjects;
-using DDS.Domain.Core.Abstractions.Model.Entities;
+﻿using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Agilis.Domain.Abstractions.Entities.Trabalho
 {
