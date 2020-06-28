@@ -124,6 +124,27 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Renomeia uma jornada do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto que contém a jornada</param>
+        /// <param name="posicao">Posição da jornada</param>
+        /// <param name="nome">Novo nome da jornada</param>
+        /// <returns>Status200OK</returns>
+        [HttpPatch("{produtoId:guid}/jornadas/{posicao}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> RenomearJornada(Guid produtoId,
+                                                        int posicao,
+                                                        StringContainerViewModel nome)
+        {
+            await _produtoService.RenomearJornada(produtoId, posicao, nome.Texto);
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Adiciona uma fase à uma jornada do produto
         /// </summary>
         /// <param name="produtoId">Id do produto</param>

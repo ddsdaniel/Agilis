@@ -15,6 +15,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class JornadasFormComponent implements OnInit {
 
+  private timeId: string;
   private produtoId: string;
   jornada: Jornada;
 
@@ -29,6 +30,7 @@ export class JornadasFormComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       params => {
+        this.timeId = this.activatedRoute.snapshot.paramMap.get('timeId');
         this.produtoId = this.activatedRoute.snapshot.paramMap.get('produtoId');
         const jornadaPosicao = parseInt(this.activatedRoute.snapshot.paramMap.get('jornadaPosicao'), 10);
 
@@ -45,8 +47,7 @@ export class JornadasFormComponent implements OnInit {
   renomear() {
     this.produtosApiService.renomearJornada(this.produtoId, this.jornada.posicao, this.jornada.nome)
       .subscribe(
-        // TODO: obter parametro do time
-        () => this.router.navigateByUrl(`produtos/${this.produtoId}`),
+        () => this.router.navigateByUrl(`produtos/${this.timeId}/${this.produtoId}`),
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
   }

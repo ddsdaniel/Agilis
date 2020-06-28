@@ -20,7 +20,7 @@ const routes: Routes = [
 
   { path: 'releases/:timeId/:releaseId', component: ReleasesFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/:timeId/:produtoId', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: 'jornadas/:produtoId/:jornadaPosicao', component: JornadasFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'jornadas/:timeId/:produtoId/:jornadaPosicao', component: JornadasFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'sprints/:id', component: SprintsFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'user-stories', component: UserStoriesComponent, canActivate: [AutenticacaoGuard] },

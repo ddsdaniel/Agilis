@@ -40,7 +40,7 @@ namespace Agilis.Domain.Services.Trabalho
                 AddNotifications(produto);
                 return null;
             }
-            
+
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
             return fase;
@@ -130,6 +130,26 @@ namespace Agilis.Domain.Services.Trabalho
             }
 
             await _unitOfWork.TimeRepository.Atualizar(time);
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+        }
+
+        public async Task RenomearJornada(Guid produtoId, int posicaoJornada, string nome)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            produto.RenomearJornada(posicaoJornada, nome);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return;
+            }
+
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }

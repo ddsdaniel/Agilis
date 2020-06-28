@@ -15,7 +15,7 @@ import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 })
 export class ProdutosFormComponent implements OnInit {
 
-  private timeId: string;
+  timeId: string;
   produto: Produto;
 
   constructor(

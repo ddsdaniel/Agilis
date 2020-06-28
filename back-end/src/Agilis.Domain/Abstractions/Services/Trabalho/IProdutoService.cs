@@ -27,5 +27,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         /// <returns>Task correspondente à renomeação</returns>
         Task Renomear(Guid timeId, Guid produtoId, string nome);
         Task<Fase> AdicionarFaseJornada(Guid produtoId, int posicao, string nome);
+        Task RenomearJornada(Guid produtoId, int posicaoJornada, string nome);
     }
 }

@@ -61,5 +61,13 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             novaLista.Add(fase);
             Fases = novaLista.OrderBy(j => j.Posicao);
         }
+
+        internal void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(Nome), "Nome não deve ser vazio ou nulo");
+            else
+                Nome = nome;
+        }
     }
 }

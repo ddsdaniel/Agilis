@@ -174,6 +174,23 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .ToList();
         }
 
+        internal void RenomearJornada(int posicao, string nome)
+        {
+            var jornada = Jornadas.FirstOrDefault(j => j.Posicao == posicao);
+            if (jornada == null)
+            {
+                AddNotification(nameof(posicao), "Jornada não encontrada");
+                return;
+            }
+
+            jornada.Renomear(nome);
+            if (jornada.Invalid)
+            {
+                AddNotifications(jornada);
+                return;
+            }
+        }
+
         public void AtualizarTipoRnf(int numeroRnf, TipoRequisitoNaoFuncional tipo)
         {
             var rnf = RequisitosNaoFuncionais.FirstOrDefault(r => r.Numero == numeroRnf);

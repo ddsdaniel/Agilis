@@ -348,6 +348,15 @@
             <param name="jornadaViewModel">Jornada a ser adicionada</param>
             <returns>Id e nome da jornada adicionada</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearJornada(System.Guid,System.Int32,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia uma jornada do produto
+            </summary>
+            <param name="produtoId">Id do produto que contém a jornada</param>
+            <param name="posicao">Posição da jornada</param>
+            <param name="nome">Novo nome da jornada</param>
+            <returns>Status200OK</returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarFaseJornada(System.Guid,System.Int32,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona uma fase à uma jornada do produto
