@@ -16,11 +16,18 @@
   <div *ngFor="let fase of jornada.fases" fxFlex="15">
 
     <div class="example-container">
-      <h4>{{fase.nome}}</h4>
+      <div  class="nome-fase ph-2 mr-1">
+        <h4 fxFlex="80">{{fase.nome}}</h4>
+        <mat-icon fxLayoutAlign="end start" fxFlex >more_horiz</mat-icon>
+      </div>
+
+
       <div cdkDropList [cdkDropListData]="fase.tarefas" class="example-list"
         (cdkDropListDropped)="drop($event)">
 
         <div class="example-box" *ngFor="let tarefa of fase.tarefas" cdkDrag>{{tarefa.nome}}</div>
+
+        <button class="m-2" mat-raised-button>+ Tarefa</button>
 
       </div>
     </div>

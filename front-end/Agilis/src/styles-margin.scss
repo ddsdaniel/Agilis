@@ -80,6 +80,26 @@ $spacer: 1rem !default;
   margin-left: 3 * $spacer !important;
 }
 
+// right
+.mr-0 {
+  margin-right: 0 !important;
+}
+.mr-1 {
+  margin-right: 0.25 * $spacer !important;
+}
+.mr-2 {
+  margin-right: 0.5 * $spacer !important;
+}
+.mr-3 {
+  margin-right: $spacer !important;
+}
+.mr-4 {
+  margin-right: 1.5 * $spacer !important;
+}
+.mr-5 {
+  margin-right: 3 * $spacer !important;
+}
+
 //vertical
 .mv-0 {
   margin-bottom: 0 !important;
@@ -104,4 +124,30 @@ $spacer: 1rem !default;
 .mv-5 {
   margin-bottom: 3 * $spacer !important;
   margin-top: 3 * $spacer !important;
+}
+
+// horizontal
+.mh-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.mh-1 {
+  margin-left: 0.25 * $spacer !important;
+  margin-right: 0.25 * $spacer !important;
+}
+.mh-2 {
+  margin-left: 0.5 * $spacer !important;
+  margin-right: 0.5 * $spacer !important;
+}
+.mh-3 {
+  margin-left: $spacer !important;
+  margin-right: $spacer !important;
+}
+.mh-4 {
+  margin-left: 1.5 * $spacer !important;
+  margin-right: 1.5 * $spacer !important;
+}
+.mh-5 {
+  margin-left: 3 * $spacer !important;
+  margin-right: 3 * $spacer !important;
 }
