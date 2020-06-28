@@ -31,7 +31,7 @@
         <mat-list-item *ngFor="let jornada of produto.jornadas">
           <mat-icon mat-list-icon title="Remover" (click)="excluirJornada(jornada.posicao)" color="warn">clear_forever</mat-icon>
           <div mat-line>
-            <a [routerLink]="['/jornadas/' + jornada.posicao]"  routerLinkActive="router-link-active">{{jornada.nome}}</a>
+            <a [routerLink]="['/jornadas/' + this.produto.id + '/' + jornada.posicao]"  routerLinkActive="router-link-active">{{jornada.nome}}</a>
           </div>
         </mat-list-item>
       </mat-list>

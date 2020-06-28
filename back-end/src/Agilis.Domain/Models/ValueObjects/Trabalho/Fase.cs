@@ -16,6 +16,12 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
         }
 
+        public Fase(int posicao, string nome)
+            :this(posicao, nome, new List<TarefaFK>())
+        {
+
+        }
+
         public Fase(int posicao, string nome, IEnumerable<TarefaFK> tarefas)
         {
             AddNotifications(new Contract()

@@ -16,7 +16,7 @@ import { TimesFormComponent } from './components/pessoas/times/times-form/times-
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
-import { ProdutosFormComponent } from './components/trabalho/produtos-form/produtos-form.component';
+import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
@@ -24,6 +24,7 @@ import { UserStoriesComponent } from './components/trabalho/user-stories/user-st
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
+import { JornadasFormComponent } from './components/trabalho/produtos/jornadas-form/jornadas-form.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -43,6 +44,7 @@ export function InitApp(appLoadService: AppLoadService) {
     UsuariosFormComponent,
     DialogoEmailComponent,
     DialogoTextoComponent,
+    JornadasFormComponent,
   ],
   imports: [
     FormsModule,

@@ -4,6 +4,7 @@ using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
@@ -15,6 +16,34 @@ namespace Agilis.Domain.Services.Trabalho
         public ProdutoService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<Fase> AdicionarFaseJornada(Guid produtoId, int posicao, string nome)
+        {
+            var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produtoId), "Produto não encontrado");
+                return null;
+            }
+
+            var jornada = produto.Jornadas.FirstOrDefault(j => j.Posicao == posicao);
+            if (jornada == null)
+            {
+                AddNotification(nameof(posicao), "Jornada não encontrada");
+                return null;
+            }
+
+            var fase = produto.AdicionarFaseJornada(jornada, nome);
+            if (produto.Invalid)
+            {
+                AddNotifications(produto);
+                return null;
+            }
+            
+            await _unitOfWork.ProdutoRepository.Atualizar(produto);
+            await _unitOfWork.Commit();
+            return fase;
         }
 
         public async Task<Jornada> AdicionarJornada(Guid produtoId, int posicao, string nome)

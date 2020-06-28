@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
+using System.Linq;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -48,11 +49,37 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             var produto = await _produtoService.ConsultarPorId(id);
 
             if (produto == null)
-                return CustomNotFound(nameof(id), "Produto não encontrada");
+                return CustomNotFound(nameof(id), "Produto não encontrado");
 
             var produtoViewModel = _mapper.Map<ProdutoViewModel>(produto);
 
             return Ok(produtoViewModel);
+        }
+
+        /// <summary>
+        /// Consulta uma produto no repositório
+        /// </summary>
+        /// <param name="produtoId">Id da produto que está sendo consultada</param>
+        /// <param name="posicao">Posição da jornada, dentro do produto</param>
+        /// <returns>View model da produto</returns>
+        [HttpGet("{produtoId:guid}/jornadas/{posicao}")]
+        [ProducesResponseType(typeof(JornadaViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status404NotFound)]
+        public virtual async Task<ActionResult<ProdutoViewModel>> ObterJornada(Guid produtoId,
+                                                                               int posicao)
+        {
+            var produto = await _produtoService.ConsultarPorId(produtoId);
+
+            if (produto == null)
+                return CustomNotFound(nameof(produtoId), "Produto não encontrado");
+
+            var jornada = produto.Jornadas.FirstOrDefault(j => j.Posicao == posicao);
+            if (jornada == null)
+                return CustomNotFound(nameof(posicao), "Jornada não encontrada");
+
+            var jornadaViewModel = _mapper.Map<JornadaViewModel>(jornada);
+
+            return Ok(jornadaViewModel);
         }
 
         /// <summary>
@@ -94,6 +121,28 @@ namespace Agilis.WebAPI.Controllers.Trabalho
                 return BadRequest(_produtoService.Notifications);
 
             return Ok(jornada);
+        }
+
+        /// <summary>
+        /// Adiciona uma fase à uma jornada do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto</param>
+        /// <param name="posicao">Posição da jornada</param>
+        /// <param name="nome">Nome da fase a ser adicionada</param>
+        /// <returns>Status200OK do tipo Fase</returns>
+        [HttpPost("{produtoId:guid}/jornadas/{posicao}/fases")]
+        [ProducesResponseType(typeof(Jornada), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarFaseJornada(Guid produtoId,
+                                                             int posicao,
+                                                             StringContainerViewModel nome)
+        {
+            var fase = await _produtoService.AdicionarFaseJornada(produtoId, posicao, nome.Texto);
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok(fase);
         }
 
         /// <summary>

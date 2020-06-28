@@ -323,6 +323,14 @@
             <param name="id">Id da produto que está sendo consultada</param>
             <returns>View model da produto</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ObterJornada(System.Guid,System.Int32)">
+            <summary>
+            Consulta uma produto no repositório
+            </summary>
+            <param name="produtoId">Id da produto que está sendo consultada</param>
+            <param name="posicao">Posição da jornada, dentro do produto</param>
+            <returns>View model da produto</returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Renomeia a produto
@@ -339,6 +347,15 @@
             <param name="produtoId">Id do produto em que a jornada será adicionada</param>
             <param name="jornadaViewModel">Jornada a ser adicionada</param>
             <returns>Id e nome da jornada adicionada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarFaseJornada(System.Guid,System.Int32,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma fase à uma jornada do produto
+            </summary>
+            <param name="produtoId">Id do produto</param>
+            <param name="posicao">Posição da jornada</param>
+            <param name="nome">Nome da fase a ser adicionada</param>
+            <returns>Status200OK do tipo Fase</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirJornada(System.Guid,System.Int32)">
             <summary>

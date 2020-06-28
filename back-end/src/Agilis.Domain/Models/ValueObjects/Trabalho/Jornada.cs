@@ -3,6 +3,7 @@ using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Domain.Models.ValueObjects.Trabalho
 {
@@ -14,13 +15,13 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
         protected Jornada()
         {
-            
+
         }
 
         public Jornada(int posicao, string nome)
             : this(posicao, nome, new List<Fase>())
         {
-            
+
         }
 
         public Jornada(int posicao, string nome, IEnumerable<Fase> fases)
@@ -34,6 +35,31 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             Posicao = posicao;
             Nome = nome;
             Fases = fases;
+        }
+
+        internal void AdicionarFase(Fase fase)
+        {
+            if (fase == null)
+            {
+                AddNotification(nameof(fase), "Fase não pode ser nula");
+                return;
+            }
+
+            if (fase.Invalid)
+            {
+                AddNotifications(fase);
+                return;
+            }
+
+            if (Fases.Any(f => f.Posicao == fase.Posicao))
+            {
+                AddNotification(nameof(fase.Posicao), $"Já existe uma fase na posição {fase.Posicao}");
+                return;
+            }
+
+            var novaLista = Fases.ToList();
+            novaLista.Add(fase);
+            Fases = novaLista.OrderBy(j => j.Posicao);
         }
     }
 }

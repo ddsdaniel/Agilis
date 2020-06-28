@@ -51,6 +51,32 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Jornadas = jornadas;
         }
 
+        internal Fase AdicionarFaseJornada(Jornada jornada, string nome)
+        {
+            if (jornada == null)
+            {
+                AddNotification(nameof(jornada), "Jornada não pode ser nula");
+                return null;
+            }
+
+            if (jornada.Invalid)
+            {
+                AddNotifications(jornada);
+                return null;
+            }
+
+            var posicao = jornada.Fases.MaxOrDefault(f => f.Posicao) + 1;
+            var fase = new Fase(posicao, nome);
+            jornada.AdicionarFase(fase);            
+            if (jornada.Invalid)
+            {
+                AddNotifications(jornada);
+                return null;                
+            }
+
+            return fase;
+        }
+
         public void AdicionarRNF(RequisitoNaoFuncional rnf)
         {
             if (rnf == null)
