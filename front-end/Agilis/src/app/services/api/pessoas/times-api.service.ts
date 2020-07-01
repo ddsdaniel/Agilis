@@ -36,7 +36,7 @@ export class TimesApiService extends CrudApiBaseService<Time> {
     return super.delete(`${timeId}/colaboradores/${colabId}`);
   }
 
-  adicionarProduto(timeId: string, nome: string): Observable<Produto> {
+  adicionarProduto(timeId: string, nome: string): Observable<ProdutoFK> {
     return super.post<StringContainer, ProdutoFK>({ texto: nome }, `${timeId}/produtos`);
   }
 
@@ -50,14 +50,6 @@ export class TimesApiService extends CrudApiBaseService<Time> {
 
   excluirRelease(timeId: string, prodId: string): Observable<void> {
     return super.delete(`${timeId}/releases/${prodId}`);
-  }
-
-  adicionarSprint(produtoId: string, nome: string): Observable<SprintFK> {
-    return super.post<StringContainer, SprintFK>({ texto: nome }, `${produtoId}/sprints`);
-  }
-
-  excluirSprint(produtoId: string, sprintId: string): Observable<void> {
-    return super.delete(`${produtoId}/sprints/${sprintId}`);
   }
 
   renomear(id: string, nome: string): Observable<void> {

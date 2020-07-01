@@ -6,6 +6,8 @@
 
 // import our custom theme
 @import "styles-theme.scss";
+@import "styles-margin.scss";
+@import "styles-padding.scss";
 
 // specify theme class eg: <body class="styles-theme"> ... </body>
 .styles-theme {
@@ -51,73 +53,6 @@ button.mat-fab {
   right: 23px;
   bottom: 23px;
   z-index: 1;
-}
-
-// magin-----------------------------------------------
-$spacer: 1rem !default;
-// bottom
-.mb-0 {
-  margin-bottom: 0 !important;
-}
-.mb-1 {
-  margin-bottom: 0.25 * $spacer !important;
-}
-.mb-2 {
-  margin-bottom: 0.5 * $spacer !important;
-}
-.mb-3 {
-  margin-bottom: $spacer !important;
-}
-.mb-4 {
-  margin-bottom: 1.5 * $spacer !important;
-}
-.mb-5 {
-  margin-bottom: 3 * $spacer !important;
-}
-// top
-.mt-0 {
-  margin-top: 0 !important;
-}
-.mt-1 {
-  margin-top: 0.25 * $spacer !important;
-}
-.mt-2 {
-  margin-top: 0.5 * $spacer !important;
-}
-.mt-3 {
-  margin-top: $spacer !important;
-}
-.mt-4 {
-  margin-top: 1.5 * $spacer !important;
-}
-.mt-5 {
-  margin-top: 3 * $spacer !important;
-}
-//margin left
-.ml-2 {
-  margin-left: 0.5 * $spacer !important;
-}
-.ml-3 {
-  margin-left: $spacer !important;
-}
-.ml-4 {
-  margin-left: 1.5 * $spacer !important;
-}
-.ml-5 {
-  margin-left: 3 * $spacer !important;
-}
-//padding
-.ph-2 {
-  padding-left: 0.5 * $spacer !important;
-  padding-right: 0.5 * $spacer !important;
-}
-.ph-3 {
-  padding-left: $spacer !important;
-  padding-right: $spacer !important;
-}
-.ph-4 {
-  padding-left: 1.5 * $spacer !important;
-  padding-right: 1.5 * $spacer !important;
 }
 
 //crud

@@ -1,55 +1,69 @@
-﻿<form fxLayout="column" class="mt-5">
-  <mat-card fxFlexAlign="center">
+﻿<h1>Release {{release.nome}}</h1>
 
-    <mat-card-header>
-      <mat-card-title>Cadastro de Releases</mat-card-title>
-    </mat-card-header>
+<mat-tab-group>
 
-    <mat-card-content>
+  <!-- Dados Principais -->
+  <mat-tab label="Dados Principais">
 
-      <mat-tab-group>
-        <mat-tab label="Dados Principais">
+    <div style="display: inline-block" class="half-width mt-4">
 
-          <mat-form-field class="full-width mt-4">
-            <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
-          </mat-form-field>
+      <mat-form-field class="half-width">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="release.nome" placeholder="Nome" name="nome" type="text" required>
+      </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Time</mat-label>
-            <mat-select [(ngModel)]="timeId" name="time">
-              <mat-option *ngFor="let time of times" [value]="time.id">
-                {{time.nome}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <button class="ml-2" mat-raised-button color="accent" (click)="renomear()">Renomear</button>
 
-          <div>
-            <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-            <button mat-raised-button (click)="cancelar()">Cancelar</button>
+    </div>
+
+  </mat-tab>
+
+
+  <!-- Product Backlog -->
+  <mat-tab label="Product Backlog">
+
+    <div cdkDropListGroup fxLayout="row" class="mt-4">
+
+      <div *ngFor="let fase of release.productBacklog.fases" fxFlex="15">
+
+        <div class="example-container">
+          <h4>{{fase.nome}}</h4>
+          <div cdkDropList [cdkDropListData]="fase.tarefas" class="example-list"
+            (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box" *ngFor="let tarefa of fase.tarefas" cdkDrag>{{tarefa.nome}}</div>
+
           </div>
+        </div>
 
-        </mat-tab>
+      </div>
 
+      <div fxFlex="15">
+        <button class="m-2" mat-raised-button (click)="abrirDialogoFase()">+ Fase</button>
+      </div>
 
-        <mat-tab label="Product Backlogs">
+    </div>
 
-        </mat-tab>
+  </mat-tab>
 
-        <mat-tab label="Sprints">
-          <mat-list>
-            <mat-list-item *ngFor="let sprint of entidade.sprints">
-              <mat-icon mat-list-icon title="Editar" (click)="editarSprint(sprint.id)">edit</mat-icon>
-              <div mat-line>
-                <span>{{sprint.numero}}</span>
-                <span class="ml-5">{{sprint.nome}}</span>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
+  <!-- Sprints -->
+  <mat-tab>
+    <ng-template matTabLabel>
+      <span [matBadge]="release.sprints.length" matBadgeOverlap="false" matBadgeColor="accent">Sprints</span>
+    </ng-template>
 
-  </mat-card>
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let sprint of release.sprints">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirSprint(sprint.id)" color="warn">clear_forever
+          </mat-icon>
+          <div mat-line>{{sprint.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoSprint()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-tab>
 
-</form>
+</mat-tab-group>

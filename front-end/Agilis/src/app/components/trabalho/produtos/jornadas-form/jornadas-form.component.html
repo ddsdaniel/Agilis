@@ -1,0 +1,41 @@
+<div style="display: inline-block" class="half-width mt-4">
+
+  <mat-form-field class="half-width">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="jornada.nome" placeholder="Nome"
+      name="nome" type="text" required>
+  </mat-form-field>
+
+  <button class="ml-2" mat-raised-button color="accent"
+      (click)="renomear()">Renomear</button>
+
+</div>
+
+<div cdkDropListGroup fxLayout="row" class="mt-4">
+
+  <div *ngFor="let fase of jornada.fases" fxFlex="15">
+
+    <div class="example-container">
+      <div  class="nome-fase ph-2 mr-1">
+        <h4 fxFlex="80">{{fase.nome}}</h4>
+        <mat-icon fxLayoutAlign="end start" fxFlex >more_horiz</mat-icon>
+      </div>
+
+
+      <div cdkDropList [cdkDropListData]="fase.tarefas" class="example-list"
+        (cdkDropListDropped)="drop($event)">
+
+        <div class="example-box" *ngFor="let tarefa of fase.tarefas" cdkDrag>{{tarefa.nome}}</div>
+
+        <button class="m-2" mat-raised-button>+ Tarefa</button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div fxFlex="15">
+    <button class="m-2" mat-raised-button (click)="abrirDialogoFase()">+ Fase</button>
+  </div>
+
+</div>

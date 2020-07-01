@@ -1,6 +1,8 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +11,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     public class Release : Entity
     {
         public string Nome { get; private set; }
-        //TODO: Product Backlog
+        public ProductBacklog ProductBacklog { get; private set; }
         public IEnumerable<SprintFK> Sprints { get; private set; }
 
         protected Release()
@@ -18,21 +20,25 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public Release(string nome)
-            :this(nome, new List<SprintFK>())
+            : this(nome, new List<SprintFK>(), new ProductBacklog())
         {
 
         }
 
         public Release(string nome,
-                       IEnumerable<SprintFK> sprints)
+                       IEnumerable<SprintFK> sprints,
+                       ProductBacklog productBacklog)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome não pode ser nulo ou vazio")
                 .IsNotNull(sprints, nameof(Sprints), "Sprints não deve ser nulo")
+                .IsNotNull(productBacklog, nameof(ProductBacklog), "Product Backlog não deve ser nulo")
+                .IfNotNull(productBacklog, c => c.Join(productBacklog))
                 );
 
             Nome = nome;
             Sprints = sprints;
+            ProductBacklog = productBacklog;
         }
 
         internal void AdicionarSprint(SprintFK sprint)
@@ -72,5 +78,13 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public override string ToString() => Nome;
+
+        public void Renomear(string nome)
+        {
+            if (String.IsNullOrEmpty(nome))
+                AddNotification(nameof(Nome), "Nome não deve ser nulo ou vazio");
+            else
+                Nome = nome;
+        }
     }
 }

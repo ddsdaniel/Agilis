@@ -1,5 +1,6 @@
 ﻿using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
@@ -16,6 +17,11 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// <summary>
         /// Nome do produto
         /// </summary>
-        public string Nome { get; set; }                
+        public string Nome { get; set; }
+
+        /// <summary>
+        /// Jornadas do produto
+        /// </summary>
+        public IEnumerable<JornadaViewModel> Jornadas { get; set; }
     }
 }

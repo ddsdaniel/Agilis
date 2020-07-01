@@ -9,6 +9,16 @@
             Define o mapeamento entre as entidades e as view models, bem como alguns value objects específicos
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.Configuration.AutoMapper.Profiles.TrabalhoProfile">
+            <summary>
+            Configurações do mapeamento (auto-mapper) para as classes do namespace Trabalho
+            </summary>
+        </member>
+        <member name="M:Agilis.WebAPI.Configuration.AutoMapper.Profiles.TrabalhoProfile.#ctor">
+            <summary>
+            Construtor responsável pelos mapeamentos
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.Configuration.CorsConfig">
             <summary>
             Classe de extensão para separar as configurações de Cors
@@ -295,16 +305,101 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IProdutoService,AutoMapper.IMapper)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="produtoService">Instância do Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ConsultarPorId(System.Guid)">
+            <summary>
+            Consulta uma produto no repositório
+            </summary>
+            <param name="id">Id da produto que está sendo consultada</param>
+            <returns>View model da produto</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ObterJornada(System.Guid,System.Int32)">
+            <summary>
+            Consulta uma produto no repositório
+            </summary>
+            <param name="produtoId">Id da produto que está sendo consultada</param>
+            <param name="posicao">Posição da jornada, dentro do produto</param>
+            <returns>View model da produto</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia a produto
+            </summary>
+            <param name="timeId">Id do time</param>
+            <param name="produtoId">Id da produto</param>
+            <param name="stringContainerViewModel">Novo nome da produto</param>
+            <returns>Status200OK</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarJornada(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel)">
+            <summary>
+            Adiciona uma jornada ao produto
+            </summary>
+            <param name="produtoId">Id do produto em que a jornada será adicionada</param>
+            <param name="jornadaViewModel">Jornada a ser adicionada</param>
+            <returns>Id e nome da jornada adicionada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearJornada(System.Guid,System.Int32,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia uma jornada do produto
+            </summary>
+            <param name="produtoId">Id do produto que contém a jornada</param>
+            <param name="posicao">Posição da jornada</param>
+            <param name="nome">Novo nome da jornada</param>
+            <returns>Status200OK</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarFaseJornada(System.Guid,System.Int32,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma fase à uma jornada do produto
+            </summary>
+            <param name="produtoId">Id do produto</param>
+            <param name="posicao">Posição da jornada</param>
+            <param name="nome">Nome da fase a ser adicionada</param>
+            <returns>Status200OK do tipo Fase</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirJornada(System.Guid,System.Int32)">
+            <summary>
+            Remove uma jornada do produto
+            </summary>
+            <param name="produtoId"></param>
+            <param name="posicao"></param>
+            <returns></returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
             <summary>
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="releaseService">Instância do Automapper</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarPorId(System.Guid)">
+            <summary>
+            Consulta uma release no repositório
+            </summary>
+            <param name="id">Id da release que está sendo consultada</param>
+            <returns>View model da release</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia a release
+            </summary>
+            <param name="timeId">Id do time</param>
+            <param name="releaseId">Id da release</param>
+            <param name="stringContainerViewModel">Novo nome da release</param>
+            <returns>Status200OK</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
@@ -312,6 +407,14 @@
             </summary>
             <param name="releaseId">Id da release em que o sprint será adicionado</param>
             <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
+            <returns>Id e nome da sprint adicionada</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarFasePB(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma fase ao product backlog
+            </summary>
+            <param name="releaseId">Id da release em que o sprint será adicionado</param>
+            <param name="faseStringContainer">Nome da sprint a ser adicionada</param>
             <returns>Id e nome da sprint adicionada</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
@@ -597,6 +700,46 @@
             Autor do comentário
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel">
+            <summary>
+            Representa a fase de um fluxo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Posicao">
+            <summary>
+            Posição da fase dentro do fluxo
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Nome">
+            <summary>
+            Nome da fase
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel.Tarefas">
+            <summary>
+            Lista de tarefas desta fase
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel">
+            <summary>
+            Representa uma jornada do usuário ou de um dado
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Posicao">
+            <summary>
+            Posição da jornada
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Nome">
+            <summary>
+            Nome da jornada
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.JornadaViewModel.Fases">
+            <summary>
+            Fases de uma jornada
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
             <summary>
             Marco histórico, ponto significativo na linha do tempo
@@ -617,6 +760,16 @@
             Data do marco histórico
             </summary>
         </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel">
+            <summary>
+            Representa uma item do product backlog
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel.Fases">
+            <summary>
+            Representa as fases de refinamento do produto
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel">
             <summary>
             Representa um produto, um software
@@ -632,9 +785,34 @@
             Nome do produto
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Jornadas">
+            <summary>
+            Jornadas do produto
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel">
+            <summary>
+            Representa uma release do time
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Id">
+            <summary>
+            Id da release
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Nome">
+            <summary>
+            Nome da release
+            </summary>
+        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
             <summary>
             Sprints da release
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.ProductBacklog">
+            <summary>
+            Product Backlog da release
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
@@ -655,6 +833,21 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel.Periodo">
             <summary>
             Intervalo de datas do sprint
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel">
+            <summary>
+            Representa uma tarefa
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel.Id">
+            <summary>
+            Id da tarefa
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel.Nome">
+            <summary>
+            Nome da tarefa
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

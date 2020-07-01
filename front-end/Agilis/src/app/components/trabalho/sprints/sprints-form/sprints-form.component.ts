@@ -29,8 +29,8 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> implements O
   }
 
   ngOnInit() {
-    this.releasesApiService.obterTodos()
-      .subscribe(releases => this.releases = releases);
+    // this.releasesApiService.obterTodos()
+    //   .subscribe(releases => this.releases = releases);
 
     super.ngOnInit();
   }
@@ -44,7 +44,6 @@ export class SprintsFormComponent extends CrudFormComponent<Sprint> implements O
   }
 
   salvar() {
-    //this.entidade.release = this.releases.find(r => r.id === this.entidade.release.id);
     super.salvar();
   }
 }

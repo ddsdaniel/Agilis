@@ -7,6 +7,7 @@ using System.Linq;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Mocks.ValueObjects.Especificacao;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -30,7 +31,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var produto = new Produto(nome,
                                       new List<RequisitoNaoFuncional>(),
-                                      LinguagemUbiquaMock.ObterValida()
+                                      LinguagemUbiquaMock.ObterValida(),
+                                      new List<Jornada>()
                                       );
 
             //Assert
@@ -44,7 +46,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var produto = new Produto(
                 nameof(Produto), 
                 null, 
-                LinguagemUbiquaMock.ObterValida()
+                LinguagemUbiquaMock.ObterValida(),
+                new List<Jornada>()
                 );
 
             //Assert
@@ -57,7 +60,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var produto = new Produto(nameof(Produto),
                                       new List<RequisitoNaoFuncional> { RequisitoNaoFuncionalMock.ObterInvalido() },
-                                      LinguagemUbiquaMock.ObterValida()
+                                      LinguagemUbiquaMock.ObterValida(),
+                                      new List<Jornada>()
                                       );
 
             //Assert
@@ -69,7 +73,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange
             var produto = ProdutoMock.ObterValido();
-            var contRNF = produto.RequisitosNaoFuncionais.Count;            
+            var contRNF = produto.RequisitosNaoFuncionais.Count();            
             var rnf1 = RequisitoNaoFuncionalMock.ObterValido(1);
             var rnf2 = RequisitoNaoFuncionalMock.ObterValido(2);
 
@@ -81,7 +85,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             Assert.True(rnf1.Valid);
             Assert.True(rnf2.Valid);
             Assert.True(produto.Valid);
-            Assert.Equal(contRNF + 2, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF + 2, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
@@ -89,14 +93,14 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange
             var produto = ProdutoMock.ObterValido();
-            var contRNF = produto.RequisitosNaoFuncionais.Count;
+            var contRNF = produto.RequisitosNaoFuncionais.Count();
 
             //Act
             produto.AdicionarRNF(null);
 
             //Assert
             Assert.True(produto.Invalid);
-            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
@@ -104,7 +108,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange
             var produto = ProdutoMock.ObterValido();
-            var contRNF = produto.RequisitosNaoFuncionais.Count;
+            var contRNF = produto.RequisitosNaoFuncionais.Count();
             var rnf = RequisitoNaoFuncionalMock.ObterInvalido();
 
             //Act
@@ -113,7 +117,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Assert
             Assert.True(rnf.Invalid);
             Assert.True(produto.Invalid);
-            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
@@ -121,7 +125,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         {
             //Arrange
             var produto = ProdutoMock.ObterValido();
-            var contRNF = produto.RequisitosNaoFuncionais.Count;
+            var contRNF = produto.RequisitosNaoFuncionais.Count();
             var rnfPrimeiro = RequisitoNaoFuncionalMock.ObterValido(1);
             var rnfDuplicado = RequisitoNaoFuncionalMock.ObterValido(1);
 
@@ -133,7 +137,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             Assert.True(rnfPrimeiro.Valid);
             Assert.True(rnfDuplicado.Valid);
             Assert.True(produto.Invalid);
-            Assert.Equal(contRNF + 1, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF + 1, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
@@ -145,7 +149,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var rnf2 = RequisitoNaoFuncionalMock.ObterValido(2);
             produto.AdicionarRNF(rnf1);
             produto.AdicionarRNF(rnf2);
-            var contRNF = produto.RequisitosNaoFuncionais.Count;
+            var contRNF = produto.RequisitosNaoFuncionais.Count();
 
             //Act
             produto.RemoverRNF(1);
@@ -155,7 +159,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             Assert.True(rnf1.Valid);
             Assert.True(rnf2.Valid);
             Assert.True(produto.Valid);
-            Assert.Equal(contRNF - 2, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF - 2, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
@@ -167,7 +171,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             var rnf2 = RequisitoNaoFuncionalMock.ObterValido(2);
             produto.AdicionarRNF(rnf1);
             produto.AdicionarRNF(rnf2);
-            var contRNF = produto.RequisitosNaoFuncionais.Count;
+            var contRNF = produto.RequisitosNaoFuncionais.Count();
 
             //Act
             var rnfNaoEncontrado = produto.RequisitosNaoFuncionais.Max(r => r.Numero) + 1;
@@ -177,7 +181,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             Assert.True(rnf1.Valid);
             Assert.True(rnf2.Valid);
             Assert.True(produto.Invalid);
-            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count);
+            Assert.Equal(contRNF, produto.RequisitosNaoFuncionais.Count());
         }
 
         [Fact]
