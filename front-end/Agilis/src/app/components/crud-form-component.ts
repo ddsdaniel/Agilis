@@ -3,14 +3,12 @@ import { OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { OperacaoFormCrud } from '../enums/operacao-form-crud.enum';
 import { Entidade } from '../models/entidade';
 import { CrudApiBaseService } from '../services/api/crud-api-base.service';
 
 export abstract class CrudFormComponent<TEntity extends Entidade> implements OnInit {
 
   entidade: TEntity;
-  operacao: OperacaoFormCrud;
 
   constructor(
     protected router: Router,
@@ -25,13 +23,7 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
     this.activatedRoute.params.subscribe(
       params => {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
-        this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
-
-        if (this.operacao === OperacaoFormCrud.adicionando) {
-          this.sugerirNovo();
-        } else {
-          this.recuperarEntidade(id);
-        }
+        this.recuperarEntidade(id);
       }
     );
 
@@ -52,29 +44,15 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
 
   }
 
-  abstract sugerirNovo(): void;
-
   salvar(): void {
-
-    if (this.operacao === OperacaoFormCrud.adicionando) {
-      this.apiService.adicionar(this.entidade)
-        .subscribe(
-          (id: string) => this.router.navigateByUrl(this.rotaPesquisa),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-    } else {
-      this.apiService.alterar(this.entidade.id, this.entidade)
-        .subscribe(
-          () => this.router.navigateByUrl(this.rotaPesquisa),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-    }
+    this.apiService.alterar(this.entidade.id, this.entidade)
+      .subscribe(
+        () => this.router.navigateByUrl(this.rotaPesquisa),
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this.snackBar.open(error.message);
+        }
+      );
   }
 
   cancelar() {
