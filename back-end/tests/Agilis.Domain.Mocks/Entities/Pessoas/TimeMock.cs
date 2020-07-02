@@ -2,7 +2,6 @@
 using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Bogus;
 using System;
 using System.Collections.Generic;
@@ -18,16 +17,7 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  colaboradores: new List<UsuarioFK>(),
                                                  administradores: new List<UsuarioFK> {
                                                      new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco)
-                                                 },
-                                                 releases: new List<ReleaseFK>(),
-                                                 produtos: new List<ProdutoFK>()
-                   ))
-               .Generate();
-
-        public static TimeFK ObterTimeVOValido()
-            => new Faker<TimeFK>()
-               .CustomInstantiator(p => new TimeFK(id: Guid.NewGuid(),
-                                                   nome: p.Commerce.Product()
+                                                 }
                    ))
                .Generate();
 
@@ -38,9 +28,7 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  colaboradores: new List<UsuarioFK>(),
                                                  administradores: new List<UsuarioFK> { 
                                                      new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco) 
-                                                 },
-                                                 releases: new List<ReleaseFK>(),
-                                                 produtos: new List<ProdutoFK>()
+                                                 }
                    ))
                .Generate();
     }

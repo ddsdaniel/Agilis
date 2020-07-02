@@ -122,14 +122,6 @@ namespace Agilis.Domain.Services.Trabalho
                 return;
             }
 
-            time.RenomearProduto(produtoId, nome);
-            if (time.Invalid)
-            {
-                AddNotifications(time);
-                return;
-            }
-
-            await _unitOfWork.TimeRepository.Atualizar(time);
             await _unitOfWork.ProdutoRepository.Atualizar(produto);
             await _unitOfWork.Commit();
         }

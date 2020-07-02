@@ -1,7 +1,5 @@
 ﻿using Agilis.Domain.Enums;
-using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
@@ -16,22 +14,8 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public EscopoTime Escopo { get; private set; }
         public IEnumerable<UsuarioFK> Colaboradores { get; private set; }
         public IEnumerable<UsuarioFK> Administradores { get; private set; }
-        public IEnumerable<ProdutoFK> Produtos { get; private set; }
-        public IEnumerable<ReleaseFK> Releases { get; private set; }
 
         protected Time()
-        {
-
-        }
-
-        public Time(string nome, UsuarioFK admin)
-            : this(nome: nome,
-                   escopo: EscopoTime.Colaborativo,
-                   colaboradores: new List<UsuarioFK>(),
-                   administradores: new List<UsuarioFK> { admin },
-                   releases: new List<ReleaseFK>(),
-                   produtos: new List<ProdutoFK>()
-                   )
         {
 
         }
@@ -39,16 +23,12 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public Time(string nome,
                     EscopoTime escopo,
                     IEnumerable<UsuarioFK> colaboradores,
-                    IEnumerable<UsuarioFK> administradores,
-                    IEnumerable<ReleaseFK> releases,
-                    IEnumerable<ProdutoFK> produtos)
+                    IEnumerable<UsuarioFK> administradores)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(colaboradores, nameof(colaboradores), "Lista de colaboradores não deve ser nula")
                 .IsNotNull(administradores, nameof(administradores), "Lista de colaboradores não deve ser nula")
-                .IsNotNull(produtos, nameof(produtos), "Lista de Produtos não deve ser nula")
-                .IsNotNull(releases, nameof(releases), "Lista de Releases não deve ser nula")
                 );
 
             if (administradores != null)
@@ -81,26 +61,6 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Escopo = escopo;
             Administradores = administradores;
             Colaboradores = colaboradores;
-            Produtos = produtos;
-            Releases = releases;
-        }
-
-        public void RenomearProduto(Guid id, string nome)
-        {
-            var produto = Produtos.FirstOrDefault(p => p.Id == id);
-            if (produto == null)
-                AddNotification(nameof(id), "Produto não encontrado no time");
-            else
-                produto.Nome = nome;
-        }
-
-        public void RenomearRelease(Guid id, string nome)
-        {
-            var release = Releases.FirstOrDefault(r => r.Id == id);
-            if (release == null)
-                AddNotification(nameof(id), "Release não encontrado no time");
-            else
-                release.Nome = nome;
         }
 
         internal void AdicionarAdmin(UsuarioFK admin)
@@ -172,68 +132,6 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             {
                 Colaboradores = Colaboradores
                     .Where(a => a.Id != colab.Id);
-            }
-        }
-
-        internal void AdicionarProduto(ProdutoFK produto)
-        {
-            if (produto == null)
-            {
-                AddNotification(nameof(produto), "Produto não deve ser nulo");
-                return;
-            }
-
-            if (Produtos.Any(p => p.Id == produto.Id))
-            {
-                AddNotification(nameof(produto), "Produto já adicionado neste time");
-                return;
-            }
-
-            var novaLista = Produtos.ToList();
-            novaLista.Add(produto);
-
-            novaLista = novaLista.OrderBy(a => a.Nome).ToList();
-
-            Produtos = novaLista;
-        }
-
-        internal void ExcluirProduto(Guid produtoId)
-        {
-            if (!Produtos.Any(p => p.Id == produtoId))
-                AddNotification(nameof(produtoId), "Produto não encontrado");
-            else
-            {
-                Produtos = Produtos.Where(a => a.Id != produtoId);
-            }
-        }
-
-        internal void AdicionarRelease(ReleaseFK releaseFK)
-        {
-            if (releaseFK is null)
-            {
-                AddNotification(nameof(releaseFK), "Release não deve ser nula");
-                return;
-            }
-
-            if (Releases.Any(r => r.Id == releaseFK.Id))
-            {
-                AddNotification(nameof(releaseFK), "Release já adicionada neste time");
-                return;
-            }
-
-            var novaLista = Releases.ToList();
-            novaLista.Add(releaseFK);
-
-            Releases = novaLista;
-        }
-
-        internal void ExcluirRelease(Release release)
-        {
-            if (!Releases.Any(r => r.Id == release.Id))
-                AddNotification(nameof(release.Id), "Release não encontrada");
-            else
-            {
-                Releases = Releases.Where(r => r.Id != release.Id);
             }
         }
 

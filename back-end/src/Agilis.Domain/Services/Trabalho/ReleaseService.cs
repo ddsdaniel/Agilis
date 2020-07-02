@@ -5,7 +5,6 @@ using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Services;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
@@ -129,14 +128,6 @@ namespace Agilis.Domain.Services.Trabalho
                 return;
             }
 
-            time.RenomearRelease(releaseId, nome);
-            if (time.Invalid)
-            {
-                AddNotifications(time);
-                return;
-            }
-
-            await _unitOfWork.TimeRepository.Atualizar(time);
             await _unitOfWork.ReleaseRepository.Atualizar(release);
             await _unitOfWork.Commit();
         }

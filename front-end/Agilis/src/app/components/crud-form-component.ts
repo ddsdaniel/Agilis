@@ -16,7 +16,7 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
     protected router: Router,
     private apiService: CrudApiBaseService<TEntity>,
     protected snackBar: MatSnackBar,
-    private activatedRoute: ActivatedRoute,
+    protected activatedRoute: ActivatedRoute,
     private rotaPesquisa: string
   ) { }
 

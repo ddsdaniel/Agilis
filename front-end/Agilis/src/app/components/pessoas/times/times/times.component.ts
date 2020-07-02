@@ -48,8 +48,6 @@ export class TimesComponent extends CrudComponent<Time> {
             nome,
             colaboradores: [],
             administradores: [admin],
-            produtos: [],
-            releases: [],
             escopo: EscopoTime.Colaborativo,
           };
 
