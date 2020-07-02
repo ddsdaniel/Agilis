@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Ator } from 'src/app/models/pessoas/ator';
 import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
-import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -18,7 +17,6 @@ export class UserStoriesFormComponent implements OnInit {
 
   userStory: UserStory;
   atores: Observable<Ator[]>;
-  operacao: OperacaoFormCrud;
 
   constructor(
     private router: Router,
@@ -31,7 +29,7 @@ export class UserStoriesFormComponent implements OnInit {
   ngOnInit() {
 
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
+    //this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
 
     this.userStory = {
       id: id ? id : '',
@@ -51,16 +49,16 @@ export class UserStoriesFormComponent implements OnInit {
 
   salvar() {
 
-    if (this.operacao === OperacaoFormCrud.adicionando) {
-      this.userStoryApiService.adicionar(this.userStory)
-        .subscribe(
-          (id: string) => this.router.navigateByUrl('user-stories'),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-    } else {
+    // if (this.operacao === OperacaoFormCrud.adicionando) {
+    //   this.userStoryApiService.adicionar(this.userStory)
+    //     .subscribe(
+    //       (id: string) => this.router.navigateByUrl('user-stories'),
+    //       (error: HttpErrorResponse) => {
+    //         console.log(error);
+    //         this.snackBar.open(error.message);
+    //       }
+    //     );
+    // } else {
       this.userStoryApiService.alterar(this.userStory.id, this.userStory)
         .subscribe(
           () => this.router.navigateByUrl('user-stories'),
@@ -69,7 +67,7 @@ export class UserStoriesFormComponent implements OnInit {
             this.snackBar.open(error.message);
           }
         );
-    }
+   // }
   }
 
   cancelar() {

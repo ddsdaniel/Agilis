@@ -1,6 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
@@ -20,29 +19,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         escopo: vm.Escopo,
                         administradores: context.Mapper.Map<UsuarioFK[]>(vm.Administradores),
-                        colaboradores: context.Mapper.Map<UsuarioFK[]>(vm.Colaboradores),
-                        releases: context.Mapper.Map<ReleaseFK[]>(vm.Releases),
-                        produtos: context.Mapper.Map<ProdutoFK[]>(vm.Produtos)
+                        colaboradores: context.Mapper.Map<UsuarioFK[]>(vm.Colaboradores)
                         )
                  );
-
-            CreateMap<Time, TimeFK>()
-                .ConstructUsing((vm, context) =>
-                  new TimeFK(
-                      id: vm.Id,
-                      nome: vm.Nome
-                      )
-               );
-
-            CreateMap<TimeFK, TimeViewModel>();
-
-            CreateMap<TimeViewModel, TimeFK>()
-               .ConstructUsing((vm, context) =>
-                 new TimeFK(
-                     id: vm.Id,
-                     nome: vm.Nome
-                     )
-              );
 
             //Ator
             CreateMap<Ator, AtorViewModel>()

@@ -33,7 +33,11 @@ export class AppComponent implements AfterContentChecked, OnInit {
     this.timesApiService.obterTodos()
       .subscribe(
         (times: Time[]) => this.adicionarTimesAoMenu(times),
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+        (error: HttpErrorResponse) => {
+          if (error.status !== 401) {
+            this.snackBar.open(error.message);
+          }
+        }
       );
   }
 

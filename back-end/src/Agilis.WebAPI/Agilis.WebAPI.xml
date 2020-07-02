@@ -154,14 +154,6 @@
             <param name="adminId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Renomear(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Renomeia o time
-            </summary>
-            <param name="timeId">Id do time</param>
-            <param name="stringContainerViewModel">Novo nome do time</param>
-            <returns>Status200OK</returns>
-        </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
             <summary>
             Adiciona um colaborador ao time
@@ -176,38 +168,6 @@
             </summary>
             <param name="timeId"></param>
             <param name="colabId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarRelease(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Adiciona uma release ao time
-            </summary>
-            <param name="timeId">Id do time em que a release será adicionada</param>
-            <param name="nomeViewModel">Container do nome da release</param>
-            <returns>ReleaseFK com o id e o nome da release adicionada</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirRelease(System.Guid,System.Guid)">
-            <summary>
-            Remove um release do time
-            </summary>
-            <param name="timeId"></param>
-            <param name="releaseId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarProduto(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Adiciona um produto ao time
-            </summary>
-            <param name="timeId"></param>
-            <param name="nomeViewModel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirProduto(System.Guid,System.Guid)">
-            <summary>
-            Remove um produto do time
-            </summary>
-            <param name="timeId"></param>
-            <param name="prodId"></param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
@@ -543,16 +503,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Colaboradores">
             <summary>
             Colaboradores do time, exceto administradores
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Releases">
-            <summary>
-            Releases do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
-            <summary>
-            Produtos do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">

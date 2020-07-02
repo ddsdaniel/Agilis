@@ -11,10 +11,6 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
 using DDS.Domain.Core.Model.ValueObjects;
-using Agilis.WebAPI.ViewModels.Trabalho;
-using Agilis.Domain.Models.Entities.Trabalho;
-using DDS.WebAPI.Models.ViewModels;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -104,25 +100,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         }
 
         /// <summary>
-        /// Renomeia o time
-        /// </summary>
-        /// <param name="timeId">Id do time</param>
-        /// <param name="stringContainerViewModel">Novo nome do time</param>
-        /// <returns>Status200OK</returns>
-        [HttpPatch("{timeId:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Renomear(Guid timeId,
-                                                 StringContainerViewModel stringContainerViewModel)
-        {
-            await _timeService.Renomear(timeId, stringContainerViewModel.Texto);
-            if (_timeService.Invalid)
-                return BadRequest(_timeService.Notifications);
-
-            return Ok();
-        }
-
-        /// <summary>
         /// Adiciona um colaborador ao time
         /// </summary>
         /// <param name="timeId"></param>
@@ -166,100 +143,6 @@ namespace Agilis.WebAPI.Controllers.Pessoas
 
             return Ok();
         }
-
-        /// <summary>
-        /// Adiciona uma release ao time
-        /// </summary>
-        /// <param name="timeId">Id do time em que a release será adicionada</param>
-        /// <param name="nomeViewModel">Container do nome da release</param>
-        /// <returns>ReleaseFK com o id e o nome da release adicionada</returns>
-        [HttpPost("{timeId:guid}/releases")]
-        [ProducesResponseType(typeof(ReleaseFK), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarRelease(Guid timeId,
-                                                         StringContainerViewModel nomeViewModel)
-        {
-            var releaseFK = await _timeService.AdicionarRelease(timeId, nomeViewModel.Texto);
-            if (_timeService.Invalid)
-                return BadRequest(_timeService.Notifications);
-
-            return Ok(releaseFK);
-        }        
-
-        /// <summary>
-        /// Remove um release do time
-        /// </summary>
-        /// <param name="timeId"></param>
-        /// <param name="releaseId"></param>
-        /// <returns></returns>
-        [HttpDelete("{timeId:guid}/releases/{releaseId:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirRelease(Guid timeId,
-                                                       Guid releaseId)
-        {
-            await _timeService.ExcluirRelease(timeId, releaseId);
-
-            if (_timeService.Invalid)
-                return BadRequest(_timeService.Notifications);
-
-            return Ok();
-        }
-
-        /// <summary>
-        /// Adiciona um produto ao time
-        /// </summary>
-        /// <param name="timeId"></param>
-        /// <param name="nomeViewModel"></param>
-        /// <returns></returns>
-        [HttpPost("{timeId:guid}/produtos")]
-        [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarProduto(Guid timeId,
-                                                         StringContainerViewModel nomeViewModel)
-        {
-            var produto = new Produto(nomeViewModel.Texto);
-            await _timeService.AdicionarProduto(timeId, produto);
-
-            if (_timeService.Invalid)
-                return BadRequest(_timeService.Notifications);
-
-            var produtoBasicViewModel = _mapper.Map<ProdutoViewModel>(produto);
-
-            return Ok(produtoBasicViewModel);
-        }
-
-        /// <summary>
-        /// Remove um produto do time
-        /// </summary>
-        /// <param name="timeId"></param>
-        /// <param name="prodId"></param>
-        /// <returns></returns>
-        [HttpDelete("{timeId:guid}/produtos/{prodId:guid}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> ExcluirProduto(Guid timeId,
-                                                       Guid prodId)
-        {
-            await _timeService.ExcluirProduto(timeId, prodId);
-
-            if (_timeService.Invalid)
-                return BadRequest(_timeService.Notifications);
-
-            return Ok();
-        }
-
-        //public override async Task<ActionResult<Guid>> Post(TimeViewModel novaEntidadeViewModel)
-        //{
-        //    if (novaEntidadeViewModel.UsuarioId != _usuarioLogado.Id)
-        //        return CustomBadRequest(nameof(Usuario), "Usuário inválido.");
-
-        //    return await base.Post(novaEntidadeViewModel);
-        //}       
 
         /// <summary>
         /// Pesquisa sobre os registros do repositório

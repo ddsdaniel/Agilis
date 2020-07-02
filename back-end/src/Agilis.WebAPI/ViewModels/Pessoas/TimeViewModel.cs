@@ -1,6 +1,4 @@
 ﻿using Agilis.Domain.Enums;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
-using Agilis.WebAPI.ViewModels.Trabalho;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -36,15 +34,6 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// Colaboradores do time, exceto administradores
         /// </summary>
         public IEnumerable<UsuarioBasicViewModel> Colaboradores { get; set; }
-
-        /// <summary>
-        /// Releases do time
-        /// </summary>
-        public IEnumerable<ReleaseFK> Releases { get; set; }
-
-        /// <summary>
-        /// Produtos do time
-        /// </summary>
-        public IEnumerable<ProdutoViewModel> Produtos { get; set; }
+        
     }
 }

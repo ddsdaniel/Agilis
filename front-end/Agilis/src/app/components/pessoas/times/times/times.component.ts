@@ -36,7 +36,7 @@ export class TimesComponent extends CrudComponent<Time> {
 
           const admin: UsuarioFK = {
             id: this.autenticacaoService.usuarioLogado.usuario.id,
-            nome: this.autenticacaoService.usuarioLogado.usuario.nome + '' +
+            nome: this.autenticacaoService.usuarioLogado.usuario.nome + ' ' +
               this.autenticacaoService.usuarioLogado.usuario.sobrenome,
             email: {
               endereco: this.autenticacaoService.usuarioLogado.usuario.email
@@ -48,14 +48,12 @@ export class TimesComponent extends CrudComponent<Time> {
             nome,
             colaboradores: [],
             administradores: [admin],
-            produtos: [],
-            releases: [],
             escopo: EscopoTime.Colaborativo,
           };
 
           this.timesApiService.adicionar(time)
             .subscribe(
-              () => super.atualizarDados(),
+              (id) => this.router.navigateByUrl(`times/${id}`),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
             );
 
