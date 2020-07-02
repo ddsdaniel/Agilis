@@ -1,6 +1,5 @@
-﻿import { Entidade } from '../../entidade';
-import { Jornada } from './jornada';
+import { Entidade } from '../../entidade';
 
 export interface Produto extends Entidade {
-  jornadas: Jornada[];
+  timeId: string;
 }

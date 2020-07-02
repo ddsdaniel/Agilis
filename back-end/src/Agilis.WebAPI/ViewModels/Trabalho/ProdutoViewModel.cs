@@ -21,6 +21,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// <summary>
         /// Id do time ao qual o produto pertence
         /// </summary>
-        public Guid TimeId { get; internal set; }
+        public Guid TimeId { get; set; }
     }
 }

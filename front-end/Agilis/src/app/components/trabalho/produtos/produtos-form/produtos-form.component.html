@@ -1,44 +1,31 @@
-﻿<h1>Produto {{produto.nome}}</h1>
+﻿<h1>Produto {{entidade.nome}}</h1>
 
 <mat-tab-group>
 
   <!-- Dados Principais -->
   <mat-tab label="Dados Principais">
 
-    <div style="display: inline-block" class="half-width mt-4">
+    <div fxLayout="row" class="mt-4">
 
-      <mat-form-field class="half-width">
+      <mat-form-field fxFlex="30">
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="produto.nome" placeholder="Nome"
-          name="nome" type="text" required>
+        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
 
-      <button class="ml-2" mat-raised-button color="accent"
-          (click)="renomear()">Renomear</button>
+      <mat-form-field class="ml-3" fxFlex="30">
+        <mat-label>Time</mat-label>
+        <mat-select [(ngModel)]="entidade.timeId" required>
+          <mat-option *ngFor="let time of times" [value]="time.id">{{time.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
     </div>
 
-  </mat-tab>
-
-  <!-- Jornadas -->
-  <mat-tab>
-    <ng-template matTabLabel>
-      <span [matBadge]="produto.jornadas.length" matBadgeOverlap="false" matBadgeColor="accent">Jornadas</span>
-    </ng-template>
-
-    <div class="tab-container">
-      <mat-list>
-        <mat-list-item *ngFor="let jornada of produto.jornadas">
-          <mat-icon mat-list-icon title="Remover" (click)="excluirJornada(jornada.posicao)" color="warn">clear_forever</mat-icon>
-          <div mat-line>
-            <a [routerLink]="['/jornadas/' + this.timeId + '/' + this.produto.id + '/' + jornada.posicao]"  routerLinkActive="router-link-active">{{jornada.nome}}</a>
-          </div>
-        </mat-list-item>
-      </mat-list>
-      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoJornada()">
-        <mat-icon>add</mat-icon>
-      </button>
+    <div class="mb-1">
+      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+      <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
     </div>
+
   </mat-tab>
 
 </mat-tab-group>

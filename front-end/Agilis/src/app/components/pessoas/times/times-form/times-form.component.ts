@@ -21,10 +21,6 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
   timeApiService: TimesApiService;
 
   constructor(
-    // private router: Router,
-    // private timeApiService: TimesApiService,
-    // private snackBar: MatSnackBar,
-    // private activatedRoute: ActivatedRoute,
     router: Router,
     timeApiService: TimesApiService,
     snackBar: MatSnackBar,
@@ -56,27 +52,9 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
     };
   }
 
-  // recuperarEntidade(id: string) {
-  //   this.timeApiService.obterUm(id)
-  //     .subscribe(
-  //       (entidade: Time) => {
-  //         this.time = entidade;
-  //       },
-  //       (error: HttpErrorResponse) => this.snackBar.open(error.message)
-  //     );
-  // }
-
   podeEditar(): boolean {
     return this.entidade.escopo === EscopoTime.Colaborativo;
   }
-
-  // renomear() {
-  //   this.timeApiService.renomear(this.entidade.id, this.time.nome)
-  //     .subscribe(
-  //       () => this.router.navigateByUrl('times'),
-  //       (error: HttpErrorResponse) => this.snackBar.open(error.message)
-  //     );
-  // }
 
   abrirDialogoColaborador() {
     this.dialogoService.abrirEmail()

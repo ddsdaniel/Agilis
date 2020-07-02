@@ -19,7 +19,7 @@ namespace Agilis.Domain.Services.Trabalho
 
         public ICollection<Produto> ConsultarTodos(IUsuario usuario)
         {
-            var timesId = ObterTimesId(usuario);
+            var timesId = ObterTimesId(usuario).ToList();
 
             return _unitOfWork.ProdutoRepository
                    .AsQueryable()
