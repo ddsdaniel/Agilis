@@ -5,6 +5,8 @@ import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-f
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { TemasFormComponent } from './components/trabalho/temas/temas-form/temas-form.component';
 import { TemasComponent } from './components/trabalho/temas/temas/temas.component';
+import { EpicosFormComponent } from './components/trabalho/epicos/epicos-form/epicos-form.component';
+import { EpicosComponent } from './components/trabalho/epicos/epicos/epicos.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
@@ -19,6 +21,10 @@ const routes: Routes = [
 
   { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: 'epicos', component: EpicosComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'epicos/new', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'epicos/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'temas', component: TemasComponent, canActivate: [AutenticacaoGuard] },
   { path: 'temas/new', component: TemasFormComponent, canActivate: [AutenticacaoGuard] },

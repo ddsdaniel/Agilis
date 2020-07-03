@@ -246,6 +246,40 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.EpicosController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IEpicoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.ConsultarTodos">
+            <summary>
+            Consulta todos os epicos do usuário logado
+            </summary>
+            <returns>Retorna todos os epicos do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="temaId">Filtra epicos pelo id do tema</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel})">
+            <summary>
+            Ordena pelo nome do epico
+            </summary>
+            <param name="lista">Lista de epicos a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestonesController">
             <summary>
             Manutenção do repositório
@@ -647,6 +681,26 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ComentarioViewModel.Autor">
             <summary>
             Autor do comentário
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel">
+            <summary>
+            Representa um epico, um software
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel.Id">
+            <summary>
+            Id do epico
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel.Nome">
+            <summary>
+            Nome do epico
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel.TemaId">
+            <summary>
+            Id do tema ao qual o epico pertence
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel">

@@ -20,12 +20,12 @@ namespace Agilis.Domain.Services.Trabalho
 
         public ICollection<Tema> ConsultarTodos(IUsuario usuario)
         {
-            var timesId = ObterTimesId(usuario).ToList();
+            var produtosId = ObterProdutosDoUsuario(usuario).ToList();
 
             return _unitOfWork.TemaRepository
                    .AsQueryable()
-                   .Where(p => timesId.Contains(p.ProdutoId))
-                   .OrderBy(t => t.Nome)
+                   .Where(p => produtosId.Contains(p.ProdutoId))
+                   .OrderBy(p => p.Nome)
                    .ToList();
         }
 
@@ -36,41 +36,22 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        private IQueryable<Guid> ObterTimesId(IUsuario usuario)
-        {
-            return _unitOfWork.TimeRepository
-                .ObterTimes(usuario)
-                .Select(t => t.Id);
-        }
-
         public ICollection<Tema> Pesquisar(string filtro, IUsuario usuario)
         {
-            var timesId = ObterTimesId(usuario);
+            var produtosId = ObterProdutosDoUsuario(usuario);
 
             return _unitOfWork.TemaRepository
                     .AsQueryable()
-                    .Where(p => timesId.Contains(p.ProdutoId) && p.Nome.ToLower().Contains(filtro.ToLower()))
+                    .Where(p => produtosId.Contains(p.ProdutoId) && p.Nome.ToLower().Contains(filtro.ToLower()))
                     .OrderBy(t => t.Nome)
                     .ToList();
         }
 
         public ICollection<Tema> Pesquisar(string filtro, Guid produtoId, IUsuario usuario)
         {
-            var produtosId = new List<Guid> { produtoId };
-
-            if (produtoId == Guid.Empty)
-            {
-                var timesDoUsuario = _unitOfWork.TimeRepository
-                    .ObterTimes(usuario)
-                    .Select(t => t.Id)
-                    .ToList();
-
-                produtosId = _unitOfWork.ProdutoRepository
-                    .AsQueryable()
-                    .Where(p => timesDoUsuario.Contains(p.TimeId))
-                    .Select(p => p.Id)
-                    .ToList();
-            }
+            var produtosId = produtoId == Guid.Empty
+                ? ObterProdutosDoUsuario(usuario)
+                : new List<Guid> { produtoId };
 
             if (filtro == null)
                 filtro = "";
@@ -82,5 +63,20 @@ namespace Agilis.Domain.Services.Trabalho
                     .ToList();
         }
 
+        private List<Guid> ObterProdutosDoUsuario(IUsuario usuario)
+        {
+            List<Guid> produtosId;
+            var timesDoUsuario = _unitOfWork.TimeRepository
+           .ObterTimes(usuario)
+           .Select(t => t.Id)
+           .ToList();
+
+            produtosId = _unitOfWork.ProdutoRepository
+                .AsQueryable()
+                .Where(p => timesDoUsuario.Contains(p.TimeId))
+                .Select(p => p.Id)
+                .ToList();
+            return produtosId;
+        }
     }
 }
