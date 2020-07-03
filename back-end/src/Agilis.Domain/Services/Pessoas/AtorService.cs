@@ -1,10 +1,12 @@
-﻿using Agilis.Domain.Abstractions.Repositories;
+﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
+using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Models.Entities.Pessoas;
+using Agilis.Domain.Models.Entities.Pessoas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -16,11 +18,65 @@ namespace Agilis.Domain.Services.Pessoas
         {
         }
 
+        public ICollection<Ator> ConsultarTodos(IUsuario usuario)
+        {
+            var produtosId = ObterProdutosDoUsuario(usuario).ToList();
+
+            return _unitOfWork.AtorRepository
+                   .AsQueryable()
+                   .Where(p => produtosId.Contains(p.ProdutoId))
+                   .OrderBy(p => p.Nome)
+                   .ToList();
+        }
+
         public override ICollection<Ator> Pesquisar(string filtro)
-            => _unitOfWork.AtorRepository
+          => _unitOfWork.AtorRepository
+                 .AsQueryable()
+                 .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
+                 .OrderBy(t => t.Nome)
+                 .ToList();
+
+        public ICollection<Ator> Pesquisar(string filtro, IUsuario usuario)
+        {
+            var produtosId = ObterProdutosDoUsuario(usuario);
+
+            return _unitOfWork.AtorRepository
                     .AsQueryable()
-                    .Where(a => a.Nome.ToLower().Contains(filtro.ToLower()))
-                    .OrderBy(a => a.Nome)
+                    .Where(p => produtosId.Contains(p.ProdutoId) && p.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(t => t.Nome)
                     .ToList();
+        }
+
+        public ICollection<Ator> Pesquisar(string filtro, Guid produtoId, IUsuario usuario)
+        {
+            var produtosId = produtoId == Guid.Empty
+                ? ObterProdutosDoUsuario(usuario)
+                : new List<Guid> { produtoId };
+
+            if (filtro == null)
+                filtro = "";
+
+            return _unitOfWork.AtorRepository
+                    .AsQueryable()
+                    .Where(t => produtosId.Contains(t.ProdutoId) && t.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(t => t.Nome)
+                    .ToList();
+        }
+
+        private List<Guid> ObterProdutosDoUsuario(IUsuario usuario)
+        {
+            List<Guid> produtosId;
+            var timesDoUsuario = _unitOfWork.TimeRepository
+           .ObterTimes(usuario)
+           .Select(t => t.Id)
+           .ToList();
+
+            produtosId = _unitOfWork.ProdutoRepository
+                .AsQueryable()
+                .Where(p => timesDoUsuario.Contains(p.TimeId))
+                .Select(p => p.Id)
+                .ToList();
+            return produtosId;
+        }
     }
 }

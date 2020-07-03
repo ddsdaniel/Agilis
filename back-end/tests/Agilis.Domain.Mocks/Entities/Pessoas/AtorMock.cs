@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Bogus;
+using System;
 
 namespace Agilis.Domain.Mocks.Entities.Pessoas
 {
@@ -7,10 +8,7 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
     {
         public static Ator ObterValido()
             => new Faker<Ator>()
-               .CustomInstantiator(p => new Ator(p.Person.FirstName))
-               .Generate();
-
-        public static Ator ObterInvalido()
-            => new Ator(null);
+               .CustomInstantiator(p => new Ator(p.Commerce.Product(), Guid.NewGuid())
+               ).Generate();
     }
 }

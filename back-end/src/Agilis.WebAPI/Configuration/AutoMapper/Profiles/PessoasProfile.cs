@@ -23,9 +23,16 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
-            //Ator
-            CreateMap<Ator, AtorViewModel>()
-                .ReverseMap();
+            //Ator            
+            CreateMap<Ator, AtorViewModel>();
+
+            CreateMap<AtorViewModel, Ator>()
+                 .ConstructUsing((vm, context) =>
+                    new Ator(
+                        nome: vm.Nome,
+                        produtoId: vm.ProdutoId
+                        )
+                 );
 
             //E-mail
             CreateMap<Email, string>()

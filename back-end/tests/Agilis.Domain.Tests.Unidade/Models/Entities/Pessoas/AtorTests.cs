@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Mocks.Entities.Pessoas;
 using Xunit;
+using System;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -22,7 +23,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var ator = new Ator(nome);
+            var ator = new Ator(nome, Guid.NewGuid());
 
             //Assert
             Assert.True(ator.Invalid);

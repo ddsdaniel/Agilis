@@ -4,7 +4,7 @@ using System;
 namespace Agilis.WebAPI.ViewModels.Pessoas
 {
     /// <summary>
-    /// Representa um ator, uma persona do universo Agilis
+    /// Representa um ator, um software
     /// </summary>
     public class AtorViewModel : IViewModel
     {
@@ -17,5 +17,10 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// Nome do ator
         /// </summary>
         public string Nome { get; set; }
+
+        /// <summary>
+        /// Id do produto ao qual o ator pertence
+        /// </summary>
+        public Guid ProdutoId { get; set; }
     }
 }
