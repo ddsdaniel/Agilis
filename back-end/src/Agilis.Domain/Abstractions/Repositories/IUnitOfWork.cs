@@ -14,6 +14,7 @@ namespace Agilis.Domain.Abstractions.Repositories
         IUsuarioRepository UsuarioRepository { get; }
         IReleaseRepository ReleaseRepository { get; }
         IProdutoRepository ProdutoRepository { get; }
+        ITemaRepository TemaRepository { get; }
         Task Commit();
     }
 }
