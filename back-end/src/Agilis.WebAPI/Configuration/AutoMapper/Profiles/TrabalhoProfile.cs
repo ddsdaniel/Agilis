@@ -42,6 +42,17 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
+            //Tema            
+            CreateMap<Tema, TemaViewModel>();
+
+            CreateMap<TemaViewModel, Tema>()
+                 .ConstructUsing((vm, context) =>
+                    new Tema(
+                        nome: vm.Nome,
+                        produtoId: vm.ProdutoId
+                        )
+                 );
+
             //Produto            
             CreateMap<Produto, ProdutoViewModel>();
 

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
+import { TemasFormComponent } from './components/trabalho/temas/temas-form/temas-form.component';
+import { TemasComponent } from './components/trabalho/temas/temas/temas.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
@@ -17,6 +19,10 @@ const routes: Routes = [
 
   { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: 'temas', component: TemasComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'temas/new', component: TemasFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'temas/:id', component: TemasFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'produtos', component: ProdutosComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },

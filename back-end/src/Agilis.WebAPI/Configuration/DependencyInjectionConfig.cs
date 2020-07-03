@@ -77,6 +77,9 @@ namespace Agilis.WebAPI.Configuration
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
+            services.AddTransient<ITemaService, TemaService>();
+            services.AddTransient<ITemaRepository, TemaRepository>();
+
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
             services.AddSingleton<IAppSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value);

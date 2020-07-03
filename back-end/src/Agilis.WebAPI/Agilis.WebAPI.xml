@@ -369,6 +369,40 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.TemasController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ITemaService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.ConsultarTodos">
+            <summary>
+            Consulta todos os temas do usuário logado
+            </summary>
+            <returns>Retorna todos os temas do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="produtoId">Filtra temas pelo id do produto</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel})">
+            <summary>
+            Ordena pelo nome do tema
+            </summary>
+            <param name="lista">Lista de temas a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
             Classe que provê métodos de extensão para IHttpContextAccessor
@@ -763,6 +797,26 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TarefaViewModel.Nome">
             <summary>
             Nome da tarefa
+            </summary>
+        </member>
+        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel">
+            <summary>
+            Representa um tema, um software
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Id">
+            <summary>
+            Id do tema
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Nome">
+            <summary>
+            Nome do tema
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.ProdutoId">
+            <summary>
+            Id do produto ao qual o tema pertence
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">

@@ -14,6 +14,8 @@ import { DialogoEmailComponent } from './components/dialogos/dialogo-email/dialo
 import { DialogoTextoComponent } from './components/dialogos/dialogo-texto/dialogo-texto.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
+import { TemasFormComponent } from './components/trabalho/temas/temas-form/temas-form.component';
+import { TemasComponent } from './components/trabalho/temas/temas/temas.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
@@ -36,6 +38,8 @@ export function InitApp(appLoadService: AppLoadService) {
     LoginComponent,
     TimesComponent,
     TimesFormComponent,
+    TemasComponent,
+    TemasFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
     ReleasesFormComponent,
