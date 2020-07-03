@@ -2,7 +2,7 @@
 <!-- Pesquisa e novo -->
 <div class="pesquisa">
 
-  <mat-form-field class="half-width">
+  <mat-form-field fxFlex="40">
     <mat-label>Pesquisa</mat-label>
     <input matInput placeholder="Pesquisa" type="search" [(ngModel)]="filtro" (keyup.enter)="atualizarDados()">
     <div matPrefix fxLayout="row">
@@ -11,7 +11,15 @@
     </div>
   </mat-form-field>
 
-  <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="50%" fxFlex.sm="25%" fxFlex.md="15%" fxFlex.lg="10%" fxFlex.xl="10%">
+  <mat-form-field class="ml-3" fxFlex="20">
+    <mat-label>Time</mat-label>
+    <mat-select [(ngModel)]="timeId">
+      <mat-option *ngFor="let time of times" [value]="time.id">{{time.nome}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="end end" fxFlex.xs="50%" fxFlex.sm="25%" fxFlex.md="15%" fxFlex.lg="10%"
+    fxFlex.xl="10%">
     <button mat-raised-button (click)="atualizarDados()">Pesquisar</button>
   </div>
 

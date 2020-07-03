@@ -8,6 +8,7 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -54,12 +55,14 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Pesquisa sobre os registros do repositório
         /// </summary>
         /// <param name="filtro">Filtro inserido pelo usuário</param>
+        /// <param name="timeId">Filtra produtos pelo id do time</param>
         /// <returns>Lista de registros correspondentes ao filtro</returns>
-        [HttpGet("pesquisa")]
+        [HttpGet("pesquisa-crud")]
         [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]
-        public override ActionResult<ICollection<ProdutoViewModel>> Pesquisar([FromQuery] string filtro)
+        public ActionResult<ICollection<ProdutoViewModel>> Pesquisar([FromQuery] string filtro,
+                                                                     [FromQuery] string timeId)
         {
-            var lista = _produtoService.Pesquisar(filtro, _usuarioLogado);
+            var lista = _produtoService.Pesquisar(filtro, Guid.Parse(timeId), _usuarioLogado);
 
             var listaViewModel = _mapper.Map<ICollection<ProdutoViewModel>>(lista);
 

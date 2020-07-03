@@ -2,6 +2,7 @@
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
+using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,22 @@ namespace Agilis.Domain.Services.Trabalho
                     .OrderBy(t => t.Nome)
                     .ToList();
         }
-        
+
+        public ICollection<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario)
+        {
+            var timesId = timeId == Guid.Empty
+                ? ObterTimesId(usuario).ToArray()
+                : new Guid[] { timeId };
+
+            if (filtro == null)
+                filtro = "";
+
+            return _unitOfWork.ProdutoRepository
+                    .AsQueryable()
+                    .Where(p => timesId.Contains(p.TimeId) && p.Nome.ToLower().Contains(filtro.ToLower()))
+                    .OrderBy(t => t.Nome)
+                    .ToList();
+        }
+
     }
 }
