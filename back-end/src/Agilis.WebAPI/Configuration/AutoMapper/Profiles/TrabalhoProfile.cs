@@ -42,6 +42,17 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
+            //Epico            
+            CreateMap<Epico, EpicoViewModel>();
+
+            CreateMap<EpicoViewModel, Epico>()
+                 .ConstructUsing((vm, context) =>
+                    new Epico(
+                        nome: vm.Nome,
+                        temaId: vm.TemaId
+                        )
+                 );
+
             //Tema            
             CreateMap<Tema, TemaViewModel>();
 

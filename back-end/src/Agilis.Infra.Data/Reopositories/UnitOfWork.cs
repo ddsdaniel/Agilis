@@ -22,6 +22,7 @@ namespace Agilis.Infra.Data.Repositories
         public IReleaseRepository ReleaseRepository { get; }
         public IProdutoRepository ProdutoRepository { get; }
         public ITemaRepository TemaRepository { get; }
+        public IEpicoRepository EpicoRepository { get; }
 
         public UnitOfWork(IMongoDatabase database)
         {
@@ -37,6 +38,7 @@ namespace Agilis.Infra.Data.Repositories
             ReleaseRepository = new ReleaseRepository(database, _session);
             ProdutoRepository = new ProdutoRepository(database, _session);
             TemaRepository = new TemaRepository(database, _session);
+            EpicoRepository = new EpicoRepository(database, _session);
         }
 
         public async Task Commit()

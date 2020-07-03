@@ -15,6 +15,7 @@ namespace Agilis.Domain.Abstractions.Repositories
         IReleaseRepository ReleaseRepository { get; }
         IProdutoRepository ProdutoRepository { get; }
         ITemaRepository TemaRepository { get; }
+        IEpicoRepository EpicoRepository { get; }
         Task Commit();
     }
 }

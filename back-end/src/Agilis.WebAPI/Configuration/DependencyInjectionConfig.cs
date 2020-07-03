@@ -80,6 +80,9 @@ namespace Agilis.WebAPI.Configuration
             services.AddTransient<ITemaService, TemaService>();
             services.AddTransient<ITemaRepository, TemaRepository>();
 
+            services.AddTransient<IEpicoService, EpicoService>();
+            services.AddTransient<IEpicoRepository, EpicoRepository>();
+
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
             services.AddSingleton<IAppSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value);

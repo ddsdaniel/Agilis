@@ -20,7 +20,7 @@ namespace Agilis.Domain.Services.Trabalho
 
         public ICollection<Produto> ConsultarTodos(IUsuario usuario)
         {
-            var timesId = ObterTimesId(usuario).ToList();
+            var timesId = ObterTimesDoUsuario(usuario).ToList();
 
             return _unitOfWork.ProdutoRepository
                    .AsQueryable()
@@ -36,7 +36,7 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        private IQueryable<Guid> ObterTimesId(IUsuario usuario)
+        private IQueryable<Guid> ObterTimesDoUsuario(IUsuario usuario)
         {
             return _unitOfWork.TimeRepository
                 .ObterTimes(usuario)
@@ -45,7 +45,7 @@ namespace Agilis.Domain.Services.Trabalho
 
         public ICollection<Produto> Pesquisar(string filtro, IUsuario usuario)
         {
-            var timesId = ObterTimesId(usuario);
+            var timesId = ObterTimesDoUsuario(usuario);
 
             return _unitOfWork.ProdutoRepository
                     .AsQueryable()
@@ -57,7 +57,7 @@ namespace Agilis.Domain.Services.Trabalho
         public ICollection<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario)
         {
             var timesId = timeId == Guid.Empty
-                ? ObterTimesId(usuario).ToArray()
+                ? ObterTimesDoUsuario(usuario).ToArray()
                 : new Guid[] { timeId };
 
             if (filtro == null)
