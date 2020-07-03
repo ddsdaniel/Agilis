@@ -16,6 +16,8 @@ import { TimesFormComponent } from './components/pessoas/times/times-form/times-
 import { TimesComponent } from './components/pessoas/times/times/times.component';
 import { TemasFormComponent } from './components/trabalho/temas/temas-form/temas-form.component';
 import { TemasComponent } from './components/trabalho/temas/temas/temas.component';
+import { EpicosFormComponent } from './components/trabalho/epicos/epicos-form/epicos-form.component';
+import { EpicosComponent } from './components/trabalho/epicos/epicos/epicos.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
@@ -40,6 +42,8 @@ export function InitApp(appLoadService: AppLoadService) {
     TimesFormComponent,
     TemasComponent,
     TemasFormComponent,
+    EpicosComponent,
+    EpicosFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
     ReleasesFormComponent,
