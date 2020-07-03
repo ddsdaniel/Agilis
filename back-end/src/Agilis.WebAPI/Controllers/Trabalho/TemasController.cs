@@ -55,14 +55,14 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Pesquisa sobre os registros do repositório
         /// </summary>
         /// <param name="filtro">Filtro inserido pelo usuário</param>
-        /// <param name="timeId">Filtra temas pelo id do time</param>
+        /// <param name="produtoId">Filtra temas pelo id do produto</param>
         /// <returns>Lista de registros correspondentes ao filtro</returns>
         [HttpGet("pesquisa-crud")]
         [ProducesResponseType(typeof(ICollection<TemaViewModel>), StatusCodes.Status200OK)]
         public ActionResult<ICollection<TemaViewModel>> Pesquisar([FromQuery] string filtro,
-                                                                     [FromQuery] string timeId)
+                                                                  [FromQuery] string produtoId)
         {
-            var lista = _temaService.Pesquisar(filtro, Guid.Parse(timeId), _usuarioLogado);
+            var lista = _temaService.Pesquisar(filtro, Guid.Parse(produtoId), _usuarioLogado);
 
             var listaViewModel = _mapper.Map<ICollection<TemaViewModel>>(lista);
 

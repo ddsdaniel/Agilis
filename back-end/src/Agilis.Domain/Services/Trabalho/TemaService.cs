@@ -54,18 +54,30 @@ namespace Agilis.Domain.Services.Trabalho
                     .ToList();
         }
 
-        public ICollection<Tema> Pesquisar(string filtro, Guid timeId, IUsuario usuario)
+        public ICollection<Tema> Pesquisar(string filtro, Guid produtoId, IUsuario usuario)
         {
-            var timesId = timeId == Guid.Empty
-                ? ObterTimesId(usuario).ToArray()
-                : new Guid[] { timeId };
+            var produtosId = new List<Guid> { produtoId };
+
+            if (produtoId == Guid.Empty)
+            {
+                var timesDoUsuario = _unitOfWork.TimeRepository
+                    .ObterTimes(usuario)
+                    .Select(t => t.Id)
+                    .ToList();
+
+                produtosId = _unitOfWork.ProdutoRepository
+                    .AsQueryable()
+                    .Where(p => timesDoUsuario.Contains(p.TimeId))
+                    .Select(p => p.Id)
+                    .ToList();
+            }
 
             if (filtro == null)
                 filtro = "";
 
             return _unitOfWork.TemaRepository
                     .AsQueryable()
-                    .Where(p => timesId.Contains(p.ProdutoId) && p.Nome.ToLower().Contains(filtro.ToLower()))
+                    .Where(t => produtosId.Contains(t.ProdutoId) && t.Nome.ToLower().Contains(filtro.ToLower()))
                     .OrderBy(t => t.Nome)
                     .ToList();
         }

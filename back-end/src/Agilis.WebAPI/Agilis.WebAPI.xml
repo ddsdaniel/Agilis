@@ -393,7 +393,7 @@
             Pesquisa sobre os registros do repositório
             </summary>
             <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="timeId">Filtra temas pelo id do time</param>
+            <param name="produtoId">Filtra temas pelo id do produto</param>
             <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel})">

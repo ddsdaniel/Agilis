@@ -7,6 +7,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
     public interface ITemaService : ICrudSeguroService<Tema>
     {
-        ICollection<Tema> Pesquisar(string filtro, Guid timeId, IUsuario usuario);
+        ICollection<Tema> Pesquisar(string filtro, Guid produtoId, IUsuario usuario);
     }
 }
