@@ -105,19 +105,34 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.ConsultarTodos">
+            <summary>
+            Consulta todos os atores do usuário logado
+            </summary>
+            <returns>Retorna todos os atores do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="produtoId">Filtra atores pelo id do produto</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
             <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            Ordena pelo nome do ator
             </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
+            <param name="lista">Lista de atores a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimesController">
             <summary>
@@ -495,7 +510,7 @@
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel">
             <summary>
-            Representa um ator, uma persona do universo Agilis
+            Representa um ator, um software
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.Id">
@@ -506,6 +521,11 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.Nome">
             <summary>
             Nome do ator
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel.ProdutoId">
+            <summary>
+            Id do produto ao qual o ator pertence
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel">

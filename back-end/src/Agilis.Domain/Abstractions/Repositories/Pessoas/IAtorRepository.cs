@@ -5,6 +5,5 @@ namespace Agilis.Domain.Abstractions.Repositories.Pessoas
 {
     public interface IAtorRepository : IRepository<Ator>
     {
-        
     }
 }
