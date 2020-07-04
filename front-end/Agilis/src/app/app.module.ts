@@ -14,6 +14,8 @@ import { DialogoEmailComponent } from './components/dialogos/dialogo-email/dialo
 import { DialogoTextoComponent } from './components/dialogos/dialogo-texto/dialogo-texto.component';
 import { TimesFormComponent } from './components/pessoas/times/times-form/times-form.component';
 import { TimesComponent } from './components/pessoas/times/times/times.component';
+import { AtoresFormComponent } from './components/pessoas/atores/atores-form/atores-form.component';
+import { AtoresComponent } from './components/pessoas/atores/atores/atores.component';
 import { TemasFormComponent } from './components/trabalho/temas/temas-form/temas-form.component';
 import { TemasComponent } from './components/trabalho/temas/temas/temas.component';
 import { EpicosFormComponent } from './components/trabalho/epicos/epicos-form/epicos-form.component';
@@ -40,6 +42,8 @@ export function InitApp(appLoadService: AppLoadService) {
     LoginComponent,
     TimesComponent,
     TimesFormComponent,
+    AtoresComponent,
+    AtoresFormComponent,
     TemasComponent,
     TemasFormComponent,
     EpicosComponent,

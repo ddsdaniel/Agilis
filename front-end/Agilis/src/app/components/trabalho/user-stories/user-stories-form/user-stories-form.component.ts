@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
-import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { constantes } from 'src/app/constants/constantes';
 import { Ator } from 'src/app/models/pessoas/ator';
+import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
+import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -36,7 +37,8 @@ export class UserStoriesFormComponent implements OnInit {
       nome: '',
       ator: {
         id: '',
-        nome: ''
+        nome: '',
+        produtoId: constantes.newGuid
       },
       narrativa: '',
       objetivo: '',
