@@ -1,4 +1,4 @@
-﻿<h1>UserStory {{entidade.nome}}</h1>
+﻿<h1>User Story {{entidade.nome}}</h1>
 
 <mat-tab-group>
 
@@ -6,19 +6,44 @@
   <mat-tab label="Dados Principais">
 
     <div fxLayout="row" class="mt-4">
-
-      <mat-form-field fxFlex="30">
+      <mat-form-field class="full-width" fxFlex="33">
         <mat-label>Nome</mat-label>
         <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
+    </div>
 
-      <mat-form-field class="ml-3" fxFlex="30">
+    <div fxLayout="row">
+      <mat-form-field class="full-width" fxFlex="33">
         <mat-label>Épico</mat-label>
         <mat-select [(ngModel)]="entidade.epicoId" required>
           <mat-option *ngFor="let epico of epicos" [value]="epico.id">{{epico.nome}}</mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
 
+    <div fxLayout="row">
+      <mat-form-field fxFlex="33">
+        <mat-label>Eu, enquanto</mat-label>
+        <mat-select [(ngModel)]="entidade.ator.id" name="ator">
+          <mat-option *ngFor="let ator of atores" [value]="ator.id">
+            {{ator.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex="33">
+        <mat-label>gostaria</mat-label>
+        <input [(ngModel)]="entidade.narrativa" matInput placeholder="Narrativa" name="narrativa" type="text" required>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex="33">
+        <mat-label>para</mat-label>
+        <input [(ngModel)]="entidade.objetivo" matInput placeholder="Objetivo" name="objetivo" type="text" required>
+      </mat-form-field>
     </div>
 
     <div class="mb-1">

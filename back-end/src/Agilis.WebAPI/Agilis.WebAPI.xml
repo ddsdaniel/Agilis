@@ -247,19 +247,34 @@
             Manutenção do repositório
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.ConsultarTodos">
+            <summary>
+            Consulta todos os userStories do usuário logado
+            </summary>
+            <returns>Retorna todos os userStories do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="epicoId">Filtra userStories pelo id do [epico</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
             <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            Ordena pelo nome do userStory
             </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
+            <param name="lista">Lista de userStories a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.EpicosController">
             <summary>

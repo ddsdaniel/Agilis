@@ -28,8 +28,18 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<Milestone, MilestoneViewModel>()
               .ReverseMap();
 
-            CreateMap<UserStory, UserStoryViewModel>()
-                .ReverseMap();
+            CreateMap<UserStory, UserStoryViewModel>();
+
+            CreateMap<UserStoryViewModel, UserStory>()
+                 .ConstructUsing((vm, context) =>
+                    new UserStory(
+                        nome: vm.Nome,
+                        ator: vm.Ator,
+                        narrativa: vm.Narrativa,
+                        objetivo: vm.Objetivo,
+                        epicoId: vm.EpicoId
+                        )
+                 ); ;
 
             //Sprint            
             CreateMap<Sprint, SprintViewModel>();

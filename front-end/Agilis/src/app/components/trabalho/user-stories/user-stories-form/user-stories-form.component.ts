@@ -8,6 +8,8 @@ import { Epico } from 'src/app/models/trabalho/epicos/epico';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { EpicosApiService } from 'src/app/services/api/trabalho/epicos-api.service';
 import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
+import { Ator } from 'src/app/models/pessoas/ator';
+import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -17,6 +19,8 @@ import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-storie
 export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
 
   epicos: Epico[];
+  atores: Ator[];
+
   userStoryApiService: UserStoriesApiService;
 
   constructor(
@@ -25,11 +29,21 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
     snackBar: MatSnackBar,
     protected activatedRoute: ActivatedRoute,
     private epicosApiService: EpicosApiService,
+    private atoresApiService: AtoresApiService,
   ) {
     super(router, userStoryApiService, snackBar, activatedRoute, 'user-stories');
     this.userStoryApiService = userStoryApiService;
     this.carregarEpicos();
+    this.carregarAtores();
     this.sugerirNovo();
+  }
+
+  carregarAtores() {
+    this.atoresApiService.obterTodos()
+      .subscribe(
+        (atores) => this.atores = atores,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
   carregarEpicos() {
@@ -40,6 +54,11 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
       );
   }
 
+  salvar(): void {
+    this.entidade.ator.nome = this.atores.find(a => a.id === this.entidade.ator.id).nome;
+    super.salvar();
+  }
+
   sugerirNovo() {
     this.entidade = {
       id: constantes.newGuid,
@@ -48,7 +67,6 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
       ator: {
         id: constantes.newGuid,
         nome: '',
-        produtoId: constantes.newGuid
       },
       historia: '',
       narrativa: '',

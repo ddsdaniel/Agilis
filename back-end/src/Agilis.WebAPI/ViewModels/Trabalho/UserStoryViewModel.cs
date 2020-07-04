@@ -9,6 +9,8 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
     /// </summary>
     public class UserStoryViewModel : IViewModel
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Nome curto da user story
         /// </summary>

@@ -1,9 +1,9 @@
-import { Ator } from '../../pessoas/ator';
+import { AtorFK } from '../../pessoas/ator-fk';
 
 export interface UserStory {
   id: string;
   nome: string;
-  ator: Ator;
+  ator: AtorFK;
   narrativa: string;
   objetivo: string;
   historia: string;

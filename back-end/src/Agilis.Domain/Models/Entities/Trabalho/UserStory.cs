@@ -76,6 +76,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Ator = ator;
             Narrativa = narrativa;
             Objetivo = objetivo;
+            EpicoId = epicoId;
         }
     }
 }
