@@ -943,5 +943,10 @@
             Id do épico ao qual a user story pertence
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.CriteriosAceitacao">
+            <summary>
+            Critérios de aceitação da user story
+            </summary>
+        </member>
     </members>
 </doc>

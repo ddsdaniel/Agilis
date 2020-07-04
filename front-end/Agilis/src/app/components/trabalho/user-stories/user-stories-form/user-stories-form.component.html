@@ -46,11 +46,32 @@
       </mat-form-field>
     </div>
 
-    <div class="mb-1">
-      <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.criteriosAceitacao.length" matBadgeOverlap="false" matBadgeColor="accent">Critérios de
+        Aceitação</span>
+    </ng-template>
+
+    <div class="mt-4">
+      <mat-list>
+        <mat-list-item *ngFor="let criterio of entidade.criteriosAceitacao; let i = index">
+          <mat-icon mat-list-icon title="Remover" (click)="excluirCriterio(i)" color="warn">clear_forever
+          </mat-icon>
+          <div mat-line>{{criterio.nome}}</div>
+        </mat-list-item>
+      </mat-list>
+      <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoCriterio()">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
   </mat-tab>
 
 </mat-tab-group>
+
+<div class="mb-1 mt-2">
+  <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
+  <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+</div>

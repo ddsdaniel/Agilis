@@ -1,6 +1,7 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
@@ -40,5 +41,10 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// Id do épico ao qual a user story pertence
         /// </summary>
         public Guid EpicoId { get; set; }
+
+        /// <summary>
+        /// Critérios de aceitação da user story
+        /// </summary>
+        public IEnumerable<CriterioAceitacaoViewModel>  CriteriosAceitacao { get; set; }
     }
 }

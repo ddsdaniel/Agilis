@@ -1,7 +1,9 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.Entities;
+using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
@@ -38,7 +40,9 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// <summary>
         /// Id do épico ao qual a user story pertence
         /// </summary>
-        public Guid EpicoId { get; set; }
+        public Guid EpicoId { get; private set; }
+
+        public IEnumerable<CriterioAceitacao> CriteriosAceitacao { get; private set; }
 
         /// <summary>
         /// Construtor usado apenas para a serialização e desserialização
@@ -52,17 +56,17 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// Construtor completo, com validações
         /// </summary>
         /// <param name="nome">Nome da user story</param>
-        /// <param name="produto">Persona para qual a história será útil</param>
         /// <param name="ator">Persona para qual a história será útil</param>
         /// <param name="narrativa">O que se deseja</param>
         /// <param name="objetivo">Para que serve</param>
-        /// <param name="comentarios">Comentários da user story</param>
-        /// <param name="milestone">Milestone (opcional) da user story</param>
+        /// <param name="epicoId">Id do épico ao qual a história pertence</param>
+        /// <param name="criteriosAceitacao">Critérios de aceitação da história</param>
         public UserStory(string nome,
                          AtorFK ator,
                          string narrativa,
                          string objetivo,
-                         Guid epicoId)
+                         Guid epicoId,
+                         IEnumerable<CriterioAceitacao> criteriosAceitacao)
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome  não deve ser nulo ou vazio")
@@ -70,6 +74,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IsNotNullOrEmpty(narrativa, nameof(Narrativa), "Narrativa não deve ser nula ou vazia")
                 .IsNotNullOrEmpty(objetivo, nameof(Objetivo), "Objetivo não deve ser nulo ou vazio")
                 .IsNotEmpty(epicoId, nameof(EpicoId), "Id do épico não deve ser vazio")
+                .IsValidArray(criteriosAceitacao, nameof(CriteriosAceitacao))
                 );
 
             Nome = nome;
@@ -77,6 +82,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Narrativa = narrativa;
             Objetivo = objetivo;
             EpicoId = epicoId;
+            CriteriosAceitacao = criteriosAceitacao;
         }
     }
 }
