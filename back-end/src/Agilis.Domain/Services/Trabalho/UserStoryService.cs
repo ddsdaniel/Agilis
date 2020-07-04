@@ -56,7 +56,14 @@ namespace Agilis.Domain.Services.Trabalho
 
             return _unitOfWork.UserStoryRepository
                     .AsQueryable()
-                    .Where(us => epicosId.Contains(us.EpicoId) && us.Nome.ToLower().Contains(filtro.ToLower()))
+                    .Where(us => epicosId.Contains(us.EpicoId) && 
+                           (
+                                us.Nome.ToLower().Contains(filtro.ToLower()) ||
+                                us.Narrativa.ToLower().Contains(filtro.ToLower()) ||
+                                us.Ator.Nome.ToLower().Contains(filtro.ToLower()) ||
+                                us.Objetivo.ToLower().Contains(filtro.ToLower())
+                           )
+                     )
                     .OrderBy(us => us.Nome)
                     .ToList();
         }
