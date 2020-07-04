@@ -7,4 +7,5 @@ export interface UserStory {
   narrativa: string;
   objetivo: string;
   historia: string;
+  epicoId: string;
 }

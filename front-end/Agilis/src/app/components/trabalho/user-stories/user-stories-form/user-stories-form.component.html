@@ -1,45 +1,31 @@
-<form fxLayout="column" class="mt-5">
-  <mat-card fxFlexAlign="center">
+﻿<h1>UserStory {{entidade.nome}}</h1>
 
-    <mat-card-header>
-      <mat-card-title>Cadastro de User Stories</mat-card-title>
-    </mat-card-header>
+<mat-tab-group>
 
-    <mat-card-content>
+  <!-- Dados Principais -->
+  <mat-tab label="Dados Principais">
 
-      <mat-form-field class="full-width mt-4">
+    <div fxLayout="row" class="mt-4">
+
+      <mat-form-field fxFlex="30">
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="userStory.nome" placeholder="Nome" name="nome" type="text" required >
+        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Eu, enquanto</mat-label>
-        <mat-select [(ngModel)]="userStory.ator.id" name="ator">
-          <mat-option *ngFor="let ator of atores | async" [value]="ator.id">
-            {{ator.nome}}
-          </mat-option>
+      <mat-form-field class="ml-3" fxFlex="30">
+        <mat-label>Épico</mat-label>
+        <mat-select [(ngModel)]="entidade.epicoId" required>
+          <mat-option *ngFor="let epico of epicos" [value]="epico.id">{{epico.nome}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <mat-label>gostaria</mat-label>
-        <input [(ngModel)]="userStory.narrativa" matInput placeholder="Narrativa" name="narrativa"
-          type="text" required>
-      </mat-form-field>
+    </div>
 
-      <mat-form-field class="full-width">
-        <mat-label>para</mat-label>
-        <input [(ngModel)]="userStory.objetivo" matInput placeholder="Objetivo" name="objetivo"
-          type="text" required>
-      </mat-form-field>
-
-    </mat-card-content>
-
-    <mat-card-actions>
+    <div class="mb-1">
       <button mat-raised-button color="accent" (click)="salvar()">Salvar</button>
-      <button mat-raised-button (click)="cancelar()">Cancelar</button>
-    </mat-card-actions>
+      <button mat-raised-button (click)="cancelar()" class="ml-2">Cancelar</button>
+    </div>
 
-  </mat-card>
+  </mat-tab>
 
-</form>
+</mat-tab-group>

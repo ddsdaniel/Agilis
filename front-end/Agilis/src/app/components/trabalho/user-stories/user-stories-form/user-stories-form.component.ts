@@ -1,80 +1,58 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
-import { Ator } from 'src/app/models/pessoas/ator';
+import { Epico } from 'src/app/models/trabalho/epicos/epico';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
-import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
-import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
+import { EpicosApiService } from 'src/app/services/api/trabalho/epicos-api.service';
+import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 
 @Component({
   selector: 'app-user-stories-form',
   templateUrl: './user-stories-form.component.html',
   styleUrls: ['./user-stories-form.component.scss']
 })
-export class UserStoriesFormComponent implements OnInit {
+export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
 
-  userStory: UserStory;
-  atores: Observable<Ator[]>;
+  epicos: Epico[];
+  userStoryApiService: UserStoriesApiService;
 
   constructor(
-    private router: Router,
-    private userStoryApiService: UserStoryApiService,
-    private snackBar: MatSnackBar,
-    private atorApiService: AtoresApiService,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+    router: Router,
+    userStoryApiService: UserStoriesApiService,
+    snackBar: MatSnackBar,
+    protected activatedRoute: ActivatedRoute,
+    private epicosApiService: EpicosApiService,
+  ) {
+    super(router, userStoryApiService, snackBar, activatedRoute, 'user-stories');
+    this.userStoryApiService = userStoryApiService;
+    this.carregarEpicos();
+    this.sugerirNovo();
+  }
 
-  ngOnInit() {
+  carregarEpicos() {
+    this.epicosApiService.obterTodos()
+      .subscribe(
+        (epicos) => this.epicos = epicos,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
 
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    //this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
-
-    this.userStory = {
-      id: id ? id : '',
+  sugerirNovo() {
+    this.entidade = {
+      id: constantes.newGuid,
       nome: '',
+      epicoId: constantes.newGuid,
       ator: {
-        id: '',
+        id: constantes.newGuid,
         nome: '',
         produtoId: constantes.newGuid
       },
-      narrativa: '',
-      objetivo: '',
       historia: '',
+      narrativa: '',
+      objetivo: ''
     };
-
-    this.atores = this.atorApiService.obterTodos();
-    this.atores.subscribe(atores => this.userStory.ator.id = atores[0].id);
   }
-
-  salvar() {
-
-    // if (this.operacao === OperacaoFormCrud.adicionando) {
-    //   this.userStoryApiService.adicionar(this.userStory)
-    //     .subscribe(
-    //       (id: string) => this.router.navigateByUrl('user-stories'),
-    //       (error: HttpErrorResponse) => {
-    //         console.log(error);
-    //         this.snackBar.open(error.message);
-    //       }
-    //     );
-    // } else {
-      this.userStoryApiService.alterar(this.userStory.id, this.userStory)
-        .subscribe(
-          () => this.router.navigateByUrl('user-stories'),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-   // }
-  }
-
-  cancelar() {
-    // TODO: mater o estado da pesquisa
-    this.router.navigateByUrl('user-stories');
-  }
-
 }
