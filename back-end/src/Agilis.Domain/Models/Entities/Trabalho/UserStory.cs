@@ -1,9 +1,7 @@
-﻿using Agilis.Domain.Models.Entities.Pessoas;
-using Agilis.Domain.Models.ValueObjects;
+﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
@@ -20,8 +18,7 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// <summary>
         /// Persona para qual a história será útil
         /// </summary>
-        public Ator Ator { get; private set; }
-        public Produto Produto { get; private set; }
+        public AtorFK Ator { get; private set; }
 
         /// <summary>
         /// O que se deseja
@@ -39,16 +36,9 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         public string Historia => $"Eu, enquanto {Ator.Nome}, gostaria {Narrativa} para {Objetivo}";
 
         /// <summary>
-        /// Comentários da user story
+        /// Id do épico ao qual a user story pertence
         /// </summary>
-        public ICollection<Comentario> Comentarios { get; private set; }
-
-        /// <summary>
-        /// Milestone (opcional) da user story
-        /// </summary>
-        public Milestone Milestone { get; private set; }
-
-        //TODO: critérios de aceitação
+        public Guid EpicoId { get; set; }
 
         /// <summary>
         /// Construtor usado apenas para a serialização e desserialização
@@ -69,33 +59,23 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// <param name="comentarios">Comentários da user story</param>
         /// <param name="milestone">Milestone (opcional) da user story</param>
         public UserStory(string nome,
-                         Produto produto,
-                         Ator ator,
+                         AtorFK ator,
                          string narrativa,
                          string objetivo,
-                         ICollection<Comentario> comentarios,
-                         Milestone milestone)
+                         Guid epicoId)
         {
             AddNotifications(new Contract()
-                .IsNotNullOrEmpty(nome, nameof(Nome), "NOME_INVALIDA")
-                .IsNotNull(produto, nameof(Produto), "PRODUTO_INVALIDO")
-                .IfNotNull(produto, c => c.Join(produto))
-                .IsNotNull(ator, nameof(Ator), "ATOR_INVALIDO")
-                .IfNotNull(ator, c => c.Join(ator))
-                .IsNotNullOrEmpty(narrativa, nameof(Narrativa), "NARRATIVA_INVALIDA")
-                .IsNotNullOrEmpty(objetivo, nameof(Objetivo), "OBJETIVO_INVALIDO")
-                .IsNotNull(comentarios, nameof(Comentarios), "COMENTARIOS_INVALIDOS")
-                .IfNotNull(comentarios, c => c.Join(comentarios.ToArray()))
-                .IfNotNull(milestone, c => c.Join(milestone))                
+                .IsNotNullOrEmpty(nome, nameof(Nome), "Nome  não deve ser nulo ou vazio")
+                .IsNotNull(ator, nameof(Ator), "Ator não deve ser nulo")
+                .IsNotNullOrEmpty(narrativa, nameof(Narrativa), "Narrativa não deve ser nula ou vazia")
+                .IsNotNullOrEmpty(objetivo, nameof(Objetivo), "Objetivo não deve ser nulo ou vazio")
+                .IsNotEmpty(epicoId, nameof(EpicoId), "Id do épico não deve ser vazio")
                 );
 
             Nome = nome;
-            Produto = produto;
             Ator = ator;
             Narrativa = narrativa;
             Objetivo = objetivo;
-            Comentarios = comentarios;
-            Milestone = milestone;
         }
     }
 }

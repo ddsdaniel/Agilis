@@ -923,14 +923,9 @@
             Descrição no formato padrão de uma user story
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Comentarios">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.EpicoId">
             <summary>
-            Comentários da user story
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Milestone">
-            <summary>
-            Milestone (opcional) da user story
+            Id do épico ao qual a user story pertence
             </summary>
         </member>
     </members>
