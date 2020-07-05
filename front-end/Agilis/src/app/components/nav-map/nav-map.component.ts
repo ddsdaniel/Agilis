@@ -1,61 +1,10 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { constantes } from 'src/app/constants/constantes';
 import { EntidadeNodo } from 'src/app/models/entidade-nodo';
-
-const TREE_DATA: EntidadeNodo[] = [
-  {
-    id: constantes.newGuid,
-    nome: 'Fruit',
-    filhos: [
-      {
-        id: constantes.newGuid,
-        nome: 'Apple'
-      },
-      {
-        id: constantes.newGuid,
-        nome: 'Banana'
-      },
-      {
-        id: constantes.newGuid,
-        nome: 'Fruit loops'
-      },
-    ]
-  }, {
-    id: constantes.newGuid,
-    nome: 'Vegetables',
-    filhos: [
-      {
-        id: constantes.newGuid,
-        nome: 'Green',
-        filhos: [
-          {
-            id: constantes.newGuid,
-            nome: 'Broccoli'
-          },
-          {
-            id: constantes.newGuid,
-            nome: 'Brussels sprouts'
-          },
-        ]
-      }, {
-        id: constantes.newGuid,
-        nome: 'Orange',
-        filhos: [
-          {
-            id: constantes.newGuid,
-            nome: 'Pumpkins'
-          },
-          {
-            id: constantes.newGuid,
-            nome: 'Carrots'
-          },
-        ]
-      },
-    ]
-  },
-];
+import { NavigationMapApiService } from 'src/app/services/api/navigation-map-api.service';
 
 @Component({
   selector: 'app-nav-map',
@@ -67,13 +16,21 @@ export class NavMapComponent implements OnInit {
   treeControl = new NestedTreeControl<EntidadeNodo>(node => node.filhos);
   dataSource = new MatTreeNestedDataSource<EntidadeNodo>();
 
-  constructor() {
-    this.dataSource.data = TREE_DATA;
+  constructor(
+    private navigationMapApiService: NavigationMapApiService,
+    private snackBar: MatSnackBar,
+  ) {
+
   }
 
   hasChild = (_: number, node: EntidadeNodo) => !!node.filhos && node.filhos.length > 0;
 
   ngOnInit() {
+    this.navigationMapApiService.obterUm()
+      .subscribe(
+        (root) => this.dataSource.data = root.filhos,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
 }

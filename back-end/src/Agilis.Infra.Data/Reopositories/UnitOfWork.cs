@@ -35,7 +35,7 @@ namespace Agilis.Infra.Data.Repositories
             SprintRepository = new SprintRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);
             ReleaseRepository = new ReleaseRepository(database, _session);
-            ProdutoRepository = new ProdutoRepository(database, _session);
+            ProdutoRepository = new ProdutoRepository(database, TimeRepository, _session);
             TemaRepository = new TemaRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
             EpicoRepository = new EpicoRepository(database, _session);
