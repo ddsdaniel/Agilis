@@ -26,7 +26,7 @@ namespace Agilis.WebAPI.Configuration
                 c.SwaggerDoc("v1",
                      new OpenApiInfo()
                      {
-                         Title = "API - Agilis",
+                         Title = "API - Agilis Studio",
                          Description = "Planejamento, organização, controle e análise de tarefas sobre uma metodologia ágil",
                          Version = PlatformServices.Default.Application.ApplicationVersion,
                          Contact = new OpenApiContact() { Name = "Daniel Dorneles da Silva", Email = "dds.daniel@gmail.com" },

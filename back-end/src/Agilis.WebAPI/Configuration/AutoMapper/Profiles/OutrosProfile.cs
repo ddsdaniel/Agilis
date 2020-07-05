@@ -1,4 +1,5 @@
-﻿using Agilis.WebAPI.ViewModels;
+﻿using Agilis.Domain.Abstractions.Entities;
+using Agilis.WebAPI.ViewModels;
 using AutoMapper;
 using DDS.Domain.Core.Model.ValueObjects;
 
@@ -17,6 +18,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  );
 
             CreateMap<IntervaloDatas, IntervaloDatasViewModel>();
+
+            CreateMap<EntidadeNodo, EntidadeNodoViewModel>();
         }
     }
 }

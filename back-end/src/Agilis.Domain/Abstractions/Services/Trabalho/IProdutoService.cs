@@ -7,6 +7,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
     public interface IProdutoService : ICrudSeguroService<Produto>
     {
-        ICollection<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario);
+        IEnumerable<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario);
     }
 }

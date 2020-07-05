@@ -128,7 +128,7 @@
       }
     }
   },
-  "defaultProject": "Agilis",
+  "defaultProject": "Agilis Studio",
   "cli": {
     "analytics": false
   }

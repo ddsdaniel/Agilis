@@ -7,6 +7,6 @@ namespace Agilis.Domain.Abstractions.Services.Pessoas
 {
     public interface IAtorService : ICrudSeguroService<Ator>
     {
-        ICollection<Ator> Pesquisar(string filtro, Guid produtoId, IUsuario usuario);
+        IEnumerable<Ator> Pesquisar(string filtro, Guid produtoId, IUsuario usuario);
     }
 }

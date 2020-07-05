@@ -100,181 +100,23 @@
             <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline</param>
             <returns>app atualizado</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtoresController">
+        <member name="T:Agilis.WebAPI.Controllers.Trabalho.NavigationMapController">
             <summary>
-            Manutenção do repositório
+            Controller que provê os serviços de navegação entre os recursos da aplicação
             </summary>    
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.NavigationMapController.#ctor(AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.INavigationMapService)">
             <summary>
             Construtor com parâmetros injetados
             </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+            <param name="navigationMapService">Serviço de mapa de navegação do site, com os dados do usuário</param>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.ConsultarTodos">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.NavigationMapController.Get">
             <summary>
-            Consulta todos os atores do usuário logado
+            Obtém o mapa de navegação do site
             </summary>
-            <returns>Retorna todos os atores do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="produtoId">Filtra atores pelo id do produto</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
-            <summary>
-            Ordena pelo nome do ator
-            </summary>
-            <param name="lista">Lista de atores a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ConsultarTodos">
-            <summary>
-            Consulta todos os times do usuário logado
-            </summary>
-            <returns>Retorna todos os times do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
-            <summary>
-            Adiciona um usuário administrador ao time
-            </summary>
-            <param name="timeId"></param>
-            <param name="emailViewModel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(System.Guid,System.Guid)">
-            <summary>
-            Remove um administrador do time
-            </summary>
-            <param name="timeId"></param>
-            <param name="adminId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
-            <summary>
-            Adiciona um colaborador ao time
-            </summary>
-            <param name="timeId"></param>
-            <param name="emailViewModel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(System.Guid,System.Guid)">
-            <summary>
-            Remove um colaborador do time
-            </summary>
-            <param name="timeId"></param>
-            <param name="colabId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel})">
-            <summary>
-            Ordena pelo nome do time
-            </summary>
-            <param name="lista">Lista de times a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
-            <summary>
-            Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="usuarioService">Serviço para validação e manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
-            <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Post(Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel)">
-            <summary>
-            Realiza alguns procedimentos e validações com a senha antes de chamar o Post da classe base
-            </summary>
-            <param name="novoUsuarioViewModel">Dados do novo usuário</param>
-            <returns>Id do usuário recém cadastrado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)">
-            <summary>
-            Realiza a autenticação do usuário
-            </summary>
-            <param name="loginViewModel"></param>
-            <returns>Dados do usuário + token da autenticação</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.AlterarSenha(System.Guid,Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel)">
-            <summary>
-            Altera a senha do usuário do repositório
-            </summary>
-            <param name="id">Id da entidade que será alterada</param>
-            <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
-            <returns>OK (201)</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel})">
-            <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
-            </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.ConsultarTodos">
-            <summary>
-            Consulta todos os userStories do usuário logado
-            </summary>
-            <returns>Retorna todos os userStories do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="epicoId">Filtra userStories pelo id do [epico</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
-            <summary>
-            Ordena pelo nome do userStory
-            </summary>
-            <param name="lista">Lista de userStories a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
+            <returns>Nó raíz da estrutura em forma de árvore</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.EpicosController">
             <summary>
@@ -465,6 +307,182 @@
             Ordena pelo nome do tema
             </summary>
             <param name="lista">Lista de temas a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtoresController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IAtorService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.ConsultarTodos">
+            <summary>
+            Consulta todos os atores do usuário logado
+            </summary>
+            <returns>Retorna todos os atores do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="produtoId">Filtra atores pelo id do produto</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.AtoresController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.AtorViewModel})">
+            <summary>
+            Ordena pelo nome do ator
+            </summary>
+            <param name="lista">Lista de atores a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.TimesController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.ITimeService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ConsultarTodos">
+            <summary>
+            Consulta todos os times do usuário logado
+            </summary>
+            <returns>Retorna todos os times do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+            <summary>
+            Adiciona um usuário administrador ao time
+            </summary>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirAdmin(System.Guid,System.Guid)">
+            <summary>
+            Remove um administrador do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="adminId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+            <summary>
+            Adiciona um colaborador ao time
+            </summary>
+            <param name="timeId"></param>
+            <param name="emailViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.ExcluirColaborador(System.Guid,System.Guid)">
+            <summary>
+            Remove um colaborador do time
+            </summary>
+            <param name="timeId"></param>
+            <param name="colabId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Pesquisar(System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel})">
+            <summary>
+            Ordena pelo nome do time
+            </summary>
+            <param name="lista">Lista de times a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UsuariosController">
+            <summary>
+            Manutenção do repositório e serviços da conta, como autenticação, registro, troca de senha, etc.
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.#ctor(Agilis.Domain.Abstractions.Services.Pessoas.IUsuarioService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Services.Seguranca.ITokenService,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="usuarioService">Serviço para validação e manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="tokenService">Serviço que gera o token da autenticação do usuário</param>
+            <param name="httpContextAccessor">Usada para obter o usuário logado</param>        
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Post(Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel)">
+            <summary>
+            Realiza alguns procedimentos e validações com a senha antes de chamar o Post da classe base
+            </summary>
+            <param name="novoUsuarioViewModel">Dados do novo usuário</param>
+            <returns>Id do usuário recém cadastrado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Login(Agilis.WebAPI.ViewModels.Seguranca.LoginViewModel)">
+            <summary>
+            Realiza a autenticação do usuário
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns>Dados do usuário + token da autenticação</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.AlterarSenha(System.Guid,Agilis.WebAPI.ViewModels.Seguranca.AlteraSenhaViewModel)">
+            <summary>
+            Altera a senha do usuário do repositório
+            </summary>
+            <param name="id">Id da entidade que será alterada</param>
+            <param name="alteraSenhaViewModel">Dados para a alteração da senha</param>
+            <returns>OK (201)</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UsuariosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Pessoas.UsuarioConsultaViewModel})">
+            <summary>
+            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
+            </summary>
+            <param name="lista">Lista a ser ordenada</param>
+            <returns>Lista já ordenada</returns>
+        </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.ConsultarTodos">
+            <summary>
+            Consulta todos os userStories do usuário logado
+            </summary>
+            <returns>Retorna todos os userStories do usuário logado</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Pesquisar(System.String,System.String)">
+            <summary>
+            Pesquisa sobre os registros do repositório
+            </summary>
+            <param name="filtro">Filtro inserido pelo usuário</param>
+            <param name="epicoId">Filtra userStories pelo id do [epico</param>
+            <returns>Lista de registros correspondentes ao filtro</returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
+            <summary>
+            Ordena pelo nome do userStory
+            </summary>
+            <param name="lista">Lista de userStories a ser ordenada</param>
             <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">

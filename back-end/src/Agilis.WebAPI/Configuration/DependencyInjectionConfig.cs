@@ -23,6 +23,8 @@ using Agilis.Domain.Services.Pessoas;
 using System;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using DDS.Domain.Core.Model.ValueObjects;
+using Agilis.Domain.Abstractions.Services;
+using Agilis.Domain.Services;
 
 namespace Agilis.WebAPI.Configuration
 {
@@ -82,6 +84,9 @@ namespace Agilis.WebAPI.Configuration
 
             services.AddTransient<IEpicoService, EpicoService>();
             services.AddTransient<IEpicoRepository, EpicoRepository>();
+
+            //Outros
+            services.AddTransient<INavigationMapService, NavigationMapService>();
 
             //AppSettings
             services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));

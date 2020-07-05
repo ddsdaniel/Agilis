@@ -2,7 +2,6 @@
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
-using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
 using System;
 using System.Collections.Generic;
@@ -18,15 +17,10 @@ namespace Agilis.Domain.Services.Trabalho
         {
         }
 
-        public ICollection<Produto> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<Produto> ConsultarTodos(IUsuario usuario)
         {
-            var timesId = ObterTimesDoUsuario(usuario).ToList();
-
-            return _unitOfWork.ProdutoRepository
-                   .AsQueryable()
-                   .Where(p => timesId.Contains(p.TimeId))
-                   .OrderBy(t => t.Nome)
-                   .ToList();
+            var timesId = _unitOfWork.TimeRepository.ObterTimes(usuario).Select(t => t.Id).ToList();
+            return _unitOfWork.ProdutoRepository.ConsultarTodos(timesId);;
         }
 
         public override ICollection<Produto> Pesquisar(string filtro)
@@ -36,16 +30,9 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        private IQueryable<Guid> ObterTimesDoUsuario(IUsuario usuario)
+        public IEnumerable<Produto> Pesquisar(string filtro, IUsuario usuario)
         {
-            return _unitOfWork.TimeRepository
-                .ObterTimes(usuario)
-                .Select(t => t.Id);
-        }
-
-        public ICollection<Produto> Pesquisar(string filtro, IUsuario usuario)
-        {
-            var timesId = ObterTimesDoUsuario(usuario);
+            var timesId = _unitOfWork.TimeRepository.ObterTimes(usuario).Select(t => t.Id).ToList();
 
             return _unitOfWork.ProdutoRepository
                     .AsQueryable()
@@ -54,10 +41,10 @@ namespace Agilis.Domain.Services.Trabalho
                     .ToList();
         }
 
-        public ICollection<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario)
+        public IEnumerable<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario)
         {
             var timesId = timeId == Guid.Empty
-                ? ObterTimesDoUsuario(usuario).ToArray()
+                ? _unitOfWork.TimeRepository.ObterTimes(usuario).Select(t => t.Id).ToArray()
                 : new Guid[] { timeId };
 
             if (filtro == null)
