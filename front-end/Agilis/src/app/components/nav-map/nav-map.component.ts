@@ -13,15 +13,15 @@ import { NavigationMapApiService } from 'src/app/services/api/navigation-map-api
 })
 export class NavMapComponent implements OnInit {
 
-  treeControl = new NestedTreeControl<EntidadeNodo>(node => node.filhos);
-  dataSource = new MatTreeNestedDataSource<EntidadeNodo>();
-
   constructor(
     private navigationMapApiService: NavigationMapApiService,
     private snackBar: MatSnackBar,
   ) {
 
   }
+
+  treeControl = new NestedTreeControl<EntidadeNodo>(node => node.filhos);
+  dataSource = new MatTreeNestedDataSource<EntidadeNodo>();
 
   hasChild = (_: number, node: EntidadeNodo) => !!node.filhos && node.filhos.length > 0;
 

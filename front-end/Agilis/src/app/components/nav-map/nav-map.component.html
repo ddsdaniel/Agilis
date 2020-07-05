@@ -1,11 +1,12 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+<h1>Sitemap</h1>
+<mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      <a [routerLink]="['/' + node.rota, node.id]">{{node.nome}}</a>
-      <a class="add ml-3" *ngIf="node.rotaFilho" [routerLink]="['/' + node.rotaFilho + '/new']">+</a>
+      <a target="_blank" [routerLink]="['/' + node.rota, node.id]">{{node.nome}}</a>
+      <a target="_blank" class="add ml-3" *ngIf="node.rotaFilho" [title]="node.rotaFilho" [routerLink]="['/' + node.rotaFilho + '/new']">+</a>
     </li>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
@@ -18,8 +19,8 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </button>
-        <a [routerLink]="['/' + node.rota, node.id]">{{node.nome}}</a>
-        <a class="add ml-3" *ngIf="node.rotaFilho" [routerLink]="['/' + node.rotaFilho + '/new']">+</a>
+        <a target="_blank" [routerLink]="['/' + node.rota, node.id]">{{node.nome}}</a>
+        <a target="_blank" class="add ml-3" [title]="node.rotaFilho" *ngIf="node.rotaFilho" [routerLink]="['/' + node.rotaFilho + '/new']">+</a>
       </div>
       <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
         <ng-container matTreeNodeOutlet></ng-container>
