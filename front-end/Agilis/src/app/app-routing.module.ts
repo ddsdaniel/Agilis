@@ -18,6 +18,7 @@ import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { AutenticacaoGuard } from './guards/autenticacao.guard';
+import { NavMapComponent } from './components/nav-map/nav-map.component';
 
 const routes: Routes = [
 
@@ -46,6 +47,8 @@ const routes: Routes = [
   { path: 'user-stories', component: UserStoriesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'user-stories/new', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'user-stories/:id', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: 'map', component: NavMapComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'usuarios/new', component: UsuariosFormComponent },
   { path: 'login', component: LoginComponent },
