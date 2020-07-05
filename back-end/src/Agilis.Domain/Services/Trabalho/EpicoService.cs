@@ -18,7 +18,7 @@ namespace Agilis.Domain.Services.Trabalho
         {
         }
 
-        public ICollection<Epico> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<Epico> ConsultarTodos(IUsuario usuario)
         {
             var temasId = ObterTemasDoUsuario(usuario).ToList();
 
@@ -36,7 +36,7 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        public ICollection<Epico> Pesquisar(string filtro, IUsuario usuario)
+        public IEnumerable<Epico> Pesquisar(string filtro, IUsuario usuario)
         {
             var temasId = ObterTemasDoUsuario(usuario);
 
@@ -47,7 +47,7 @@ namespace Agilis.Domain.Services.Trabalho
                     .ToList();
         }
 
-        public ICollection<Epico> Pesquisar(string filtro, Guid temaId, IUsuario usuario)
+        public IEnumerable<Epico> Pesquisar(string filtro, Guid temaId, IUsuario usuario)
         {
             var temasId = temaId == Guid.Empty
                 ? ObterTemasDoUsuario(usuario)

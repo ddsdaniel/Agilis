@@ -18,7 +18,7 @@ namespace Agilis.Domain.Services.Trabalho
         {
         }
 
-        public ICollection<Tema> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<Tema> ConsultarTodos(IUsuario usuario)
         {
             var produtosId = ObterProdutosDoUsuario(usuario).ToList();
 
@@ -36,7 +36,7 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        public ICollection<Tema> Pesquisar(string filtro, IUsuario usuario)
+        public IEnumerable<Tema> Pesquisar(string filtro, IUsuario usuario)
         {
             var produtosId = ObterProdutosDoUsuario(usuario);
 

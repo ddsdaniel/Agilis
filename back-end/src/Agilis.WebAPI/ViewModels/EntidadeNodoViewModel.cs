@@ -8,6 +8,7 @@ namespace Agilis.WebAPI.ViewModels
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
+        public string Rota { get; set; }
         public List<EntidadeNodoViewModel> Filhos { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Agilis.Domain.Services.Pessoas
         {
         }
 
-        public ICollection<Ator> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<Ator> ConsultarTodos(IUsuario usuario)
         {
             var produtosId = ObterProdutosDoUsuario(usuario).ToList();
 
@@ -36,7 +36,7 @@ namespace Agilis.Domain.Services.Pessoas
                  .OrderBy(t => t.Nome)
                  .ToList();
 
-        public ICollection<Ator> Pesquisar(string filtro, IUsuario usuario)
+        public IEnumerable<Ator> Pesquisar(string filtro, IUsuario usuario)
         {
             var produtosId = ObterProdutosDoUsuario(usuario);
 
@@ -47,7 +47,7 @@ namespace Agilis.Domain.Services.Pessoas
                     .ToList();
         }
 
-        public ICollection<Ator> Pesquisar(string filtro, Guid produtoId, IUsuario usuario)
+        public IEnumerable<Ator> Pesquisar(string filtro, Guid produtoId, IUsuario usuario)
         {
             var produtosId = produtoId == Guid.Empty
                 ? ObterProdutosDoUsuario(usuario)

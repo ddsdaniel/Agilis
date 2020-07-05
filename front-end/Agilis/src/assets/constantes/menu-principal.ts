@@ -29,4 +29,8 @@ export const menuPrincipal: ItemMenu[] = [
     nome: 'User Stories',
     rota: '/user-stories'
   },
+  {
+    nome: 'Sitemap',
+    rota: '/map'
+  },
 ];

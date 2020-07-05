@@ -29,7 +29,7 @@ namespace Agilis.Domain.Services.Pessoas
                     .OrderBy(t => t.Nome)
                     .ToList();
 
-        public ICollection<Time> Pesquisar(string filtro, IUsuario usuario)
+        public IEnumerable<Time> Pesquisar(string filtro, IUsuario usuario)
             => _unitOfWork.TimeRepository
                     .ObterTimes(usuario)
                     .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
@@ -60,7 +60,7 @@ namespace Agilis.Domain.Services.Pessoas
             await base.Adicionar(time);
         }
 
-        public ICollection<Time> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<Time> ConsultarTodos(IUsuario usuario)
            => _unitOfWork.TimeRepository
                     .ObterTimes(usuario)
                     .OrderBy(t => t.Nome)

@@ -7,7 +7,7 @@ namespace Agilis.Domain.Abstractions.Services
 {
     public interface ICrudSeguroService<TEntity> : ICrudService<TEntity> where TEntity : Entity 
     {
-        ICollection<TEntity> ConsultarTodos(IUsuario usuario);
-        ICollection<TEntity> Pesquisar(string filtro, IUsuario usuario);
+        IEnumerable<TEntity> ConsultarTodos(IUsuario usuario);
+        IEnumerable<TEntity> Pesquisar(string filtro, IUsuario usuario);
     }
 }

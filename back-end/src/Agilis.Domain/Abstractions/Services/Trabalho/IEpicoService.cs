@@ -7,6 +7,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
     public interface IEpicoService : ICrudSeguroService<Epico>
     {
-        ICollection<Epico> Pesquisar(string filtro, Guid temaId, IUsuario usuario);
+        IEnumerable<Epico> Pesquisar(string filtro, Guid temaId, IUsuario usuario);
     }
 }
