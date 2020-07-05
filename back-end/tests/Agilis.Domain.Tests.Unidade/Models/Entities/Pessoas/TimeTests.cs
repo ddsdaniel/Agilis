@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
 {
@@ -30,7 +31,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             var time = new Time(nome: nome,
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioFK>(),
-                                administradores: new List<UsuarioFK> { new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco) }
+                                administradores: new List<UsuarioFK> { new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco) },
+                                produtos: new List<ProdutoFK>()
                                 );
 
             //Assert
@@ -44,7 +46,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas
             var time = new Time(nome: "Time 1",
                                 escopo: EscopoTime.Pessoal,
                                 colaboradores: new List<UsuarioFK>(),
-                                administradores: new List<UsuarioFK> { }
+                                administradores: new List<UsuarioFK> { },
+                                produtos: new List<ProdutoFK>()
                                 );
 
             //Assert

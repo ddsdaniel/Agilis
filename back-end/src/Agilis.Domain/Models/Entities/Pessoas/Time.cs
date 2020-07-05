@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
@@ -14,6 +15,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public EscopoTime Escopo { get; private set; }
         public IEnumerable<UsuarioFK> Colaboradores { get; private set; }
         public IEnumerable<UsuarioFK> Administradores { get; private set; }
+        public IEnumerable<ProdutoFK> Produtos { get; private set; }
 
         protected Time()
         {
@@ -23,12 +25,15 @@ namespace Agilis.Domain.Models.Entities.Pessoas
         public Time(string nome,
                     EscopoTime escopo,
                     IEnumerable<UsuarioFK> colaboradores,
-                    IEnumerable<UsuarioFK> administradores)
+                    IEnumerable<UsuarioFK> administradores,
+                    IEnumerable<ProdutoFK> produtos
+                    )
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotNull(colaboradores, nameof(colaboradores), "Lista de colaboradores não deve ser nula")
                 .IsNotNull(administradores, nameof(administradores), "Lista de colaboradores não deve ser nula")
+                .IsNotNull(produtos, nameof(Produtos), "Lista de produtos não deve ser nula")
                 );
 
             if (administradores != null)
@@ -61,6 +66,7 @@ namespace Agilis.Domain.Models.Entities.Pessoas
             Escopo = escopo;
             Administradores = administradores;
             Colaboradores = colaboradores;
+            Produtos = produtos;
         }
 
         internal void AdicionarAdmin(UsuarioFK admin)
@@ -122,6 +128,13 @@ namespace Agilis.Domain.Models.Entities.Pessoas
 
             Colaboradores = novaLista;
             ValidarColaboradorEAdmin();
+        }
+
+        public void AdicionarProduto(ProdutoFK produto)
+        {
+            var novaLista = Produtos.ToList();
+            novaLista.Add(produto);
+            Produtos = novaLista;
         }
 
         internal void ExcluirColaborador(Usuario colab)

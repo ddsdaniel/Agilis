@@ -48,7 +48,8 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
       nome: '',
       administradores: [],
       colaboradores: [],
-      escopo: EscopoTime.Colaborativo
+      escopo: EscopoTime.Colaborativo,
+      produtos: []
     };
   }
 

@@ -39,7 +39,8 @@ export class ProdutosComponent extends CrudComponent<Produto> {
             nome: 'Todos',
             administradores: [],
             colaboradores: [],
-            escopo: EscopoTime.Colaborativo
+            escopo: EscopoTime.Colaborativo,
+            produtos: []
           };
           times.insert(0, todos);
           this.times = times;

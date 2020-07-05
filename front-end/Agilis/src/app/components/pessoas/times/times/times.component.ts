@@ -49,6 +49,7 @@ export class TimesComponent extends CrudComponent<Time> {
             colaboradores: [],
             administradores: [admin],
             escopo: EscopoTime.Colaborativo,
+            produtos: []
           };
 
           this.timesApiService.adicionar(time)

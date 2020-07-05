@@ -79,6 +79,5 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
-
     }
 }

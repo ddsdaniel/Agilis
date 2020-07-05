@@ -7,8 +7,8 @@
 
     <mat-form-field class="half-width mt-4">
       <mat-label>Nome</mat-label>
-      <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome"
-        type="text" required>
+      <input [attr.disabled]="!podeEditar() ? '' : null" matInput [(ngModel)]="entidade.nome" placeholder="Nome"
+        name="nome" type="text" required>
     </mat-form-field>
 
     <div *ngIf="podeEditar()" class="mb-1">
@@ -44,7 +44,8 @@
   <mat-tab *ngIf="podeEditar()">
 
     <ng-template matTabLabel>
-      <span [matBadge]="entidade.colaboradores.length" matBadgeOverlap="false" matBadgeColor="accent">Colaboradores</span>
+      <span [matBadge]="entidade.colaboradores.length" matBadgeOverlap="false"
+        matBadgeColor="accent">Colaboradores</span>
     </ng-template>
 
     <div class="tab-container">
@@ -58,6 +59,27 @@
       <button mat-fab color="accent" title="Adicionar" (click)="abrirDialogoColaborador()">
         <mat-icon>add</mat-icon>
       </button>
+    </div>
+  </mat-tab>
+
+  <!-- Produtos -->
+  <mat-tab>
+
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.produtos.length" matBadgeOverlap="false" matBadgeColor="accent">Produtos</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let produto of entidade.produtos">
+          <div mat-line><a [routerLink]="['/produtos', produto.id]">{{produto.nome}}</a></div>
+        </mat-list-item>
+      </mat-list>
+      <a routerLink="/produtos/new">
+        <button mat-fab color="accent" title="Adicionar">
+          <mat-icon>add</mat-icon>
+        </button>
+      </a>
     </div>
   </mat-tab>
 
