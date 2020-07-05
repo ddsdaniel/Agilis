@@ -1,3 +1,13 @@
 ﻿.post-it {
   background-color: #ffffa5;
+  height: 180px;
+}
+
+mat-card-subtitle{
+  margin-bottom: 6px;
+}
+
+mat-card-actions {
+  position: absolute;
+  bottom: 12px;
 }
