@@ -1,4 +1,5 @@
 ﻿using Agilis.Domain.Enums;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.WebAPI.Abstractions.ViewModels;
 using System;
@@ -29,13 +30,16 @@ namespace Agilis.WebAPI.ViewModels.Pessoas
         /// <summary>
         /// Administradores do time
         /// </summary>
-        public IEnumerable<UsuarioBasicViewModel> Administradores { get; set; }
+        public IEnumerable<UsuarioFK> Administradores { get; set; }
 
         /// <summary>
         /// Colaboradores do time, exceto administradores
         /// </summary>
-        public IEnumerable<UsuarioBasicViewModel> Colaboradores { get; set; }
+        public IEnumerable<UsuarioFK> Colaboradores { get; set; }
 
+        /// <summary>
+        /// Lista de produtos do time
+        /// </summary>
         public IEnumerable<ProdutoFK> Produtos { get; set; }
     }
 }

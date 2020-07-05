@@ -362,7 +362,7 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um usuário administrador ao time
             </summary>
@@ -378,7 +378,7 @@
             <param name="adminId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um colaborador ao time
             </summary>
@@ -589,6 +589,11 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Colaboradores">
             <summary>
             Colaboradores do time, exceto administradores
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
+            <summary>
+            Lista de produtos do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">
