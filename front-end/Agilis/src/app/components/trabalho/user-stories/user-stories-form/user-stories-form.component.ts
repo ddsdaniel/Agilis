@@ -1,80 +1,102 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
 import { Ator } from 'src/app/models/pessoas/ator';
+import { Epico } from 'src/app/models/trabalho/epicos/epico';
+import { CriterioAceitacao } from 'src/app/models/trabalho/user-stories/criterio-aceitacao';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
-import { UserStoryApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
+import { EpicosApiService } from 'src/app/services/api/trabalho/epicos-api.service';
+import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
+import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 
 @Component({
   selector: 'app-user-stories-form',
   templateUrl: './user-stories-form.component.html',
   styleUrls: ['./user-stories-form.component.scss']
 })
-export class UserStoriesFormComponent implements OnInit {
+export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
 
-  userStory: UserStory;
-  atores: Observable<Ator[]>;
+  epicos: Epico[];
+  atores: Ator[];
+
+  userStoryApiService: UserStoriesApiService;
 
   constructor(
-    private router: Router,
-    private userStoryApiService: UserStoryApiService,
-    private snackBar: MatSnackBar,
-    private atorApiService: AtoresApiService,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+    router: Router,
+    userStoryApiService: UserStoriesApiService,
+    snackBar: MatSnackBar,
+    protected activatedRoute: ActivatedRoute,
+    private epicosApiService: EpicosApiService,
+    private atoresApiService: AtoresApiService,
+    private dialogoService: DialogoService,
+  ) {
+    super(router, userStoryApiService, snackBar, activatedRoute, 'user-stories');
+    this.userStoryApiService = userStoryApiService;
+    this.carregarEpicos();
+    this.carregarAtores();
+    this.sugerirNovo();
+  }
 
-  ngOnInit() {
+  carregarAtores() {
+    this.atoresApiService.obterTodos()
+      .subscribe(
+        (atores) => this.atores = atores,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
 
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    //this.operacao = id ? OperacaoFormCrud.alterando : OperacaoFormCrud.adicionando;
+  carregarEpicos() {
+    this.epicosApiService.obterTodos()
+      .subscribe(
+        (epicos) => this.epicos = epicos,
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
 
-    this.userStory = {
-      id: id ? id : '',
+  salvar(): void {
+    this.entidade.ator.nome = this.atores.find(a => a.id === this.entidade.ator.id).nome;
+    super.salvar();
+  }
+
+  sugerirNovo() {
+    this.entidade = {
+      id: constantes.newGuid,
       nome: '',
+      epicoId: constantes.newGuid,
       ator: {
-        id: '',
+        id: constantes.newGuid,
         nome: '',
-        produtoId: constantes.newGuid
       },
+      historia: '',
       narrativa: '',
       objetivo: '',
-      historia: '',
+      criteriosAceitacao: []
     };
-
-    this.atores = this.atorApiService.obterTodos();
-    this.atores.subscribe(atores => this.userStory.ator.id = atores[0].id);
   }
 
-  salvar() {
-
-    // if (this.operacao === OperacaoFormCrud.adicionando) {
-    //   this.userStoryApiService.adicionar(this.userStory)
-    //     .subscribe(
-    //       (id: string) => this.router.navigateByUrl('user-stories'),
-    //       (error: HttpErrorResponse) => {
-    //         console.log(error);
-    //         this.snackBar.open(error.message);
-    //       }
-    //     );
-    // } else {
-      this.userStoryApiService.alterar(this.userStory.id, this.userStory)
-        .subscribe(
-          () => this.router.navigateByUrl('user-stories'),
-          (error: HttpErrorResponse) => {
-            console.log(error);
-            this.snackBar.open(error.message);
-          }
-        );
-   // }
+  abrirDialogoCriterio() {
+    this.dialogoService.abrirTexto('Entre com o nome do critério', 'Nome do critério')
+      .subscribe(nome => {
+        if (nome) {
+          const criterio: CriterioAceitacao = {
+            nome
+          };
+          this.entidade.criteriosAceitacao.push(criterio);
+        }
+      });
   }
 
-  cancelar() {
-    // TODO: mater o estado da pesquisa
-    this.router.navigateByUrl('user-stories');
+  excluirCriterio(index: number) {
+    const excluido = this.entidade.criteriosAceitacao.removeAt<CriterioAceitacao>(index)[0];
+    const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+    snackBarRef.onAction().subscribe(() => {
+      this.entidade.criteriosAceitacao.insert(index, excluido);
+    });
   }
 
 }

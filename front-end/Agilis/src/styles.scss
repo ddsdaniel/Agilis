@@ -8,6 +8,7 @@
 @import "styles-theme.scss";
 @import "styles-margin.scss";
 @import "styles-padding.scss";
+@import "styles-ellipsis.scss";
 
 // specify theme class eg: <body class="styles-theme"> ... </body>
 .styles-theme {
@@ -65,3 +66,5 @@ mat-list-item mat-icon {
   height: 36px !important;
   margin-bottom: 20px;
 }
+
+

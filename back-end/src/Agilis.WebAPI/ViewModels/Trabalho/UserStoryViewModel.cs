@@ -1,5 +1,6 @@
-﻿using Agilis.WebAPI.ViewModels.Pessoas;
+﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using DDS.WebAPI.Abstractions.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
@@ -9,6 +10,8 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
     /// </summary>
     public class UserStoryViewModel : IViewModel
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         /// Nome curto da user story
         /// </summary>
@@ -17,8 +20,7 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// <summary>
         /// Persona para qual a história será útil
         /// </summary>
-        public AtorViewModel Ator { get;  set; }
-        public ProdutoViewModel Produto { get;  set; }
+        public AtorFK Ator { get;  set; }
 
         /// <summary>
         /// O que se deseja
@@ -36,13 +38,13 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Historia { get; set; }
 
         /// <summary>
-        /// Comentários da user story
+        /// Id do épico ao qual a user story pertence
         /// </summary>
-        public ICollection<ComentarioViewModel> Comentarios { get;  set; }
+        public Guid EpicoId { get; set; }
 
         /// <summary>
-        /// Milestone (opcional) da user story
+        /// Critérios de aceitação da user story
         /// </summary>
-        public MilestoneViewModel Milestone { get; private set; }
+        public IEnumerable<CriterioAceitacaoViewModel>  CriteriosAceitacao { get; set; }
     }
 }
