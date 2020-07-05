@@ -9,6 +9,7 @@ namespace Agilis.Domain.Abstractions.Entities
         public Guid Id { get; private set; }
         public string Nome { get; private set; }
         public string Rota { get; private set; }
+        public string RotaFilho { get; private set; }
         public IEnumerable<EntidadeNodo> Filhos { get; private set; }
 
         protected EntidadeNodo()
@@ -16,11 +17,12 @@ namespace Agilis.Domain.Abstractions.Entities
 
         }
 
-        public EntidadeNodo(Guid id, string nome, string rota)
+        public EntidadeNodo(Guid id, string nome, string rota, string rotaFilho)
         {
             Id = id;
             Nome = nome;
             Rota = rota;
+            RotaFilho = rotaFilho;
             Filhos = new List<EntidadeNodo>();
         }
 
