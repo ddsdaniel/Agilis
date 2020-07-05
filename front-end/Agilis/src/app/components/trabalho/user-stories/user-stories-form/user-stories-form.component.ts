@@ -59,7 +59,6 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
 
   salvar(): void {
     this.entidade.ator.nome = this.atores.find(a => a.id === this.entidade.ator.id).nome;
-    console.log(this.entidade);
     super.salvar();
   }
 

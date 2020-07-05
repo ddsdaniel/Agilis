@@ -30,10 +30,22 @@
 </button>
 
 <!-- Grade -->
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let userStory of lista; let i = index">
-    <mat-icon mat-list-icon title="Excluir" color="warn" (click)="excluir(i)">clear_forever</mat-icon>
-    <mat-icon mat-list-icon title="Editar" (click)="editar(userStory.id)">edit</mat-icon>
-    <div mat-line>{{userStory.historia}}</div>
-  </mat-list-item>
-</mat-list>
+<div fxLayout="row wrap" fxLayoutGap="1%">
+  <mat-card class="post-it mb-2" fxFlex="19" *ngFor="let userStory of lista; let i = index">
+    <mat-card-header>
+      <mat-card-title>{{userStory.nome}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{userStory.historia}}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="excluir(i)" color="warn">Excluir</button>
+      <button mat-button (click)="editar(userStory.id)">Editar</button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>
