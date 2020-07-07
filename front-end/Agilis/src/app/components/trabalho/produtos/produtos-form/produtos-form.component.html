@@ -12,7 +12,11 @@
         <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
 
-      <mat-form-field class="ml-3" fxFlex="30">
+    </div>
+
+    <div fxLayout="row">
+
+      <mat-form-field fxFlex="30">
         <mat-label>Time</mat-label>
         <mat-select [(ngModel)]="entidade.timeId" required>
           <mat-option *ngFor="let time of times" [value]="time.id">{{time.nome}}</mat-option>

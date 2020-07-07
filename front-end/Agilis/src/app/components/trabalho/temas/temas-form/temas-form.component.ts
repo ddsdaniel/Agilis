@@ -18,6 +18,7 @@ export class TemasFormComponent extends CrudFormComponent<Tema> {
 
   produtos: Produto[];
   temaApiService: TemasApiService;
+  sugestaoProdutoId: string = constantes.newGuid;
 
   constructor(
     router: Router,
@@ -27,9 +28,17 @@ export class TemasFormComponent extends CrudFormComponent<Tema> {
     private produtosApiService: ProdutosApiService,
   ) {
     super(router, temaApiService, snackBar, activatedRoute, 'temas');
+    this.recuperarQueryParams();
     this.temaApiService = temaApiService;
     this.carregarProdutos();
     this.sugerirNovo();
+  }
+
+  recuperarQueryParams() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        this.sugestaoProdutoId = params.produtoId;
+      });
   }
 
   carregarProdutos() {
@@ -44,7 +53,7 @@ export class TemasFormComponent extends CrudFormComponent<Tema> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      produtoId: constantes.newGuid
+      produtoId: this.sugestaoProdutoId
     };
   }
 }
