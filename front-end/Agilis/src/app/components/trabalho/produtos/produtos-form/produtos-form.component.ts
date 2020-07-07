@@ -18,6 +18,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
 
   times: Time[];
   produtoApiService: ProdutosApiService;
+  sugestaoTimeId: string = constantes.newGuid;
 
   constructor(
     router: Router,
@@ -27,9 +28,17 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
     private timesApiService: TimesApiService,
   ) {
     super(router, produtoApiService, snackBar, activatedRoute, 'produtos');
+    this.recuperarQueryParams();
     this.produtoApiService = produtoApiService;
     this.carregarTimes();
     this.sugerirNovo();
+  }
+
+  recuperarQueryParams() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        this.sugestaoTimeId = params.timeId;
+      });
   }
 
   carregarTimes() {
@@ -44,7 +53,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      timeId: constantes.newGuid
+      timeId: this.sugestaoTimeId
     };
   }
 }

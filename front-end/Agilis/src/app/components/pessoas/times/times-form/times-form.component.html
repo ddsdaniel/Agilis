@@ -75,7 +75,7 @@
           <div mat-line><a [routerLink]="['/produtos', produto.id]">{{produto.nome}}</a></div>
         </mat-list-item>
       </mat-list>
-      <a routerLink="/produtos/new">
+      <a routerLink="/produtos/new" [queryParams]="{ timeId: this.entidade.id}">
         <button mat-fab color="accent" title="Adicionar">
           <mat-icon>add</mat-icon>
         </button>
