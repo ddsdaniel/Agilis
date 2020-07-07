@@ -36,7 +36,9 @@ export class AtoresComponent extends CrudComponent<Ator> {
           const todos: Produto = {
             id: constantes.newGuid,
             nome: 'Todos',
-            timeId: constantes.newGuid
+            timeId: constantes.newGuid,
+            temas: [],
+            atores: [],
           };
           produtos.insert(0, todos);
           this.produtos = produtos;
