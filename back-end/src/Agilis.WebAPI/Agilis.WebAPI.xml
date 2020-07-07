@@ -851,6 +851,16 @@
             Id do time ao qual o produto pertence
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Temas">
+            <summary>
+            Lista de temas do produto
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Atores">
+            <summary>
+            Lista de atores do produto
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel">
             <summary>
             Representa uma release do time

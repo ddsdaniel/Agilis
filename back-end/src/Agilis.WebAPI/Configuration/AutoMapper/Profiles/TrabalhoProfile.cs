@@ -91,7 +91,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  .ConstructUsing((vm, context) =>
                     new Produto(
                         nome: vm.Nome,
-                        timeId: vm.TimeId
+                        timeId: vm.TimeId,
+                        temas: vm.Temas,
+                        atores: vm.Atores
                         )
                  );
 
