@@ -38,6 +38,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
     this.activatedRoute.queryParams
       .subscribe(params => {
         this.sugestaoTimeId = params.timeId;
+        super.rotaPesquisa = 'times/' + this.sugestaoTimeId;
       });
   }
 

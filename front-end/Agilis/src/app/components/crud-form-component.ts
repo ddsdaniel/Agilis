@@ -17,7 +17,7 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
     private apiService: CrudApiBaseService<TEntity>,
     protected snackBar: MatSnackBar,
     protected activatedRoute: ActivatedRoute,
-    private rotaPesquisa: string
+    protected rotaPesquisa: string
   ) { }
 
   ngOnInit() {

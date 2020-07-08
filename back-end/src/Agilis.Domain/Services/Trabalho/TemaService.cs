@@ -4,9 +4,11 @@ using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {
@@ -77,6 +79,21 @@ namespace Agilis.Domain.Services.Trabalho
                 .Select(p => p.Id)
                 .ToList();
             return produtosId;
+        }
+
+        public override async Task Adicionar(Tema tema)
+        {
+            await base.Adicionar(tema);
+            if (Valid)
+            {
+                var produto = await _unitOfWork.ProdutoRepository.ConsultarPorId(tema.ProdutoId);
+                var temaFK = new TemaFK(tema.Id, tema.Nome);
+                produto.AdicionarTema(temaFK);
+                if (produto.Valid)
+                    await _unitOfWork.ProdutoRepository.Atualizar(produto);
+                else
+                    AddNotifications(produto);
+            }
         }
     }
 }

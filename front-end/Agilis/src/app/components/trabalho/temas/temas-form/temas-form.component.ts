@@ -38,6 +38,7 @@ export class TemasFormComponent extends CrudFormComponent<Tema> {
     this.activatedRoute.queryParams
       .subscribe(params => {
         this.sugestaoProdutoId = params.produtoId;
+        super.rotaPesquisa = 'produtos/' + this.sugestaoProdutoId;
       });
   }
 

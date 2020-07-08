@@ -4,6 +4,7 @@ using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
 {
@@ -39,5 +40,19 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         }
 
         public override string ToString() => Nome;
+
+        internal void AdicionarTema(TemaFK temaFK)
+        {
+            var novaLista = Temas.ToList();
+            novaLista.Add(temaFK);
+            Temas = novaLista;
+        }
+
+        internal void AdicionarAtor(AtorFK atorFK)
+        {
+            var novaLista = Atores.ToList();
+            novaLista.Add(atorFK);
+            Atores = novaLista;
+        }
     }
 }
