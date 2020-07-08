@@ -36,7 +36,8 @@ export class EpicosComponent extends CrudComponent<Epico> {
           const todos: Tema = {
             id: constantes.newGuid,
             nome: 'Todos',
-            produtoId: constantes.newGuid
+            produtoId: constantes.newGuid,
+            epicos: []
           };
           temas.insert(0, todos);
           this.temas = temas;

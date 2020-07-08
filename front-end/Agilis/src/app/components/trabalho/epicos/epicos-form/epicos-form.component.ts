@@ -18,6 +18,7 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> {
 
   temas: Tema[];
   epicoApiService: EpicosApiService;
+  sugestaoTemaId: string = constantes.newGuid;
 
   constructor(
     router: Router,
@@ -28,8 +29,19 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> {
   ) {
     super(router, epicoApiService, snackBar, activatedRoute, 'epicos');
     this.epicoApiService = epicoApiService;
+    this.recuperarQueryParams();
     this.carregarTemas();
     this.sugerirNovo();
+  }
+
+  recuperarQueryParams() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        if (params.temaId) {
+          this.sugestaoTemaId = params.temaId;
+          super.rotaPesquisa = 'temas/' + this.sugestaoTemaId;
+        }
+      });
   }
 
   carregarTemas() {
@@ -44,7 +56,7 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      temaId: constantes.newGuid
+      temaId: this.sugestaoTemaId
     };
   }
 }

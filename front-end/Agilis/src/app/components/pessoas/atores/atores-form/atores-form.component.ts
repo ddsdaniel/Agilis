@@ -37,8 +37,10 @@ export class AtoresFormComponent extends CrudFormComponent<Ator> {
   recuperarQueryParams() {
     this.activatedRoute.queryParams
       .subscribe(params => {
-        this.sugestaoProdutoId = params.produtoId;
-        super.rotaPesquisa = 'produtos/' + this.sugestaoProdutoId;
+        if (params.produtoId) {
+          this.sugestaoProdutoId = params.produtoId;
+          super.rotaPesquisa = 'produtos/' + this.sugestaoProdutoId;
+        }
       });
   }
 

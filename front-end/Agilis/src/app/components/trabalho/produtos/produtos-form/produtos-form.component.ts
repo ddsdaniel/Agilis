@@ -37,8 +37,10 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
   recuperarQueryParams() {
     this.activatedRoute.queryParams
       .subscribe(params => {
-        this.sugestaoTimeId = params.timeId;
-        super.rotaPesquisa = 'times/' + this.sugestaoTimeId;
+        if (params.timeId) {
+          this.sugestaoTimeId = params.timeId;
+          super.rotaPesquisa = 'times/' + this.sugestaoTimeId;
+        }
       });
   }
 

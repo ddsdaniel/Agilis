@@ -80,7 +80,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  .ConstructUsing((vm, context) =>
                     new Tema(
                         nome: vm.Nome,
-                        produtoId: vm.ProdutoId
+                        produtoId: vm.ProdutoId,
+                        epicos: vm.Epicos
                         )
                  );
 

@@ -32,4 +32,25 @@
 
   </mat-tab>
 
+  <!-- Épicos -->
+  <mat-tab>
+
+    <ng-template matTabLabel>
+      <span [matBadge]="entidade.epicos.length" matBadgeOverlap="false" matBadgeColor="accent">Épicos</span>
+    </ng-template>
+
+    <div class="tab-container">
+      <mat-list>
+        <mat-list-item *ngFor="let epico of entidade.epicos">
+          <div mat-line><a [routerLink]="['/epicos', epico.id]">{{epico.nome}}</a></div>
+        </mat-list-item>
+      </mat-list>
+      <a routerLink="/epicos/new" [queryParams]="{ temaId: this.entidade.id}">
+        <button mat-fab color="accent" title="Adicionar">
+          <mat-icon>add</mat-icon>
+        </button>
+      </a>
+    </div>
+  </mat-tab>
+
 </mat-tab-group>

@@ -941,6 +941,11 @@
             Id do produto ao qual o tema pertence
             </summary>
         </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Epicos">
+            <summary>
+            Lista de épicos do tema
+            </summary>
+        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">
             <summary>
             Representa uma história do usuário, ou seja, uma funcionalidade que ele deseja

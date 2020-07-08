@@ -4,9 +4,11 @@ using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.Entities.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {
@@ -83,6 +85,21 @@ namespace Agilis.Domain.Services.Trabalho
                 .Select(p => p.Id)
                 .ToList();
             return temasId;
+        }
+
+        public override async Task Adicionar(Epico epico)
+        {
+            await base.Adicionar(epico);
+            if (Valid)
+            {
+                var tema = await _unitOfWork.TemaRepository.ConsultarPorId(epico.TemaId);
+                var epicoFK = new EpicoFK(epico.Id, epico.Nome);
+                tema.AdicionarEpico(epicoFK);
+                if (tema.Valid)
+                    await _unitOfWork.TemaRepository.Atualizar(tema);
+                else
+                    AddNotifications(tema);
+            }
         }
     }
 }
