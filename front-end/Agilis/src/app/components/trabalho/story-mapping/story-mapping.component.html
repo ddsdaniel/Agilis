@@ -1,35 +1,25 @@
-<!-- Temas -->
 <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div>
-    <div class="tema">Tema 1</div>
-    <div fxLayout="row" fxLayoutAlign="space-around start">
-      <div cdkDropListGroup>
-        <div class="epico">Epico 1</div>
+  <div *ngFor="let tema of temas">
 
-        <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="todo"
+    <!-- Temas -->
+    <div class="tema">{{tema.nome}}</div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around start">
+      <div *ngFor="let epico of tema.epicos" cdkDropListGroup>
+
+        <!-- Epicos -->
+        <div class="epico">{{epico.nome}}</div>
+
+        <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="epico.userStories"
           (cdkDropListDropped)="drop($event)" class="example-list">
 
-          <div class="example-box us" cdkDrag *ngFor="let item of todo">{{item}}</div>
+          <!-- US -->
+          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories">{{us.nome}}</div>
 
         </div>
       </div>
-      <div>
-        <div class="epico">Epico 2</div>
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div class="us">US 4</div>
-          <div class="us">US 5</div>
-        </div>
-      </div>
-      <div>
-        <div class="epico">Epico 3</div>
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div class="us">US 6</div>
-          <div class="us">US 7</div>
-          <div class="us">US 8</div>
-          <div class="us">US 9</div>
-        </div>
-      </div>
+
     </div>
   </div>
-  <div>Tema 2</div>
+
 </div>

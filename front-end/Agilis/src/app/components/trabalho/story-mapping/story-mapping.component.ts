@@ -1,5 +1,6 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { TemaSM } from 'src/app/models/trabalho/stories-mapping/tema-sm';
 
 @Component({
   selector: 'app-story-mapping',
@@ -8,19 +9,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoryMappingComponent implements OnInit {
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
+  temas: TemaSM[] = [
+    {
+      nome: 'Estoque',
+      epicos: [
+        {
+          nome: 'Cad. Produtos',
+          userStories: [
+            {
+              nome: 'Quero cadastrar produto',
+            },
+            {
+              nome: 'Quero alterar o preço',
+            },
+            {
+              nome: 'Excluir um produto',
+            }
+          ]
+        }
+      ]
+    },
+    {
+      nome: 'Fiscal',
+      epicos: [
+        {
+          nome: 'Apuração de Impostos',
+          userStories: [
+            {
+              nome: 'PIS',
+            },
+            {
+              nome: 'COFINS',
+            },
+            {
+              nome: 'ICMS',
+            }
+          ]
+        },
+        {
+          nome: 'SPED',
+          userStories: [
+            {
+              nome: 'C100',
+            },
+            {
+              nome: 'C170',
+            },
+            {
+              nome: '0200',
+            }
+            ,
+            {
+              nome: 'D100',
+            }
+          ]
+        }
+      ]
+    }
   ];
 
   constructor() { }
