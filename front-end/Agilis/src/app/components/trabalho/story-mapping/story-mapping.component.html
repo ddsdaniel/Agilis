@@ -3,12 +3,14 @@
   <div>
     <div class="tema">Tema 1</div>
     <div fxLayout="row" fxLayoutAlign="space-around start">
-      <div>
+      <div cdkDropListGroup>
         <div class="epico">Epico 1</div>
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div class="us">US 1</div>
-          <div class="us">US 2</div>
-          <div class="us">US 3</div>
+
+        <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="todo"
+          (cdkDropListDropped)="drop($event)" class="example-list">
+
+          <div class="example-box us" cdkDrag *ngFor="let item of todo">{{item}}</div>
+
         </div>
       </div>
       <div>
