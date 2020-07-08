@@ -19,11 +19,14 @@ import { UserStoriesFormComponent } from './components/trabalho/user-stories/use
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
 import { AutenticacaoGuard } from './guards/autenticacao.guard';
 import { NavMapComponent } from './components/nav-map/nav-map.component';
+import { StoryMappingComponent } from './components/trabalho/story-mapping/story-mapping.component';
 
 const routes: Routes = [
 
   { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: 'story-mapping', component: StoryMappingComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'epicos', component: EpicosComponent, canActivate: [AutenticacaoGuard] },
   { path: 'epicos/new', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
