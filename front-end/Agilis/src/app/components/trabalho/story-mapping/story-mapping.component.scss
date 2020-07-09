@@ -1,3 +1,8 @@
+.story-mapping-container{
+  width: 100%;
+  overflow: auto;
+}
+
 .tema {
   margin-bottom: 1px;
   margin-right: 1px;
@@ -10,9 +15,12 @@
   margin-bottom: 1px;
   margin-right: 1px;
   border-radius: 4px;
-  background-color: #49cc90;
-
+  background-color: #90CAF9;
   padding: 20px 10px;
+}
+
+.epico-container{
+  width: 250px;
 }
 
 .us {
