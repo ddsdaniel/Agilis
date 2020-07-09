@@ -1,10 +1,11 @@
-<div fxLayout="row" fxLayoutAlign="space-around start">
+<h1>Story Mapping - Produto XYZ</h1>
+<div fxLayout="row" fxLayoutAlign="start start" class="mt-4">
   <div *ngFor="let tema of temas">
 
     <!-- Temas -->
     <div class="tema">{{tema.nome}}</div>
 
-    <div fxLayout="row" fxLayoutAlign="space-around start">
+    <div fxLayout="row" fxLayoutAlign="start start">
       <div *ngFor="let epico of tema.epicos" cdkDropListGroup>
 
         <!-- Epicos -->

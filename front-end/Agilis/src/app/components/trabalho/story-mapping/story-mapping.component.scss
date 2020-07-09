@@ -1,21 +1,23 @@
-div {
-  //border: 1px solid black;
-}
-
 .tema {
-  margin: 1px;
-  background-color: blue;
+  margin-bottom: 1px;
+  margin-right: 1px;
+  border-radius: 4px;
+  padding: 20px 10px;
+  background-color: #61affe;
 }
 
 .epico {
-  margin: 1px;
-  padding: 8px;
-  background-color: green;
+  margin-bottom: 1px;
+  margin-right: 1px;
+  border-radius: 4px;
+  background-color: #49cc90;
+
+  padding: 20px 10px;
 }
 
 .us {
   width: 100%;
-  background-color: yellow;
+  background-color: #ffffa5 !important;
 }
 
 .example-container {
