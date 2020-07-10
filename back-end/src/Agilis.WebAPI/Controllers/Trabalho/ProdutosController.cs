@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Threading.Tasks;
+using DDS.WebAPI.Models.ViewModels;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -79,5 +82,29 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
+
+        /// <summary>
+        /// Adiciona um tema ao story mapping do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="nomeContainer">Nome do tema a ser adicionado</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas")]
+        [ProducesResponseType(typeof(TemaViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarTema(Guid produtoId,
+                                                      StringContainerViewModel nomeContainer)
+        {
+            var tema = new Tema(Guid.NewGuid(), nomeContainer.Texto, new List<Epico>());
+            await _produtoService.AdicionarTema(produtoId, tema);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            var temaViewModel = _mapper.Map<TemaViewModel>(tema);
+
+            return Ok(temaViewModel);
+        }
     }
 }

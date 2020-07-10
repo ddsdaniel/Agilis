@@ -152,6 +152,14 @@
             <param name="lista">Lista de produtos a ser ordenada</param>
             <returns>Lista já ordenada pelo nome</returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarTema(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona um tema ao story mapping do produto
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="nomeContainer">Nome do tema a ser adicionado</param>
+            <returns></returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
             <summary>
             Manutenção do repositório

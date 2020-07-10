@@ -4,6 +4,7 @@ using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Agilis.Domain.Services.Trabalho
         public IEnumerable<Produto> ConsultarTodos(IUsuario usuario)
         {
             var timesId = _unitOfWork.TimeRepository.ObterTimes(usuario).Select(t => t.Id).ToList();
-            return _unitOfWork.ProdutoRepository.ConsultarTodos(timesId);;
+            return _unitOfWork.ProdutoRepository.ConsultarTodos(timesId); ;
         }
 
         public override ICollection<Produto> Pesquisar(string filtro)
@@ -75,5 +76,22 @@ namespace Agilis.Domain.Services.Trabalho
             }
         }
 
+        public async Task AdicionarTema(Guid produtoId, Tema tema)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+                AddNotification(nameof(produto), "Produto não encontrado");
+            else
+            {
+                produto.StoryMapping.AdicionarTema(tema);
+                if (produto.StoryMapping.Invalid)
+                    AddNotifications(produto.StoryMapping);
+                else
+                {
+                    await Atualizar(produto);
+                    await _unitOfWork.Commit();
+                }
+            }
+        }
     }
 }

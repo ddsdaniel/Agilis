@@ -13,6 +13,11 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
         public string Nome { get; private set; }
         public IEnumerable<UserStoryFK> UserStories { get; private set; }
 
+        protected Epico()
+        {
+
+        }
+
         public Epico(Guid id, string nome, IEnumerable<UserStoryFK> userStories)
         {
             AddNotifications(new Contract()

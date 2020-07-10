@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'times', component: TimesComponent, canActivate: [AutenticacaoGuard] },
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
 
-  { path: 'story-mapping', component: StoryMappingComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'story-mapping/:produtoId', component: StoryMappingComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'atores', component: AtoresComponent, canActivate: [AutenticacaoGuard] },
   { path: 'atores/new', component: AtoresFormComponent, canActivate: [AutenticacaoGuard] },

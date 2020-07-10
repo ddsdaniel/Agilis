@@ -1,14 +1,13 @@
-<h1>Story Mapping - Produto XYZ</h1>
 <div fxLayout="row" fxLayoutAlign="start start" class="mt-4 story-mapping-container">
-  <div *ngFor="let tema of temas">
+  <div *ngFor="let tema of produto.storyMapping.temas">
 
     <!-- Temas -->
     <div class="tema">
       <span>{{tema.nome}}</span>
-      <div class="icone-na-direita">
-        <mat-icon mat-list-icon title="Adicionar Épico" (click)="editar(time.id)">add</mat-icon>
-        <mat-icon mat-list-icon title="Mais opções" (click)="editar(time.id)">more_horiz</mat-icon>
-      </div>
+      <span class="icone-acoes">
+        <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarTema()">add</mat-icon>
+        <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
+      </span>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start start">
@@ -17,9 +16,9 @@
         <!-- Epicos -->
         <div class="epico">
           <span>{{epico.nome}}</span>
-          <div class="icone-na-direita">
-            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory()">add</mat-icon>
-            <mat-icon mat-list-icon title="Mais opções" (click)="editar(time.id)">more_horiz</mat-icon>
+          <div class="icone-acoes">
+            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarTema()">add</mat-icon>
+            <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
           </div>
         </div>
 
@@ -34,7 +33,7 @@
     </div>
   </div>
 
-  <button mat-fab color="accent" title="Adicionar tema" (click)="adicionar()">
+  <button mat-fab color="accent" title="Adicionar tema" (click)="adicionarTema()">
     <mat-icon>add</mat-icon>
   </button>
 

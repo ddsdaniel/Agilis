@@ -6,10 +6,6 @@ export const menuPrincipal: ItemMenu[] = [
     rota: '/login'
   },
   {
-    nome: 'Story Mapping',
-    rota: '/story-mapping'
-  },
-  {
     nome: 'Times',
     rota: '/times'
   },

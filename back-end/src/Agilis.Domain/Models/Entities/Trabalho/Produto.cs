@@ -1,4 +1,5 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
@@ -46,6 +47,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             var novaLista = Atores.ToList();
             novaLista.Add(atorFK);
             Atores = novaLista;
-        }
+        }        
     }
 }

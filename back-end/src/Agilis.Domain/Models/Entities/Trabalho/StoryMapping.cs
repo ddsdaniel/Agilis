@@ -12,6 +12,11 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     {
         public IEnumerable<Tema> Temas { get; private set; }
 
+        protected StoryMapping()
+        {
+
+        }
+
         public StoryMapping(IEnumerable<Tema> temas)
         {
             AddNotifications(new Contract()
@@ -27,6 +32,10 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 AddNotification(nameof(tema), "Tema não deve ser nulo");
             else if (tema.Invalid)
                 AddNotifications(tema);
+            else if (Temas.Any(t => t.Nome.ToLower().Equals(tema.Nome.ToLower())))
+                AddNotification(nameof(tema), "Já existe um tema com este nome");
+            else if (Temas.Any(t => t.Id.Equals(tema.Id)))
+                AddNotification(nameof(tema), "Já existe um tema com este id");
             else
             {
                 var novaLista = Temas.ToList();

@@ -13,6 +13,11 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
         public string Nome { get; private set; }
         public IEnumerable<Epico> Epicos { get; private set; }
 
+        protected Tema()
+        {
+
+        }
+
         public Tema(Guid id, string nome, IEnumerable<Epico> epicos)
         {
             AddNotifications(new Contract()

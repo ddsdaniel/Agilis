@@ -9,7 +9,6 @@
   border-radius: 4px;
   padding: 20px 10px;
   background-color: #61affe;
-  position: relative; //para que o icone fique na direita
 }
 
 .epico {
@@ -18,7 +17,6 @@
   border-radius: 4px;
   background-color: #90caf9;
   padding: 20px 10px;
-  position: relative; //para que o icone fique na direita
 }
 
 .epico-container {
@@ -30,11 +28,10 @@
   background-color: #ffffa5 !important;
 }
 
-.icone-na-direita {
-  position: absolute;
-  color: #616161;
-  top: 0px;
-  right: 0px;
+.icone-acoes {
+  color: #424242;
+  vertical-align: middle;
+  margin-left: 10px;
   cursor: pointer;
 }
 
