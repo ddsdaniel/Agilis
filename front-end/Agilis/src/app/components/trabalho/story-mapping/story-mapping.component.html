@@ -3,24 +3,39 @@
   <div *ngFor="let tema of temas">
 
     <!-- Temas -->
-    <div class="tema">{{tema.nome}}</div>
+    <div class="tema">
+      <span>{{tema.nome}}</span>
+      <div class="icone-na-direita">
+        <mat-icon mat-list-icon title="Adicionar Épico" (click)="editar(time.id)">add</mat-icon>
+        <mat-icon mat-list-icon title="Mais opções" (click)="editar(time.id)">more_horiz</mat-icon>
+      </div>
+    </div>
 
     <div fxLayout="row" fxLayoutAlign="start start">
       <div class="epico-container" *ngFor="let epico of tema.epicos" cdkDropListGroup>
 
         <!-- Epicos -->
-        <div class="epico">{{epico.nome}}</div>
+        <div class="epico">
+          <span>{{epico.nome}}</span>
+          <div class="icone-na-direita">
+            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory()">add</mat-icon>
+            <mat-icon mat-list-icon title="Mais opções" (click)="editar(time.id)">more_horiz</mat-icon>
+          </div>
+        </div>
 
         <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="epico.userStories"
           (cdkDropListDropped)="drop($event)" class="example-list">
 
           <!-- US -->
           <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories">{{us.nome}}</div>
-
         </div>
       </div>
 
     </div>
   </div>
+
+  <button mat-fab color="accent" title="Adicionar tema" (click)="adicionar()">
+    <mat-icon>add</mat-icon>
+  </button>
 
 </div>

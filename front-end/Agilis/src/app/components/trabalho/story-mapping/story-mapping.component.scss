@@ -1,4 +1,4 @@
-.story-mapping-container{
+.story-mapping-container {
   width: 100%;
   overflow: auto;
 }
@@ -9,23 +9,33 @@
   border-radius: 4px;
   padding: 20px 10px;
   background-color: #61affe;
+  position: relative; //para que o icone fique na direita
 }
 
 .epico {
   margin-bottom: 1px;
   margin-right: 1px;
   border-radius: 4px;
-  background-color: #90CAF9;
+  background-color: #90caf9;
   padding: 20px 10px;
+  position: relative; //para que o icone fique na direita
 }
 
-.epico-container{
+.epico-container {
   width: 250px;
 }
 
 .us {
   width: 100%;
   background-color: #ffffa5 !important;
+}
+
+.icone-na-direita {
+  position: absolute;
+  color: #616161;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
 }
 
 .example-container {
