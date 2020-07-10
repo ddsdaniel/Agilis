@@ -1,9 +1,9 @@
 import { Entidade } from '../../entidade';
 import { AtorFK } from '../../pessoas/ator-fk';
-import { TemaFK } from '../temas/tema-fk';
+import { StoryMapping } from '../stories-mapping/story-mapping';
 
 export interface Produto extends Entidade {
   timeId: string;
-  temas: TemaFK[];
   atores: AtorFK[];
+  storyMapping: StoryMapping;
 }

@@ -32,27 +32,6 @@
 
   </mat-tab>
 
-  <!-- Temas -->
-  <mat-tab>
-
-    <ng-template matTabLabel>
-      <span [matBadge]="entidade.temas.length" matBadgeOverlap="false" matBadgeColor="accent">Temas</span>
-    </ng-template>
-
-    <div class="tab-container">
-      <mat-list>
-        <mat-list-item *ngFor="let tema of entidade.temas">
-          <div mat-line><a [routerLink]="['/temas', tema.id]">{{tema.nome}}</a></div>
-        </mat-list-item>
-      </mat-list>
-      <a routerLink="/temas/new" [queryParams]="{ produtoId: this.entidade.id}">
-        <button mat-fab color="accent" title="Adicionar">
-          <mat-icon>add</mat-icon>
-        </button>
-      </a>
-    </div>
-  </mat-tab>
-
   <!-- Atores -->
   <mat-tab>
 

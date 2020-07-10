@@ -31,6 +31,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// </summary>
         public IEnumerable<AtorFK> Atores { get; set; }
 
-        public StoryMappingViewModel StoryMapping { get; private set; }
+        public StoryMappingViewModel StoryMapping { get; set; }
     }
 }

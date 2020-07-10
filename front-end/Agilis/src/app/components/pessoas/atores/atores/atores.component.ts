@@ -37,8 +37,10 @@ export class AtoresComponent extends CrudComponent<Ator> {
             id: constantes.newGuid,
             nome: 'Todos',
             timeId: constantes.newGuid,
-            temas: [],
             atores: [],
+            storyMapping: {
+              temas: []
+            }
           };
           produtos.insert(0, todos);
           this.produtos = produtos;

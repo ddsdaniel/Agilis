@@ -2,7 +2,6 @@
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
-using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
@@ -93,6 +92,15 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         timeId: vm.TimeId,
                         atores: vm.Atores,
                         storyMapping: context.Mapper.Map<StoryMapping>(vm.StoryMapping)
+                        )
+                 );
+
+            CreateMap<StoryMapping, StoryMappingViewModel>();
+
+            CreateMap<StoryMappingViewModel, StoryMapping>()
+                 .ConstructUsing((vm, context) =>
+                    new StoryMapping(
+                        temas: context.Mapper.Map<Tema[]>(vm.Temas)
                         )
                  );
 

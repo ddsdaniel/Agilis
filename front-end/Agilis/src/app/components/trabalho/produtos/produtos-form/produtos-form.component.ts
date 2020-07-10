@@ -57,8 +57,10 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> {
       id: constantes.newGuid,
       nome: '',
       timeId: this.sugestaoTimeId,
-      temas: [],
       atores: [],
+      storyMapping: {
+        temas: []
+      }
     };
   }
 }
