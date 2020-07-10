@@ -584,11 +584,6 @@
             Nome do epico
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel.TemaId">
-            <summary>
-            Id do tema ao qual o epico pertence
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel">
             <summary>
             Representa a fase de um fluxo
@@ -712,11 +707,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Nome">
             <summary>
             Nome do tema
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.ProdutoId">
-            <summary>
-            Id do produto ao qual o tema pertence
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Epicos">
