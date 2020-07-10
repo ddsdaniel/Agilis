@@ -24,7 +24,6 @@ import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-f
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
 import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-form/usuarios-form.component';
 import { LoginComponent } from './components/seguranca/login/login.component';
-import { ReleasesFormComponent } from './components/trabalho/releases/releases-form/releases-form.component';
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
 import { UserStoriesComponent } from './components/trabalho/user-stories/user-stories/user-stories.component';
@@ -52,7 +51,6 @@ export function InitApp(appLoadService: AppLoadService) {
     EpicosFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
-    ReleasesFormComponent,
     SprintsFormComponent,
     UserStoriesComponent,
     UserStoriesFormComponent,
