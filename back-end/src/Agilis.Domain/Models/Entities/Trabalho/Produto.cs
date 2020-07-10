@@ -1,5 +1,4 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using Flunt.Validations;
 using System;
@@ -12,8 +11,8 @@ namespace Agilis.Domain.Models.Entities.Trabalho
     {
         public Guid TimeId { get; set; }
         public string Nome { get; private set; }
-        public IEnumerable<TemaFK> Temas { get; private set; }
         public IEnumerable<AtorFK> Atores { get; private set; }
+        public StoryMapping StoryMapping { get; private set; }
 
         protected Produto()
         {
@@ -22,31 +21,25 @@ namespace Agilis.Domain.Models.Entities.Trabalho
 
         public Produto(string nome,
                        Guid timeId,
-                       IEnumerable<TemaFK> temas,
-                       IEnumerable<AtorFK> atores
+                       IEnumerable<AtorFK> atores,
+                       StoryMapping storyMapping
             )
         {
             AddNotifications(new Contract()
                 .IsNotNullOrEmpty(nome, nameof(Nome), "Nome inválido")
                 .IsNotEmpty(timeId, nameof(TimeId), "O id do time não pode ser vazio")
-                .IsNotNull(temas, nameof(Temas), "Lista de temas não deve ser nula")
                 .IsNotNull(atores, nameof(Atores), "Lista de atores não deve ser nula")
+                .IsNotNull(storyMapping, nameof(StoryMapping), "Story Mapping não deve ser nulo")
+                .IfNotNull(storyMapping, c => c.Join(storyMapping))
                 );
 
             Nome = nome;
             TimeId = timeId;
-            Temas = temas;
             Atores = atores;
+            StoryMapping = storyMapping;
         }
 
         public override string ToString() => Nome;
-
-        internal void AdicionarTema(TemaFK temaFK)
-        {
-            var novaLista = Temas.ToList();
-            novaLista.Add(temaFK);
-            Temas = novaLista;
-        }
 
         internal void AdicionarAtor(AtorFK atorFK)
         {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -28,8 +29,8 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
             //Arrange & Act
             var produto = new Produto(nome, 
                                       Guid.NewGuid(),
-                                      new List<TemaFK>(),
-                                      new List<AtorFK>()
+                                      new List<AtorFK>(),
+                                      new StoryMapping(new List<Tema>())
                                       );
 
             //Assert

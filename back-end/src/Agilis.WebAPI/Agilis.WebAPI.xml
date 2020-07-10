@@ -118,59 +118,6 @@
             </summary>
             <returns>Nó raíz da estrutura em forma de árvore</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.EpicosController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IEpicoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.ConsultarTodos">
-            <summary>
-            Consulta todos os epicos do usuário logado
-            </summary>
-            <returns>Retorna todos os epicos do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="temaId">Filtra epicos pelo id do tema</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel})">
-            <summary>
-            Ordena pelo nome do epico
-            </summary>
-            <param name="lista">Lista de epicos a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestonesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IMilestoneService,AutoMapper.IMapper)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
-            <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
-            </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
-        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
             <summary>
             Manutenção do repositório
@@ -205,57 +152,6 @@
             <param name="lista">Lista de produtos a ser ordenada</param>
             <returns>Lista já ordenada pelo nome</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="releaseService">Instância do Automapper</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarPorId(System.Guid)">
-            <summary>
-            Consulta uma release no repositório
-            </summary>
-            <param name="id">Id da release que está sendo consultada</param>
-            <returns>View model da release</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Renomeia a release
-            </summary>
-            <param name="timeId">Id do time</param>
-            <param name="releaseId">Id da release</param>
-            <param name="stringContainerViewModel">Novo nome da release</param>
-            <returns>Status200OK</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Adiciona um sprint ao release
-            </summary>
-            <param name="releaseId">Id da release em que o sprint será adicionado</param>
-            <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
-            <returns>Id e nome da sprint adicionada</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarFasePB(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
-            <summary>
-            Adiciona uma fase ao product backlog
-            </summary>
-            <param name="releaseId">Id da release em que o sprint será adicionado</param>
-            <param name="faseStringContainer">Nome da sprint a ser adicionada</param>
-            <returns>Id e nome da sprint adicionada</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
-            <summary>
-            Remove um sprint do release+
-            </summary>
-            <param name="releaseId"></param>
-            <param name="sprintId"></param>
-            <returns></returns>
-        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
             <summary>
             Manutenção do repositório
@@ -274,40 +170,6 @@
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.TemasController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ITemaService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.ConsultarTodos">
-            <summary>
-            Consulta todos os temas do usuário logado
-            </summary>
-            <returns>Retorna todos os temas do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="produtoId">Filtra temas pelo id do produto</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel})">
-            <summary>
-            Ordena pelo nome do tema
-            </summary>
-            <param name="lista">Lista de temas a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtoresController">
             <summary>
@@ -450,40 +312,6 @@
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.ConsultarTodos">
-            <summary>
-            Consulta todos os userStories do usuário logado
-            </summary>
-            <returns>Retorna todos os userStories do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="epicoId">Filtra userStories pelo id do [epico</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
-            <summary>
-            Ordena pelo nome do userStory
-            </summary>
-            <param name="lista">Lista de userStories a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
@@ -801,26 +629,6 @@
             Fases de uma jornada
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
-            <summary>
-            Marco histórico, ponto significativo na linha do tempo
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Id">
-            <summary>
-            Id do milestone
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Nome">
-            <summary>
-            Nome do Milestone
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Marco">
-            <summary>
-            Data do marco histórico
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel">
             <summary>
             Representa uma item do product backlog
@@ -851,39 +659,9 @@
             Id do time ao qual o produto pertence
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Temas">
-            <summary>
-            Lista de temas do produto
-            </summary>
-        </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Atores">
             <summary>
             Lista de atores do produto
-            </summary>
-        </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel">
-            <summary>
-            Representa uma release do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Id">
-            <summary>
-            Id da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Nome">
-            <summary>
-            Nome da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
-            <summary>
-            Sprints da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.ProductBacklog">
-            <summary>
-            Product Backlog da release
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">

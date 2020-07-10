@@ -30,15 +30,6 @@ namespace Agilis.Domain.Services
             var produtos = _unitOfWork.ProdutoRepository.ConsultarTodos(timesId).ToList();
             var produtosId = produtos.Select(p => p.Id);
 
-            var temas = _unitOfWork.TemaRepository.ConsultarTodos(produtosId).ToList();
-            var temasId = temas.Select(t => t.Id);
-
-            var epicos = _unitOfWork.EpicoRepository.ConsultarTodos(temasId).ToList();
-            var epicosId = epicos.Select(e => e.Id);
-
-            var userStories = _unitOfWork.UserStoryRepository.ConsultarTodas(epicosId).ToList();
-            var userStoriesId = userStories.Select(us => us.Id);
-
             foreach (var time in times)
             {
                 var timeNodo = new EntidadeNodo(time.Id, time.Nome, "times", "produtos");
@@ -50,22 +41,19 @@ namespace Agilis.Domain.Services
                     var produtoNodo = new EntidadeNodo(produto.Id, produto.Nome, "produtos", "temas");
                     timeNodo.AdicionarFilho(produtoNodo);
 
-                    var temasDoProduto = temas.Where(t => t.ProdutoId == produto.Id).ToList();
-                    foreach (var tema in temasDoProduto)
+                    foreach (var tema in produto.StoryMapping.Temas)
                     {
                         var temaNodo = new EntidadeNodo(tema.Id, tema.Nome, "temas", "epicos");
                         produtoNodo.AdicionarFilho(temaNodo);
 
-                        var epicosDoTema = epicos.Where(e => e.TemaId == tema.Id).ToList();
-                        foreach (var epico in epicosDoTema)
+                        foreach (var epico in tema.Epicos)
                         {
                             var epicoNodo = new EntidadeNodo(epico.Id, epico.Nome, "epicos", "user-stories");
                             temaNodo.AdicionarFilho(epicoNodo);
 
-                            var userStoriesDoEpico = userStories.Where(us => us.EpicoId == epico.Id);
-                            foreach (var userStory in userStoriesDoEpico)
+                            foreach (var userStory in epico.UserStories)
                             {
-                                var userStoryNodo = new EntidadeNodo(userStory.Id, userStory.Historia, "user-stories", "");
+                                var userStoryNodo = new EntidadeNodo(userStory.Id, userStory.Nome, "user-stories", "");
                                 epicoNodo.AdicionarFilho(userStoryNodo);
                             }
                         }

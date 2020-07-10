@@ -67,23 +67,10 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped(serviceProvider => ObterUsuarioLogado(serviceProvider));
 
             //Trabalho
-            services.AddTransient<IUserStoryService, UserStoryService>();
             services.AddTransient<IUserStoryRepository, UserStoryRepository>();
-
-            services.AddTransient<IMilestoneService, MilestoneService>();
-            services.AddTransient<IMilestoneRepository, MilestoneRepository>();
-
-            services.AddTransient<IReleaseService, ReleaseService>();
-            services.AddTransient<IReleaseRepository, ReleaseRepository>();
 
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
-
-            services.AddTransient<ITemaService, TemaService>();
-            services.AddTransient<ITemaRepository, TemaRepository>();
-
-            services.AddTransient<IEpicoService, EpicoService>();
-            services.AddTransient<IEpicoRepository, EpicoRepository>();
 
             //Outros
             services.AddTransient<INavigationMapService, NavigationMapService>();

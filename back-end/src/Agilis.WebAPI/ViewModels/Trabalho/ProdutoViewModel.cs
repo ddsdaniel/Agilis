@@ -27,13 +27,10 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public Guid TimeId { get; set; }
 
         /// <summary>
-        /// Lista de temas do produto
-        /// </summary>
-        public IEnumerable<TemaFK> Temas { get; set; }
-
-        /// <summary>
         /// Lista de atores do produto
         /// </summary>
         public IEnumerable<AtorFK> Atores { get; set; }
+
+        public StoryMappingViewModel StoryMapping { get; private set; }
     }
 }

@@ -25,9 +25,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<Comentario, ComentarioViewModel>()
                 .ReverseMap();
 
-            CreateMap<Milestone, MilestoneViewModel>()
-              .ReverseMap();
-
             CreateMap<CriterioAceitacao, CriterioAceitacaoViewModel>();
 
             CreateMap<CriterioAceitacaoViewModel, CriterioAceitacao>()
@@ -68,8 +65,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<EpicoViewModel, Epico>()
                  .ConstructUsing((vm, context) =>
                     new Epico(
+                        id: vm.Id,
                         nome: vm.Nome,
-                        temaId: vm.TemaId
+                        userStories: new List<UserStoryFK>()
                         )
                  );
 
@@ -79,9 +77,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<TemaViewModel, Tema>()
                  .ConstructUsing((vm, context) =>
                     new Tema(
+                        id: vm.Id,
                         nome: vm.Nome,
-                        produtoId: vm.ProdutoId,
-                        epicos: vm.Epicos
+                        epicos: context.Mapper.Map<Epico[]>(vm.Epicos)
                         )
                  );
 
@@ -93,8 +91,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                     new Produto(
                         nome: vm.Nome,
                         timeId: vm.TimeId,
-                        temas: vm.Temas,
-                        atores: vm.Atores
+                        atores: vm.Atores,
+                        storyMapping: context.Mapper.Map<StoryMapping>(vm.StoryMapping)
                         )
                  );
 
@@ -106,18 +104,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         posicao: vm.Posicao,
                         nome: vm.Nome,
                         fases: context.Mapper.Map<Fase[]>(vm.Fases)
-                        )
-                 );
-
-            //Releases
-            CreateMap<Release, ReleaseViewModel>();
-
-            CreateMap<ReleaseViewModel, Release>()
-                 .ConstructUsing((vm, context) =>
-                    new Release(
-                        nome: vm.Nome,
-                        sprints: context.Mapper.Map<SprintFK[]>(vm.Sprints),
-                        productBacklog: context.Mapper.Map<ProductBacklog>(vm.ProductBacklog)
                         )
                  );
 
