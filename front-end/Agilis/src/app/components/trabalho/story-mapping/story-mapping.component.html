@@ -1,3 +1,6 @@
+<mat-card *ngIf="produto.storyMapping.temas.length == 0" class="mt-4">
+  Clique no botão abaixo para começar adicionando um tema
+</mat-card>
 <div fxLayout="row" fxLayoutAlign="start start" class="mt-4 story-mapping-container">
   <div *ngFor="let tema of produto.storyMapping.temas">
 
@@ -6,7 +9,21 @@
       <span>{{tema.nome}}</span>
       <span class="icone-acoes">
         <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarEpico(tema.id)">add</mat-icon>
-        <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
+        <mat-icon [matMenuTriggerFor]="menuTema" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+        <mat-menu #menuTema="matMenu">
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Renomear</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>arrow_forward</mat-icon>
+            <span>Mover</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon color="warn">clear_forever</mat-icon>
+            <span>Excluir</span>
+          </button>
+        </mat-menu>
       </span>
     </div>
 
