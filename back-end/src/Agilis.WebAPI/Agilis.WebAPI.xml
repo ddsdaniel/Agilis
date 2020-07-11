@@ -160,6 +160,15 @@
             <param name="nomeContainer">Nome do tema a ser adicionado</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona um épico ao story mapping do produto
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="temaId">Id do tema em que o épico será adicionado</param>
+            <param name="nomeContainer">Nome do épico a ser adicionado</param>
+            <returns></returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
             <summary>
             Manutenção do repositório

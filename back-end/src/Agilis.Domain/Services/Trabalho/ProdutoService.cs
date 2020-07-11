@@ -93,5 +93,29 @@ namespace Agilis.Domain.Services.Trabalho
                 }
             }
         }
+
+        public async Task AdicionarEpico(Guid produtoId, Guid temaId, Epico epico)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+                AddNotification(nameof(produto), "Produto não encontrado");
+            else
+            {
+                var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+                if (tema == null)
+                    AddNotification(nameof(tema), "Tema não encontrado");
+                else
+                {
+                    tema.AdicionarEpico(epico);
+                    if (tema.Invalid)
+                        AddNotifications(tema);
+                    else
+                    {
+                        await Atualizar(produto);
+                        await _unitOfWork.Commit();
+                    }
+                }
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
     {
         IEnumerable<Produto> Pesquisar(string filtro, Guid timeId, IUsuario usuario);
         Task AdicionarTema(Guid produtoId, Tema tema);
+        Task AdicionarEpico(Guid produtoId, Guid temaId, Epico epico);
     }
 }

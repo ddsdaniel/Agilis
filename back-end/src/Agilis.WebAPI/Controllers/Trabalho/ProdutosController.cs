@@ -12,6 +12,7 @@ using System;
 using System.Threading.Tasks;
 using DDS.WebAPI.Models.ViewModels;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -105,6 +106,32 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             var temaViewModel = _mapper.Map<TemaViewModel>(tema);
 
             return Ok(temaViewModel);
+        }
+
+        /// <summary>
+        /// Adiciona um épico ao story mapping do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="temaId">Id do tema em que o épico será adicionado</param>
+        /// <param name="nomeContainer">Nome do épico a ser adicionado</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas/{temaId:guid}")]
+        [ProducesResponseType(typeof(EpicoViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarEpico(Guid produtoId,
+                                                       Guid temaId,
+                                                       StringContainerViewModel nomeContainer)
+        {
+            var epico = new Epico(Guid.NewGuid(), nomeContainer.Texto, new List<UserStoryFK>());
+            await _produtoService.AdicionarEpico(produtoId, temaId, epico);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            var epicoViewModel = _mapper.Map<EpicoViewModel>(epico);
+
+            return Ok(epicoViewModel);
         }
     }
 }

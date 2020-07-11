@@ -5,7 +5,7 @@
     <div class="tema">
       <span>{{tema.nome}}</span>
       <span class="icone-acoes">
-        <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarTema()">add</mat-icon>
+        <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarEpico(tema.id)">add</mat-icon>
         <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
       </span>
     </div>
@@ -16,10 +16,10 @@
         <!-- Epicos -->
         <div class="epico">
           <span>{{epico.nome}}</span>
-          <div class="icone-acoes">
-            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarTema()">add</mat-icon>
+          <span class="icone-acoes">
+            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarEpico(tema.id)">add</mat-icon>
             <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
-          </div>
+          </span>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="epico.userStories"

@@ -6,6 +6,7 @@ import { Produto } from 'src/app/models/trabalho/produtos/produto';
 import { Tema } from 'src/app/models/trabalho/temas/tema';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
+import { Epico } from 'src/app/models/trabalho/epicos/epico';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
 
   adicionarTema(produtoId: string, nome: string): Observable<Tema> {
     return super.post<StringContainer, Tema>({ texto: nome }, `${produtoId}/temas`);
+  }
+
+  adicionarEpico(produtoId: string, temaId: string, nome: string): Observable<Epico> {
+    return super.post<StringContainer, Epico>({ texto: nome }, `${produtoId}/temas/${temaId}`);
   }
 
 }

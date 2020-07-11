@@ -8,6 +8,7 @@ import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.s
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { ActivatedRoute } from '@angular/router';
 import { constantes } from 'src/app/constants/constantes';
+import { Epico } from 'src/app/models/trabalho/epicos/epico';
 
 @Component({
   selector: 'app-story-mapping',
@@ -41,7 +42,7 @@ export class StoryMappingComponent implements OnInit {
           .subscribe(
             (produto) => this.produto = produto,
             (error: HttpErrorResponse) => this.snackBar.open(error.message)
-        );
+          );
       }
     );
   }
@@ -58,17 +59,33 @@ export class StoryMappingComponent implements OnInit {
     }
   }
 
-  adicionarTema(){
+  adicionarTema() {
     this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema')
-    .subscribe(nome => {
-      if (nome) {
-        this.produtosApiService.adicionarTema(this.produto.id, nome)
-          .subscribe(
-            (novoTema: Tema) => this.produto.storyMapping.temas.push(novoTema),
-            (error: HttpErrorResponse) => this.snackBar.open(error.message)
-          );
-      }
-    });
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.adicionarTema(this.produto.id, nome)
+            .subscribe(
+              (novoTema: Tema) => this.produto.storyMapping.temas.push(novoTema),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
+
+  adicionarEpico(temaId: string) {
+    this.dialogoService.abrirTexto('Entre com o nome do épico', 'Nome do épico')
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.adicionarEpico(this.produto.id, temaId, nome)
+            .subscribe(
+              (novoEpico: Epico) => {
+                const tema = this.produto.storyMapping.temas.find(t => t.id === temaId);
+                tema.epicos.push(novoEpico);
+              },
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
   }
 
 }
