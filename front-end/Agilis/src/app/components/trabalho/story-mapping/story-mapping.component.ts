@@ -1,16 +1,16 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { constantes } from 'src/app/constants/constantes';
+import { OrigemDestino } from 'src/app/models/origem-destino';
 import { Epico } from 'src/app/models/trabalho/epicos/epico';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
 import { Tema } from 'src/app/models/trabalho/temas/tema';
 import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
 import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
-import { OrigemDestino } from 'src/app/models/origem-destino';
 
 @Component({
   selector: 'app-story-mapping',
@@ -49,6 +49,18 @@ export class StoryMappingComponent implements OnInit {
     );
   }
 
+  renomearTema(tema: Tema) {
+    this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema', tema.nome)
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.renomearTema(this.produto.id, this.produto.id, nome)
+            .subscribe(
+              () => { },
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
 
   drop(event: CdkDragDrop<UserStoryFK[]>) {
     if (event.previousContainer === event.container) {

@@ -11,7 +11,7 @@
         <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarEpico(tema.id)">add</mat-icon>
         <mat-icon [matMenuTriggerFor]="menuTema" mat-list-icon title="Mais opções">more_horiz</mat-icon>
         <mat-menu #menuTema="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="renomearTema(tema)">
             <mat-icon>edit</mat-icon>
             <span>Renomear</span>
           </button>

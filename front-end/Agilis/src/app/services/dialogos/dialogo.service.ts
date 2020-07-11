@@ -27,12 +27,12 @@ export class DialogoService {
     return dialogRef.afterClosed().pipe(take(1));
   }
 
-  abrirTexto(titulo: string, label: string): Observable<string> {
+  abrirTexto(titulo: string, label: string, valorDefault: string = ''): Observable<string> {
 
     const data: DialogoTexto = {
       titulo,
       label,
-      texto: ''
+      texto: valorDefault
     };
 
     const config = {
