@@ -89,24 +89,48 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Adiciona um tema ao story mapping do produto
         /// </summary>
         /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
-        /// <param name="nomeContainer">Nome do tema a ser adicionado</param>
+        /// <param name="temaViewModel">Tema a ser adicionado</param>
         /// <returns></returns>
         [HttpPost("{produtoId:guid}/temas")]
         [ProducesResponseType(typeof(TemaViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarTema(Guid produtoId,
-                                                      StringContainerViewModel nomeContainer)
+                                                      TemaViewModel temaViewModel)
         {
-            var tema = new Tema(Guid.NewGuid(), nomeContainer.Texto, new List<Epico>());
+            if (temaViewModel.Id == Guid.Empty)
+                temaViewModel.Id = Guid.NewGuid();
+
+            var tema = _mapper.Map<Tema>(temaViewModel);
             await _produtoService.AdicionarTema(produtoId, tema);
 
             if (_produtoService.Invalid)
                 return BadRequest(_produtoService.Notifications);
 
-            var temaViewModel = _mapper.Map<TemaViewModel>(tema);
+            temaViewModel = _mapper.Map<TemaViewModel>(tema);
 
             return Ok(temaViewModel);
+        }
+
+        /// <summary>
+        /// Remove um tema do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirTema(Guid produtoId,
+                                                     Guid temaId)
+        {
+            await _produtoService.ExcluirTema(produtoId, temaId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
         }
 
         /// <summary>

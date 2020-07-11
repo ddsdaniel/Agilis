@@ -47,6 +47,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             var novaLista = Atores.ToList();
             novaLista.Add(atorFK);
             Atores = novaLista;
-        }        
+        }       
     }
 }

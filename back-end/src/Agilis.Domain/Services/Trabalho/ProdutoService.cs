@@ -155,5 +155,34 @@ namespace Agilis.Domain.Services.Trabalho
                 }
             }
         }
+
+        public async Task ExcluirTema(Guid produtoId, Guid temaId)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id ==temaId);
+            if (tema == null)
+            {
+                AddNotification(nameof(tema), "Tema não encontrado");
+                return;
+            }
+
+            produto.StoryMapping.ExcluirTema(tema);
+            if (produto.StoryMapping.Invalid)
+            {
+                AddNotifications(produto.StoryMapping);
+                return;
+            }
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

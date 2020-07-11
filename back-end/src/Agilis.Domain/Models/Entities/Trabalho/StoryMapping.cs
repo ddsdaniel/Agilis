@@ -51,5 +51,13 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             else
                 Temas = Temas.ToList().Where(t => t.Id != id);
         }
+
+        internal void ExcluirTema(Tema tema)
+        {
+            if (!Temas.Any(t => t.Id == tema.Id))
+                AddNotification(nameof(tema.Id), "Tema não encontrado");
+            else
+                Temas = Temas.Where(t => t.Id != tema.Id);
+        }
     }
 }

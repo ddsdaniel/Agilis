@@ -13,5 +13,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         Task AdicionarTema(Guid produtoId, Tema tema);
         Task AdicionarEpico(Guid produtoId, Guid temaId, Epico epico);
         Task AdicionarUserStory(Guid produtoId, Guid temaId, Guid epicoId, UserStory userStory);
+        Task ExcluirTema(Guid produtoId, Guid temaId);
     }
 }

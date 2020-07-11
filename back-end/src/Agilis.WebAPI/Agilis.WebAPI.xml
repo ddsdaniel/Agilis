@@ -152,12 +152,20 @@
             <param name="lista">Lista de produtos a ser ordenada</param>
             <returns>Lista já ordenada pelo nome</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarTema(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarTema(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel)">
             <summary>
             Adiciona um tema ao story mapping do produto
             </summary>
             <param name="produtoId">Id do produto em que o tema será adicionado</param>
-            <param name="nomeContainer">Nome do tema a ser adicionado</param>
+            <param name="temaViewModel">Tema a ser adicionado</param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirTema(System.Guid,System.Guid)">
+            <summary>
+            Remove um tema do story mapping
+            </summary>
+            <param name="produtoId"></param>
+            <param name="temaId"></param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">

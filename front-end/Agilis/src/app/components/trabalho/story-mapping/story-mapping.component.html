@@ -2,7 +2,7 @@
   Clique no botão abaixo para começar adicionando um tema
 </mat-card>
 <div fxLayout="row" fxLayoutAlign="start start" class="mt-4 story-mapping-container">
-  <div *ngFor="let tema of produto.storyMapping.temas">
+  <div *ngFor="let tema of produto.storyMapping.temas; let temaIndex = index">
 
     <!-- Temas -->
     <div class="tema">
@@ -19,7 +19,7 @@
             <mat-icon>arrow_forward</mat-icon>
             <span>Mover</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="excluirTema(temaIndex)">
             <mat-icon color="warn">clear_forever</mat-icon>
             <span>Excluir</span>
           </button>

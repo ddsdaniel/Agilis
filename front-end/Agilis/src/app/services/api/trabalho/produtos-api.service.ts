@@ -21,8 +21,8 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
     return super.get<Produto[]>('pesquisa-crud', this.buildParams({ filtro, timeId }));
   }
 
-  adicionarTema(produtoId: string, nome: string): Observable<Tema> {
-    return super.post<StringContainer, Tema>({ texto: nome }, `${produtoId}/temas`);
+  adicionarTema(produtoId: string, tema: Tema): Observable<Tema> {
+    return super.post<Tema, Tema>(tema, `${produtoId}/temas`);
   }
 
   adicionarEpico(produtoId: string, temaId: string, nome: string): Observable<Epico> {
@@ -32,5 +32,9 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
   adicionarUserStory(produtoId: string, temaId: string, epicoId: string, nome: string): Observable<UserStoryFK> {
     const url = `${produtoId}/temas/${temaId}/epicos/${epicoId}/user-stories`;
     return super.post<StringContainer, UserStoryFK>({ texto: nome }, url);
+  }
+
+  excluirTema(produtoId: string, temaId: string): Observable<void> {
+    return super.delete(`${produtoId}/temas/${temaId}`);
   }
 }

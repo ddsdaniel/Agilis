@@ -64,7 +64,12 @@ export class StoryMappingComponent implements OnInit {
     this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema')
       .subscribe(nome => {
         if (nome) {
-          this.produtosApiService.adicionarTema(this.produto.id, nome)
+          const tema: Tema = {
+            id: constantes.newGuid,
+            nome,
+            epicos: []
+          };
+          this.produtosApiService.adicionarTema(this.produto.id, tema)
             .subscribe(
               (novoTema: Tema) => this.produto.storyMapping.temas.push(novoTema),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
@@ -104,6 +109,31 @@ export class StoryMappingComponent implements OnInit {
             );
         }
       });
+  }
+
+  excluirTema(index: number) {
+    const tema = this.produto.storyMapping.temas[index];
+
+    this.produtosApiService.excluirTema(this.produto.id, tema.id)
+      .subscribe(
+        () => {
+
+          this.produto.storyMapping.temas.removeAt(index);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            this.produtosApiService.adicionarTema(this.produto.id, tema)
+              .subscribe(
+                () => this.produto.storyMapping.temas.push(tema),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
 }
