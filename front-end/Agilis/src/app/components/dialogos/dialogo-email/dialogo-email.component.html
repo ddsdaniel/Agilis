@@ -2,10 +2,10 @@
 <div mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>E-mail</mat-label>
-    <input matInput class="full-width" type="email" [(ngModel)]="email.endereco" cdkFocusInitial>
+    <input matInput class="full-width" (keyup.enter)="salvar()"  type="email" [(ngModel)]="email.endereco" cdkFocusInitial>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="accent" [mat-dialog-close]="email">Confirmar</button>
+  <button mat-raised-button color="accent" (click)="salvar()">Confirmar</button>
   <button mat-raised-button (click)="cancelar()">Cancelar</button>
 </div>
