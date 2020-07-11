@@ -26,6 +26,7 @@ import { StoryMappingComponent } from './components/trabalho/story-mapping/story
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
+import { DialogoSelectComponent } from './components/dialogos/dialogo-select/dialogo-select.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -47,6 +48,7 @@ export function InitApp(appLoadService: AppLoadService) {
     DialogoTextoComponent,
     NavMapComponent,
     StoryMappingComponent,
+    DialogoSelectComponent,
   ],
   imports: [
     FormsModule,
@@ -61,12 +63,14 @@ export function InitApp(appLoadService: AppLoadService) {
   ],
   entryComponents: [
     DialogoEmailComponent,
-    DialogoTextoComponent
+    DialogoTextoComponent,
+    DialogoSelectComponent
   ],
   exports: [
     AngularMaterialModule,
     DialogoEmailComponent,
-    DialogoTextoComponent
+    DialogoTextoComponent,
+    DialogoSelectComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpsRequestInterceptorService, multi: true, },

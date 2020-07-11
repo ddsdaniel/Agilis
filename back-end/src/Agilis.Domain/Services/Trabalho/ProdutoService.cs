@@ -241,5 +241,24 @@ namespace Agilis.Domain.Services.Trabalho
                 }
             }
         }
+
+        public async Task MoverTema(Guid produtoId, Guid temaId, int novaPosicao)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            produto.StoryMapping.MoverTema(temaId, novaPosicao);
+            if (produto.StoryMapping.Invalid)
+                AddNotifications(produto.StoryMapping);
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

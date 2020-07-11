@@ -37,7 +37,7 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
   }
 
   renomearTema(produtoId: string, temaId: string, nome: string): Observable<void> {
-    return super.patch<StringContainer, void>({ texto: nome }, `${produtoId}/temas/${temaId}`);
+    return super.patch<StringContainer, void>({ texto: nome }, `${produtoId}/temas/${temaId}/renomear`);
   }
 
   excluirTema(produtoId: string, temaId: string): Observable<void> {
@@ -54,4 +54,10 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
     const url = `${produtoId}/temas/${temaId}/epicos/${epicoId}/user-stories/${userStoryId}/mover`;
     return super.patch<OrigemDestino, void>(origemDestino, url);
   }
+
+  moverTema(produtoId: string, temaId: string, origemDestino: OrigemDestino): Observable<void> {
+    const url = `${produtoId}/temas/${temaId}/mover`;
+    return super.patch<OrigemDestino, void>(origemDestino, url);
+  }
+
 }

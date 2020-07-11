@@ -171,6 +171,15 @@
             <param name="origemDestino">Contém o índice anterior e o novo</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverTema(System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
+            <summary>
+            Move um tema dentro do story mapping
+            </summary>
+            <param name="produtoId">Id do produto em que o tema se encontra</param>
+            <param name="temaId">Id do tema que será movido</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirTema(System.Guid,System.Guid)">
             <summary>
             Remove um tema do story mapping

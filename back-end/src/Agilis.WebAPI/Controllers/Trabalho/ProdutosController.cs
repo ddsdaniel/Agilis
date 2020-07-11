@@ -141,6 +141,29 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Move um tema dentro do story mapping
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema se encontra</param>
+        /// <param name="temaId">Id do tema que será movido</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverTema(Guid produtoId,
+                                                  Guid temaId,
+                                                  OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverTema(produtoId, temaId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Remove um tema do story mapping
         /// </summary>
         /// <param name="produtoId"></param>
@@ -194,7 +217,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="temaId">Id do tema que será renomeado</param>
         /// <param name="nomeContainer">Novo nome do tema</param>
         /// <returns></returns>
-        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}")]
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/renomear")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

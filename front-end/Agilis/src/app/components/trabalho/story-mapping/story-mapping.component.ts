@@ -11,6 +11,7 @@ import { Tema } from 'src/app/models/trabalho/temas/tema';
 import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
 import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
+import { ItemSelect } from 'src/app/models/item-select';
 
 @Component({
   selector: 'app-story-mapping',
@@ -177,6 +178,40 @@ export class StoryMappingComponent implements OnInit {
         },
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
+  }
+
+  moverTema(indiceAnterior) {
+    const lista: ItemSelect[] = [];
+    this.produto.storyMapping.temas.forEach(tema => {
+      let texto = (lista.length + 1).toString();
+      if (lista.length === indiceAnterior) {
+        texto += ' (atual)';
+      }
+      const item: ItemSelect = {
+        id: lista.length,
+        texto
+      };
+      lista.push(item);
+    });
+
+    this.dialogoService.abrirSelect(lista, 'Mover Tema', 'Posição', indiceAnterior)
+      .subscribe(itemSelecionado => {
+        if (itemSelecionado) {
+
+          const origemDestino: OrigemDestino = {
+            origem: indiceAnterior,
+            destino: itemSelecionado.id
+          };
+
+          const tema = this.produto.storyMapping.temas[indiceAnterior];
+
+          this.produtosApiService.moverTema(this.produto.id, tema.id, origemDestino)
+            .subscribe(
+              () => moveItemInArray(this.produto.storyMapping.temas, indiceAnterior, itemSelecionado.id),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
   }
 
 }

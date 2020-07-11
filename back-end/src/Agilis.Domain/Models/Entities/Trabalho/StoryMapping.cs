@@ -59,5 +59,17 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             else
                 Temas = Temas.Where(t => t.Id != tema.Id);
         }
+
+        internal void MoverTema(Guid temaId, int novaPosicao)
+        {
+            if (!Temas.Any(t => t.Id == temaId))
+                AddNotification(nameof(temaId), "Tema não encontrado");
+            else
+            {
+                var posicaoAnterior = Temas.ToList().FindIndex(t => t.Id == temaId);
+                var novaLista = Temas.ToList();
+                Temas = novaLista.Move(posicaoAnterior, novaPosicao);
+            }
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         Task ExcluirTema(Guid produtoId, Guid temaId);
         Task MoverUserStory(Guid produtoId, Guid temaId, Guid epicoId, Guid userStoryId, int novaPosicao);
         Task RenomearTema(Guid produtoId, Guid temaId, string texto);
+        Task MoverTema(Guid produtoId, Guid temaId, int destino);
     }
 }
