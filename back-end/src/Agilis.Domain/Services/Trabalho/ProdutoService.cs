@@ -184,5 +184,38 @@ namespace Agilis.Domain.Services.Trabalho
                 await _unitOfWork.Commit();
             }
         }
+
+        public async Task MoverUserStory(Guid produtoId, Guid temaId, Guid epicoId, Guid userStoryId, int novaPosicao)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+            if (tema == null)
+            {
+                AddNotification(nameof(tema), "Tema não encontrado");
+                return;
+            }
+
+            var epico = tema.Epicos.FirstOrDefault(e => e.Id == epicoId);
+            if (epico == null)
+            {
+                AddNotification(nameof(epico), "Épico não encontrado");
+                return;
+            }
+
+            epico.MoverUserStory(userStoryId, novaPosicao);
+            if (epico.Invalid)
+                AddNotifications(epico);
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

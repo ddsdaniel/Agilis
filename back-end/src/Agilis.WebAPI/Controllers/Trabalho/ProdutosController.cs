@@ -14,6 +14,7 @@ using DDS.WebAPI.Models.ViewModels;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.WebAPI.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -113,6 +114,33 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Move uma user story para cima ou para baixo
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que a user story se encontra</param>
+        /// <param name="temaId">Id do tem em que a user story se encontra</param>
+        /// <param name="epicoId">Id do épico em que a user story se encontra</param>
+        /// <param name="userStoryId">Id da user story que será movida</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories/{userStoryId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverUserStory(Guid produtoId,
+                                                       Guid temaId,
+                                                       Guid epicoId,
+                                                       Guid userStoryId,
+                                                       OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverUserStory(produtoId, temaId, epicoId, userStoryId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Remove um tema do story mapping
         /// </summary>
         /// <param name="produtoId"></param>
@@ -171,7 +199,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         [ProducesResponseType(typeof(UserStoryFK), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AdicionarEpico(Guid produtoId,
+        public async Task<ActionResult> AdicionarUserStory(Guid produtoId,
                                                        Guid temaId,
                                                        Guid epicoId,
                                                        StringContainerViewModel nomeContainer)

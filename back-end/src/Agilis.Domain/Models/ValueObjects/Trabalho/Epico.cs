@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
@@ -45,10 +46,22 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
 
         public void RemoverUserStory(Guid id)
         {
-            if (!UserStories.Any(t => t.Id == id))
+            if (!UserStories.Any(us => us.Id == id))
                 AddNotification(nameof(id), "User story não encontrada");
             else
-                UserStories = UserStories.ToList().Where(t => t.Id != id);
+                UserStories = UserStories.ToList().Where(us => us.Id != id);
+        }
+
+        internal void MoverUserStory(Guid userStoryId, int novaPosicao)
+        {
+            if (!UserStories.Any(us => us.Id == userStoryId))
+                AddNotification(nameof(userStoryId), "User story não encontrada");
+            else
+            {
+                var posicaoAnterior = UserStories.ToList().FindIndex(us => us.Id == userStoryId);
+                var novaLista = UserStories.ToList();                
+                UserStories = novaLista.Move(posicaoAnterior, novaPosicao);
+            }
         }
     }
 }

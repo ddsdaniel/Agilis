@@ -8,11 +8,13 @@ import { Tema } from 'src/app/models/trabalho/temas/tema';
 import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
+import { OrigemDestino } from 'src/app/models/origem-destino';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutosApiService extends CrudApiBaseService<Produto> {
+
   constructor(httpClient: HttpClient) {
     super(httpClient, 'produtos');
   }
@@ -36,5 +38,16 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
 
   excluirTema(produtoId: string, temaId: string): Observable<void> {
     return super.delete(`${produtoId}/temas/${temaId}`);
+  }
+
+  moverUserStory(
+    produtoId: string,
+    temaId: string,
+    epicoId: string,
+    userStoryId: string,
+    origemDestino: OrigemDestino
+  ): Observable<void> {
+    const url = `${produtoId}/temas/${temaId}/epicos/${epicoId}/user-stories/${userStoryId}/mover`;
+    return super.patch<OrigemDestino, void>(origemDestino, url);
   }
 }

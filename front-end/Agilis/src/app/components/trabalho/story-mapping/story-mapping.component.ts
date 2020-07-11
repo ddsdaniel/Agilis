@@ -10,6 +10,7 @@ import { Tema } from 'src/app/models/trabalho/temas/tema';
 import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
 import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
+import { OrigemDestino } from 'src/app/models/origem-destino';
 
 @Component({
   selector: 'app-story-mapping',
@@ -49,14 +50,44 @@ export class StoryMappingComponent implements OnInit {
   }
 
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<UserStoryFK[]>) {
     if (event.previousContainer === event.container) {
+
+      const userStoryId = event.container.data[event.previousIndex].id;
+      let temaId = '';
+      let epicoId = '';
+
+      this.produto.storyMapping.temas.forEach(tema => {
+        tema.epicos.forEach(epico => {
+          epico.userStories.forEach(us => {
+            if (us.id === userStoryId) {
+              temaId = tema.id;
+              epicoId = epico.id;
+            }
+          });
+        });
+      });
+
+      const origemDestino: OrigemDestino = {
+        origem: event.previousIndex,
+        destino: event.currentIndex
+      };
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+
+      this.produtosApiService.moverUserStory(
+        this.produto.id,
+        temaId,
+        epicoId,
+        userStoryId,
+        origemDestino
+      ).subscribe(
+        () => { },
+        (error: HttpErrorResponse) => {
+          this.snackBar.open(error.message);
+          moveItemInArray(event.container.data, event.currentIndex, event.previousIndex);
+        }
+      );
     }
   }
 

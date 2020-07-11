@@ -160,6 +160,17 @@
             <param name="temaViewModel">Tema a ser adicionado</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverUserStory(System.Guid,System.Guid,System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
+            <summary>
+            Move uma user story para cima ou para baixo
+            </summary>
+            <param name="produtoId">Id do produto em que a user story se encontra</param>
+            <param name="temaId">Id do tem em que a user story se encontra</param>
+            <param name="epicoId">Id do épico em que a user story se encontra</param>
+            <param name="userStoryId">Id da user story que será movida</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirTema(System.Guid,System.Guid)">
             <summary>
             Remove um tema do story mapping
@@ -177,7 +188,7 @@
             <param name="nomeContainer">Nome do épico a ser adicionado</param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarUserStory(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona uma user story ao épico
             </summary>
