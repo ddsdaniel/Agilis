@@ -38,11 +38,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Historia { get; set; }
 
         /// <summary>
-        /// Id do épico ao qual a user story pertence
-        /// </summary>
-        public Guid EpicoId { get; set; }
-
-        /// <summary>
         /// Critérios de aceitação da user story
         /// </summary>
         public IEnumerable<CriterioAceitacaoViewModel>  CriteriosAceitacao { get; set; }

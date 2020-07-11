@@ -169,6 +169,16 @@
             <param name="nomeContainer">Nome do épico a ser adicionado</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Adiciona uma user story ao épico
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="temaId">Id do tema em que o épico será adicionado</param>
+            <param name="epicoId">Id do tema em que o épico será adicionado</param>
+            <param name="nomeContainer">Nome do épico a ser adicionado</param>
+            <returns></returns>
+        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
             <summary>
             Manutenção do repositório
@@ -759,11 +769,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Historia">
             <summary>
             Descrição no formato padrão de uma user story
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.EpicoId">
-            <summary>
-            Id do épico ao qual a user story pertence
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.CriteriosAceitacao">

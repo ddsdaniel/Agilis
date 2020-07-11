@@ -42,7 +42,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         ator: vm.Ator,
                         narrativa: vm.Narrativa,
                         objetivo: vm.Objetivo,
-                        epicoId: vm.EpicoId,
                         criteriosAceitacao: context.Mapper.Map<CriterioAceitacao[]>(vm.CriteriosAceitacao)
                         )
                  );

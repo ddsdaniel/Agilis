@@ -2,13 +2,14 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Produto } from 'src/app/models/trabalho/produtos/produto';
-import { Tema } from 'src/app/models/trabalho/temas/tema';
-import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
-import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { ActivatedRoute } from '@angular/router';
 import { constantes } from 'src/app/constants/constantes';
 import { Epico } from 'src/app/models/trabalho/epicos/epico';
+import { Produto } from 'src/app/models/trabalho/produtos/produto';
+import { Tema } from 'src/app/models/trabalho/temas/tema';
+import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
+import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
+import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 
 @Component({
   selector: 'app-story-mapping',
@@ -81,6 +82,23 @@ export class StoryMappingComponent implements OnInit {
               (novoEpico: Epico) => {
                 const tema = this.produto.storyMapping.temas.find(t => t.id === temaId);
                 tema.epicos.push(novoEpico);
+              },
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
+
+  adicionarUserStory(temaId: string, epicoId: string) {
+    this.dialogoService.abrirTexto('Entre com o título da user story', 'Título da user story')
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.adicionarUserStory(this.produto.id, temaId, epicoId, nome)
+            .subscribe(
+              (novaUserStory: UserStoryFK) => {
+                const tema = this.produto.storyMapping.temas.find(t => t.id === temaId);
+                const epico = tema.epicos.find(e => e.id === epicoId);
+                epico.userStories.push(novaUserStory);
               },
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
             );

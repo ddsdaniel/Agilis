@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using DDS.WebAPI.Models.ViewModels;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -115,7 +116,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="temaId">Id do tema em que o épico será adicionado</param>
         /// <param name="nomeContainer">Nome do épico a ser adicionado</param>
         /// <returns></returns>
-        [HttpPost("{produtoId:guid}/temas/{temaId:guid}")]
+        [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos")]
         [ProducesResponseType(typeof(EpicoViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -132,6 +133,41 @@ namespace Agilis.WebAPI.Controllers.Trabalho
             var epicoViewModel = _mapper.Map<EpicoViewModel>(epico);
 
             return Ok(epicoViewModel);
+        }
+
+        /// <summary>
+        /// Adiciona uma user story ao épico
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="temaId">Id do tema em que o épico será adicionado</param>
+        /// <param name="epicoId">Id do tema em que o épico será adicionado</param>
+        /// <param name="nomeContainer">Nome do épico a ser adicionado</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories")]
+        [ProducesResponseType(typeof(UserStoryFK), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarEpico(Guid produtoId,
+                                                       Guid temaId,
+                                                       Guid epicoId,
+                                                       StringContainerViewModel nomeContainer)
+        {
+            var userStory = new UserStory(
+                nome: nomeContainer.Texto, 
+                ator: new AtorFK(Guid.NewGuid(), ""),
+                narrativa: "-",
+                objetivo: "-",
+                new List<CriterioAceitacao>()
+                );
+
+            await _produtoService.AdicionarUserStory(produtoId, temaId, epicoId, userStory);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            var userStoryFK = new UserStoryFK(userStory.Id, userStory.Nome);
+
+            return Ok(userStoryFK);
         }
     }
 }

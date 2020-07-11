@@ -31,7 +31,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             UserStories = userStories;
         }
 
-        public void AdicionarUserStoryFK(UserStoryFK userStory)
+        public void AdicionarUserStory(UserStoryFK userStory)
         {
             if (userStory == null)
                 AddNotification(nameof(userStory), "User story não deve ser nula");
