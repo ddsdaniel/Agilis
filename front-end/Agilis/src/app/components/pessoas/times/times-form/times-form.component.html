@@ -72,7 +72,10 @@
     <div class="tab-container">
       <mat-list>
         <mat-list-item *ngFor="let produto of entidade.produtos">
-          <div mat-line><a [routerLink]="['/produtos', produto.id]">{{produto.nome}}</a></div>
+          <mat-icon [routerLink]="['/story-mapping', produto.id]" rou mat-list-icon title="Story Mapping">view_quilt</mat-icon>
+          <div mat-line>
+            <a title="Editar" [routerLink]="['/produtos', produto.id]">{{produto.nome}}</a>
+          </div>
         </mat-list-item>
       </mat-list>
       <a routerLink="/produtos/new" [queryParams]="{ timeId: this.entidade.id}">
