@@ -188,6 +188,29 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Renomeia um tema
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será renomeado</param>
+        /// <param name="temaId">Id do tema que será renomeado</param>
+        /// <param name="nomeContainer">Novo nome do tema</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> RenomearTema(Guid produtoId,
+                                                     Guid temaId,
+                                                     StringContainerViewModel nomeContainer)
+        {
+            await _produtoService.RenomearTema(produtoId, temaId, nomeContainer.Texto);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Adiciona uma user story ao épico
         /// </summary>
         /// <param name="produtoId">Id do produto em que o tema será adicionado</param>

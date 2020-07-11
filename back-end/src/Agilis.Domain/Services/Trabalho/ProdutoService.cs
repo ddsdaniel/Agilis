@@ -217,5 +217,29 @@ namespace Agilis.Domain.Services.Trabalho
                 await _unitOfWork.Commit();
             }
         }
+
+        public async Task RenomearTema(Guid produtoId, Guid temaId, string nome)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+                AddNotification(nameof(produto), "Produto não encontrado");
+            else
+            {
+                var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+                if (tema == null)
+                    AddNotification(nameof(tema), "Tema não encontrado");
+                else
+                {
+                    tema.Renomear(nome);
+                    if (tema.Invalid)
+                        AddNotifications(tema);
+                    else
+                    {
+                        await Atualizar(produto);
+                        await _unitOfWork.Commit();
+                    }
+                }
+            }
+        }
     }
 }

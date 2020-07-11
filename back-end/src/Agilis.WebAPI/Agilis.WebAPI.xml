@@ -188,6 +188,15 @@
             <param name="nomeContainer">Nome do épico a ser adicionado</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearTema(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia um tema
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será renomeado</param>
+            <param name="temaId">Id do tema que será renomeado</param>
+            <param name="nomeContainer">Novo nome do tema</param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarUserStory(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona uma user story ao épico

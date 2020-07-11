@@ -37,7 +37,7 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
   }
 
   renomearTema(produtoId: string, temaId: string, nome: string): Observable<void> {
-    return super.patch<StringContainer, void>({ texto: nome }, `${produtoId}/temas/${temaId}/renomear`);
+    return super.patch<StringContainer, void>({ texto: nome }, `${produtoId}/temas/${temaId}`);
   }
 
   excluirTema(produtoId: string, temaId: string): Observable<void> {

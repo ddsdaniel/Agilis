@@ -53,9 +53,9 @@ export class StoryMappingComponent implements OnInit {
     this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema', tema.nome)
       .subscribe(nome => {
         if (nome) {
-          this.produtosApiService.renomearTema(this.produto.id, this.produto.id, nome)
+          this.produtosApiService.renomearTema(this.produto.id, tema.id, nome)
             .subscribe(
-              () => { },
+              () => tema.nome = nome,
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
             );
         }
