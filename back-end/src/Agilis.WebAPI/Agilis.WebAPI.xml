@@ -180,6 +180,16 @@
             <param name="origemDestino">Contém o índice anterior e o novo</param>
             <returns></returns>
         </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverEpico(System.Guid,System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
+            <summary>
+            Move um épico dentro do story mapping
+            </summary>
+            <param name="produtoId">Id do produto em que o tema se encontra</param>
+            <param name="temaId">Id do tema que será movido</param>
+            <param name="epicoId">Id do épico que será movido</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
+        </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirTema(System.Guid,System.Guid)">
             <summary>
             Remove um tema do story mapping
@@ -188,13 +198,22 @@
             <param name="temaId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirEpico(System.Guid,System.Guid,System.Guid)">
+            <summary>
+            Remove um épico do story mapping
+            </summary>
+            <param name="produtoId"></param>
+            <param name="temaId"></param>
+            <param name="epicoId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel)">
             <summary>
             Adiciona um épico ao story mapping do produto
             </summary>
             <param name="produtoId">Id do produto em que o tema será adicionado</param>
             <param name="temaId">Id do tema em que o épico será adicionado</param>
-            <param name="nomeContainer">Nome do épico a ser adicionado</param>
+            <param name="epicoViewModel">Épico a ser adicionado</param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearTema(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
@@ -204,6 +223,16 @@
             <param name="produtoId">Id do produto em que o tema será renomeado</param>
             <param name="temaId">Id do tema que será renomeado</param>
             <param name="nomeContainer">Novo nome do tema</param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearEpico(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia um épico
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será renomeado</param>
+            <param name="temaId">Id do tema que será renomeado</param>
+            <param name="epicoId">Id do épico que será renomeado</param>
+            <param name="nomeContainer">Novo nome do épico</param>
             <returns></returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarUserStory(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">

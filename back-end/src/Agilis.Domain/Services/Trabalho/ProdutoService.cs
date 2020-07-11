@@ -260,5 +260,98 @@ namespace Agilis.Domain.Services.Trabalho
                 await _unitOfWork.Commit();
             }
         }
+
+        public async Task ExcluirEpico(Guid produtoId, Guid temaId, Guid epicoId)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+            if (tema == null)
+            {
+                AddNotification(nameof(tema), "Tema não encontrado");
+                return;
+            }
+
+            var epico = tema.Epicos.FirstOrDefault(e => e.Id == epicoId);
+            if (epico == null)
+            {
+                AddNotification(nameof(epico), "Épico não encontrado");
+                return;
+            }
+
+            //TODO: excluir user stories
+            tema.ExcluirEpico(epico);
+            if (tema.Invalid)
+            {
+                AddNotifications(tema);
+                return;
+            }
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
+
+        public async Task RenomearEpico(Guid produtoId, Guid temaId, Guid epicoId, string nome)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+                AddNotification(nameof(produto), "Produto não encontrado");
+            else
+            {
+                var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+                if (tema == null)
+                    AddNotification(nameof(tema), "Tema não encontrado");
+                else
+                {
+                    var epico = tema.Epicos.FirstOrDefault(e => e.Id == epicoId);
+                    if (epico == null)
+                        AddNotification(nameof(epico), "Épico não encontrado");
+                    else
+                    {
+                        epico.Renomear(nome);
+                        if (epico.Invalid)
+                            AddNotifications(epico);
+                        else
+                        {
+                            await Atualizar(produto);
+                            await _unitOfWork.Commit();
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task MoverEpico(Guid produtoId, Guid temaId, Guid epicoId, int novaPosicao)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+            if (tema == null)
+            {
+                AddNotification(nameof(tema), "Tema não encontrado");
+                return;
+            }
+
+            tema.MoverEpico(epicoId, novaPosicao);
+            if (tema.Invalid)
+                AddNotifications(tema);
+            else
+            {
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

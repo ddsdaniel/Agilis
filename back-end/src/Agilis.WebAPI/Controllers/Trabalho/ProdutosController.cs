@@ -25,6 +25,8 @@ namespace Agilis.WebAPI.Controllers.Trabalho
     [Route("api/[controller]")]
     public class ProdutosController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
     {
+        //TODO: decompor tema, us e epico
+
         private readonly IProdutoService _produtoService;
         private readonly IUsuario _usuarioLogado;
 
@@ -164,6 +166,31 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Move um épico dentro do story mapping
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema se encontra</param>
+        /// <param name="temaId">Id do tema que será movido</param>
+        /// <param name="epicoId">Id do épico que será movido</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverEpico(Guid produtoId,
+                                                   Guid temaId,
+                                                   Guid epicoId,
+                                                   OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverEpico(produtoId, temaId, epicoId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Remove um tema do story mapping
         /// </summary>
         /// <param name="produtoId"></param>
@@ -185,11 +212,34 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Remove um épico do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <param name="epicoId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirEpico(Guid produtoId,
+                                                     Guid temaId,
+                                                     Guid epicoId)
+        {
+            await _produtoService.ExcluirEpico(produtoId, temaId, epicoId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Adiciona um épico ao story mapping do produto
         /// </summary>
         /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
         /// <param name="temaId">Id do tema em que o épico será adicionado</param>
-        /// <param name="nomeContainer">Nome do épico a ser adicionado</param>
+        /// <param name="epicoViewModel">Épico a ser adicionado</param>
         /// <returns></returns>
         [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos")]
         [ProducesResponseType(typeof(EpicoViewModel), StatusCodes.Status200OK)]
@@ -197,15 +247,18 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarEpico(Guid produtoId,
                                                        Guid temaId,
-                                                       StringContainerViewModel nomeContainer)
+                                                       EpicoViewModel epicoViewModel)
         {
-            var epico = new Epico(Guid.NewGuid(), nomeContainer.Texto, new List<UserStoryFK>());
+            if (epicoViewModel.Id == Guid.Empty)
+                epicoViewModel.Id = Guid.NewGuid();
+
+            var epico = _mapper.Map<Epico>(epicoViewModel);
             await _produtoService.AdicionarEpico(produtoId, temaId, epico);
 
             if (_produtoService.Invalid)
                 return BadRequest(_produtoService.Notifications);
 
-            var epicoViewModel = _mapper.Map<EpicoViewModel>(epico);
+            epicoViewModel = _mapper.Map<EpicoViewModel>(epico);
 
             return Ok(epicoViewModel);
         }
@@ -226,6 +279,31 @@ namespace Agilis.WebAPI.Controllers.Trabalho
                                                      StringContainerViewModel nomeContainer)
         {
             await _produtoService.RenomearTema(produtoId, temaId, nomeContainer.Texto);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Renomeia um épico
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será renomeado</param>
+        /// <param name="temaId">Id do tema que será renomeado</param>
+        /// <param name="epicoId">Id do épico que será renomeado</param>
+        /// <param name="nomeContainer">Novo nome do épico</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/renomear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> RenomearEpico(Guid produtoId,
+                                                      Guid temaId,
+                                                      Guid epicoId,
+                                                      StringContainerViewModel nomeContainer)
+        {
+            await _produtoService.RenomearEpico(produtoId, temaId, epicoId, nomeContainer.Texto);
 
             if (_produtoService.Invalid)
                 return BadRequest(_produtoService.Notifications);

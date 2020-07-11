@@ -28,14 +28,28 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start start">
-      <div class="epico-container" *ngFor="let epico of tema.epicos" cdkDropListGroup>
+      <div class="epico-container" *ngFor="let epico of tema.epicos; let epicoIndex = index" cdkDropListGroup>
 
         <!-- Epicos -->
         <div class="epico">
           <span>{{epico.nome}}</span>
           <span class="icone-acoes">
             <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory(tema.id, epico.id)">add</mat-icon>
-            <mat-icon mat-list-icon title="Mais opções" (click)="adicionarTema()">more_horiz</mat-icon>
+            <mat-icon [matMenuTriggerFor]="menuEpico" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+            <mat-menu #menuEpico="matMenu">
+              <button mat-menu-item (click)="renomearEpico(tema, epico)">
+                <mat-icon>edit</mat-icon>
+                <span>Renomear</span>
+              </button>
+              <button mat-menu-item (click)="moverEpico(temaIndex, epicoIndex)">
+                <mat-icon>arrow_forward</mat-icon>
+                <span>Mover</span>
+              </button>
+              <button mat-menu-item (click)="excluirEpico(temaIndex, epicoIndex)">
+                <mat-icon color="warn">clear_forever</mat-icon>
+                <span>Excluir</span>
+              </button>
+            </mat-menu>
           </span>
         </div>
 

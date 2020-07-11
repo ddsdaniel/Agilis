@@ -27,8 +27,8 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
     return super.post<Tema, Tema>(tema, `${produtoId}/temas`);
   }
 
-  adicionarEpico(produtoId: string, temaId: string, nome: string): Observable<Epico> {
-    return super.post<StringContainer, Epico>({ texto: nome }, `${produtoId}/temas/${temaId}/epicos`);
+  adicionarEpico(produtoId: string, temaId: string, epico: Epico): Observable<Epico> {
+    return super.post<Epico, Epico>(epico, `${produtoId}/temas/${temaId}/epicos`);
   }
 
   adicionarUserStory(produtoId: string, temaId: string, epicoId: string, nome: string): Observable<UserStoryFK> {
@@ -58,6 +58,19 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
   moverTema(produtoId: string, temaId: string, origemDestino: OrigemDestino): Observable<void> {
     const url = `${produtoId}/temas/${temaId}/mover`;
     return super.patch<OrigemDestino, void>(origemDestino, url);
+  }
+
+  renomearEpico(produtoId: string, temaId: string, epicoId: string, nome: string): Observable<void> {
+    return super.patch<StringContainer, void>({ texto: nome }, `${produtoId}/temas/${temaId}/epicos/${epicoId}/renomear`);
+  }
+
+  moverEpico(produtoId: string, temaId: string, epicoId: string, origemDestino: OrigemDestino) : Observable<void> {
+    const url = `${produtoId}/temas/${temaId}/epicos/${epicoId}/mover`;
+    return super.patch<OrigemDestino, void>(origemDestino, url);
+  }
+
+  excluirEpico(produtoId: string, temaId: string, epicoId: string): Observable<void> {
+    return super.delete(`${produtoId}/temas/${temaId}/epicos/${epicoId}`);
   }
 
 }

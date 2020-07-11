@@ -60,5 +60,25 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             else
                 Nome = nome;
         }
+
+        internal void ExcluirEpico(Epico epico)
+        {
+            if (!Epicos.Any(e => e.Id == epico.Id))
+                AddNotification(nameof(epico.Id), "Épico não encontrado");
+            else
+                Epicos = Epicos.Where(t => t.Id != epico.Id);
+        }
+
+        internal void MoverEpico(Guid epicoId, int novaPosicao)
+        {
+            if (!Epicos.Any(e => e.Id == epicoId))
+                AddNotification(nameof(epicoId), "Épico não encontrado");
+            else
+            {
+                var posicaoAnterior = Epicos.ToList().FindIndex(e => e.Id == epicoId);
+                var novaLista = Epicos.ToList();
+                Epicos = novaLista.Move(posicaoAnterior, novaPosicao);
+            }
+        }
     }
 }

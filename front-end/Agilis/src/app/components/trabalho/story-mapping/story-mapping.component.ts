@@ -50,19 +50,6 @@ export class StoryMappingComponent implements OnInit {
     );
   }
 
-  renomearTema(tema: Tema) {
-    this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema', tema.nome)
-      .subscribe(nome => {
-        if (nome) {
-          this.produtosApiService.renomearTema(this.produto.id, tema.id, nome)
-            .subscribe(
-              () => tema.nome = nome,
-              (error: HttpErrorResponse) => this.snackBar.open(error.message)
-            );
-        }
-      });
-  }
-
   drop(event: CdkDragDrop<UserStoryFK[]>) {
     if (event.previousContainer === event.container) {
 
@@ -126,7 +113,12 @@ export class StoryMappingComponent implements OnInit {
     this.dialogoService.abrirTexto('Entre com o nome do épico', 'Nome do épico')
       .subscribe(nome => {
         if (nome) {
-          this.produtosApiService.adicionarEpico(this.produto.id, temaId, nome)
+          const epico: Epico = {
+            id: constantes.newGuid,
+            nome,
+            userStories: []
+          };
+          this.produtosApiService.adicionarEpico(this.produto.id, temaId, epico)
             .subscribe(
               (novoEpico: Epico) => {
                 const tema = this.produto.storyMapping.temas.find(t => t.id === temaId);
@@ -214,4 +206,90 @@ export class StoryMappingComponent implements OnInit {
       });
   }
 
+  renomearTema(tema: Tema) {
+    this.dialogoService.abrirTexto('Entre com o nome do tema', 'Nome do tema', tema.nome)
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.renomearTema(this.produto.id, tema.id, nome)
+            .subscribe(
+              () => tema.nome = nome,
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
+
+  excluirEpico(temaIndex: number, epicoIndex: number) {
+    const tema = this.produto.storyMapping.temas[temaIndex];
+    const epico = tema.epicos[epicoIndex];
+
+    this.produtosApiService.excluirEpico(this.produto.id, tema.id, epico.id)
+      .subscribe(
+        () => {
+
+          tema.epicos.removeAt(epicoIndex);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            this.produtosApiService.adicionarEpico(this.produto.id, tema.id, epico)
+              .subscribe(
+                () => tema.epicos.push(epico),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  moverEpico(temaIndex: number, indiceAnterior: number) {
+    const lista: ItemSelect[] = [];
+    const tema: Tema = this.produto.storyMapping.temas[temaIndex];
+    tema.epicos.forEach(epico => {
+      let texto = (lista.length + 1).toString();
+      if (lista.length === indiceAnterior) {
+        texto += ' (atual)';
+      }
+      const item: ItemSelect = {
+        id: lista.length,
+        texto
+      };
+      lista.push(item);
+    });
+
+    this.dialogoService.abrirSelect(lista, 'Mover Épico', 'Posição', indiceAnterior)
+      .subscribe(itemSelecionado => {
+        if (itemSelecionado) {
+
+          const origemDestino: OrigemDestino = {
+            origem: indiceAnterior,
+            destino: itemSelecionado.id
+          };
+
+          const epico = tema.epicos[indiceAnterior];
+
+          this.produtosApiService.moverEpico(this.produto.id, tema.id, epico.id, origemDestino)
+            .subscribe(
+              () => moveItemInArray(tema.epicos, indiceAnterior, itemSelecionado.id),
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
+
+  renomearEpico(tema: Tema, epico: Epico) {
+    this.dialogoService.abrirTexto('Entre com o nome do épico', 'Nome do épico', epico.nome)
+      .subscribe(nome => {
+        if (nome) {
+          this.produtosApiService.renomearEpico(this.produto.id, tema.id, epico.id, nome)
+            .subscribe(
+              () => epico.nome = nome,
+              (error: HttpErrorResponse) => this.snackBar.open(error.message)
+            );
+        }
+      });
+  }
 }
