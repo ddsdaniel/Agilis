@@ -10,6 +10,7 @@ import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
 import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
+import { TituloService } from 'src/app/services/titulo.service';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -29,6 +30,7 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
     protected activatedRoute: ActivatedRoute,
     private atoresApiService: AtoresApiService,
     private dialogoService: DialogoService,
+    private tituloService: TituloService,
   ) {
     super(router, userStoryApiService, snackBar, activatedRoute, 'produtos');
     this.userStoryApiService = userStoryApiService;
@@ -45,6 +47,10 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
           super.rotaPesquisa = 'story-mapping/' + this.produtoId;
         }
       });
+  }
+
+  recuperouEntidade(userStory: UserStory){
+    this.tituloService.setTitulo(`${userStory.nome} - User Story`);
   }
 
   carregarAtores() {
