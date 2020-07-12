@@ -66,7 +66,7 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             if (!Epicos.Any(e => e.Id == epico.Id))
                 AddNotification(nameof(epico.Id), "Épico não encontrado");
             else
-                Epicos = Epicos.Where(t => t.Id != epico.Id);
+                Epicos = Epicos.Where(e => e.Id != epico.Id);
         }
 
         internal void MoverEpico(Guid epicoId, int novaPosicao)

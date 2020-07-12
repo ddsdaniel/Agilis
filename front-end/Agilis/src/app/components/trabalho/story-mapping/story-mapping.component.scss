@@ -42,6 +42,10 @@
   color: black;
 }
 
+.us:hover .icone-acoes {
+  visibility: visible;
+}
+
 .us a:hover{
   text-decoration: underline;
   color: blue;

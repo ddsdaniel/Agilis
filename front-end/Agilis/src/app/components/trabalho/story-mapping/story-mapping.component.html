@@ -58,10 +58,19 @@
           (cdkDropListDropped)="drop($event)" class="example-list">
 
           <!-- US -->
-          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories">
+          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories; let usIndex = index">
             <a [routerLink]="['/user-stories', us.id]" [queryParams]="{ produtoId: this.produto.id}">
               {{us.nome}}
             </a>
+            <span class="icone-acoes">
+              <mat-icon [matMenuTriggerFor]="menuUserStory" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+              <mat-menu #menuUserStory="matMenu">
+                <button mat-menu-item (click)="excluirUserStory(temaIndex, epicoIndex, usIndex)">
+                  <mat-icon color="warn">clear_forever</mat-icon>
+                  <span>Excluir</span>
+                </button>
+              </mat-menu>
+            </span>
           </div>
         </div>
       </div>

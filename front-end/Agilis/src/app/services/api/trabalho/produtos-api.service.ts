@@ -1,14 +1,15 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { OrigemDestino } from 'src/app/models/origem-destino';
 import { StringContainer } from 'src/app/models/string-container';
 import { Epico } from 'src/app/models/trabalho/epicos/epico';
 import { Produto } from 'src/app/models/trabalho/produtos/produto';
 import { Tema } from 'src/app/models/trabalho/temas/tema';
+import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk';
 
 import { CrudApiBaseService } from '../crud-api-base.service';
-import { OrigemDestino } from 'src/app/models/origem-destino';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +32,9 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
     return super.post<Epico, Epico>(epico, `${produtoId}/temas/${temaId}/epicos`);
   }
 
-  adicionarUserStory(produtoId: string, temaId: string, epicoId: string, nome: string): Observable<UserStoryFK> {
+  adicionarUserStory(produtoId: string, temaId: string, epicoId: string, userStory: UserStory): Observable<UserStoryFK> {
     const url = `${produtoId}/temas/${temaId}/epicos/${epicoId}/user-stories`;
-    return super.post<StringContainer, UserStoryFK>({ texto: nome }, url);
+    return super.post<UserStory, UserStoryFK>(userStory, url);
   }
 
   renomearTema(produtoId: string, temaId: string, nome: string): Observable<void> {
@@ -71,6 +72,10 @@ export class ProdutosApiService extends CrudApiBaseService<Produto> {
 
   excluirEpico(produtoId: string, temaId: string, epicoId: string): Observable<void> {
     return super.delete(`${produtoId}/temas/${temaId}/epicos/${epicoId}`);
+  }
+
+  excluirUserStory(produtoId: string, temaId: string, epicoId: string, userStoryId: string): Observable<void> {
+    return super.delete(`${produtoId}/temas/${temaId}/epicos/${epicoId}/user-stories/${userStoryId}`);
   }
 
 }

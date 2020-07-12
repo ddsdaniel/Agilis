@@ -353,5 +353,49 @@ namespace Agilis.Domain.Services.Trabalho
                 await _unitOfWork.Commit();
             }
         }
+
+        public async Task ExcluirUserStory(Guid produtoId, Guid temaId, Guid epicoId, Guid userStoryId)
+        {
+            var produto = await ConsultarPorId(produtoId);
+            if (produto == null)
+            {
+                AddNotification(nameof(produto), "Produto não encontrado");
+                return;
+            }
+
+            var tema = produto.StoryMapping.Temas.FirstOrDefault(t => t.Id == temaId);
+            if (tema == null)
+            {
+                AddNotification(nameof(tema), "Tema não encontrado");
+                return;
+            }
+
+            var epico = tema.Epicos.FirstOrDefault(e => e.Id == epicoId);
+            if (epico == null)
+            {
+                AddNotification(nameof(epico), "Épico não encontrado");
+                return;
+            }
+
+            var userStory = epico.UserStories.FirstOrDefault(us => us.Id == userStoryId);
+            if (userStory == null)
+            {
+                AddNotification(nameof(userStory), "User Story não encontrada");
+                return;
+            }
+
+            epico.ExcluirUserStory(userStory);
+            if (epico.Invalid)
+            {
+                AddNotifications(epico);
+                return;
+            }
+            else
+            {
+                await _unitOfWork.UserStoryRepository.Excluir(userStory.Id);
+                await Atualizar(produto);
+                await _unitOfWork.Commit();
+            }
+        }
     }
 }

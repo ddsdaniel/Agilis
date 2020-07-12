@@ -71,5 +71,13 @@ namespace Agilis.Domain.Models.ValueObjects.Trabalho
             else
                 Nome = nome;
         }
+
+        internal void ExcluirUserStory(UserStoryFK userStory)
+        {
+            if (!UserStories.Any(us => us.Id == userStory.Id))
+                AddNotification(nameof(userStory.Id), "User story não encontrada");
+            else
+                UserStories = UserStories.Where(us => us.Id != userStory.Id); ;
+        }
     }
 }

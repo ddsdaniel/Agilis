@@ -235,6 +235,31 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         }
 
         /// <summary>
+        /// Remove uma user story do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <param name="epicoId"></param>
+        /// <param name="userStoryId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories/{userStoryId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirUserStory(Guid produtoId,
+                                                     Guid temaId,
+                                                     Guid epicoId,
+                                                     Guid userStoryId)
+        {
+            await _produtoService.ExcluirUserStory(produtoId, temaId, epicoId, userStoryId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Adiciona um épico ao story mapping do produto
         /// </summary>
         /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
@@ -317,24 +342,18 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
         /// <param name="temaId">Id do tema em que o épico será adicionado</param>
         /// <param name="epicoId">Id do tema em que o épico será adicionado</param>
-        /// <param name="nomeContainer">Nome do épico a ser adicionado</param>
+        /// <param name="userStoryViewModel">User story a ser adicionada</param>
         /// <returns></returns>
         [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories")]
         [ProducesResponseType(typeof(UserStoryFK), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarUserStory(Guid produtoId,
-                                                       Guid temaId,
-                                                       Guid epicoId,
-                                                       StringContainerViewModel nomeContainer)
+                                                           Guid temaId,
+                                                           Guid epicoId,
+                                                           UserStoryViewModel userStoryViewModel)
         {
-            var userStory = new UserStory(
-                nome: nomeContainer.Texto, 
-                ator: new AtorFK(Guid.NewGuid(), ""),
-                narrativa: "-",
-                objetivo: "-",
-                new List<CriterioAceitacao>()
-                );
+            var userStory = _mapper.Map<UserStory>(userStoryViewModel);
 
             await _produtoService.AdicionarUserStory(produtoId, temaId, epicoId, userStory);
 

@@ -21,5 +21,6 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
         Task ExcluirEpico(Guid produtoId, Guid temaId, Guid epicoId);
         Task RenomearEpico(Guid produtoId, Guid temaId, Guid epicoId, string nome);
         Task MoverEpico(Guid produtoId, Guid temaId, Guid epicoId, int novaPosicao);
+        Task ExcluirUserStory(Guid produtoId, Guid temaId, Guid epicoId, Guid userStoryId);
     }
 }

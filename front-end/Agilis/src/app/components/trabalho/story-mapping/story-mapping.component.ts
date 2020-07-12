@@ -13,6 +13,8 @@ import { UserStoryFK } from 'src/app/models/trabalho/user-stories/user-story-fk'
 import { ProdutosApiService } from 'src/app/services/api/trabalho/produtos-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 import { TituloService } from 'src/app/services/titulo.service';
+import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
+import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 
 @Component({
   selector: 'app-story-mapping',
@@ -37,6 +39,7 @@ export class StoryMappingComponent implements OnInit {
     private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private tituloService: TituloService,
+    private userStoriesApiService: UserStoriesApiService,
   ) { }
 
   ngOnInit() {
@@ -139,7 +142,19 @@ export class StoryMappingComponent implements OnInit {
     this.dialogoService.abrirTexto('Entre com o título da user story', 'Título da user story')
       .subscribe(nome => {
         if (nome) {
-          this.produtosApiService.adicionarUserStory(this.produto.id, temaId, epicoId, nome)
+          const userStory: UserStory = {
+            id: constantes.newGuid,
+            nome,
+            ator: {
+              id: constantes.newGuid,
+              nome: '-'
+            },
+            criteriosAceitacao: [],
+            historia: '-',
+            narrativa: '-',
+            objetivo: '-'
+          };
+          this.produtosApiService.adicionarUserStory(this.produto.id, temaId, epicoId, userStory)
             .subscribe(
               (novaUserStory: UserStoryFK) => {
                 const tema = this.produto.storyMapping.temas.find(t => t.id === temaId);
@@ -296,5 +311,52 @@ export class StoryMappingComponent implements OnInit {
             );
         }
       });
+  }
+
+  excluirUserStory(temaIndex: number, epicoIndex: number, usIndex: number) {
+    const tema = this.produto.storyMapping.temas[temaIndex];
+    const epico = tema.epicos[epicoIndex];
+    const userStoryFK = epico.userStories[usIndex];
+    let userStoryBackup: UserStory;
+
+    this.userStoriesApiService.obterUm(userStoryFK.id)
+      .subscribe(
+        (us) => {
+          userStoryBackup = us;
+
+          this.excluirUserStoryComDesfazer(tema, epico, userStoryFK, usIndex, userStoryBackup);
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
+  }
+
+  private excluirUserStoryComDesfazer(
+    tema: Tema,
+    epico: Epico,
+    userStoryFK: UserStoryFK,
+    usIndex: number,
+    userStoryBackup: UserStory
+  ) {
+
+    this.produtosApiService.excluirUserStory(this.produto.id, tema.id, epico.id, userStoryFK.id)
+      .subscribe(
+        () => {
+
+          epico.userStories.removeAt(usIndex);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            this.produtosApiService.adicionarUserStory(this.produto.id, tema.id, epico.id, userStoryBackup)
+              .subscribe(
+                () => epico.userStories.push(userStoryFK),
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 }
