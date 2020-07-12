@@ -29,6 +29,7 @@ namespace Agilis.Domain.Services.Trabalho
         public override async Task Atualizar(UserStory userStory)
         {
             await base.Atualizar(userStory);
+
             if (Valid)
             {
                 var timesId = _unitOfWork.TimeRepository
@@ -36,34 +37,22 @@ namespace Agilis.Domain.Services.Trabalho
                     .Select(t => t.Id)
                     .ToList();
 
-                var achouUserStoryFK = false;
-                var produtos = _unitOfWork.ProdutoRepository.ConsultarTodos(timesId);
-                foreach (var produto in produtos)
+                var userStoryFK = _unitOfWork.ProdutoRepository
+                    .ConsultarTodos(timesId)
+                    .SelectMany(p => p.StoryMapping.Temas)
+                    .SelectMany(t => t.Epicos)
+                    .SelectMany(e => e.UserStories)
+                    .FirstOrDefault(us => us.Id == userStory.Id);
+
+                if (userStoryFK != null)
                 {
-                    foreach (var tema in produto.StoryMapping.Temas)
-                    {
-                        foreach (var epico in tema.Epicos)
-                        {
-                            foreach (var us in epico.UserStories)
-                            {
-                                if (us.Id == userStory.Id)
-                                {
-                                    us.Nome = userStory.Nome;
-                                    achouUserStoryFK = true;
-                                    break;
-                                }
-                            }
-                            if (achouUserStoryFK)
-                                break;
-                        }
-                        if (achouUserStoryFK)
-                            break;
-                    }
-                    if (achouUserStoryFK)
-                    {
-                        await _unitOfWork.ProdutoRepository.Atualizar(produto);
-                        break;
-                    }
+                    userStoryFK.Nome = userStory.Nome;
+
+                    var produto = _unitOfWork.ProdutoRepository
+                        .ConsultarTodos(timesId)
+                        .FirstOrDefault(p => p.StoryMapping.Temas.Any(t => t.Epicos.Any(e => e.UserStories.Any(us => us.Id == userStory.Id))));
+
+                    await _unitOfWork.ProdutoRepository.Atualizar(produto);
                 }
             }
         }
