@@ -34,7 +34,8 @@
         <div class="epico">
           <span>{{epico.nome}}</span>
           <span class="icone-acoes">
-            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory(tema.id, epico.id)">add</mat-icon>
+            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory(tema.id, epico.id)">add
+            </mat-icon>
             <mat-icon [matMenuTriggerFor]="menuEpico" mat-list-icon title="Mais opções">more_horiz</mat-icon>
             <mat-menu #menuEpico="matMenu">
               <button mat-menu-item (click)="renomearEpico(tema, epico)">
@@ -57,7 +58,11 @@
           (cdkDropListDropped)="drop($event)" class="example-list">
 
           <!-- US -->
-          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories">{{us.nome}}</div>
+          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories">
+            <a [routerLink]="['/user-stories', us.id]" [queryParams]="{ produtoId: this.produto.id}">
+              {{us.nome}}
+            </a>
+          </div>
         </div>
       </div>
 

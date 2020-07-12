@@ -37,6 +37,16 @@
   background-color: #ffffa5 !important;
 }
 
+.us a{
+  text-decoration: none;
+  color: black;
+}
+
+.us a:hover{
+  text-decoration: underline;
+  color: blue;
+}
+
 .icone-acoes {
   visibility: hidden;
   color: #424242;

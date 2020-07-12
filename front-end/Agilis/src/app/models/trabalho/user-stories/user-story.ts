@@ -7,6 +7,5 @@ export interface UserStory extends Entidade {
   narrativa: string;
   objetivo: string;
   historia: string;
-  epicoId: string;
   criteriosAceitacao: CriterioAceitacao[];
 }

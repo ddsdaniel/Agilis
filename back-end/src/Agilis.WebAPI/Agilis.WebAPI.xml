@@ -406,6 +406,26 @@
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
         </member>
+        <member name="T:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController">
+            <summary>
+            Manutenção do repositório
+            </summary>    
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IUserStoryService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
+            <summary>
+            Construtor com parâmetros injetados
+            </summary>
+            <param name="service">Serviço para manipulação da entidade</param>       
+            <param name="mapper">Automapper</param>
+            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
+            <summary>
+            Ordena pelo nome do userStory
+            </summary>
+            <param name="lista">Lista de userStories a ser ordenada</param>
+            <returns>Lista já ordenada pelo nome</returns>
+        </member>
         <member name="T:Agilis.WebAPI.Extensions.HttpContextAccessorExtensions">
             <summary>
             Classe que provê métodos de extensão para IHttpContextAccessor

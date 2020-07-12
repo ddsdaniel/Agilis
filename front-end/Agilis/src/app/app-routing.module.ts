@@ -13,6 +13,7 @@ import { ProdutosComponent } from './components/trabalho/produtos/produtos/produ
 import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
 import { StoryMappingComponent } from './components/trabalho/story-mapping/story-mapping.component';
 import { AutenticacaoGuard } from './guards/autenticacao.guard';
+import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
 
 const routes: Routes = [
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'times/:id', component: TimesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'story-mapping/:produtoId', component: StoryMappingComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'user-stories/:id', component: UserStoriesFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'atores', component: AtoresComponent, canActivate: [AutenticacaoGuard] },
   { path: 'atores/new', component: AtoresFormComponent, canActivate: [AutenticacaoGuard] },

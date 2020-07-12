@@ -27,6 +27,7 @@ import { AngularMaterialModule } from './modules/angular-material/angular-materi
 import { AppLoadService } from './services/app-load.service';
 import { HttpsRequestInterceptorService } from './services/interceptors/http-request-interceptor.service';
 import { DialogoSelectComponent } from './components/dialogos/dialogo-select/dialogo-select.component';
+import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -49,6 +50,7 @@ export function InitApp(appLoadService: AppLoadService) {
     NavMapComponent,
     StoryMappingComponent,
     DialogoSelectComponent,
+    UserStoriesFormComponent,
   ],
   imports: [
     FormsModule,
