@@ -12,6 +12,6 @@ export class TituloService {
   ) { }
 
   setTitulo(titulo: string) {
-    this.titleService.setTitle(`${titulo} - ${environment.appName}`);
+    this.titleService.setTitle(`${titulo} | ${environment.appName}`);
   }
 }
