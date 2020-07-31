@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { OperacaoFormCrud } from '../enums/operacao-form-crud.enum';
 import { Entidade } from '../models/entidade';
 import { CrudApiBaseService } from '../services/api/crud-api-base.service';
 
+@Directive()
 export abstract class CrudFormComponent<TEntity extends Entidade> implements OnInit {
 
   entidade: TEntity;

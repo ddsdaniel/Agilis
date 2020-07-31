@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { OnInit } from '@angular/core';
+import { OnInit, Directive } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { Entidade } from '../models/entidade';
 import { CrudApiBaseService } from '../services/api/crud-api-base.service';
 
+@Directive()
 export class CrudComponent<TEntity extends Entidade> implements OnInit {
 
   lista: TEntity[];
