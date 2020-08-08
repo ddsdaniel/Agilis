@@ -21,7 +21,6 @@ import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-fo
 import { LoginComponent } from './components/seguranca/login/login.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
-import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
 import { StoryMappingComponent } from './components/trabalho/story-mapping/story-mapping.component';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
 import { AppLoadService } from './services/app-load.service';
@@ -43,7 +42,6 @@ export function InitApp(appLoadService: AppLoadService) {
     AtoresFormComponent,
     ProdutosComponent,
     ProdutosFormComponent,
-    SprintsFormComponent,
     UsuariosFormComponent,
     DialogoEmailComponent,
     DialogoTextoComponent,

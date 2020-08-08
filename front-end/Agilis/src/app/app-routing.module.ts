@@ -10,7 +10,6 @@ import { UsuariosFormComponent } from './components/pessoas/usuarios/usuarios-fo
 import { LoginComponent } from './components/seguranca/login/login.component';
 import { ProdutosFormComponent } from './components/trabalho/produtos/produtos-form/produtos-form.component';
 import { ProdutosComponent } from './components/trabalho/produtos/produtos/produtos.component';
-import { SprintsFormComponent } from './components/trabalho/sprints/sprints-form/sprints-form.component';
 import { StoryMappingComponent } from './components/trabalho/story-mapping/story-mapping.component';
 import { AutenticacaoGuard } from './guards/autenticacao.guard';
 import { UserStoriesFormComponent } from './components/trabalho/user-stories/user-stories-form/user-stories-form.component';
@@ -30,8 +29,6 @@ const routes: Routes = [
   { path: 'produtos', component: ProdutosComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'produtos/:id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
-
-  { path: 'sprints/:id', component: SprintsFormComponent, canActivate: [AutenticacaoGuard] },
 
   { path: 'map', component: NavMapComponent, canActivate: [AutenticacaoGuard] },
 
