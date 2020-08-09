@@ -1,5 +1,7 @@
-﻿using DDS.WebAPI.Abstractions.ViewModels;
+﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
@@ -18,9 +20,6 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// </summary>
         public string Nome { get; set; }
 
-        /// <summary>
-        /// Id do tema ao qual o epico pertence
-        /// </summary>
-        public Guid TemaId { get; set; }
+        public IEnumerable<UserStoryFK> UserStories { get; set; }
     }
 }

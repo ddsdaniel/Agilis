@@ -16,6 +16,7 @@ import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.servic
 })
 export class AtoresFormComponent extends CrudFormComponent<Ator> {
 
+  sugestaoProdutoId: string = constantes.newGuid;
   produtos: Produto[];
   atorApiService: AtoresApiService;
 
@@ -27,9 +28,20 @@ export class AtoresFormComponent extends CrudFormComponent<Ator> {
     private produtosApiService: ProdutosApiService,
   ) {
     super(router, atorApiService, snackBar, activatedRoute, 'atores');
+    this.recuperarQueryParams();
     this.atorApiService = atorApiService;
     this.carregarProdutos();
     this.sugerirNovo();
+  }
+
+  recuperarQueryParams() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        if (params.produtoId) {
+          this.sugestaoProdutoId = params.produtoId;
+          super.rotaPesquisa = 'produtos/' + this.sugestaoProdutoId;
+        }
+      });
   }
 
   carregarProdutos() {
@@ -44,7 +56,7 @@ export class AtoresFormComponent extends CrudFormComponent<Ator> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      produtoId: constantes.newGuid
+      produtoId: this.sugestaoProdutoId
     };
   }
 }

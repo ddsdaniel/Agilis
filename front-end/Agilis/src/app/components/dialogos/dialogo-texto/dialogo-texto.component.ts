@@ -21,4 +21,7 @@ export class DialogoTextoComponent implements OnInit {
   ngOnInit() {
   }
 
+  salvar() {
+    this.dialogRef.close(this.data.texto);
+  }
 }

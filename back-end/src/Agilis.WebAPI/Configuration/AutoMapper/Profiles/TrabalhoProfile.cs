@@ -2,7 +2,6 @@
 using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Agilis.Domain.Models.ValueObjects;
-using Agilis.Domain.Models.ValueObjects.Especificacao;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
@@ -25,9 +24,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<Comentario, ComentarioViewModel>()
                 .ReverseMap();
 
-            CreateMap<Milestone, MilestoneViewModel>()
-              .ReverseMap();
-
             CreateMap<CriterioAceitacao, CriterioAceitacaoViewModel>();
 
             CreateMap<CriterioAceitacaoViewModel, CriterioAceitacao>()
@@ -46,7 +42,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         ator: vm.Ator,
                         narrativa: vm.Narrativa,
                         objetivo: vm.Objetivo,
-                        epicoId: vm.EpicoId,
                         criteriosAceitacao: context.Mapper.Map<CriterioAceitacao[]>(vm.CriteriosAceitacao)
                         )
                  );
@@ -68,8 +63,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<EpicoViewModel, Epico>()
                  .ConstructUsing((vm, context) =>
                     new Epico(
+                        id: vm.Id,
                         nome: vm.Nome,
-                        temaId: vm.TemaId
+                        userStories: new List<UserStoryFK>()
                         )
                  );
 
@@ -79,8 +75,9 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
             CreateMap<TemaViewModel, Tema>()
                  .ConstructUsing((vm, context) =>
                     new Tema(
+                        id: vm.Id,
                         nome: vm.Nome,
-                        produtoId: vm.ProdutoId
+                        epicos: context.Mapper.Map<Epico[]>(vm.Epicos)
                         )
                  );
 
@@ -91,7 +88,18 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                  .ConstructUsing((vm, context) =>
                     new Produto(
                         nome: vm.Nome,
-                        timeId: vm.TimeId
+                        timeId: vm.TimeId,
+                        atores: vm.Atores,
+                        storyMapping: context.Mapper.Map<StoryMapping>(vm.StoryMapping)
+                        )
+                 );
+
+            CreateMap<StoryMapping, StoryMappingViewModel>();
+
+            CreateMap<StoryMappingViewModel, StoryMapping>()
+                 .ConstructUsing((vm, context) =>
+                    new StoryMapping(
+                        temas: context.Mapper.Map<Tema[]>(vm.Temas)
                         )
                  );
 
@@ -103,18 +111,6 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         posicao: vm.Posicao,
                         nome: vm.Nome,
                         fases: context.Mapper.Map<Fase[]>(vm.Fases)
-                        )
-                 );
-
-            //Releases
-            CreateMap<Release, ReleaseViewModel>();
-
-            CreateMap<ReleaseViewModel, Release>()
-                 .ConstructUsing((vm, context) =>
-                    new Release(
-                        nome: vm.Nome,
-                        sprints: context.Mapper.Map<SprintFK[]>(vm.Sprints),
-                        productBacklog: context.Mapper.Map<ProductBacklog>(vm.ProductBacklog)
                         )
                  );
 

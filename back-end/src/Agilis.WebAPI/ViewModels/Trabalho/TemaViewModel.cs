@@ -1,5 +1,6 @@
 ﻿using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
@@ -19,8 +20,8 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         public string Nome { get; set; }
 
         /// <summary>
-        /// Id do produto ao qual o tema pertence
+        /// Lista de épicos do tema
         /// </summary>
-        public Guid ProdutoId { get; set; }
+        public IEnumerable<EpicoViewModel> Epicos { get; set; }
     }
 }

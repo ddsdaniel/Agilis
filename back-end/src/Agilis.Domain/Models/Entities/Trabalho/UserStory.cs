@@ -2,7 +2,6 @@
 using DDS.Domain.Core.Abstractions.Model.Entities;
 using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
-using System;
 using System.Collections.Generic;
 
 namespace Agilis.Domain.Models.Entities.Trabalho
@@ -37,11 +36,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
         /// </summary>
         public string Historia => $"Eu, enquanto {Ator.Nome}, gostaria {Narrativa} para {Objetivo}";
 
-        /// <summary>
-        /// Id do épico ao qual a user story pertence
-        /// </summary>
-        public Guid EpicoId { get; private set; }
-
         public IEnumerable<CriterioAceitacao> CriteriosAceitacao { get; private set; }
 
         /// <summary>
@@ -65,7 +59,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                          AtorFK ator,
                          string narrativa,
                          string objetivo,
-                         Guid epicoId,
                          IEnumerable<CriterioAceitacao> criteriosAceitacao)
         {
             AddNotifications(new Contract()
@@ -73,7 +66,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
                 .IsNotNull(ator, nameof(Ator), "Ator não deve ser nulo")
                 .IsNotNullOrEmpty(narrativa, nameof(Narrativa), "Narrativa não deve ser nula ou vazia")
                 .IsNotNullOrEmpty(objetivo, nameof(Objetivo), "Objetivo não deve ser nulo ou vazio")
-                .IsNotEmpty(epicoId, nameof(EpicoId), "Id do épico não deve ser vazio")
                 .IsValidArray(criteriosAceitacao, nameof(CriteriosAceitacao))
                 );
 
@@ -81,7 +73,6 @@ namespace Agilis.Domain.Models.Entities.Trabalho
             Ator = ator;
             Narrativa = narrativa;
             Objetivo = objetivo;
-            EpicoId = epicoId;
             CriteriosAceitacao = criteriosAceitacao;
         }
     }

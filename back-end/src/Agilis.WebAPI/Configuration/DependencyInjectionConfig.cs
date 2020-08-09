@@ -41,6 +41,8 @@ namespace Agilis.WebAPI.Configuration
         /// <returns>services atualizado</returns>
         public static IServiceCollection AddDependencyInjectionConfig(this IServiceCollection services, IConfiguration configuration)
         {
+            //TODO: decompor este arquivo
+
             //Banco de dados
             var mongoDatabase = new MongoClient(new MongoClientSettings { ReplicaSetName = "rs1" }).GetDatabase("agilis");
             services.TryAddScoped(x => mongoDatabase);
@@ -51,13 +53,13 @@ namespace Agilis.WebAPI.Configuration
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-			services.AddTransient<ISprintService, SprintService>();
+            services.AddTransient<ISprintService, SprintService>();
             services.AddTransient<ISprintRepository, SprintRepository>();
 
-			services.AddTransient<ITimeService, TimeService>();
+            services.AddTransient<ITimeService, TimeService>();
             services.AddTransient<ITimeRepository, TimeRepository>();
 
-			services.AddTransient<IAtorService, AtorService>();
+            services.AddTransient<IAtorService, AtorService>();
             services.AddTransient<IAtorRepository, AtorRepository>();
 
             //Seguranca
@@ -67,23 +69,11 @@ namespace Agilis.WebAPI.Configuration
             services.AddScoped(serviceProvider => ObterUsuarioLogado(serviceProvider));
 
             //Trabalho
-            services.AddTransient<IUserStoryService, UserStoryService>();
             services.AddTransient<IUserStoryRepository, UserStoryRepository>();
-
-            services.AddTransient<IMilestoneService, MilestoneService>();
-            services.AddTransient<IMilestoneRepository, MilestoneRepository>();
-
-            services.AddTransient<IReleaseService, ReleaseService>();
-            services.AddTransient<IReleaseRepository, ReleaseRepository>();
+            services.AddTransient<IUserStoryService, UserStoryService>();
 
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
-
-            services.AddTransient<ITemaService, TemaService>();
-            services.AddTransient<ITemaRepository, TemaRepository>();
-
-            services.AddTransient<IEpicoService, EpicoService>();
-            services.AddTransient<IEpicoRepository, EpicoRepository>();
 
             //Outros
             services.AddTransient<INavigationMapService, NavigationMapService>();

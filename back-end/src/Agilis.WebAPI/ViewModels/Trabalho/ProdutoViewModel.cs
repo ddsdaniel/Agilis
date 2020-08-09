@@ -1,5 +1,8 @@
-﻿using DDS.WebAPI.Abstractions.ViewModels;
+﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using DDS.WebAPI.Abstractions.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.ViewModels.Trabalho
 {
@@ -22,5 +25,12 @@ namespace Agilis.WebAPI.ViewModels.Trabalho
         /// Id do time ao qual o produto pertence
         /// </summary>
         public Guid TimeId { get; set; }
+
+        /// <summary>
+        /// Lista de atores do produto
+        /// </summary>
+        public IEnumerable<AtorFK> Atores { get; set; }
+
+        public StoryMappingViewModel StoryMapping { get; set; }
     }
 }

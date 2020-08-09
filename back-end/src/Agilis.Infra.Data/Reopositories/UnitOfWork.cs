@@ -17,12 +17,8 @@ namespace Agilis.Infra.Data.Repositories
         public IUserStoryRepository UserStoryRepository { get; }
         public ITimeRepository TimeRepository { get; }
         public ISprintRepository SprintRepository { get; }
-        public IMilestoneRepository MilestoneRepository { get; }
-        public IReleaseRepository ReleaseRepository { get; }
         public IProdutoRepository ProdutoRepository { get; }
-        public ITemaRepository TemaRepository { get; }
         public IAtorRepository AtorRepository { get; }
-        public IEpicoRepository EpicoRepository { get; }
 
         public UnitOfWork(IMongoDatabase database)
         {
@@ -30,15 +26,11 @@ namespace Agilis.Infra.Data.Repositories
             _session.StartTransaction();
 
             UsuarioRepository = new UsuarioRepository(database, _session);
-            MilestoneRepository = new MilestoneRepository(database, _session);
             TimeRepository = new TimeRepository(database, _session);
             SprintRepository = new SprintRepository(database, _session);
             UserStoryRepository = new UserStoryRepository(database, _session);
-            ReleaseRepository = new ReleaseRepository(database, _session);
             ProdutoRepository = new ProdutoRepository(database, _session);
-            TemaRepository = new TemaRepository(database, _session);
             AtorRepository = new AtorRepository(database, _session);
-            EpicoRepository = new EpicoRepository(database, _session);
         }
 
         public async Task Commit()

@@ -1,0 +1,85 @@
+<mat-card *ngIf="produto.storyMapping.temas.length == 0" class="mt-4">
+  Clique no botão abaixo para começar adicionando um tema
+</mat-card>
+<div fxLayout="row" fxLayoutAlign="start start" class="mt-4 story-mapping-container">
+  <div *ngFor="let tema of produto.storyMapping.temas; let temaIndex = index">
+
+    <!-- Temas -->
+    <div class="tema">
+      <span>{{tema.nome}}</span>
+      <span class="icone-acoes">
+        <mat-icon mat-list-icon title="Adicionar Épico" (click)="adicionarEpico(tema.id)">add</mat-icon>
+        <mat-icon [matMenuTriggerFor]="menuTema" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+        <mat-menu #menuTema="matMenu">
+          <button mat-menu-item (click)="renomearTema(tema)">
+            <mat-icon>edit</mat-icon>
+            <span>Renomear</span>
+          </button>
+          <button mat-menu-item (click)="moverTema(temaIndex)">
+            <mat-icon>arrow_forward</mat-icon>
+            <span>Mover</span>
+          </button>
+          <button mat-menu-item (click)="excluirTema(temaIndex)">
+            <mat-icon color="warn">clear_forever</mat-icon>
+            <span>Excluir</span>
+          </button>
+        </mat-menu>
+      </span>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <div class="epico-container" *ngFor="let epico of tema.epicos; let epicoIndex = index" cdkDropListGroup>
+
+        <!-- Epicos -->
+        <div class="epico">
+          <span>{{epico.nome}}</span>
+          <span class="icone-acoes">
+            <mat-icon mat-list-icon title="Adicionar User Story" (click)="adicionarUserStory(tema.id, epico.id)">add
+            </mat-icon>
+            <mat-icon [matMenuTriggerFor]="menuEpico" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+            <mat-menu #menuEpico="matMenu">
+              <button mat-menu-item (click)="renomearEpico(tema, epico)">
+                <mat-icon>edit</mat-icon>
+                <span>Renomear</span>
+              </button>
+              <button mat-menu-item (click)="moverEpico(temaIndex, epicoIndex)">
+                <mat-icon>arrow_forward</mat-icon>
+                <span>Mover</span>
+              </button>
+              <button mat-menu-item (click)="excluirEpico(temaIndex, epicoIndex)">
+                <mat-icon color="warn">clear_forever</mat-icon>
+                <span>Excluir</span>
+              </button>
+            </mat-menu>
+          </span>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start center" cdkDropList [cdkDropListData]="epico.userStories"
+          (cdkDropListDropped)="drop($event)" class="example-list">
+
+          <!-- US -->
+          <div class="example-box us" cdkDrag *ngFor="let us of epico.userStories; let usIndex = index">
+            <a [routerLink]="['/user-stories', us.id]" [queryParams]="{ produtoId: this.produto.id}">
+              {{us.nome}}
+            </a>
+            <span class="icone-acoes">
+              <mat-icon [matMenuTriggerFor]="menuUserStory" mat-list-icon title="Mais opções">more_horiz</mat-icon>
+              <mat-menu #menuUserStory="matMenu">
+                <button mat-menu-item (click)="excluirUserStory(temaIndex, epicoIndex, usIndex)">
+                  <mat-icon color="warn">clear_forever</mat-icon>
+                  <span>Excluir</span>
+                </button>
+              </mat-menu>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <button mat-fab color="accent" title="Adicionar tema" (click)="adicionarTema()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</div>

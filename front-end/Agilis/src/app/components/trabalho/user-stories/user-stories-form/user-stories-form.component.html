@@ -2,9 +2,16 @@
 
 <mat-tab-group>
 
-  <mat-tab label="História">
+  <mat-tab label="Dados Principais">
 
     <div fxLayout="row" class="mt-4">
+      <mat-form-field class="full-width" fxFlex="33">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row">
       <mat-form-field fxFlex="33">
         <mat-label>Eu, enquanto</mat-label>
         <mat-select [(ngModel)]="entidade.ator.id" name="ator">
@@ -50,24 +57,6 @@
       </button>
     </div>
 
-  </mat-tab>
-
-  <mat-tab label="Configurações">
-    <div fxLayout="row" class="mt-4">
-      <mat-form-field class="full-width" fxFlex="33">
-        <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row">
-      <mat-form-field class="full-width" fxFlex="33">
-        <mat-label>Épico</mat-label>
-        <mat-select [(ngModel)]="entidade.epicoId" required>
-          <mat-option *ngFor="let epico of epicos" [value]="epico.id">{{epico.nome}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
   </mat-tab>
 
 </mat-tab-group>

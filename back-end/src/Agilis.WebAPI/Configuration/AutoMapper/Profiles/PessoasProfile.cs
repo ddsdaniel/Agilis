@@ -19,7 +19,8 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         nome: vm.Nome,
                         escopo: vm.Escopo,
                         administradores: context.Mapper.Map<UsuarioFK[]>(vm.Administradores),
-                        colaboradores: context.Mapper.Map<UsuarioFK[]>(vm.Colaboradores)
+                        colaboradores: context.Mapper.Map<UsuarioFK[]>(vm.Colaboradores),
+                        produtos: vm.Produtos
                         )
                  );
 

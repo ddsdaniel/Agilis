@@ -2,6 +2,10 @@
 using Agilis.Domain.Mocks.Entities.Trabalho;
 using Xunit;
 using System;
+using System.Collections.Generic;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {
@@ -23,7 +27,11 @@ namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
         public void Construtor_NomeInvalido_Invalid(string nome)
         {
             //Arrange & Act
-            var produto = new Produto(nome, Guid.NewGuid());
+            var produto = new Produto(nome, 
+                                      Guid.NewGuid(),
+                                      new List<AtorFK>(),
+                                      new StoryMapping(new List<Tema>())
+                                      );
 
             //Assert
             Assert.True(produto.Invalid);

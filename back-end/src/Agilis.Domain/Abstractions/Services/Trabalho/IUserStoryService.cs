@@ -1,12 +1,10 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
-using System.Collections.Generic;
-using System;
-using Agilis.Domain.Abstractions.Entities.Pessoas;
+using DDS.Domain.Core.Abstractions.Services;
 
 namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
-    public interface IUserStoryService : ICrudSeguroService<UserStory>
+    public interface IUserStoryService : ICrudService<UserStory>
     {
-        ICollection<UserStory> Pesquisar(string filtro, Guid epicoId, IUsuario usuario);
+        
     }
 }

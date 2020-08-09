@@ -5,13 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CrudFormComponent } from 'src/app/components/crud-form-component';
 import { constantes } from 'src/app/constants/constantes';
 import { Ator } from 'src/app/models/pessoas/ator';
-import { Epico } from 'src/app/models/trabalho/epicos/epico';
 import { CriterioAceitacao } from 'src/app/models/trabalho/user-stories/criterio-aceitacao';
 import { UserStory } from 'src/app/models/trabalho/user-stories/user-story';
 import { AtoresApiService } from 'src/app/services/api/pessoas/atores-api.service';
-import { EpicosApiService } from 'src/app/services/api/trabalho/epicos-api.service';
 import { UserStoriesApiService } from 'src/app/services/api/trabalho/user-stories-api.service';
 import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
+import { TituloService } from 'src/app/services/titulo.service';
 
 @Component({
   selector: 'app-user-stories-form',
@@ -20,39 +19,44 @@ import { DialogoService } from 'src/app/services/dialogos/dialogo.service';
 })
 export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
 
-  epicos: Epico[];
   atores: Ator[];
-
   userStoryApiService: UserStoriesApiService;
+  private produtoId: string;
 
   constructor(
     router: Router,
     userStoryApiService: UserStoriesApiService,
     snackBar: MatSnackBar,
     protected activatedRoute: ActivatedRoute,
-    private epicosApiService: EpicosApiService,
     private atoresApiService: AtoresApiService,
     private dialogoService: DialogoService,
+    private tituloService: TituloService,
   ) {
-    super(router, userStoryApiService, snackBar, activatedRoute, 'user-stories');
+    super(router, userStoryApiService, snackBar, activatedRoute, 'produtos');
     this.userStoryApiService = userStoryApiService;
-    this.carregarEpicos();
+    this.recuperarQueryParams();
     this.carregarAtores();
     this.sugerirNovo();
+  }
+
+  recuperarQueryParams() {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        if (params.produtoId) {
+          this.produtoId = params.produtoId;
+          super.rotaPesquisa = 'story-mapping/' + this.produtoId;
+        }
+      });
+  }
+
+  recuperouEntidade(userStory: UserStory){
+    this.tituloService.setTitulo(`${userStory.nome} - User Story`);
   }
 
   carregarAtores() {
     this.atoresApiService.obterTodos()
       .subscribe(
         (atores) => this.atores = atores,
-        (error: HttpErrorResponse) => this.snackBar.open(error.message)
-      );
-  }
-
-  carregarEpicos() {
-    this.epicosApiService.obterTodos()
-      .subscribe(
-        (epicos) => this.epicos = epicos,
         (error: HttpErrorResponse) => this.snackBar.open(error.message)
       );
   }
@@ -66,7 +70,6 @@ export class UserStoriesFormComponent extends CrudFormComponent<UserStory> {
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      epicoId: constantes.newGuid,
       ator: {
         id: constantes.newGuid,
         nome: '',

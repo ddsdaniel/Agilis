@@ -118,59 +118,6 @@
             </summary>
             <returns>Nó raíz da estrutura em forma de árvore</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.EpicosController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IEpicoService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.ConsultarTodos">
-            <summary>
-            Consulta todos os epicos do usuário logado
-            </summary>
-            <returns>Retorna todos os epicos do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="temaId">Filtra epicos pelo id do tema</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.EpicosController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel})">
-            <summary>
-            Ordena pelo nome do epico
-            </summary>
-            <param name="lista">Lista de epicos a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.MilestonesController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IMilestoneService,AutoMapper.IMapper)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.MilestonesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel})">
-            <summary>
-            Método abstrato, no qual cada controller implementa a ordenação de forma customizada
-            </summary>
-            <param name="lista">Lista a ser ordenada</param>
-            <returns>Lista já ordenada</returns>
-        </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.ProdutosController">
             <summary>
             Manutenção do repositório
@@ -205,55 +152,107 @@
             <param name="lista">Lista de produtos a ser ordenada</param>
             <returns>Lista já ordenada pelo nome</returns>
         </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.ReleasesController">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarTema(System.Guid,Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel)">
             <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.IReleaseService,AutoMapper.IMapper)">
-            <summary>
-            Construtor com parâmetros injetados
+            Adiciona um tema ao story mapping do produto
             </summary>
-            <param name="releaseService">Instância do Automapper</param>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="temaViewModel">Tema a ser adicionado</param>
+            <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ConsultarPorId(System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverUserStory(System.Guid,System.Guid,System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
             <summary>
-            Consulta uma release no repositório
+            Move uma user story para cima ou para baixo
             </summary>
-            <param name="id">Id da release que está sendo consultada</param>
-            <returns>View model da release</returns>
+            <param name="produtoId">Id do produto em que a user story se encontra</param>
+            <param name="temaId">Id do tem em que a user story se encontra</param>
+            <param name="epicoId">Id do épico em que a user story se encontra</param>
+            <param name="userStoryId">Id da user story que será movida</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.Renomear(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverTema(System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
             <summary>
-            Renomeia a release
+            Move um tema dentro do story mapping
             </summary>
-            <param name="timeId">Id do time</param>
-            <param name="releaseId">Id da release</param>
-            <param name="stringContainerViewModel">Novo nome da release</param>
-            <returns>Status200OK</returns>
+            <param name="produtoId">Id do produto em que o tema se encontra</param>
+            <param name="temaId">Id do tema que será movido</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarSprint(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.MoverEpico(System.Guid,System.Guid,System.Guid,Agilis.WebAPI.ViewModels.OrigemDestinoViewModel)">
             <summary>
-            Adiciona um sprint ao release
+            Move um épico dentro do story mapping
             </summary>
-            <param name="releaseId">Id da release em que o sprint será adicionado</param>
-            <param name="sprintViewModel">Nome da sprint a ser adicionada</param>
-            <returns>Id e nome da sprint adicionada</returns>
+            <param name="produtoId">Id do produto em que o tema se encontra</param>
+            <param name="temaId">Id do tema que será movido</param>
+            <param name="epicoId">Id do épico que será movido</param>
+            <param name="origemDestino">Contém o índice anterior e o novo</param>
+            <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.AdicionarFasePB(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirTema(System.Guid,System.Guid)">
             <summary>
-            Adiciona uma fase ao product backlog
+            Remove um tema do story mapping
             </summary>
-            <param name="releaseId">Id da release em que o sprint será adicionado</param>
-            <param name="faseStringContainer">Nome da sprint a ser adicionada</param>
-            <returns>Id e nome da sprint adicionada</returns>
+            <param name="produtoId"></param>
+            <param name="temaId"></param>
+            <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ReleasesController.ExcluirSprint(System.Guid,System.Guid)">
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirEpico(System.Guid,System.Guid,System.Guid)">
             <summary>
-            Remove um sprint do release+
+            Remove um épico do story mapping
             </summary>
-            <param name="releaseId"></param>
-            <param name="sprintId"></param>
+            <param name="produtoId"></param>
+            <param name="temaId"></param>
+            <param name="epicoId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.ExcluirUserStory(System.Guid,System.Guid,System.Guid,System.Guid)">
+            <summary>
+            Remove uma user story do story mapping
+            </summary>
+            <param name="produtoId"></param>
+            <param name="temaId"></param>
+            <param name="epicoId"></param>
+            <param name="userStoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarEpico(System.Guid,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel)">
+            <summary>
+            Adiciona um épico ao story mapping do produto
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="temaId">Id do tema em que o épico será adicionado</param>
+            <param name="epicoViewModel">Épico a ser adicionado</param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearTema(System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia um tema
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será renomeado</param>
+            <param name="temaId">Id do tema que será renomeado</param>
+            <param name="nomeContainer">Novo nome do tema</param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.RenomearEpico(System.Guid,System.Guid,System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
+            <summary>
+            Renomeia um épico
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será renomeado</param>
+            <param name="temaId">Id do tema que será renomeado</param>
+            <param name="epicoId">Id do épico que será renomeado</param>
+            <param name="nomeContainer">Novo nome do épico</param>
+            <returns></returns>
+        </member>
+        <member name="M:Agilis.WebAPI.Controllers.Trabalho.ProdutosController.AdicionarUserStory(System.Guid,System.Guid,System.Guid,Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel)">
+            <summary>
+            Adiciona uma user story ao épico
+            </summary>
+            <param name="produtoId">Id do produto em que o tema será adicionado</param>
+            <param name="temaId">Id do tema em que o épico será adicionado</param>
+            <param name="epicoId">Id do tema em que o épico será adicionado</param>
+            <param name="userStoryViewModel">User story a ser adicionada</param>
             <returns></returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Trabalho.SprintsController">
@@ -274,40 +273,6 @@
             </summary>
             <param name="lista">Lista a ser ordenada</param>
             <returns>Lista já ordenada</returns>
-        </member>
-        <member name="T:Agilis.WebAPI.Controllers.Trabalho.TemasController">
-            <summary>
-            Manutenção do repositório
-            </summary>    
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.#ctor(Agilis.Domain.Abstractions.Services.Trabalho.ITemaService,AutoMapper.IMapper,Agilis.Domain.Abstractions.Entities.Pessoas.IUsuario)">
-            <summary>
-            Construtor com parâmetros injetados
-            </summary>
-            <param name="service">Serviço para manipulação da entidade</param>       
-            <param name="mapper">Automapper</param>
-            <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.ConsultarTodos">
-            <summary>
-            Consulta todos os temas do usuário logado
-            </summary>
-            <returns>Retorna todos os temas do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="produtoId">Filtra temas pelo id do produto</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Trabalho.TemasController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel})">
-            <summary>
-            Ordena pelo nome do tema
-            </summary>
-            <param name="lista">Lista de temas a ser ordenada</param>
-            <returns>Lista já ordenada pelo nome</returns>
         </member>
         <member name="T:Agilis.WebAPI.Controllers.Pessoas.AtoresController">
             <summary>
@@ -362,7 +327,7 @@
             </summary>
             <returns>Retorna todos os times do usuário logado</returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarAdmin(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um usuário administrador ao time
             </summary>
@@ -378,7 +343,7 @@
             <param name="adminId"></param>
             <returns></returns>
         </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,Agilis.WebAPI.ViewModels.Pessoas.EmailViewModel)">
+        <member name="M:Agilis.WebAPI.Controllers.Pessoas.TimesController.AdicionarColaborador(System.Guid,DDS.WebAPI.Models.ViewModels.StringContainerViewModel)">
             <summary>
             Adiciona um colaborador ao time
             </summary>
@@ -463,20 +428,6 @@
             <param name="service">Serviço para manipulação da entidade</param>       
             <param name="mapper">Automapper</param>
             <param name="usuarioLogado">Injetado a partir de IHttpContextAccessor</param>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.ConsultarTodos">
-            <summary>
-            Consulta todos os userStories do usuário logado
-            </summary>
-            <returns>Retorna todos os userStories do usuário logado</returns>
-        </member>
-        <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Pesquisar(System.String,System.String)">
-            <summary>
-            Pesquisa sobre os registros do repositório
-            </summary>
-            <param name="filtro">Filtro inserido pelo usuário</param>
-            <param name="epicoId">Filtra userStories pelo id do [epico</param>
-            <returns>Lista de registros correspondentes ao filtro</returns>
         </member>
         <member name="M:Agilis.WebAPI.Controllers.Pessoas.UserStoriesController.Ordenar(System.Collections.Generic.ICollection{Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel})">
             <summary>
@@ -589,6 +540,11 @@
         <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Colaboradores">
             <summary>
             Colaboradores do time, exceto administradores
+            </summary>
+        </member>
+        <member name="P:Agilis.WebAPI.ViewModels.Pessoas.TimeViewModel.Produtos">
+            <summary>
+            Lista de produtos do time
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Pessoas.UsuarioCadastroViewModel">
@@ -751,11 +707,6 @@
             Nome do epico
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.EpicoViewModel.TemaId">
-            <summary>
-            Id do tema ao qual o epico pertence
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.FaseViewModel">
             <summary>
             Representa a fase de um fluxo
@@ -796,26 +747,6 @@
             Fases de uma jornada
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel">
-            <summary>
-            Marco histórico, ponto significativo na linha do tempo
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Id">
-            <summary>
-            Id do milestone
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Nome">
-            <summary>
-            Nome do Milestone
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.MilestoneViewModel.Marco">
-            <summary>
-            Data do marco histórico
-            </summary>
-        </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ProductBacklogViewModel">
             <summary>
             Representa uma item do product backlog
@@ -846,29 +777,9 @@
             Id do time ao qual o produto pertence
             </summary>
         </member>
-        <member name="T:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ProdutoViewModel.Atores">
             <summary>
-            Representa uma release do time
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Id">
-            <summary>
-            Id da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Nome">
-            <summary>
-            Nome da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.Sprints">
-            <summary>
-            Sprints da release
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.ReleaseViewModel.ProductBacklog">
-            <summary>
-            Product Backlog da release
+            Lista de atores do produto
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.SprintViewModel">
@@ -921,9 +832,9 @@
             Nome do tema
             </summary>
         </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.ProdutoId">
+        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.TemaViewModel.Epicos">
             <summary>
-            Id do produto ao qual o tema pertence
+            Lista de épicos do tema
             </summary>
         </member>
         <member name="T:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel">
@@ -954,11 +865,6 @@
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.Historia">
             <summary>
             Descrição no formato padrão de uma user story
-            </summary>
-        </member>
-        <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.EpicoId">
-            <summary>
-            Id do épico ao qual a user story pertence
             </summary>
         </member>
         <member name="P:Agilis.WebAPI.ViewModels.Trabalho.UserStoryViewModel.CriteriosAceitacao">

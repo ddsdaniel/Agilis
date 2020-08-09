@@ -3,28 +3,20 @@ using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Abstractions.Services.Trabalho;
 using Agilis.Domain.Models.Entities.Trabalho;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Agilis.Domain.Services.Trabalho
 {
     public class UserStoryService : CrudService<UserStory>, IUserStoryService
     {
-        public UserStoryService(IUnitOfWork unitOfWork)
+        private readonly IUsuario _usuarioLogado;
+
+        public UserStoryService(IUnitOfWork unitOfWork, IUsuario usuarioLogado)
             : base(unitOfWork, unitOfWork.UserStoryRepository)
         {
-        }
-
-        public IEnumerable<UserStory> ConsultarTodos(IUsuario usuario)
-        {
-            var epicosId = ObterEpicosDoUsuario(usuario).ToList();
-
-            return _unitOfWork.UserStoryRepository
-                   .AsQueryable()
-                   .Where(us => epicosId.Contains(us.EpicoId))
-                   .OrderBy(us => us.Nome)
-                   .ToList();
+            _usuarioLogado = usuarioLogado;
         }
 
         public override ICollection<UserStory> Pesquisar(string filtro)
@@ -34,66 +26,35 @@ namespace Agilis.Domain.Services.Trabalho
                  .OrderBy(us => us.Nome)
                  .ToList();
 
-        public IEnumerable<UserStory> Pesquisar(string filtro, IUsuario usuario)
+        public override async Task Atualizar(UserStory userStory)
         {
-            var epicosId = ObterEpicosDoUsuario(usuario);
+            await base.Atualizar(userStory);
 
-            return _unitOfWork.UserStoryRepository
-                    .AsQueryable()
-                    .Where(us => epicosId.Contains(us.EpicoId) && us.Nome.ToLower().Contains(filtro.ToLower()))
-                    .OrderBy(us => us.Nome)
+            if (Valid)
+            {
+                var timesId = _unitOfWork.TimeRepository
+                    .ObterTimes(_usuarioLogado)
+                    .Select(t => t.Id)
                     .ToList();
-        }
 
-        public ICollection<UserStory> Pesquisar(string filtro, Guid epicoId, IUsuario usuario)
-        {
-            var epicosId = epicoId == Guid.Empty
-                ? ObterEpicosDoUsuario(usuario)
-                : new List<Guid> { epicoId };
+                var userStoryFK = _unitOfWork.ProdutoRepository
+                    .ConsultarTodos(timesId)
+                    .SelectMany(p => p.StoryMapping.Temas)
+                    .SelectMany(t => t.Epicos)
+                    .SelectMany(e => e.UserStories)
+                    .FirstOrDefault(us => us.Id == userStory.Id);
 
-            if (filtro == null)
-                filtro = "";
+                if (userStoryFK != null)
+                {
+                    userStoryFK.Nome = userStory.Nome;
 
-            return _unitOfWork.UserStoryRepository
-                    .AsQueryable()
-                    .Where(us => epicosId.Contains(us.EpicoId) && 
-                           (
-                                us.Nome.ToLower().Contains(filtro.ToLower()) ||
-                                us.Narrativa.ToLower().Contains(filtro.ToLower()) ||
-                                us.Ator.Nome.ToLower().Contains(filtro.ToLower()) ||
-                                us.Objetivo.ToLower().Contains(filtro.ToLower())
-                           )
-                     )
-                    .OrderBy(us => us.Nome)
-                    .ToList();
-        }
+                    var produto = _unitOfWork.ProdutoRepository
+                        .ConsultarTodos(timesId)
+                        .FirstOrDefault(p => p.StoryMapping.Temas.Any(t => t.Epicos.Any(e => e.UserStories.Any(us => us.Id == userStory.Id))));
 
-        private List<Guid> ObterEpicosDoUsuario(IUsuario usuario)
-        {
-            var timesDoUsuario = _unitOfWork.TimeRepository
-               .ObterTimes(usuario)
-               .Select(t => t.Id)
-               .ToList();
-
-            var produtosId = _unitOfWork.ProdutoRepository
-                .AsQueryable()
-                .Where(p => timesDoUsuario.Contains(p.TimeId))
-                .Select(p => p.Id)
-                .ToList();
-
-            var temasId = _unitOfWork.TemaRepository
-                .AsQueryable()
-                .Where(t => produtosId.Contains(t.ProdutoId))
-                .Select(t => t.Id)
-                .ToList();
-
-            var epicosId = _unitOfWork.EpicoRepository
-                .AsQueryable()
-                .Where(e => temasId.Contains(e.TemaId))
-                .Select(e => e.Id)
-                .ToList();
-
-            return epicosId;
+                    await _unitOfWork.ProdutoRepository.Atualizar(produto);
+                }
+            }
         }
     }
 }

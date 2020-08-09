@@ -48,7 +48,8 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
       nome: '',
       administradores: [],
       colaboradores: [],
-      escopo: EscopoTime.Colaborativo
+      escopo: EscopoTime.Colaborativo,
+      produtos: []
     };
   }
 
@@ -60,7 +61,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
     this.dialogoService.abrirEmail()
       .subscribe(email => {
         if (email) {
-          this.timeApiService.adicionarColaborador(this.entidade.id, email)
+          this.timeApiService.adicionarColaborador(this.entidade.id, email.endereco)
             .subscribe(
               (novoColab: UsuarioFK) => this.entidade.colaboradores.push(novoColab),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)
@@ -96,7 +97,7 @@ export class TimesFormComponent extends CrudFormComponent<Time> implements OnIni
     this.dialogoService.abrirEmail()
       .subscribe(email => {
         if (email) {
-          this.timeApiService.adicionarAdmin(this.entidade.id, email)
+          this.timeApiService.adicionarAdmin(this.entidade.id, email.endereco)
             .subscribe(
               (novoAdmin: UsuarioFK) => this.entidade.administradores.push(novoAdmin),
               (error: HttpErrorResponse) => this.snackBar.open(error.message)

@@ -1,5 +1,7 @@
-﻿import { Entidade } from '../../entidade';
+﻿import { Epico } from '../epicos/epico';
 
-export interface Tema extends Entidade {
-  produtoId: string;
+export interface Tema {
+  id: string;
+  nome: string;
+  epicos: Epico[];
 }

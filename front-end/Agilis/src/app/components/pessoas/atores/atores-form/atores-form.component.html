@@ -12,7 +12,11 @@
         <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required>
       </mat-form-field>
 
-      <mat-form-field class="ml-3" fxFlex="30">
+    </div>
+
+    <div fxLayout="row">
+
+      <mat-form-field fxFlex="30">
         <mat-label>Produto</mat-label>
         <mat-select [(ngModel)]="entidade.produtoId" required>
           <mat-option *ngFor="let produto of produtos" [value]="produto.id">{{produto.nome}}</mat-option>

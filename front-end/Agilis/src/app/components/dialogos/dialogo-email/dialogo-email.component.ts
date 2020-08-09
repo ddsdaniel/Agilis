@@ -21,4 +21,8 @@ export class DialogoEmailComponent implements OnInit {
   ngOnInit() {
   }
 
+  salvar() {
+    this.dialogRef.close(this.email);
+  }
+
 }

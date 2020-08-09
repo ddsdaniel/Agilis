@@ -9,6 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Threading.Tasks;
+using DDS.WebAPI.Models.ViewModels;
+using Agilis.Domain.Models.ValueObjects.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.WebAPI.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Trabalho
 {
@@ -19,6 +25,8 @@ namespace Agilis.WebAPI.Controllers.Trabalho
     [Route("api/[controller]")]
     public class ProdutosController : CrudController<ProdutoViewModel, ProdutoViewModel, Produto>
     {
+        //TODO: decompor tema, us e epico
+
         private readonly IProdutoService _produtoService;
         private readonly IUsuario _usuarioLogado;
 
@@ -80,5 +88,281 @@ namespace Agilis.WebAPI.Controllers.Trabalho
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
 
+        /// <summary>
+        /// Adiciona um tema ao story mapping do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="temaViewModel">Tema a ser adicionado</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas")]
+        [ProducesResponseType(typeof(TemaViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarTema(Guid produtoId,
+                                                      TemaViewModel temaViewModel)
+        {
+            if (temaViewModel.Id == Guid.Empty)
+                temaViewModel.Id = Guid.NewGuid();
+
+            var tema = _mapper.Map<Tema>(temaViewModel);
+            await _produtoService.AdicionarTema(produtoId, tema);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            temaViewModel = _mapper.Map<TemaViewModel>(tema);
+
+            return Ok(temaViewModel);
+        }
+
+        /// <summary>
+        /// Move uma user story para cima ou para baixo
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que a user story se encontra</param>
+        /// <param name="temaId">Id do tem em que a user story se encontra</param>
+        /// <param name="epicoId">Id do épico em que a user story se encontra</param>
+        /// <param name="userStoryId">Id da user story que será movida</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories/{userStoryId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverUserStory(Guid produtoId,
+                                                       Guid temaId,
+                                                       Guid epicoId,
+                                                       Guid userStoryId,
+                                                       OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverUserStory(produtoId, temaId, epicoId, userStoryId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Move um tema dentro do story mapping
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema se encontra</param>
+        /// <param name="temaId">Id do tema que será movido</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverTema(Guid produtoId,
+                                                  Guid temaId,
+                                                  OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverTema(produtoId, temaId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Move um épico dentro do story mapping
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema se encontra</param>
+        /// <param name="temaId">Id do tema que será movido</param>
+        /// <param name="epicoId">Id do épico que será movido</param>
+        /// <param name="origemDestino">Contém o índice anterior e o novo</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/mover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoverEpico(Guid produtoId,
+                                                   Guid temaId,
+                                                   Guid epicoId,
+                                                   OrigemDestinoViewModel origemDestino)
+        {
+            await _produtoService.MoverEpico(produtoId, temaId, epicoId, origemDestino.Destino);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Remove um tema do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirTema(Guid produtoId,
+                                                     Guid temaId)
+        {
+            await _produtoService.ExcluirTema(produtoId, temaId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Remove um épico do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <param name="epicoId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirEpico(Guid produtoId,
+                                                     Guid temaId,
+                                                     Guid epicoId)
+        {
+            await _produtoService.ExcluirEpico(produtoId, temaId, epicoId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Remove uma user story do story mapping
+        /// </summary>
+        /// <param name="produtoId"></param>
+        /// <param name="temaId"></param>
+        /// <param name="epicoId"></param>
+        /// <param name="userStoryId"></param>
+        /// <returns></returns>
+        [HttpDelete("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories/{userStoryId:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> ExcluirUserStory(Guid produtoId,
+                                                     Guid temaId,
+                                                     Guid epicoId,
+                                                     Guid userStoryId)
+        {
+            await _produtoService.ExcluirUserStory(produtoId, temaId, epicoId, userStoryId);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adiciona um épico ao story mapping do produto
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="temaId">Id do tema em que o épico será adicionado</param>
+        /// <param name="epicoViewModel">Épico a ser adicionado</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos")]
+        [ProducesResponseType(typeof(EpicoViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarEpico(Guid produtoId,
+                                                       Guid temaId,
+                                                       EpicoViewModel epicoViewModel)
+        {
+            if (epicoViewModel.Id == Guid.Empty)
+                epicoViewModel.Id = Guid.NewGuid();
+
+            var epico = _mapper.Map<Epico>(epicoViewModel);
+            await _produtoService.AdicionarEpico(produtoId, temaId, epico);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            epicoViewModel = _mapper.Map<EpicoViewModel>(epico);
+
+            return Ok(epicoViewModel);
+        }
+
+        /// <summary>
+        /// Renomeia um tema
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será renomeado</param>
+        /// <param name="temaId">Id do tema que será renomeado</param>
+        /// <param name="nomeContainer">Novo nome do tema</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/renomear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> RenomearTema(Guid produtoId,
+                                                     Guid temaId,
+                                                     StringContainerViewModel nomeContainer)
+        {
+            await _produtoService.RenomearTema(produtoId, temaId, nomeContainer.Texto);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Renomeia um épico
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será renomeado</param>
+        /// <param name="temaId">Id do tema que será renomeado</param>
+        /// <param name="epicoId">Id do épico que será renomeado</param>
+        /// <param name="nomeContainer">Novo nome do épico</param>
+        /// <returns></returns>
+        [HttpPatch("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/renomear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> RenomearEpico(Guid produtoId,
+                                                      Guid temaId,
+                                                      Guid epicoId,
+                                                      StringContainerViewModel nomeContainer)
+        {
+            await _produtoService.RenomearEpico(produtoId, temaId, epicoId, nomeContainer.Texto);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adiciona uma user story ao épico
+        /// </summary>
+        /// <param name="produtoId">Id do produto em que o tema será adicionado</param>
+        /// <param name="temaId">Id do tema em que o épico será adicionado</param>
+        /// <param name="epicoId">Id do tema em que o épico será adicionado</param>
+        /// <param name="userStoryViewModel">User story a ser adicionada</param>
+        /// <returns></returns>
+        [HttpPost("{produtoId:guid}/temas/{temaId:guid}/epicos/{epicoId:guid}/user-stories")]
+        [ProducesResponseType(typeof(UserStoryFK), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> AdicionarUserStory(Guid produtoId,
+                                                           Guid temaId,
+                                                           Guid epicoId,
+                                                           UserStoryViewModel userStoryViewModel)
+        {
+            var userStory = _mapper.Map<UserStory>(userStoryViewModel);
+
+            await _produtoService.AdicionarUserStory(produtoId, temaId, epicoId, userStory);
+
+            if (_produtoService.Invalid)
+                return BadRequest(_produtoService.Notifications);
+
+            var userStoryFK = new UserStoryFK(userStory.Id, userStory.Nome);
+
+            return Ok(userStoryFK);
+        }
     }
 }

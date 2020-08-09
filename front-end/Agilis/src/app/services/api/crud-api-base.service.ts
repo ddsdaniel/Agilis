@@ -6,9 +6,6 @@ import { ApiRestBaseService } from './api-rest-base.service';
 import { map } from 'rxjs/operators';
 import { Entidade } from 'src/app/models/entidade';
 
-@Injectable({
-  providedIn: 'root'
-})
 export abstract class CrudApiBaseService<TEntity extends Entidade> extends ApiRestBaseService {
 
   constructor(http: HttpClient, recurso: string) {

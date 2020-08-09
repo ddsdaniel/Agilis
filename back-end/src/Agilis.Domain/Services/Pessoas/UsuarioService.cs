@@ -11,6 +11,7 @@ using Agilis.Domain.Abstractions.Services.Pessoas;
 using System.Collections.Generic;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 
 namespace Agilis.Domain.Services.Pessoas
 {
@@ -38,7 +39,8 @@ namespace Agilis.Domain.Services.Pessoas
             var timePessoal = new Time("Pessoal",
                                        EscopoTime.Pessoal,
                                        new List<UsuarioFK>(),
-                                       new List<UsuarioFK> { new UsuarioFK(usuario.Id, usuario.Nome, usuario.Email.Endereco) }
+                                       new List<UsuarioFK> { new UsuarioFK(usuario.Id, usuario.Nome, usuario.Email.Endereco) },
+                                       new List<ProdutoFK>()
                                        );
             await _unitOfWork.TimeRepository.Adicionar(timePessoal);
         }

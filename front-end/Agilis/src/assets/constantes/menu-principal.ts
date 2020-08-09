@@ -18,18 +18,6 @@ export const menuPrincipal: ItemMenu[] = [
     rota: '/atores'
   },
   {
-    nome: 'Temas',
-    rota: '/temas'
-  },
-  {
-    nome: 'Épicos',
-    rota: '/epicos'
-  },
-  {
-    nome: 'User Stories',
-    rota: '/user-stories'
-  },
-  {
     nome: 'Sitemap',
     rota: '/map'
   },

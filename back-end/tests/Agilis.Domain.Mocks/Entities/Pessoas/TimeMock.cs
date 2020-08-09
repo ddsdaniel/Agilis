@@ -2,6 +2,7 @@
 using Agilis.Domain.Mocks.ValueObjects;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using Agilis.Domain.Models.ForeignKeys.Trabalho;
 using Bogus;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  colaboradores: new List<UsuarioFK>(),
                                                  administradores: new List<UsuarioFK> {
                                                      new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco)
-                                                 }
+                                                 },
+                                                 produtos: new List<ProdutoFK>()
                    ))
                .Generate();
 
@@ -28,7 +30,8 @@ namespace Agilis.Domain.Mocks.Entities.Pessoas
                                                  colaboradores: new List<UsuarioFK>(),
                                                  administradores: new List<UsuarioFK> { 
                                                      new UsuarioFK(Guid.NewGuid(), "Usuário 1", EmailMock.ObterValido().Endereco) 
-                                                 }
+                                                 },
+                                                 produtos: new List<ProdutoFK>()
                    ))
                .Generate();
     }

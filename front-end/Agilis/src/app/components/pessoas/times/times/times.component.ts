@@ -38,9 +38,7 @@ export class TimesComponent extends CrudComponent<Time> {
             id: this.autenticacaoService.usuarioLogado.usuario.id,
             nome: this.autenticacaoService.usuarioLogado.usuario.nome + ' ' +
               this.autenticacaoService.usuarioLogado.usuario.sobrenome,
-            email: {
-              endereco: this.autenticacaoService.usuarioLogado.usuario.email
-            },
+            email: this.autenticacaoService.usuarioLogado.usuario.email,
           };
 
           const time: Time = {
@@ -49,6 +47,7 @@ export class TimesComponent extends CrudComponent<Time> {
             colaboradores: [],
             administradores: [admin],
             escopo: EscopoTime.Colaborativo,
+            produtos: []
           };
 
           this.timesApiService.adicionar(time)

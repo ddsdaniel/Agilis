@@ -24,23 +24,12 @@ namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
                         )
                  );
 
-            CreateMap<UsuarioFK, UsuarioBasicViewModel>();
-
             CreateMap<Usuario, UsuarioFK>()
                  .ConstructUsing((usuario, context) =>
                     new UsuarioFK(
                         id: usuario.Id,
                         nome: usuario.NomeCompleto,
                         email: usuario.Email.Endereco
-                        )
-                 );
-
-            CreateMap<UsuarioBasicViewModel, UsuarioFK>()
-                 .ConstructUsing((vm, context) =>
-                    new UsuarioFK(
-                        id: vm.Id,
-                        nome: vm.Nome,
-                        email: vm.Email.Endereco
                         )
                  );
         }

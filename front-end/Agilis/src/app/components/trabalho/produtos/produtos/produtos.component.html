@@ -34,6 +34,7 @@
   <mat-list-item role="listitem" *ngFor="let produto of lista; let i = index">
     <mat-icon mat-list-icon title="Excluir" color="warn" (click)="excluir(i)">clear_forever</mat-icon>
     <mat-icon mat-list-icon title="Editar" (click)="editar(produto.id)">edit</mat-icon>
+    <mat-icon [routerLink]="['/story-mapping', produto.id]" rou mat-list-icon title="Story Mapping">view_quilt</mat-icon>
     <div mat-line>{{produto.nome}}</div>
   </mat-list-item>
 </mat-list>

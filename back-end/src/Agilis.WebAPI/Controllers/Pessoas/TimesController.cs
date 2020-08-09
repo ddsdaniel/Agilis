@@ -11,6 +11,8 @@ using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
 using DDS.Domain.Core.Model.ValueObjects;
+using Agilis.Domain.Models.ForeignKeys.Pessoas;
+using DDS.WebAPI.Models.ViewModels;
 
 namespace Agilis.WebAPI.Controllers.Pessoas
 {
@@ -61,19 +63,19 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/administradores")]
-        [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ICollection<UsuarioFK>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarAdmin(Guid timeId,
-                                                       EmailViewModel emailViewModel)
+                                                       StringContainerViewModel emailViewModel)
         {
-            var email = new Email(emailViewModel.Endereco);
+            var email = new Email(emailViewModel.Texto);
             var adminVO = await _timeService.AdicionarAdmin(timeId, email);
 
             if (_timeService.Invalid)
                 return BadRequest(_timeService.Notifications);
 
-            var adminViewModel = _mapper.Map<UsuarioBasicViewModel>(adminVO);
+            var adminViewModel = _mapper.Map<UsuarioFK>(adminVO);
 
             return Ok(adminViewModel);
         }
@@ -106,19 +108,19 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/colaboradores")]
-        [ProducesResponseType(typeof(ICollection<UsuarioBasicViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ICollection<UsuarioFK>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarColaborador(Guid timeId,
-                                                             EmailViewModel emailViewModel)
+                                                             StringContainerViewModel emailViewModel)
         {
-            var email = new Email(emailViewModel.Endereco);
+            var email = new Email(emailViewModel.Texto);
             var colabVO = await _timeService.AdicionarColaborador(timeId, email);
 
             if (_timeService.Invalid)
                 return BadRequest(_timeService.Notifications);
 
-            var colabViewModel = _mapper.Map<UsuarioBasicViewModel>(colabVO);
+            var colabViewModel = _mapper.Map<UsuarioFK>(colabVO);
 
             return Ok(colabViewModel);
         }
