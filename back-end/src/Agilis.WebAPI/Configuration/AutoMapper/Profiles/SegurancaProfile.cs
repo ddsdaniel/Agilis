@@ -2,8 +2,8 @@
 using Agilis.Domain.Models.ValueObjects.Seguranca;
 using Agilis.WebAPI.ViewModels.Seguranca;
 using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Models.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 {

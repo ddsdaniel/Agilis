@@ -1,5 +1,5 @@
-﻿using DDS.Domain.Core.Model.ValueObjects;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+﻿using DDS.Domain.Core.Models.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using Agilis.Domain.Abstractions.Repositories;
 using Agilis.Domain.Abstractions.Services;
 using System;
@@ -113,7 +113,7 @@ namespace Agilis.Domain.Services.Pessoas
 
         public Usuario ConsultarPorEmail(Email email) => _unitOfWork.UsuarioRepository.ConsultarPorEmail(email);
 
-        public override ICollection<Usuario> Pesquisar(string filtro)
+        public override IEnumerable<Usuario> Pesquisar(string filtro)
              => _unitOfWork.UsuarioRepository
                     .AsQueryable()
                     .Where(u => u.Nome.ToLower().Contains(filtro.ToLower()))

@@ -2,7 +2,7 @@
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 {

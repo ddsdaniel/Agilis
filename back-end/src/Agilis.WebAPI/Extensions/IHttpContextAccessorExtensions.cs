@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Model.ValueObjects;
+﻿using DDS.Domain.Core.Models.ValueObjects;
 using Microsoft.AspNetCore.Http;
 
 namespace Agilis.WebAPI.Extensions

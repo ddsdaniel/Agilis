@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
-using DDS.Domain.Core.Abstractions.Model.Entities;
+using DDS.Domain.Core.Abstractions.Models.Entities;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;

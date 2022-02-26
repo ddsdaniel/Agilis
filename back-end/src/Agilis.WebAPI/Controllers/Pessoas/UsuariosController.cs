@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using Flunt.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -132,7 +132,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// </summary>
         /// <param name="lista">Lista a ser ordenada</param>
         /// <returns>Lista já ordenada</returns>
-        protected override ICollection<UsuarioConsultaViewModel> Ordenar(ICollection<UsuarioConsultaViewModel> lista)
+        protected override IEnumerable<UsuarioConsultaViewModel> Ordenar(IEnumerable<UsuarioConsultaViewModel> lista)
                 => lista.OrderBy(u => u.Nome)
                         .ToList();
     }

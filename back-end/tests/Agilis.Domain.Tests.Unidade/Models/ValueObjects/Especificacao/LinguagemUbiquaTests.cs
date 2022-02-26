@@ -49,14 +49,14 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
         {
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Adicionar(jargao, significado);
 
             //Assert
             Assert.True(linguagemUbiqua.Valid);
-            Assert.Equal(contAntes + 1, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes + 1, linguagemUbiqua.Jargoes.Count());
 
             var ultimo = linguagemUbiqua.Jargoes.Last();
             Assert.Equal(jargao, ultimo.Jargao);
@@ -68,7 +68,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
         {
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Adicionar("J1", "S1");
@@ -76,7 +76,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
 
             //Assert
             Assert.True(linguagemUbiqua.Invalid);
-            Assert.Equal(contAntes + 1, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes + 1, linguagemUbiqua.Jargoes.Count());
 
             var ultimo = linguagemUbiqua.Jargoes.Last();
             Assert.Equal("J1", ultimo.Jargao);
@@ -88,7 +88,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
         {
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Adicionar("", "S1");
@@ -96,7 +96,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
 
             //Assert
             Assert.True(linguagemUbiqua.Invalid);
-            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count());
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
         {
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Adicionar("J1", "");
@@ -112,7 +112,7 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
 
             //Assert
             Assert.True(linguagemUbiqua.Invalid);
-            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count());
         }
 
         [Theory]
@@ -124,14 +124,14 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
             linguagemUbiqua.Adicionar(jargaoParaAdicionar, "S1");
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Remover(jargaoParaRemover);
 
             //Assert
             Assert.True(linguagemUbiqua.Valid);
-            Assert.Equal(contAntes - 1, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes - 1, linguagemUbiqua.Jargoes.Count());
         }
 
         [Fact]
@@ -140,14 +140,14 @@ namespace Agilis.Domain.Tests.Unidade.Models.ValueObjects.Especificacao
             //Arrange
             var linguagemUbiqua = new LinguagemUbiqua(new List<JargaoDoNegocio>());
             linguagemUbiqua.Adicionar("J1", "S1");
-            var contAntes = linguagemUbiqua.Jargoes.Count;
+            var contAntes = linguagemUbiqua.Jargoes.Count();
 
             //Act
             linguagemUbiqua.Remover("J2");
 
             //Assert
             Assert.True(linguagemUbiqua.Invalid);
-            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count);
+            Assert.Equal(contAntes, linguagemUbiqua.Jargoes.Count());
         }
        
     }

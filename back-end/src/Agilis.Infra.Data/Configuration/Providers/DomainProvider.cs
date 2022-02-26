@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+﻿using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using MongoDB.Bson.Serialization;
 using Agilis.Infra.Data.Configuration.Serializers;
 using System;

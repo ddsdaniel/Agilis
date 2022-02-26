@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+﻿using DDS.Domain.Core.Abstractions.Models.ValueObjects;
 using Flunt.Validations;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ namespace Agilis.Domain.Models.ValueObjects.Especificacao
 {
     public class LinguagemUbiqua : ValueObject<LinguagemUbiqua>
     {
-        public ICollection<JargaoDoNegocio> Jargoes { get; private set; }
+        public IEnumerable<JargaoDoNegocio> Jargoes { get; private set; }
 
-        public LinguagemUbiqua(ICollection<JargaoDoNegocio> jargoes)
+        public LinguagemUbiqua(IEnumerable<JargaoDoNegocio> jargoes)
         {
             AddNotifications(new Contract()
                 .IsNotNull(jargoes, nameof(Jargoes), "Jargões não pode ser nulo")
@@ -32,7 +32,9 @@ namespace Agilis.Domain.Models.ValueObjects.Especificacao
                 }
                 else
                 {
-                    Jargoes.Add(jargaoDoNegocio);
+                    var novaLista = Jargoes.ToList();
+                    novaLista.Add(jargaoDoNegocio);
+                    Jargoes = novaLista;
                 }
             }
         }

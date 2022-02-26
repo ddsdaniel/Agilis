@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Trabalho;
-using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+using DDS.Domain.Core.Abstractions.Models.ValueObjects;
 using Flunt.Validations;
 using System.Collections.Generic;
 

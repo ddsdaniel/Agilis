@@ -5,7 +5,7 @@ using Agilis.Domain.Abstractions.Services.Pessoas;
 using Agilis.Domain.Enums;
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace Agilis.Domain.Services.Pessoas
 
         }
 
-        public override ICollection<Time> Pesquisar(string filtro)
+        public override IEnumerable<Time> Pesquisar(string filtro)
              => _unitOfWork.TimeRepository
                     .AsQueryable()
                     .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))

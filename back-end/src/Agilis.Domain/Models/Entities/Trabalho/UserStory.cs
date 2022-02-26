@@ -1,5 +1,6 @@
 ﻿using Agilis.Domain.Models.ForeignKeys.Pessoas;
-using DDS.Domain.Core.Abstractions.Model.Entities;
+using DDS.Domain.Core.Abstractions.Models.Entities;
+using DDS.Domain.Core.Abstractions.Models.Entities;
 using DDS.Domain.Core.Extensions;
 using Flunt.Validations;
 using System.Collections.Generic;

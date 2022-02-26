@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
-using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+using DDS.Domain.Core.Abstractions.Models.ValueObjects;
 using Flunt.Validations;
 using System;
 

@@ -15,7 +15,7 @@ namespace Agilis.Domain.Abstractions.Services
         {
         }
 
-        public ICollection<TEntity> ConsultarTodos(IUsuario usuario)
+        public IEnumerable<TEntity> ConsultarTodos(IUsuario usuario)
             => _repository
                 .AsQueryable()
                 .Where(p => p.UsuarioId == usuario.Id)

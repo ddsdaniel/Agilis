@@ -5,7 +5,7 @@ namespace Agilis.Domain.Abstractions.Services.Trabalho
 {
     public interface ISprintService : ICrudService<Sprint>
     {
-        //ICollection<Sprint> ConsultarTodos(IUsuario usuario);
-        //ICollection<Sprint> Pesquisar(string filtro, IUsuario usuario);        
+        //IEnumerable<Sprint> ConsultarTodos(IUsuario usuario);
+        //IEnumerable<Sprint> Pesquisar(string filtro, IUsuario usuario);        
     }
 }

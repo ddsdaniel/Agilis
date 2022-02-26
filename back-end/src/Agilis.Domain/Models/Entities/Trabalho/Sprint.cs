@@ -1,5 +1,5 @@
-﻿using DDS.Domain.Core.Abstractions.Model.Entities;
-using DDS.Domain.Core.Model.ValueObjects;
+﻿using DDS.Domain.Core.Abstractions.Models.Entities;
+using DDS.Domain.Core.Models.ValueObjects;
 using Flunt.Validations;
 
 namespace Agilis.Domain.Models.Entities.Trabalho

@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
-using DDS.Domain.Core.Abstractions.Model.Entities;
+using DDS.Domain.Core.Abstractions.Models.Entities;
 using DDS.Domain.Core.Abstractions.Services;
 using System.Collections.Generic;
 

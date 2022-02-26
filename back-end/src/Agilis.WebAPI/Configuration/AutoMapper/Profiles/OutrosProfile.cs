@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Abstractions.Entities;
 using Agilis.WebAPI.ViewModels;
 using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles
 {

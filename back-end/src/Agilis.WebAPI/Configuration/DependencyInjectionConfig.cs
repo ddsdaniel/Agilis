@@ -22,7 +22,7 @@ using Agilis.Infra.Data.Reopositories.Trabalho;
 using Agilis.Domain.Services.Pessoas;
 using System;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 using Agilis.Domain.Abstractions.Services;
 using Agilis.Domain.Services;
 

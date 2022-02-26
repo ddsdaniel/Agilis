@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Abstractions.Model.ValueObjects;
+﻿using DDS.Domain.Core.Abstractions.Models.ValueObjects;
 
 namespace Agilis.Domain.Models.ValueObjects
 {

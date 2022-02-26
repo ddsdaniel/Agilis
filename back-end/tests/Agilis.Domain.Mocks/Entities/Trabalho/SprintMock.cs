@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Bogus;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 
 namespace Agilis.Domain.Mocks.Entities.Trabalho
 {

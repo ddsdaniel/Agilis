@@ -5,7 +5,7 @@ using Agilis.Domain.Models.ValueObjects;
 using Agilis.Domain.Models.ValueObjects.Trabalho;
 using Agilis.WebAPI.ViewModels.Trabalho;
 using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 using System.Collections.Generic;
 
 namespace Agilis.WebAPI.Configuration.AutoMapper.Profiles

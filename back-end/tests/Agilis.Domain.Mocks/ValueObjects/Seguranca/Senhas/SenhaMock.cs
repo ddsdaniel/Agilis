@@ -1,6 +1,6 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
 using Bogus;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 
 namespace Agilis.Domain.Mocks.ValueObjects.Seguranca.Senhas
 {

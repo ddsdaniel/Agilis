@@ -32,7 +32,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         ///// Consulta todos os sprints do usuário logado
         ///// </summary>
         ///// <returns>Retorna todos os sprints do usuário logado</returns>
-        //public override ActionResult<ICollection<SprintViewModel>> ConsultarTodos()
+        //public override ActionResult<IEnumerable<SprintViewModel>> ConsultarTodos()
         //{
 
         //    var lista = _service.ConsultarTodos(_usuarioLogado).OrderBy(p => p.Nome);
@@ -48,12 +48,12 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         ///// <param name="filtro">Filtro inserido pelo usuário</param>
         ///// <returns>Lista de registros correspondentes ao filtro</returns>
         //[HttpGet("pesquisa")]
-        //[ProducesResponseType(typeof(ICollection<SprintViewModel>), StatusCodes.Status200OK)]
-        //public override ActionResult<ICollection<SprintViewModel>> Pesquisar([FromQuery] string filtro)
+        //[ProducesResponseType(typeof(IEnumerable<SprintViewModel>), StatusCodes.Status200OK)]
+        //public override ActionResult<IEnumerable<SprintViewModel>> Pesquisar([FromQuery] string filtro)
         //{
         //    var lista = _service.Pesquisar(filtro, _usuarioLogado);
 
-        //    var listaViewModel = _mapper.Map<ICollection<SprintViewModel>>(lista);
+        //    var listaViewModel = _mapper.Map<IEnumerable<SprintViewModel>>(lista);
 
         //    listaViewModel = Ordenar(listaViewModel);
 
@@ -65,7 +65,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// </summary>
         /// <param name="lista">Lista a ser ordenada</param>
         /// <returns>Lista já ordenada</returns>
-        protected override ICollection<SprintViewModel> Ordenar(ICollection<SprintViewModel> lista)
+        protected override IEnumerable<SprintViewModel> Ordenar(IEnumerable<SprintViewModel> lista)
                 => lista.OrderBy(p => p.Nome)
                         .ToList();
     }

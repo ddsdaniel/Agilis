@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Abstractions.Model.Entities;
+﻿using DDS.Domain.Core.Abstractions.Models.Entities;
 using Flunt.Validations;
 
 namespace Agilis.Domain.Abstractions.Entities.Trabalho

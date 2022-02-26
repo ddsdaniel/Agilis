@@ -19,7 +19,7 @@ namespace Agilis.Domain.Services.Trabalho
             _usuarioLogado = usuarioLogado;
         }
 
-        public override ICollection<UserStory> Pesquisar(string filtro)
+        public override IEnumerable<UserStory> Pesquisar(string filtro)
           => _unitOfWork.UserStoryRepository
                  .AsQueryable()
                  .Where(us => us.Nome.ToLower().Contains(filtro.ToLower()))

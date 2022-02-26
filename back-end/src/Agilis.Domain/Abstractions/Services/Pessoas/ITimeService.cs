@@ -1,5 +1,5 @@
 ﻿using Agilis.Domain.Models.Entities.Pessoas;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 using System;
 using System.Threading.Tasks;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;

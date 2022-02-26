@@ -6,7 +6,7 @@ using Agilis.WebAPI.Tests.Integracao.Abstractions;
 using Agilis.WebAPI.Tests.Integracao.Extensions;
 using Agilis.WebAPI.ViewModels.Pessoas;
 using AutoMapper;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using Xunit;
 
 namespace Agilis.WebAPI.Tests.Integracao.Tests.Services.Pessoas

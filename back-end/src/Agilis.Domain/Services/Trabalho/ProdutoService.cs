@@ -26,7 +26,7 @@ namespace Agilis.Domain.Services.Trabalho
             return _unitOfWork.ProdutoRepository.ConsultarTodos(timesId); ;
         }
 
-        public override ICollection<Produto> Pesquisar(string filtro)
+        public override IEnumerable<Produto> Pesquisar(string filtro)
           => _unitOfWork.ProdutoRepository
                  .AsQueryable()
                  .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))

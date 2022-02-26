@@ -1,7 +1,7 @@
 ﻿using Agilis.Domain.Models.Entities.Trabalho;
 using Agilis.Domain.Mocks.Entities.Trabalho;
 using Xunit;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Trabalho
 {

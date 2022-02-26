@@ -49,7 +49,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// Consulta todos os produtos do usuário logado
         /// </summary>
         /// <returns>Retorna todos os produtos do usuário logado</returns>
-        public override ActionResult<ICollection<ProdutoViewModel>> ConsultarTodos()
+        public override ActionResult<IEnumerable<ProdutoViewModel>> ConsultarTodos()
         {
             var lista = _produtoService.ConsultarTodos(_usuarioLogado)
                 .OrderBy(t => t.Nome);
@@ -66,13 +66,13 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// <param name="timeId">Filtra produtos pelo id do time</param>
         /// <returns>Lista de registros correspondentes ao filtro</returns>
         [HttpGet("pesquisa-crud")]
-        [ProducesResponseType(typeof(ICollection<ProdutoViewModel>), StatusCodes.Status200OK)]
-        public ActionResult<ICollection<ProdutoViewModel>> Pesquisar([FromQuery] string filtro,
+        [ProducesResponseType(typeof(IEnumerable<ProdutoViewModel>), StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<ProdutoViewModel>> Pesquisar([FromQuery] string filtro,
                                                                      [FromQuery] string timeId)
         {
             var lista = _produtoService.Pesquisar(filtro, Guid.Parse(timeId), _usuarioLogado);
 
-            var listaViewModel = _mapper.Map<ICollection<ProdutoViewModel>>(lista);
+            var listaViewModel = _mapper.Map<IEnumerable<ProdutoViewModel>>(lista);
 
             listaViewModel = Ordenar(listaViewModel);
 
@@ -84,7 +84,7 @@ namespace Agilis.WebAPI.Controllers.Trabalho
         /// </summary>
         /// <param name="lista">Lista de produtos a ser ordenada</param>
         /// <returns>Lista já ordenada pelo nome</returns>
-        protected override ICollection<ProdutoViewModel> Ordenar(ICollection<ProdutoViewModel> lista)
+        protected override IEnumerable<ProdutoViewModel> Ordenar(IEnumerable<ProdutoViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
 

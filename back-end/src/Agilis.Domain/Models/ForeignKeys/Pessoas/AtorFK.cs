@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Abstractions.Model.ForeignKeys;
+﻿using DDS.Domain.Core.Abstractions.Models.ForeignKeys;
 using System;
 
 namespace Agilis.Domain.Models.ForeignKeys.Pessoas

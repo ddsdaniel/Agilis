@@ -40,7 +40,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// </summary>
         /// <param name="lista">Lista de userStories a ser ordenada</param>
         /// <returns>Lista já ordenada pelo nome</returns>
-        protected override ICollection<UserStoryViewModel> Ordenar(ICollection<UserStoryViewModel> lista)
+        protected override IEnumerable<UserStoryViewModel> Ordenar(IEnumerable<UserStoryViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
 

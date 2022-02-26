@@ -10,7 +10,7 @@ using System.Linq;
 using Agilis.Domain.Abstractions.Entities.Pessoas;
 using System.Threading.Tasks;
 using System;
-using DDS.Domain.Core.Model.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects;
 using Agilis.Domain.Models.ForeignKeys.Pessoas;
 using DDS.WebAPI.Models.ViewModels;
 
@@ -45,7 +45,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// Consulta todos os times do usuário logado
         /// </summary>
         /// <returns>Retorna todos os times do usuário logado</returns>
-        public override ActionResult<ICollection<TimeViewModel>> ConsultarTodos()
+        public override ActionResult<IEnumerable<TimeViewModel>> ConsultarTodos()
         {
             var lista = _timeService.ConsultarTodos(_usuarioLogado)
                 .OrderBy(t => t.Nome);
@@ -63,7 +63,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/administradores")]
-        [ProducesResponseType(typeof(ICollection<UsuarioFK>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UsuarioFK>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarAdmin(Guid timeId,
@@ -108,7 +108,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="emailViewModel"></param>
         /// <returns></returns>
         [HttpPost("{timeId:guid}/colaboradores")]
-        [ProducesResponseType(typeof(ICollection<UsuarioFK>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UsuarioFK>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AdicionarColaborador(Guid timeId,
@@ -152,12 +152,12 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="filtro">Filtro inserido pelo usuário</param>
         /// <returns>Lista de registros correspondentes ao filtro</returns>
         [HttpGet("pesquisa")]
-        [ProducesResponseType(typeof(ICollection<TimeViewModel>), StatusCodes.Status200OK)]
-        public override ActionResult<ICollection<TimeViewModel>> Pesquisar([FromQuery] string filtro)
+        [ProducesResponseType(typeof(IEnumerable<TimeViewModel>), StatusCodes.Status200OK)]
+        public override ActionResult<IEnumerable<TimeViewModel>> Pesquisar([FromQuery] string filtro)
         {
             var lista = _timeService.Pesquisar(filtro, _usuarioLogado);
 
-            var listaViewModel = _mapper.Map<ICollection<TimeViewModel>>(lista);
+            var listaViewModel = _mapper.Map<IEnumerable<TimeViewModel>>(lista);
 
             listaViewModel = Ordenar(listaViewModel);
 
@@ -169,7 +169,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// </summary>
         /// <param name="lista">Lista de times a ser ordenada</param>
         /// <returns>Lista já ordenada pelo nome</returns>
-        protected override ICollection<TimeViewModel> Ordenar(ICollection<TimeViewModel> lista)
+        protected override IEnumerable<TimeViewModel> Ordenar(IEnumerable<TimeViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
     }

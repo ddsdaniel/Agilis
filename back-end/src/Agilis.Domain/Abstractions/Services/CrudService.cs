@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Abstractions.Model.Entities;
+﻿using DDS.Domain.Core.Abstractions.Models.Entities;
 using DDS.Domain.Core.Abstractions.Repositories;
 using DDS.Domain.Core.Abstractions.Services;
 using Agilis.Domain.Abstractions.Repositories;
@@ -80,7 +80,7 @@ namespace Agilis.Domain.Abstractions.Services
         /// Retorna todas as entidades desse repositório
         /// </summary>
         /// <returns>Lista de todas as entidades desse repositório</returns>
-        public virtual ICollection<TEntity> ConsultarTodos() => _repository.AsQueryable().ToList();
+        public virtual IEnumerable<TEntity> ConsultarTodos() => _repository.AsQueryable().ToList();
 
         /// <summary>
         /// Exclui a entidade do repositório
@@ -88,6 +88,6 @@ namespace Agilis.Domain.Abstractions.Services
         /// <param name="id">Id da entidade a ser excluída</param>
         /// <returns>Task correspondente à exclusão</returns>
         public virtual async Task Excluir(Guid id) => await _repository.Excluir(id);
-        public abstract ICollection<TEntity> Pesquisar(string filtro);
+        public abstract IEnumerable<TEntity> Pesquisar(string filtro);
     }
 }

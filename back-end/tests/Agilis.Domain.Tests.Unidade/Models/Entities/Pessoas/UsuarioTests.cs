@@ -2,7 +2,7 @@
 using Agilis.Domain.Models.Entities.Pessoas;
 using Agilis.Domain.Mocks.Entities.Pessoas;
 using Agilis.Domain.Mocks.ValueObjects;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using Xunit;
 
 namespace Agilis.Domain.Tests.Unidade.Models.Entities.Pessoas

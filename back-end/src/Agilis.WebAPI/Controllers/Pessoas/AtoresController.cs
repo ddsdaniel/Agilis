@@ -41,7 +41,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// Consulta todos os atores do usuário logado
         /// </summary>
         /// <returns>Retorna todos os atores do usuário logado</returns>
-        public override ActionResult<ICollection<AtorViewModel>> ConsultarTodos()
+        public override ActionResult<IEnumerable<AtorViewModel>> ConsultarTodos()
         {
             var lista = _atorService.ConsultarTodos(_usuarioLogado)
                 .OrderBy(t => t.Nome);
@@ -58,13 +58,13 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// <param name="produtoId">Filtra atores pelo id do produto</param>
         /// <returns>Lista de registros correspondentes ao filtro</returns>
         [HttpGet("pesquisa-crud")]
-        [ProducesResponseType(typeof(ICollection<AtorViewModel>), StatusCodes.Status200OK)]
-        public ActionResult<ICollection<AtorViewModel>> Pesquisar([FromQuery] string filtro,
+        [ProducesResponseType(typeof(IEnumerable<AtorViewModel>), StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<AtorViewModel>> Pesquisar([FromQuery] string filtro,
                                                                   [FromQuery] string produtoId)
         {
             var lista = _atorService.Pesquisar(filtro, Guid.Parse(produtoId), _usuarioLogado);
 
-            var listaViewModel = _mapper.Map<ICollection<AtorViewModel>>(lista);
+            var listaViewModel = _mapper.Map<IEnumerable<AtorViewModel>>(lista);
 
             listaViewModel = Ordenar(listaViewModel);
 
@@ -76,7 +76,7 @@ namespace Agilis.WebAPI.Controllers.Pessoas
         /// </summary>
         /// <param name="lista">Lista de atores a ser ordenada</param>
         /// <returns>Lista já ordenada pelo nome</returns>
-        protected override ICollection<AtorViewModel> Ordenar(ICollection<AtorViewModel> lista)
+        protected override IEnumerable<AtorViewModel> Ordenar(IEnumerable<AtorViewModel> lista)
                 => lista.OrderBy(t => t.Nome)
                         .ToList();
 

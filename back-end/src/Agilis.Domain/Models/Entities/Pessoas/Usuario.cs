@@ -1,8 +1,8 @@
 ﻿using Agilis.Domain.Abstractions.Entities.Pessoas;
 using Agilis.Domain.Enums;
-using DDS.Domain.Core.Abstractions.Model.Entities;
-using DDS.Domain.Core.Model.ValueObjects;
-using DDS.Domain.Core.Model.ValueObjects.Seguranca.Senhas;
+using DDS.Domain.Core.Abstractions.Models.Entities;
+using DDS.Domain.Core.Models.ValueObjects;
+using DDS.Domain.Core.Models.ValueObjects.Seguranca.Senhas;
 using Flunt.Validations;
 
 namespace Agilis.Domain.Models.Entities.Pessoas

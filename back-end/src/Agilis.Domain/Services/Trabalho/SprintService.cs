@@ -18,7 +18,7 @@ namespace Agilis.Domain.Services.Trabalho
 
         }
 
-        public override ICollection<Sprint> Pesquisar(string filtro)
+        public override IEnumerable<Sprint> Pesquisar(string filtro)
             => _unitOfWork.SprintRepository
                    .AsQueryable()
                    .Where(p => p.Nome.ToLower().Contains(filtro.ToLower()))
@@ -27,7 +27,7 @@ namespace Agilis.Domain.Services.Trabalho
 
         #region Regras de Negócio
 
-        //public ICollection<Sprint> ConsultarTodos(IUsuario usuario)
+        //public IEnumerable<Sprint> ConsultarTodos(IUsuario usuario)
         //{
         //    var releaseIds = ObterReleaseIds(usuario);
 
@@ -57,7 +57,7 @@ namespace Agilis.Domain.Services.Trabalho
                             .ToArray();
         }
 
-        //public ICollection<Sprint> Pesquisar(string filtro, IUsuario usuario)
+        //public IEnumerable<Sprint> Pesquisar(string filtro, IUsuario usuario)
         //{
         //    var releaseIds = ObterReleaseIds(usuario);
 

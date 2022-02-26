@@ -1,4 +1,4 @@
-﻿using DDS.Domain.Core.Model.ValueObjects;
+﻿using DDS.Domain.Core.Models.ValueObjects;
 using DDS.Infra.Data.Mongo.Abstractions.Repositories;
 using MongoDB.Driver;
 using System.Linq;

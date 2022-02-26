@@ -31,7 +31,7 @@ namespace Agilis.Domain.Services.Pessoas
                    .ToList();
         }
 
-        public override ICollection<Ator> Pesquisar(string filtro)
+        public override IEnumerable<Ator> Pesquisar(string filtro)
           => _unitOfWork.AtorRepository
                  .AsQueryable()
                  .Where(t => t.Nome.ToLower().Contains(filtro.ToLower()))
