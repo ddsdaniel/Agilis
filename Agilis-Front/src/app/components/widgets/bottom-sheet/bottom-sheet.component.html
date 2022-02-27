@@ -1,0 +1,10 @@
+<mat-nav-list>
+
+  <a *ngFor="let item of itens" href="#" mat-list-item (click)="selecionou($event, item.codigo)">
+    <mat-icon *ngIf="item.icone" mat-list-icon [ngStyle]="{'color': item.cor ? item.cor : '#808080'}">{{item.icone}}
+    </mat-icon>
+    <span mat-line>{{item.titulo}}</span>
+    <span *ngIf="item.subTitulo" mat-line>{{item.subTitulo}}</span>
+  </a>
+
+</mat-nav-list>

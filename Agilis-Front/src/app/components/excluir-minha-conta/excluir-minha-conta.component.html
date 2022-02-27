@@ -1,0 +1,26 @@
+<app-action-bar [titulo]="'Excluir a minha conta'">
+
+  <div menu fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div class="form-container" fxLayout="column" fxLayoutAlign="space-around center">
+
+      <p>Atenção, este procedimento irá <strong>excluir permanentemente</strong> todos os seus dados atuais, de modo <strong>irreversível</strong>.</p>
+
+      <mat-checkbox color="warn" class="mt-4" [(ngModel)]="estouCiente" [disabled]="processandoService.estaCarregando()">Estou
+        ciente e quero continuar</mat-checkbox>
+
+      <!-- Senha -->
+      <mat-form-field class="caixa-texto half-width-margin mt-4" color="warn">
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="senha" placeholder="Digite a sua senha" name="senha" type="password" required
+          [disabled]="processandoService.estaCarregando() || !estouCiente">
+      </mat-form-field>
+
+      <button mat-raised-button color="warn" class="botao mt-4" (click)="excluir()"
+        [disabled]="processandoService.estaCarregando() || !estouCiente">EXCLUIR</button>
+
+    </div>
+
+  </div>
+
+</app-action-bar>

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstractions\Services\**" />
+    <EmbeddedResource Remove="Abstractions\Services\**" />
+    <None Remove="Abstractions\Services\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mongo.Migration" Version="3.0.123" />
+		<PackageReference Include="MongoDB.Driver" Version="2.11.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
+	  <ProjectReference Include="..\Agilis.Infra.Seguranca\Agilis.Infra.Seguranca.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
+	
+</Project>

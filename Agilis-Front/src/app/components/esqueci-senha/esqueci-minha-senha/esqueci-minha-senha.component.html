@@ -1,0 +1,22 @@
+<form fxLayout="column" fxLayoutAlign="space-around center">
+
+  <section fxLayout="column" fxLayoutAlign="space-around center" [class.mat-elevation-z3]="true">
+
+    <h2>Esqueci a Minha Senha</h2>
+    <p>Confirme o seu e-mail para continuar</p>
+
+    <!-- E-mail -->
+    <mat-form-field class="caixa-texto mt-2">
+      <mat-label>E-mail</mat-label>
+      <input matInput [(ngModel)]="email.endereco" placeholder="E-mail" name="email" type="email" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="botao" (click)="recuperar()">RECUPERAR POR E-MAIL</button>
+    <button mat-raised-button class="botao mt-4" [routerLink]="['/']">VOLTAR</button>
+
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
+  </section>
+
+</form>

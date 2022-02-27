@@ -1,0 +1,47 @@
+<!-- Cabeçalho -->
+<header fxLayout="column" fxLayoutAlign="center center">
+
+  <!-- Logo -->
+  <div class="logo" fxLayout="column" fxLayoutAlign="center center">
+    <img src="../../../assets/images/Agilis-192.png" alt="Logotipo do sistema" />
+  </div>
+
+  <!-- Textos -->
+  <h1>Agilis</h1>
+  <h2>Sistema de Administração Financeira</h2>
+  <div>
+    <p>O aplicativo perfeito para gerenciar as suas finanças pessoais. Possui diversos recursos que permitem a você ter
+      total controle de suas despesas e receitas.</p>
+    <p>Cadastre-se <strong>gratuitamente</strong> agora mesmo.</p>
+  </div>
+
+  <!-- Botões -->
+  <form fxLayout="row" fxLayoutAlign="start center" class="mt-4">
+    <button mat-raised-button color="accent" class="botao mr-4" routerLink="/usuarios/new">CADASTRE-SE</button>
+    <button mat-raised-button color="default" class="botao" routerLink="/login">LOGIN</button>
+  </form>
+
+</header>
+
+<!-- Recursos -->
+<div>
+
+  <section *ngFor="let recurso of recursos" [class.mat-elevation-z3]="true">
+    <div>
+      <img [src]="recurso.imagemUrl" [alt]="recurso.imagemAlt" [class.mat-elevation-z3]="true" />
+    </div>
+    <div>
+      <h2>{{recurso.titulo}}</h2>
+      <p>{{recurso.descricao}}</p>
+    </div>
+  </section>
+
+</div>
+
+<div style="clear: both;"></div>
+
+<!-- Rodapé -->
+<footer fxLayout="column" fxLayoutAlign="center center">
+  <p>Todos os direitos reservados © DDS Sistemas</p>
+  <p>Siga <a target="_blank" href="https://www.instagram.com/appAgilis">@appAgilis</a> no Instagram</p>
+</footer>

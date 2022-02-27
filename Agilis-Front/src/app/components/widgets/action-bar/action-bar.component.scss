@@ -1,0 +1,50 @@
+@import "../../../../styles.scss";
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.cabecalho {
+  padding: 16px;
+  background-color: mat-color($styles-theme-primary);
+  color: white;
+}
+
+mat-nav-list mat-icon {
+  color: mat-color($styles-theme-primary) !important;
+}
+
+mat-nav-list {
+  margin: 0 16px;
+}
+
+mat-sidenav h1 {
+  margin: 16px;
+}
+
+mat-sidenav {
+  min-width: 20%;
+  width: 80%;
+  max-width: 300px;
+}
+mat-sidenav h1 {
+  margin-left: 0;
+}
+
+mat-progress-bar {
+  position: fixed;
+  bottom: 0;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  padding-left: 0;
+}
+
+.titulo-filtros {
+  margin: 16px;
+}

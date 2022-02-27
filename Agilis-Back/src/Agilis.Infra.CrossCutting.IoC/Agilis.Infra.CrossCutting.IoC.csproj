@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-rc.2.20475.5" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+	  <PackageReference Include="MongoDB.Driver" Version="2.11.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Configuracoes\Agilis.Infra.Configuracoes.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Data.Mongo\Agilis.Infra.Data.Mongo.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Email\Agilis.Infra.Emails.csproj" />
+  </ItemGroup>
+
+</Project>

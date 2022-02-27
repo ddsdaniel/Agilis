@@ -1,0 +1,29 @@
+<form fxLayout="column" fxLayoutAlign="space-around center">
+
+  <section fxLayout="column" fxLayoutAlign="space-around center" [class.mat-elevation-z3]="true">
+
+    <h2>Redefinir a Minha Senha</h2>
+
+    <!-- Nova Senha -->
+    <mat-form-field class="caixa-texto mt-2 full-width-margin">
+      <mat-label>Nova Senha</mat-label>
+      <input matInput [(ngModel)]="redefinicaoSenha.novaSenha" placeholder="Nova Senha" name="novaSenha" type="password"
+        required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Confirma Senha -->
+    <mat-form-field class="caixa-texto mt-2 full-width-margin">
+      <mat-label>Confirme a nova senha</mat-label>
+      <input matInput [(ngModel)]="redefinicaoSenha.confirmaSenha" placeholder="Confirme a nova senha"
+        name="confirmaSenha" type="password" required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="botao" (click)="salvar()">REDEFINIR</button>
+    <button mat-raised-button class="botao mt-4" [routerLink]="['/']">VOLTAR</button>
+
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
+  </section>
+
+</form>

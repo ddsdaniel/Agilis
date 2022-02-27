@@ -1,0 +1,34 @@
+<app-action-bar [titulo]="'Alterar a Minha Senha'">
+
+  <div menu class="form-container">
+
+    <!-- Senha Atual-->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Senha Atual</mat-label>
+      <input matInput [(ngModel)]="alterarMinhaSenha.senhaAtual" placeholder="Senha Atual" name="senhaAtual"
+        type="password" required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Nova Senha -->
+    <mat-form-field class="mt-2 full-width-margin">
+      <mat-label>Nova Senha</mat-label>
+      <input matInput [(ngModel)]="alterarMinhaSenha.novaSenha" placeholder="Nova Senha" name="novaSenha"
+        type="password" required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Confirma Senha -->
+    <mat-form-field class="mt-2 full-width-margin">
+      <mat-label>Confirme a sua senha</mat-label>
+      <input matInput [(ngModel)]="alterarMinhaSenha.confirmaSenha" placeholder="Confirme a sua senha" name="senha"
+        type="password" required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+  </div>
+
+  <div icones>
+    <button mat-icon-button (click)="salvar()" [disabled]="processandoService.estaCarregando()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>

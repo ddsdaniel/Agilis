@@ -1,0 +1,36 @@
+@import "../../../../styles.scss";
+
+img {
+  width: 96px;
+}
+
+h2 {
+  color: mat-color($styles-theme-primary);
+}
+
+form {
+  height: 100%;
+  background-color: mat-color($styles-theme-primary);
+}
+
+.caixa-texto {
+  width: 95%;
+  max-width: 400px;
+}
+
+.botao {
+  width: 70%;
+  max-width: 350px;
+}
+
+mat-progress-bar {
+  position: fixed;
+  bottom: 0;
+}
+
+section {
+  background-color: whitesmoke;
+  padding: 32px;
+  min-width: 350px;
+  min-height: 600px;
+}

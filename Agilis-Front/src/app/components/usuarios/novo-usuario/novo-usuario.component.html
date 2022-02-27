@@ -1,0 +1,53 @@
+<form fxLayout="column" fxLayoutAlign="space-around center">
+
+  <section fxLayout="column" fxLayoutAlign="space-around center" [class.mat-elevation-z3]="true">
+
+    <img src="../../../../assets/images/Agilis-192.png" alt="Logotipo do sistema" />
+
+    <p>Crie a sua conta</p>
+
+    <!-- Nome -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="usuario.nome" placeholder="Nome" name="nome" type="text" required
+        [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Sobrenome -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>Sobrenome</mat-label>
+      <input matInput [(ngModel)]="usuario.sobrenome" placeholder="Sobrenome" name="sobrenome" type="text" required
+        [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- E-mail -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>E-mail</mat-label>
+      <input matInput [(ngModel)]="usuario.email" placeholder="E-mail" name="email" type="email" required
+        [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Senha -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>Senha</mat-label>
+      <input matInput [(ngModel)]="usuario.senha" placeholder="Senha" name="senha" type="password" required
+        [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <!-- Confirma a Senha -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>Confirme a sua senha</mat-label>
+      <input matInput [(ngModel)]="usuario.confirmaSenha" placeholder="Confirme a sua senha" name="senha"
+        type="password" required [disabled]="processandoService.estaCarregando()">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="botao" (click)="criar()"
+      [disabled]="processandoService.estaCarregando()">CRIAR</button>
+    <button mat-raised-button class="botao mt-4" [routerLink]="['/']">VOLTAR</button>
+
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
+  </section>
+
+</form>

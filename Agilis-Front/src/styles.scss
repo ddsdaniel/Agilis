@@ -1,0 +1,155 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+
+// always include only once per project
+@include mat-core();
+
+@import "styles-margin.scss";
+@import "styles-padding.scss";
+@import "styles-theme.scss";
+
+// specify theme class eg: <body class="styles-theme"> ... </body>
+.styles-theme {
+  // use our theme with angular-material-theme mixin
+  @include angular-material-theme($styles-theme);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+button.mat-fab {
+  position: fixed !important;
+  right: 23px;
+  bottom: 23px;
+  z-index: 1;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.full-width-margin {
+  margin: 0 8px;
+  width: calc(100% - 16px);
+}
+
+.half-width-margin {
+  margin: 0 8px;
+  width: calc(50% - 16px);
+}
+
+.um-terco {
+  margin: 0 8px;
+  width: calc((100% / 3) - 16px);
+}
+
+.texto-discreto {
+  color: silver;
+}
+
+mat-icon {
+  font-family: "Material Icons Outlined" !important;
+}
+
+mat-form-field mat-icon,
+mat-list-item mat-icon {
+  color: mat-color($styles-theme-primary);
+}
+
+.container {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.pull-right {
+  float: right;
+}
+
+.preto-discreto {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.sticky-top {
+  z-index: 1000;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.small-chip {
+  height: 16px !important;
+  min-height: 16px !important;
+  font-size: x-small;
+  padding: 7px;
+}
+
+.cor-despesa {
+  color: red;
+}
+
+.cor-receita {
+  color: blue;
+}
+
+.color-accent {
+  color: mat-color($styles-theme-accent);
+}
+
+@media (min-width: 900px) {
+  .form-container {
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 32px;
+  }
+}
+
+.negrito {
+  font-weight: bold;
+}
+
+.icone-pequeno {
+  margin-top: -2px;
+  transform: scale(0.75);
+  display: inline-flex;
+  vertical-align: middle;
+  padding: 0 !important;
+}
+
+.icone-mini {
+  margin-top: 0px;
+  transform: scale(0.6);
+  display: inline-flex;
+  vertical-align: middle;
+  padding: 0 !important;
+}
+
+.accent-color-link,
+.accent-color-link:visited {
+  color: mat-color($styles-theme-accent);
+}
