@@ -19,7 +19,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email: EmailMocks.ObterValido(),
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -36,7 +35,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email: EmailMocks.ObterValido(),
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -53,7 +51,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email: EmailMocks.ObterValido(),
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -70,7 +67,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha,
                  email: EmailMocks.ObterValido(),
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -87,7 +83,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email,
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -104,24 +99,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email: EmailMocks.ObterValido(),
                  ativo,
-                 licencaCompleta: f.Random.Bool(),
-                 regra: f.Random.Enum<RegraUsuario>()
-                 ))
-             .Generate();
-
-            return usuario;
-        }
-
-        public static Usuario ObterComLicencaCompleta(bool licencaCompleta)
-        {
-            var usuario = new Faker<Usuario>("pt_BR")
-             .CustomInstantiator(f => new Usuario(
-                 nome: f.Person.FirstName,
-                 sobrenome: f.Person.LastName,
-                 senha: SenhaMocks.ObterValido(),
-                 email: EmailMocks.ObterValido(),
-                 ativo: f.Random.Bool(),
-                 licencaCompleta,
                  regra: f.Random.Enum<RegraUsuario>()
                  ))
              .Generate();
@@ -138,7 +115,6 @@ namespace Agilis.Test.Mock.Seguranca.Models.Entities
                  senha: SenhaMocks.ObterValido(),
                  email: EmailMocks.ObterValido(),
                  ativo: f.Random.Bool(),
-                 licencaCompleta: f.Random.Bool(),
                  regra
                  ))
              .Generate();

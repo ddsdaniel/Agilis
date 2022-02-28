@@ -10,7 +10,6 @@ namespace Agilis.Infra.Seguranca.Abstractions.Models.Entities
         Guid Id { get; }
         bool Ativo { get; }
         Email Email { get; }
-        bool LicencaCompleta { get; }
         string Nome { get; }
         string NomeCompleto { get; }
         RegraUsuario Regra { get; }

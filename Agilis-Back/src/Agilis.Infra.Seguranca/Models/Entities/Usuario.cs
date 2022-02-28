@@ -16,7 +16,6 @@ namespace Agilis.Infra.Seguranca.Models.Entities
         public Senha Senha { get; private set; }
         public Email Email { get; private set; }
         public bool Ativo { get; private set; }
-        public bool LicencaCompleta { get; private set; }
         public RegraUsuario Regra { get; private set; }
 
         protected Usuario() { }
@@ -26,7 +25,6 @@ namespace Agilis.Infra.Seguranca.Models.Entities
                        Senha senha,
                        Email email,
                        bool ativo,
-                       bool licencaCompleta,
                        RegraUsuario regra)
         {
             Nome = nome;
@@ -34,7 +32,6 @@ namespace Agilis.Infra.Seguranca.Models.Entities
             Senha = senha;
             Email = email;
             Ativo = ativo;
-            LicencaCompleta = licencaCompleta;
             Regra = regra;
 
             AddNotifications(new Contract()

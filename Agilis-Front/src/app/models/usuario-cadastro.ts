@@ -8,6 +8,5 @@ export interface UsuarioCadastro extends Entidade {
   confirmaSenha: string;
   email: string;
   ativo: boolean;
-  licencaCompleta: boolean;
   regra: RegraUsuario;
 }

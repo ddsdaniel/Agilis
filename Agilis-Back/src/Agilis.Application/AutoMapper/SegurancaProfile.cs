@@ -30,7 +30,6 @@ namespace Agilis.Application.AutoMapper
                   context.Mapper.Map<Senha>(vm.Senha),
                   context.Mapper.Map<Email>(vm.Email),
                   vm.Ativo,
-                  vm.LicencaCompleta,
                   vm.Regra
                   ));
 

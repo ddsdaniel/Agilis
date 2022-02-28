@@ -6,6 +6,5 @@ export interface UsuarioConsulta extends Entidade {
   sobrenome: string;
   email: string;
   ativo: boolean;
-  licencaCompleta: boolean;
   regra: RegraUsuario;
 }

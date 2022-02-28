@@ -26,7 +26,6 @@ export class NovoUsuarioComponent implements OnInit {
     senha: '',
     confirmaSenha: '',
     ativo: true,
-    licencaCompleta: false,
     regra: RegraUsuario.Usuario,
   };
 

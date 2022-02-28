@@ -12,7 +12,6 @@ namespace Agilis.Application.ViewModels.Seguranca
         public string ConfirmaSenha { get; set; }
         public string Email { get; set; }
         public bool Ativo { get; set; }
-        public bool LicencaCompleta { get; set; }
         public RegraUsuario Regra { get; set; }
     }
 }
