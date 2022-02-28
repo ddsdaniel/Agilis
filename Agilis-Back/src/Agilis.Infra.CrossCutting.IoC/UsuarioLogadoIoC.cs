@@ -25,7 +25,7 @@ namespace Agilis.Infra.CrossCutting.IoC
 
             var scope = serviceProvider.CreateScope();
 
-            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWorkCatalogo>();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             var usuarioRepository = unitOfWork.ObterRepository<Usuario>();
 
             var usuario = usuarioRepository.Consultar().FirstOrDefault(u => u.Email.Endereco == email.Endereco);

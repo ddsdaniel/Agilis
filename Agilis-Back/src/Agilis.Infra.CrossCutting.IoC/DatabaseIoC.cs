@@ -7,42 +7,33 @@ using Agilis.Core.Domain.Abstractions.Services;
 using Agilis.Infra.Data.Mongo.Providers;
 using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
-using Agilis.Core.Domain.Abstractions.Factories;
-using Agilis.Infra.Data.Mongo.Factories;
 using Agilis.Infra.Data.Mongo.Services;
-using Agilis.Infra.Seguranca.Abstractions.Models.Entities;
 using Agilis.Infra.Configuracoes.Abstractions.Models.ValueObjects;
+using MongoDB.Driver;
+using Microsoft.Extensions.Configuration;
+using Agilis.Infra.Data.Mongo.UnitsOfWork;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
     public static class DatabaseIoC
     {
 
-        public static IServiceCollection AddDatabaseIoC(this IServiceCollection services)
+        public static IServiceCollection AddDatabaseIoC(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IAdminDatabaseService, AdminDatabaseService>();
-            services.AddScoped<IUnitOfWorkFactory, MongoUnitOfWorkFactory>();
-            services.AddScoped(serviceProvider => ObterUnitOfWorkCatalogo(serviceProvider));
-            services.AddScoped(serviceProvider => ObterUnitOfWorkInquilino(serviceProvider));
+            services.AddScoped(serviceProvider => ObterUnitOfWork(configuration));
             ConfigurarSerializations(services);
             return services;
         }
 
-        private static IUnitOfWorkCatalogo ObterUnitOfWorkCatalogo(IServiceProvider serviceProvider)
+        private static IUnitOfWork ObterUnitOfWork(IConfiguration configuration)
         {
-            var unitOfWorkFactory = serviceProvider.GetService<IUnitOfWorkFactory>();
-            return unitOfWorkFactory.ObterUnitOfWorkCatalogo();
-        }
+            var connectionString = configuration.GetValue<string>("ConnectionString");
 
-        private static IUnitOfWorkInquilino ObterUnitOfWorkInquilino(IServiceProvider serviceProvider)
-        {
-            var unitOfWorkFactory = serviceProvider.GetService<IUnitOfWorkFactory>();
-            var usuarioLogado = serviceProvider.GetService<IUsuario>();
+            var catalogoDatabase = new MongoClient(connectionString)
+                .GetDatabase("agilis");
 
-            if (usuarioLogado == null)
-                throw new Exception("Usuário logado não foi encontrado.");
-
-            return unitOfWorkFactory.ObterUnitOfWorkInquilino(usuarioLogado.Email);
+            return new MongoUnitOfWork(catalogoDatabase);
         }
 
         private static void ConfigurarSerializations(IServiceCollection services)

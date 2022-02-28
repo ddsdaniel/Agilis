@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
-using Agilis.Core.Domain.Abstractions.Factories;
 using Agilis.Core.Domain.Abstractions.Repositories;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Infra.Seguranca.Enums;
@@ -18,21 +17,21 @@ namespace Agilis.Application.Services.Seguranca
     public class RefreshTokenAppService : AppService
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<RefreshTokenAppService> _logger;
         private readonly TokenFactory _tokenFactory;
 
         public RefreshTokenAppService(
             IMediator mediator,
             IMapper mapper,
-            IUnitOfWorkFactory unitOfWorkFactory,
+            IUnitOfWork unitOfWork,
             ILogger<RefreshTokenAppService> logger,
             TokenFactory tokenFactory
             )
             : base(mediator)
         {
             _mapper = mapper;
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWork = unitOfWork;
             _logger = logger;
             _tokenFactory = tokenFactory;
         }
@@ -42,8 +41,7 @@ namespace Agilis.Application.Services.Seguranca
             var usuario = ExtrairUsuario(refreshTokenViewModel);
             if (Invalid) return null;
 
-            var unitOfWorkInquilino = _unitOfWorkFactory.ObterUnitOfWorkInquilino(usuario.Email);
-            var refreshTokenRepository = unitOfWorkInquilino.ObterRepository<RefreshToken>();
+            var refreshTokenRepository = _unitOfWork.ObterRepository<RefreshToken>();
 
             var refreshTokenArmazenado = ValidarToken(refreshTokenViewModel, refreshTokenRepository);
             if (Invalid) return null;
@@ -51,7 +49,7 @@ namespace Agilis.Application.Services.Seguranca
             var novoToken = _tokenFactory.Criar(usuario, TipoToken.Autenticacao);
             var novoRefreshTokenString = _tokenFactory.Criar(usuario, TipoToken.RefreshToken);
             var novoRefreshToken = new RefreshToken(novoRefreshTokenString);
-            await PersistirTokens(unitOfWorkInquilino, refreshTokenRepository, novoRefreshToken, refreshTokenArmazenado);
+            await PersistirTokens(refreshTokenRepository, novoRefreshToken, refreshTokenArmazenado);
 
             _logger.LogInformation("Um token foi renovado");
 
@@ -66,19 +64,18 @@ namespace Agilis.Application.Services.Seguranca
         }
 
         private async Task PersistirTokens(
-            IUnitOfWorkInquilino unitOfWorkInquilino,
             IRepository<RefreshToken> refreshTokenRepository,
             RefreshToken novoRefreshToken,
             RefreshToken refreshTokenArmazenado)
         {
             await refreshTokenRepository.AdicionarAsync(novoRefreshToken);
-            await unitOfWorkInquilino.CommitAsync();
+            await _unitOfWork.CommitAsync();
 
             //roda sem esperar a conclusão
-            _ = LimparAsync(unitOfWorkInquilino, refreshTokenRepository, refreshTokenArmazenado);
+            _ = LimparAsync(refreshTokenRepository, refreshTokenArmazenado);
         }
 
-        private static async Task LimparAsync(IUnitOfWorkInquilino unitOfWorkInquilino, IRepository<RefreshToken> refreshTokenRepository, RefreshToken refreshTokenArmazenado)
+        private async Task LimparAsync(IRepository<RefreshToken> refreshTokenRepository, RefreshToken refreshTokenArmazenado)
         {
             try
             {
@@ -86,7 +83,7 @@ namespace Agilis.Application.Services.Seguranca
 
                 await refreshTokenRepository.ExcluirAsync(refreshTokenArmazenado.Id);
                 await refreshTokenRepository.ExcluirAsync(rt => rt.DataCriacao < DateTime.UtcNow.AddDays(-TokenFactory.DIAS_REFRESH_TOKEN));
-                await unitOfWorkInquilino.CommitAsync();
+                await _unitOfWork.CommitAsync();
             }
             catch (Exception)
             {
@@ -100,12 +97,11 @@ namespace Agilis.Application.Services.Seguranca
             AddNotifications(refreshTokenRequest);
             if (Invalid) return null;
 
-            var unitOfWorkCatalogo = _unitOfWorkFactory.ObterUnitOfWorkCatalogo();
             var email = refreshTokenRequest.ObterEmail();
             AddNotifications(email);
             if (Invalid) return null;
 
-            var usuarioRepository = unitOfWorkCatalogo.ObterRepository<Usuario>();
+            var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
 
             var usuario = usuarioRepository
                 .Consultar()

@@ -2,7 +2,6 @@
 using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
-using Agilis.Core.Domain.Abstractions.Factories;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Infra.Seguranca.Enums;
@@ -17,20 +16,17 @@ namespace Agilis.Application.Services.Seguranca
     public class AutenticacaoAppService : AppService
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWorkCatalogo _unitOfWork;
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly TokenFactory _tokenFactory;
 
         public AutenticacaoAppService(IMapper mapper,
                                       IMediator mediator,
-                                      IUnitOfWorkCatalogo unitOfWork,
-                                      IUnitOfWorkFactory unitOfWorkFactory,
+                                      IUnitOfWork unitOfWork,
                                       TokenFactory tokenFactory)
             : base(mediator)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _unitOfWorkFactory = unitOfWorkFactory;
             _tokenFactory = tokenFactory;
         }
 
@@ -68,11 +64,10 @@ namespace Agilis.Application.Services.Seguranca
                     var token = _tokenFactory.Criar(usuario, TipoToken.Autenticacao);
                     var refreshTokenString = _tokenFactory.Criar(usuario, TipoToken.RefreshToken);
 
-                    var unitOfWorkInquilino = _unitOfWorkFactory.ObterUnitOfWorkInquilino(usuario.Email);
                     var refreskToken = new RefreshToken(refreshTokenString);
-                    var refreshTokenRepository = unitOfWorkInquilino.ObterRepository<RefreshToken>();
+                    var refreshTokenRepository = _unitOfWork.ObterRepository<RefreshToken>();
                     await refreshTokenRepository.AdicionarAsync(refreskToken);
-                    await unitOfWorkInquilino.CommitAsync();
+                    await _unitOfWork.CommitAsync();
 
                     var usuarioLogado = _mapper.Map<UsuarioConsultaViewModel>(usuario);
 

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Agilis.Core.Domain.Abstractions.Factories;
 using Agilis.Core.Domain.Abstractions.Services;
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Events;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 
 namespace Agilis.Application.Handlers.Notificacoes
 {
@@ -30,11 +30,9 @@ namespace Agilis.Application.Handlers.Notificacoes
         {
             using var scope = _serviceProvider.CreateScope();
 
-            var unitOfWorkFactory = scope.ServiceProvider.GetService<IUnitOfWorkFactory>();
+            var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
 
-            var unitOfWorkCatalogo = unitOfWorkFactory.ObterUnitOfWorkCatalogo();
-
-            var usuarioRepository = unitOfWorkCatalogo.ObterRepository<Usuario>();
+            var usuarioRepository = unitOfWork.ObterRepository<Usuario>();
 
             var administradores = usuarioRepository
                 .Consultar()
@@ -44,8 +42,7 @@ namespace Agilis.Application.Handlers.Notificacoes
             var dispositivos = new List<Dispositivo>();
             foreach (var admin in administradores)
             {
-                var unitOfWorkInquilino = unitOfWorkFactory.ObterUnitOfWorkInquilino(admin.Email);
-                var dispositivoRepository = unitOfWorkInquilino.ObterRepository<Dispositivo>();
+                var dispositivoRepository = unitOfWork.ObterRepository<Dispositivo>();
                 dispositivos.AddRange(dispositivoRepository.Consultar());
             }
 

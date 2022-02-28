@@ -17,7 +17,7 @@ namespace Agilis.Application.Services.Notificacoes
         private readonly IRepository<Dispositivo> _dispositivoRepository;
         private readonly IMapper _mapper;
 
-        public DispositivoCrudAppService(IUnitOfWorkInquilino unitOfWork, IMapper mapper, IMediator mediator)
+        public DispositivoCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
             : base(mapper, mediator, unitOfWork.ObterRepository<Dispositivo>(), unitOfWork)
         {
             _dispositivoRepository = unitOfWork.ObterRepository<Dispositivo>();

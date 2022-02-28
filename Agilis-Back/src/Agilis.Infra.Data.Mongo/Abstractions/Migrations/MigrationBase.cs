@@ -12,12 +12,12 @@ namespace Agilis.Infra.Data.Mongo.Abstractions.Migrations
         private readonly string _nome;
         private readonly ILogger _logger;
 
-        protected IUnitOfWorkCatalogo UnitOfWorkCatalogo { get; private set; }
+        protected IUnitOfWork UnitOfWork { get; private set; }
 
-        public MigrationBase(string nome, IUnitOfWorkCatalogo unitOfWorkCatalogo, ILogger logger)
+        public MigrationBase(string nome, IUnitOfWork unitOfWork, ILogger logger)
         {
             _nome = nome;
-            UnitOfWorkCatalogo = unitOfWorkCatalogo;
+            UnitOfWork = unitOfWork;
             _logger = logger;
         }
 
@@ -25,14 +25,14 @@ namespace Agilis.Infra.Data.Mongo.Abstractions.Migrations
         {
             try
             {
-                var migrationRepository = UnitOfWorkCatalogo.ObterRepository<Migration>();
+                var migrationRepository = UnitOfWork.ObterRepository<Migration>();
 
                 if (!migrationRepository.Consultar().Any(m => m.Nome == _nome))
                 {
                     _logger.LogInformation(_nome);
                     await MigrarAsync();
                     await migrationRepository.AdicionarAsync(new Migration(_nome));
-                    await UnitOfWorkCatalogo.CommitAsync();
+                    await UnitOfWork.CommitAsync();
                 }
             }
             catch (Exception erro)

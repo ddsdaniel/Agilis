@@ -37,7 +37,7 @@ namespace Agilis.Test.Integration.Application.Services
                 ConfirmaSenha = UsuarioConts.Senha
             };
 
-            var usuarioRepository = _integrationTestFixture.AutoMocker.MockarRepositoryCatalogo<Usuario>();
+            var usuarioRepository = _integrationTestFixture.AutoMocker.MockarRepository<Usuario>();
 
             var usuarioCrudAppService = _integrationTestFixture.AutoMocker.CreateInstance<UsuarioCrudAppService>();
 
@@ -48,7 +48,7 @@ namespace Agilis.Test.Integration.Application.Services
             Assert.True(usuarioCrudAppService.Valid);
             var novoUsuarioDomain = _integrationTestFixture.Mapper.Map<Usuario>(novoUsuarioViewModel);
             usuarioRepository.Verify(r => r.AdicionarAsync(novoUsuarioDomain), Times.Once);
-            _integrationTestFixture.AutoMocker.GetMock<IUnitOfWorkCatalogo>().Verify(uow => uow.CommitAsync(), Times.Once);
+            _integrationTestFixture.AutoMocker.GetMock<IUnitOfWork>().Verify(uow => uow.CommitAsync(), Times.Once);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Agilis.Test.Integration.Application.Services
                 ConfirmaSenha = UsuarioConts.Senha.Reverse().ToString()
             };
 
-            var usuarioRepository = _integrationTestFixture.AutoMocker.MockarRepositoryCatalogo<Usuario>();
+            var usuarioRepository = _integrationTestFixture.AutoMocker.MockarRepository<Usuario>();
 
             var usuarioCrudAppService = _integrationTestFixture.AutoMocker.CreateInstance<UsuarioCrudAppService>();
 
@@ -77,7 +77,7 @@ namespace Agilis.Test.Integration.Application.Services
             Assert.True(usuarioCrudAppService.Invalid);
             Assert.True(novoUsuarioInvalidoDomain.Invalid);
             usuarioRepository.Verify(r => r.AdicionarAsync(novoUsuarioInvalidoDomain), Times.Never);
-            _integrationTestFixture.AutoMocker.GetMock<IUnitOfWorkCatalogo>().Verify(uow => uow.CommitAsync(), Times.Never);
+            _integrationTestFixture.AutoMocker.GetMock<IUnitOfWork>().Verify(uow => uow.CommitAsync(), Times.Never);
         }
 
         //[Fact]

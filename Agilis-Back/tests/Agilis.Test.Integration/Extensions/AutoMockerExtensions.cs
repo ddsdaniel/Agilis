@@ -8,24 +8,12 @@ namespace Agilis.Test.Integration.Extensions
 {
     public static class AutoMockerExtensions
     {
-        public static Mock<IRepository<TEntity>> MockarRepositoryInquilino<TEntity>(this AutoMocker source)
+        public static Mock<IRepository<TEntity>> MockarRepository<TEntity>(this AutoMocker source)
            where TEntity : Entidade
         {
             var repository = new Mock<IRepository<TEntity>>();
 
-            source.GetMock<IUnitOfWorkInquilino>()
-                .Setup(u => u.ObterRepository<TEntity>())
-                .Returns(repository.Object);
-
-            return repository;
-        }
-
-        public static Mock<IRepository<TEntity>> MockarRepositoryCatalogo<TEntity>(this AutoMocker source)
-            where TEntity : Entidade
-        {
-            var repository = new Mock<IRepository<TEntity>>();
-
-            source.GetMock<IUnitOfWorkCatalogo>()
+            source.GetMock<IUnitOfWork>()
                 .Setup(u => u.ObterRepository<TEntity>())
                 .Returns(repository.Object);
 

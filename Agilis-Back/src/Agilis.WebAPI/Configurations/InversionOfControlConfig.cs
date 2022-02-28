@@ -21,7 +21,7 @@ namespace Agilis.WebAPI.Configurations
             services.AddCriptografiaIoC();
             if (!currentEnvironment.IsStaging())
             {
-                services.AddDatabaseIoC();
+                services.AddDatabaseIoC(configuration);
             }
             services.AddAppServicesIoC();
             services.AddWorkersIoC();

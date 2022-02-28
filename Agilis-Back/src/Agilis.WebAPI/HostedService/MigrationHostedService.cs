@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Agilis.Core.Domain.Abstractions.Factories;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,9 +25,9 @@ namespace Agilis.WebAPI.HostedService
 
             using var scope = _serviceProvider.CreateScope();
 
-            var unitOfWorkFactory = scope.ServiceProvider.GetService<IUnitOfWorkFactory>();
+            var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
 
-            //TODO: await new MigrationPoupanca(unitOfWorkFactory, _logger).Migrar();
+            //TODO: await new MigrationPoupanca(unitOfWork, _logger).Migrar();
 
             _logger.LogInformation("Terminou migrations");
         }

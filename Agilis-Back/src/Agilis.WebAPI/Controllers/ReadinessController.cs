@@ -12,11 +12,11 @@ namespace Agilis.WebAPI.Controllers
     public class ReadinessController : AgilisController
     {
         [HttpGet]
-        public IActionResult Consultar([FromServices] IUnitOfWorkCatalogo unitOfWorkCatalogo)
+        public IActionResult Consultar([FromServices] IUnitOfWork unitOfWork)
         {
             try
             {
-                var usuarioRepository = unitOfWorkCatalogo.ObterRepository<Usuario>();
+                var usuarioRepository = unitOfWork.ObterRepository<Usuario>();
 
                 var achou = usuarioRepository.Consultar().Any();
 

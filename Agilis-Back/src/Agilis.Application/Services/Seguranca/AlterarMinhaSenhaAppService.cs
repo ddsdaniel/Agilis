@@ -13,17 +13,17 @@ namespace Agilis.Application.Services.Seguranca
     public class AlterarMinhaSenhaAppService : AppService
     {
         private readonly IMapper _mapper;
-        private readonly IUnitOfWorkCatalogo _unitOfWorkCatalogo;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUsuario _usuarioLogado;
 
         public AlterarMinhaSenhaAppService(
             IMediator mediator, 
             IMapper mapper,
-            IUnitOfWorkCatalogo unitOfWorkCatalogo,
+            IUnitOfWork unitOfWork,
             IUsuario usuarioLogado) : base(mediator)
         {
             _mapper = mapper;
-            _unitOfWorkCatalogo = unitOfWorkCatalogo;
+            _unitOfWork = unitOfWork;
             _usuarioLogado = usuarioLogado;
         }
 
@@ -33,7 +33,7 @@ namespace Agilis.Application.Services.Seguranca
             AddNotifications(alterarMinhaSenha);
             if (Invalid) return;
 
-            var usuarioRepository = _unitOfWorkCatalogo.ObterRepository<Usuario>();
+            var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = await usuarioRepository.ConsultarPorIdAsync(_usuarioLogado.Id);
 
             usuario.AlterarSenha(alterarMinhaSenha);
@@ -41,7 +41,7 @@ namespace Agilis.Application.Services.Seguranca
             if (Invalid) return;
 
             await usuarioRepository.AlterarAsync(usuario);
-            await _unitOfWorkCatalogo.CommitAsync();
+            await _unitOfWork.CommitAsync();
         }
     }
 }

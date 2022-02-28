@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
-using Agilis.Core.Domain.Abstractions.Factories;
-using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Infra.Emails.Abstractions.Services;
 using Agilis.Infra.Seguranca.Enums;
@@ -14,13 +12,13 @@ using Agilis.Infra.Seguranca.Models.ValueObjects;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 
 namespace Agilis.Application.Services.Seguranca
 {
     public class EsqueciMinhaSenhaAppService : AppService
     {
-        private readonly IUnitOfWorkCatalogo _unitOfWorkCatalogo;
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMemoryCache _memoryCache;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
@@ -28,8 +26,7 @@ namespace Agilis.Application.Services.Seguranca
 
         public EsqueciMinhaSenhaAppService(
             IMediator mediator,
-            IUnitOfWorkCatalogo unitOfWorkCatalogo,
-            IUnitOfWorkFactory unitOfWorkFactory,
+            IUnitOfWork unitOfWork,
             IMemoryCache memoryCache,
             IEmailService emailService,
             IMapper mapper,
@@ -37,8 +34,7 @@ namespace Agilis.Application.Services.Seguranca
             ) 
             : base(mediator)
         {
-            _unitOfWorkCatalogo = unitOfWorkCatalogo;
-            _unitOfWorkFactory = unitOfWorkFactory;
+            _unitOfWork = unitOfWork;
             _memoryCache = memoryCache;
             _emailService = emailService;
             _mapper = mapper;
@@ -50,7 +46,7 @@ namespace Agilis.Application.Services.Seguranca
             AddNotifications(email);
             if (Invalid) return;
 
-            var usuarioRepository = _unitOfWorkCatalogo.ObterRepository<Usuario>();
+            var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = usuarioRepository
                 .Consultar()
                 .FirstOrDefault(u => u.Email.Endereco == email.Endereco);
@@ -80,7 +76,7 @@ namespace Agilis.Application.Services.Seguranca
             AddNotifications(email);
             if (Invalid) return null;
 
-            var usuarioRepository = _unitOfWorkCatalogo.ObterRepository<Usuario>();
+            var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = usuarioRepository
                 .Consultar()
                 .FirstOrDefault(u => u.Email.Endereco == email.Endereco);
@@ -109,18 +105,17 @@ namespace Agilis.Application.Services.Seguranca
             if (Invalid) return null;
             
             await usuarioRepository.AlterarAsync(usuario);
-            await _unitOfWorkCatalogo.CommitAsync();
+            await _unitOfWork.CommitAsync();
 
             _memoryCache.Remove($"EsqueciMinhaSenha.{usuario.Email.Endereco}");
 
             var token = _tokenFactory.Criar(usuario, TipoToken.Autenticacao);
             var refreshTokenString = _tokenFactory.Criar(usuario, TipoToken.RefreshToken);
 
-            var unitOfWorkInquilino = _unitOfWorkFactory.ObterUnitOfWorkInquilino(usuario.Email);
             var refreskToken = new RefreshToken(refreshTokenString);
-            var refreshTokenRepository = unitOfWorkInquilino.ObterRepository<RefreshToken>();
+            var refreshTokenRepository = _unitOfWork.ObterRepository<RefreshToken>();
             await refreshTokenRepository.AdicionarAsync(refreskToken);
-            await unitOfWorkInquilino.CommitAsync();
+            await _unitOfWork.CommitAsync();
 
             var usuarioLogado = _mapper.Map<UsuarioConsultaViewModel>(usuario);
 

@@ -9,15 +9,15 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 
-namespace Agilis.Infra.Data.Mongo.Abstractions.UnitsOfWork
+namespace Agilis.Infra.Data.Mongo.UnitsOfWork
 {
-    public abstract class MongoUnitOfWork : IUnitOfWork
+    public class MongoUnitOfWork : IUnitOfWork
     {
         private readonly IClientSessionHandle _session;
         private readonly IMongoDatabase _database;
         private bool _disposed = false;
         private IList _repositories;
-        
+
         public MongoUnitOfWork(IMongoDatabase database)
         {
             _session = database.Client.StartSession();

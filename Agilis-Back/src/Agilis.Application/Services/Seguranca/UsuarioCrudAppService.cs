@@ -13,9 +13,9 @@ namespace Agilis.Application.Services.Seguranca
     public class UsuarioCrudAppService
         : CrudAppService<UsuarioCadastroViewModel, UsuarioConsultaViewModel, Usuario>
     {
-        private readonly IUnitOfWorkCatalogo _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UsuarioCrudAppService(IUnitOfWorkCatalogo unitOfWork, IMapper mapper, IMediator mediator)
+        public UsuarioCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
             : base(mapper, mediator, unitOfWork.ObterRepository<Usuario>(), unitOfWork)
         {
             _unitOfWork = unitOfWork;
