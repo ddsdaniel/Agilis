@@ -20,13 +20,12 @@ self.onnotificationclick = function(event) {
 };
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBBtpX9aJuw5mPH7ZrQ471GYG65R4LhedQ",
-  authDomain: "app-Agilis.firebaseapp.com",
-  databaseURL: "https://app-Agilis.firebaseio.com",
-  projectId: "app-Agilis",
-  storageBucket: "app-Agilis.appspot.com",
-  messagingSenderId: "529958958217",
-  appId: "1:529958958217:web:1b2dfde9f8a8954acf8258"
+  apiKey: "AIzaSyBwWdIarzt-D7jtLZ995LW36QXvAN9hCJM",
+  authDomain: "agilis-f7c41.firebaseapp.com",
+  projectId: "agilis-f7c41",
+  storageBucket: "agilis-f7c41.appspot.com",
+  messagingSenderId: "448778142805",
+  appId: "1:448778142805:web:eb79969fa49c78471440dc"
 });
 
 const messaging = firebase.messaging();
