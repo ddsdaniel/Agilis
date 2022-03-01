@@ -27,14 +27,14 @@
         <div mat-line>Dinheiro Acumulado</div>
       </mat-list-item>
 
-      <mat-list-item (click)="menu.close();router.navigate(['/categorias/despesas']);">
+      <mat-list-item (click)="menu.close();router.navigate(['/times/despesas']);">
         <mat-icon mat-list-icon>pie_chart_outline</mat-icon>
-        <div mat-line>Despesas por Categoria</div>
+        <div mat-line>Despesas por Time</div>
       </mat-list-item>
 
-      <mat-list-item (click)="menu.close();router.navigate(['/categorias/analise']);">
+      <mat-list-item (click)="menu.close();router.navigate(['/times/analise']);">
         <mat-icon mat-list-icon>timeline</mat-icon>
-        <div mat-line>Análise de Categorias</div>
+        <div mat-line>Análise de Times</div>
       </mat-list-item>
 
       <mat-list-item (click)="menu.close();router.navigate(['/orcamentos/analise']);">
@@ -49,9 +49,9 @@
 
       <mat-divider></mat-divider>
 
-      <mat-list-item (click)="menu.close();router.navigate(['/categorias']);">
-        <mat-icon mat-list-icon>category</mat-icon>
-        <div mat-line>Categorias</div>
+      <mat-list-item (click)="menu.close();router.navigate(['/times']);">
+        <mat-icon mat-list-icon>groups</mat-icon>
+        <div mat-line>Times</div>
       </mat-list-item>
 
       <mat-list-item (click)="menu.close();router.navigate(['/cartoes-credito']);">

@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'intro', component: IntroComponent, canActivate: [AutenticacaoGuard] },
   { path: 'alterar-minha-senha', component: AlterarMinhaSenhaComponent, canActivate: [AutenticacaoGuard] },
 
+  { path: 'times', loadChildren: () => import('./components/times/times.module').then(m => m.TimesModule) },
+
   // { path: '', component: TransacoesListComponent, canActivate: [AutenticacaoGuard] },
 
 ];

@@ -17,18 +17,6 @@ export class IntroComponent implements OnInit {
       explicacao: 'Aqui você tem acesso a todos os recursos do sistema.',
       imagem: '../../../assets/images/intro/menu.png'
     },
-    {
-      titulo: 'Categorias',
-      explicacao: 'Use as categorias para organizar as suas despesas e receitas, ' +
-        'mais tarde você poderá visualizar um gráfico e descobrir onde vai o seu dinheiro.',
-      imagem: '../../../assets/images/intro/categorias.png'
-    },
-    {
-      titulo: 'Transações',
-      explicacao: 'Esta é a tela principal do sistema, aqui você registra todas as suas contas a pagar e a receber. ' +
-        'Lembre-se que quanto mais você registrar, mais o Agilis conseguirá te ajudar nas decisões sobre o seu dinheiro.',
-      imagem: '../../../assets/images/intro/transacoes.png'
-    },
   ];
 
   constructor(

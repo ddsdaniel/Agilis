@@ -8,11 +8,9 @@
 
   <!-- Textos -->
   <h1>Agilis</h1>
-  <h2>Sistema de Administração Financeira</h2>
+  <h2>Sistema Agilis</h2>
   <div>
-    <p>O aplicativo perfeito para gerenciar as suas finanças pessoais. Possui diversos recursos que permitem a você ter
-      total controle de suas despesas e receitas.</p>
-    <p>Cadastre-se <strong>gratuitamente</strong> agora mesmo.</p>
+    <p>Frase promocional</p>
   </div>
 
   <!-- Botões -->
@@ -23,25 +21,9 @@
 
 </header>
 
-<!-- Recursos -->
-<div>
-
-  <section *ngFor="let recurso of recursos" [class.mat-elevation-z3]="true">
-    <div>
-      <img [src]="recurso.imagemUrl" [alt]="recurso.imagemAlt" [class.mat-elevation-z3]="true" />
-    </div>
-    <div>
-      <h2>{{recurso.titulo}}</h2>
-      <p>{{recurso.descricao}}</p>
-    </div>
-  </section>
-
-</div>
-
 <div style="clear: both;"></div>
 
 <!-- Rodapé -->
 <footer fxLayout="column" fxLayoutAlign="center center">
   <p>Todos os direitos reservados © DDS Sistemas</p>
-  <p>Siga <a target="_blank" href="https://www.instagram.com/appAgilis">@appAgilis</a> no Instagram</p>
 </footer>

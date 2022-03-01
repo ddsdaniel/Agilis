@@ -11,6 +11,7 @@ namespace Agilis.Infra.CrossCutting.IoC
         {
             //Outros
             services.AddScoped<DispositivoCrudAppService>();
+            services.AddScoped<TimeCrudAppService>();
 
             //Segurança
             services.AddScoped<UsuarioCrudAppService>();

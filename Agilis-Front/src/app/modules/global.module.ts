@@ -7,7 +7,6 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { ActionBarComponent } from '../components/widgets/action-bar/action-bar.component';
 import { ColorPickerComponent } from '../components/widgets/color-picker/color-picker.component';
 import { DialogoSimNaoComponent } from '../components/widgets/dialogo-sim-nao/dialogo-sim-nao.component';
-import { IconPickerComponent } from '../components/widgets/icon-picker/icon-picker.component';
 import { MonthNavigationComponent } from '../components/widgets/month-navigation/month-navigation.component';
 import { ProgressBarComponent } from '../components/widgets/progress-bar/progress-bar.component';
 import { YearNavigationComponent } from '../components/widgets/year-navigation/year-navigation.component';
@@ -20,7 +19,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   declarations: [
     ActionBarComponent,
     ColorPickerComponent,
-    IconPickerComponent,
     MonthNavigationComponent,
     YearNavigationComponent,
     ProgressBarComponent,
@@ -43,7 +41,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     NgxMaskModule,
     ActionBarComponent,
     ColorPickerComponent,
-    IconPickerComponent,
     MonthNavigationComponent,
     YearNavigationComponent,
     ProgressBarComponent,
