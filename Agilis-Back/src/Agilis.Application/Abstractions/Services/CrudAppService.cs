@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Abstractions.Repositories;
-using MediatR;
 using System;
 using System.Threading.Tasks;
 using Agilis.Core.Domain.Events;
@@ -23,10 +22,9 @@ namespace Agilis.Application.Abstractions.Services
         private readonly IUnitOfWork _unitOfWork;
 
         protected CrudAppService(IMapper mapper,
-                                 IMediator mediator,
                                  IRepository<TEntity> repository,
                                  IUnitOfWork unitOfWork) 
-            : base(mapper, mediator, repository)
+            : base(mapper, repository)
         {
             _mapper = mapper;
             _repository = repository;
@@ -37,9 +35,9 @@ namespace Agilis.Application.Abstractions.Services
         {
             var entidade = _mapper.Map<TEntity>(novaEntidadeViewModel);
 
-            if (entidade.Invalid)
+            if (entidade.Invalido)
             {
-                AddNotifications(entidade);
+                ImportarCriticas(entidade);
                 return null;
             }
             else
@@ -48,9 +46,6 @@ namespace Agilis.Application.Abstractions.Services
 
                 var entidadeAdicionadaEvent = (EntidadeAdicionadaDomainEvent<TEntity>)Activator.
                     CreateInstance(typeof(EntidadeAdicionadaDomainEvent<TEntity>), new object[] { entidade });
-
-                await PublicarDomainEventAsync(entidadeAdicionadaEvent);
-                if (Invalid) return null;
 
                 await _unitOfWork.CommitAsync();
 
@@ -65,11 +60,11 @@ namespace Agilis.Application.Abstractions.Services
 
             if (depois.Id != id)
             {
-                AddNotification(nameof(id), "Ids não conferem");
+                Criticar("Ids não conferem");
             }
-            else if (depois.Invalid)
+            else if (depois.Invalido)
             {
-                AddNotifications(depois);
+                ImportarCriticas(depois);
             }
             else
             {
@@ -80,8 +75,7 @@ namespace Agilis.Application.Abstractions.Services
                 var entidadeAlteradaEvent = (EntidadeAlteradaDomainEvent<TEntity>)Activator.
                     CreateInstance(typeof(EntidadeAlteradaDomainEvent<TEntity>), new object[] { antes, depois });
 
-                await PublicarDomainEventAsync(entidadeAlteradaEvent);
-                if (Valid)
+                if (Valido)
                 {
                     await _unitOfWork.CommitAsync();
                 }
@@ -94,7 +88,7 @@ namespace Agilis.Application.Abstractions.Services
 
             if (entidade == null)
             {
-                AddNotification(nameof(id), "Registro não encontrado");
+                Criticar("Registro não encontrado");
             }
             else
             {
@@ -103,8 +97,7 @@ namespace Agilis.Application.Abstractions.Services
                 var entidadeExcluidaEvent = (EntidadeExcluidaDomainEvent<TEntity>)Activator.
                 CreateInstance(typeof(EntidadeExcluidaDomainEvent<TEntity>), new object[] { entidade });
 
-                await PublicarDomainEventAsync(entidadeExcluidaEvent);
-                if (Valid)
+                if (Valido)
                 {
                     await _unitOfWork.CommitAsync();
                 }

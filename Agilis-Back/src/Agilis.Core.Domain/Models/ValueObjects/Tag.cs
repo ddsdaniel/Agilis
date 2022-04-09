@@ -1,6 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
-using Agilis.Core.Domain.Extensions;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+using System;
 
 namespace Agilis.Core.Domain.Models.ValueObjects
 {
@@ -16,10 +15,15 @@ namespace Agilis.Core.Domain.Models.ValueObjects
             Nome = nome;
             Cor = cor;
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Nome, nameof(Nome), "Nome não deve ser nulo ou vazio")
-                .IsValid(Cor, nameof(Cor))
-                );
+            Validar();
+        }
+
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome não deve ser nulo ou vazio");
+
+            ImportarCriticas(Cor);
         }
 
         public override string ToString()

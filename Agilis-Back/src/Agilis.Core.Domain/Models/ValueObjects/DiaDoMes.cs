@@ -1,5 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Agilis.Core.Domain.Models.ValueObjects
@@ -12,11 +11,14 @@ namespace Agilis.Core.Domain.Models.ValueObjects
 
         public DiaDoMes(int dia)
         {
-            AddNotifications(new Contract()
-                .IsBetween(dia, 1, 31, nameof(Dia), "Dia deve ser entre 1 e 31")
-                );
-
             Dia = dia;
+            Validar();
+        }
+
+        private void Validar()
+        {
+            if (Dia < 1 || Dia > 31)
+                Criticar("Dia deve ser entre 1 e 31");
         }
     }
 }

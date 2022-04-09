@@ -1,5 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
+using System;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -10,13 +10,16 @@ namespace Agilis.Core.Domain.Models.Entities
         protected Dispositivo()  { }
 
         public Dispositivo(string token)
-            
+
         {
             Token = token;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Token, nameof(Token), "Token do dispositivo não deve ser vazio ou nulo")
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Token))
+                Criticar("Token do dispositivo não deve ser vazio ou nulo");
         }
 
         public override string ToString() => Token;

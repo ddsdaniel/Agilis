@@ -1,6 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
-using Agilis.Core.Domain.Extensions;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 
 namespace Agilis.Infra.Seguranca.Models.ValueObjects
 {
@@ -15,16 +13,18 @@ namespace Agilis.Infra.Seguranca.Models.ValueObjects
         {
             NovaSenha = novaSenha;
             ConfirmaSenha = confirmaSenha;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsValid(NovaSenha, nameof(NovaSenha))
-                .IsValid(ConfirmaSenha, nameof(ConfirmaSenha))
-                );
+        private void Validar()
+        {
+            ImportarCriticas(NovaSenha);
+            ImportarCriticas(ConfirmaSenha);
 
             if (NovaSenha?.Conteudo != null && ConfirmaSenha?.Conteudo != null)
             {
                 if (NovaSenha?.Conteudo != ConfirmaSenha?.Conteudo)
-                    AddNotification(nameof(ConfirmaSenha), "Nova Senha e Confirma Senha não devem ser diferentes");
+                    Criticar("Nova Senha e Confirma Senha não devem ser diferentes");
             }
         }
     }

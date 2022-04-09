@@ -20,7 +20,7 @@ namespace Agilis.Infra.Data.Mongo.Serializers
         {
             var senhaCrifrada = context.Reader.ReadString();
             var senhaDecifrada = _criptografiaSimetrica.Decifrar(senhaCrifrada, _segredo);
-            if (_criptografiaSimetrica.Valid)
+            if (_criptografiaSimetrica.Valido)
                 return new Senha(senhaDecifrada);
             else
                 return null;
@@ -29,7 +29,7 @@ namespace Agilis.Infra.Data.Mongo.Serializers
         public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Senha senha)
         {
             var senhaCrifrada = _criptografiaSimetrica.Cifrar(senha.Conteudo, _segredo);
-            if (_criptografiaSimetrica.Valid)
+            if (_criptografiaSimetrica.Valido)
                 context.Writer.WriteString(senhaCrifrada);
         }
         

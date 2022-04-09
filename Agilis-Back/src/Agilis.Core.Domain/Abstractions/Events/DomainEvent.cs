@@ -1,10 +1,10 @@
-﻿using Flunt.Notifications;
+﻿using DDS.Validacoes.Abstractions.Models;
 using MediatR;
 using System;
 
 namespace Agilis.Core.Domain.Abstractions.Events
 {
-    public abstract class DomainEvent : Notifiable, INotification
+    public abstract class DomainEvent : Validavel, INotification
     {
         public DateTime Timestamp { get; private set; }
 

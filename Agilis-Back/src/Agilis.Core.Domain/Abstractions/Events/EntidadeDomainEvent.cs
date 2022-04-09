@@ -1,6 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Extensions;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 
 namespace Agilis.Core.Domain.Abstractions.Events
 {
@@ -13,9 +11,7 @@ namespace Agilis.Core.Domain.Abstractions.Events
         {
             Entidade = entidade;
 
-            AddNotifications(new Contract()
-                .IsValid(entidade, nameof(Entidade))
-                );
+            ImportarCriticas(Entidade);
         }
     }
 }

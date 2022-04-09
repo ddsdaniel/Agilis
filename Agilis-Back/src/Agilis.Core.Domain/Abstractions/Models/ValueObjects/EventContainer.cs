@@ -1,17 +1,17 @@
-﻿using Flunt.Notifications;
-using Agilis.Core.Domain.Abstractions.Events;
+﻿using Agilis.Core.Domain.Abstractions.Events;
+using DDS.Validacoes.Abstractions.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Agilis.Core.Domain.Abstractions.Models.ValueObjects
 {
-    public abstract class EventContainer: Notifiable
+    public abstract class EventContainer : Validavel
     {
         public IEnumerable<DomainEvent> Eventos { get; private set; } = new List<DomainEvent>();
 
         public void AdicionarEvento(DomainEvent domainEvent)
         {
-            if (domainEvent.Valid)
+            if (domainEvent.Valido)
             {
                 var lista = Eventos.ToList();
                 lista.Add(domainEvent);
@@ -19,7 +19,7 @@ namespace Agilis.Core.Domain.Abstractions.Models.ValueObjects
             }
             else
             {
-                AddNotifications(domainEvent);
+                ImportarCriticas(domainEvent);
             }
         }
     }

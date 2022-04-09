@@ -1,10 +1,9 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Enums;
-using Agilis.Core.Domain.Extensions;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Infra.Seguranca.Abstractions.Models.Entities;
 using Agilis.Infra.Seguranca.Models.ValueObjects;
+using System;
 
 namespace Agilis.Infra.Seguranca.Models.Entities
 {
@@ -34,27 +33,35 @@ namespace Agilis.Infra.Seguranca.Models.Entities
             Ativo = ativo;
             Regra = regra;
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Nome, nameof(Nome), "Nome não deve ser nulo ou vazio")
-                .IsNotNullOrEmpty(Sobrenome, nameof(Sobrenome), "Sobrenome não deve ser nulo ou vazio")
-                .IsValid(Email, nameof(Email))
-                .IsValid(Senha, nameof(Senha))
-                );
+            Validar();
+        }
+
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome não deve ser nulo ou vazio");
+
+            if (String.IsNullOrEmpty(Sobrenome))
+                Criticar("Sobrenome não deve ser nulo ou vazio");
+
+            ImportarCriticas(Email);
+            ImportarCriticas(Senha);
         }
 
         public void AlterarSenha(AlterarMinhaSenha alterarMinhaSenha)
         {
             if (alterarMinhaSenha == null)
             {
-                AddNotification(nameof(alterarMinhaSenha), "O objeto alterar a minha senha não deve ser nulo");
+                Criticar("O objeto alterar a minha senha não deve ser nulo");
                 return;
             }
-            AddNotifications(alterarMinhaSenha);
-            if (Invalid) return;
+            ImportarCriticas(alterarMinhaSenha);
+
+            if (Invalido) return;
 
             if (alterarMinhaSenha.SenhaAtual.Conteudo != Senha.Conteudo)
             {
-                AddNotification(nameof(alterarMinhaSenha.SenhaAtual), "A senha atual está incorreta");
+                Criticar("A senha atual está incorreta");
                 return;
             }
 
@@ -70,11 +77,11 @@ namespace Agilis.Infra.Seguranca.Models.Entities
         {
             if (redefinicaoSenha == null)
             {
-                AddNotification(nameof(redefinicaoSenha), "O objeto redefinição de minha senha não deve ser nulo");
+                Criticar("O objeto redefinição de minha senha não deve ser nulo");
                 return;
             }
-            AddNotifications(redefinicaoSenha);
-            if (Invalid) return;
+            ImportarCriticas(redefinicaoSenha);
+            if (Invalido) return;
 
             Senha = redefinicaoSenha.NovaSenha;
         }

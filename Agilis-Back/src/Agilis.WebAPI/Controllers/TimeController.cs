@@ -21,7 +21,7 @@ namespace Agilis.WebAPI.Controllers
         {
             var timesViewModel = _timeCrudAppService.ConsultarTodos();
 
-            if (_timeCrudAppService.Invalid)
+            if (_timeCrudAppService.Invalido)
                 return CustomBadRequest(_timeCrudAppService);
 
             return Ok(timesViewModel);

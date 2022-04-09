@@ -1,5 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Models.ValueObjects;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,13 +16,16 @@ namespace Agilis.Infra.Seguranca.Models.Entities
 
         {
             Token = token;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(token, nameof(Token), "Token não deve ser vazio ou nulo")
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Token))
+                Criticar("Token não deve ser vazio ou nulo");
 
-            if (!String.IsNullOrEmpty(token) && TestarSeExpirou())
-                AddNotification(nameof(token), "Token expirado");
+            if (!String.IsNullOrEmpty(Token) && TestarSeExpirou())
+                Criticar("Token expirado");
         }
 
         public JwtSecurityToken Decodificar()
@@ -36,7 +38,7 @@ namespace Agilis.Infra.Seguranca.Models.Entities
             }
             catch (Exception exception)
             {
-                AddNotification(nameof(exception), exception.Message);
+                Criticar(exception.Message);
                 return null;
             }
         }

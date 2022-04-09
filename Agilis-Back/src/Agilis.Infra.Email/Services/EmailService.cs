@@ -39,24 +39,24 @@ namespace Agilis.Infra.Emails.Services
             {
                 if (destinatario == null)
                 {
-                    AddNotification(nameof(destinatario), "Destinatário não deve ser nulo");
+                    Criticar("Destinatário não deve ser nulo");
                     return;
                 }
-                AddNotifications(destinatario);
+                ImportarCriticas(destinatario);
 
                 if (String.IsNullOrEmpty(assunto))
                 {
-                    AddNotification(nameof(assunto), "Assunto não deve ser vazio ou nulo");
+                    Criticar("Assunto não deve ser vazio ou nulo");
                     return;
                 }
 
                 if (String.IsNullOrEmpty(mensagem))
                 {
-                    AddNotification(nameof(mensagem), "Mensagem não deve ser vazia ou nula");
+                    Criticar("Mensagem não deve ser vazia ou nula");
                     return;
                 }
 
-                if (Invalid) return;
+                if (Invalido) return;
 
                 var mailMessage = new MailMessage
                 {
@@ -74,7 +74,7 @@ namespace Agilis.Infra.Emails.Services
 
                     if (anexos.Any(a => String.IsNullOrEmpty(a)))
                     {
-                        AddNotification(nameof(anexos), "Anexo inválido");
+                        Criticar("Anexo inválido");
                         return;
                     }
 
@@ -87,7 +87,7 @@ namespace Agilis.Infra.Emails.Services
             }
             catch (Exception exception)
             {
-                AddNotification(nameof(exception), exception.Message);
+                Criticar(exception.Message);
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+using System;
 
 namespace Agilis.Core.Domain.Models.ValueObjects
 {
@@ -14,10 +14,13 @@ namespace Agilis.Core.Domain.Models.ValueObjects
         {
             Nome = nome;
             Ordem = ordem;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Nome, nameof(Nome), "Nome não deve ser nulo ou vazio")
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome não deve ser nulo ou vazio");
         }
 
         public override string ToString()

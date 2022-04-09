@@ -9,7 +9,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="DDSSistemas.Logs" Version="2.1.0" />
-		<PackageReference Include="Flunt" Version="1.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.0" />

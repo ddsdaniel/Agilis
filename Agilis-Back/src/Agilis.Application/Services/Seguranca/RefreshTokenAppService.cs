@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
@@ -22,13 +21,11 @@ namespace Agilis.Application.Services.Seguranca
         private readonly TokenFactory _tokenFactory;
 
         public RefreshTokenAppService(
-            IMediator mediator,
             IMapper mapper,
             IUnitOfWork unitOfWork,
             ILogger<RefreshTokenAppService> logger,
             TokenFactory tokenFactory
             )
-            : base(mediator)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -39,12 +36,12 @@ namespace Agilis.Application.Services.Seguranca
         public async Task<UsuarioLogadoViewModel> RenovarAsync(RefreshTokenViewModel refreshTokenViewModel)
         {
             var usuario = ExtrairUsuario(refreshTokenViewModel);
-            if (Invalid) return null;
+            if (Invalido) return null;
 
             var refreshTokenRepository = _unitOfWork.ObterRepository<RefreshToken>();
 
             var refreshTokenArmazenado = ValidarToken(refreshTokenViewModel, refreshTokenRepository);
-            if (Invalid) return null;
+            if (Invalido) return null;
 
             var novoToken = _tokenFactory.Criar(usuario, TipoToken.Autenticacao);
             var novoRefreshTokenString = _tokenFactory.Criar(usuario, TipoToken.RefreshToken);
@@ -94,12 +91,12 @@ namespace Agilis.Application.Services.Seguranca
         private Usuario ExtrairUsuario(RefreshTokenViewModel refreshTokenViewModel)
         {
             var refreshTokenRequest = _mapper.Map<RefreshToken>(refreshTokenViewModel);
-            AddNotifications(refreshTokenRequest);
-            if (Invalid) return null;
+            ImportarCriticas(refreshTokenRequest);
+            if (Invalido) return null;
 
             var email = refreshTokenRequest.ObterEmail();
-            AddNotifications(email);
-            if (Invalid) return null;
+            ImportarCriticas(email);
+            if (Invalido) return null;
 
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
 
@@ -109,7 +106,7 @@ namespace Agilis.Application.Services.Seguranca
 
             if (usuario == null)
             {
-                AddNotification(nameof(usuario), "Usuário não encontrado.");
+                Criticar("Usuário não encontrado.");
                 return null;
             }
 
@@ -124,12 +121,12 @@ namespace Agilis.Application.Services.Seguranca
 
             if (refreshTokenArmazenado == null)
             {
-                AddNotification(nameof(refreshTokenArmazenado), "Refresh token não encontrado.");
+                Criticar("Refresh token não encontrado.");
                 return null;
             }
 
-            AddNotifications(refreshTokenArmazenado);
-            if (Invalid) return null;
+            ImportarCriticas(refreshTokenArmazenado);
+            if (Invalido) return null;
 
             return refreshTokenArmazenado;
         }

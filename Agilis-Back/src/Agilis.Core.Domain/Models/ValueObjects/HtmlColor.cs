@@ -1,5 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using System;
 using System.Text.RegularExpressions;
 
@@ -9,30 +8,26 @@ namespace Agilis.Core.Domain.Models.ValueObjects
     {
         public string Codigo { get; private set; }
 
-        protected HtmlColor()
-        {
-
-        }
+        protected HtmlColor() { }
 
         public HtmlColor(string codigo)
         {
             Codigo = codigo;
-
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Codigo, nameof(Codigo), "O código da cor não deve ser nulo ou vazio")
-                .IsTrue(Validar(Codigo), nameof(Codigo), "Código de cor inválido, deve estar no formato #000000")
-                );
+            Validar(codigo);
         }
 
-        private static bool Validar(string codigo)
+        private void Validar(string codigo)
         {
-            if (String.IsNullOrEmpty(codigo))
-                return false;
-
-            const string HEX_PATTERN = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
-            var regex = new Regex(HEX_PATTERN);
-            var match = regex.Match(codigo);
-            return match.Success;
+            if (String.IsNullOrEmpty(Codigo))
+                Criticar("O código da cor não deve ser nulo ou vazio");
+            else
+            {
+                const string HEX_PATTERN = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+                var regex = new Regex(HEX_PATTERN);
+                var match = regex.Match(codigo);
+                if (!match.Success)
+                    Criticar("Código de cor inválido, deve estar no formato #000000");
+            }
         }
 
         public override string ToString() => Codigo;

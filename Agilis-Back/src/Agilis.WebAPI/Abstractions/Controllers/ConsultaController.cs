@@ -23,7 +23,7 @@ namespace Agilis.WebAPI.Abstractions.Controllers
             var viewModel = await _consultaAppService.ConsultarPorIdAsync(id);
 
             if (viewModel == null)
-                return CustomNotFound(nameof(id), "Registro não encontrado");
+                return CustomNotFound("Registro não encontrado");
 
             return Ok(viewModel);
         }

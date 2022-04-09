@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Abstractions.Repositories;
-using MediatR;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +15,8 @@ namespace Agilis.Application.Abstractions.Services
         private readonly IRepository<TEntity> _repository;
 
         protected ConsultaAppService(IMapper mapper,
-                                     IMediator mediator,
                                      IRepository<TEntity> repository
-            ) : base(mediator)
+            ) 
         {
             _mapper = mapper;
             _repository = repository;

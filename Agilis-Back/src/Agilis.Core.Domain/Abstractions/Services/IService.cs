@@ -1,12 +1,8 @@
-﻿using Flunt.Notifications;
-using System.Collections.Generic;
+﻿using DDS.Validacoes.Abstractions.Models;
 
 namespace Agilis.Core.Domain.Abstractions.Services
 {
-    public interface IService
+    public interface IService : IValidavel
     {
-        IReadOnlyCollection<Notification> Notifications { get; }
-        bool Invalid { get; }
-        bool Valid { get; }
     }
 }

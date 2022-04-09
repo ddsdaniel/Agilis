@@ -1,5 +1,4 @@
-﻿using Flunt.Notifications;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,7 +35,7 @@ namespace Agilis.WebAPI.Abstractions.Controllers
         {
             var viewModelConsulta = await _crudAppService.AdicionarAsync(novaEntidadeViewModel);
 
-            if (_crudAppService.Invalid)
+            if (_crudAppService.Invalido)
                 return CustomBadRequest(_crudAppService);
 
             return Ok(viewModelConsulta);
@@ -50,13 +49,13 @@ namespace Agilis.WebAPI.Abstractions.Controllers
         /// <returns>OK (201)</returns>
         [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public virtual async Task<ActionResult> Put(Guid id, TViewModelCadastro viewModelCadastro)
         {
             await _crudAppService.AlterarAsync(id, viewModelCadastro);
 
-            if (_crudAppService.Invalid)
+            if (_crudAppService.Invalido)
                 return CustomBadRequest(_crudAppService);
 
             return Ok();
@@ -69,13 +68,13 @@ namespace Agilis.WebAPI.Abstractions.Controllers
         /// <returns></returns>
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public virtual async Task<ActionResult> Delete(Guid id)
         {
             await _crudAppService.ExcluirAsync(id);
 
-            if (_crudAppService.Invalid)
+            if (_crudAppService.Invalido)
                 return CustomBadRequest(_crudAppService);            
 
             return Ok();

@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Flunt" Version="1.0.5" />
     <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DDS.Validacoes\DDS.Validacoes\DDS.Validacoes.csproj" />
   </ItemGroup>
 
 </Project>

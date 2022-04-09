@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
@@ -15,8 +14,8 @@ namespace Agilis.Application.Services.Seguranca
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsuarioCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
-            : base(mapper, mediator, unitOfWork.ObterRepository<Usuario>(), unitOfWork)
+        public UsuarioCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(mapper, unitOfWork.ObterRepository<Usuario>(), unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -26,12 +25,12 @@ namespace Agilis.Application.Services.Seguranca
             var repository = _unitOfWork.ObterRepository<Usuario>();
             if (repository.Consultar().Any(u => u.Email.Endereco == novaEntidadeViewModel.Email))
             {
-                AddNotification(nameof(novaEntidadeViewModel.Email), $"Já existe um usuário cadastrado com o e-mail: {novaEntidadeViewModel.Email}");
+                Criticar($"Já existe um usuário cadastrado com o e-mail: {novaEntidadeViewModel.Email}");
                 return null;
             }
             else if (novaEntidadeViewModel.Senha != novaEntidadeViewModel.ConfirmaSenha)
             {
-                AddNotification(nameof(novaEntidadeViewModel.ConfirmaSenha), "Senhas não conferem.");
+                Criticar("Senhas não conferem.");
                 return null;
             }
 
@@ -43,7 +42,7 @@ namespace Agilis.Application.Services.Seguranca
             var repository = _unitOfWork.ObterRepository<Usuario>();
             if (repository.Consultar().Any(u => u.Email.Endereco == viewModelCadastro.Email && u.Id != viewModelCadastro.Id))
             {
-                AddNotification(nameof(viewModelCadastro.Email), $"Já existe um usuário cadastrado com o e-mail: {viewModelCadastro.Email}");
+                Criticar($"Já existe um usuário cadastrado com o e-mail: {viewModelCadastro.Email}");
                 return null;
             }
 

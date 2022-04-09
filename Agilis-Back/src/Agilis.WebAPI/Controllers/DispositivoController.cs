@@ -21,7 +21,7 @@ namespace Agilis.WebAPI.Controllers
         {
             var dispositivosViewModel = _dispositivoCrudAppService.ConsultarTodos();
 
-            if (_dispositivoCrudAppService.Invalid)
+            if (_dispositivoCrudAppService.Invalido)
                 return CustomBadRequest(_dispositivoCrudAppService);
 
             return Ok(dispositivosViewModel);

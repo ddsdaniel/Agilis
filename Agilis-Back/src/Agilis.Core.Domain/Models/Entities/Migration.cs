@@ -1,5 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
+using System;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -12,10 +12,13 @@ namespace Agilis.Core.Domain.Models.Entities
         public Migration(string nome)
         {
             Nome = nome;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Nome, nameof(Nome), "Nome da migration não deve ser vazio ou nulo")
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome da migration não deve ser vazio ou nulo");
         }
     }
 }

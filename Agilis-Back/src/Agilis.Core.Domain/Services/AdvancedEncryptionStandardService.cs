@@ -15,7 +15,7 @@ namespace Agilis.Core.Domain.Services
         {
             if (string.IsNullOrEmpty(mensagem))
             {
-                AddNotification(nameof(mensagem), "Mensagem não deve ser nula");
+                Criticar("Mensagem não deve ser nula");
                 return null;
             }
 
@@ -44,13 +44,13 @@ namespace Agilis.Core.Domain.Services
         {
             if (string.IsNullOrEmpty(mensagemCifrada))
             {
-                AddNotification(nameof(mensagemCifrada), "Mensagem cifrada não deve ser nula");
+                Criticar("Mensagem cifrada não deve ser nula");
                 return null;
             }
 
             if (!IsBase64String(mensagemCifrada))
             {
-                AddNotification(nameof(mensagemCifrada), "Mensagem cifrada deve ser um texto do tipo Base64");
+                Criticar("Mensagem cifrada deve ser um texto do tipo Base64");
                 return null;
             }
 
@@ -77,7 +77,7 @@ namespace Agilis.Core.Domain.Services
             }
             catch (Exception)
             {
-                AddNotification(nameof(mensagemCifrada), "Erro ao decifrar a mensagem cifrada");
+                Criticar("Erro ao decifrar a mensagem cifrada");
                 return null;
             }            
         }
@@ -86,7 +86,7 @@ namespace Agilis.Core.Domain.Services
         {
             if (salt == null)
             {
-                AddNotification(nameof(salt), "Salt não deve ser nulo");
+                Criticar("Salt não deve ser nulo");
                 return null;
             }
 

@@ -21,7 +21,7 @@ namespace Agilis.WebAPI.Controllers
         {
             var usuarioLogadoViewModel = await refreshTokenAppService.RenovarAsync(refreshTokenViewModel);
 
-            if (refreshTokenAppService.Invalid)
+            if (refreshTokenAppService.Invalido)
                 return Forbid();
 
             return Ok(usuarioLogadoViewModel);

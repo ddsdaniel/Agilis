@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Core.Domain.Abstractions.Repositories;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
@@ -17,8 +16,8 @@ namespace Agilis.Application.Services.Times
         private readonly IRepository<Time> _timeRepository;
         private readonly IMapper _mapper;
 
-        public TimeCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
-            : base(mapper, mediator, unitOfWork.ObterRepository<Time>(), unitOfWork)
+        public TimeCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(mapper, unitOfWork.ObterRepository<Time>(), unitOfWork)
         {
             _timeRepository = unitOfWork.ObterRepository<Time>();
             _mapper = mapper;

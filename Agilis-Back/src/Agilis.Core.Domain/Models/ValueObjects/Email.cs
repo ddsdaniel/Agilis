@@ -1,5 +1,4 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using System;
 using System.Text.RegularExpressions;
 
@@ -9,30 +8,27 @@ namespace Agilis.Core.Domain.Models.ValueObjects
     {
         public string Endereco { get; private set; }
 
-        protected Email()
-        {
-
-        }
+        protected Email() { }
 
         public Email(string endereco)
         {
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(endereco, nameof(Endereco), "E-mail não deve ser nulo ou vazio")
-                .IsTrue(Validar(endereco), nameof(Endereco), "E-mail inválido")
-                );
-
-            if (!String.IsNullOrEmpty(endereco))
-                Endereco = endereco.ToLower();
+            Endereco = endereco?.ToLower();
+            Validar();
         }
 
-        private static bool Validar(string endereco)
+        private void Validar()
         {
-            if (String.IsNullOrEmpty(endereco))
-                return false;
+            if (String.IsNullOrEmpty(Endereco))
+                Criticar("E-mail não deve ser nulo ou vazio");
+            else
+            {
+                var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                var match = regex.Match(Endereco);
 
-            var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            var match = regex.Match(endereco);
-            return match.Success;
+                if (!match.Success)
+                    Criticar("E-mail inválido");
+            }
+
         }
 
         public override string ToString() => Endereco;

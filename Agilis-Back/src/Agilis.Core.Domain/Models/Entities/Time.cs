@@ -1,5 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.Entities;
+﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
+using System;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -10,13 +10,16 @@ namespace Agilis.Core.Domain.Models.Entities
         protected Time()  { }
 
         public Time(string nome)
-            
+
         {
             Nome = nome;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Nome, nameof(Nome), "Nome do time não deve ser vazio ou nulo")
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome do time não deve ser vazio ou nulo");
         }
 
         public override string ToString() => Nome;

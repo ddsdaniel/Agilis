@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
@@ -20,10 +19,8 @@ namespace Agilis.Application.Services.Seguranca
         private readonly TokenFactory _tokenFactory;
 
         public AutenticacaoAppService(IMapper mapper,
-                                      IMediator mediator,
                                       IUnitOfWork unitOfWork,
                                       TokenFactory tokenFactory)
-            : base(mediator)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -35,14 +32,14 @@ namespace Agilis.Application.Services.Seguranca
             var email = _mapper.Map<Email>(loginViewModel.Email);
             var senha = _mapper.Map<Senha>(loginViewModel.Senha);
 
-            if (email.Invalid)
+            if (email.Invalido)
             {
-                AddNotifications(email);
+                ImportarCriticas(email);
                 return null;
             }
-            else if (senha.Invalid)
+            else if (senha.Invalido)
             {
-                AddNotifications(senha);
+                ImportarCriticas(senha);
                 return null;
             }
             else
@@ -52,11 +49,11 @@ namespace Agilis.Application.Services.Seguranca
                 var usuario = usuarioRepository.Consultar().FirstOrDefault(u => u.Email.Endereco == email.Endereco);
                 if (usuario == null || usuario.Senha.Conteudo != senha.Conteudo)
                 {
-                    AddNotification(nameof(loginViewModel), "Usuário ou senha incorretos");
+                    Criticar("Usuário ou senha incorretos");
                     return null;
                 } else if (!usuario.Ativo)
                 {
-                    AddNotification(nameof(usuario.Ativo), "Usuário inativo.");
+                    Criticar("Usuário inativo.");
                     return null;
                 }
                 else

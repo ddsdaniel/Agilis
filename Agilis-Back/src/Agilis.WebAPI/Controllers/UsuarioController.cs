@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using Flunt.Notifications;
 using Agilis.Infra.Seguranca.Models.Entities;
 using Agilis.Infra.Seguranca.Abstractions.Models.Entities;
 using Agilis.Application.Services.Seguranca;
@@ -39,7 +38,7 @@ namespace Agilis.WebAPI.Controllers
         {
             var usuariosViewModel = _usuarioCrudAppService.ConsultarTodos();
 
-            if (_usuarioCrudAppService.Invalid)
+            if (_usuarioCrudAppService.Invalido)
                 return CustomBadRequest(_usuarioCrudAppService);
 
             return Ok(usuariosViewModel);
@@ -53,14 +52,14 @@ namespace Agilis.WebAPI.Controllers
         [HttpPost("login")]
         [AllowAnonymous]
         [ProducesResponseType(typeof(UsuarioLogadoViewModel), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UsuarioLogadoViewModel>> Login(
             [FromBody] LoginViewModel loginViewModel,
             [FromServices] AutenticacaoAppService usuarioAutenticacaoAppService)
         {
             var usuarioLogado = await usuarioAutenticacaoAppService.AutenticarAsync(loginViewModel);
 
-            if (usuarioAutenticacaoAppService.Invalid)
+            if (usuarioAutenticacaoAppService.Invalido)
                 return CustomBadRequest(usuarioAutenticacaoAppService);
 
             return Ok(usuarioLogado);
@@ -68,12 +67,12 @@ namespace Agilis.WebAPI.Controllers
 
         [HttpDelete("conta")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ExcluirConta([FromServices] IUsuario usuarioLogado)
         {
             await _usuarioCrudAppService.ExcluirAsync(usuarioLogado.Id);
 
-            if (_usuarioCrudAppService.Invalid)
+            if (_usuarioCrudAppService.Invalido)
                 return CustomBadRequest(_usuarioCrudAppService);
 
             return Ok();
@@ -81,8 +80,8 @@ namespace Agilis.WebAPI.Controllers
 
         [HttpPut("senha")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public virtual async Task<ActionResult> AlterarMinhaSenha(
             [FromServices] AlterarMinhaSenhaAppService alterarMinhaSenhaAppService,
             AlterarMinhaSenhaViewModel alterarMinhaSenhaViewModel
@@ -90,7 +89,7 @@ namespace Agilis.WebAPI.Controllers
         {
             await alterarMinhaSenhaAppService.AlterarAsync(alterarMinhaSenhaViewModel);
 
-            if (alterarMinhaSenhaAppService.Invalid)
+            if (alterarMinhaSenhaAppService.Invalido)
                 return CustomBadRequest(alterarMinhaSenhaAppService);
 
             return Ok();
@@ -99,7 +98,7 @@ namespace Agilis.WebAPI.Controllers
         [HttpPost("esqueci-minha-senha")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public ActionResult RequisitarEsqueciMinhaSenha(
             [FromBody] EmailViewModel emailViewModel,
             [FromServices] EsqueciMinhaSenhaAppService esqueciMinhaSenhaAppService,
@@ -110,7 +109,7 @@ namespace Agilis.WebAPI.Controllers
 
             esqueciMinhaSenhaAppService.Requisitar(email, Request.GetFrontUrl());
 
-            if (esqueciMinhaSenhaAppService.Invalid)
+            if (esqueciMinhaSenhaAppService.Invalido)
                 return CustomBadRequest(esqueciMinhaSenhaAppService);
 
             return Ok();
@@ -119,7 +118,7 @@ namespace Agilis.WebAPI.Controllers
         [HttpPut("redefinir-minha-senha/{email}/{chave:guid}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Notification>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UsuarioLogadoViewModel>> RequisitarEsqueciMinhaSenha(
             [FromRoute] string email,
             [FromRoute] Guid chave,
@@ -136,7 +135,7 @@ namespace Agilis.WebAPI.Controllers
                 redefinicaoSenha
                 );
 
-            if (esqueciMinhaSenhaAppService.Invalid)
+            if (esqueciMinhaSenhaAppService.Invalido)
                 return CustomBadRequest(esqueciMinhaSenhaAppService);
 
             return Ok(usuarioLogadoViewModel);

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Mensagens;
 using Agilis.Core.Domain.Abstractions.Repositories;
@@ -17,8 +16,8 @@ namespace Agilis.Application.Services.Notificacoes
         private readonly IRepository<Dispositivo> _dispositivoRepository;
         private readonly IMapper _mapper;
 
-        public DispositivoCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
-            : base(mapper, mediator, unitOfWork.ObterRepository<Dispositivo>(), unitOfWork)
+        public DispositivoCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(mapper, unitOfWork.ObterRepository<Dispositivo>(), unitOfWork)
         {
             _dispositivoRepository = unitOfWork.ObterRepository<Dispositivo>();
             _mapper = mapper;

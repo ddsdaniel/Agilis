@@ -1,7 +1,6 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
-using Agilis.Core.Domain.Extensions;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using Agilis.Core.Domain.Models.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Agilis.Core.Domain.Models.ValueObjects
@@ -23,12 +22,18 @@ namespace Agilis.Core.Domain.Models.ValueObjects
             Icone = icone;
             ClickAction = clickAction;
             Dispositivos = dispositivos;
+            Validar();
+        }
 
-            AddNotifications(new Contract()
-                .IsNotNullOrEmpty(Titulo, nameof(Titulo), "Título da notificação não deve ser nulo ou vazio")
-                .IsNotNullOrEmpty(Corpo, nameof(Corpo), "Corpo da notificação não deve ser nulo ou vazio")
-                .IsValidArray(Dispositivos, nameof(Dispositivos))
-                );
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Titulo))
+                Criticar("Título da notificação não deve ser nulo ou vazio");
+
+            if (String.IsNullOrEmpty(Corpo))
+                Criticar("Corpo da notificação não deve ser nulo ou vazio");
+
+            ImportarCriticas(Dispositivos);
         }
 
         public override string ToString() => Titulo;

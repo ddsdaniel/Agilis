@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
@@ -25,14 +24,12 @@ namespace Agilis.Application.Services.Seguranca
         private readonly TokenFactory _tokenFactory;
 
         public EsqueciMinhaSenhaAppService(
-            IMediator mediator,
             IUnitOfWork unitOfWork,
             IMemoryCache memoryCache,
             IEmailService emailService,
             IMapper mapper,
             TokenFactory tokenFactory
             ) 
-            : base(mediator)
         {
             _unitOfWork = unitOfWork;
             _memoryCache = memoryCache;
@@ -43,8 +40,8 @@ namespace Agilis.Application.Services.Seguranca
 
         public void Requisitar(Email email, string frontUrl)
         {
-            AddNotifications(email);
-            if (Invalid) return;
+            ImportarCriticas(email);
+            if (Invalido) return;
 
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = usuarioRepository
@@ -53,7 +50,7 @@ namespace Agilis.Application.Services.Seguranca
 
             if (usuario == null)
             {
-                AddNotification(nameof(email), "Usuário não encontrado");
+                Criticar("Usuário não encontrado");
                 return;
             }
 
@@ -65,7 +62,7 @@ namespace Agilis.Application.Services.Seguranca
             var mensagem = $"Foi solicitada uma redefinição de senha para a sua conta no Agilis. Caso queira prosseguir clique {linkRedefinicao}.";
             _emailService.Enviar(usuario.Email, ASSUNTO, mensagem);
 
-            AddNotifications(_emailService.Notifications);
+            ImportarCriticas(_emailService);
         }
 
         public async Task<UsuarioLogadoViewModel> RedefinirAsync(
@@ -73,8 +70,8 @@ namespace Agilis.Application.Services.Seguranca
             Guid chave,
             RedefinicaoSenha redefinicaoSenha)
         {
-            AddNotifications(email);
-            if (Invalid) return null;
+            ImportarCriticas(email);
+            if (Invalido) return null;
 
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = usuarioRepository
@@ -83,26 +80,26 @@ namespace Agilis.Application.Services.Seguranca
 
             if (usuario == null)
             {
-                AddNotification(nameof(email), "Usuário não encontrado");
+                Criticar("Usuário não encontrado");
                 return null;
             }
 
             var chaveEsperada = _memoryCache.Get<Guid>($"EsqueciMinhaSenha.{usuario.Email.Endereco}");
             if (chaveEsperada == Guid.Empty)
             {
-                AddNotification(nameof(chave), "Tempo esgotado, tente novamente.");
+                Criticar("Tempo esgotado, tente novamente.");
                 return null;
             }
 
             if (chave != chaveEsperada)
             {
-                AddNotification(nameof(chave), "Chave de redefinição incorreta.");
+                Criticar("Chave de redefinição incorreta.");
                 return null;
             }
 
             usuario.RedefinirSenha(redefinicaoSenha);
-            AddNotifications(usuario);
-            if (Invalid) return null;
+            ImportarCriticas(usuario);
+            if (Invalido) return null;
             
             await usuarioRepository.AlterarAsync(usuario);
             await _unitOfWork.CommitAsync();

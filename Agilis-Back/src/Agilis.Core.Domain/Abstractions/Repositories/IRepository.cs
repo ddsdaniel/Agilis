@@ -1,5 +1,4 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Abstractions.Validacoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Agilis.Core.Domain.Abstractions.Repositories
 {
-    public interface IRepository<TEntity> : INotifiable
+    public interface IRepository<TEntity> 
         where TEntity : Entidade
     {
         public bool ConsultarSeExiste(Guid id);

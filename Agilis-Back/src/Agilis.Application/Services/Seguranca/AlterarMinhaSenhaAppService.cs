@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MediatR;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
@@ -17,10 +16,9 @@ namespace Agilis.Application.Services.Seguranca
         private readonly IUsuario _usuarioLogado;
 
         public AlterarMinhaSenhaAppService(
-            IMediator mediator, 
             IMapper mapper,
             IUnitOfWork unitOfWork,
-            IUsuario usuarioLogado) : base(mediator)
+            IUsuario usuarioLogado) 
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -30,15 +28,15 @@ namespace Agilis.Application.Services.Seguranca
         public async Task AlterarAsync(AlterarMinhaSenhaViewModel alterarMinhaSenhaViewModel)
         {
             var alterarMinhaSenha = _mapper.Map<AlterarMinhaSenha>(alterarMinhaSenhaViewModel);
-            AddNotifications(alterarMinhaSenha);
-            if (Invalid) return;
+            ImportarCriticas(alterarMinhaSenha);
+            if (Invalido) return;
 
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var usuario = await usuarioRepository.ConsultarPorIdAsync(_usuarioLogado.Id);
 
             usuario.AlterarSenha(alterarMinhaSenha);
-            AddNotifications(usuario);
-            if (Invalid) return;
+            ImportarCriticas(usuario);
+            if (Invalido) return;
 
             await usuarioRepository.AlterarAsync(usuario);
             await _unitOfWork.CommitAsync();

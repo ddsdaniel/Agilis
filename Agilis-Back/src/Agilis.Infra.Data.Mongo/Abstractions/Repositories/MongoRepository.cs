@@ -1,5 +1,4 @@
 ﻿using Agilis.Infra.Data.Mongo.Extensions;
-using Flunt.Notifications;
 using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Abstractions.Repositories;
 using MongoDB.Driver;
@@ -12,7 +11,7 @@ using MongoDB.Bson;
 
 namespace Agilis.Infra.Data.Mongo.Abstractions.Repositories
 {
-    public class MongoRepository<TEntity> : Notifiable, IRepository<TEntity>
+    public class MongoRepository<TEntity> : IRepository<TEntity>
         where TEntity : Entidade
     {
         private readonly IMongoCollection<TEntity> _mongoCollection;

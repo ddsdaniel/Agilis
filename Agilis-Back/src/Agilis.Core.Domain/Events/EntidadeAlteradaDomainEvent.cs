@@ -1,7 +1,5 @@
-﻿using Flunt.Validations;
-using Agilis.Core.Domain.Abstractions.Events;
+﻿using Agilis.Core.Domain.Abstractions.Events;
 using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Extensions;
 
 namespace Agilis.Core.Domain.Events
 {
@@ -16,10 +14,13 @@ namespace Agilis.Core.Domain.Events
             Antes = antes;
             Depois = depois;
 
-            AddNotifications(new Contract()
-                .IsValid(antes, nameof(Antes))
-                .IsValid(depois, nameof(Depois))
-                );
+            Validar();
+        }
+
+        private void Validar()
+        {
+            ImportarCriticas(Antes);
+            ImportarCriticas(Depois);
         }
     }
 }
