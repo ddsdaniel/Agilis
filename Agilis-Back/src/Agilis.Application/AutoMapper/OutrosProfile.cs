@@ -34,12 +34,6 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<DispositivoViewModel, Dispositivo>()
               .ConstructUsing((vm, context) => new Dispositivo(vm.Token));
-
-            CreateMap<string, Tag>()
-              .ConstructUsing(nome => new Tag(nome));
-
-            CreateMap<Tag, string>()
-              .ConstructUsing(t => t.Nome);
         }
     }
 }

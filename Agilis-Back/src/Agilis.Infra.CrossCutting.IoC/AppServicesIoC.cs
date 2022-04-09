@@ -2,6 +2,7 @@
 using Agilis.Application.Services.Notificacoes;
 using Agilis.Application.Services.Seguranca;
 using Agilis.Infra.Seguranca.Factories;
+using Agilis.Application.Services.Times;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {

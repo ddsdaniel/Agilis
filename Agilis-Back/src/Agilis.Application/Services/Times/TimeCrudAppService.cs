@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agilis.Application.ViewModels.Times;
 
-namespace Agilis.Application.Services.Notificacoes
+namespace Agilis.Application.Services.Times
 {
     public class TimeCrudAppService
         : CrudAppService<TimeViewModel, TimeViewModel, Time>

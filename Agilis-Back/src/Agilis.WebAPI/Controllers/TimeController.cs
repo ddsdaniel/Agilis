@@ -1,8 +1,8 @@
 ﻿using Agilis.WebAPI.Abstractions.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Agilis.Core.Domain.Models.Entities;
-using Agilis.Application.Services.Notificacoes;
 using Agilis.Application.ViewModels.Times;
+using Agilis.Application.Services.Times;
 
 namespace Agilis.WebAPI.Controllers
 {
