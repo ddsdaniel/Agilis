@@ -1,0 +1,110 @@
+@import "../../../styles.scss";
+
+header {
+  height: 500px;
+  background-color: mat-color($styles-theme-primary);
+  color: white;
+  padding: 0 64px;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.logo img {
+  width: 60px;
+  height: 60px;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: x-large;
+}
+
+section {
+  padding: 64px;
+  margin: 16px 20%;
+  float: left;
+  width: 60%;
+}
+
+section div {
+  height: 500px;
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+
+section h2 {
+  margin-top: 180px;
+  color: mat-color($styles-theme-primary);
+}
+
+section p {
+  height: 100px;
+}
+
+section img {
+  height: 512px;
+}
+
+@media (max-width: 1150px) {
+  section {
+    margin: 16px;
+    width: calc(100% - 32px - 128px);
+  }
+}
+
+@media (max-width: 700px) {
+  section {
+    float: none;
+    height: 800px;
+  }
+
+  section h2 {
+    margin-top: 32px;
+  }
+
+  section div {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    width: calc(100% - 32px - 32px);
+    margin: 16px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    height: 500px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 325px) {
+  header {
+    height: 550px;
+  }
+}
+
+footer {
+  height: 200px;
+  background-color: mat-color($styles-theme-primary);
+  color: white;
+  padding: 0 64px;
+  margin-top: 64px;
+}
+
+footer a,
+footer a:visited {
+  color: white;
+}

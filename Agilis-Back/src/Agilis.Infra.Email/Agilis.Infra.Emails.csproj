@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Configuracoes\Agilis.Infra.Configuracoes.csproj" />
+  </ItemGroup>
+
+</Project>

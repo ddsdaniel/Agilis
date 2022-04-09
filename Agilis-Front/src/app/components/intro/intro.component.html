@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="space-between" class="container">
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button [routerLink]="['/transacoes']" routerLinkActive="router-link-active" mat-button color="primary"
+      class="mt-4 p-0">Pular introdução</button>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <img [class.mat-elevation-z3]="true" [src]="itens[indiceAtual].imagem" />
+    <h2 class="mt-5 mb-2">{{itens[indiceAtual].titulo}}</h2>
+    <p class="mt-0 preto-discreto">{{itens[indiceAtual].explicacao}}</p>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="default" class="mb-4 ml-3" [disabled]="indiceAtual == 0"
+      (click)="onVoltar()">VOLTAR</button>
+    <button mat-raised-button color="primary" class="mb-4 mr-3" (click)="onAvancar()">{{ obterTextoAvancar() }}</button>
+  </div>
+
+</div>

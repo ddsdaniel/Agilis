@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.titulo}}</h1>
+<div mat-dialog-content>
+  <p>{{data.dica}}</p>
+  <mat-form-field class="full-width-margin">
+    <mat-label>{{ data.label }}</mat-label>
+    <input matInput [(ngModel)]="resposta">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button color="primary" mat-raised-button (click)="confirmar()" cdkFocusInitial>CONFIRMAR</button>
+  <button mat-raised-button (click)="cancelar()">CANCELAR</button>
+</div>

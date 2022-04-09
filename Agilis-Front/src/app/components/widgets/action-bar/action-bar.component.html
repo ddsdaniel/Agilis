@@ -1,0 +1,96 @@
+<!-- Menu lateral -->
+<mat-sidenav-container class="example-container">
+
+  <mat-sidenav #menu mode="over">
+
+    <!-- Dados do usuário logado -->
+    <div class="cabecalho">
+      <div>
+        <h1>{{nomeAplicacao}}</h1>
+      </div>
+      <div>
+        <div>{{nomeUsuario()}}</div>
+        <small>{{emailUsuario()}}</small>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <mat-nav-list>
+
+      <mat-list-item (click)="menu.close();router.navigate(['/times']);">
+        <mat-icon mat-list-icon>groups</mat-icon>
+        <div mat-line>Times</div>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="menu.close();router.navigate(['/alterar-minha-senha']);">
+        <mat-icon mat-list-icon>password</mat-icon>
+        <div mat-line>Alterar a minha senha</div>
+      </mat-list-item>
+
+      <mat-list-item (click)="menu.close();router.navigate(['/excluir-minha-conta']);">
+        <mat-icon mat-list-icon color="warn">clear</mat-icon>
+        <div mat-line>Excluir a minha conta</div>
+      </mat-list-item>
+
+      <mat-list-item (click)="sair();menu.close();">
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+        <div mat-line>Sair</div>
+      </mat-list-item>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <!-- Menu da direita -->
+  <mat-sidenav #filtros position="end">
+    <p class="titulo-filtros">Filtros</p>
+    <ng-content select="[filtros]"></ng-content>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <!-- Barra superior -->
+    <mat-toolbar color="primary" *ngIf="modo=='lista'" class="sticky-top">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="menu.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>{{titulo}}</span>
+        <span class="example-spacer"></span>
+        <!-- Ícones à direita -->
+        <ng-content select="[icones-esquerda]"></ng-content>
+        <button *ngIf="botaoPesquisa" mat-icon-button (click)="abrirPesquisa()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button *ngIf="botaoFiltro" mat-icon-button (click)="filtros.toggle()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <ng-content select="[icones]"></ng-content>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Pesquisa -->
+    <mat-toolbar class="top-toolbar" color="default" *ngIf="modo=='pesquisa'">
+      <mat-toolbar-row>
+        <mat-icon matRipple class="icon-mat-toolbar voltar icone-discreto" aria-hidden="false" aria-label="Voltar"
+          (click)="fecharPesquisa()" class="ml-2">
+          arrow_back
+        </mat-icon>
+        <input id="busca" #busca [(ngModel)]="query" (input)="pesquisar()" matInput placeholder="Pesquisar"
+          type="search" class="full-width ml-2" style="padding: 8px;" appSelectAllText>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Conteudo -->
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
+    <div class="ph-1">
+      <ng-content select="[menu]"></ng-content>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

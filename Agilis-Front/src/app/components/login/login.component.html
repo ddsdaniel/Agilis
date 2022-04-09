@@ -1,0 +1,28 @@
+<form fxLayout="row" fxLayoutAlign="center center">
+
+  <section fxLayout="column" fxLayoutAlign="space-around center" [class.mat-elevation-z3]="true">
+
+    <img src="../../../assets/images/agilis-192.png" alt="Logotipo do sistema" />
+    <p>Agilis</p>
+
+    <!-- E-mail -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>E-mail</mat-label>
+      <input matInput [(ngModel)]="login.email" placeholder="E-mail" name="email" type="email" required>
+    </mat-form-field>
+
+    <!-- Senha -->
+    <mat-form-field class="caixa-texto">
+      <mat-label>Senha</mat-label>
+      <input matInput [(ngModel)]="login.senha" placeholder="Senha" name="senha" type="password" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="botao" (click)="entrar()">ENTRAR</button>
+    <button mat-raised-button class="botao" [routerLink]="['/esqueci-minha-senha']">ESQUECI A MINHA SENHA</button>
+
+    <mat-progress-bar *ngIf="processandoService.estaCarregando()" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
+  </section>
+
+</form>
