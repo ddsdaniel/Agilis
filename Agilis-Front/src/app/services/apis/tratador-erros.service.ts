@@ -17,7 +17,7 @@ export class TratadorErrosService {
 
     let mensagem = '';
     if (Array.isArray(err.error)) {
-      mensagem = err.error.map(e => e.message).join(' ');
+      mensagem = err.error.map(e => e).join(' ');
     } else if (err.error.title) {
       mensagem = err.error.title;
     } else if (err.error.message) {

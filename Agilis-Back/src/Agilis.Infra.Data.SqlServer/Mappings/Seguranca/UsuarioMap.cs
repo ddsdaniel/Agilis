@@ -4,7 +4,7 @@ using Agilis.Infra.Data.SqlServer.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Agilis.Infra.Data.SqlServer.Mappings
+namespace Agilis.Infra.Data.SqlServer.Mappings.Seguranca
 {
     public class UsuarioMap : IEntityTypeConfiguration<Usuario>
     {

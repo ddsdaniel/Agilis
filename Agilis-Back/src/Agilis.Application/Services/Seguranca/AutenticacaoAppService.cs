@@ -47,7 +47,7 @@ namespace Agilis.Application.Services.Seguranca
                 var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
 
                 var usuario = usuarioRepository.Consultar().FirstOrDefault(u => u.Email.Endereco == email.Endereco);
-                if (usuario == null || usuario.Senha.Conteudo != senha.Conteudo)
+                if (usuario == null || usuario?.Senha?.Conteudo != senha?.Conteudo)
                 {
                     Criticar("Usuário ou senha incorretos");
                     return null;

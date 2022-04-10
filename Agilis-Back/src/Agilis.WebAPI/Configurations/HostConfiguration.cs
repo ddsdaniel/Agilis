@@ -56,7 +56,7 @@ namespace Agilis.WebAPI.Configurations
                .UseApiVersioning()
                .UseMvcWithDefaultRoute();
 
-            app.UseHealthChecks("/health");
+            //TODO: app.UseHealthChecks("/health");
 
             return app;
         }

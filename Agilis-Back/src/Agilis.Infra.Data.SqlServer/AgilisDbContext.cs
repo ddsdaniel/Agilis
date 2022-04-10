@@ -8,6 +8,7 @@ namespace Agilis.Infra.Data.SqlServer
     public class AgilisDbContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)
