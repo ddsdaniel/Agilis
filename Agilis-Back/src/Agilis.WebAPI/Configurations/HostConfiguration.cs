@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.Text.Json.Serialization;
@@ -13,8 +11,7 @@ namespace Agilis.WebAPI.Configurations
     public static class HostConfiguration
     {
         public static IServiceCollection AddHostConfiguration(
-            this IServiceCollection services,
-            IConfiguration configuration)
+            this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddResponseCompression();
@@ -44,10 +41,6 @@ namespace Agilis.WebAPI.Configurations
                 p.GroupNameFormat = "'v'VVV";
                 p.SubstituteApiVersionInUrl = true;
             });
-
-            var connectionString = configuration.GetValue<string>("ConnectionString");
-            services.AddHealthChecks()
-                .AddMongoDb(connectionString, "mongo", HealthStatus.Unhealthy);
 
             return services;
         }

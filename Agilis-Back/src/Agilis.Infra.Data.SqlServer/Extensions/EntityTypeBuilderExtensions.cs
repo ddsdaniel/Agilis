@@ -15,8 +15,6 @@ namespace Agilis.Infra.Data.SqlServer.Extensions
             Expression<Func<TEntity, Senha>> navigationExpression)
             where TEntity : class
         {
-
-
             builder.OwnsOne(
                      navigationExpression,
                      navigationBuilder
@@ -32,6 +30,8 @@ namespace Agilis.Infra.Data.SqlServer.Extensions
                                                 senha => algoritmoCriptografiaSimetrico.Cifrar(senha, CHAVE_SECRETA),
                                                 senha => algoritmoCriptografiaSimetrico.Decifrar(senha, CHAVE_SECRETA)
                                                 );
+                         
+                         navigationBuilder.Ignore(senha => senha.Criticas);
                      });
 
             return builder;

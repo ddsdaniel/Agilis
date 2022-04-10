@@ -27,7 +27,7 @@ namespace Agilis.WebAPI
             services.AddResponseCompression(options => options.EnableForHttps = true);
             services.AddCors();
             services.AddInversionOfControlConfig(_configuration, _currentEnvironment);
-            services.AddHostConfiguration(_configuration);
+            services.AddHostConfiguration();
             services.AddSwagger(_currentEnvironment);
             services.AddAutoMapperConfig();
             services.AddMediatrConfig();
