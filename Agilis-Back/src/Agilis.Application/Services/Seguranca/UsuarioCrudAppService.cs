@@ -2,10 +2,10 @@
 using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
-using Agilis.Infra.Seguranca.Models.Entities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
 
 namespace Agilis.Application.Services.Seguranca
 {

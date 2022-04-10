@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Seguranca.Models.Entities;
-using Agilis.Infra.Seguranca.Models.ValueObjects;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
 
 namespace Agilis.Application.AutoMapper
 {

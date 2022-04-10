@@ -4,7 +4,7 @@ using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.WebAPI.Abstractions.Controllers;
 using System;
 using System.Linq;
-using Agilis.Infra.Seguranca.Models.Entities;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
 
 namespace Agilis.WebAPI.Controllers
 {

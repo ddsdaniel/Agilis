@@ -1,28 +1,22 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Agilis.Infra.Configuracoes.Abstractions.Models.ValueObjects;
-using Agilis.Infra.Seguranca.Enums;
-using Agilis.Infra.Seguranca.Models.Entities;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Enums;
 
 namespace Agilis.Infra.Seguranca.Factories
 {
     public class TokenFactory
     {
         public const int DIAS_REFRESH_TOKEN = 7;
-        private readonly IAppSettings _appSettings;
-
-        public TokenFactory(IAppSettings appSettings)
-        {
-            _appSettings = appSettings;
-        }
+        private const string CHAVE_SECRETA = "9F5F6734-3E75-4707-AF87-2E3D9F034A22";
 
         public string Criar(Usuario usuario, TipoToken tipoToken)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Segredo);
+            var key = Encoding.ASCII.GetBytes(CHAVE_SECRETA);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

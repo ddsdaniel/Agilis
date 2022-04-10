@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Agilis.Infra.Configuracoes.Abstractions.Models.ValueObjects;
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +12,8 @@ namespace Agilis.WebAPI.Configurations
     /// </summary>
     public static class JwtConfig
     {
+        private const string CHAVE_SECRETA = "9F5F6734-3E75-4707-AF87-2E3D9F034A22";
+
         /// <summary>
         /// Adiciona configurações do token
         /// </summary>
@@ -20,8 +21,7 @@ namespace Agilis.WebAPI.Configurations
         /// <returns>Services configurado para atuar com token jwt</returns>
         public static IServiceCollection AddJwtConfig(this IServiceCollection services)
         {
-            var appSettings = services.BuildServiceProvider().GetService<IAppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Segredo);
+            var key = Encoding.ASCII.GetBytes(CHAVE_SECRETA);
 
             services.AddAuthentication(x =>
             {

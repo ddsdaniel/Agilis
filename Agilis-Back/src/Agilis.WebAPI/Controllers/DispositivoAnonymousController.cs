@@ -6,8 +6,8 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Agilis.Core.Domain.Models.Entities;
 using Microsoft.AspNetCore.Http;
-using Agilis.Infra.Seguranca.Models.Entities;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
 
 namespace Agilis.WebAPI.Controllers
 {

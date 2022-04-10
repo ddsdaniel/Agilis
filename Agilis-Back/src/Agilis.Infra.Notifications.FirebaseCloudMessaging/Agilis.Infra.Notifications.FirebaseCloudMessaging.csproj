@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
-    <ProjectReference Include="..\Agilis.Infra.Configuracoes\Agilis.Infra.Configuracoes.csproj" />
   </ItemGroup>
 
 </Project>

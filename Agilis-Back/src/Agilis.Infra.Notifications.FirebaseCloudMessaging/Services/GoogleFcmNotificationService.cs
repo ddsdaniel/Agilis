@@ -5,7 +5,6 @@ using Newtonsoft.Json.Serialization;
 using Agilis.Core.Domain.Abstractions.Services;
 using Agilis.Core.Domain.Extensions;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Configuracoes.Abstractions.Models.ValueObjects;
 using Agilis.Infra.Notifications.FirebaseCloudMessaging.Models.ValueObjects;
 using System;
 using System.Linq;
@@ -13,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 
 namespace Agilis.Infra.Notifications.FirebaseCloudMessaging.Services
 {

@@ -2,10 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Seguranca.Abstractions.Models.Entities;
-using Agilis.Infra.Seguranca.Models.Entities;
 using System;
 using System.Linq;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Abstractions.Models.Entities;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {

@@ -1,6 +1,6 @@
-﻿using Agilis.Core.Domain.Abstractions.Services;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
+using Agilis.Core.Domain.Abstractions.Services;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Configuracoes.Abstractions.Models.ValueObjects;
 using Agilis.Infra.Emails.Abstractions.Services;
 using System;
 using System.Linq;
@@ -15,13 +15,15 @@ namespace Agilis.Infra.Emails.Services
         private readonly IAppSettings _appSettings;
         private readonly SmtpClient _smtpClient;
 
+        private const string CHAVE_SECRETA = "8175DE51-6340-406F-BADF-67F413B73C10";
+
         public EmailService(
             IAppSettings appSettings,
             ICriptografiaSimetrica criptografiaSimetrica)
         {
             _appSettings = appSettings;
 
-            var senha = criptografiaSimetrica.Decifrar(appSettings.Smtp.Senha, _appSettings.Segredo);
+            var senha = criptografiaSimetrica.Decifrar(appSettings.Smtp.Senha, CHAVE_SECRETA);
 
             _smtpClient = new SmtpClient
             {

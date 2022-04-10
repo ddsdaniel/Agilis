@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using Agilis.Infra.Seguranca.Models.Entities;
-using Agilis.Infra.Seguranca.Abstractions.Models.Entities;
 using Agilis.Application.Services.Seguranca;
 using AutoMapper;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.WebAPI.Extensions;
 using System;
-using Agilis.Infra.Seguranca.Models.ValueObjects;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Application.ViewModels.Mensagens;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
+using Agilis.Core.Domain.Abstractions.Models.Entities;
 
 namespace Agilis.WebAPI.Controllers
 {

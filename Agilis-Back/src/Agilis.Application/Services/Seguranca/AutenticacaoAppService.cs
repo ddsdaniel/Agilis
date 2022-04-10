@@ -3,12 +3,12 @@ using Agilis.Application.Abstractions.Services;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Seguranca.Enums;
 using Agilis.Infra.Seguranca.Factories;
-using Agilis.Infra.Seguranca.Models.Entities;
-using Agilis.Infra.Seguranca.Models.ValueObjects;
 using System.Linq;
 using System.Threading.Tasks;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
+using Agilis.Core.Domain.Enums;
 
 namespace Agilis.Application.Services.Seguranca
 {

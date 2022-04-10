@@ -5,13 +5,13 @@ using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Events;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Infra.Seguranca.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
 
 namespace Agilis.Application.Handlers.Notificacoes
 {
