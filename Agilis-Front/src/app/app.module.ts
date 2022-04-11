@@ -1,16 +1,10 @@
-import './prototypes/array-prototypes';
-import './prototypes/date-prototypes';
-
 import { CommonModule, HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { APP_INITIALIZER, ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +12,7 @@ import { AlterarMinhaSenhaComponent } from './components/alterar-minha-senha/alt
 import { BemVindoComponent } from './components/bem-vindo/bem-vindo.component';
 import { EsqueciMinhaSenhaComponent } from './components/esqueci-senha/esqueci-minha-senha/esqueci-minha-senha.component';
 import {
-  RedefinirMinhaSenhaComponent,
+  RedefinirMinhaSenhaComponent
 } from './components/esqueci-senha/redefinir-minha-senha/redefinir-minha-senha.component';
 import { ExcluirMinhaContaComponent } from './components/excluir-minha-conta/excluir-minha-conta.component';
 import { IntroComponent } from './components/intro/intro.component';
@@ -29,7 +23,11 @@ import { DialogoInputComponent } from './components/widgets/dialogo-input/dialog
 import { GlobalErrorHandler } from './handlers/global-error-handler';
 import { HttpsRequestInterceptorService } from './interceptors/https-request-interceptor.service';
 import { GlobalModule } from './modules/global.module';
+import './prototypes/array-prototypes';
+import './prototypes/date-prototypes';
 import { AppLoadService } from './services/app-load.service';
+
+
 
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
@@ -64,8 +62,6 @@ registerLocaleData(localePt, 'pt-BR');
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireMessagingModule
   ],
   entryComponents: [
     BottomSheetComponent,

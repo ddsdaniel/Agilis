@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Agilis.Application.ViewModels.Mensagens;
-using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.ValueObjects;
 
 namespace Agilis.Application.AutoMapper
@@ -29,11 +28,6 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<DiaDoMes, int>()
               .ConstructUsing(dm => dm.Dia);
-
-            CreateMap<Dispositivo, DispositivoViewModel>();
-
-            CreateMap<DispositivoViewModel, Dispositivo>()
-              .ConstructUsing((vm, context) => new Dispositivo(vm.Token));
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Agilis.Infra.CrossCutting.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Agilis.Core.Domain.Abstractions.Services;
-using Agilis.Infra.Notifications.FirebaseCloudMessaging.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -25,7 +23,6 @@ namespace Agilis.WebAPI.Configurations
             }
             services.AddAppServicesIoC();
             services.AddWorkersIoC();
-            services.AddSingleton<INotificationService, GoogleFcmNotificationService>();
             services.AddEstatisticaIoC();
 
             return services;

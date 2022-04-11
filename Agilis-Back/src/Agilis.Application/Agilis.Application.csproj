@@ -17,11 +17,11 @@
     <ProjectReference Include="..\..\..\..\DDS.Estatistica\src\DDS.Estatistica\DDS.Estatistica.csproj" />
     <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Email\Agilis.Infra.Emails.csproj" />
-    <ProjectReference Include="..\Agilis.Infra.Notifications.FirebaseCloudMessaging\Agilis.Infra.Notifications.FirebaseCloudMessaging.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Seguranca\Agilis.Infra.Seguranca.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Handlers\" />
     <Folder Include="Workers\" />
   </ItemGroup>
 

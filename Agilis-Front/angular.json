@@ -30,7 +30,6 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/firebase-messaging-sw.js",
               "src/manifest.json",
               "src/web.config"
             ],

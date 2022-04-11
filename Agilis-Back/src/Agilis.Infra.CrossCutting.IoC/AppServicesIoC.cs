@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Agilis.Application.Services.Notificacoes;
 using Agilis.Application.Services.Seguranca;
 using Agilis.Infra.Seguranca.Factories;
 using Agilis.Application.Services.Times;
@@ -11,7 +10,6 @@ namespace Agilis.Infra.CrossCutting.IoC
         public static IServiceCollection AddAppServicesIoC(this IServiceCollection services)
         {
             //Outros
-            services.AddScoped<DispositivoCrudAppService>();
             services.AddScoped<TimeCrudAppService>();
 
             //Segurança

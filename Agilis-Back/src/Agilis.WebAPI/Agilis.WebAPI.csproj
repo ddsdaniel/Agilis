@@ -27,7 +27,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
 		<ProjectReference Include="..\Agilis.Infra.CrossCutting.IoC\Agilis.Infra.CrossCutting.IoC.csproj" />
-		<ProjectReference Include="..\Agilis.Infra.Notifications.FirebaseCloudMessaging\Agilis.Infra.Notifications.FirebaseCloudMessaging.csproj" />
 	</ItemGroup>
 
 
