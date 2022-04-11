@@ -17,6 +17,11 @@
     <!-- Menu -->
     <mat-nav-list>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/tarefas']);">
+        <mat-icon mat-list-icon>groups</mat-icon>
+        <div mat-line>Tarefas</div>
+      </mat-list-item>
+
       <mat-list-item (click)="menu.close();router.navigate(['/times']);">
         <mat-icon mat-list-icon>groups</mat-icon>
         <div mat-line>Times</div>

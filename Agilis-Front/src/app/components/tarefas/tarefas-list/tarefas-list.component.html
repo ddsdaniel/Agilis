@@ -1,0 +1,32 @@
+﻿<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+
+  <div menu>
+
+    <!-- Grade -->
+    <mat-list role="list">
+
+      <mat-list-item role="listitem" *ngFor="let tarefa of lista; let i = index"
+        (click)="openBottomSheet(tarefa.id, i)">
+
+        <mat-icon mat-list-icon>groups</mat-icon>
+
+        <div mat-line>
+          <span>{{tarefa.nome}}</span>
+        </div>
+
+        <div mat-line>
+          <small class="preto-discreto">{{ tarefa.orcamento?.nome }}</small>
+        </div>
+
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- Adicionar -->
+    <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/tarefas/new'>
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+
+</app-action-bar>

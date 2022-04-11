@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   entrar() {
     this.autenticacaoService.autenticar(this.login)
       .subscribe(
-        () => this.router.navigate(['transacoes']),
+        () => this.router.navigate(['tarefas']),
         (error: HttpErrorResponse) => this.snackBar.open(error.message));
   }
 
