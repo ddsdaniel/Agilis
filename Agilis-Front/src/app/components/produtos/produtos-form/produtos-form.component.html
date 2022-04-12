@@ -1,0 +1,35 @@
+﻿<app-action-bar [titulo]="'Cadastro do Produto'">
+
+  <div menu class="form-container">
+
+    <!-- Nome -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
+    </mat-form-field>
+
+    <!-- Descrição -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+    <!-- URl do Repositório -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>URl do Repositório</mat-label>
+      <input matInput [(ngModel)]="entidade.urlRepositorio" placeholder="URl do Repositório" name="urlRepositorio"
+        type="text" appSelectAllText>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Ícones da action-bar -->
+  <div icones>
+    <!-- Salvar -->
+    <button mat-icon-button (click)="salvar()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>

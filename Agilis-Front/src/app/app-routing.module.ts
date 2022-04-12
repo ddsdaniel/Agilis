@@ -27,6 +27,7 @@ const routes: Routes = [
 
   { path: 'times', loadChildren: () => import('./components/times/times.module').then(m => m.TimesModule) },
   { path: 'tarefas', loadChildren: () => import('./components/tarefas/tarefas.module').then(m => m.TarefasModule) },
+  { path: 'produtos', loadChildren: () => import('./components/produtos/produtos.module').then(m => m.ProdutosModule) },
 
   // { path: '', component: TransacoesListComponent, canActivate: [AutenticacaoGuard] },
 

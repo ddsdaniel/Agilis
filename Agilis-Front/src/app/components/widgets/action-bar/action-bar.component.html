@@ -22,6 +22,11 @@
         <div mat-line>Tarefas</div>
       </mat-list-item>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/produtos']);">
+        <mat-icon mat-list-icon>web_asset</mat-icon>
+        <div mat-line>Produtos</div>
+      </mat-list-item>
+
       <mat-list-item (click)="menu.close();router.navigate(['/times']);">
         <mat-icon mat-list-icon>groups</mat-icon>
         <div mat-line>Times</div>
