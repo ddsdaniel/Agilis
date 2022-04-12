@@ -11,6 +11,7 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
+        public DbSet<Time> Times { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)
