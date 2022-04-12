@@ -1,0 +1,45 @@
+﻿<app-action-bar [titulo]="'Cadastro do Sprint'">
+
+  <div menu class="form-container">
+
+    <!-- Nome -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
+    </mat-form-field>
+
+    <!-- Data Inicial -->
+    <mat-form-field class="half-width-margin">
+      <mat-label>Data Inicial</mat-label>
+      <input matInput [matDatepicker]="pickerDataInicial" [(ngModel)]="entidade.dataInicial"
+        [disabled]="desabilitado()">
+      <mat-datepicker-toggle matSuffix [for]="pickerDataInicial"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDataInicial></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Data Final -->
+    <mat-form-field class="half-width-margin">
+      <mat-label>Data Final</mat-label>
+      <input matInput [matDatepicker]="pickerDataFinal" [(ngModel)]="entidade.dataFinal" [disabled]="desabilitado()">
+      <mat-datepicker-toggle matSuffix [for]="pickerDataFinal"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDataFinal></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Objetivos -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Objetivos</mat-label>
+      <textarea matInput [(ngModel)]="entidade.objetivos" placeholder="Objetivos" name="objetivos" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Ícones da action-bar -->
+  <div icones>
+    <!-- Salvar -->
+    <button mat-icon-button (click)="salvar()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>

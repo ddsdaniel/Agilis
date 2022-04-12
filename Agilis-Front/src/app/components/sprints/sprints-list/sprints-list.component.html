@@ -1,0 +1,28 @@
+﻿<app-action-bar [titulo]="'Sprints'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+
+  <div menu>
+
+    <!-- Grade -->
+    <mat-list role="list">
+
+      <mat-list-item role="listitem" *ngFor="let sprint of lista; let i = index"
+        (click)="openBottomSheet(sprint.id, i)">
+
+        <mat-icon mat-list-icon>loop</mat-icon>
+
+        <div mat-line>
+          <span>{{sprint.nome}}</span>
+        </div>
+
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- Adicionar -->
+    <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/sprints/new'>
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+
+</app-action-bar>
