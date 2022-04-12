@@ -34,7 +34,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> {
   onPesquisar(criterio: string) {
     if (criterio) {
       this.lista = (this.listaCompleta || [])
-        .filter(item => new RegExp(criterio, 'gi').test(item.nome));
+        .filter(item => new RegExp(criterio, 'gi').test(item.titulo));
     } else {
       this.lista = this.listaCompleta;
     }
@@ -76,7 +76,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> {
   }
 
   testarTarefaFixo(tarefa: Tarefa): boolean {
-    if (tarefa.nome === constantes.nomeDefault) {
+    if (tarefa.titulo === constantes.nomeDefault) {
       this.snackBar.open('Este registro não pode ser alterado ou excluído.');
       return true;
     }

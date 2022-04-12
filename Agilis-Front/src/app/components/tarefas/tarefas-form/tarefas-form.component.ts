@@ -25,17 +25,15 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     public comparadorService: ComparadorService,
   ) {
     super(router, tarefaApiService, snackBar, activatedRoute, 'tarefas');
-    tituloService.definir('Cadastro do Tarefa');
+    tituloService.definir('Cadastro da Tarefa');
   }
 
   sugerirNovo(): void {
     this.entidade = {
       id: constantes.newGuid,
-      nome: '',
+      titulo: '',
+      descricao: '',
     };
   }
 
-  testarTarefaFixo(): boolean {
-    return this.entidade.nome === constantes.nomeDefault;
-  }
 }

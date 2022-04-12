@@ -1,11 +1,18 @@
-﻿<app-action-bar [titulo]="'Cadastro do Tarefa'">
+﻿<app-action-bar [titulo]="'Cadastro da Tarefa'">
 
   <div menu class="form-container">
 
-    <!-- Nome -->
+    <!-- Título -->
     <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Nome</mat-label>
-      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText [disabled]="testarTarefaFixo()">
+      <mat-label>Título</mat-label>
+      <input matInput [(ngModel)]="entidade.titulo" placeholder="Título" name="titulo" type="text" required
+        appSelectAllText>
+    </mat-form-field>
+
+    <!-- Descrição -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text" appSelectAllText rows="5"></textarea>
     </mat-form-field>
 
   </div>

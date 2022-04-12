@@ -22,9 +22,21 @@ namespace Agilis.Infra.Data.SqlServer.Abstractions
             return Task.CompletedTask;
         }
 
-        public virtual IQueryable<TEntity> Consultar() => _agilisDbContext.Set<TEntity>().AsQueryable();
+        public virtual IQueryable<TEntity> Consultar()
+        {
+            return _agilisDbContext
+                  .Set<TEntity>()
+                  .AsQueryable()
+                  .AsNoTracking();
+        }
 
-        public virtual Task<TEntity> ConsultarPorIdAsync(Guid id) => _agilisDbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id);
+        public virtual Task<TEntity> ConsultarPorIdAsync(Guid id)
+        {
+            return _agilisDbContext
+                .Set<TEntity>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
 
         public virtual async Task ExcluirAsync(Guid id)
         {

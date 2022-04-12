@@ -21,7 +21,7 @@ namespace Agilis.Core.Domain.Models.Entities
             if (String.IsNullOrEmpty(Titulo))
                 Criticar("Título inválido.");
 
-            if (String.IsNullOrEmpty(Descricao))
+            if (Descricao == null)
                 Criticar("Descrição inválida.");
         }
 
