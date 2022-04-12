@@ -3,6 +3,7 @@ using Agilis.Application.Services.Seguranca;
 using Agilis.Infra.Seguranca.Factories;
 using Agilis.Application.Services.Times;
 using Agilis.Application.Services.Tarefas;
+using Agilis.Application.Services.Produtos;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
@@ -15,6 +16,9 @@ namespace Agilis.Infra.CrossCutting.IoC
 
             //Tarefas
             services.AddScoped<TarefaCrudAppService>();
+
+            //Produtos
+            services.AddScoped<ProdutoCrudAppService>();
 
             //Segurança
             services.AddScoped<UsuarioCrudAppService>();
