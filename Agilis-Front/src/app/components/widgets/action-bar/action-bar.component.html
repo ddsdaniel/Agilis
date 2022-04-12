@@ -27,6 +27,11 @@
         <div mat-line>Produtos</div>
       </mat-list-item>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/clientes']);">
+        <mat-icon mat-list-icon>corporate_fare</mat-icon>
+        <div mat-line>Clientes</div>
+      </mat-list-item>
+
       <mat-list-item (click)="menu.close();router.navigate(['/times']);">
         <mat-icon mat-list-icon>groups</mat-icon>
         <div mat-line>Times</div>

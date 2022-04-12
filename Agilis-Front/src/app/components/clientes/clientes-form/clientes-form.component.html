@@ -1,0 +1,28 @@
+﻿<app-action-bar [titulo]="'Cadastro do Cliente'">
+
+  <div menu class="form-container">
+
+    <!-- Nome -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
+    </mat-form-field>
+
+    <!-- ID de Integração SAC -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>ID de Integração SAC</mat-label>
+      <input matInput [(ngModel)]="entidade.idIntegracaoSac" placeholder="ID de Integração SAC" name="idIntegracaoSac"
+        type="text" appSelectAllText>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Ícones da action-bar -->
+  <div icones>
+    <!-- Salvar -->
+    <button mat-icon-button (click)="salvar()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>
