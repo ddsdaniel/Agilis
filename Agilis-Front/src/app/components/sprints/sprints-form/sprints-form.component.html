@@ -11,8 +11,7 @@
     <!-- Data Inicial -->
     <mat-form-field class="half-width-margin">
       <mat-label>Data Inicial</mat-label>
-      <input matInput [matDatepicker]="pickerDataInicial" [(ngModel)]="entidade.dataInicial"
-        [disabled]="desabilitado()">
+      <input matInput [matDatepicker]="pickerDataInicial" [(ngModel)]="entidade.dataInicial">
       <mat-datepicker-toggle matSuffix [for]="pickerDataInicial"></mat-datepicker-toggle>
       <mat-datepicker #pickerDataInicial></mat-datepicker>
     </mat-form-field>
@@ -20,7 +19,7 @@
     <!-- Data Final -->
     <mat-form-field class="half-width-margin">
       <mat-label>Data Final</mat-label>
-      <input matInput [matDatepicker]="pickerDataFinal" [(ngModel)]="entidade.dataFinal" [disabled]="desabilitado()">
+      <input matInput [matDatepicker]="pickerDataFinal" [(ngModel)]="entidade.dataFinal">
       <mat-datepicker-toggle matSuffix [for]="pickerDataFinal"></mat-datepicker-toggle>
       <mat-datepicker #pickerDataFinal></mat-datepicker>
     </mat-form-field>
