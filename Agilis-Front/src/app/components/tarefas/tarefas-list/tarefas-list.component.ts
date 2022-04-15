@@ -1,9 +1,11 @@
 ﻿import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Produto } from 'src/app/models/produto';
 import { Tarefa } from 'src/app/models/tarefa';
+import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
@@ -19,16 +21,34 @@ import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.co
 })
 export class TarefasListComponent extends CrudListComponent<Tarefa> {
 
+  produto: Produto;
+
   constructor(
     tarefaApiService: TarefaApiService,
-    public snackBar: MatSnackBar,
     router: Router,
-    private bottomSheetService: BottomSheetService,
     tituloService: TituloService,
+    private bottomSheetService: BottomSheetService,
+    private activatedRoute: ActivatedRoute,
+    private produtoApiService: ProdutoApiService,
+    public snackBar: MatSnackBar,
   ) {
     super(tarefaApiService, snackBar, router, 'tarefas');
+    tituloService.definir('Product Backlog');
+  }
 
-    tituloService.definir('Tarefas');
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+
+        const id = this.activatedRoute.snapshot.paramMap.get('productId');
+
+        this.produtoApiService.obterUm(id)
+          .subscribe({
+            next: produto => this.produto = produto
+          });
+      });
+
+    super.ngOnInit();
   }
 
   onPesquisar(criterio: string) {

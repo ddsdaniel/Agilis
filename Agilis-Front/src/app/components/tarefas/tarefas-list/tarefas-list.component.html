@@ -1,9 +1,13 @@
-﻿<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+﻿<app-action-bar [titulo]="'Product Backlog'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
 
   <div menu>
 
+    <h4 class="preto-discreto ml-3">{{ produto.nome }}</h4>
+
     <!-- Grade -->
     <mat-list role="list">
+
+      <mat-divider></mat-divider>
 
       <mat-list-item role="listitem" *ngFor="let tarefa of lista; let i = index"
         (click)="openBottomSheet(tarefa.id, i)">

@@ -6,7 +6,7 @@ import { TarefasFormComponent } from './tarefas-form/tarefas-form.component';
 import { TarefasListComponent } from './tarefas-list/tarefas-list.component';
 
 const routes: Routes = [
-  { path: '', component: TarefasListComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'backlog/:productId', component: TarefasListComponent, canActivate: [AutenticacaoGuard] },
   { path: 'new', component: TarefasFormComponent, canActivate: [AutenticacaoGuard] },
   { path: ':id', component: TarefasFormComponent, canActivate: [AutenticacaoGuard] },
 ];
