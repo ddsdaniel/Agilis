@@ -1,6 +1,6 @@
 ﻿<app-action-bar [titulo]="'Cadastro da Tarefa'">
 
-  <div menu class="form-container">
+  <div menu class="form-produtoiner">
 
     <!-- Título -->
     <mat-form-field class="mt-4 full-width-margin">
@@ -12,7 +12,17 @@
     <!-- Descrição -->
     <mat-form-field class="mt-4 full-width-margin">
       <mat-label>Descrição</mat-label>
-      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text" appSelectAllText rows="5"></textarea>
+      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+    <!-- Produto -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Produto</mat-label>
+      <mat-select [(value)]="entidade.produto" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let produto of produtos" [value]="produto"> {{produto.nome}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
   </div>

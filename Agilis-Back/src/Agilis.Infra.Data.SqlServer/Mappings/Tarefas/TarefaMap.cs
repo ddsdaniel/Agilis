@@ -13,7 +13,7 @@ namespace Agilis.Infra.Data.SqlServer.Mappings.Tarefas
             builder.Ignore(u => u.Criticas);
 
             builder.Property(u => u.Titulo)
-                .HasMaxLength(256);
+                .HasMaxLength(256);            
         }
     }
 }

@@ -10,15 +10,18 @@ namespace Agilis.Infra.Data.SqlServer.Mappings.Produtos
         {
             builder.ToTable("Produtos");
 
-            builder.Ignore(u => u.Criticas);
+            builder.Ignore(p => p.Criticas);
 
-            builder.Property(u => u.Nome)
+            builder.Property(p => p.Nome)
                 .HasMaxLength(64);
 
-            builder.Property(u => u.UrlRepositorio)
+            builder.Property(p => p.UrlRepositorio)
                 .HasMaxLength(256);
 
-            builder.Property(u => u.Descricao);
+            builder.Property(p => p.Descricao);
+
+            builder.HasMany(p => p.Backlog)
+                .WithOne(t => t.Produto);
         }
     }
 }
