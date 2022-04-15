@@ -54,9 +54,7 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
       );
   }
 
-  recuperouEntidade(entidade: TEntity) {
-
-  }
+  recuperouEntidade(entidade: TEntity) { }
 
   abstract sugerirNovo(): void;
 

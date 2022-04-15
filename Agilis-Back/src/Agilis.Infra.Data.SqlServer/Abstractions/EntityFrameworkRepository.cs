@@ -32,9 +32,7 @@ namespace Agilis.Infra.Data.SqlServer.Abstractions
 
         public virtual Task<TEntity> ConsultarPorIdAsync(Guid id)
         {
-            return _agilisDbContext
-                .Set<TEntity>()
-                .AsNoTracking()
+            return Consultar()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 

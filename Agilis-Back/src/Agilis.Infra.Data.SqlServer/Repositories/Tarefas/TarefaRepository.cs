@@ -19,5 +19,11 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
             _agilisDbContext.Entry(tarefa.Produto).State = EntityState.Unchanged;
             return base.AdicionarAsync(tarefa);
         }
+
+        public override IQueryable<Tarefa> Consultar()
+        {
+            return base.Consultar()
+                .Include(t => t.Produto);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿import { Entidade } from './entidade';
+﻿import { TipoTarefa } from '../enums/tipo-tarefa.enum';
+import { Entidade } from './entidade';
 import { Produto } from './produto';
 
 export interface Tarefa extends Entidade {
@@ -6,4 +7,5 @@ export interface Tarefa extends Entidade {
   descricao: string;
   produtoId: string;
   produto?: Produto;
+  tipo: TipoTarefa;
 }

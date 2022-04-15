@@ -2,6 +2,7 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
+import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { Produto } from 'src/app/models/produto';
 import { Tarefa } from 'src/app/models/tarefa';
 import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
@@ -18,6 +19,7 @@ import { CrudFormComponent } from '../../crud/crud-form-component';
 export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements OnInit {
 
   produtos: Produto[] = [];
+  tipos = Object.keys(TipoTarefa);
 
   constructor(
     private produtoApiService: ProdutoApiService,
@@ -30,17 +32,14 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   ) {
     super(router, tarefaApiService, snackBar, activatedRoute, 'tarefas');
     tituloService.definir('Cadastro da Tarefa');
+    this.inicializar();
   }
 
-  ngOnInit(): void {
+  inicializar() {
     this.produtoApiService.obterTodos()
       .subscribe({
-        next: produtos => {
-          this.produtos = produtos;
-          super.ngOnInit();
-        }
+        next: produtos => this.produtos = produtos
       });
-
   }
 
   sugerirNovo(): void {
@@ -48,7 +47,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       id: constantes.newGuid,
       titulo: '',
       descricao: '',
-      produtoId: constantes.newGuid
+      produtoId: constantes.newGuid,
+      tipo: TipoTarefa.Novidade,
     };
   }
 
@@ -57,6 +57,10 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       this.entidade.produtoId = this.entidade.produto.id;
     }
     super.salvar();
+  }
+
+  obterLabelTipo(tipo: TipoTarefa): string {
+    return TipoTarefaLabel.get(tipo);
   }
 
 }

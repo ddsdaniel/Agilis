@@ -25,6 +25,15 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Tipo -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Tipo</mat-label>
+      <mat-select [(ngModel)]="entidade.tipo">
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <!-- Ícones da action-bar -->
