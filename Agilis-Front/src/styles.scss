@@ -153,3 +153,7 @@ mat-list-item mat-icon {
 .accent-color-link:visited {
   color: mat-color($styles-theme-accent);
 }
+
+.link {
+  cursor: pointer;
+}

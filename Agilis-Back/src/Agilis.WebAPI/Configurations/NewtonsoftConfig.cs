@@ -23,6 +23,8 @@ namespace Agilis.WebAPI.Configurations
                 options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
 
                 options.SerializerSettings.Converters.Add(new StringEnumConverter());
+
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             return builder;

@@ -1,8 +1,29 @@
-<app-action-bar [titulo]="'Product Backlog'">
+<app-action-bar [titulo]="titulo">
 
-  <div menu class="form-container">
+  <div menu>
 
+    <div *ngFor="let epico of produto.epicos" class="mt-3 ml-2">
 
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <!-- <div> {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}} </div> -->
+        <div>
+          <mat-icon class="preto-discreto link">expand_more</mat-icon>
+        </div>
+        <div>
+          <mat-icon class="ml-3" color="primary">emoji_events</mat-icon>
+        </div>
+        <div class="ml-2">{{epico.nome}}</div>
+      </div>
+
+      <div *ngFor="let feature of epico.features" class="ml-6 mt-3 preto-discreto">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>
+            <mat-icon color="accent">military_tech</mat-icon>
+          </div>
+          <div class="ml-2">{{feature.nome}}</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
