@@ -1,6 +1,6 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Tarefa } from 'src/app/models/tarefa';
+import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { CrudApiBaseService } from './crud-api-base.service';
 
 

@@ -3,8 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
-import { Produto } from 'src/app/models/produto';
-import { Tarefa } from 'src/app/models/tarefa';
+import { Produto } from 'src/app/models/produtos/produto';
+import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
@@ -47,14 +47,14 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       id: constantes.newGuid,
       titulo: '',
       descricao: '',
-      produtoId: constantes.newGuid,
+      featureId: constantes.newGuid,
       tipo: TipoTarefa.Novidade,
     };
   }
 
   salvar() {
-    if (this.entidade.produto) {
-      this.entidade.produtoId = this.entidade.produto.id;
+    if (this.entidade.feature) {
+      this.entidade.featureId = this.entidade.feature.id;
     }
     super.salvar();
   }

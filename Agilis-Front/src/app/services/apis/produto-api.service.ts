@@ -1,6 +1,6 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Produto } from 'src/app/models/produto';
+import { Produto } from 'src/app/models/produtos/produto';
 import { CrudApiBaseService } from './crud-api-base.service';
 
 

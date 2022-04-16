@@ -2,7 +2,7 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
-import { Produto } from 'src/app/models/produto';
+import { Produto } from 'src/app/models/produtos/produto';
 import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
@@ -34,6 +34,7 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
       nome: '',
       descricao: '',
       urlRepositorio: '',
+      epicos: [],
     };
   }
 
