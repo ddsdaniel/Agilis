@@ -12,6 +12,8 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Feature> Epicos { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Time> Times { get; set; }
