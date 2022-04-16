@@ -8,18 +8,17 @@ namespace Agilis.Core.Domain.Models.Entities
     {
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public string UrlRepositorio { get; private set; }
-
-        public IEnumerable<Tarefa> Backlog { get; private set; }
+        public string UrlRepositorio { get; private set; }                
+        public IEnumerable<Epico> Epicos { get; private set; }
 
         protected Produto() { }
 
-        public Produto(string nome, string descricao, string urlRepositorio, IEnumerable<Tarefa> backlog)
+        public Produto(string nome, string descricao, string urlRepositorio, IEnumerable<Epico> epicos)
         {
             Nome = nome;
             Descricao = descricao;
             UrlRepositorio = urlRepositorio;
-            Backlog = backlog;
+            Epicos = epicos;
             Validar();
         }
 

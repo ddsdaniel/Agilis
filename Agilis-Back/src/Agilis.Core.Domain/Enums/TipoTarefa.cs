@@ -7,6 +7,7 @@ namespace Agilis.Core.Domain.Enums
         [Description("Melhoria")]
         Melhoria,
 
+        //TODO: feature?
         [Description("Novidade")]
         Novidade,
 
@@ -18,5 +19,6 @@ namespace Agilis.Core.Domain.Enums
 
         [Description("Qualificação")]
         Qualificacao
+            //TODO: débito técnico
     }
 }

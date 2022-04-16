@@ -10,6 +10,12 @@ namespace Agilis.Application.AutoMapper
         {
             CreateMap<Produto, ProdutoViewModel>()
                 .ReverseMap();
+
+            CreateMap<Feature, FeatureViewModel>()
+                .ReverseMap();
+
+            CreateMap<Epico, EpicoViewModel>()
+                .ReverseMap();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Agilis.Application.ViewModels.Tarefas
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public Guid ProdutoId { get; set; }
-        public ProdutoViewModel Produto { get; set; }
+        public FeatureViewModel Feature { get; set; }
         public TipoTarefa Tipo { get; set; }
     }
 }

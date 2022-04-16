@@ -20,8 +20,8 @@ namespace Agilis.Infra.Data.SqlServer.Mappings.Produtos
 
             builder.Property(p => p.Descricao);
 
-            builder.HasMany(p => p.Backlog)
-                .WithOne(t => t.Produto);
+            builder.HasMany(p => p.Epicos)
+                .WithOne(e => e.Produto);
         }
     }
 }
