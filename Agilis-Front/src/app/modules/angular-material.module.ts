@@ -23,6 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -51,6 +52,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatRadioModule,
     MatCheckboxModule,
     MatBadgeModule,
+    MatExpansionModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -76,6 +78,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatRadioModule,
     MatCheckboxModule,
     MatBadgeModule,
+    MatExpansionModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

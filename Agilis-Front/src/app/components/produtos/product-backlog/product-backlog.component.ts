@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { constantes } from 'src/app/consts/constantes';
+import { DialogoInput } from 'src/app/models/dialogo-input';
+import { Epico } from 'src/app/models/produtos/epico';
 import { Produto } from 'src/app/models/produtos/produto';
-import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
+import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
+import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { TituloService } from 'src/app/services/titulo.service';
+import { DialogoInputComponent } from '../../widgets/dialogo-input/dialogo-input.component';
 
 @Component({
   selector: 'app-product-backlog',
@@ -18,6 +25,9 @@ export class ProductBacklogComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private produtoApiService: ProdutoApiService,
     private tituloService: TituloService,
+    private dialog: MatDialog,
+    private epicoApiService: EpicoApiService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -37,4 +47,39 @@ export class ProductBacklogComponent implements OnInit {
       });
   }
 
+  abrirDialogoNovoEpico() {
+    const dialogRef = this.dialog.open<DialogoInputComponent, DialogoInput>(DialogoInputComponent, {
+      width: '500px',
+      data: {
+        titulo: 'Novo Épico',
+        label: 'Nome',
+        dica: '',
+        valorInicial: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: resposta => {
+        if (resposta) {
+          const epico: Epico = {
+            id: constantes.newGuid,
+            nome: resposta,
+            features: [],
+            produtoId: this.produto.id,
+            produto: this.produto,
+          };
+
+          this.epicoApiService.adicionar(epico)
+            .subscribe({
+              next: id => {
+                epico.id = id;
+                epico.produto = null;
+                this.produto.epicos.push(epico);
+              },
+              error: (error) => this.snackBar.open(error.message),
+            });
+        }
+      }
+    });
+  }
 }

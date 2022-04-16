@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Produto } from 'src/app/models/produtos/produto';
-import { ProdutoApiService } from 'src/app/services/apis/produto-api.service';
+import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
 

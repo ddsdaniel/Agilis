@@ -2,28 +2,38 @@
 
   <div menu>
 
-    <div *ngFor="let epico of produto.epicos" class="mt-3 ml-2">
+    <mat-accordion multi>
 
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <!-- <div> {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}} </div> -->
-        <div>
-          <mat-icon class="preto-discreto link">expand_more</mat-icon>
-        </div>
-        <div>
-          <mat-icon class="ml-3" color="primary">emoji_events</mat-icon>
-        </div>
-        <div class="ml-2">{{epico.nome}}</div>
-      </div>
+      <mat-expansion-panel *ngFor="let epico of produto.epicos">
 
-      <div *ngFor="let feature of epico.features" class="ml-6 mt-3 preto-discreto">
-        <div fxLayout="row" fxLayoutAlign="start center">
-          <div>
-            <mat-icon color="accent">military_tech</mat-icon>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{epico.nome}}
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <div *ngFor="let feature of epico.features" class="ml-2 mt-3 preto-discreto">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>
+              <mat-icon color="accent">wysiwyg</mat-icon>
+            </div>
+            <div class="ml-2 link">{{feature.nome}}</div>
           </div>
-          <div class="ml-2">{{feature.nome}}</div>
         </div>
-      </div>
-    </div>
+
+        <button mat-raised-button class="botao mt-3 ml-2">Nova Feature</button>
+        <button mat-raised-button class="botao mt-3 ml-2">Excluir Épico</button>
+
+      </mat-expansion-panel>
+
+
+    </mat-accordion>
+
+    <!-- Adicionar -->
+    <button mat-fab color="accent" title="Novo Épico" (click)="abrirDialogoNovoEpico()">
+      <mat-icon>add</mat-icon>
+    </button>
 
   </div>
 

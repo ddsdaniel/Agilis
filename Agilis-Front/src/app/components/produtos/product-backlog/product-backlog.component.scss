@@ -1,3 +1,7 @@
-mat-icon{
+mat-accordion mat-icon {
   margin-top: 3px;
+}
+
+.mat-expansion-panel-header.mat-expanded{
+  height: 48px !important;
 }
