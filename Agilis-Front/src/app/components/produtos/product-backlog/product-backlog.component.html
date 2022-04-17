@@ -2,36 +2,27 @@
 
   <div menu>
 
-    <mat-accordion multi>
+    <div *ngFor="let epico of produto.epicos" class="mt-1 ml-2 epicos">
 
-      <mat-expansion-panel *ngFor="let epico of produto.epicos">
-
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{epico.nome}}
-          </mat-panel-title>
-
-        </mat-expansion-panel-header>
-
-        <div *ngFor="let feature of epico.features" class="ml-2 mt-3 preto-discreto">
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <div>
-              <mat-icon color="accent">wysiwyg</mat-icon>
-            </div>
-            <div class="ml-2 link">{{feature.nome}}</div>
-          </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div>
+          <mat-icon color="primary">emoji_events</mat-icon>
         </div>
+        <div class="ml-2 link">{{epico.nome}}</div>
+      </div>
 
-        <button mat-raised-button class="botao mt-3 ml-2">Nova Feature</button>
-        <button mat-raised-button class="botao mt-3 ml-2">Excluir Épico</button>
+      <div *ngFor="let feature of epico.features" class="ml-3 mt-1 preto-discreto">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>
+            <mat-icon color="accent">wysiwyg</mat-icon>
+          </div>
+          <div class="ml-2 link">{{feature.nome}}</div>
+        </div>
+      </div>
+    </div>
 
-      </mat-expansion-panel>
-
-
-    </mat-accordion>
-
-    <!-- Adicionar -->
-    <button mat-fab color="accent" title="Novo Épico" (click)="abrirDialogoNovoEpico()">
+    <!-- Adicionar Épico -->
+    <button mat-fab color="accent" title="Adicionar Épico" (click)="adicionarEpico()">
       <mat-icon>add</mat-icon>
     </button>
 

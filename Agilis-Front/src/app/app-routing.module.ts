@@ -25,13 +25,15 @@ const routes: Routes = [
   { path: 'intro', component: IntroComponent, canActivate: [AutenticacaoGuard] },
   { path: 'alterar-minha-senha', component: AlterarMinhaSenhaComponent, canActivate: [AutenticacaoGuard] },
 
+  // TODO descobrir a tela principal e remove-la do modulo especifico
+  // { path: '', pathMatch: 'full', redirectTo: 'tarefas' },
+  // { path: '', component: TransacoesListComponent, canActivate: [AutenticacaoGuard] },
+
   { path: 'times', loadChildren: () => import('./components/times/times.module').then(m => m.TimesModule) },
   { path: 'tarefas', loadChildren: () => import('./components/tarefas/tarefas.module').then(m => m.TarefasModule) },
   { path: 'produtos', loadChildren: () => import('./components/produtos/produtos.module').then(m => m.ProdutosModule) },
   { path: 'sprints', loadChildren: () => import('./components/sprints/sprints.module').then(m => m.SprintsModule) },
   { path: 'clientes', loadChildren: () => import('./components/clientes/clientes.module').then(m => m.ClientesModule) },
-
-  // { path: '', pathMatch: 'full', redirectTo: 'tarefas' },
 
 ];
 

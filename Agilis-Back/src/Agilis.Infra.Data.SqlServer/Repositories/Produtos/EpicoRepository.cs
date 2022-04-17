@@ -19,5 +19,11 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Produtos
             _agilisDbContext.Entry(epico.Produto).State = EntityState.Unchanged;
             return base.AdicionarAsync(epico);
         }
+
+        public override IQueryable<Epico> Consultar()
+        {
+            return base.Consultar()
+                .Include(e => e.Produto);
+        }
     }
 }
