@@ -1,7 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Produto } from 'src/app/models/produtos/produto';
+import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
@@ -23,6 +26,8 @@ export class ProductBacklogComponent implements OnInit {
     private tituloService: TituloService,
     private router: Router,
     private bottomSheetService: BottomSheetService,
+    private epicoApiService: EpicoApiService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -69,11 +74,42 @@ export class ProductBacklogComponent implements OnInit {
               //super.editar(id);
               break;
             case 'excluir':
-              //super.excluir(index);
+              this.excluirEpico(index);
               break;
           }
         }
       });
+  }
+
+  excluirEpico(index: number) {
+
+    const epico = this.produto.epicos[index];
+
+    this.epicoApiService.excluir(epico.id)
+      .subscribe(
+        () => {
+
+          this.produto.epicos.removeAt(index);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            const clone = Object.assign({}, epico);
+
+            clone.produto = this.produto;
+            this.epicoApiService.adicionar(clone)
+              .subscribe(
+                () => {
+                  this.produto.epicos.insert(index, clone);
+                },
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
   adicionarEpico() {
