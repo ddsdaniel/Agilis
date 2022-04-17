@@ -14,7 +14,7 @@ const routes: Routes = [
 
   { path: ':id/backlog', component: ProductBacklogComponent, canActivate: [AutenticacaoGuard] },
 
-  { path: 'epico/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'epicos/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'epicos/new', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
 ];
 

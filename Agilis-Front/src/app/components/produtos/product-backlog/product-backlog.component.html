@@ -2,13 +2,13 @@
 
   <div menu>
 
-    <div *ngFor="let epico of produto.epicos" class="mt-1 ml-2 epicos">
+    <div *ngFor="let epico of produto.epicos; let e = index" class="mt-1 ml-2 epicos">
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <div>
           <mat-icon color="primary">emoji_events</mat-icon>
         </div>
-        <div class="ml-2 link">{{epico.nome}}</div>
+        <div class="ml-2 link" (click)="openBottomSheetEpicos(epico.id, e)">{{epico.nome}}</div>
       </div>
 
       <div *ngFor="let feature of epico.features" class="ml-3 mt-1 preto-discreto">
