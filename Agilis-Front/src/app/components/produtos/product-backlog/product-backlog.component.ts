@@ -6,6 +6,7 @@ import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Epico } from 'src/app/models/produtos/epico';
 import { Produto } from 'src/app/models/produtos/produto';
 import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
+import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
@@ -28,6 +29,7 @@ export class ProductBacklogComponent implements OnInit {
     private router: Router,
     private bottomSheetService: BottomSheetService,
     private epicoApiService: EpicoApiService,
+    private featureApiService: FeatureApiService,
     private snackBar: MatSnackBar,
   ) { }
 
@@ -115,12 +117,43 @@ export class ProductBacklogComponent implements OnInit {
             case 'editar':
               this.navegarParaFeature(`/produtos/features/${id}`, this.produto.epicos[indiceEpico]);
               break;
-            // case 'excluir':
-            //   this.excluirEpico(indiceEpico);
-            //   break;
+            case 'excluir':
+              this.excluirFeature(indiceEpico, indiceFeature);
+              break;
           }
         }
       });
+  }
+
+  excluirFeature(indiceEpico: number, indiceFeature: number) {
+    const epico = this.produto.epicos[indiceEpico];
+    const feature = epico.features[indiceFeature];
+
+    this.featureApiService.excluir(feature.id)
+      .subscribe(
+        () => {
+
+          epico.features.removeAt(indiceFeature);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            const clone = Object.assign({}, feature);
+
+            clone.epico = epico;
+            this.featureApiService.adicionar(clone)
+              .subscribe(
+                () => {
+                  epico.features.insert(indiceFeature, clone);
+                },
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
   excluirEpico(index: number) {
