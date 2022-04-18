@@ -19,7 +19,17 @@ namespace Agilis.Core.Domain.Models.Entities
             EpicoId = epicoId;
             Epico = epico;
             Tarefas = tarefas;
-            //TODO: validar
+            Validar();
+        }
+
+
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome inválido.");
+
+            if (EpicoId == Guid.Empty)
+                Criticar("Épico ID inválido.");
         }
 
         public override string ToString() => Nome;

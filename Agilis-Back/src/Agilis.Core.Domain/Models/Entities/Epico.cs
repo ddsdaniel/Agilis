@@ -1,6 +1,7 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -19,9 +20,17 @@ namespace Agilis.Core.Domain.Models.Entities
             ProdutoId = produtoId;
             Produto = produto;
             Features = features;
-            //TODO: validar
+            Validar();
         }
 
+        private void Validar()
+        {
+            if (String.IsNullOrEmpty(Nome))
+                Criticar("Nome inválido.");
+
+            if (ProdutoId == Guid.Empty)
+                Criticar("Produto ID inválido.");
+        }
         public override string ToString() => Nome;
     }
 }

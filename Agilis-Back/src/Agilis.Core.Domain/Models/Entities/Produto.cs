@@ -1,6 +1,7 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -21,7 +22,6 @@ namespace Agilis.Core.Domain.Models.Entities
             Epicos = epicos;
             Validar();
         }
-
         private void Validar()
         {
             if (String.IsNullOrEmpty(Nome))
