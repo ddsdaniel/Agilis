@@ -11,12 +11,12 @@
         <div class="ml-2 link" (click)="openBottomSheetEpicos(epico.id, e)">{{epico.nome}}</div>
       </div>
 
-      <div *ngFor="let feature of epico.features" class="ml-3 mt-1 preto-discreto">
+      <div *ngFor="let feature of epico.features; let f = index" class="ml-3 mt-1 preto-discreto">
         <div fxLayout="row" fxLayoutAlign="start center">
           <div>
             <mat-icon color="accent">wysiwyg</mat-icon>
           </div>
-          <div class="ml-2 link">{{feature.nome}}</div>
+          <div class="ml-2 link" (click)="openBottomSheetFeatures(feature.id, e, f)">{{feature.nome}}</div>
         </div>
       </div>
     </div>

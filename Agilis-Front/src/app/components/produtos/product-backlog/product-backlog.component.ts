@@ -90,6 +90,39 @@ export class ProductBacklogComponent implements OnInit {
       });
   }
 
+  openBottomSheetFeatures(id: string, indiceEpico: number, indiceFeature: number): void {
+
+    const itens: BottomSheetItem[] = [
+      {
+        codigo: 'editar',
+        titulo: 'Editar',
+        subTitulo: 'Abre uma nova tela para edição',
+        icone: 'edit'
+      },
+      {
+        codigo: 'excluir',
+        titulo: 'Excluir',
+        subTitulo: 'Exclui a feature',
+        icone: 'clear',
+        cor: '#FF0000'
+      }
+    ];
+
+    this.bottomSheetService.abrir(itens, BottomSheetComponent)
+      .subscribe(codigo => {
+        if (codigo) {
+          switch (codigo) {
+            case 'editar':
+              this.navegarParaFeature(`/produtos/features/${id}`, this.produto.epicos[indiceEpico]);
+              break;
+            // case 'excluir':
+            //   this.excluirEpico(indiceEpico);
+            //   break;
+          }
+        }
+      });
+  }
+
   excluirEpico(index: number) {
 
     const epico = this.produto.epicos[index];

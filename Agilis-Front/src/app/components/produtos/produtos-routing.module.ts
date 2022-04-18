@@ -11,15 +11,13 @@ import { ProdutosListComponent } from './produtos-list/produtos-list.component';
 const routes: Routes = [
   { path: '', component: ProdutosListComponent, canActivate: [AutenticacaoGuard] },
   { path: 'new', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
-  { path: ':id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
-
-  { path: ':id/backlog', component: ProductBacklogComponent, canActivate: [AutenticacaoGuard] },
-
-  { path: 'epicos/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'epicos/new', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
-
-  { path: 'features/:id', component: FeaturesFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'features/new', component: FeaturesFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: ':id', component: ProdutosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: ':id/backlog', component: ProductBacklogComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'epicos/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'features/:id', component: FeaturesFormComponent, canActivate: [AutenticacaoGuard] },
 ];
 
 @NgModule({
