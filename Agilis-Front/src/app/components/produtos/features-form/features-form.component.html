@@ -1,0 +1,21 @@
+﻿<app-action-bar [titulo]="'Cadastro da Feature'">
+
+  <div menu class="form-container">
+
+    <!-- Nome -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Ícones da action-bar -->
+  <div icones>
+    <!-- Salvar -->
+    <button mat-icon-button (click)="salvar()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>

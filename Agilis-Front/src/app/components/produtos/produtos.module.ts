@@ -5,6 +5,7 @@ import { ProdutosListComponent } from './produtos-list/produtos-list.component';
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';;
 import { EpicosFormComponent } from './epicos-form/epicos-form.component'
+import { FeaturesFormComponent } from './features-form/features-form.component'
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { EpicosFormComponent } from './epicos-form/epicos-form.component'
     ProdutosListComponent,
     ProdutosFormComponent,
     ProductBacklogComponent,
-    EpicosFormComponent
+    EpicosFormComponent,
+    FeaturesFormComponent
   ],
   imports: [
     GlobalModule,

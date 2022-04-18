@@ -2,6 +2,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AutenticacaoGuard } from 'src/app/guards/autenticacao.guard';
 import { EpicosFormComponent } from './epicos-form/epicos-form.component';
+import { FeaturesFormComponent } from './features-form/features-form.component';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 
 import { ProdutosFormComponent } from './produtos-form/produtos-form.component';
@@ -16,6 +17,9 @@ const routes: Routes = [
 
   { path: 'epicos/:id', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
   { path: 'epicos/new', component: EpicosFormComponent, canActivate: [AutenticacaoGuard] },
+
+  { path: 'features/:id', component: FeaturesFormComponent, canActivate: [AutenticacaoGuard] },
+  { path: 'features/new', component: FeaturesFormComponent, canActivate: [AutenticacaoGuard] },
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Epico } from 'src/app/models/produtos/epico';
 import { Produto } from 'src/app/models/produtos/produto';
 import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
@@ -51,6 +52,12 @@ export class ProductBacklogComponent implements OnInit {
 
     const itens: BottomSheetItem[] = [
       {
+        codigo: 'add-feature',
+        titulo: 'Adicionar Feature',
+        subTitulo: 'Abre uma nova tela para adicionar uma nova feature',
+        icone: 'add'
+      },
+      {
         codigo: 'editar',
         titulo: 'Editar',
         subTitulo: 'Abre uma nova tela para edição',
@@ -69,9 +76,11 @@ export class ProductBacklogComponent implements OnInit {
       .subscribe(codigo => {
         if (codigo) {
           switch (codigo) {
+            case 'add-feature':
+              this.navegarParaFeature('/produtos/features/new', this.produto.epicos[index]);
+              break;
             case 'editar':
               this.navegarParaEdico(`/produtos/epicos/${id}`);
-              //super.editar(id);
               break;
             case 'excluir':
               this.excluirEpico(index);
@@ -120,6 +129,17 @@ export class ProductBacklogComponent implements OnInit {
     const params = {
       queryParams: {
         produtoId: this.produto.id
+      }
+    };
+
+    this.router.navigate([rota], params);
+  }
+
+  private navegarParaFeature(rota: string, epico: Epico) {
+    const params = {
+      queryParams: {
+        produtoId: this.produto.id,
+        epicoId: epico.id,
       }
     };
 
