@@ -14,7 +14,7 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Produtos
         public override IQueryable<Produto> Consultar()
         {
             return base.Consultar()
-                .Include(p => p.Epicos).ThenInclude(e => e.Features);
+                .Include(p => p.Epicos).ThenInclude(e => e.Features).ThenInclude(f => f.Tarefas);
         }
     }
 }

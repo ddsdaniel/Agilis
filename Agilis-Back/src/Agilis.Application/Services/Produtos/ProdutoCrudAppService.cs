@@ -17,6 +17,13 @@ namespace Agilis.Application.Services.Produtos
         {
         }
 
+        public override ProdutoViewModel[] ConsultarTodos()
+        {
+            return base.ConsultarTodos()
+                .OrderBy(p => p.Nome)
+                .ToArray();
+        }
+
         public override async Task<ProdutoViewModel> ConsultarPorIdAsync(Guid id)
         {
             var produtoViewModel = await base.ConsultarPorIdAsync(id);

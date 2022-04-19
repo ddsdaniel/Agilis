@@ -9,6 +9,7 @@ import { Produto } from 'src/app/models/produtos/produto';
 import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
+import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
 import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
@@ -32,6 +33,7 @@ export class ProductBacklogComponent implements OnInit {
     private epicoApiService: EpicoApiService,
     private featureApiService: FeatureApiService,
     private snackBar: MatSnackBar,
+    private tarefaApiService: TarefaApiService,
   ) { }
 
   ngOnInit(): void {
@@ -133,6 +135,71 @@ export class ProductBacklogComponent implements OnInit {
           }
         }
       });
+  }
+
+  openBottomSheetTarefas(id: string, indiceEpico: number, indiceFeature: number, indiceTarefa: number): void {
+
+    const itens: BottomSheetItem[] = [
+      {
+        codigo: 'editar',
+        titulo: 'Editar',
+        subTitulo: 'Abre uma nova tela para edição',
+        icone: 'edit'
+      },
+      {
+        codigo: 'excluir',
+        titulo: 'Excluir',
+        subTitulo: 'Exclui a tarefa',
+        icone: 'clear',
+        cor: '#FF0000'
+      }
+    ];
+
+    this.bottomSheetService.abrir(itens, BottomSheetComponent)
+      .subscribe(codigo => {
+        if (codigo) {
+          switch (codigo) {
+            case 'editar':
+              this.navegarParaTarefas(`/tarefas/${id}`, this.produto.epicos[indiceEpico].features[indiceFeature]);
+              break;
+            case 'excluir':
+              this.excluirTarefa(indiceEpico, indiceFeature, indiceTarefa);
+              break;
+          }
+        }
+      });
+  }
+
+  excluirTarefa(indiceEpico: number, indiceFeature: number, indiceTarefa: number) {
+    const epico = this.produto.epicos[indiceEpico];
+    const feature = epico.features[indiceFeature];
+    const tarefa = feature.tarefas[indiceTarefa];
+
+    this.tarefaApiService.excluir(tarefa.id)
+      .subscribe(
+        () => {
+
+          feature.tarefas.removeAt(indiceTarefa);
+
+          const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+
+          snackBarRef.onAction().subscribe(() => {
+
+            const clone = Object.assign({}, tarefa);
+
+            clone.feature = feature;
+            this.tarefaApiService.adicionar(clone)
+              .subscribe(
+                () => {
+                  feature.tarefas.insert(indiceTarefa, clone);
+                },
+                (error: HttpErrorResponse) => this.snackBar.open(error.message)
+              );
+
+          });
+        },
+        (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      );
   }
 
   excluirFeature(indiceEpico: number, indiceFeature: number) {

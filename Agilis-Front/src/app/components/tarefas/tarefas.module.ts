@@ -7,7 +7,7 @@ import { TarefasRoutingModule } from './tarefas-routing.module';
 
 @NgModule({
   declarations: [
-    TarefasListComponent,
+    TarefasListComponent, // TODO remover este form?
     TarefasFormComponent,
   ],
   imports: [
