@@ -17,13 +17,26 @@
     </mat-form-field>
 
     <!-- Produto -->
-    <mat-form-field class="full-width-margin">
+    <mat-form-field class="mt-4 um-terco">
       <mat-label>Produto</mat-label>
-      <mat-select [(value)]="entidade.produto" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let produto of produtos" [value]="produto"> {{produto.nome}}
-        </mat-option>
-      </mat-select>
+      <input matInput [(ngModel)]="entidade.feature.epico.produto.nome" placeholder="Produto" name="produto" type="text"
+        disabled="disabled">
     </mat-form-field>
+
+    <!-- Épico -->
+    <mat-form-field class="mt-4 um-terco">
+      <mat-label>Épico</mat-label>
+      <input matInput [(ngModel)]="entidade.feature.epico.nome" placeholder="Épico" name="epico" type="text"
+        disabled="disabled">
+    </mat-form-field>
+
+    <!-- Feature -->
+    <mat-form-field class="mt-4 um-terco">
+      <mat-label>Feature</mat-label>
+      <input matInput [(ngModel)]="entidade.feature.nome" placeholder="Feature" name="feature" type="text"
+        disabled="disabled">
+    </mat-form-field>
+
 
     <!-- Tipo -->
     <mat-form-field class="mt-4 full-width-margin">

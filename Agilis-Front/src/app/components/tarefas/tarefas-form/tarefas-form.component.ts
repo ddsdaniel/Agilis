@@ -5,6 +5,7 @@ import { constantes } from 'src/app/consts/constantes';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { Produto } from 'src/app/models/produtos/produto';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
@@ -23,6 +24,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
 
   constructor(
     private produtoApiService: ProdutoApiService,
+    private featureApiService: FeatureApiService,
     router: Router,
     tarefaApiService: TarefaApiService,
     snackBar: MatSnackBar,
@@ -40,6 +42,17 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       .subscribe({
         next: produtos => this.produtos = produtos
       });
+
+    this.activatedRoute.queryParams.subscribe({
+      next: params => {
+        if (params.featureId) {
+          this.featureApiService.obterUm(params.featureId)
+            .subscribe({
+              next: feature => this.entidade.feature = feature
+            });
+        }
+      }
+    });
   }
 
   sugerirNovo(): void {
