@@ -38,21 +38,33 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   }
 
   inicializar() {
-    this.produtoApiService.obterTodos()
-      .subscribe({
-        next: produtos => this.produtos = produtos
-      });
+    this.obterProdutos();
+    this.identificarFeature();
+  }
 
+  private identificarFeature() {
     this.activatedRoute.queryParams.subscribe({
       next: params => {
         if (params.featureId) {
           this.featureApiService.obterUm(params.featureId)
             .subscribe({
-              next: feature => this.entidade.feature = feature
+              next: feature => {
+                this.entidade.feature = feature;
+                this.entidade.featureId = feature.id;
+
+                this.rotaPesquisa = `/produtos/${feature.epico.produtoId}/backlog`;
+              }
             });
         }
       }
     });
+  }
+
+  private obterProdutos() {
+    this.produtoApiService.obterTodos()
+      .subscribe({
+        next: produtos => this.produtos = produtos
+      });
   }
 
   sugerirNovo(): void {

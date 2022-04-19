@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'sprints', loadChildren: () => import('./components/sprints/sprints.module').then(m => m.SprintsModule) },
   { path: 'clientes', loadChildren: () => import('./components/clientes/clientes.module').then(m => m.ClientesModule) },
 
+  { path: '', redirectTo: '/times', pathMatch: 'full' },
 ];
 
 @NgModule({
