@@ -5,6 +5,7 @@ import { constantes } from 'src/app/consts/constantes';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { Produto } from 'src/app/models/produtos/produto';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { UsuarioConsulta } from 'src/app/models/usuario-consulta';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
@@ -19,6 +20,7 @@ import { CrudFormComponent } from '../../crud/crud-form-component';
 })
 export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements OnInit {
 
+  usuarios: UsuarioConsulta[];
   produtos: Produto[] = [];
   tipos = Object.keys(TipoTarefa);
 
