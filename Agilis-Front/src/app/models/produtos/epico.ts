@@ -4,7 +4,6 @@ import { Produto } from './produto';
 
 export interface Epico extends Entidade {
   nome: string;
-  produtoId: string;
-  produto?: Produto;
+  produto: Produto;
   features: Feature[];
 }

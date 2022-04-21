@@ -36,7 +36,13 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> implements OnI
       id: constantes.newGuid,
       nome: '',
       features: [],
-      produtoId: constantes.newGuid
+      produto: {
+        id: constantes.newGuid,
+        nome: '',
+        descricao: '',
+        epicos: [],
+        urlRepositorio: '',
+      }
     };
 
     this.activatedRoute.queryParams.subscribe({
@@ -44,7 +50,6 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> implements OnI
         if (params.produtoId) {
 
           this.rotaPesquisa = `/produtos/${params.produtoId}/backlog`;
-          this.entidade.produtoId = params.produtoId;
 
           this.produtoApiService.obterUm(params.produtoId)
             .subscribe({
@@ -55,10 +60,4 @@ export class EpicosFormComponent extends CrudFormComponent<Epico> implements OnI
     });
   }
 
-  salvar() {
-    if (this.entidade.produto) {
-      this.entidade.produtoId = this.entidade.produto.id;
-    }
-    super.salvar();
-  }
 }

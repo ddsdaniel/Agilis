@@ -1,8 +1,8 @@
 ﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { RefreshToken } from 'src/app/models/refresh-token';
-import { UsuarioLogado } from 'src/app/models/usuario-logado';
+import { RefreshToken } from 'src/app/models/seguranca/refresh-token';
+import { UsuarioLogado } from 'src/app/models/seguranca/usuario-logado';
 
 import { ApiRestBaseService } from './api-rest-base.service';
 

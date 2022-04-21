@@ -1,5 +1,6 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Enums;
+using Agilis.Core.Domain.Models.Entities.Seguranca;
 using System;
 
 namespace Agilis.Core.Domain.Models.Entities
@@ -8,19 +9,32 @@ namespace Agilis.Core.Domain.Models.Entities
     {
         public string Titulo { get; private set; }
         public string Descricao { get; private set; }
-        public Guid FeatureId { get; private set; }
         public Feature Feature { get; private set; }
         public TipoTarefa Tipo { get; private set; }
+        public Usuario Relator { get; private set; }
+        public Usuario Solucionador { get; private set; }
 
         protected Tarefa() { }
 
-        public Tarefa(string titulo, string descricao, Guid featureId, Feature feature, TipoTarefa tipo)
+        public Tarefa(
+            string titulo,
+            string descricao,
+            Feature feature,
+            TipoTarefa tipo,
+            Usuario relator,
+            Usuario solucionador
+            )
         {
+            //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
+            if (relator?.Id == solucionador?.Id)
+                relator = solucionador;
+
             Titulo = titulo;
             Descricao = descricao;
-            FeatureId = featureId;
             Feature = feature;
             Tipo = tipo;
+            Relator = relator;
+            Solucionador = solucionador;
             Validar();
         }
 
@@ -32,8 +46,15 @@ namespace Agilis.Core.Domain.Models.Entities
             if (Descricao == null)
                 Criticar("Descrição inválida.");
 
-            if (FeatureId == Guid.Empty)
-                Criticar("Feature id inválido");
+            if (Feature == null)
+                Criticar("Feature não deve ser nula");
+
+            ImportarCriticas(Feature);
+
+            if (Relator == null)
+                Criticar("Relator não deve ser nulo");
+
+            ImportarCriticas(Relator);
         }
 
         public override string ToString() => Titulo;

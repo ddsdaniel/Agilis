@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Login } from 'src/app/models/login';
+import { Login } from 'src/app/models/seguranca/login';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';

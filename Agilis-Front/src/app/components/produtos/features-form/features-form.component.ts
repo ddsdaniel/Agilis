@@ -36,7 +36,18 @@ export class FeaturesFormComponent extends CrudFormComponent<Feature> implements
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      epicoId: constantes.newGuid,
+      epico: {
+        id: constantes.newGuid,
+        features: [],
+        nome: '',
+        produto: {
+          id: constantes.newGuid,
+          descricao: '',
+          epicos: [],
+          nome: '',
+          urlRepositorio: '',
+        }
+      },
       tarefas: [],
     };
 
@@ -46,7 +57,6 @@ export class FeaturesFormComponent extends CrudFormComponent<Feature> implements
         if (params.produtoId && params.epicoId) {
 
           this.rotaPesquisa = `/produtos/${params.produtoId}/backlog`;
-          this.entidade.epicoId = params.epicoId;
 
           this.epicoApiService.obterUm(params.epicoId)
             .subscribe({
@@ -55,12 +65,5 @@ export class FeaturesFormComponent extends CrudFormComponent<Feature> implements
         }
       }
     });
-  }
-
-  salvar() {
-    if (this.entidade.epico) {
-      this.entidade.epicoId = this.entidade.epico.id;
-    }
-    super.salvar();
   }
 }

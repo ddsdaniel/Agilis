@@ -4,7 +4,6 @@ import { Epico } from './epico';
 
 export interface Feature extends Entidade {
   nome: string;
-  epicoId: string;
-  epico?: Epico;
+  epico: Epico;
   tarefas: Tarefa[];
 }

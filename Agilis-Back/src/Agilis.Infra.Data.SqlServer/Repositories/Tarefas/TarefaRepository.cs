@@ -17,13 +17,17 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
         public override Task AdicionarAsync(Tarefa tarefa)
         {
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
+            _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
+            _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
             return base.AdicionarAsync(tarefa);
         }
 
         public override IQueryable<Tarefa> Consultar()
         {
             return base.Consultar()
-                .Include(t => t.Feature);
+                .Include(t => t.Feature).ThenInclude(f => f.Epico).ThenInclude(e => e.Produto)
+                .Include(t => t.Relator)
+                .Include(t => t.Solucionador);
         }
     }
 }

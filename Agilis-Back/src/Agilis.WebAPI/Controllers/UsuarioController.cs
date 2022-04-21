@@ -34,7 +34,7 @@ namespace Agilis.WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<UsuarioCadastroViewModel[]> Consultar()
+        public ActionResult<UsuarioConsultaViewModel[]> Consultar()
         {
             var usuariosViewModel = _usuarioCrudAppService.ConsultarTodos();
 

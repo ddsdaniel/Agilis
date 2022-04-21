@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RedefinicaoSenha } from 'src/app/models/redefinicao-senha';
+import { RedefinicaoSenha } from 'src/app/models/seguranca/redefinicao-senha';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 import { ProcessandoService } from 'src/app/services/processando.service';

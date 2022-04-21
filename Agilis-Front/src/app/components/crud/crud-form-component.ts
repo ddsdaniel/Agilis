@@ -2,11 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Directive, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { Entidade } from 'src/app/models/entidade';
 import { CrudApiBaseService } from 'src/app/services/apis/crud-api-base.service';
 
-// @Directive()
 @Directive()
 export abstract class CrudFormComponent<TEntity extends Entidade> implements OnInit {
 
@@ -23,8 +23,14 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
 
   ngOnInit() {
 
-    this.sugerirNovo();
+    this.carregarDependencias()
+      .subscribe({
+        next: _ => this.identificarOperacao()
+      });
 
+  }
+
+  private identificarOperacao(): void {
     this.activatedRoute.params.subscribe(
       params => {
 
@@ -36,11 +42,17 @@ export abstract class CrudFormComponent<TEntity extends Entidade> implements OnI
 
         if (this.operacao === OperacaoFormCrud.alterando) {
           this.recuperarEntidade(id);
+        } else {
+          this.sugerirNovo();
         }
 
       }
     );
+  }
 
+
+  carregarDependencias(): Observable<void> {
+    return of(null);
   }
 
   recuperarEntidade(id: string): void {
