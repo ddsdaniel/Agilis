@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AlterarMinhaSenha } from 'src/app/models/alterar-minha-senha';
+import { AlterarMinhaSenha } from 'src/app/models/seguranca/alterar-minha-senha';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { ProcessandoService } from 'src/app/services/processando.service';
 import { TituloService } from 'src/app/services/titulo.service';

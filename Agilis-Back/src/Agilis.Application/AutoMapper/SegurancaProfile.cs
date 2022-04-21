@@ -10,7 +10,8 @@ namespace Agilis.Application.AutoMapper
     {
         public SegurancaProfile()
         {
-            CreateMap<Usuario, UsuarioConsultaViewModel>();
+            CreateMap<Usuario, UsuarioConsultaViewModel>()
+                .ReverseMap();
 
             CreateMap<RefreshToken, RefreshTokenViewModel>();
 

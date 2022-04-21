@@ -25,6 +25,10 @@ namespace Agilis.Core.Domain.Models.Entities
             Usuario solucionador
             )
         {
+            //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
+            if (relator?.Id == solucionador?.Id)
+                relator = solucionador;
+
             Titulo = titulo;
             Descricao = descricao;
             Feature = feature;
@@ -46,6 +50,11 @@ namespace Agilis.Core.Domain.Models.Entities
                 Criticar("Feature não deve ser nula");
 
             ImportarCriticas(Feature);
+
+            if (Relator == null)
+                Criticar("Relator não deve ser nulo");
+
+            ImportarCriticas(Relator);
         }
 
         public override string ToString() => Titulo;

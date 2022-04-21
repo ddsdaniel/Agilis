@@ -2,13 +2,15 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
+import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { Produto } from 'src/app/models/produtos/produto';
+import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
-import { UsuarioConsulta } from 'src/app/models/usuario-consulta';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
+import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
 import { CrudFormComponent } from '../../crud/crud-form-component';
@@ -27,6 +29,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   constructor(
     private produtoApiService: ProdutoApiService,
     private featureApiService: FeatureApiService,
+    private usuarioApiService: UsuarioApiService,
     router: Router,
     tarefaApiService: TarefaApiService,
     snackBar: MatSnackBar,
@@ -35,13 +38,23 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     public comparadorService: ComparadorService,
   ) {
     super(router, tarefaApiService, snackBar, activatedRoute, 'tarefas');
+
+    this.sugerirNovo();
     tituloService.definir('Cadastro da Tarefa');
     this.inicializar();
   }
 
   inicializar() {
     this.obterProdutos();
+    this.obterUsuarios();
     this.identificarFeature();
+  }
+
+  obterUsuarios() {
+    this.usuarioApiService.obterTodos()
+      .subscribe({
+        next: usuarios => this.usuarios = usuarios
+      });
   }
 
   private identificarFeature() {
@@ -52,9 +65,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
             .subscribe({
               next: feature => {
                 this.entidade.feature = feature;
-                this.entidade.featureId = feature.id;
 
-                this.rotaPesquisa = `/produtos/${feature.epico.produtoId}/backlog`;
+                this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
               }
             });
         }
@@ -74,16 +86,33 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       id: constantes.newGuid,
       titulo: '',
       descricao: '',
-      featureId: constantes.newGuid,
+      feature: {
+        id: constantes.newGuid,
+        nome: '',
+        tarefas: [],
+        epico: {
+          id: constantes.newGuid,
+          nome: '',
+          features: [],
+          produto: {
+            id: constantes.newGuid,
+            nome: '',
+            descricao: '',
+            urlRepositorio: '',
+            epicos: []
+          }
+        }
+      },
+      relator: {
+        id: constantes.newGuid,
+        nome: '',
+        sobrenome: '',
+        ativo: true,
+        email: '',
+        regra: RegraUsuario.Usuario,
+      },
       tipo: TipoTarefa.Novidade,
     };
-  }
-
-  salvar() {
-    if (this.entidade.feature) {
-      this.entidade.featureId = this.entidade.feature.id;
-    }
-    super.salvar();
   }
 
   obterLabelTipo(tipo: TipoTarefa): string {

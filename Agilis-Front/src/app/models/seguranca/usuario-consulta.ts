@@ -1,5 +1,6 @@
-import { RegraUsuario } from '../enums/regra-usuario.enum';
-import { Entidade } from './entidade';
+import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
+
+import { Entidade } from '../entidade';
 
 export interface UsuarioConsulta extends Entidade {
   nome: string;

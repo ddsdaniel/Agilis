@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
 import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
-import { UsuarioCadastro } from 'src/app/models/usuario-cadastro';
+import { UsuarioCadastro } from 'src/app/models/seguranca/usuario-cadastro';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 import { ProcessandoService } from 'src/app/services/processando.service';
@@ -46,7 +46,6 @@ export class NovoUsuarioComponent implements OnInit {
     this.usuarioApiService.adicionar(this.usuario)
       .pipe(
         switchMap(() => this.autenticacaoService.autenticar({ email: this.usuario.email, senha: this.usuario.senha })),
-        switchMap(() => this.usuarioApiService.cadastrarDadosPadroes())
       )
       .subscribe({
         next: () => this.router.navigate(['intro']),

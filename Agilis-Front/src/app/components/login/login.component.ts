@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/models/login';
+import { Login } from 'src/app/models/seguranca/login';
 import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProcessandoService } from 'src/app/services/processando.service';
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   entrar() {
     this.autenticacaoService.autenticar(this.login)
       .subscribe(
-        () => this.router.navigate(['tarefas']),
+        () => this.router.navigate(['produtos']),
         (error: HttpErrorResponse) => this.snackBar.open(error.message));
   }
 
