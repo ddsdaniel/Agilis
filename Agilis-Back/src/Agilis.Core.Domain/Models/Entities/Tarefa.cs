@@ -1,6 +1,7 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Models.ValueObjects;
 using System;
 
 namespace Agilis.Core.Domain.Models.Entities
@@ -13,6 +14,8 @@ namespace Agilis.Core.Domain.Models.Entities
         public TipoTarefa Tipo { get; private set; }
         public Usuario Relator { get; private set; }
         public Usuario Solucionador { get; private set; }
+        public Hora HorasPrevistas { get; private set; }
+        public Hora HorasRealizadas { get; private set; }
 
         protected Tarefa() { }
 
@@ -22,8 +25,9 @@ namespace Agilis.Core.Domain.Models.Entities
             Feature feature,
             TipoTarefa tipo,
             Usuario relator,
-            Usuario solucionador
-            )
+            Usuario solucionador,
+            Hora horasPrevistas,
+            Hora horasRealizadas)
         {
             //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
             if (relator?.Id == solucionador?.Id)
@@ -35,6 +39,8 @@ namespace Agilis.Core.Domain.Models.Entities
             Tipo = tipo;
             Relator = relator;
             Solucionador = solucionador;
+            HorasPrevistas = horasPrevistas;
+            HorasRealizadas = horasRealizadas;
             Validar();
         }
 
@@ -49,11 +55,12 @@ namespace Agilis.Core.Domain.Models.Entities
             if (Feature == null)
                 Criticar("Feature não deve ser nula");
 
-            ImportarCriticas(Feature);
-
             if (Relator == null)
                 Criticar("Relator não deve ser nulo");
 
+            ImportarCriticas(Feature);
+            ImportarCriticas(HorasPrevistas);
+            ImportarCriticas(HorasRealizadas);
             ImportarCriticas(Relator);
         }
 

@@ -12,7 +12,9 @@ namespace Agilis.Application.ViewModels.Tarefas
         public string Descricao { get; set; }
         public FeatureViewModel Feature { get; set; }
         public TipoTarefa Tipo { get; set; }
-        public UsuarioConsultaViewModel Relator { get;  set; }
-        public UsuarioConsultaViewModel Solucionador { get;  set; }
+        public UsuarioConsultaViewModel Relator { get; set; }
+        public UsuarioConsultaViewModel Solucionador { get; set; }
+        public string HorasPrevistas { get; set; }
+        public string HorasRealizadas { get; set; }
     }
 }

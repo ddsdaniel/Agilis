@@ -4,6 +4,7 @@ using Agilis.Infra.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AgilisDbContext))]
-    partial class AgilisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220421170035_HorasMigration")]
+    partial class HorasMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,9 +355,8 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                             b1.Property<Guid>("TarefaId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Horario")
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)")
+                            b1.Property<long?>("Horario")
+                                .HasColumnType("bigint")
                                 .HasColumnName("HorasPrevistas");
 
                             b1.HasKey("TarefaId");
@@ -371,9 +372,8 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                             b1.Property<Guid>("TarefaId")
                                 .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Horario")
-                                .HasMaxLength(5)
-                                .HasColumnType("nvarchar(5)")
+                            b1.Property<long?>("Horario")
+                                .HasColumnType("bigint")
                                 .HasColumnName("HorasRealizadas");
 
                             b1.HasKey("TarefaId");

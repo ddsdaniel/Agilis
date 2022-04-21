@@ -1,4 +1,5 @@
-﻿using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
+﻿using Agilis.Core.Domain.Models.ValueObjects;
+using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
 using Agilis.Core.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
