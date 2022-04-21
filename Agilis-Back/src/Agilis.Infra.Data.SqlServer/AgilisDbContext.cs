@@ -1,5 +1,6 @@
 ﻿using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
+using Agilis.Core.Domain.Models.Entities.Tags;
 using DDS.Validacoes.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -17,6 +18,7 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<Sprint> Sprints { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Time> Times { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)
