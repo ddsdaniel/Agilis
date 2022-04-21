@@ -1,4 +1,4 @@
-﻿using Agilis.Core.Domain.Models.Entities;
+﻿using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
-using Agilis.Core.Domain.Models.Entities;
 using Agilis.Application.ViewModels.Tarefas;
+using Agilis.Core.Domain.Models.Entities.Tarefas;
 
 namespace Agilis.Application.Services.Tarefas
 {

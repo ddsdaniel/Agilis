@@ -1,4 +1,4 @@
-﻿using Agilis.Core.Domain.Models.Entities;
+﻿using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Infra.Data.SqlServer.Abstractions;
 using Microsoft.EntityFrameworkCore;
 

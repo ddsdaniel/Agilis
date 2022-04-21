@@ -4,7 +4,7 @@ using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
 using System;
 
-namespace Agilis.Core.Domain.Models.Entities
+namespace Agilis.Core.Domain.Models.Entities.Tarefas
 {
     public class Tarefa : Entidade
     {
@@ -46,7 +46,7 @@ namespace Agilis.Core.Domain.Models.Entities
 
         private void Validar()
         {
-            if (String.IsNullOrEmpty(Titulo))
+            if (string.IsNullOrEmpty(Titulo))
                 Criticar("Título inválido.");
 
             if (Descricao == null)

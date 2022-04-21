@@ -1,8 +1,8 @@
 ﻿using Agilis.WebAPI.Abstractions.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Agilis.Core.Domain.Models.Entities;
 using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Application.Services.Tarefas;
+using Agilis.Core.Domain.Models.Entities.Tarefas;
 
 namespace Agilis.WebAPI.Controllers
 {

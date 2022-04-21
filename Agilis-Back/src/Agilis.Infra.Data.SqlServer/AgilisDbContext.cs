@@ -1,6 +1,7 @@
 ﻿using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tags;
+using Agilis.Core.Domain.Models.Entities.Tarefas;
 using DDS.Validacoes.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
