@@ -18,17 +18,19 @@ namespace Agilis.Core.Domain.Models.ValueObjects
         public Hora(string horario)
         {
             Horario = horario;
+            if (!Validar())
+                Criticar("Hora inválida.");
         }
 
         public Hora ObterAbsoluto() => new Hora(Horario.Replace("-", ""));
 
-        public bool Validar()
+        private bool Validar()
         {
             if (string.IsNullOrEmpty(Horario))
                 return false;
 
             var hora = Horario.StartsWith("-")
-                ? Horario.Substring(1)
+                ? Horario[1..]
                 : Horario;
 
             var regex = new Regex(REGEX_PATTERN);
@@ -54,7 +56,7 @@ namespace Agilis.Core.Domain.Models.ValueObjects
             return FromSegundos(totalSegundos, a.ContemSegundos || b.ContemSegundos);
         }
 
-        private static Hora FromSegundos(long segundos, bool incluirSegundos)
+        public static Hora FromSegundos(long segundos, bool incluirSegundos)
         {
             var negativo = false;
 
@@ -82,7 +84,7 @@ namespace Agilis.Core.Domain.Models.ValueObjects
             return hora;
         }
 
-        private long ObterTotalSegundos()
+        public long ObterTotalSegundos()
         {
             if (!Validar())
                 return 0;

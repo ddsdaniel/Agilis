@@ -28,6 +28,12 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<DiaDoMes, int>()
               .ConstructUsing(dm => dm.Dia);
+
+            CreateMap<Hora, string>()
+                .ConstructUsing(hora => hora.Horario);
+
+            CreateMap<string, Hora>()
+                .ConstructUsing(horario => new Hora(horario));
         }
     }
 }
