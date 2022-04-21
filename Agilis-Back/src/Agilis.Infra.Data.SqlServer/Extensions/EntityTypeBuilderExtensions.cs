@@ -37,29 +37,5 @@ namespace Agilis.Infra.Data.SqlServer.Extensions
 
             return builder;
         }
-
-        public static EntityTypeBuilder<TEntity> OwnsOneHora<TEntity>(
-           this EntityTypeBuilder<TEntity> builder,
-           Expression<Func<TEntity, Hora>> navigationExpression,
-           string columnName = nameof(Hora))
-           where TEntity : class
-        {
-            builder.OwnsOne(
-                     navigationExpression,
-                     navigationBuilder
-                     =>
-                     {
-                         navigationBuilder.Property(hora => hora.Horario)
-                                          .HasColumnName(columnName)
-                                          .HasConversion(
-                                                hora => new Hora(hora).ObterTotalSegundos(),
-                                                segundos => Hora.FromSegundos(segundos, false).Horario
-                                                );
-
-                         navigationBuilder.Ignore(hora => hora.Criticas);
-                     });
-
-            return builder;
-        }
     }
 }

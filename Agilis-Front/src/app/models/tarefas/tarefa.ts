@@ -10,4 +10,6 @@ export interface Tarefa extends Entidade {
   tipo: TipoTarefa;
   relator: UsuarioConsulta;
   solucionador?: UsuarioConsulta;
+  horasPrevistas: string;
+  horasRealizadas: string;
 }

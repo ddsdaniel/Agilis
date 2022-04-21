@@ -1,5 +1,4 @@
 ﻿using Agilis.Core.Domain.Models.Entities;
-using Agilis.Infra.Data.SqlServer.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,9 +15,30 @@ namespace Agilis.Infra.Data.SqlServer.Mappings.Tarefas
             builder.Property(u => u.Titulo)
                 .HasMaxLength(256);
 
-            builder.OwnsOneHora(t => t.HorasPrevistas, "HorasPrevistas");
+            builder.OwnsOne(
+               tarefa => tarefa.HorasPrevistas,
+               navigationBuilder =>
+               {
+                   navigationBuilder
+                       .Property(hora => hora.Horario)
+                       .HasColumnName("HorasPrevistas")
+                       .HasMaxLength(5);
 
-            builder.OwnsOneHora(t => t.HorasRealizadas, "HorasRealizadas");
+                   navigationBuilder.Ignore(email => email.Criticas);
+               });
+
+
+            builder.OwnsOne(
+               tarefa => tarefa.HorasRealizadas,
+               navigationBuilder =>
+               {
+                   navigationBuilder
+                       .Property(hora => hora.Horario)
+                       .HasColumnName("HorasRealizadas")
+                       .HasMaxLength(5);
+
+                   navigationBuilder.Ignore(email => email.Criticas);
+               });
         }
     }
 }

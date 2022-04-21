@@ -65,6 +65,20 @@
       </mat-select>
     </mat-form-field>
 
+     <!-- Horas Previstas -->
+     <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Horas Previstas</mat-label>
+      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas" type="text" required
+        appSelectAllText>
+    </mat-form-field>
+
+     <!-- Horas Realizadas -->
+     <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Horas Realizadas</mat-label>
+      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas" type="text" required
+        appSelectAllText>
+    </mat-form-field>
+
   </div>
 
   <!-- Ícones da action-bar -->

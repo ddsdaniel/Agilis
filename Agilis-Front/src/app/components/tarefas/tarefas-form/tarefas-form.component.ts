@@ -81,6 +81,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       id: constantes.newGuid,
       titulo: '',
       descricao: '',
+      horasPrevistas: '00:00',
+      horasRealizadas: '00:00',
       feature: {
         id: constantes.newGuid,
         nome: '',
