@@ -1,18 +1,21 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/internal/operators/tap';
+import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
+import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
-import { Produto } from 'src/app/models/produtos/produto';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
-import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
+
 import { CrudFormComponent } from '../../crud/crud-form-component';
 
 @Component({
@@ -23,11 +26,9 @@ import { CrudFormComponent } from '../../crud/crud-form-component';
 export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements OnInit {
 
   usuarios: UsuarioConsulta[];
-  produtos: Produto[] = [];
   tipos = Object.keys(TipoTarefa);
 
   constructor(
-    private produtoApiService: ProdutoApiService,
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
     router: Router,
@@ -38,47 +39,41 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     public comparadorService: ComparadorService,
   ) {
     super(router, tarefaApiService, snackBar, activatedRoute, 'tarefas');
-
-    this.sugerirNovo();
     tituloService.definir('Cadastro da Tarefa');
-    this.inicializar();
   }
 
-  inicializar() {
-    this.obterProdutos();
-    this.obterUsuarios();
-    this.identificarFeature();
+  carregarDependencias(): Observable<void> {
+    return this.obterUsuarios()
+      .pipe(
+        switchMap(_ => this.identificarFeature())
+      );
   }
 
-  obterUsuarios() {
-    this.usuarioApiService.obterTodos()
-      .subscribe({
-        next: usuarios => this.usuarios = usuarios
-      });
+  obterUsuarios(): Observable<any> {
+    return this.usuarioApiService.obterTodos()
+      .pipe(
+        tap(usuarios => this.usuarios = usuarios)
+      );
   }
 
-  private identificarFeature() {
-    this.activatedRoute.queryParams.subscribe({
-      next: params => {
-        if (params.featureId) {
-          this.featureApiService.obterUm(params.featureId)
-            .subscribe({
-              next: feature => {
-                this.entidade.feature = feature;
+  private identificarFeature(): Observable<any> {
+    return this.activatedRoute.queryParams
+      .pipe(
+        tap(params => {
+          if (params.featureId) {
+            this.featureApiService.obterUm(params.featureId)
+              .subscribe({
+                next: feature => {
 
-                this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
-              }
-            });
+                  if (super.operacao === OperacaoFormCrud.adicionando) {
+                    this.entidade.feature = feature;
+                  }
+                  this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
+                }
+              });
+          }
         }
-      }
-    });
-  }
-
-  private obterProdutos() {
-    this.produtoApiService.obterTodos()
-      .subscribe({
-        next: produtos => this.produtos = produtos
-      });
+        ));
   }
 
   sugerirNovo(): void {
