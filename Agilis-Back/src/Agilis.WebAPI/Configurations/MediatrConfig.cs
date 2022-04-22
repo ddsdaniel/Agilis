@@ -11,10 +11,7 @@ namespace Agilis.WebAPI.Configurations
             var assemblyDomainCore = AppDomain.CurrentDomain.Load("Agilis.Core.Domain");
             var assemblyAgilisApplication = AppDomain.CurrentDomain.Load("Agilis.Application");
 
-            services.AddMediatR(config =>
-            {
-                //config.AsScoped();
-            }, assemblyDomainCore, assemblyAgilisApplication);
+            services.AddMediatR(config => { }, assemblyDomainCore, assemblyAgilisApplication);
 
             return services;
         }

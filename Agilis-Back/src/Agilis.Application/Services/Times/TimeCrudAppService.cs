@@ -6,6 +6,7 @@ using Agilis.Core.Domain.Models.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using Agilis.Application.ViewModels.Times;
+using MediatR;
 
 namespace Agilis.Application.Services.Times
 {
@@ -16,8 +17,8 @@ namespace Agilis.Application.Services.Times
         private readonly IRepository<Time> _timeRepository;
         private readonly IMapper _mapper;
 
-        public TimeCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
-            : base(mapper, unitOfWork.ObterRepository<Time>(), unitOfWork)
+        public TimeCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+            : base(mapper, unitOfWork.ObterRepository<Time>(), unitOfWork, mediator)
         {
             _timeRepository = unitOfWork.ObterRepository<Time>();
             _mapper = mapper;

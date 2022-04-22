@@ -93,10 +93,6 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     this.tagValue = '';
   }
 
-  selecionarCor(tag: Tag): void {
-    console.log('selecionarCor');
-  }
-
   selecionouTag(event: MatAutocompleteSelectedEvent): void {
     const tag: Tag = {
       id: constantes.newGuid,

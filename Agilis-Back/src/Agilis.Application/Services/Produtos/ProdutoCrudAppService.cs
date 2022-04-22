@@ -6,14 +6,15 @@ using Agilis.Application.ViewModels.Produtos;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using MediatR;
 
 namespace Agilis.Application.Services.Produtos
 {
     public class ProdutoCrudAppService
         : CrudAppService<ProdutoViewModel, ProdutoViewModel, Produto>
     {
-        public ProdutoCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
-            : base(mapper, unitOfWork.ObterRepository<Produto>(), unitOfWork)
+        public ProdutoCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+            : base(mapper, unitOfWork.ObterRepository<Produto>(), unitOfWork, mediator)
         {
         }
 
