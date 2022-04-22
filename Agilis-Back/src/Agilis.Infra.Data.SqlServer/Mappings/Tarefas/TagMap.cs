@@ -1,8 +1,8 @@
-﻿using Agilis.Core.Domain.Models.Entities.Tags;
+﻿using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Agilis.Infra.Data.SqlServer.Mappings.Tags
+namespace Agilis.Infra.Data.SqlServer.Mappings.Tarefas
 {
     public class TagMap : IEntityTypeConfiguration<Tag>
     {

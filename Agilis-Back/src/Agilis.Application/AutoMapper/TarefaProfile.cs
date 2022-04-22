@@ -10,6 +10,9 @@ namespace Agilis.Application.AutoMapper
         {
             CreateMap<Tarefa, TarefaViewModel>()
                 .ReverseMap();
+
+            CreateMap<Tag, TagViewModel>()
+                .ReverseMap();
         }
     }
 }

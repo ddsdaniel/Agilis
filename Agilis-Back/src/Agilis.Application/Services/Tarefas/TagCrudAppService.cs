@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Agilis.Application.Abstractions.Services;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
-using Agilis.Application.ViewModels.Tags;
-using Agilis.Core.Domain.Models.Entities.Tags;
+using Agilis.Application.ViewModels.Tarefas;
+using Agilis.Core.Domain.Models.Entities.Tarefas;
 
-namespace Agilis.Application.Services.Tags
+namespace Agilis.Application.Services.Tarefas
 {
     public class TagCrudAppService
         : CrudAppService<TagViewModel, TagViewModel, Tag>

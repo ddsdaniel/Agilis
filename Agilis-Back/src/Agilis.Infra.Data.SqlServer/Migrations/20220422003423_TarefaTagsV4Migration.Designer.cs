@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AgilisDbContext))]
-    [Migration("20220421174742_TarefaTagsMigration")]
-    partial class TarefaTagsMigration
+    [Migration("20220422003423_TarefaTagsV4Migration")]
+    partial class TarefaTagsV4Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,7 +211,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.ToTable("Sprints", (string)null);
                 });
 
-            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tags.Tag", b =>
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,6 +230,21 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags", (string)null);
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.TagTarefa", b =>
+                {
+                    b.Property<Guid>("TarefaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TarefaId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagTarefas", (string)null);
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>
@@ -307,7 +322,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
 
                     b.HasIndex("TarefasId");
 
-                    b.ToTable("TagTarefa");
+                    b.ToTable("TagTarefas");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Epico", b =>
@@ -372,7 +387,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.Navigation("Senha");
                 });
 
-            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tags.Tag", b =>
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", b =>
                 {
                     b.OwnsOne("Agilis.Core.Domain.Models.ValueObjects.HtmlColor", "Cor", b1 =>
                         {
@@ -393,6 +408,25 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                         });
 
                     b.Navigation("Cor");
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.TagTarefa", b =>
+                {
+                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", "Tarefa")
+                        .WithMany()
+                        .HasForeignKey("TarefaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tag");
+
+                    b.Navigation("Tarefa");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>
@@ -458,7 +492,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
 
             modelBuilder.Entity("TagTarefa", b =>
                 {
-                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tags.Tag", null)
+                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)

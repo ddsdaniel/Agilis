@@ -2,6 +2,7 @@
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Agilis.Application.ViewModels.Tarefas
 {
@@ -16,5 +17,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public UsuarioConsultaViewModel Solucionador { get; set; }
         public string HorasPrevistas { get; set; }
         public string HorasRealizadas { get; set; }
+        public IEnumerable<TagViewModel> Tags { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Agilis.Core.Domain.Models.Entities.Tags;
+﻿using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Infra.Data.SqlServer.Abstractions;
 
-namespace Agilis.Infra.Data.SqlServer.Repositories.Tags
+namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
 {
     public class TagRepository : EntityFrameworkRepository<Tag>
     {

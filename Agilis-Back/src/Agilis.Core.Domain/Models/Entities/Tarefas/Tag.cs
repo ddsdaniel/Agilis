@@ -1,9 +1,8 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Core.Domain.Models.ValueObjects;
 using System.Collections.Generic;
 
-namespace Agilis.Core.Domain.Models.Entities.Tags
+namespace Agilis.Core.Domain.Models.Entities.Tarefas
 {
     public class Tag : Entidade
     {

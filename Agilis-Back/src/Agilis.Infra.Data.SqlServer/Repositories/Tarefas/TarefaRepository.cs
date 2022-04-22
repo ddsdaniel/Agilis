@@ -19,6 +19,7 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
+            _agilisDbContext.Entry(tarefa.Tags).State = EntityState.Unchanged;
             return base.AdicionarAsync(tarefa);
         }
 

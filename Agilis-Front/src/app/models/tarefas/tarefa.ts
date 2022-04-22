@@ -2,6 +2,7 @@
 import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
 import { UsuarioConsulta } from '../seguranca/usuario-consulta';
+import { Tag } from '../tags/tag';
 
 export interface Tarefa extends Entidade {
   titulo: string;
@@ -12,4 +13,5 @@ export interface Tarefa extends Entidade {
   solucionador?: UsuarioConsulta;
   horasPrevistas: string;
   horasRealizadas: string;
+  tags: Tag[];
 }

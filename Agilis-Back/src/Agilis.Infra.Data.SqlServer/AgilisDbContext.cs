@@ -1,6 +1,5 @@
 ﻿using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
-using Agilis.Core.Domain.Models.Entities.Tags;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
 using DDS.Validacoes.Abstractions.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +19,7 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Time> Times { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagTarefa> TagTarefas { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)

@@ -6,7 +6,6 @@ using Agilis.Application.Services.Tarefas;
 using Agilis.Application.Services.Produtos;
 using Agilis.Application.Services.Clientes;
 using Agilis.Application.Services.Sprints;
-using Agilis.Application.Services.Tags;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {

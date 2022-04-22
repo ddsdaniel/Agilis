@@ -1,7 +1,6 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
-using Agilis.Core.Domain.Models.Entities.Tags;
 using Agilis.Core.Domain.Models.ValueObjects;
 using System.Collections.Generic;
 

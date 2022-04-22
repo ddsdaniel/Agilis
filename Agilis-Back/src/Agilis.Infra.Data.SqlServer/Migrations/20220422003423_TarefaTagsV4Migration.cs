@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
-    public partial class TarefaTagsMigration : Migration
+    public partial class TarefaTagsV4Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TarefaTags",
+                name: "TagTarefas",
                 columns: table => new
                 {
                     TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -18,15 +18,15 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TarefaTags", x => new { x.TagId, x.TarefaId });
+                    table.PrimaryKey("PK_TagTarefas", x => new { x.TarefaId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_TarefaTags_Tags_TagId",
+                        name: "FK_TagTarefas_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TarefaTags_Tarefas_TarefaId",
+                        name: "FK_TagTarefas_Tarefas_TarefaId",
                         column: x => x.TarefaId,
                         principalTable: "Tarefas",
                         principalColumn: "Id",
@@ -34,15 +34,15 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TarefaTags_TarefaId",
-                table: "TarefaTags",
-                column: "TarefaId");
+                name: "IX_TagTarefas_TagId",
+                table: "TagTarefas",
+                column: "TagId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TarefaTags");
+                name: "TagTarefas");
         }
     }
 }

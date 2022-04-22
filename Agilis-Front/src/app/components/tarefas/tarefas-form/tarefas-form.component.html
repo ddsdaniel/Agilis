@@ -65,18 +65,37 @@
       </mat-select>
     </mat-form-field>
 
-     <!-- Horas Previstas -->
-     <mat-form-field class="mt-4 full-width-margin">
+    <!-- Horas Previstas -->
+    <mat-form-field class="mt-4 full-width-margin">
       <mat-label>Horas Previstas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas" type="text" required
-        appSelectAllText>
+      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
+        type="text" required appSelectAllText>
     </mat-form-field>
 
-     <!-- Horas Realizadas -->
-     <mat-form-field class="mt-4 full-width-margin">
+    <!-- Horas Realizadas -->
+    <mat-form-field class="mt-4 full-width-margin">
       <mat-label>Horas Realizadas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas" type="text" required
-        appSelectAllText>
+      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
+        type="text" required appSelectAllText>
+    </mat-form-field>
+
+    <!-- Tags -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Tags</mat-label>
+      <mat-chip-list #tagList aria-label="Seleção de tags">
+        <mat-chip *ngFor="let tag of entidade.tags" selectable="true" removable="true" (removed)="removerTag(tag)">
+          {{tag.nome}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Adicionar tag" #tagInput [(ngModel)]="tagValue" [matAutocomplete]="auto"
+          [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="tagSeparatorKeysCodes"
+          (matChipInputTokenEnd)="adicionarTag($event)" (ngModelChange)="filtrarTagControl()">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selecionouTag($event)">
+        <mat-option *ngFor="let tag of tagsFiltradas" [value]="tag.nome">
+          {{tag.nome}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
   </div>
