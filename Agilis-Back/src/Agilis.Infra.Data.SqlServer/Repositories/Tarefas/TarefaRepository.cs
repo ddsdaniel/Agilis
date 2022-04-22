@@ -28,7 +28,8 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
             return base.Consultar()
                 .Include(t => t.Feature).ThenInclude(f => f.Epico).ThenInclude(e => e.Produto)
                 .Include(t => t.Relator)
-                .Include(t => t.Solucionador);
+                .Include(t => t.Solucionador)
+                .Include(t => t.Tags);
         }
     }
 }

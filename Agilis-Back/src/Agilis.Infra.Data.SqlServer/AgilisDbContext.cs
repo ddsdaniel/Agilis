@@ -19,7 +19,6 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Time> Times { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<TagTarefa> TagTarefas { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)

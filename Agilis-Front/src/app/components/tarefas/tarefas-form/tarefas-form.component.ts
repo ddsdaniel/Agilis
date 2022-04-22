@@ -72,7 +72,6 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       const tag: Tag = {
         id: constantes.newGuid,
         nome: value.trim(),
-        cor: constantes.tagDefaultColor,
         tarefas: [],
       };
 
@@ -94,11 +93,14 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     this.tagValue = '';
   }
 
+  selecionarCor(tag: Tag): void {
+    console.log('selecionarCor');
+  }
+
   selecionouTag(event: MatAutocompleteSelectedEvent): void {
     const tag: Tag = {
       id: constantes.newGuid,
       nome: event.option.viewValue,
-      cor: constantes.tagDefaultColor,
       tarefas: [],
     };
     this.entidade.tags.push(tag);

@@ -83,7 +83,7 @@
     <mat-form-field class="full-width-margin">
       <mat-label>Tags</mat-label>
       <mat-chip-list #tagList aria-label="Seleção de tags">
-        <mat-chip *ngFor="let tag of entidade.tags" selectable="true" removable="true" (removed)="removerTag(tag)">
+        <mat-chip *ngFor="let tag of entidade.tags" selectable="true" removable="true" (removed)="removerTag(tag)" (click)="selecionarCor(tag)">
           {{tag.nome}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>

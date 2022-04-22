@@ -14,18 +14,6 @@ namespace Agilis.Infra.Data.SqlServer.Mappings.Tarefas
 
             builder.Property(s => s.Nome)
                 .HasMaxLength(64);
-
-            builder.OwnsOne(
-              tag => tag.Cor,
-              navigationBuilder =>
-              {
-                  navigationBuilder
-                      .Property(cor => cor.Codigo)
-                      .HasColumnName("Cor")
-                      .HasMaxLength(7);
-
-                  navigationBuilder.Ignore(email => email.Criticas);
-              });
         }
     }
 }
