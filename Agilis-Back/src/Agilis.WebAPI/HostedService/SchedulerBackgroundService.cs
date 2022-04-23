@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
 using Agilis.Application.Abstractions.Workers;
+using Agilis.Application.Workers.Tarefas;
 
 namespace Agilis.WebAPI.HostedService
 {
@@ -12,30 +13,22 @@ namespace Agilis.WebAPI.HostedService
     {
         private readonly ILogger<SchedulerBackgroundService> _logger;
         private readonly IServiceProvider _serviceProvider;
-        
+        private readonly ExcluirTagsNaoUsadasWorker _excluirTagsNaoUsadasWorker;
+
         public SchedulerBackgroundService(
             ILogger<SchedulerBackgroundService> logger,
-            IServiceProvider serviceProvider
+            IServiceProvider serviceProvider,
+            ExcluirTagsNaoUsadasWorker excluirTagsNaoUsadasWorker
             )
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-        }
-
-        public override Task StartAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation($"Iniciando {nameof(SchedulerBackgroundService)}...");
-            return base.StartAsync(cancellationToken);
-        }
-
-        public override Task StopAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation($"Parando {nameof(SchedulerBackgroundService)}...");
-            return base.StopAsync(cancellationToken);
+            _excluirTagsNaoUsadasWorker = excluirTagsNaoUsadasWorker;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            ExecutarDiariamente(12, 15, _excluirTagsNaoUsadasWorker, stoppingToken);
             return Task.CompletedTask;
         }
 
@@ -60,5 +53,17 @@ namespace Agilis.WebAPI.HostedService
                     worker.WorkAsync().Wait();
                 }, stoppingToken);
         }
+        public override Task StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"Iniciando {nameof(SchedulerBackgroundService)}...");
+            return base.StartAsync(cancellationToken);
+        }
+
+        public override Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"Parando {nameof(SchedulerBackgroundService)}...");
+            return base.StopAsync(cancellationToken);
+        }
+
     }
 }

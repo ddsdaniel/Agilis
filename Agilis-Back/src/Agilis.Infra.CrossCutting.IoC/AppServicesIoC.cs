@@ -6,6 +6,7 @@ using Agilis.Application.Services.Tarefas;
 using Agilis.Application.Services.Produtos;
 using Agilis.Application.Services.Clientes;
 using Agilis.Application.Services.Sprints;
+using Agilis.Application.Workers.Tarefas;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
@@ -18,6 +19,7 @@ namespace Agilis.Infra.CrossCutting.IoC
 
             //Tarefas
             services.AddScoped<TarefaCrudAppService>();
+            services.AddSingleton<ExcluirTagsNaoUsadasWorker>();
 
             //Produtos
             services.AddScoped<ProdutoCrudAppService>();
