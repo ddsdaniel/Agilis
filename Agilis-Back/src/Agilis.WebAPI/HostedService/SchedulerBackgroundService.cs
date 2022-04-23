@@ -12,17 +12,14 @@ namespace Agilis.WebAPI.HostedService
     public class SchedulerBackgroundService : BackgroundService
     {
         private readonly ILogger<SchedulerBackgroundService> _logger;
-        private readonly IServiceProvider _serviceProvider;
         private readonly ExcluirTagsNaoUsadasWorker _excluirTagsNaoUsadasWorker;
 
         public SchedulerBackgroundService(
             ILogger<SchedulerBackgroundService> logger,
-            IServiceProvider serviceProvider,
             ExcluirTagsNaoUsadasWorker excluirTagsNaoUsadasWorker
             )
         {
             _logger = logger;
-            _serviceProvider = serviceProvider;
             _excluirTagsNaoUsadasWorker = excluirTagsNaoUsadasWorker;
         }
 
