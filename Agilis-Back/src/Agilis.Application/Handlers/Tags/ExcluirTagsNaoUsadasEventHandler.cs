@@ -40,6 +40,8 @@ namespace Agilis.Application.Handlers.Tags
 
         private async Task ExcluirAsync()
         {
+            //await _unitOfWork.CommitAsync();
+
             //var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
             //var tagRepository = _unitOfWork.ObterRepository<Tag>();
 

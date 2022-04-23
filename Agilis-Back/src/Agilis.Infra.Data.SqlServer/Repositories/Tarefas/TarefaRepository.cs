@@ -25,17 +25,11 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
-
-            foreach (var tag in tarefa.Tags)
-            {
-                //_agilisDbContext.Tags.Attach(tag);
-                //_agilisDbContext.Entry(tag).State = EntityState.Unchanged;
-            }
         }
 
         public override Task AlterarAsync(Tarefa tarefa)
         {
-            IgnorarFKs(tarefa);
+            _agilisDbContext.Database.ExecuteSqlRaw($"Delete From TagTarefa Where TarefasId = '{tarefa.Id}'");
             return base.AlterarAsync(tarefa);
         }
 
