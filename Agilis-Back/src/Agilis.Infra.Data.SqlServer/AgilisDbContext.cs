@@ -19,6 +19,8 @@ namespace Agilis.Infra.Data.SqlServer
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Time> Times { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<CheckList> CheckLists { get; set; }
+        public DbSet<ItemCheckList> ItensCheckList { get; set; }
 
         public AgilisDbContext(DbContextOptions<AgilisDbContext> options)
             : base(options)
