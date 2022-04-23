@@ -28,7 +28,7 @@ namespace Agilis.WebAPI.HostedService
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            ExecutarDiariamente(12, 15, _excluirTagsNaoUsadasWorker, stoppingToken);
+            ExecutarDiariamente(0, 0, _excluirTagsNaoUsadasWorker, stoppingToken);
             return Task.CompletedTask;
         }
 
