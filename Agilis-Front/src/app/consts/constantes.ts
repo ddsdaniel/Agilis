@@ -3,4 +3,5 @@ export const constantes = {
   newGuidFormatado: '00000000-0000-0000-0000-000000000000',
   nomeDefault: 'Não identificado',
   corPadraoIcones: '#7C90C1',
+  tagDefaultColor: '#e0e0e0',
 };

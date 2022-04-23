@@ -2,9 +2,9 @@
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
-using System;
+using System.Collections.Generic;
 
-namespace Agilis.Core.Domain.Models.Entities
+namespace Agilis.Core.Domain.Models.Entities.Tarefas
 {
     public class Tarefa : Entidade
     {
@@ -16,6 +16,7 @@ namespace Agilis.Core.Domain.Models.Entities
         public Usuario Solucionador { get; private set; }
         public Hora HorasPrevistas { get; private set; }
         public Hora HorasRealizadas { get; private set; }
+        public IEnumerable<Tag> Tags { get; private set; }
 
         protected Tarefa() { }
 
@@ -27,7 +28,8 @@ namespace Agilis.Core.Domain.Models.Entities
             Usuario relator,
             Usuario solucionador,
             Hora horasPrevistas,
-            Hora horasRealizadas)
+            Hora horasRealizadas, 
+            IEnumerable<Tag> tags)
         {
             //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
             if (relator?.Id == solucionador?.Id)
@@ -41,12 +43,13 @@ namespace Agilis.Core.Domain.Models.Entities
             Solucionador = solucionador;
             HorasPrevistas = horasPrevistas;
             HorasRealizadas = horasRealizadas;
+            Tags = tags;
             Validar();
         }
 
         private void Validar()
         {
-            if (String.IsNullOrEmpty(Titulo))
+            if (string.IsNullOrEmpty(Titulo))
                 Criticar("Título inválido.");
 
             if (Descricao == null)
@@ -62,6 +65,8 @@ namespace Agilis.Core.Domain.Models.Entities
             ImportarCriticas(HorasPrevistas);
             ImportarCriticas(HorasRealizadas);
             ImportarCriticas(Relator);
+            ImportarCriticas(Solucionador);
+            ImportarCriticas(Tags);
         }
 
         public override string ToString() => Titulo;

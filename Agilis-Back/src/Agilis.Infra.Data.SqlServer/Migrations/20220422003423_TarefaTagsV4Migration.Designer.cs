@@ -4,6 +4,7 @@ using Agilis.Infra.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AgilisDbContext))]
-    partial class AgilisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220422003423_TarefaTagsV4Migration")]
+    partial class TarefaTagsV4Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,6 +232,21 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.ToTable("Tags", (string)null);
                 });
 
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.TagTarefa", b =>
+                {
+                    b.Property<Guid>("TarefaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TarefaId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagTarefas", (string)null);
+                });
+
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>
                 {
                     b.Property<Guid>("Id")
@@ -305,7 +322,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
 
                     b.HasIndex("TarefasId");
 
-                    b.ToTable("TagTarefa");
+                    b.ToTable("TagTarefas");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Epico", b =>
@@ -368,6 +385,48 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.Navigation("Email");
 
                     b.Navigation("Senha");
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", b =>
+                {
+                    b.OwnsOne("Agilis.Core.Domain.Models.ValueObjects.HtmlColor", "Cor", b1 =>
+                        {
+                            b1.Property<Guid>("TagId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Codigo")
+                                .HasMaxLength(7)
+                                .HasColumnType("nvarchar(7)")
+                                .HasColumnName("Cor");
+
+                            b1.HasKey("TagId");
+
+                            b1.ToTable("Tags");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TagId");
+                        });
+
+                    b.Navigation("Cor");
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.TagTarefa", b =>
+                {
+                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", "Tarefa")
+                        .WithMany()
+                        .HasForeignKey("TarefaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tag");
+
+                    b.Navigation("Tarefa");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>

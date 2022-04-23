@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
+using MediatR;
 
 namespace Agilis.Application.Services.Seguranca
 {
@@ -14,8 +15,8 @@ namespace Agilis.Application.Services.Seguranca
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsuarioCrudAppService(IUnitOfWork unitOfWork, IMapper mapper)
-            : base(mapper, unitOfWork.ObterRepository<Usuario>(), unitOfWork)
+        public UsuarioCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+            : base(mapper, unitOfWork.ObterRepository<Usuario>(), unitOfWork, mediator)
         {
             _unitOfWork = unitOfWork;
         }

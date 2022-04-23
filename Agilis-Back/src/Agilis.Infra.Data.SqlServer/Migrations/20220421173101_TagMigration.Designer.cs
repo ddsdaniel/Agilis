@@ -4,6 +4,7 @@ using Agilis.Infra.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AgilisDbContext))]
-    partial class AgilisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220421173101_TagMigration")]
+    partial class TagMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,7 +211,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.ToTable("Sprints", (string)null);
                 });
 
-            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", b =>
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tags.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,7 +232,7 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.ToTable("Tags", (string)null);
                 });
 
-            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefa", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -291,21 +293,6 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Times", (string)null);
-                });
-
-            modelBuilder.Entity("TagTarefa", b =>
-                {
-                    b.Property<Guid>("TagsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TarefasId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("TagsId", "TarefasId");
-
-                    b.HasIndex("TarefasId");
-
-                    b.ToTable("TagTarefa");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Epico", b =>
@@ -370,7 +357,30 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.Navigation("Senha");
                 });
 
-            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tags.Tag", b =>
+                {
+                    b.OwnsOne("Agilis.Core.Domain.Models.ValueObjects.HtmlColor", "Cor", b1 =>
+                        {
+                            b1.Property<Guid>("TagId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Codigo")
+                                .HasMaxLength(7)
+                                .HasColumnType("nvarchar(7)")
+                                .HasColumnName("Cor");
+
+                            b1.HasKey("TagId");
+
+                            b1.ToTable("Tags");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TagId");
+                        });
+
+                    b.Navigation("Cor");
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefa", b =>
                 {
                     b.HasOne("Agilis.Core.Domain.Models.Entities.Feature", "Feature")
                         .WithMany("Tarefas")
@@ -429,21 +439,6 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.Navigation("Relator");
 
                     b.Navigation("Solucionador");
-                });
-
-            modelBuilder.Entity("TagTarefa", b =>
-                {
-                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", null)
-                        .WithMany()
-                        .HasForeignKey("TarefasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Epico", b =>

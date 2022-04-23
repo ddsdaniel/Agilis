@@ -4,6 +4,7 @@ using Agilis.Infra.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agilis.Infra.Data.SqlServer.Migrations
 {
     [DbContext(typeof(AgilisDbContext))]
-    partial class AgilisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220422211112_RemovendoTagTarefa2Migration")]
+    partial class RemovendoTagTarefa2Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -368,6 +370,29 @@ namespace Agilis.Infra.Data.SqlServer.Migrations
                     b.Navigation("Email");
 
                     b.Navigation("Senha");
+                });
+
+            modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tag", b =>
+                {
+                    b.OwnsOne("Agilis.Core.Domain.Models.ValueObjects.HtmlColor", "Cor", b1 =>
+                        {
+                            b1.Property<Guid>("TagId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Codigo")
+                                .HasMaxLength(7)
+                                .HasColumnType("nvarchar(7)")
+                                .HasColumnName("Cor");
+
+                            b1.HasKey("TagId");
+
+                            b1.ToTable("Tags");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TagId");
+                        });
+
+                    b.Navigation("Cor");
                 });
 
             modelBuilder.Entity("Agilis.Core.Domain.Models.Entities.Tarefas.Tarefa", b =>

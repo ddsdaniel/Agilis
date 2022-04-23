@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Agilis.Core.Domain.Events;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+using MediatR;
 
 namespace Agilis.Application.Abstractions.Services
 {
@@ -15,20 +16,23 @@ namespace Agilis.Application.Abstractions.Services
         > : ConsultaAppService<TViewModelConsulta, TEntity>
         where TViewModelCadastro : class
         where TViewModelConsulta : class
-        where TEntity : Entidade        
+        where TEntity : Entidade
     {
         private readonly IMapper _mapper;
         private readonly IRepository<TEntity> _repository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
         protected CrudAppService(IMapper mapper,
                                  IRepository<TEntity> repository,
-                                 IUnitOfWork unitOfWork) 
+                                 IUnitOfWork unitOfWork,
+                                 IMediator mediator)
             : base(mapper, repository)
         {
             _mapper = mapper;
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         public virtual async Task<TViewModelConsulta> AdicionarAsync(TViewModelCadastro novaEntidadeViewModel)
@@ -44,10 +48,15 @@ namespace Agilis.Application.Abstractions.Services
             {
                 await _repository.AdicionarAsync(entidade);
 
-                var entidadeAdicionadaEvent = (EntidadeAdicionadaDomainEvent<TEntity>)Activator.
-                    CreateInstance(typeof(EntidadeAdicionadaDomainEvent<TEntity>), new object[] { entidade });
+                var entidadeAdicionadaEvent = new EntidadeAdicionadaDomainEvent<TEntity>(entidade);
+                await _mediator.Publish(entidadeAdicionadaEvent);
 
-                await _unitOfWork.CommitAsync();
+                ImportarCriticas(entidade);
+
+                if (Valido)
+                {
+                    await _unitOfWork.CommitAsync();
+                }
 
                 var viewModelConsulta = _mapper.Map<TViewModelConsulta>(entidade);
                 return viewModelConsulta;
@@ -72,8 +81,12 @@ namespace Agilis.Application.Abstractions.Services
 
                 await _repository.AlterarAsync(depois);
 
-                var entidadeAlteradaEvent = (EntidadeAlteradaDomainEvent<TEntity>)Activator.
-                    CreateInstance(typeof(EntidadeAlteradaDomainEvent<TEntity>), new object[] { antes, depois });
+                var entidadeAlteradaEvent = new EntidadeAlteradaDomainEvent<TEntity>(antes, depois);
+
+                await _mediator.Publish(entidadeAlteradaEvent);
+
+                ImportarCriticas(antes);
+                ImportarCriticas(depois);
 
                 if (Valido)
                 {
@@ -94,8 +107,11 @@ namespace Agilis.Application.Abstractions.Services
             {
                 await _repository.ExcluirAsync(id);
 
-                var entidadeExcluidaEvent = (EntidadeExcluidaDomainEvent<TEntity>)Activator.
-                CreateInstance(typeof(EntidadeExcluidaDomainEvent<TEntity>), new object[] { entidade });
+                var entidadeExcluidaEvent = new EntidadeExcluidaDomainEvent<TEntity>(entidade);
+
+                await _mediator.Publish(entidadeExcluidaEvent);
+
+                ImportarCriticas(entidade);
 
                 if (Valido)
                 {

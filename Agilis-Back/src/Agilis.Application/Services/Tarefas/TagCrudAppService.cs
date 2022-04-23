@@ -7,11 +7,11 @@ using MediatR;
 
 namespace Agilis.Application.Services.Tarefas
 {
-    public class TarefaCrudAppService
-        : CrudAppService<TarefaViewModel, TarefaViewModel, Tarefa>
+    public class TagCrudAppService
+        : CrudAppService<TagViewModel, TagViewModel, Tag>
     {
-        public TarefaCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
-            : base(mapper, unitOfWork.ObterRepository<Tarefa>(), unitOfWork, mediator)
+        public TagCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+            : base(mapper, unitOfWork.ObterRepository<Tag>(), unitOfWork, mediator)
         {
         }
     }

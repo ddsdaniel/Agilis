@@ -17,7 +17,7 @@ namespace Agilis.Infra.CrossCutting.IoC
             services.AddScoped<TimeCrudAppService>();
 
             //Tarefas
-            services.AddScoped<TarefaCrudAppService>();
+            services.AddScoped<TarefaCrudAppService>();            
 
             //Produtos
             services.AddScoped<ProdutoCrudAppService>();
@@ -26,6 +26,9 @@ namespace Agilis.Infra.CrossCutting.IoC
 
             //Sprints
             services.AddScoped<SprintCrudAppService>();
+
+            //Tags
+            services.AddScoped<TagCrudAppService>();
 
             //Clientes
             services.AddScoped<ClienteCrudAppService>();

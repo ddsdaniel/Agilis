@@ -1,4 +1,4 @@
-﻿using Agilis.Core.Domain.Models.Entities;
+﻿using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Infra.Data.SqlServer.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +16,21 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
 
         public override Task AdicionarAsync(Tarefa tarefa)
         {
+            IgnorarFKs(tarefa);
+            return base.AdicionarAsync(tarefa);
+        }
+
+        private void IgnorarFKs(Tarefa tarefa)
+        {
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
-            return base.AdicionarAsync(tarefa);
+        }
+
+        public override Task AlterarAsync(Tarefa tarefa)
+        {
+            _agilisDbContext.Database.ExecuteSqlRaw($"Delete From TagTarefa Where TarefasId = '{tarefa.Id}'");
+            return base.AlterarAsync(tarefa);
         }
 
         public override IQueryable<Tarefa> Consultar()
@@ -27,7 +38,8 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
             return base.Consultar()
                 .Include(t => t.Feature).ThenInclude(f => f.Epico).ThenInclude(e => e.Produto)
                 .Include(t => t.Relator)
-                .Include(t => t.Solucionador);
+                .Include(t => t.Solucionador)
+                .Include(t => t.Tags);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Agilis.Application.ViewModels.Tarefas;
-using Agilis.Core.Domain.Models.Entities;
+using Agilis.Core.Domain.Models.Entities.Tarefas;
 using AutoMapper;
 
 namespace Agilis.Application.AutoMapper
@@ -9,6 +9,9 @@ namespace Agilis.Application.AutoMapper
         public TarefaProfile()
         {
             CreateMap<Tarefa, TarefaViewModel>()
+                .ReverseMap();
+
+            CreateMap<Tag, TagViewModel>()
                 .ReverseMap();
         }
     }
