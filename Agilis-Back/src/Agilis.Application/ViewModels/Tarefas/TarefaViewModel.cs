@@ -18,5 +18,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public string HorasPrevistas { get; set; }
         public string HorasRealizadas { get; set; }
         public IEnumerable<TagViewModel> Tags { get; set; }
+        public IEnumerable<CheckListViewModel> CheckLists { get; set; }
     }
 }
