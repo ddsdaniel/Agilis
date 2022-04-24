@@ -13,6 +13,13 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<Tag, TagViewModel>()
                 .ReverseMap();
+
+            CreateMap<CheckList, CheckListViewModel>()
+                .ReverseMap();
+
+            CreateMap<ItemCheckList, ItemCheckListViewModel>()
+                .ReverseMap();
+
         }
     }
 }

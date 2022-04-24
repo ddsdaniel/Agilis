@@ -9,6 +9,7 @@ import { ColorPickerComponent } from '../components/widgets/color-picker/color-p
 import { DialogoSimNaoComponent } from '../components/widgets/dialogo-sim-nao/dialogo-sim-nao.component';
 import { MonthNavigationComponent } from '../components/widgets/month-navigation/month-navigation.component';
 import { ProgressBarComponent } from '../components/widgets/progress-bar/progress-bar.component';
+import { SpanEditavelComponent } from '../components/widgets/span-editavel/span-editavel.component';
 import { YearNavigationComponent } from '../components/widgets/year-navigation/year-navigation.component';
 import { AngularMaterialModule } from './angular-material.module';
 
@@ -23,6 +24,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     YearNavigationComponent,
     ProgressBarComponent,
     DialogoSimNaoComponent,
+    SpanEditavelComponent,
   ],
   imports: [
     FormsModule,
@@ -45,6 +47,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     YearNavigationComponent,
     ProgressBarComponent,
     DialogoSimNaoComponent,
+    SpanEditavelComponent,
   ]
 })
 export class GlobalModule { }

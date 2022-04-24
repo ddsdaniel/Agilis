@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!editando">
+  <div>
+    <span>{{ value }}</span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <mat-icon class="preto-discreto" title="Editar" (click)="editar()">edit</mat-icon>
+    <mat-icon class="preto-discreto" title="Excluir" (click)="excluir()">delete_outline</mat-icon>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="editando">
+  <mat-form-field class="full-width-margin">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [(ngModel)]="value" [placeholder]="label" name="input" type="text" required appSelectAllText>
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <mat-icon class="preto-discreto" title="Aplicar" (click)="aplicar()">done</mat-icon>
+    <mat-icon class="preto-discreto" title="Cancelar" (click)="cancelar()">clear</mat-icon>
+  </div>
+</div>

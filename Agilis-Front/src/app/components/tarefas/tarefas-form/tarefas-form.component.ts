@@ -11,17 +11,21 @@ import { constantes } from 'src/app/consts/constantes';
 import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
+import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Tag } from 'src/app/models/tags/tag';
+import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { TagApiService } from 'src/app/services/apis/tag-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
+import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
 
 import { CrudFormComponent } from '../../crud/crud-form-component';
+import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-tarefas-form',
@@ -43,6 +47,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
     private tagApiService: TagApiService,
+    private bottomSheetService: BottomSheetService,
     router: Router,
     tarefaApiService: TarefaApiService,
     snackBar: MatSnackBar,
@@ -155,6 +160,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     this.entidade = {
       id: constantes.newGuid,
       titulo: '',
+      checkLists: [],
       descricao: '',
       horasPrevistas: '00:00',
       horasRealizadas: '00:00',
@@ -190,6 +196,41 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
 
   obterLabelTipo(tipo: TipoTarefa): string {
     return TipoTarefaLabel.get(tipo);
+  }
+
+  adicionar() {
+
+    const itens: BottomSheetItem[] = [
+      {
+        codigo: 'check-list',
+        titulo: 'Check-List',
+        subTitulo: 'Adicionar um check-list',
+        icone: 'check_box'
+      },
+    ];
+
+    this.bottomSheetService.abrir(itens, BottomSheetComponent)
+      .subscribe(codigo => {
+        if (codigo) {
+          switch (codigo) {
+            case 'check-list':
+              this.adicionarCheckList();
+              break;
+          }
+        }
+      });
+  }
+
+  adicionarCheckList() {
+    const checkList: CheckList = {
+      id: constantes.newGuid,
+      nome: 'Novo check-list',
+      itens: [],
+      ordem: 0,
+      tarefa: this.entidade
+    };
+
+    this.entidade.checkLists.push(checkList);
   }
 
 }
