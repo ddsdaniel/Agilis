@@ -42,6 +42,23 @@
         type="text" required appSelectAllText>
     </mat-form-field>
 
+    <!-- Relator -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Relator</mat-label>
+      <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Solucionador -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Solucionador</mat-label>
+      <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <!-- Produto -->
     <mat-form-field class="mt-1 um-terco">
@@ -64,30 +81,11 @@
         disabled="disabled">
     </mat-form-field>
 
-
     <!-- Tipo -->
     <mat-form-field class="mt-1 full-width-margin">
       <mat-label>Tipo</mat-label>
       <mat-select [(ngModel)]="entidade.tipo">
         <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Relator -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Relator</mat-label>
-      <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Solucionador -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Solucionador</mat-label>
-      <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -100,30 +98,52 @@
     </mat-form-field>
 
     <!-- Check-Lists -->
-    <div *ngFor="let checkList of entidade.checkLists" class="mt-4">
+    <!-- <div *ngFor="let checkList of entidade.checkLists" class="mt-4">
 
       <div>
-
         <app-span-editavel label="Check-List" [value]="checkList.nome" class="mt-4 full-width-margin">
         </app-span-editavel>
-
-        <!-- ícone -->
-        <!-- <span>{{ checkList.nome }}</span>
-        <button mat-raised-button class="pull-right">Excluir</button>
-        <button mat-raised-button class="pull-right mr-1">Editar</button> -->
       </div>
 
-      <div class="mt-2">
-        <div *ngFor="let item of checkList.itens">
-          <mat-checkbox>{{ item.nome }}</mat-checkbox>
-          <button mat-raised-button>Excluir</button>
-        </div>
+      <div class="mt-2"> -->
 
-        <button mat-raised-button class="mt-1">Adicionar um item</button>
+    <!-- Itens -->
+    <!-- <div *ngFor="let item of checkList.itens">
+          <app-span-editavel checkBox="true" [value]="item.nome">
+          </app-span-editavel>
+        </div> -->
+
+    <!-- Adicionar item -->
+    <!-- <button mat-raised-button class="mt-2" (click)="adicionarItem(checkList)">Adicionar um item</button>
       </div>
 
+    </div> -->
+
+    <div *ngIf="!editandoCheckList">
+
+      <mat-selection-list *ngFor="let checkList of entidade.checkLists">
+        <p>
+          {{checkList.nome}}
+        </p>
+
+        <mat-list-option *ngFor="let item of checkList.itens" [checkboxPosition]="before" [(ngModel)]="item.concluido">
+          {{item.nome}}
+        </mat-list-option>
+
+        <!-- Adicionar item -->
+        <button mat-raised-button class="mt-2" (click)="adicionarItem(checkList)">Adicionar um item</button>
+        <button mat-raised-button class="mt-2" (click)="editarCheckList(checkList)">Editar</button>
+
+      </mat-selection-list>
     </div>
 
+    <mat-form-field class="mt-1 full-width-margin" *ngIf="editandoCheckList">
+      <mat-label>textoEdicaoCheckList</mat-label>
+      <textarea matInput [(ngModel)]="textoEdicaoCheckList" placeholder="textoEdicaoCheckList" name="textoEdicaoCheckList" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+    <div class="mb-5"></div>
     <!-- Adicionar -->
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()">
       <mat-icon>add</mat-icon>

@@ -9,6 +9,8 @@ export class SpanEditavelComponent implements OnInit {
 
   @Input() value = '';
   @Input() label = '';
+  @Input() checkBox = false;
+  @Input() marcado = false;
   @Output() removeEvent = new EventEmitter();
 
   private backupValue = '';
