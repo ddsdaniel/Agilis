@@ -1,0 +1,24 @@
+<div *ngIf="!editando">
+
+  <mat-selection-list #list (selectionChange)="selectionChange($event)">
+    <p>
+      {{checkList.nome}}
+    </p>
+
+    <mat-list-option *ngFor="let item of checkList.itens" [checkboxPosition]="before" [value]="item">
+      {{item.nome}}
+    </mat-list-option>
+
+    <!-- Adicionar item -->
+    <button mat-raised-button class="mt-2" (click)="adicionarItem()">Adicionar um item</button>
+    <button mat-raised-button class="mt-2" (click)="editar()">Editar</button>
+
+  </mat-selection-list>
+
+</div>
+
+<mat-form-field class="mt-1 full-width-margin" *ngIf="editando">
+  <mat-label>Edição</mat-label>
+  <textarea matInput [(ngModel)]="textoEdicao" placeholder="Edição" name="textoEdicao" type="text" appSelectAllText
+    rows="10"></textarea>
+</mat-form-field>

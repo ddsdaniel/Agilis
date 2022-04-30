@@ -239,7 +239,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
 
   adicionarItem(checkList: CheckList) {
     const item: ItemCheckList = {
-      id: constantes.newGuid,
+      id: (checkList.itens.length + 1).toString(),// constantes.newGuid,
       nome: 'Novo item',
       checkList,
       concluido: false,

@@ -29,8 +29,6 @@ import { HttpsRequestInterceptorService } from './interceptors/https-request-int
 import { GlobalModule } from './modules/global.module';
 import { AppLoadService } from './services/app-load.service';
 
-
-
 export function InitApp(appLoadService: AppLoadService) {
   return () => appLoadService.initializeApp();
 }

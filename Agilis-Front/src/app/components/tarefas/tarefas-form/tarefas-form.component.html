@@ -98,52 +98,11 @@
     </mat-form-field>
 
     <!-- Check-Lists -->
-    <!-- <div *ngFor="let checkList of entidade.checkLists" class="mt-4">
+    <app-check-list-editavel *ngFor="let checkList of entidade.checkLists" [checkList]="checkList"></app-check-list-editavel>
 
-      <div>
-        <app-span-editavel label="Check-List" [value]="checkList.nome" class="mt-4 full-width-margin">
-        </app-span-editavel>
-      </div>
-
-      <div class="mt-2"> -->
-
-    <!-- Itens -->
-    <!-- <div *ngFor="let item of checkList.itens">
-          <app-span-editavel checkBox="true" [value]="item.nome">
-          </app-span-editavel>
-        </div> -->
-
-    <!-- Adicionar item -->
-    <!-- <button mat-raised-button class="mt-2" (click)="adicionarItem(checkList)">Adicionar um item</button>
-      </div>
-
-    </div> -->
-
-    <div *ngIf="!editandoCheckList">
-
-      <mat-selection-list *ngFor="let checkList of entidade.checkLists">
-        <p>
-          {{checkList.nome}}
-        </p>
-
-        <mat-list-option *ngFor="let item of checkList.itens" [checkboxPosition]="before" [(ngModel)]="item.concluido">
-          {{item.nome}}
-        </mat-list-option>
-
-        <!-- Adicionar item -->
-        <button mat-raised-button class="mt-2" (click)="adicionarItem(checkList)">Adicionar um item</button>
-        <button mat-raised-button class="mt-2" (click)="editarCheckList(checkList)">Editar</button>
-
-      </mat-selection-list>
-    </div>
-
-    <mat-form-field class="mt-1 full-width-margin" *ngIf="editandoCheckList">
-      <mat-label>textoEdicaoCheckList</mat-label>
-      <textarea matInput [(ngModel)]="textoEdicaoCheckList" placeholder="textoEdicaoCheckList" name="textoEdicaoCheckList" type="text"
-        appSelectAllText rows="5"></textarea>
-    </mat-form-field>
-
+    <!-- Margem inferior -->
     <div class="mb-5"></div>
+
     <!-- Adicionar -->
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()">
       <mat-icon>add</mat-icon>
