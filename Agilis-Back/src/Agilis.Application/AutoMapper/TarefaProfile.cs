@@ -19,7 +19,6 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<ItemCheckList, ItemCheckListViewModel>()
                 .ReverseMap();
-
         }
     }
 }

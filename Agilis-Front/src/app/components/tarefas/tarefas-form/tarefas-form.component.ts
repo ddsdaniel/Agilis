@@ -15,7 +15,6 @@ import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Tag } from 'src/app/models/tags/tag';
 import { CheckList } from 'src/app/models/tarefas/check-list';
-import { ItemCheckList } from 'src/app/models/tarefas/item-check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { TagApiService } from 'src/app/services/apis/tag-api.service';
@@ -43,9 +42,6 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   tagSeparatorKeysCodes: number[] = [ENTER, COMMA];
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-
-  editandoCheckList = false;
-  textoEdicaoCheckList = '';
 
   constructor(
     private featureApiService: FeatureApiService,
@@ -226,36 +222,20 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   }
 
   adicionarCheckList() {
+
+    const ordem = this.entidade.checkLists && this.entidade.checkLists.length > 0
+      ? Math.max.apply(null, this.entidade.checkLists.map(x => x.ordem)) + 1
+      : 1;
+
     const checkList: CheckList = {
       id: constantes.newGuid,
       nome: 'Novo check-list',
       itens: [],
-      ordem: 0,
-      tarefa: this.entidade
+      ordem,
+      tarefa: null
     };
 
     this.entidade.checkLists.push(checkList);
   }
 
-  adicionarItem(checkList: CheckList) {
-    const item: ItemCheckList = {
-      id: (checkList.itens.length + 1).toString(),// constantes.newGuid,
-      nome: 'Novo item',
-      checkList,
-      concluido: false,
-      horasPrevistas: '00:00',
-      ordem: 0
-    };
-    checkList.itens.push(item);
-  }
-
-  editarCheckList(checkList: CheckList) {
-    let texto = checkList.nome + '\n';
-
-    checkList.itens.forEach(item => texto += '- ' + item.nome + '\n');
-
-    this.textoEdicaoCheckList = texto;
-
-    this.editandoCheckList = true;
-  }
 }

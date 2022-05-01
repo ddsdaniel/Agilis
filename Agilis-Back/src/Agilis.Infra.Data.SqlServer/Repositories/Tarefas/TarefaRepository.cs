@@ -30,6 +30,7 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
         public override Task AlterarAsync(Tarefa tarefa)
         {
             _agilisDbContext.Database.ExecuteSqlRaw($"Delete From TagTarefa Where TarefasId = '{tarefa.Id}'");
+            _agilisDbContext.Database.ExecuteSqlRaw($"Delete From ItensCheckList Where CheckListId In(Select Id From CheckLists Where TarefaId = '{tarefa.Id}')");
             return base.AlterarAsync(tarefa);
         }
 

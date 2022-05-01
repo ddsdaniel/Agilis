@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { constantes } from 'src/app/consts/constantes';
 import { CheckList } from 'src/app/models/tarefas/check-list';
 import { ItemCheckList } from 'src/app/models/tarefas/item-check-list';
 
@@ -20,13 +21,17 @@ export class CheckListEditavelComponent implements OnInit {
   }
 
   adicionarItem() {
+    const ordem = this.checkList.itens && this.checkList.itens.length > 0
+      ? Math.max.apply(null, this.checkList.itens.map(x => x.ordem)) + 1
+      : 1;
+
     const item: ItemCheckList = {
-      id: (this.checkList.itens.length + 1).toString(),// constantes.newGuid,
+      id: constantes.newGuid,
       nome: 'Novo item',
-      checkList: this.checkList,
+      checkList: null,
       concluido: false,
       horasPrevistas: '00:00',
-      ordem: 0
+      ordem
     };
     this.checkList.itens.push(item);
   }
@@ -70,12 +75,12 @@ export class CheckListEditavelComponent implements OnInit {
       if (linha) {
 
         const item: ItemCheckList = {
-          id: (this.checkList.itens.length + 1).toString(),// constantes.newGuid,
+          id: constantes.newGuid,
           nome: linha,
-          checkList: this.checkList,
+          checkList: null,
           concluido,
           horasPrevistas: '00:00',
-          ordem: 0
+          ordem: i
         };
 
         this.checkList.itens.push(item);
