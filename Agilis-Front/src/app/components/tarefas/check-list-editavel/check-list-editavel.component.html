@@ -1,6 +1,6 @@
 <div *ngIf="!editando">
 
-  <mat-selection-list #list (selectionChange)="selectionChange($event)">
+  <mat-selection-list #list (selectionChange)="selectionChange($event)" [(ngModel)]="selectedOptions">
     <p>
       {{checkList.nome}}
     </p>
@@ -17,8 +17,15 @@
 
 </div>
 
-<mat-form-field class="mt-1 full-width-margin" *ngIf="editando">
-  <mat-label>Edição</mat-label>
-  <textarea matInput [(ngModel)]="textoEdicao" placeholder="Edição" name="textoEdicao" type="text" appSelectAllText
-    rows="10"></textarea>
-</mat-form-field>
+<div *ngIf="editando">
+
+  <mat-form-field class="mt-1 full-width-margin">
+    <mat-label>Edição</mat-label>
+    <textarea matInput [(ngModel)]="textoEdicao" placeholder="Edição" name="textoEdicao" type="text" appSelectAllText
+      rows="10"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button class="mt-2" (click)="salvar()">Salvar</button>
+  <button mat-raised-button class="mt-2" (click)="cancelar()">Cancelar</button>
+
+</div>
