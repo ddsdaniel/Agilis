@@ -24,7 +24,9 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
         {
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
-            _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
+
+            if (tarefa.Solucionador != null)
+                _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
         }
 
         public override Task AlterarAsync(Tarefa tarefa)

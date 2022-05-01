@@ -12,6 +12,7 @@ import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
 import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Feature } from 'src/app/models/produtos/feature';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Tag } from 'src/app/models/tags/tag';
 import { CheckList } from 'src/app/models/tarefas/check-list';
@@ -40,6 +41,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   tagsFiltradas: Tag[];
   todasAsTags: Tag[] = [];
   tagSeparatorKeysCodes: number[] = [ENTER, COMMA];
+  featureQueryString: Feature;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -144,10 +146,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
             this.featureApiService.obterUm(params.featureId)
               .subscribe({
                 next: feature => {
-
-                  if (super.operacao === OperacaoFormCrud.adicionando) {
-                    this.entidade.feature = feature;
-                  }
+                  this.featureQueryString = feature;
                   this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
                 }
               });
@@ -157,6 +156,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   }
 
   sugerirNovo(): void {
+
     this.entidade = {
       id: constantes.newGuid,
       titulo: '',
@@ -165,31 +165,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       horasPrevistas: '00:00',
       horasRealizadas: '00:00',
       tags: [],
-      feature: {
-        id: constantes.newGuid,
-        nome: '',
-        tarefas: [],
-        epico: {
-          id: constantes.newGuid,
-          nome: '',
-          features: [],
-          produto: {
-            id: constantes.newGuid,
-            nome: '',
-            descricao: '',
-            urlRepositorio: '',
-            epicos: []
-          }
-        }
-      },
-      relator: {
-        id: constantes.newGuid,
-        nome: '',
-        sobrenome: '',
-        ativo: true,
-        email: '',
-        regra: RegraUsuario.Usuario,
-      },
+      feature: this.featureQueryString,
+      relator: null,
       tipo: TipoTarefa.Novidade,
     };
   }
