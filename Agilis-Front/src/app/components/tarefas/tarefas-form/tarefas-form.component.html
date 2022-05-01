@@ -10,23 +10,7 @@
     </mat-form-field>
 
     <!-- Tags -->
-    <mat-form-field class="full-width-margin">
-      <mat-label>Tags</mat-label>
-      <mat-chip-list #tagList aria-label="Seleção de tags">
-        <mat-chip *ngFor="let tag of entidade.tags" selectable="true" removable="true" (removed)="removerTag(tag)">
-          {{tag.nome}}
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Adicionar tag" #tagInput [(ngModel)]="tagValue" [matAutocomplete]="auto"
-          [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="tagSeparatorKeysCodes"
-          (matChipInputTokenEnd)="adicionarTag($event)" (ngModelChange)="filtrarTagControl()">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selecionouTag($event)">
-        <mat-option *ngFor="let tag of tagsFiltradas" [value]="tag.nome">
-          {{tag.nome}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <app-tags [tarefa]="entidade" #tags></app-tags>
 
     <!-- Horas Previstas -->
     <mat-form-field class="mt-1 half-width-margin">
@@ -98,7 +82,8 @@
     </mat-form-field>
 
     <!-- Check-Lists -->
-    <app-check-list-editavel *ngFor="let checkList of entidade.checkLists" [checkList]="checkList"></app-check-list-editavel>
+    <app-check-list-editavel *ngFor="let checkList of entidade.checkLists" [checkList]="checkList">
+    </app-check-list-editavel>
 
     <!-- Margem inferior -->
     <div class="mb-5"></div>
