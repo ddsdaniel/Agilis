@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { Tag } from 'src/app/models/tags/tag';
 import { CrudApiBaseService } from './crud-api-base.service';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

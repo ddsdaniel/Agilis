@@ -1,0 +1,31 @@
+<div *ngIf="!editando">
+
+  <div>
+    <p (click)="editar()" title="Editar"><strong>{{checkList.nome}}</strong></p>
+
+    <div *ngFor="let item of checkList.itens" class="mb-2">
+      <mat-checkbox color="accent" [(ngModel)]="item.concluido"></mat-checkbox>
+      <span class="ml-2" (click)="editar()" title="Editar">{{item.nome}}</span>
+    </div>
+
+    <!-- Adicionar item -->
+    <button mat-raised-button class="mt-2" (click)="adicionarItem()">Adicionar um item</button>
+
+  </div>
+
+</div>
+
+<div *ngIf="editando">
+
+  <mat-form-field class="mt-1 full-width-margin">
+    <mat-label>Edição</mat-label>
+    <textarea cdkTextareaAutosize matInput [(ngModel)]="textoEdicao" placeholder="Edição" name="textoEdicao" type="text"
+      appSelectAllText></textarea>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="accent" class="mr-2" (click)="salvar()">Salvar</button>
+    <button mat-raised-button (click)="cancelar()">Cancelar</button>
+  </div>
+
+</div>

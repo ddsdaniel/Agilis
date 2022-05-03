@@ -24,12 +24,15 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
         {
             _agilisDbContext.Entry(tarefa.Feature).State = EntityState.Unchanged;
             _agilisDbContext.Entry(tarefa.Relator).State = EntityState.Unchanged;
-            _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
+
+            if (tarefa.Solucionador != null)
+                _agilisDbContext.Entry(tarefa.Solucionador).State = EntityState.Unchanged;
         }
 
         public override Task AlterarAsync(Tarefa tarefa)
         {
             _agilisDbContext.Database.ExecuteSqlRaw($"Delete From TagTarefa Where TarefasId = '{tarefa.Id}'");
+            _agilisDbContext.Database.ExecuteSqlRaw($"Delete From ItensCheckList Where CheckListId In(Select Id From CheckLists Where TarefaId = '{tarefa.Id}')");
             return base.AlterarAsync(tarefa);
         }
 
@@ -39,7 +42,8 @@ namespace Agilis.Infra.Data.SqlServer.Repositories.Tarefas
                 .Include(t => t.Feature).ThenInclude(f => f.Epico).ThenInclude(e => e.Produto)
                 .Include(t => t.Relator)
                 .Include(t => t.Solucionador)
-                .Include(t => t.Tags);
+                .Include(t => t.Tags)
+                .Include(t => t.CheckLists).ThenInclude(cl => cl.Itens);
         }
     }
 }

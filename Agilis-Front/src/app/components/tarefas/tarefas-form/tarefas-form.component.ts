@@ -1,27 +1,26 @@
-﻿import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+﻿import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
-import { OperacaoFormCrud } from 'src/app/enums/operacao-form-crud.enum';
-import { RegraUsuario } from 'src/app/enums/regra-usuario.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
+import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Feature } from 'src/app/models/produtos/feature';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
-import { Tag } from 'src/app/models/tags/tag';
+import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
-import { TagApiService } from 'src/app/services/apis/tag-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
+import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
 
 import { CrudFormComponent } from '../../crud/crud-form-component';
+import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
+import { TagsComponent } from '../tags/tags.component';
 
 @Component({
   selector: 'app-tarefas-form',
@@ -30,19 +29,15 @@ import { CrudFormComponent } from '../../crud/crud-form-component';
 })
 export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements OnInit {
 
+  @ViewChild('tags', {static: true}) tagsViewChild: TagsComponent;
   usuarios: UsuarioConsulta[];
   tipos = Object.keys(TipoTarefa);
-  tagValue = '';
-  tagsFiltradas: Tag[];
-  todasAsTags: Tag[] = [];
-  tagSeparatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  featureQueryString: Feature;
 
   constructor(
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
-    private tagApiService: TagApiService,
+    private bottomSheetService: BottomSheetService,
     router: Router,
     tarefaApiService: TarefaApiService,
     snackBar: MatSnackBar,
@@ -58,69 +53,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     return this.obterUsuarios()
       .pipe(
         switchMap(_ => this.identificarFeature()),
-        switchMap(_ => this.obterTags())
-      );
-  }
-
-  adicionarTag(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our tag
-    if ((value || '').trim()) {
-
-      const tag: Tag = {
-        id: constantes.newGuid,
-        nome: value.trim(),
-        tarefas: [],
-      };
-
-      this.tagApiService.adicionar(tag)
-        .subscribe({
-          next: id => {
-            tag.id = id;
-            this.entidade.tags.push(tag);
-          }
-        });
-
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.tagValue = '';
-  }
-
-  selecionouTag(event: MatAutocompleteSelectedEvent): void {
-    const tag: Tag = {
-      id: constantes.newGuid,
-      nome: event.option.viewValue,
-      tarefas: [],
-    };
-    this.entidade.tags.push(tag);
-    this.tagInput.nativeElement.value = '';
-    this.tagValue = '';
-  }
-
-  removerTag(tag: Tag): void {
-    const index = this.entidade.tags.findIndex(t => t.id === tag.id);
-
-    if (index >= 0) {
-      this.entidade.tags.splice(index, 1);
-    }
-  }
-
-  filtrarTagControl() {
-    const filterValue = this.tagValue.toLowerCase();
-    this.tagsFiltradas = this.todasAsTags.filter(tag => tag.nome.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  obterTags(): Observable<any> {
-    return this.tagApiService.obterTodos()
-      .pipe(
-        tap(tags => this.todasAsTags = tags)
+        switchMap(_ => this.tagsViewChild.obterTags())
       );
   }
 
@@ -139,10 +72,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
             this.featureApiService.obterUm(params.featureId)
               .subscribe({
                 next: feature => {
-
-                  if (super.operacao === OperacaoFormCrud.adicionando) {
-                    this.entidade.feature = feature;
-                  }
+                  this.featureQueryString = feature;
                   this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
                 }
               });
@@ -152,44 +82,63 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   }
 
   sugerirNovo(): void {
+
     this.entidade = {
       id: constantes.newGuid,
       titulo: '',
+      checkLists: [],
       descricao: '',
       horasPrevistas: '00:00',
       horasRealizadas: '00:00',
       tags: [],
-      feature: {
-        id: constantes.newGuid,
-        nome: '',
-        tarefas: [],
-        epico: {
-          id: constantes.newGuid,
-          nome: '',
-          features: [],
-          produto: {
-            id: constantes.newGuid,
-            nome: '',
-            descricao: '',
-            urlRepositorio: '',
-            epicos: []
-          }
-        }
-      },
-      relator: {
-        id: constantes.newGuid,
-        nome: '',
-        sobrenome: '',
-        ativo: true,
-        email: '',
-        regra: RegraUsuario.Usuario,
-      },
+      feature: this.featureQueryString,
+      relator: null,
       tipo: TipoTarefa.Novidade,
     };
   }
 
   obterLabelTipo(tipo: TipoTarefa): string {
     return TipoTarefaLabel.get(tipo);
+  }
+
+  adicionar() {
+
+    const itens: BottomSheetItem[] = [
+      {
+        codigo: 'check-list',
+        titulo: 'Check-List',
+        subTitulo: 'Adicionar um check-list',
+        icone: 'check_box'
+      },
+    ];
+
+    this.bottomSheetService.abrir(itens, BottomSheetComponent)
+      .subscribe(codigo => {
+        if (codigo) {
+          switch (codigo) {
+            case 'check-list':
+              this.adicionarCheckList();
+              break;
+          }
+        }
+      });
+  }
+
+  adicionarCheckList() {
+
+    const ordem = this.entidade.checkLists && this.entidade.checkLists.length > 0
+      ? Math.max.apply(null, this.entidade.checkLists.map(x => x.ordem)) + 1
+      : 1;
+
+    const checkList: CheckList = {
+      id: constantes.newGuid,
+      nome: 'Novo check-list',
+      itens: [],
+      ordem,
+      tarefa: null
+    };
+
+    this.entidade.checkLists.push(checkList);
   }
 
 }

@@ -3,6 +3,7 @@ import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
 import { UsuarioConsulta } from '../seguranca/usuario-consulta';
 import { Tag } from '../tags/tag';
+import { CheckList } from './check-list';
 
 export interface Tarefa extends Entidade {
   titulo: string;
@@ -14,4 +15,5 @@ export interface Tarefa extends Entidade {
   horasPrevistas: string;
   horasRealizadas: string;
   tags: Tag[];
+  checkLists: CheckList[];
 }
