@@ -1,6 +1,4 @@
-﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Models.Entities.Tarefas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Agilis.Application.ViewModels.Tarefas

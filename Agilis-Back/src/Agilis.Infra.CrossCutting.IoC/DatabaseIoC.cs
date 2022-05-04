@@ -16,8 +16,6 @@ namespace Agilis.Infra.CrossCutting.IoC
 {
     public static class DatabaseIoC
     {
-        private const string CHAVE_SECRETA = "03DA94BC-B03A-490C-9094-2D7B51D012CC";
-
         public static IServiceCollection AddDatabaseIoC(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped(serviceProvider => ObterUnitOfWork(services));
@@ -39,16 +37,9 @@ namespace Agilis.Infra.CrossCutting.IoC
 
         private static string ObterConnectionString(IServiceCollection services)
         {
-            //TODO: corrigir connection string
-            var criptografia = services.Get<ICriptografiaSimetrica>();
+            //TODO: proteger connection string
             var appSettings = services.Get<IAppSettings>();
-
-            var servidor = appSettings.BancoDados.Servidor;
-            var banco = appSettings.BancoDados.Banco;
-            var usuario = appSettings.BancoDados.Usuario;
-            var senha = criptografia.Decifrar(appSettings.BancoDados.Senha, CHAVE_SECRETA);
-
-            return $"Server={servidor};Database={banco};User Id={usuario};Password={senha};";
+            return appSettings.BancoDados.ConnectionString;
         }
 
         private static void ConfigurarSerializations(IServiceCollection services)
@@ -67,7 +58,7 @@ namespace Agilis.Infra.CrossCutting.IoC
             var criptografiaSimetrica = serviceProvider.GetService<ICriptografiaSimetrica>();
             var appSettings = serviceProvider.GetService<IAppSettings>();
 
-            BsonSerializer.RegisterSerializationProvider(new DomainProvider(criptografiaSimetrica, appSettings.Segredo));
+            BsonSerializer.RegisterSerializationProvider(new DomainProvider(criptografiaSimetrica));
 
             BsonClassMap.RegisterClassMap<EventContainer>(cm =>
             {

@@ -2,9 +2,6 @@
 {
     public class BancoDadosSettings
     {
-        public string Servidor { get; set; }
-        public string Usuario { get; set; }
-        public string Banco { get; set; }
-        public string Senha { get; set; }
+        public string ConnectionString { get; set; }      
     }
 }
