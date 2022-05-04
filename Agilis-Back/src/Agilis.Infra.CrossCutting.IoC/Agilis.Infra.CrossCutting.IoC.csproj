@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
-    <ProjectReference Include="..\Agilis.Infra.Data.SqlServer\Agilis.Infra.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Data.Mongo\Agilis.Infra.Data.Mongo.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Email\Agilis.Infra.Emails.csproj" />
   </ItemGroup>
 

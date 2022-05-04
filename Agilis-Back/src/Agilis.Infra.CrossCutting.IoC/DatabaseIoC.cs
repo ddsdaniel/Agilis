@@ -2,11 +2,15 @@
 using Agilis.Core.Domain.Abstractions.Services;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Infra.CrossCutting.IoC.Extensions;
-using Agilis.Infra.Data.SqlServer;
-using Agilis.Infra.Data.SqlServer.UnitsOfWork;
-using Microsoft.EntityFrameworkCore;
+using Agilis.Infra.Data.Mongo.Providers;
+using Agilis.Infra.Data.Mongo.UnitsOfWork;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
+using System;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
@@ -16,21 +20,26 @@ namespace Agilis.Infra.CrossCutting.IoC
 
         public static IServiceCollection AddDatabaseIoC(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWorkSqlServer>();
+            services.AddScoped(serviceProvider => ObterUnitOfWork(services));
 
-            var connectionString = ObterConnectionString(services);
-            services.AddDbContext<AgilisDbContext>(
-                optionsBuilder => optionsBuilder.UseSqlServer(connectionString, options => options.EnableRetryOnFailure())
-#if DEBUG
-                              .EnableSensitiveDataLogging()
-#endif
-            );
+            ConfigurarSerializations(services);
 
             return services;
         }
 
+        private static IUnitOfWork ObterUnitOfWork(IServiceCollection services)
+        {
+            var connectionString = ObterConnectionString(services);
+
+            var catalogoDatabase = new MongoClient(connectionString)
+               .GetDatabase("agilis");
+
+            return new MongoUnitOfWork(catalogoDatabase);
+        }
+
         private static string ObterConnectionString(IServiceCollection services)
         {
+            //TODO: corrigir connection string
             var criptografia = services.Get<ICriptografiaSimetrica>();
             var appSettings = services.Get<IAppSettings>();
 
@@ -40,6 +49,31 @@ namespace Agilis.Infra.CrossCutting.IoC
             var senha = criptografia.Decifrar(appSettings.BancoDados.Senha, CHAVE_SECRETA);
 
             return $"Server={servidor};Database={banco};User Id={usuario};Password={senha};";
+        }
+
+        private static void ConfigurarSerializations(IServiceCollection services)
+        {
+            // Torna a representação dos Guid do Mongo para ser igual do C#
+            //BsonSerializer.RegisterSerializer(typeof(Guid), new GuidSerializer(GuidRepresentation.Standard));
+
+            // Evita problema com o time zone ao gravar e recuperar dados
+            BsonSerializer.RegisterSerializer(typeof(DateTime), new DateTimeSerializer(DateTimeKind.Local));
+
+            // Regra para serialização de decimais
+            BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var criptografiaSimetrica = serviceProvider.GetService<ICriptografiaSimetrica>();
+            var appSettings = serviceProvider.GetService<IAppSettings>();
+
+            BsonSerializer.RegisterSerializationProvider(new DomainProvider(criptografiaSimetrica, appSettings.Segredo));
+
+            BsonClassMap.RegisterClassMap<EventContainer>(cm =>
+            {
+                cm.AutoMap();
+                cm.UnmapMember(m => m.Eventos);
+            });
         }
     }
 }
