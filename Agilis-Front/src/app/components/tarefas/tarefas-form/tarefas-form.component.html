@@ -77,8 +77,10 @@
     </mat-form-field>
 
     <!-- Check-Lists -->
-    <app-check-list-editavel *ngFor="let checkList of entidade.checkLists" [checkList]="checkList">
-    </app-check-list-editavel>
+    <div *ngFor="let checkList of entidade.checkLists" class="mb-4">
+      <app-check-list-editavel [checkList]="checkList">
+      </app-check-list-editavel>
+    </div>
 
     <!-- Margem inferior -->
     <div class="mb-5"></div>
