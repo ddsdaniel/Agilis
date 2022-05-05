@@ -1,5 +1,6 @@
 ﻿using Agilis.Application.ViewModels.Produtos;
 using Agilis.Core.Domain.Models.Entities;
+using Agilis.Core.Domain.Models.ValueObjects.Produtos;
 using AutoMapper;
 
 namespace Agilis.Application.AutoMapper
@@ -12,9 +13,6 @@ namespace Agilis.Application.AutoMapper
                 .ReverseMap();
 
             CreateMap<Feature, FeatureViewModel>()
-                .ReverseMap();
-
-            CreateMap<Epico, EpicoViewModel>()
                 .ReverseMap();
         }
     }

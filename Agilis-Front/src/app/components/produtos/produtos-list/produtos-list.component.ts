@@ -44,12 +44,6 @@ export class ProdutosListComponent extends CrudListComponent<Produto> {
 
     const itens: BottomSheetItem[] = [
       {
-        codigo: 'backlog',
-        titulo: 'Backlog',
-        subTitulo: 'Abre o product backlog',
-        icone: 'task'
-      },
-      {
         codigo: 'editar',
         titulo: 'Editar',
         subTitulo: 'Abre uma nova tela para edição',
@@ -75,9 +69,6 @@ export class ProdutosListComponent extends CrudListComponent<Produto> {
               if (!this.testarProdutoFixo(this.lista[index])) {
                 super.excluir(index);
               }
-              break;
-            case 'backlog':
-              this.router.navigateByUrl(`produtos/${id}/backlog`);
               break;
           }
         }

@@ -1,6 +1,7 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Agilis.Core.Domain.Abstractions.Repositories
@@ -12,6 +13,6 @@ namespace Agilis.Core.Domain.Abstractions.Repositories
         public Task AdicionarAsync(TEntity entity);
         public Task AlterarAsync(TEntity entity);
         public Task ExcluirAsync(Guid id);
-        Task ExcluirAsync(Func<TEntity, bool> predicate);
+        Task ExcluirAsync(Expression<Func<TEntity, bool>> expression);
     }
 }

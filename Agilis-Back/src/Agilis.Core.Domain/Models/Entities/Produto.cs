@@ -1,7 +1,5 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Agilis.Core.Domain.Models.Entities
 {
@@ -9,17 +7,15 @@ namespace Agilis.Core.Domain.Models.Entities
     {
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public string UrlRepositorio { get; private set; }                
-        public IEnumerable<Epico> Epicos { get; private set; }
+        public string UrlRepositorio { get; private set; }
 
         protected Produto() { }
 
-        public Produto(string nome, string descricao, string urlRepositorio, IEnumerable<Epico> epicos)
+        public Produto(string nome, string descricao, string urlRepositorio)
         {
             Nome = nome;
             Descricao = descricao;
             UrlRepositorio = urlRepositorio;
-            Epicos = epicos;
             Validar();
         }
         private void Validar()

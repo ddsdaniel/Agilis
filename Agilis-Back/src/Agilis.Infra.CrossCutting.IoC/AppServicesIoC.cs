@@ -6,6 +6,7 @@ using Agilis.Application.Services.Tarefas;
 using Agilis.Application.Services.Produtos;
 using Agilis.Application.Services.Clientes;
 using Agilis.Application.Services.Sprints;
+using Agilis.Application.Services.Features;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
@@ -22,7 +23,6 @@ namespace Agilis.Infra.CrossCutting.IoC
             //Produtos
             services.AddScoped<ProdutoCrudAppService>();
             services.AddScoped<FeatureCrudAppService>();
-            services.AddScoped<EpicoCrudAppService>();
 
             //Sprints
             services.AddScoped<SprintCrudAppService>();

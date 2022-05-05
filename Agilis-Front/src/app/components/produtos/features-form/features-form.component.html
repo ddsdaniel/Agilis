@@ -8,6 +8,15 @@
       <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
     </mat-form-field>
 
+    <!-- Produto -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Produto</mat-label>
+      <mat-select [(ngModel)]="entidade.produto" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <!-- Ícones da action-bar -->

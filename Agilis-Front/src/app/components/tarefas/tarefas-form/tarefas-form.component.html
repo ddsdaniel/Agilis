@@ -1,6 +1,6 @@
 ﻿<app-action-bar [titulo]="'Cadastro da Tarefa'">
 
-  <div menu class="form-produtoiner">
+  <div menu class="form-container">
 
     <!-- Título -->
     <mat-form-field class="mt-4 full-width-margin">
@@ -9,46 +9,25 @@
         appSelectAllText>
     </mat-form-field>
 
-    <!-- Descrição -->
-    <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
-        appSelectAllText rows="5"></textarea>
+    <!-- Tags -->
+    <app-tags [tarefa]="entidade" #tags></app-tags>
+
+    <!-- Horas Previstas -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Horas Previstas</mat-label>
+      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
+        type="text" required appSelectAllText>
     </mat-form-field>
 
-    <!-- Produto -->
-    <mat-form-field class="mt-4 um-terco">
-      <mat-label>Produto</mat-label>
-      <input matInput [value]="entidade.feature.epico.produto.nome" placeholder="Produto" name="produto" type="text"
-        disabled="disabled">
-    </mat-form-field>
-
-    <!-- Épico -->
-    <mat-form-field class="mt-4 um-terco">
-      <mat-label>Épico</mat-label>
-      <input matInput [(ngModel)]="entidade.feature.epico.nome" placeholder="Épico" name="epico" type="text"
-        disabled="disabled">
-    </mat-form-field>
-
-    <!-- Feature -->
-    <mat-form-field class="mt-4 um-terco">
-      <mat-label>Feature</mat-label>
-      <input matInput [(ngModel)]="entidade.feature.nome" placeholder="Feature" name="feature" type="text"
-        disabled="disabled">
-    </mat-form-field>
-
-
-    <!-- Tipo -->
-    <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="entidade.tipo">
-        <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
-        </mat-option>
-      </mat-select>
+    <!-- Horas Realizadas -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Horas Realizadas</mat-label>
+      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
+        type="text" required appSelectAllText>
     </mat-form-field>
 
     <!-- Relator -->
-    <mat-form-field class="mt-4 full-width-margin">
+    <mat-form-field class="mt-1 half-width-margin">
       <mat-label>Relator</mat-label>
       <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
         <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
@@ -57,7 +36,7 @@
     </mat-form-field>
 
     <!-- Solucionador -->
-    <mat-form-field class="mt-4 full-width-margin">
+    <mat-form-field class="mt-1 half-width-margin">
       <mat-label>Solucionador</mat-label>
       <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
         <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
@@ -65,38 +44,51 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Horas Previstas -->
-    <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Horas Previstas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
-        type="text" required appSelectAllText>
+    <!-- Produto -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Produto</mat-label>
+      <input matInput [value]="entidade?.feature?.produto?.nome" placeholder="Produto" name="produto" type="text"
+        disabled="disabled">
     </mat-form-field>
 
-    <!-- Horas Realizadas -->
-    <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Horas Realizadas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
-        type="text" required appSelectAllText>
-    </mat-form-field>
-
-    <!-- Tags -->
-    <mat-form-field class="full-width-margin">
-      <mat-label>Tags</mat-label>
-      <mat-chip-list #tagList aria-label="Seleção de tags">
-        <mat-chip *ngFor="let tag of entidade.tags" selectable="true" removable="true" (removed)="removerTag(tag)">
-          {{tag.nome}}
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Adicionar tag" #tagInput [(ngModel)]="tagValue" [matAutocomplete]="auto"
-          [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="tagSeparatorKeysCodes"
-          (matChipInputTokenEnd)="adicionarTag($event)" (ngModelChange)="filtrarTagControl()">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selecionouTag($event)">
-        <mat-option *ngFor="let tag of tagsFiltradas" [value]="tag.nome">
-          {{tag.nome}}
+    <!-- Feature -->
+    <mat-form-field class="mt-1 half-width-margin">
+      <mat-label>Feature</mat-label>
+      <mat-select [(ngModel)]="entidade.feature" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let feature of features" [value]="feature">{{feature.nome}}
         </mat-option>
-      </mat-autocomplete>
+      </mat-select>
     </mat-form-field>
+
+    <!-- Tipo -->
+    <mat-form-field class="mt-1 full-width-margin">
+      <mat-label>Tipo</mat-label>
+      <mat-select [(ngModel)]="entidade.tipo">
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Descrição -->
+    <mat-form-field class="mt-1 full-width-margin">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+    <!-- Check-Lists -->
+    <div *ngFor="let checkList of entidade.checkLists" class="mb-4">
+      <app-check-list-editavel [checkList]="checkList">
+      </app-check-list-editavel>
+    </div>
+
+    <!-- Margem inferior -->
+    <div class="mb-5"></div>
+
+    <!-- Adicionar -->
+    <button mat-fab color="accent" title="Adicionar" (click)="adicionar()">
+      <mat-icon>add</mat-icon>
+    </button>
 
   </div>
 

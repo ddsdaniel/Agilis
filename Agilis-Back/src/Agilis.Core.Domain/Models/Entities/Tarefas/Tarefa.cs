@@ -2,6 +2,8 @@
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
+using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
+using Agilis.Core.Domain.Models.ValueObjects.Produtos;
 using System.Collections.Generic;
 
 namespace Agilis.Core.Domain.Models.Entities.Tarefas
@@ -17,6 +19,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public Hora HorasPrevistas { get; private set; }
         public Hora HorasRealizadas { get; private set; }
         public IEnumerable<Tag> Tags { get; private set; }
+        public IEnumerable<CheckList> CheckLists { get; private set; }
 
         protected Tarefa() { }
 
@@ -28,8 +31,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Usuario relator,
             Usuario solucionador,
             Hora horasPrevistas,
-            Hora horasRealizadas, 
-            IEnumerable<Tag> tags)
+            Hora horasRealizadas,
+            IEnumerable<Tag> tags, 
+            IEnumerable<CheckList> checkLists)
         {
             //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
             if (relator?.Id == solucionador?.Id)
@@ -44,6 +48,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             HorasPrevistas = horasPrevistas;
             HorasRealizadas = horasRealizadas;
             Tags = tags;
+            CheckLists = checkLists;
             Validar();
         }
 
@@ -67,6 +72,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(Relator);
             ImportarCriticas(Solucionador);
             ImportarCriticas(Tags);
+            ImportarCriticas(CheckLists);
         }
 
         public override string ToString() => Titulo;

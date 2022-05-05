@@ -1,12 +1,16 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
 import { Feature } from 'src/app/models/produtos/feature';
-import { EpicoApiService } from 'src/app/services/apis/produtos/epico-api.service';
+import { Produto } from 'src/app/models/produtos/produto';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
+import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
+
 import { CrudFormComponent } from '../../crud/crud-form-component';
 
 
@@ -17,13 +21,15 @@ import { CrudFormComponent } from '../../crud/crud-form-component';
 })
 export class FeaturesFormComponent extends CrudFormComponent<Feature> implements OnInit {
 
+  produtos: Produto[] = [];
+
 
   constructor(
     router: Router,
     featureApiService: FeatureApiService,
     snackBar: MatSnackBar,
     tituloService: TituloService,
-    private epicoApiService: EpicoApiService,
+    private produtoApiService: ProdutoApiService,
     protected activatedRoute: ActivatedRoute,
     public comparadorService: ComparadorService,
   ) {
@@ -31,39 +37,24 @@ export class FeaturesFormComponent extends CrudFormComponent<Feature> implements
     tituloService.definir('Cadastro da Feature');
   }
 
+  carregarDependencias(): Observable<void> {
+    return this.obterProdutos();
+  }
+
+  public obterProdutos(): Observable<any> {
+    return this.produtoApiService.obterTodos()
+      .pipe(
+        tap(produtos => this.produtos = produtos)
+      );
+  }
+
   sugerirNovo(): void {
 
     this.entidade = {
       id: constantes.newGuid,
       nome: '',
-      epico: {
-        id: constantes.newGuid,
-        features: [],
-        nome: '',
-        produto: {
-          id: constantes.newGuid,
-          descricao: '',
-          epicos: [],
-          nome: '',
-          urlRepositorio: '',
-        }
-      },
-      tarefas: [],
+      produto: null,
     };
-
-    this.activatedRoute.queryParams.subscribe({
-      next: params => {
-
-        if (params.produtoId && params.epicoId) {
-
-          this.rotaPesquisa = `/produtos/${params.produtoId}/backlog`;
-
-          this.epicoApiService.obterUm(params.epicoId)
-            .subscribe({
-              next: epico => this.entidade.epico = epico
-            });
-        }
-      }
-    });
   }
 }
+

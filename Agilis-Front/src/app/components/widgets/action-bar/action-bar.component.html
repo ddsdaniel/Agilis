@@ -17,9 +17,19 @@
     <!-- Menu -->
     <mat-nav-list>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/tarefas']);">
+        <mat-icon mat-list-icon>task</mat-icon>
+        <div mat-line>Tarefas</div>
+      </mat-list-item>
+
       <mat-list-item (click)="menu.close();router.navigate(['/produtos']);">
         <mat-icon mat-list-icon>devices</mat-icon>
         <div mat-line>Produtos</div>
+      </mat-list-item>
+
+      <mat-list-item (click)="menu.close();router.navigate(['/produtos/features']);">
+        <mat-icon mat-list-icon>wysiwyg</mat-icon>
+        <div mat-line>Features</div>
       </mat-list-item>
 
       <mat-list-item (click)="menu.close();router.navigate(['/sprints']);">

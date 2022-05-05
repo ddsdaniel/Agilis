@@ -1,6 +1,4 @@
-﻿using Agilis.Application.ViewModels.Tarefas;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Agilis.Application.ViewModels.Produtos
 {
@@ -8,7 +6,6 @@ namespace Agilis.Application.ViewModels.Produtos
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        public EpicoViewModel Epico { get; set; }
-        public IEnumerable<TarefaViewModel> Tarefas { get; set; }
+        public ProdutoViewModel Produto { get; set; }
     }
 }

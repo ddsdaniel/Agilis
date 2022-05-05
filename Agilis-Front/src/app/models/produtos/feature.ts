@@ -1,9 +1,7 @@
 import { Entidade } from '../entidade';
-import { Tarefa } from '../tarefas/tarefa';
-import { Epico } from './epico';
+import { Produto } from './produto';
 
-export interface Feature extends Entidade {
+export interface Feature extends Entidade  {
   nome: string;
-  epico: Epico;
-  tarefas: Tarefa[];
+  produto: Produto;
 }

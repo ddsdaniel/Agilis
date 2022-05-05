@@ -1,38 +1,34 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Models.Entities.Tarefas;
-using System;
-using System.Collections.Generic;
+using Agilis.Core.Domain.Models.Entities;
 
-namespace Agilis.Core.Domain.Models.Entities
+namespace Agilis.Core.Domain.Models.ValueObjects.Produtos
 {
     public class Feature : Entidade
     {
         public string Nome { get; private set; }
-        public Epico Epico { get; private set; }
-        public IEnumerable<Tarefa> Tarefas { get; private set; }
+        public Produto Produto { get; private set; }
 
         protected Feature() { }
 
-        public Feature(string nome, Epico epico, IEnumerable<Tarefa> tarefas)
+        public Feature(string nome, Produto produto)
         {
             Nome = nome;
-            Epico = epico;
-            Tarefas = tarefas;
+            Produto = produto;
             Validar();
         }
 
 
         private void Validar()
         {
-            if (String.IsNullOrEmpty(Nome))
+            if (string.IsNullOrEmpty(Nome))
                 Criticar("Nome inválido.");
 
-            if (Epico == null)
-                Criticar("Épico não deve ser nulo.");
+            if (Produto == null)
+                Criticar("Produto não deve ser nulo");
 
-            ImportarCriticas(Epico);
+            ImportarCriticas(Produto);
         }
 
-        public override string ToString() => Nome;
+        public override string ToString() => $"{Nome} - {Produto.Nome}";
     }
 }
