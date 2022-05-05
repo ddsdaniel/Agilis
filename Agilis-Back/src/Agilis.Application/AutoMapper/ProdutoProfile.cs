@@ -14,9 +14,6 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<Feature, FeatureViewModel>()
                 .ReverseMap();
-
-            CreateMap<Epico, EpicoViewModel>()
-                .ReverseMap();
         }
     }
 }

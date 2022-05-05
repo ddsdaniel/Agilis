@@ -24,27 +24,5 @@ namespace Agilis.Application.Services.Produtos
                 .OrderBy(p => p.Nome)
                 .ToArray();
         }
-
-        public override async Task<ProdutoViewModel> ConsultarPorIdAsync(Guid id)
-        {
-            var produtoViewModel = await base.ConsultarPorIdAsync(id);
-            Ordenar(produtoViewModel);
-            return produtoViewModel;
-        }
-
-        private static void Ordenar(ProdutoViewModel produtoViewModel)
-        {
-            produtoViewModel.Epicos = produtoViewModel.Epicos.OrderBy(e => e.Nome);
-
-            foreach (var epico in produtoViewModel.Epicos)
-            {
-                epico.Features = epico.Features.OrderBy(e => e.Nome);
-
-                foreach (var feature in epico.Features)
-                {
-                    //TODO: feature.Tarefas = feature.Tarefas.OrderBy(t => t.Titulo);
-                }
-            }
-        }
     }
 }

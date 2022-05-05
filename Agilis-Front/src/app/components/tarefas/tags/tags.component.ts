@@ -49,7 +49,6 @@ export class TagsComponent implements OnInit {
       const tag: Tag = {
         id: constantes.newGuid,
         nome: value.trim(),
-        tarefas: [],
       };
 
       this.tagApiService.adicionar(tag)
@@ -76,7 +75,6 @@ export class TagsComponent implements OnInit {
     const tag: Tag = {
       id: constantes.newGuid,
       nome: event.option.viewValue,
-      tarefas: [],
     };
     this.tarefa.tags.push(tag);
     this.tagInput.nativeElement.value = '';
