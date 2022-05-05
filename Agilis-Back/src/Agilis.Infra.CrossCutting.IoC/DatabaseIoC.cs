@@ -4,6 +4,7 @@ using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Infra.CrossCutting.IoC.Extensions;
 using Agilis.Infra.Data.Mongo.Providers;
 using Agilis.Infra.Data.Mongo.UnitsOfWork;
+using DDS.Validacoes.Abstractions.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -64,6 +65,12 @@ namespace Agilis.Infra.CrossCutting.IoC
             {
                 cm.AutoMap();
                 cm.UnmapMember(m => m.Eventos);
+            });
+
+            BsonClassMap.RegisterClassMap<Validavel>(cm =>
+            {
+                cm.AutoMap();
+                cm.UnmapMember(m => m.Criticas);
             });
         }
     }
