@@ -42,7 +42,7 @@ namespace Agilis.Application.Services.Produtos
 
                 foreach (var feature in epico.Features)
                 {
-                    feature.Tarefas = feature.Tarefas.OrderBy(t => t.Titulo);
+                    //TODO: feature.Tarefas = feature.Tarefas.OrderBy(t => t.Titulo);
                 }
             }
         }

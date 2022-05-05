@@ -2,6 +2,8 @@
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
+using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
+using Agilis.Core.Domain.Models.ValueObjects.Produtos;
 using System.Collections.Generic;
 
 namespace Agilis.Core.Domain.Models.Entities.Tarefas

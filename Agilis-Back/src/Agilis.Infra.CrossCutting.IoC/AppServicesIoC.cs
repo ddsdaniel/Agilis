@@ -21,8 +21,6 @@ namespace Agilis.Infra.CrossCutting.IoC
 
             //Produtos
             services.AddScoped<ProdutoCrudAppService>();
-            services.AddScoped<FeatureCrudAppService>();
-            services.AddScoped<EpicoCrudAppService>();
 
             //Sprints
             services.AddScoped<SprintCrudAppService>();

@@ -1,5 +1,6 @@
 ﻿using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
+using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
 using AutoMapper;
 
 namespace Agilis.Application.AutoMapper

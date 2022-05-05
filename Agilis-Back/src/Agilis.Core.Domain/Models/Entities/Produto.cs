@@ -1,4 +1,5 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
+using Agilis.Core.Domain.Models.ValueObjects.Produtos;
 using System;
 using System.Collections.Generic;
 
