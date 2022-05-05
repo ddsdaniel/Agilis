@@ -45,16 +45,16 @@
     </mat-form-field>
 
     <!-- Produto -->
-    <mat-form-field class="mt-1 um-terco">
+    <mat-form-field class="mt-1 half-width-margin">
       <mat-label>Produto</mat-label>
-      <input matInput [value]="entidade.feature.produto.nome" placeholder="Produto" name="produto" type="text"
+      <input matInput [value]="entidade?.feature?.produto?.nome" placeholder="Produto" name="produto" type="text"
         disabled="disabled">
     </mat-form-field>
 
     <!-- Feature -->
-    <mat-form-field class="mt-1 um-terco">
+    <mat-form-field class="mt-1 half-width-margin">
       <mat-label>Feature</mat-label>
-      <input matInput [(ngModel)]="entidade.feature.nome" placeholder="Feature" name="feature" type="text"
+      <input matInput [value]="entidade?.feature?.nome" placeholder="Feature" name="feature" type="text"
         disabled="disabled">
     </mat-form-field>
 
