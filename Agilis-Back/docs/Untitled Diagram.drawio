@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-25T23:38:55.067Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="532AdPaPqGaMiI8whIPr" version="17.4.6" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-05-05T23:34:55.399Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="PWqIf7zE2UfQPbFW_RAE" version="18.0.0" type="github" pages="2">
   <diagram id="evVnv_gE7u53RW09xMep" name="Page-1">
     <mxGraphModel dx="2591" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -464,7 +464,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="ordem" id="82nU5xO7w6w9tUfkNJ1W">
-    <mxGraphModel dx="3357" dy="1172" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="3043" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="7eMH6kivMONYyGoxkQ6P-0" />
         <mxCell id="7eMH6kivMONYyGoxkQ6P-1" parent="7eMH6kivMONYyGoxkQ6P-0" />
@@ -761,7 +761,7 @@
         <mxCell id="7eMH6kivMONYyGoxkQ6P-99" value="Comentarios" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
           <mxGeometry y="266" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="7eMH6kivMONYyGoxkQ6P-100" value="CheckLists" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
+        <mxCell id="7eMH6kivMONYyGoxkQ6P-100" value="CheckLists" style="text;strokeColor=#82b366;fillColor=#d5e8d4;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
           <mxGeometry y="296" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7eMH6kivMONYyGoxkQ6P-101" value="Tags" style="text;strokeColor=#82b366;fillColor=#d5e8d4;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
@@ -812,7 +812,7 @@
         <mxCell id="RkbLTWdtXAAyLOWaYyT7-0" value="Sprint" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
           <mxGeometry y="776" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Md4OHp04LGmNH8GFH0vB-0" value="Valor" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="7eMH6kivMONYyGoxkQ6P-89">
+        <mxCell id="Md4OHp04LGmNH8GFH0vB-0" value="Valor" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" parent="7eMH6kivMONYyGoxkQ6P-89" vertex="1">
           <mxGeometry y="806" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7eMH6kivMONYyGoxkQ6P-117" value="Cliente" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;" parent="7eMH6kivMONYyGoxkQ6P-1" vertex="1">
