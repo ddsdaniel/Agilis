@@ -1,34 +1,32 @@
-﻿import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
-import { Produto } from 'src/app/models/produtos/produto';
-import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
+import { Feature } from 'src/app/models/produtos/feature';
+import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
-
 import { CrudListComponent } from '../../crud/crud-list-component';
 import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
 
-
 @Component({
-  selector: 'app-produtos-list',
-  templateUrl: './produtos-list.component.html',
-  styleUrls: ['./produtos-list.component.scss']
+  selector: 'app-features-list',
+  templateUrl: './features-list.component.html',
+  styleUrls: ['./features-list.component.scss']
 })
-export class ProdutosListComponent extends CrudListComponent<Produto> {
+export class FeaturesListComponent extends CrudListComponent<Feature> {
 
   constructor(
-    produtoApiService: ProdutoApiService,
+    featureApiService: FeatureApiService,
     public snackBar: MatSnackBar,
     router: Router,
     private bottomSheetService: BottomSheetService,
     tituloService: TituloService,
   ) {
-    super(produtoApiService, snackBar, router, 'produtos');
+    super(featureApiService, snackBar, router, 'produtos/features');
 
-    tituloService.definir('Produtos');
+    tituloService.definir('Features');
   }
 
   onPesquisar(criterio: string) {
@@ -52,7 +50,7 @@ export class ProdutosListComponent extends CrudListComponent<Produto> {
       {
         codigo: 'excluir',
         titulo: 'Excluir',
-        subTitulo: 'Exclui o produto',
+        subTitulo: 'Exclui o feature',
         icone: 'clear',
         cor: '#FF0000'
       }
@@ -66,7 +64,7 @@ export class ProdutosListComponent extends CrudListComponent<Produto> {
               super.editar(id);
               break;
             case 'excluir':
-              if (!this.testarProdutoFixo(this.lista[index])) {
+              if (!this.testarFeatureFixo(this.lista[index])) {
                 super.excluir(index);
               }
               break;
@@ -75,8 +73,8 @@ export class ProdutosListComponent extends CrudListComponent<Produto> {
       });
   }
 
-  testarProdutoFixo(produto: Produto): boolean {
-    if (produto.nome === constantes.nomeDefault) {
+  testarFeatureFixo(feature: Feature): boolean {
+    if (feature.nome === constantes.nomeDefault) {
       this.snackBar.open('Este registro não pode ser alterado ou excluído.');
       return true;
     }

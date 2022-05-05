@@ -29,7 +29,7 @@ import { TagsComponent } from '../tags/tags.component';
 })
 export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements OnInit {
 
-  @ViewChild('tags', {static: true}) tagsViewChild: TagsComponent;
+  @ViewChild('tags', { static: true }) tagsViewChild: TagsComponent;
   usuarios: UsuarioConsulta[];
   tipos = Object.keys(TipoTarefa);
   featureQueryString: Feature;
@@ -73,7 +73,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
               .subscribe({
                 next: feature => {
                   this.featureQueryString = feature;
-                  this.rotaPesquisa = `/produtos/${feature.epico.produto.id}/backlog`;
+                  // TODO this.rotaPesquisa = `/produtos/${feature.produto.id}/backlog`;
                 }
               });
           }

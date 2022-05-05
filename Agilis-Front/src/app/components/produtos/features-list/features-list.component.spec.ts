@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EpicosFormComponent } from './epicos-form.component';
+import { FeaturesListComponent } from './features-list.component';
 
-describe('EpicosFormComponent', () => {
-  let component: EpicosFormComponent;
-  let fixture: ComponentFixture<EpicosFormComponent>;
+describe('FeaturesListComponent', () => {
+  let component: FeaturesListComponent;
+  let fixture: ComponentFixture<FeaturesListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EpicosFormComponent ]
+      declarations: [ FeaturesListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EpicosFormComponent);
+    fixture = TestBed.createComponent(FeaturesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -34,7 +34,6 @@ export class ProdutosFormComponent extends CrudFormComponent<Produto> implements
       nome: '',
       descricao: '',
       urlRepositorio: '',
-      epicos: [],
     };
   }
 
