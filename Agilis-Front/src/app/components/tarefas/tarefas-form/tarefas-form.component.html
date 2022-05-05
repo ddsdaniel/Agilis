@@ -54,8 +54,10 @@
     <!-- Feature -->
     <mat-form-field class="mt-1 half-width-margin">
       <mat-label>Feature</mat-label>
-      <input matInput [value]="entidade?.feature?.nome" placeholder="Feature" name="feature" type="text"
-        disabled="disabled">
+      <mat-select [(ngModel)]="entidade.feature" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let feature of features" [value]="feature">{{feature.nome}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <!-- Tipo -->

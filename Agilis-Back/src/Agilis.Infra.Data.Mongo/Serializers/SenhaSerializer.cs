@@ -28,9 +28,14 @@ namespace Agilis.Infra.Data.Mongo.Serializers
 
         public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Senha senha)
         {
-            var senhaCrifrada = _criptografiaSimetrica.Cifrar(senha.Conteudo, _segredo);
-            if (_criptografiaSimetrica.Valido)
-                context.Writer.WriteString(senhaCrifrada);
+            if (senha == null)
+                context.Writer.WriteString("");
+            else
+            {
+                var senhaCrifrada = _criptografiaSimetrica.Cifrar(senha.Conteudo, _segredo);
+                if (_criptografiaSimetrica.Valido)
+                    context.Writer.WriteString(senhaCrifrada);
+            }
         }
 
     }

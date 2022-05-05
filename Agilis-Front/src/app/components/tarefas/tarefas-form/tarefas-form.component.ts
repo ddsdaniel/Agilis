@@ -32,7 +32,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   @ViewChild('tags', { static: true }) tagsViewChild: TagsComponent;
   usuarios: UsuarioConsulta[];
   tipos = Object.keys(TipoTarefa);
-  featureQueryString: Feature;
+  features: Feature[] = [];
 
   constructor(
     private featureApiService: FeatureApiService,
@@ -52,33 +52,23 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   carregarDependencias(): Observable<void> {
     return this.obterUsuarios()
       .pipe(
-        switchMap(_ => this.identificarFeature()),
+        switchMap(_ => this.obterFeatures()),
         switchMap(_ => this.tagsViewChild.obterTags())
       );
   }
 
-  obterUsuarios(): Observable<any> {
+  private obterUsuarios(): Observable<any> {
     return this.usuarioApiService.obterTodos()
       .pipe(
         tap(usuarios => this.usuarios = usuarios)
       );
   }
 
-  private identificarFeature(): Observable<any> {
-    return this.activatedRoute.queryParams
+  private obterFeatures(): Observable<any> {
+    return this.featureApiService.obterTodos()
       .pipe(
-        tap(params => {
-          if (params.featureId) {
-            this.featureApiService.obterUm(params.featureId)
-              .subscribe({
-                next: feature => {
-                  this.featureQueryString = feature;
-                  // TODO this.rotaPesquisa = `/produtos/${feature.produto.id}/backlog`;
-                }
-              });
-          }
-        }
-        ));
+        tap(features => this.features = features)
+      );
   }
 
   sugerirNovo(): void {
@@ -91,7 +81,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       horasPrevistas: '00:00',
       horasRealizadas: '00:00',
       tags: [],
-      feature: this.featureQueryString,
+      feature: null,
       relator: null,
       tipo: TipoTarefa.Novidade,
     };
