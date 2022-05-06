@@ -18,7 +18,7 @@ namespace Agilis.Application.ViewModels.Tarefas
         public UsuarioConsultaViewModel Solucionador { get; set; }
         public string HorasPrevistas { get; set; }
         public string HorasRealizadas { get; set; }
-        public IEnumerable<TagViewModel> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
         public IEnumerable<CheckListViewModel> CheckLists { get; set; }
         public ClienteViewModel Cliente { get; set; }
     }

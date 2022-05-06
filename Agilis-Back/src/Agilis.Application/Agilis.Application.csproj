@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Agilis.Infra.Seguranca\Agilis.Infra.Seguranca.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Workers\Tarefas\" />
+  </ItemGroup>
+
 </Project>

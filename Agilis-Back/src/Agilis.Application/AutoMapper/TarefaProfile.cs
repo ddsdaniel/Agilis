@@ -1,5 +1,6 @@
 ﻿using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
+using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
 using AutoMapper;
 
@@ -10,9 +11,6 @@ namespace Agilis.Application.AutoMapper
         public TarefaProfile()
         {
             CreateMap<Tarefa, TarefaViewModel>()
-                .ReverseMap();
-
-            CreateMap<Tag, TagViewModel>()
                 .ReverseMap();
 
             CreateMap<CheckList, CheckListViewModel>()

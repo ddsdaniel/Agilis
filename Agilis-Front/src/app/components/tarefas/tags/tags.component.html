@@ -2,7 +2,7 @@
   <mat-label>Tags</mat-label>
   <mat-chip-list #tagList aria-label="Seleção de tags">
     <mat-chip *ngFor="let tag of tarefa.tags" selectable="true" removable="true" (removed)="remover(tag)">
-      {{tag.nome}}
+      {{tag}}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
     <input placeholder="Adicionar tag" #tagInput [(ngModel)]="value" [matAutocomplete]="auto"
@@ -10,8 +10,8 @@
       (matChipInputTokenEnd)="adicionar($event)" (ngModelChange)="filtrar()">
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selecionou($event)">
-    <mat-option *ngFor="let tag of filtradas" [value]="tag.nome">
-      {{tag.nome}}
+    <mat-option *ngFor="let tag of filtradas" [value]="tag">
+      {{tag}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
