@@ -1,4 +1,5 @@
 ﻿import { TipoTarefa } from '../../enums/tipo-tarefa.enum';
+import { Cliente } from '../cliente';
 import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
 import { UsuarioConsulta } from '../seguranca/usuario-consulta';
@@ -16,4 +17,5 @@ export interface Tarefa extends Entidade {
   horasRealizadas: string;
   tags: Tag[];
   checkLists: CheckList[];
+  cliente: Cliente;
 }

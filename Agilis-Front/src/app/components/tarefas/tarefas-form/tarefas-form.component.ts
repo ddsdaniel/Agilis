@@ -7,10 +7,12 @@ import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
@@ -33,10 +35,12 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   usuarios: UsuarioConsulta[];
   tipos = Object.keys(TipoTarefa);
   features: Feature[] = [];
+  clientes: Cliente[] = [];
 
   constructor(
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
+    private clienteApiService: ClienteApiService,
     private bottomSheetService: BottomSheetService,
     router: Router,
     tarefaApiService: TarefaApiService,
@@ -53,7 +57,15 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     return this.obterUsuarios()
       .pipe(
         switchMap(_ => this.obterFeatures()),
+        switchMap(_ => this.obterClientes()),
         switchMap(_ => this.tagsViewChild.obterTags())
+      );
+  }
+
+  obterClientes(): Observable<any> {
+    return this.clienteApiService.obterTodos()
+      .pipe(
+        tap(clientes => this.clientes = clientes)
       );
   }
 
@@ -84,6 +96,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       feature: null,
       relator: null,
       tipo: TipoTarefa.Novidade,
+      cliente: null,
     };
   }
 
