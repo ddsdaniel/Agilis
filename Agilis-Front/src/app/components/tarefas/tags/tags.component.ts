@@ -1,13 +1,11 @@
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { constantes } from 'src/app/consts/constantes';
-import { Tag } from 'src/app/models/tags/tag';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
-import { TagApiService } from 'src/app/services/apis/tag-api.service';
+import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 
 @Component({
   selector: 'app-tags',
@@ -20,20 +18,20 @@ export class TagsComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  todas: Tag[] = [];
+  todas: string[] = [];
   value = '';
-  filtradas: Tag[];
+  filtradas: string[];
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
-    private tagApiService: TagApiService,
+    private tarefaApiService: TarefaApiService,
   ) { }
 
   ngOnInit(): void {
   }
 
   public obterTags(): Observable<any> {
-    return this.tagApiService.obterTodos()
+    return this.tarefaApiService.obterTags()
       .pipe(
         tap(tags => this.todas = tags)
       );
@@ -45,20 +43,8 @@ export class TagsComponent implements OnInit {
 
     // Add our tag
     if ((value || '').trim()) {
-
-      const tag: Tag = {
-        id: constantes.newGuid,
-        nome: value.trim(),
-      };
-
-      this.tagApiService.adicionar(tag)
-        .subscribe({
-          next: id => {
-            tag.id = id;
-            this.tarefa.tags.push(tag);
-          }
-        });
-
+      const tag = value.trim();
+      this.tarefa.tags.push(tag);
     }
 
     // Reset the input value
@@ -72,17 +58,14 @@ export class TagsComponent implements OnInit {
 
 
   selecionou(event: MatAutocompleteSelectedEvent): void {
-    const tag: Tag = {
-      id: constantes.newGuid,
-      nome: event.option.viewValue,
-    };
+    const tag = event.option.viewValue;
     this.tarefa.tags.push(tag);
     this.tagInput.nativeElement.value = '';
     this.value = '';
   }
 
-  remover(tag: Tag): void {
-    const index = this.tarefa.tags.findIndex(t => t.id === tag.id);
+  remover(tag: string): void {
+    const index = this.tarefa.tags.findIndex(t => t.toLowerCase() === tag.toLowerCase());
 
     if (index >= 0) {
       this.tarefa.tags.splice(index, 1);
@@ -91,7 +74,7 @@ export class TagsComponent implements OnInit {
 
   filtrar() {
     const filterValue = this.value.toLowerCase();
-    this.filtradas = this.todas.filter(tag => tag.nome.toLowerCase().indexOf(filterValue) === 0);
+    this.filtradas = this.todas.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }

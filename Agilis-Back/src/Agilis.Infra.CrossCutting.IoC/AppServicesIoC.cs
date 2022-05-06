@@ -27,9 +27,6 @@ namespace Agilis.Infra.CrossCutting.IoC
             //Sprints
             services.AddScoped<SprintCrudAppService>();
 
-            //Tags
-            services.AddScoped<TagCrudAppService>();
-
             //Clientes
             services.AddScoped<ClienteCrudAppService>();
 

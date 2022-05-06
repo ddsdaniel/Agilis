@@ -5,27 +5,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
 using Agilis.Application.Abstractions.Workers;
-using Agilis.Application.Workers.Tarefas;
 
 namespace Agilis.WebAPI.HostedService
 {
     public class SchedulerBackgroundService : BackgroundService
     {
         private readonly ILogger<SchedulerBackgroundService> _logger;
-        private readonly ExcluirTagsNaoUsadasWorker _excluirTagsNaoUsadasWorker;
 
         public SchedulerBackgroundService(
-            ILogger<SchedulerBackgroundService> logger,
-            ExcluirTagsNaoUsadasWorker excluirTagsNaoUsadasWorker
+            ILogger<SchedulerBackgroundService> logger
             )
         {
             _logger = logger;
-            _excluirTagsNaoUsadasWorker = excluirTagsNaoUsadasWorker;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            ExecutarDiariamente(0, 0, _excluirTagsNaoUsadasWorker, stoppingToken);
             return Task.CompletedTask;
         }
 

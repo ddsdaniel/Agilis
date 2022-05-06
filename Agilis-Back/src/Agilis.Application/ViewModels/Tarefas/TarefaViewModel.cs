@@ -1,4 +1,5 @@
-﻿using Agilis.Application.ViewModels.Produtos;
+﻿using Agilis.Application.ViewModels.Clientes;
+using Agilis.Application.ViewModels.Produtos;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Core.Domain.Enums;
 using System;
@@ -17,7 +18,8 @@ namespace Agilis.Application.ViewModels.Tarefas
         public UsuarioConsultaViewModel Solucionador { get; set; }
         public string HorasPrevistas { get; set; }
         public string HorasRealizadas { get; set; }
-        public IEnumerable<TagViewModel> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
         public IEnumerable<CheckListViewModel> CheckLists { get; set; }
+        public ClienteViewModel Cliente { get; set; }
     }
 }

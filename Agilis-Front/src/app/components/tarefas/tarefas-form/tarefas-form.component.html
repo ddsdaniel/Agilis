@@ -69,6 +69,16 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Cliente -->
+    <mat-form-field class="mt-1 full-width-margin">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
+        <mat-option [value]="null"></mat-option>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <!-- Descrição -->
     <mat-form-field class="mt-1 full-width-margin">
       <mat-label>Descrição</mat-label>

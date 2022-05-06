@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { constantes } from 'src/app/consts/constantes';
@@ -7,6 +7,7 @@ import { Feature } from 'src/app/models/produtos/feature';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
+
 import { CrudListComponent } from '../../crud/crud-list-component';
 import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
 

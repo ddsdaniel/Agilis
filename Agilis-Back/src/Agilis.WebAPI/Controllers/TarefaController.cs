@@ -25,5 +25,16 @@ namespace Agilis.WebAPI.Controllers
 
             return Ok(tarefasViewModel);
         }
+
+        [HttpGet("tags")]
+        public ActionResult<string[]> ConsultarTags()
+        {
+            var tags = _tarefaCrudAppService.ConsultarTags();
+
+            if (_tarefaCrudAppService.Invalido)
+                return CustomBadRequest(_tarefaCrudAppService);
+
+            return Ok(tags);
+        }
     }
 }

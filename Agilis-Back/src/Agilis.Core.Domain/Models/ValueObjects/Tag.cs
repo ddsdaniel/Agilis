@@ -1,9 +1,8 @@
-﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using System.Collections.Generic;
+﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 
-namespace Agilis.Core.Domain.Models.Entities.Tarefas
+namespace Agilis.Core.Domain.Models.ValueObjects
 {
-    public class Tag : Entidade
+    public class Tag : ValueObject<Tag>
     {
         public string Nome { get; private set; }
 

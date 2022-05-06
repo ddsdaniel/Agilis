@@ -34,6 +34,12 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<string, Hora>()
                 .ConstructUsing(horario => new Hora(horario));
+
+            CreateMap<string, Tag>()
+             .ConstructUsing(nome => new Tag(nome));
+
+            CreateMap<Tag, string>()
+              .ConstructUsing(t => t.Nome);
         }
     }
 }
