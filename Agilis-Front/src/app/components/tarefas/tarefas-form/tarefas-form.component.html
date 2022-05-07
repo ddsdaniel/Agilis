@@ -12,19 +12,26 @@
     <!-- Tags -->
     <app-tags [tarefa]="entidade" #tags></app-tags>
 
-    <!-- Horas Previstas -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Horas Previstas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
-        type="text" required appSelectAllText>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
 
-    <!-- Horas Realizadas -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Horas Realizadas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
-        type="text" required appSelectAllText>
-    </mat-form-field>
+      <!-- Horas Previstas -->
+      <mat-form-field>
+        <mat-label>Horas Previstas</mat-label>
+        <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
+          type="text" required appSelectAllText>
+      </mat-form-field>
+
+      <!-- Horas Realizadas -->
+      <mat-form-field>
+        <mat-label>Horas Realizadas</mat-label>
+        <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
+          type="text" required appSelectAllText>
+      </mat-form-field>
+
+      <!-- Valor -->
+      <app-star-rating [(valor)]="entidade.valor" label="Valor Agregado"></app-star-rating>
+
+    </div>
 
     <!-- Relator -->
     <mat-form-field class="mt-1 half-width-margin">

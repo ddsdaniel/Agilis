@@ -1,0 +1,7 @@
+<div class="mb-1">
+  <label class="texto-discreto">{{label}}</label>
+</div>
+<mat-icon *ngFor="let in of counter(maximo);let i = index" class="link"
+  [ngClass]="(i+1) <= valor ? 'color-accent' : 'preto-discreto'" (click)="marcar(i)">
+  star
+</mat-icon>

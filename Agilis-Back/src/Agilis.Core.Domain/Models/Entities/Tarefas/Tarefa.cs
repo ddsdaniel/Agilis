@@ -21,6 +21,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public IEnumerable<Tag> Tags { get; private set; }
         public IEnumerable<CheckList> CheckLists { get; private set; }
         public Cliente Cliente { get; private set; }
+        public int Valor { get; private set; }
 
         protected Tarefa() { }
 
@@ -34,8 +35,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Hora horasPrevistas,
             Hora horasRealizadas,
             IEnumerable<Tag> tags,
-            IEnumerable<CheckList> checkLists, 
-            Cliente cliente)
+            IEnumerable<CheckList> checkLists,
+            Cliente cliente, 
+            int valor)
         {
             //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
             if (relator?.Id == solucionador?.Id)
@@ -52,6 +54,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Tags = tags;
             CheckLists = checkLists;
             Cliente = cliente;
+            Valor = valor;
             Validar();
         }
 
@@ -68,6 +71,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
 
             if (Relator == null)
                 Criticar("Relator não deve ser nulo");
+
+            if (Valor < 0 || Valor > 5)
+                Criticar("Valor deve estar entre 0 e 5");
 
             ImportarCriticas(Feature);
             ImportarCriticas(HorasPrevistas);
