@@ -18,4 +18,5 @@ export interface Tarefa extends Entidade {
   checkLists: CheckList[];
   cliente: Cliente;
   valor: number;
+  urlTicketSAC: string;
 }

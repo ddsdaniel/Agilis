@@ -22,6 +22,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public IEnumerable<CheckList> CheckLists { get; private set; }
         public Cliente Cliente { get; private set; }
         public int Valor { get; private set; }
+        public string UrlTicketSAC { get; private set; }
 
         protected Tarefa() { }
 
@@ -36,13 +37,10 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Hora horasRealizadas,
             IEnumerable<Tag> tags,
             IEnumerable<CheckList> checkLists,
-            Cliente cliente, 
-            int valor)
+            Cliente cliente,
+            int valor, 
+            string urlTicketSAC)
         {
-            //para evitar: System.InvalidOperationException: The instance of entity type 'Usuario' cannot be tracked because another instance with the key value '{Id: xyz}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
-            if (relator?.Id == solucionador?.Id)
-                relator = solucionador;
-
             Titulo = titulo;
             Descricao = descricao;
             Feature = feature;
@@ -55,6 +53,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             CheckLists = checkLists;
             Cliente = cliente;
             Valor = valor;
+            UrlTicketSAC = urlTicketSAC;
             Validar();
         }
 

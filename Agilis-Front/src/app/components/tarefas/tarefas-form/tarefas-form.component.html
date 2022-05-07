@@ -101,6 +101,13 @@
         appSelectAllText rows="5"></textarea>
     </mat-form-field>
 
+    <!-- UrlTicketSAC -->
+    <mat-form-field class="mt-1 full-width-margin">
+      <mat-label>URL Ticket SAC</mat-label>
+      <input matInput [(ngModel)]="entidade.urlTicketSAC" placeholder="URL Ticket SAC" name="urlTicketSAC" type="text"
+        appSelectAllText>
+    </mat-form-field>
+
     <!-- Check-Lists -->
     <div *ngFor="let checkList of entidade.checkLists" class="mb-4">
       <app-check-list-editavel [checkList]="checkList">

@@ -97,7 +97,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       relator: null,
       tipo: TipoTarefa.Novidade,
       cliente: null,
-      valor: 0
+      valor: 0,
+      urlTicketSAC: '',
     };
   }
 
