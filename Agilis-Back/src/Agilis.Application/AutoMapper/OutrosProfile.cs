@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Agilis.Application.ViewModels.Mensagens;
 using Agilis.Core.Domain.Models.ValueObjects;
+using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
 
 namespace Agilis.Application.AutoMapper
 {

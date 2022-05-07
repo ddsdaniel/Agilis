@@ -4,7 +4,7 @@ using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using System.Linq;
 using MediatR;
 using Agilis.Application.ViewModels.Produtos;
-using Agilis.Core.Domain.Models.ValueObjects.Produtos;
+using Agilis.Core.Domain.Models.Entities;
 
 namespace Agilis.Application.Services.Features
 {

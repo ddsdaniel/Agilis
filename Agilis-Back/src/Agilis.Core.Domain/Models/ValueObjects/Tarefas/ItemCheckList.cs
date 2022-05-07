@@ -1,8 +1,6 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
-using Agilis.Core.Domain.Models.ValueObjects;
-using System;
 
-namespace Agilis.Core.Domain.Models.ValueObjects.CheckLists
+namespace Agilis.Core.Domain.Models.ValueObjects.Tarefas
 {
     public class ItemCheckList : ValueObject<ItemCheckList>
     {

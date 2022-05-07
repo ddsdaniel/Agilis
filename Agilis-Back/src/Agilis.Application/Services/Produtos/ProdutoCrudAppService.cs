@@ -3,8 +3,6 @@ using Agilis.Application.Abstractions.Services;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.Application.ViewModels.Produtos;
-using System.Threading.Tasks;
-using System;
 using System.Linq;
 using MediatR;
 

@@ -2,8 +2,7 @@
 using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
-using Agilis.Core.Domain.Models.ValueObjects.Produtos;
+using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
 using System.Collections.Generic;
 
 namespace Agilis.Core.Domain.Models.Entities.Tarefas
@@ -23,6 +22,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public Cliente Cliente { get; private set; }
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
+        public IEnumerable<Comentario> Comentarios { get; private set; }
 
         protected Tarefa() { }
 
@@ -38,8 +38,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             IEnumerable<Tag> tags,
             IEnumerable<CheckList> checkLists,
             Cliente cliente,
-            int valor, 
-            Url urlTicketSAC)
+            int valor,
+            Url urlTicketSAC, 
+            IEnumerable<Comentario> comentarios)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -54,6 +55,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Cliente = cliente;
             Valor = valor;
             UrlTicketSAC = urlTicketSAC;
+            Comentarios = comentarios;
             Validar();
         }
 
@@ -83,6 +85,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(CheckLists);
             ImportarCriticas(Cliente);
             ImportarCriticas(UrlTicketSAC);
+            ImportarCriticas(Comentarios);
         }
 
         public override string ToString() => Titulo;

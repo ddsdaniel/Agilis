@@ -1,6 +1,5 @@
 ﻿using Agilis.Application.ViewModels.Produtos;
 using Agilis.Core.Domain.Models.Entities;
-using Agilis.Core.Domain.Models.ValueObjects.Produtos;
 using AutoMapper;
 
 namespace Agilis.Application.AutoMapper
