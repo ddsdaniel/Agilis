@@ -23,5 +23,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public ClienteViewModel Cliente { get; set; }
         public int Valor { get; set; }
         public string UrlTicketSAC { get; set; }
+        public IEnumerable<ComentarioViewModel> Comentarios { get; set; }
     }
 }
