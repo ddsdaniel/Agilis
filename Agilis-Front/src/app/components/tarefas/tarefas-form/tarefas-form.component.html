@@ -117,7 +117,7 @@
 
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between none">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
 
       <!-- UrlTicketSAC -->
       <mat-form-field fxFlex>
@@ -125,6 +125,9 @@
         <input matInput [(ngModel)]="entidade.urlTicketSAC" placeholder="URL Ticket SAC" name="urlTicketSAC" type="text"
           appSelectAllText>
       </mat-form-field>
+
+      <mat-icon class="link" [ngClass]="entidade.urlTicketSAC ? 'color-accent' : 'preto-discreto'"
+        title="Abrir em uma nova aba" (click)="navegarUrlTicketSAC()">open_in_browser</mat-icon>
 
     </div>
 

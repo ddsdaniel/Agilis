@@ -146,4 +146,9 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     this.entidade.checkLists.push(checkList);
   }
 
+  navegarUrlTicketSAC() {
+    if (this.entidade.urlTicketSAC) {
+      window.open(this.entidade.urlTicketSAC, '_blank');
+    }
+  }
 }
