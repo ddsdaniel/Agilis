@@ -22,7 +22,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public IEnumerable<CheckList> CheckLists { get; private set; }
         public Cliente Cliente { get; private set; }
         public int Valor { get; private set; }
-        public string UrlTicketSAC { get; private set; }
+        public Url UrlTicketSAC { get; private set; }
 
         protected Tarefa() { }
 
@@ -39,7 +39,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             IEnumerable<CheckList> checkLists,
             Cliente cliente,
             int valor, 
-            string urlTicketSAC)
+            Url urlTicketSAC)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -82,6 +82,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(Tags);
             ImportarCriticas(CheckLists);
             ImportarCriticas(Cliente);
+            ImportarCriticas(UrlTicketSAC);
         }
 
         public override string ToString() => Titulo;

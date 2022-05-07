@@ -1,4 +1,4 @@
- <mat-form-field class="full-width-margin">
+ <mat-form-field class="full-width">
   <mat-label>Tags</mat-label>
   <mat-chip-list #tagList aria-label="Seleção de tags">
     <mat-chip *ngFor="let tag of tarefa.tags" selectable="true" removable="true" (removed)="remover(tag)">

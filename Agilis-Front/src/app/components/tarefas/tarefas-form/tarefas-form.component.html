@@ -2,15 +2,23 @@
 
   <div menu class="form-container">
 
-    <!-- Título -->
-    <mat-form-field class="mt-4 full-width-margin">
-      <mat-label>Título</mat-label>
-      <input matInput [(ngModel)]="entidade.titulo" placeholder="Título" name="titulo" type="text" required
-        appSelectAllText>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
 
-    <!-- Tags -->
-    <app-tags [tarefa]="entidade" #tags></app-tags>
+      <!-- Título -->
+      <mat-form-field class="mt-4" fxFlex>
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="entidade.titulo" placeholder="Título" name="titulo" type="text" required
+          appSelectAllText>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Tags -->
+      <app-tags [tarefa]="entidade" #tags fxFlex></app-tags>
+
+    </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between none">
 
@@ -18,14 +26,14 @@
       <mat-form-field fxflex="33">
         <mat-label>Horas Previstas</mat-label>
         <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
-          type="text" required appSelectAllText>
+          type="text" appSelectAllText>
       </mat-form-field>
 
       <!-- Horas Realizadas -->
       <mat-form-field fxflex="33">
         <mat-label>Horas Realizadas</mat-label>
         <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
-          type="text" required appSelectAllText>
+          type="text" appSelectAllText>
       </mat-form-field>
 
       <!-- Valor -->
@@ -75,38 +83,50 @@
 
     </div>
 
-    <!-- Tipo -->
-    <mat-form-field class="mt-1 full-width-margin">
-      <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="entidade.tipo">
-        <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
 
-    <!-- Cliente -->
-    <mat-form-field class="mt-1 full-width-margin">
-      <mat-label>Cliente</mat-label>
-      <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
-        <mat-option [value]="null"></mat-option>
-        <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Tipo -->
+      <mat-form-field fxFlex="50" class="mr-1">
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="entidade.tipo">
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{obterLabelTipo(tipo)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- Descrição -->
-    <mat-form-field class="mt-1 full-width-margin">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
-        appSelectAllText rows="5"></textarea>
-    </mat-form-field>
+      <!-- Cliente -->
+      <mat-form-field fxFlex="50" class="ml-1">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- UrlTicketSAC -->
-    <mat-form-field class="mt-1 full-width-margin">
-      <mat-label>URL Ticket SAC</mat-label>
-      <input matInput [(ngModel)]="entidade.urlTicketSAC" placeholder="URL Ticket SAC" name="urlTicketSAC" type="text"
-        appSelectAllText>
-    </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Descrição -->
+      <mat-form-field fxFlex>
+        <mat-label>Descrição</mat-label>
+        <textarea matInput [(ngModel)]="entidade.descricao" placeholder="Descrição" name="descricao" type="text"
+          appSelectAllText rows="5"></textarea>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- UrlTicketSAC -->
+      <mat-form-field fxFlex>
+        <mat-label>URL Ticket SAC</mat-label>
+        <input matInput [(ngModel)]="entidade.urlTicketSAC" placeholder="URL Ticket SAC" name="urlTicketSAC" type="text"
+          appSelectAllText>
+      </mat-form-field>
+
+    </div>
 
     <!-- Check-Lists -->
     <div *ngFor="let checkList of entidade.checkLists" class="mb-4">

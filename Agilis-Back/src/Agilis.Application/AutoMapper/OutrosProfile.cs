@@ -40,6 +40,12 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<Tag, string>()
               .ConstructUsing(t => t.Nome);
+
+            CreateMap<string, Url>()
+             .ConstructUsing(endereco => string.IsNullOrEmpty(endereco) ? null : new Url(endereco));
+
+            CreateMap<Url, string>()
+              .ConstructUsing(u => u.Endereco);
         }
     }
 }
