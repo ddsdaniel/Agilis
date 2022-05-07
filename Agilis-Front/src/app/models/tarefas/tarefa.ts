@@ -17,4 +17,5 @@ export interface Tarefa extends Entidade {
   tags: string[];
   checkLists: CheckList[];
   cliente: Cliente;
+  valor: number;
 }

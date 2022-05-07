@@ -9,6 +9,7 @@ import { ColorPickerComponent } from '../components/widgets/color-picker/color-p
 import { DialogoSimNaoComponent } from '../components/widgets/dialogo-sim-nao/dialogo-sim-nao.component';
 import { MonthNavigationComponent } from '../components/widgets/month-navigation/month-navigation.component';
 import { ProgressBarComponent } from '../components/widgets/progress-bar/progress-bar.component';
+import { StarRatingComponent } from '../components/widgets/star-rating/star-rating.component';
 import { YearNavigationComponent } from '../components/widgets/year-navigation/year-navigation.component';
 import { AngularMaterialModule } from './angular-material.module';
 
@@ -18,6 +19,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   declarations: [
     ActionBarComponent,
+    StarRatingComponent,
     ColorPickerComponent,
     MonthNavigationComponent,
     YearNavigationComponent,
@@ -45,6 +47,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     YearNavigationComponent,
     ProgressBarComponent,
     DialogoSimNaoComponent,
+    StarRatingComponent,
   ]
 })
 export class GlobalModule { }

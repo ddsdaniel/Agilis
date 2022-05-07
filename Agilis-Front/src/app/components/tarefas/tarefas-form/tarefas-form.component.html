@@ -12,53 +12,68 @@
     <!-- Tags -->
     <app-tags [tarefa]="entidade" #tags></app-tags>
 
-    <!-- Horas Previstas -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Horas Previstas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
-        type="text" required appSelectAllText>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
 
-    <!-- Horas Realizadas -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Horas Realizadas</mat-label>
-      <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
-        type="text" required appSelectAllText>
-    </mat-form-field>
+      <!-- Horas Previstas -->
+      <mat-form-field fxflex="33">
+        <mat-label>Horas Previstas</mat-label>
+        <input matInput [(ngModel)]="entidade.horasPrevistas" placeholder="Horas Previstas" name="horasPrevistas"
+          type="text" required appSelectAllText>
+      </mat-form-field>
 
-    <!-- Relator -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Relator</mat-label>
-      <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Horas Realizadas -->
+      <mat-form-field fxflex="33">
+        <mat-label>Horas Realizadas</mat-label>
+        <input matInput [(ngModel)]="entidade.horasRealizadas" placeholder="Horas Realizadas" name="horasRealizadas"
+          type="text" required appSelectAllText>
+      </mat-form-field>
 
-    <!-- Solucionador -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Solucionador</mat-label>
-      <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Valor -->
+      <app-star-rating fxflex="33" [(valor)]="entidade.valor" label="Valor Agregado"></app-star-rating>
 
-    <!-- Produto -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Produto</mat-label>
-      <input matInput [value]="entidade?.feature?.produto?.nome" placeholder="Produto" name="produto" type="text"
-        disabled="disabled">
-    </mat-form-field>
+    </div>
 
-    <!-- Feature -->
-    <mat-form-field class="mt-1 half-width-margin">
-      <mat-label>Feature</mat-label>
-      <mat-select [(ngModel)]="entidade.feature" [compareWith]="comparadorService.compareById">
-        <mat-option *ngFor="let feature of features" [value]="feature">{{feature.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between none" class="mt-1">
+
+      <!-- Relator -->
+      <mat-form-field fxFlex="50" class="mr-1">
+        <mat-label>Relator</mat-label>
+        <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
+          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Solucionador -->
+      <mat-form-field fxFlex="50" class="ml-1">
+        <mat-label>Solucionador</mat-label>
+        <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
+          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none" class="mt-1">
+
+      <!-- Produto -->
+      <mat-form-field class="mr-1" fxFlex="50">
+        <mat-label>Produto</mat-label>
+        <input matInput [value]="entidade?.feature?.produto?.nome" placeholder="Produto" name="produto" type="text"
+          disabled="disabled">
+      </mat-form-field>
+
+      <!-- Feature -->
+      <mat-form-field class="ml-1" fxFlex="50">
+        <mat-label>Feature</mat-label>
+        <mat-select [(ngModel)]="entidade.feature" [compareWith]="comparadorService.compareById">
+          <mat-option *ngFor="let feature of features" [value]="feature">{{feature.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
 
     <!-- Tipo -->
     <mat-form-field class="mt-1 full-width-margin">

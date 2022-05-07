@@ -21,5 +21,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public IEnumerable<string> Tags { get; set; }
         public IEnumerable<CheckListViewModel> CheckLists { get; set; }
         public ClienteViewModel Cliente { get; set; }
+        public int Valor { get; set; }
     }
 }
