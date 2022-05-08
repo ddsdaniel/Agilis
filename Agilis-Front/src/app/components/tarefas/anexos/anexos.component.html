@@ -1,0 +1,8 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let anexo of anexos; let i = index">
+  <a href="#">{{anexo.nome}}</a>
+  <button mat-button color="warn" (click)="excluir(i)">Excluir</button>
+</div>
+<div>
+  <input #inputFile hidden="true" type="file" (change)="inputFileChange($event)" [src]="novoAnexo" />
+  <button mat-raised-button (click)="inputFile.click()" class="mt-1">Anexar um arquivo</button>
+</div>

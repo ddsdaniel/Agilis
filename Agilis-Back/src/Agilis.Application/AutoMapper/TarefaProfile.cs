@@ -1,5 +1,7 @@
-﻿using Agilis.Application.ViewModels.Tarefas;
+﻿using Agilis.Application.ViewModels;
+using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
+using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
 using AutoMapper;
 
@@ -19,6 +21,9 @@ namespace Agilis.Application.AutoMapper
                 .ReverseMap();
 
             CreateMap<Comentario, ComentarioViewModel>()
+                .ReverseMap();
+
+            CreateMap<Anexo, AnexoViewModel>()
                 .ReverseMap();
         }
     }
