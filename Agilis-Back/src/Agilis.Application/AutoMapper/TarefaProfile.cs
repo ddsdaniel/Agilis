@@ -17,6 +17,9 @@ namespace Agilis.Application.AutoMapper
 
             CreateMap<ItemCheckList, ItemCheckListViewModel>()
                 .ReverseMap();
+
+            CreateMap<Comentario, ComentarioViewModel>()
+                .ReverseMap();
         }
     }
 }
