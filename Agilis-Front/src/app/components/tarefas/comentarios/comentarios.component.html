@@ -15,14 +15,13 @@
   <div>
     <strong>{{comentario.autor.nome}} {{comentario.autor.sobrenome}}</strong>
 
-    <app-span-editavel class="ml-1" [(value)]="comentario.descricao"></app-span-editavel>
+    <app-span-editavel [editavel]="podeEditar(comentario)" class="ml-1" [(value)]="comentario.descricao"></app-span-editavel>
 
-    <!-- <span class="ml-1 preto-discreto">{{comentario.descricao}}</span> -->
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <small class="texto-discreto">{{comentario.dataHora | date:'medium'}}</small>
-    <button mat-button color="warn" (click)="excluir(i)">Excluir</button>
+    <button *ngIf="podeEditar(comentario)" mat-button color="warn" (click)="excluir(i)">Excluir</button>
   </div>
 
 </div>

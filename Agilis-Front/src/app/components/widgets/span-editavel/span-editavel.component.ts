@@ -7,8 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SpanEditavelComponent {
 
-  @Input() value = '';
+  @Input() editavel: true;
   @Input() label = '';
+  @Input() value = '';
   @Output() valueChange = new EventEmitter<string>();
 
   private backupValue = '';
@@ -16,8 +17,10 @@ export class SpanEditavelComponent {
   editando = false;
 
   editar() {
-    this.backupValue = this.value;
-    this.editando = true;
+    if (this.editavel) {
+      this.backupValue = this.value;
+      this.editando = true;
+    }
   }
 
   cancelar() {

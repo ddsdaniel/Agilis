@@ -66,4 +66,7 @@ export class ComentariosComponent implements OnInit {
 
   }
 
+  podeEditar(comentario: Comentario): boolean {
+    return this.autenticacaoSerivce.usuarioLogado.usuario.id === comentario.autor.id;
+  }
 }
