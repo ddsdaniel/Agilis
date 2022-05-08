@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MentionModule } from 'angular-mentions';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { ActionBarComponent } from '../components/widgets/action-bar/action-bar.component';
@@ -32,6 +33,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     FlexLayoutModule,
     InfiniteScrollModule,
     NgxChartsModule,
+    MentionModule,
     NgxMaskModule.forRoot(options),
   ],
   exports: [
@@ -48,6 +50,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ProgressBarComponent,
     DialogoSimNaoComponent,
     StarRatingComponent,
+    MentionModule,
   ]
 })
 export class GlobalModule { }
