@@ -1,10 +1,5 @@
 <!-- Não editável -->
-<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!editando">
-  <!-- Span -->
-  <div>
-    <span (click)="editar()">{{ value }}</span>
-  </div>
-</div>
+<span (click)="editar()" *ngIf="!editando">{{ value }}</span>
 
 <!-- Editável -->
 <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="editando">
