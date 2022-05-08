@@ -1,25 +1,22 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
-using System;
 
-namespace Agilis.Core.Domain.Models.ValueObjects
+namespace Agilis.Core.Domain.Models.ValueObjects.Tarefas
 {
-    public class CriterioAceitacao : ValueObject<CriterioAceitacao>
+    public class Tag : ValueObject<Tag>
     {
         public string Nome { get; private set; }
-        public int Ordem { get; private set; }
 
-        protected CriterioAceitacao() { }
+        protected Tag() { }
 
-        public CriterioAceitacao(string nome, int ordem)
+        public Tag(string nome)
         {
             Nome = nome;
-            Ordem = ordem;
             Validar();
         }
 
         private void Validar()
         {
-            if (String.IsNullOrEmpty(Nome))
+            if (string.IsNullOrEmpty(Nome))
                 Criticar("Nome não deve ser nulo ou vazio");
         }
 

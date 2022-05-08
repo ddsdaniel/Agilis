@@ -1,7 +1,6 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.Entities;
-using Agilis.Core.Domain.Models.Entities;
 
-namespace Agilis.Core.Domain.Models.ValueObjects.Produtos
+namespace Agilis.Core.Domain.Models.Entities
 {
     public class Feature : Entidade
     {

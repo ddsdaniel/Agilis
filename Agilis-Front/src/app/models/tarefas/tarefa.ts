@@ -4,6 +4,7 @@ import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
 import { UsuarioConsulta } from '../seguranca/usuario-consulta';
 import { CheckList } from './check-list';
+import { Comentario } from './comentario';
 
 export interface Tarefa extends Entidade {
   titulo: string;
@@ -19,4 +20,5 @@ export interface Tarefa extends Entidade {
   cliente: Cliente;
   valor: number;
   urlTicketSAC: string;
+  comentarios: Comentario[];
 }

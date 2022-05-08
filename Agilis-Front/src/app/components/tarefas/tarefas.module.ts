@@ -5,6 +5,7 @@ import { TarefasRoutingModule } from './tarefas-routing.module';
 import { CheckListEditavelComponent } from './check-list-editavel/check-list-editavel.component';
 import { TagsComponent } from './tags/tags.component';
 import { TarefasListComponent } from './tarefas-list/tarefas-list.component';
+import { ComentariosComponent } from './comentarios/comentarios.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TarefasListComponent } from './tarefas-list/tarefas-list.component';
     CheckListEditavelComponent,
     TagsComponent,
     TarefasListComponent,
+    ComentariosComponent,
   ],
   imports: [
     GlobalModule,

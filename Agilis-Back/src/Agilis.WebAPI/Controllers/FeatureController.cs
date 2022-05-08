@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Agilis.Application.Services.Features;
 using Agilis.Application.ViewModels.Produtos;
-using Agilis.Core.Domain.Models.ValueObjects.Produtos;
+using Agilis.Core.Domain.Models.Entities;
 
 namespace Agilis.WebAPI.Controllers
 {

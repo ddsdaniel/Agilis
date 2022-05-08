@@ -99,6 +99,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       cliente: null,
       valor: 0,
       urlTicketSAC: '',
+      comentarios: [],
     };
   }
 

@@ -1,5 +1,5 @@
 ﻿using Agilis.Core.Domain.Abstractions.Repositories;
-using Agilis.Core.Domain.Models.ValueObjects.Produtos;
+using Agilis.Core.Domain.Models.Entities;
 using Agilis.Infra.Data.Mongo.Abstractions.Repositories;
 using MongoDB.Driver;
 

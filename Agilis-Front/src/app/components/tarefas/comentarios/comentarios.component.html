@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+  <mat-form-field fxFlex>
+    <mat-label>Adicione um comentário</mat-label>
+    <textarea matInput [(ngModel)]="novoComentario.descricao" placeholder="Comentário" name="descricao" type="text"
+      appSelectAllText rows="2" required [mention]="mencoes"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button class="ml-2" (click)="adicionar()">Adicionar</button>
+
+</div>
+
+<div *ngFor="let comentario of comentarios; let i = index" class="mb-3">
+
+  <div>
+    <strong>{{comentario.autor.nome}} {{comentario.autor.sobrenome}}</strong>
+
+    <app-span-editavel [editavel]="podeEditar(comentario)" class="ml-1" [(value)]="comentario.descricao"></app-span-editavel>
+
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <small class="texto-discreto">{{comentario.dataHora | date:'medium'}}</small>
+    <button *ngIf="podeEditar(comentario)" mat-button color="warn" (click)="excluir(i)">Excluir</button>
+  </div>
+
+</div>

@@ -1,7 +1,6 @@
 ﻿using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
-using Agilis.Core.Domain.Models.ValueObjects;
-using Agilis.Core.Domain.Models.ValueObjects.CheckLists;
+using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
 using AutoMapper;
 
 namespace Agilis.Application.AutoMapper
@@ -17,6 +16,9 @@ namespace Agilis.Application.AutoMapper
                 .ReverseMap();
 
             CreateMap<ItemCheckList, ItemCheckListViewModel>()
+                .ReverseMap();
+
+            CreateMap<Comentario, ComentarioViewModel>()
                 .ReverseMap();
         }
     }
