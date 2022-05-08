@@ -1,0 +1,24 @@
+<!-- Não editável -->
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="!editando">
+  <!-- Span -->
+  <div>
+    <span (click)="editar()">{{ value }}</span>
+  </div>
+</div>
+
+<!-- Editável -->
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="editando">
+
+  <!-- Caixa de texto -->
+  <mat-form-field class="full-width-margin">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [(ngModel)]="value" [placeholder]="label" name="input" type="text" required appSelectAllText>
+  </mat-form-field>
+
+  <!-- Ícones -->
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <mat-icon class="preto-discreto link" title="Aplicar" (click)="aplicar()">done</mat-icon>
+    <mat-icon class="preto-discreto link" title="Cancelar" (click)="cancelar()">clear</mat-icon>
+  </div>
+
+</div>
