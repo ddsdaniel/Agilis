@@ -23,6 +23,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
+        public IEnumerable<Anexo> Anexos { get; private set; }
 
         protected Tarefa() { }
 
@@ -39,8 +40,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             IEnumerable<CheckList> checkLists,
             Cliente cliente,
             int valor,
-            Url urlTicketSAC, 
-            IEnumerable<Comentario> comentarios)
+            Url urlTicketSAC,
+            IEnumerable<Comentario> comentarios, 
+            IEnumerable<Anexo> anexos)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -56,6 +58,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Valor = valor;
             UrlTicketSAC = urlTicketSAC;
             Comentarios = comentarios;
+            Anexos = anexos;
             Validar();
         }
 
@@ -86,6 +89,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(Cliente);
             ImportarCriticas(UrlTicketSAC);
             ImportarCriticas(Comentarios);
+            ImportarCriticas(Anexos);
         }
 
         public override string ToString() => Titulo;
