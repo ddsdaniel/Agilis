@@ -1,4 +1,5 @@
 ﻿import { TipoTarefa } from '../../enums/tipo-tarefa.enum';
+import { Anexo } from '../anexo';
 import { Cliente } from '../cliente';
 import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
@@ -21,4 +22,5 @@ export interface Tarefa extends Entidade {
   valor: number;
   urlTicketSAC: string;
   comentarios: Comentario[];
+  anexos: Anexo[];
 }

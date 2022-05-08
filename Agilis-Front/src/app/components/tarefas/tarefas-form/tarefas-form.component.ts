@@ -100,6 +100,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       valor: 0,
       urlTicketSAC: '',
       comentarios: [],
+      anexos: [],
     };
   }
 
