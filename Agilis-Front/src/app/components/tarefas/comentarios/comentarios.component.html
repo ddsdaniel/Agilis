@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+  <mat-form-field fxFlex>
+    <mat-label>Adicione um comentário</mat-label>
+    <textarea matInput [(ngModel)]="novoComentario.descricao" placeholder="Comentário" name="descricao" type="text"
+      appSelectAllText rows="2" required></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button class="ml-2" (click)="adicionar()">Adicionar</button>
+
+</div>
+
+<div *ngFor="let comentario of comentarios" class="mb-3">
+
+  <div>
+    <strong>{{comentario.autor.nome}} {{comentario.autor.sobrenome}}</strong>
+    <span class="ml-1 preto-discreto">{{comentario.descricao}}</span>
+  </div>
+
+  <div>
+    <small class="texto-discreto">{{comentario.dataHora | date:'medium'}}</small>
+  </div>
+
+</div>
