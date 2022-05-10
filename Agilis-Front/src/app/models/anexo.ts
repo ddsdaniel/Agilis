@@ -1,5 +1,5 @@
 export interface Anexo {
   nome: string;
-  base64: string;
+  arquivoId: string;
   imagem: boolean;
 }

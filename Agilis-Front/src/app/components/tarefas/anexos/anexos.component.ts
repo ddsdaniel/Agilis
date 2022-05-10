@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { constantes } from 'src/app/consts/constantes';
 import { Anexo } from 'src/app/models/anexo';
+import { Arquivo } from 'src/app/models/arquivo';
+import { ArquivoApiService } from 'src/app/services/apis/arquivo-api.service';
 
 @Component({
   selector: 'app-anexos',
@@ -15,28 +18,28 @@ export class AnexosComponent {
 
   constructor(
     private snackBar: MatSnackBar,
+    private arquivoApiService: ArquivoApiService,
   ) { }
 
   excluir(indice: number) {
-    const removido = this.anexos[indice];
-    this.anexos.removeAt(indice);
-    this.anexosChange.emit(this.anexos);
+    const anexoRemovido = this.anexos[indice];
 
-    const snackBarRef = this.snackBar.open('Excluído', 'Desfazer');
+    this.arquivoApiService.excluir(anexoRemovido.arquivoId)
+      .subscribe({
+        next: _ => {
+          this.anexos.removeAt(indice);
+          this.anexosChange.emit(this.anexos);
+          this.snackBar.open('Excluído');
+        }
+      });
 
-    snackBarRef.onAction().subscribe(() => {
-
-      this.anexos.insert(indice, removido);
-      this.anexosChange.emit(this.anexos);
-
-    });
   }
 
   inputFileChange(event: any) {
-    this.anexar(event.target.files[0]);
+    this.selecionouArquivo(event.target.files[0]);
   }
 
-  anexar(file: File) {
+  selecionouArquivo(file: File) {
 
     const MEGAS = 10;
     const MAX_SIZE = MEGAS * 1024 * 1024;
@@ -49,13 +52,13 @@ export class AnexosComponent {
 
       reader.onload = () => {
 
-        this.novoAnexo = {
-          nome: file.name,
-          base64: reader.result.valueOf().toString(),
-          imagem: false // TODO descobrir se é uma imagem
+        const arquivo: Arquivo = {
+          id: constantes.newGuid,
+          base64: reader.result.valueOf().toString()
         };
-        const clone = Object.assign({}, this.novoAnexo);
-        this.anexos.push(clone);
+
+        this.upload(arquivo, file);
+
       };
       reader.onerror = () => {
         this.snackBar.open('Erro ao carregar o anexo');
@@ -63,4 +66,23 @@ export class AnexosComponent {
       reader.readAsDataURL(file);
     }
   }
+
+  upload(arquivo: Arquivo, file: File) {
+    this.arquivoApiService.adicionar(arquivo)
+      .subscribe({
+        next: id => this.anexar(id, file)
+      });
+  }
+
+  anexar(id: string, file: File): void {
+    this.novoAnexo = {
+      nome: file.name,
+      arquivoId: id,
+      imagem: false // TODO descobrir se é uma imagem
+    };
+    const clone = Object.assign({}, this.novoAnexo);
+    this.anexos.push(clone);
+    this.anexosChange.emit(this.anexos);
+  }
+
 }

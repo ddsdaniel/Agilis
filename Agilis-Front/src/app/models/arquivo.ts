@@ -1,3 +1,5 @@
-export interface Arquivo {
-  conteudoBase64: string;
+import { Entidade } from './entidade';
+
+export interface Arquivo extends Entidade {
+  base64: string;
 }
