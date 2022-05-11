@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Workers\Tarefas\**" />
+    <EmbeddedResource Remove="Workers\Tarefas\**" />
+    <None Remove="Workers\Tarefas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
@@ -18,10 +24,6 @@
     <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Email\Agilis.Infra.Emails.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Seguranca\Agilis.Infra.Seguranca.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Workers\Tarefas\" />
   </ItemGroup>
 
 </Project>

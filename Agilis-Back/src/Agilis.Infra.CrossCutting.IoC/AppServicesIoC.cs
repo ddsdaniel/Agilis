@@ -32,7 +32,7 @@ namespace Agilis.Infra.CrossCutting.IoC
             services.AddScoped<ClienteCrudAppService>();
 
             //Arquivos
-            services.AddScoped<ArquivoCrudAppService>();
+            services.AddScoped<ArquivoCrudAppService>();            
 
             //Segurança
             services.AddScoped<UsuarioCrudAppService>();

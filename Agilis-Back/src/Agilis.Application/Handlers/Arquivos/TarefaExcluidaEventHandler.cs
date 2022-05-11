@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Agilis.Application.Handlers.Arquivos
 {
-    public class TarefaExcluidaEvent : INotificationHandler<EntidadeExcluidaDomainEvent<Tarefa>>
+    public class TarefaExcluidaEventHandler : INotificationHandler<EntidadeExcluidaDomainEvent<Tarefa>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TarefaExcluidaEvent(IUnitOfWork unitOfWork)
+        public TarefaExcluidaEventHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -24,7 +24,6 @@ namespace Agilis.Application.Handlers.Arquivos
             {
                 await arquivoRepository.ExcluirAsync(a => a.Id == anexo.ArquivoId);
             }
-            await _unitOfWork.CommitAsync();
         }
     }
 }

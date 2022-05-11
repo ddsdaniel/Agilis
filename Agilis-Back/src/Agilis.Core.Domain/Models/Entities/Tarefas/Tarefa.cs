@@ -3,7 +3,9 @@ using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Core.Domain.Models.Entities.Tarefas
 {
@@ -23,7 +25,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
-        public IEnumerable<Anexo> Anexos { get; private set; }
+        public IEnumerable<Anexo> Anexos { get; private set; }        
 
         protected Tarefa() { }
 
@@ -90,6 +92,11 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(UrlTicketSAC);
             ImportarCriticas(Comentarios);
             ImportarCriticas(Anexos);
+        }
+
+        public void RemoverAnexo(Guid arquivoid)
+        {
+            Anexos = Anexos.Where(a => a.ArquivoId != arquivoid);
         }
 
         public override string ToString() => Titulo;
