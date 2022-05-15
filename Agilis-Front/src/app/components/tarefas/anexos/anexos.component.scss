@@ -1,0 +1,14 @@
+@import "../../../../styles.scss";
+
+a {
+  color: mat-color($styles-theme-accent);
+}
+a:visited {
+  color: mat-color($styles-theme-accent);
+}
+a:hover {
+  color: mat-color($styles-theme-accent);
+}
+a:active {
+  color: mat-color($styles-theme-accent);
+}

@@ -117,7 +117,7 @@
 
     </div>
 
-    <app-anexos [(anexos)]="entidade.anexos"></app-anexos>
+    <app-anexos [(anexos)]="entidade.anexos" (downloadAnexo)="download($event)"></app-anexos>
 
     <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
 

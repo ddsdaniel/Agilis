@@ -15,6 +15,7 @@ export class AnexosComponent {
   novoAnexo: Anexo;
   @Input() anexos: Anexo[] = [];
   @Output() anexosChange = new EventEmitter<Anexo[]>();
+  @Output() downloadAnexo = new EventEmitter<Anexo>();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -54,7 +55,8 @@ export class AnexosComponent {
 
         const arquivo: Arquivo = {
           id: constantes.newGuid,
-          base64: reader.result.valueOf().toString()
+          base64: reader.result.valueOf().toString(),
+          nome: file.name
         };
 
         this.upload(arquivo, file);
@@ -78,11 +80,15 @@ export class AnexosComponent {
     this.novoAnexo = {
       nome: file.name,
       arquivoId: id,
-      imagem: false // TODO descobrir se é uma imagem
+      imagem: false
     };
     const clone = Object.assign({}, this.novoAnexo);
     this.anexos.push(clone);
     this.anexosChange.emit(this.anexos);
   }
 
+  download(anexo: Anexo): void {
+    event.stopPropagation();
+    this.downloadAnexo.emit(anexo);
+  }
 }

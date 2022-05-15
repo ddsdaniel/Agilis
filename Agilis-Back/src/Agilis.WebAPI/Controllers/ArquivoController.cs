@@ -2,7 +2,11 @@
 using Agilis.Application.ViewModels;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.WebAPI.Abstractions.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace Agilis.WebAPI.Controllers
 {
@@ -24,6 +28,19 @@ namespace Agilis.WebAPI.Controllers
                 return CustomBadRequest(_arquivoCrudAppService);
 
             return Ok(arquivosViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/download")]
+        public async Task<IActionResult> DownloadNexo(Guid id)
+        {
+            var arquivo = await _arquivoCrudAppService.ConsultarPorIdAsync(id);
+            if (arquivo == null)
+                return NotFound();
+
+            var byteArray = Convert.FromBase64String(arquivo.Base64.Split(',')[1]);
+
+            return File(byteArray, MediaTypeNames.Application.Octet, arquivo.Nome);
         }
     }
 }

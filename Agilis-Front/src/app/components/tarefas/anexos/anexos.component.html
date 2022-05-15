@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let anexo of anexos; let i = index">
-  <a href="#">{{anexo.nome}}</a>
+  <a href="#" title="Download" (click)="$event.preventDefault();download(anexo)">{{anexo.nome}}</a>
   <button mat-button color="warn" (click)="excluir(i)">Excluir</button>
 </div>
 <div>

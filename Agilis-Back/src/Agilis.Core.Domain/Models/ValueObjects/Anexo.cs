@@ -1,5 +1,7 @@
 ﻿using Agilis.Core.Domain.Abstractions.Models.ValueObjects;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Agilis.Core.Domain.Models.ValueObjects
 {
@@ -7,15 +9,35 @@ namespace Agilis.Core.Domain.Models.ValueObjects
     {
         public Guid ArquivoId { get; private set; }
         public string Nome { get; private set; }
-        public bool Imagem { get; private set; }
+        public bool Imagem
+        {
+            get
+            {
+                var imagens = new List<string>
+                {
+                    ".apng",
+                    ".avif",
+                    ".gif",
+                    ".jpg",
+                    ".jpeg",
+                    ".jfif",
+                    ".pjpeg",
+                    ".pjp",
+                    ".png",
+                    ".svg",
+                    ".webp"
+                };
+
+                return imagens.Contains(Path.GetExtension(Nome).ToLower());
+            }
+        }
 
         protected Anexo() { }
 
-        public Anexo(string nome, Guid arquivoId, bool imagem)
+        public Anexo(string nome, Guid arquivoId)
         {
             ArquivoId = arquivoId;
             Nome = nome;
-            Imagem = imagem;
             Validar();
         }
 
