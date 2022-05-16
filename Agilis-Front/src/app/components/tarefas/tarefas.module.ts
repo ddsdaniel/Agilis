@@ -6,6 +6,7 @@ import { CheckListEditavelComponent } from './check-list-editavel/check-list-edi
 import { TagsComponent } from './tags/tags.component';
 import { TarefasListComponent } from './tarefas-list/tarefas-list.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
+import { AnexosComponent } from './anexos/anexos.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
     TagsComponent,
     TarefasListComponent,
     ComentariosComponent,
+    AnexosComponent,
   ],
   imports: [
     GlobalModule,

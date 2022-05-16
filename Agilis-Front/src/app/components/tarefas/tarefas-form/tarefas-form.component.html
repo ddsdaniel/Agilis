@@ -117,7 +117,9 @@
 
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
+    <app-anexos [(anexos)]="entidade.anexos" (downloadAnexo)="download($event)"></app-anexos>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
 
       <!-- UrlTicketSAC -->
       <mat-form-field fxFlex>

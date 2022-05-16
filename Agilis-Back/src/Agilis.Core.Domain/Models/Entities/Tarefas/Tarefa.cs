@@ -3,7 +3,9 @@ using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agilis.Core.Domain.Models.Entities.Tarefas
 {
@@ -23,6 +25,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
+        public IEnumerable<Anexo> Anexos { get; private set; }        
 
         protected Tarefa() { }
 
@@ -39,8 +42,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             IEnumerable<CheckList> checkLists,
             Cliente cliente,
             int valor,
-            Url urlTicketSAC, 
-            IEnumerable<Comentario> comentarios)
+            Url urlTicketSAC,
+            IEnumerable<Comentario> comentarios, 
+            IEnumerable<Anexo> anexos)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -56,6 +60,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Valor = valor;
             UrlTicketSAC = urlTicketSAC;
             Comentarios = comentarios;
+            Anexos = anexos;
             Validar();
         }
 
@@ -86,6 +91,12 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(Cliente);
             ImportarCriticas(UrlTicketSAC);
             ImportarCriticas(Comentarios);
+            ImportarCriticas(Anexos);
+        }
+
+        public void RemoverAnexo(Guid arquivoid)
+        {
+            Anexos = Anexos.Where(a => a.ArquivoId != arquivoid);
         }
 
         public override string ToString() => Titulo;

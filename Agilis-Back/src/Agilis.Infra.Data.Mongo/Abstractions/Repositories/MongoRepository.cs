@@ -115,5 +115,36 @@ namespace Agilis.Infra.Data.Mongo.Abstractions.Repositories
             var collection = _mongoDatabase.GetCollection<BsonDocument>(_collecionName);
             collection.DropField(nome);
         }
+
+        public async Task ExcluirAsync(IEnumerable<Guid> ids)
+        {
+            var idFilter = ObterFiltroPorId(ids);
+            await _mongoCollection.DeleteManyAsync(_session, idFilter);
+        }
+
+        public async Task ExcluirNotInAsync(IEnumerable<Guid> ids)
+        {
+            var idFilter = Builders<TEntity>.Filter.Nin(d => d.Id, ids);
+            await _mongoCollection.DeleteManyAsync(_session, idFilter);
+        }
+
+        public async Task ExcluirAsync(IEnumerable<TEntity> entities)
+        {
+            var idFilter = ObterFiltroPorId(entities);
+
+            await _mongoCollection.DeleteManyAsync(_session, idFilter);
+        }
+
+        private FilterDefinition<TEntity> ObterFiltroPorId(IEnumerable<TEntity> entities)
+        {
+            var ids = entities.Select(d => d.Id);
+            return ObterFiltroPorId(ids);
+        }
+
+        private FilterDefinition<TEntity> ObterFiltroPorId(IEnumerable<Guid> ids)
+        {
+            var idFilter = Builders<TEntity>.Filter.In(d => d.Id, ids);
+            return idFilter;
+        }
     }
 }

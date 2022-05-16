@@ -5,16 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ValueObjects\CheckLists\**" />
+    <EmbeddedResource Remove="Models\ValueObjects\CheckLists\**" />
+    <None Remove="Models\ValueObjects\CheckLists\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\DDS.Validacoes\DDS.Validacoes\DDS.Validacoes.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\ValueObjects\CheckLists\" />
   </ItemGroup>
 
 </Project>

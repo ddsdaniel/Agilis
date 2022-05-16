@@ -6,6 +6,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
+import { Anexo } from 'src/app/models/anexo';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
@@ -19,6 +20,7 @@ import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { ComparadorService } from 'src/app/services/comparador.service';
 import { TituloService } from 'src/app/services/titulo.service';
+import { environment } from 'src/environments/environment';
 
 import { CrudFormComponent } from '../../crud/crud-form-component';
 import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.component';
@@ -100,6 +102,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       valor: 0,
       urlTicketSAC: '',
       comentarios: [],
+      anexos: [],
     };
   }
 
@@ -151,5 +154,10 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     if (this.entidade.urlTicketSAC) {
       window.open(this.entidade.urlTicketSAC, '_blank');
     }
+  }
+
+  download(anexo: Anexo): void {
+    const url = `${environment.apiUrl}/arquivo/${anexo.arquivoId}/download`;
+    window.open(url, '_blank');
   }
 }
