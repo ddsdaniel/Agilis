@@ -11,10 +11,12 @@ import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
+import { Sprint } from 'src/app/models/sprint';
 import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
+import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
@@ -38,11 +40,13 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   tipos = Object.keys(TipoTarefa);
   features: Feature[] = [];
   clientes: Cliente[] = [];
+  sprints: Sprint[] = [];
 
   constructor(
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
     private clienteApiService: ClienteApiService,
+    private sprintApiService: SprintApiService,
     private bottomSheetService: BottomSheetService,
     router: Router,
     tarefaApiService: TarefaApiService,
@@ -60,7 +64,15 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       .pipe(
         switchMap(_ => this.obterFeatures()),
         switchMap(_ => this.obterClientes()),
+        switchMap(_ => this.obterSprints()),
         switchMap(_ => this.tagsViewChild.obterTags())
+      );
+  }
+
+  obterSprints(): Observable<any> {
+    return this.sprintApiService.obterTodos()
+      .pipe(
+        tap(sprints => this.sprints = sprints)
       );
   }
 
@@ -103,6 +115,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       urlTicketSAC: '',
       comentarios: [],
       anexos: [],
+      sprint: null,
     };
   }
 

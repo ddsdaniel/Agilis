@@ -37,7 +37,7 @@
       </mat-form-field>
 
       <!-- Valor -->
-      <app-star-rating fxflex="33" [(valor)]="entidade.valor" label="Valor para o Cliente"></app-star-rating>
+      <app-star-rating fxflex="33" [(valor)]="entidade.valor" label="Valor"></app-star-rating>
 
     </div>
 
@@ -100,6 +100,20 @@
         <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
           <mat-option [value]="null"></mat-option>
           <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Sprint -->
+      <mat-form-field fxFlex="50" class="ml-1">
+        <mat-label>Sprint</mat-label>
+        <mat-select [(ngModel)]="entidade.sprint" [compareWith]="comparadorService.compareById">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let sprint of sprints" [value]="sprint">{{sprint.nome}}
           </mat-option>
         </mat-select>
       </mat-form-field>

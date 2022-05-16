@@ -1,6 +1,7 @@
 ﻿using Agilis.Application.ViewModels.Clientes;
 using Agilis.Application.ViewModels.Produtos;
 using Agilis.Application.ViewModels.Seguranca;
+using Agilis.Application.ViewModels.Sprints;
 using Agilis.Core.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public string UrlTicketSAC { get; set; }
         public IEnumerable<ComentarioViewModel> Comentarios { get; set; }
         public IEnumerable<AnexoViewModel> Anexos { get; set; }
+        public SprintViewModel Sprint { get; set; }
     }
 }
