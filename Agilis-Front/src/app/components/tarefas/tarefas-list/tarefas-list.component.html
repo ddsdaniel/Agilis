@@ -2,30 +2,39 @@
 
   <div menu>
 
-    <!-- Grade -->
-    <mat-list role="list">
-
-      <mat-list-item role="listitem" *ngFor="let tarefa of lista; let i = index"
-        (click)="openBottomSheet(tarefa.id, i)">
-
-        <mat-icon mat-list-icon>task</mat-icon>
-
-        <div mat-line>
-          <span>{{tarefa.titulo}}</span>
-        </div>
-
-        <div mat-line>
-          <span>{{tarefa?.sprint?.nome}}</span>
-        </div>
-
-        <mat-chip-list aria-label="Tags">
-          <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
-          </mat-chip>
-        </mat-chip-list>
-
-        <mat-divider></mat-divider>
-      </mat-list-item>
-    </mat-list>
+    <!-- Tabela -->
+    <table class="full-width-margin mt-4 mat-elevation-z8">
+      <thead>
+        <tr>
+          <th class="text-left" fxFlex="30%">Título</th>
+          <th class="text-left" fxFlex="15%">Produto</th>
+          <th class="text-left" fxFlex="15%">Feature</th>
+          <th class="text-right" fxFlex="5%">Valor</th>
+          <th class="text-left" fxFlex="15%">Sprint</th>
+          <th class="text-left" fxFlex="10%">Solucionador</th>
+          <th class="text-left" fxFlex="5%">Horas Prev.</th>
+          <th class="text-left" fxFlex="5%">Horas Real.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(transacao.id, i)">
+          <td fxFlex="30%">
+            <span>{{ tarefa.titulo }}</span>
+            <mat-chip-list aria-label="Tags">
+              <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
+              </mat-chip>
+            </mat-chip-list>
+          </td>
+          <td fxFlex="15%">{{ tarefa?.feature?.produto?.nome }}</td>
+          <td fxFlex="15%">{{ tarefa?.feature?.nome }}</td>
+          <td fxFlex="5%" class="text-right">{{ tarefa.valor }}</td>
+          <td fxFlex="15%">{{ tarefa?.sprint?.nome }}</td>
+          <td fxFlex="10%">{{ tarefa?.solucionador?.nome }}</td>
+          <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
+          <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Adicionar -->
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/tarefas/new'>
