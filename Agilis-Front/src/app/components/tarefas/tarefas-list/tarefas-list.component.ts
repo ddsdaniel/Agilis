@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
+import { SituacaoTarefa } from 'src/app/enums/situacao-tarefa.enum';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
@@ -206,5 +207,13 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
       this.filtros.tag = tag;
     }
     this.atualizarDados();
+  }
+
+  estaFazendo(tarefa: Tarefa): boolean {
+    return tarefa.situacao === SituacaoTarefa.Fazendo;
+  }
+
+  estaFeito(tarefa: Tarefa): boolean {
+    return tarefa.situacao === SituacaoTarefa.Feito;
   }
 }

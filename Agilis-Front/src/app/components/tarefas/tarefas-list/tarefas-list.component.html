@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(transacao.id, i)">
+        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(tarefa.id, i)">
           <td fxFlex="30%">
             <span>{{ tarefa.titulo }}</span>
             <mat-chip-list aria-label="Tags">
@@ -29,7 +29,13 @@
           <td fxFlex="15%">{{ tarefa?.feature?.nome }}</td>
           <td fxFlex="5%" class="text-right">{{ tarefa.valor }}</td>
           <td fxFlex="15%">{{ tarefa?.sprint?.nome }}</td>
-          <td fxFlex="10%">{{ tarefa?.solucionador?.nome }}</td>
+          <td fxFlex="10%">
+            <mat-icon class="icone-pequeno" title="Fazendo" *ngIf="estaFazendo(tarefa)" mat-list-icon color="accent">
+              code</mat-icon>
+            <mat-icon class="icone-pequeno" title="Feito" *ngIf="estaFeito(tarefa)" mat-list-icon color="primary">
+              done</mat-icon>
+            <span>{{ tarefa?.solucionador?.nome }}</span>
+          </td>
           <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
           <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
         </tr>

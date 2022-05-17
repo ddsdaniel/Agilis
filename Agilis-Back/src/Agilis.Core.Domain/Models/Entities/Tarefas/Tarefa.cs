@@ -27,6 +27,23 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public IEnumerable<Comentario> Comentarios { get; private set; }
         public IEnumerable<Anexo> Anexos { get; private set; }
         public Sprint Sprint { get; private set; }
+        public SituacaoTarefa Situacao { get; private set; }
+        public string Solucao { get; private set; }
+        public string Branches { get; private set; }
+
+        public bool AtividadeProgramacao
+        {
+            get
+            {
+                var tiposProgramacao = new TipoTarefa[] {
+                    TipoTarefa.Melhoria,
+                    TipoTarefa.Novidade,
+                    TipoTarefa.Bug
+                };
+
+                return tiposProgramacao.Contains(Tipo);
+            }
+        }
 
         protected Tarefa() { }
 
@@ -45,8 +62,11 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             int valor,
             Url urlTicketSAC,
             IEnumerable<Comentario> comentarios,
-            IEnumerable<Anexo> anexos, 
-            Sprint sprint)
+            IEnumerable<Anexo> anexos,
+            Sprint sprint,
+            SituacaoTarefa situacao,
+            string solucao,
+            string branches)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -64,6 +84,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Comentarios = comentarios;
             Anexos = anexos;
             Sprint = sprint;
+            Situacao = situacao;
+            Solucao = solucao;
+            Branches = branches;
             Validar();
         }
 
@@ -83,6 +106,28 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
 
             if (Valor < 0 || Valor > 5)
                 Criticar("Valor deve estar entre 0 e 5");
+
+            if (Situacao == SituacaoTarefa.Fazendo || Situacao == SituacaoTarefa.Feito)
+            {
+                if (Solucionador == null)
+                    Criticar("Solucionador inválido");
+
+                if (HorasPrevistas == null || HorasPrevistas.ObterTotalSegundos() == 0)
+                    Criticar("O campo Horas Previstas é obritório");
+
+                if (Situacao == SituacaoTarefa.Feito)
+                {
+                    if (String.IsNullOrEmpty(Solucao))
+                        Criticar("Solução inválida");
+
+                    if (AtividadeProgramacao && String.IsNullOrEmpty(Branches))
+                        Criticar("Branches inválidas");
+
+                    if (HorasRealizadas == null || HorasRealizadas.ObterTotalSegundos() == 0)
+                        Criticar("O campo Horas Realizadas é obritório");
+                }
+
+            }
 
             ImportarCriticas(Feature);
             ImportarCriticas(HorasPrevistas);

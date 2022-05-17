@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
+import { SituacaoTarefa, SituacaoTarefaLabel } from 'src/app/enums/situacao-tarefa.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { Anexo } from 'src/app/models/anexo';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
@@ -38,6 +39,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   @ViewChild('tags', { static: true }) tagsViewChild: TagsComponent;
   usuarios: UsuarioConsulta[];
   tipos = Object.keys(TipoTarefa);
+  situacoes = Object.keys(SituacaoTarefa);
   features: Feature[] = [];
   clientes: Cliente[] = [];
   sprints: Sprint[] = [];
@@ -116,7 +118,14 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       comentarios: [],
       anexos: [],
       sprint: null,
+      situacao: SituacaoTarefa.AFazer,
+      solucao: '',
+      branches: ''
     };
+  }
+
+  obterLabelSituacao(situacao: SituacaoTarefa): string {
+    return SituacaoTarefaLabel.get(situacao);
   }
 
   obterLabelTipo(tipo: TipoTarefa): string {
