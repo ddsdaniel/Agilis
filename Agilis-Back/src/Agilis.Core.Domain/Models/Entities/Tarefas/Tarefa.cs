@@ -25,7 +25,8 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
-        public IEnumerable<Anexo> Anexos { get; private set; }        
+        public IEnumerable<Anexo> Anexos { get; private set; }
+        public Sprint Sprint { get; private set; }
 
         protected Tarefa() { }
 
@@ -43,8 +44,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Cliente cliente,
             int valor,
             Url urlTicketSAC,
-            IEnumerable<Comentario> comentarios, 
-            IEnumerable<Anexo> anexos)
+            IEnumerable<Comentario> comentarios,
+            IEnumerable<Anexo> anexos, 
+            Sprint sprint)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -61,6 +63,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             UrlTicketSAC = urlTicketSAC;
             Comentarios = comentarios;
             Anexos = anexos;
+            Sprint = sprint;
             Validar();
         }
 
@@ -92,6 +95,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(UrlTicketSAC);
             ImportarCriticas(Comentarios);
             ImportarCriticas(Anexos);
+            ImportarCriticas(Sprint);
         }
 
         public void RemoverAnexo(Guid arquivoid)

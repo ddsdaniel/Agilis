@@ -1,27 +1,127 @@
-<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="true" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
 
   <div menu>
 
-    <!-- Grade -->
-    <mat-list role="list">
-
-      <mat-list-item role="listitem" *ngFor="let tarefa of lista; let i = index"
-        (click)="openBottomSheet(tarefa.id, i)">
-
-        <mat-icon mat-list-icon>task</mat-icon>
-
-        <div mat-line>
-          <span>{{tarefa.titulo}}</span>
-        </div>
-
-        <mat-divider></mat-divider>
-      </mat-list-item>
-    </mat-list>
+    <!-- Tabela -->
+    <table class="full-width-margin mt-4 mat-elevation-z8">
+      <thead>
+        <tr>
+          <th class="text-left" fxFlex="30%">Título</th>
+          <th class="text-left" fxFlex="15%">Produto</th>
+          <th class="text-left" fxFlex="15%">Feature</th>
+          <th class="text-right" fxFlex="5%">Valor</th>
+          <th class="text-left" fxFlex="15%">Sprint</th>
+          <th class="text-left" fxFlex="10%">Solucionador</th>
+          <th class="text-left" fxFlex="5%">Horas Prev.</th>
+          <th class="text-left" fxFlex="5%">Horas Real.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(transacao.id, i)">
+          <td fxFlex="30%">
+            <span>{{ tarefa.titulo }}</span>
+            <mat-chip-list aria-label="Tags">
+              <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
+              </mat-chip>
+            </mat-chip-list>
+          </td>
+          <td fxFlex="15%">{{ tarefa?.feature?.produto?.nome }}</td>
+          <td fxFlex="15%">{{ tarefa?.feature?.nome }}</td>
+          <td fxFlex="5%" class="text-right">{{ tarefa.valor }}</td>
+          <td fxFlex="15%">{{ tarefa?.sprint?.nome }}</td>
+          <td fxFlex="10%">{{ tarefa?.solucionador?.nome }}</td>
+          <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
+          <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Adicionar -->
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/tarefas/new'>
       <mat-icon>add</mat-icon>
     </button>
+
+  </div>
+
+  <div filtros>
+
+    <!-- Sprint -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Sprint</mat-label>
+      <mat-select [(ngModel)]="filtros.sprintId">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let sprint of sprints" [value]="sprint.id">
+          {{sprint.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Relator -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Relator</mat-label>
+      <mat-select [(ngModel)]="filtros.relatorId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let relator of usuarios" [value]="relator.id">
+          {{relator.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Solucionador -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Solucionador</mat-label>
+      <mat-select [(ngModel)]="filtros.solucionadorId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let solucionador of usuarios" [value]="solucionador.id">
+          {{solucionador.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Cliente -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(ngModel)]="filtros.clienteId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{cliente.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Produto -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Produto</mat-label>
+      <mat-select [(ngModel)]="filtros.produtoId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let produto of produtos" [value]="produto.id">
+          {{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Feature -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Feature</mat-label>
+      <mat-select [(ngModel)]="filtros.featureId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let feature of features" [value]="feature.id">
+          {{feature.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Tags -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Tags</mat-label>
+      <mat-select [(ngModel)]="filtros.tag">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="ml-2 mb-4 full-width-margin" mat-raised-button color="primary"
+      (click)="atualizarDados()">Aplicar</button>
 
   </div>
 

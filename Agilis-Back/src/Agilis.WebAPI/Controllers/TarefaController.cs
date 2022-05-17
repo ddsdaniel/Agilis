@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Application.Services.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
+using System.Collections.Generic;
 
 namespace Agilis.WebAPI.Controllers
 {
@@ -35,6 +36,33 @@ namespace Agilis.WebAPI.Controllers
                 return CustomBadRequest(_tarefaCrudAppService);
 
             return Ok(tags);
+        }
+
+        [HttpGet("pesquisa")]
+        public ActionResult<IEnumerable<TarefaViewModel>> Consultar(
+            [FromQuery] string sprintId,
+            [FromQuery] string relatorId,
+            [FromQuery] string solucionadorId,
+            [FromQuery] string clienteId,
+            [FromQuery] string produtoId,
+            [FromQuery] string featureId,
+            [FromQuery] string tag
+            )
+        {
+            //SituacaoTransacao? situacao = null;
+            //if (filtroSituacao != "Todas")
+            //{
+            //    Enum.TryParse(filtroSituacao, out SituacaoTransacao sit);
+            //    situacao = sit;
+            //}
+
+            var tarefasViewModel = _tarefaCrudAppService
+                .Pesquisar(sprintId, relatorId, solucionadorId, clienteId, produtoId, featureId, tag);
+
+            if (_tarefaCrudAppService.Invalido)
+                return CustomBadRequest(_tarefaCrudAppService);
+
+            return Ok(tarefasViewModel);
         }
     }
 }
