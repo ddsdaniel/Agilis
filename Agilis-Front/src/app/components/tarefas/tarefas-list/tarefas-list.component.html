@@ -1,4 +1,4 @@
-<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+<app-action-bar [titulo]="'Tarefas'" [botaoFiltro]="true" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
 
   <div menu>
 
@@ -14,6 +14,10 @@
           <span>{{tarefa.titulo}}</span>
         </div>
 
+        <div mat-line>
+          <span>{{tarefa?.sprint?.nome}}</span>
+        </div>
+
         <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>
@@ -22,6 +26,24 @@
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/tarefas/new'>
       <mat-icon>add</mat-icon>
     </button>
+
+  </div>
+
+  <div filtros>
+
+    <!-- Sprint -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Sprint</mat-label>
+      <mat-select [(ngModel)]="filtros.sprintId">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let sprint of sprints" [value]="sprint.id">
+          {{sprint.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="ml-2 mb-4 full-width-margin" mat-raised-button color="primary"
+      (click)="atualizarDados()">Aplicar</button>
 
   </div>
 

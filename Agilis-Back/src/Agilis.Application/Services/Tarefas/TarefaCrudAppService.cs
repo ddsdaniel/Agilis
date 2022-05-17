@@ -5,6 +5,8 @@ using Agilis.Application.ViewModels.Tarefas;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
 using MediatR;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Agilis.Application.Services.Tarefas
 {
@@ -12,11 +14,16 @@ namespace Agilis.Application.Services.Tarefas
         : CrudAppService<TarefaViewModel, TarefaViewModel, Tarefa>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public TarefaCrudAppService(IUnitOfWork unitOfWork, IMapper mapper, IMediator mediator)
+        public TarefaCrudAppService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IMediator mediator)
             : base(mapper, unitOfWork.ObterRepository<Tarefa>(), unitOfWork, mediator)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public string[] ConsultarTags()
@@ -33,6 +40,29 @@ namespace Agilis.Application.Services.Tarefas
             tags = tags.Distinct().ToArray();
 
             return tags;
+        }
+
+        public IEnumerable<TarefaViewModel> Pesquisar(
+            string sprintId
+            )
+        {
+            var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
+
+            var query = tarefaRepository.Consultar();
+
+            //if (tipoRepeticao.HasValue)
+            //    query = query.Where(t => t.Repeticao.Tipo == tipoRepeticao.Value);
+
+            if (!String.IsNullOrEmpty(sprintId))
+                query = query.Where(t => t.Sprint.Id == new Guid(sprintId));
+
+            var queryOrdenada = query
+                .Take(300)
+                .OrderByDescending(t => t.Valor);
+
+            var tarefas = queryOrdenada.ToArray();
+
+            return _mapper.Map<IEnumerable<TarefaViewModel>>(tarefas);
         }
     }
 }

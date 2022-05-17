@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Sprint } from 'src/app/models/sprint';
+import { FiltroTarefa } from 'src/app/models/tarefas/filtro-tarefa';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
@@ -16,18 +22,40 @@ import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.co
   templateUrl: './tarefas-list.component.html',
   styleUrls: ['./tarefas-list.component.scss']
 })
-export class TarefasListComponent extends CrudListComponent<Tarefa> {
+export class TarefasListComponent extends CrudListComponent<Tarefa> implements OnInit {
+
+  // Filtros
+  sprints: Sprint[] = [];
+
+  filtros: FiltroTarefa = {
+    sprintId: ''
+  };
 
   constructor(
-    tarefaApiService: TarefaApiService,
+    private sprintApiService: SprintApiService,
+    private bottomSheetService: BottomSheetService,
     router: Router,
     tituloService: TituloService,
-    private bottomSheetService: BottomSheetService,
     public snackBar: MatSnackBar,
+    public tarefaApiService: TarefaApiService,
   ) {
     super(tarefaApiService, snackBar, router, 'tarefas');
 
     tituloService.definir('Tarefas');
+  }
+
+  ngOnInit(): void {
+    this.carregarCampos()
+      .subscribe({
+        next: _ => super.ngOnInit()
+      });
+  }
+
+  carregarCampos(): Observable<any> {
+    return this.sprintApiService.obterTodos()
+      .pipe(
+        tap(sprints => this.sprints = sprints)
+      );
   }
 
   onPesquisar(criterio: string) {
@@ -80,5 +108,24 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> {
       return true;
     }
     return false;
+  }
+
+  atualizarDados() {
+    this.buscarDadosNaApi();
+  }
+
+  private buscarDadosNaApi() {
+
+    this.lista = [];
+    this.listaCompleta = [];
+
+    this.tarefaApiService.filtrar(this.filtros)
+      .subscribe({
+        next: (tarefas: Tarefa[]) => {
+          this.lista = tarefas;
+          this.listaCompleta = tarefas;
+        },
+        error: (error: HttpErrorResponse) => this.snackBar.open(error.message)
+      });
   }
 }
