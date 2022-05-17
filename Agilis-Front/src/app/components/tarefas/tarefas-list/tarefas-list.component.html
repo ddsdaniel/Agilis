@@ -42,6 +42,28 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Relator -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Relator</mat-label>
+      <mat-select [(ngModel)]="filtros.relatorId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let relator of usuarios" [value]="relator.id">
+          {{relator.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Solucionador -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Solucionador</mat-label>
+      <mat-select [(ngModel)]="filtros.solucionadorId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let solucionador of usuarios" [value]="solucionador.id">
+          {{solucionador.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button class="ml-2 mb-4 full-width-margin" mat-raised-button color="primary"
       (click)="atualizarDados()">Aplicar</button>
 

@@ -25,6 +25,8 @@ export class TarefaApiService extends CrudApiBaseService<Tarefa> {
 
     const params = new HttpParams()
       .append('sprintId', filtro.sprintId)
+      .append('relatorId', filtro.relatorId)
+      .append('solucionadorId', filtro.solucionadorId)
       ;
 
     return super.get<Tarefa[]>('pesquisa', params);

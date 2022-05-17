@@ -43,8 +43,9 @@ namespace Agilis.Application.Services.Tarefas
         }
 
         public IEnumerable<TarefaViewModel> Pesquisar(
-            string sprintId
-            )
+            string sprintId, 
+            string relatorId,
+            string solucionadorId)
         {
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
 
@@ -55,6 +56,12 @@ namespace Agilis.Application.Services.Tarefas
 
             if (!String.IsNullOrEmpty(sprintId))
                 query = query.Where(t => t.Sprint.Id == new Guid(sprintId));
+
+            if (!String.IsNullOrEmpty(relatorId))
+                query = query.Where(t => t.Relator.Id == new Guid(relatorId));
+
+            if (!String.IsNullOrEmpty(solucionadorId))
+                query = query.Where(t => t.Solucionador.Id == new Guid(solucionadorId));
 
             var queryOrdenada = query
                 .Take(300)

@@ -3,14 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Sprint } from 'src/app/models/sprint';
 import { FiltroTarefa } from 'src/app/models/tarefas/filtro-tarefa';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
+import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
 import { BottomSheetService } from 'src/app/services/bottom-sheet.service';
 import { TituloService } from 'src/app/services/titulo.service';
 
@@ -26,13 +29,17 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
 
   // Filtros
   sprints: Sprint[] = [];
+  usuarios: UsuarioConsulta[] = [];
 
   filtros: FiltroTarefa = {
-    sprintId: ''
+    sprintId: '',
+    relatorId: '',
+    solucionadorId: ''
   };
 
   constructor(
     private sprintApiService: SprintApiService,
+    private usuarioApiService: UsuarioApiService,
     private bottomSheetService: BottomSheetService,
     router: Router,
     tituloService: TituloService,
@@ -52,6 +59,20 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   }
 
   carregarCampos(): Observable<any> {
+    return this.obterSprints()
+      .pipe(
+        switchMap(_ => this.obterUsuarios()),
+      );
+  }
+
+  obterUsuarios(): Observable<any> {
+    return this.usuarioApiService.obterTodos()
+      .pipe(
+        tap(usuarios => this.usuarios = usuarios)
+      );
+  }
+
+  obterSprints(): Observable<any> {
     return this.sprintApiService.obterTodos()
       .pipe(
         tap(sprints => this.sprints = sprints)
