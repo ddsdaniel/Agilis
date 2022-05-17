@@ -18,6 +18,11 @@
           <span>{{tarefa?.sprint?.nome}}</span>
         </div>
 
+        <mat-chip-list aria-label="Tags">
+          <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
+          </mat-chip>
+        </mat-chip-list>
+
         <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>
@@ -94,6 +99,15 @@
         <mat-option *ngFor="let feature of features" [value]="feature.id">
           {{feature.nome}}
         </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Tags -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Tags</mat-label>
+      <mat-select [(ngModel)]="filtros.tag">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
       </mat-select>
     </mat-form-field>
 

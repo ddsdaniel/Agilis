@@ -5,4 +5,5 @@ export interface FiltroTarefa {
   clienteId: string;
   produtoId: string;
   featureId: string;
+  tag: string;
 }

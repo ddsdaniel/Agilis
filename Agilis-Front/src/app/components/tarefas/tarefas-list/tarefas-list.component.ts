@@ -39,6 +39,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   clientes: Cliente[] = [];
   produtos: Produto[] = [];
   features: Feature[] = [];
+  tags: string;
 
   filtros: FiltroTarefa = {
     sprintId: '',
@@ -46,7 +47,8 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
     solucionadorId: '',
     clienteId: '',
     produtoId: '',
-    featureId: ''
+    featureId: '',
+    tag: ''
   };
 
   constructor(
@@ -80,6 +82,14 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
         switchMap(_ => this.obterClientes()),
         switchMap(_ => this.obterProdutos()),
         switchMap(_ => this.obterFeatures()),
+        switchMap(_ => this.obterTags()),
+      );
+  }
+
+  obterTags(): Observable<any> {
+    return this.tarefaApiService.obterTags()
+      .pipe(
+        tap(tags => this.tags = tags)
       );
   }
 
@@ -187,5 +197,14 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
         },
         error: (error: HttpErrorResponse) => this.snackBar.open(error.message)
       });
+  }
+
+  filtrarTag(tag: string) {
+    if (tag && this.filtros.tag === tag) {
+      this.filtros.tag = '';
+    } else {
+      this.filtros.tag = tag;
+    }
+    this.atualizarDados();
   }
 }

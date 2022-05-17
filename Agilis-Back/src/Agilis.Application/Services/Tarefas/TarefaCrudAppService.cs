@@ -48,7 +48,8 @@ namespace Agilis.Application.Services.Tarefas
             string solucionadorId,
             string clienteId,
             string produtoId,
-            string featureId
+            string featureId,
+            string tag
             )
         {
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
@@ -75,6 +76,9 @@ namespace Agilis.Application.Services.Tarefas
 
             if (!String.IsNullOrEmpty(featureId))
                 query = query.Where(t => t.Feature.Id == new Guid(featureId));
+
+            if (!String.IsNullOrEmpty(tag))
+                query = query.Where(tarefa => tarefa.Tags.Any(t => t.Nome == tag));
 
             var queryOrdenada = query
                 .Take(300)
