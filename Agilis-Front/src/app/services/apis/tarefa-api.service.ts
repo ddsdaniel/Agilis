@@ -27,6 +27,7 @@ export class TarefaApiService extends CrudApiBaseService<Tarefa> {
       .append('sprintId', filtro.sprintId)
       .append('relatorId', filtro.relatorId)
       .append('solucionadorId', filtro.solucionadorId)
+      .append('clienteId', filtro.clienteId)
       ;
 
     return super.get<Tarefa[]>('pesquisa', params);

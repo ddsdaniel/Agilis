@@ -7,10 +7,12 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
+import { Cliente } from 'src/app/models/cliente';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Sprint } from 'src/app/models/sprint';
 import { FiltroTarefa } from 'src/app/models/tarefas/filtro-tarefa';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
@@ -30,17 +32,20 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   // Filtros
   sprints: Sprint[] = [];
   usuarios: UsuarioConsulta[] = [];
+  clientes: Cliente[] = [];
 
   filtros: FiltroTarefa = {
     sprintId: '',
     relatorId: '',
-    solucionadorId: ''
+    solucionadorId: '',
+    clienteId: ''
   };
 
   constructor(
     private sprintApiService: SprintApiService,
     private usuarioApiService: UsuarioApiService,
     private bottomSheetService: BottomSheetService,
+    private clienteApiService: ClienteApiService,
     router: Router,
     tituloService: TituloService,
     public snackBar: MatSnackBar,
@@ -62,6 +67,14 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
     return this.obterSprints()
       .pipe(
         switchMap(_ => this.obterUsuarios()),
+        switchMap(_ => this.obterClientes()),
+      );
+  }
+
+  obterClientes(): Observable<any> {
+    return this.clienteApiService.obterTodos()
+      .pipe(
+        tap(clientes => this.clientes = clientes)
       );
   }
 

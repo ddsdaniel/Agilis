@@ -64,6 +64,17 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Cliente -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(ngModel)]="filtros.clienteId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{cliente.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button class="ml-2 mb-4 full-width-margin" mat-raised-button color="primary"
       (click)="atualizarDados()">Aplicar</button>
 
