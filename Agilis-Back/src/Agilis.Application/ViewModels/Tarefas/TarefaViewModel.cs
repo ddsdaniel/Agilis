@@ -27,5 +27,6 @@ namespace Agilis.Application.ViewModels.Tarefas
         public IEnumerable<ComentarioViewModel> Comentarios { get; set; }
         public IEnumerable<AnexoViewModel> Anexos { get; set; }
         public SprintViewModel Sprint { get; set; }
+        public SituacaoTarefa Situacao { get; set; }
     }
 }

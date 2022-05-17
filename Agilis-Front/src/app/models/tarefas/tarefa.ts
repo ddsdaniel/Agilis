@@ -1,4 +1,5 @@
-﻿import { TipoTarefa } from '../../enums/tipo-tarefa.enum';
+﻿import { SituacaoTarefa } from 'src/app/enums/situacao-tarefa.enum';
+import { TipoTarefa } from '../../enums/tipo-tarefa.enum';
 import { Anexo } from '../anexo';
 import { Cliente } from '../cliente';
 import { Entidade } from '../entidade';
@@ -25,4 +26,5 @@ export interface Tarefa extends Entidade {
   comentarios: Comentario[];
   anexos: Anexo[];
   sprint: Sprint;
+  situacao: SituacaoTarefa;
 }

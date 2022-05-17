@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(transacao.id, i)">
+        <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(tarefa.id, i)">
           <td fxFlex="30%">
             <span>{{ tarefa.titulo }}</span>
             <mat-chip-list aria-label="Tags">

@@ -94,12 +94,11 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Cliente -->
+      <!-- Situação -->
       <mat-form-field fxFlex="50" class="ml-1">
-        <mat-label>Cliente</mat-label>
-        <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
-          <mat-option [value]="null"></mat-option>
-          <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
+        <mat-label>Situação</mat-label>
+        <mat-select [(ngModel)]="entidade.situacao">
+          <mat-option *ngFor="let situacao of situacoes" [value]="situacao">{{obterLabelSituacao(situacao)}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -107,6 +106,16 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Cliente -->
+      <mat-form-field fxFlex="50" class="mr-1">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(ngModel)]="entidade.cliente" [compareWith]="comparadorService.compareById">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <!-- Sprint -->
       <mat-form-field fxFlex="50" class="ml-1">

@@ -27,6 +27,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public IEnumerable<Comentario> Comentarios { get; private set; }
         public IEnumerable<Anexo> Anexos { get; private set; }
         public Sprint Sprint { get; private set; }
+        public SituacaoTarefa Situacao { get; private set; }
 
         protected Tarefa() { }
 
@@ -45,8 +46,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             int valor,
             Url urlTicketSAC,
             IEnumerable<Comentario> comentarios,
-            IEnumerable<Anexo> anexos, 
-            Sprint sprint)
+            IEnumerable<Anexo> anexos,
+            Sprint sprint, 
+            SituacaoTarefa situacao)
         {
             Titulo = titulo;
             Descricao = descricao;
@@ -64,6 +66,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Comentarios = comentarios;
             Anexos = anexos;
             Sprint = sprint;
+            Situacao = situacao;
             Validar();
         }
 
