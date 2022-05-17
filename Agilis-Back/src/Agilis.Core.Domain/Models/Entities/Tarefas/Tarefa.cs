@@ -107,13 +107,26 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             if (Valor < 0 || Valor > 5)
                 Criticar("Valor deve estar entre 0 e 5");
 
-            if (Situacao == SituacaoTarefa.Feito)
+            if (Situacao == SituacaoTarefa.Fazendo || Situacao == SituacaoTarefa.Feito)
             {
-                if (String.IsNullOrEmpty(Solucao))
-                    Criticar("Solução inválida para tarefa resolvida");
+                if (Solucionador == null)
+                    Criticar("Solucionador inválido");
 
-                if (AtividadeProgramacao && String.IsNullOrEmpty(Branches))
-                    Criticar("Branches inválidas para tarefa resolvida");
+                if (HorasPrevistas == null || HorasPrevistas.ObterTotalSegundos() == 0)
+                    Criticar("O campo Horas Previstas é obritório");
+
+                if (Situacao == SituacaoTarefa.Feito)
+                {
+                    if (String.IsNullOrEmpty(Solucao))
+                        Criticar("Solução inválida");
+
+                    if (AtividadeProgramacao && String.IsNullOrEmpty(Branches))
+                        Criticar("Branches inválidas");
+
+                    if (HorasRealizadas == null || HorasRealizadas.ObterTotalSegundos() == 0)
+                        Criticar("O campo Horas Realizadas é obritório");
+                }
+
             }
 
             ImportarCriticas(Feature);

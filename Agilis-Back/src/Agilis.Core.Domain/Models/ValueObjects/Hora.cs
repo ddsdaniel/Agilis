@@ -140,6 +140,15 @@ namespace Agilis.Core.Domain.Models.ValueObjects
 
         public static bool operator ==(Hora a, Hora b)
         {
+            if (a is null && b is null)
+                return true;
+
+            if (a is null && b is not null)
+                return false;
+
+            if (a is not null && b is null)
+                return false;
+
             return a.ObterTotalSegundos() == b.ObterTotalSegundos();
         }
 
