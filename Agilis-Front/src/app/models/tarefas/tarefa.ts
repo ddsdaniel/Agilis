@@ -27,4 +27,6 @@ export interface Tarefa extends Entidade {
   anexos: Anexo[];
   sprint: Sprint;
   situacao: SituacaoTarefa;
+  branches: string;
+  solucao: string;
 }

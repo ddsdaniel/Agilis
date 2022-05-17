@@ -118,7 +118,9 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       comentarios: [],
       anexos: [],
       sprint: null,
-      situacao: SituacaoTarefa.AFazer
+      situacao: SituacaoTarefa.AFazer,
+      solucao: '',
+      branches: ''
     };
   }
 

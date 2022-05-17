@@ -156,6 +156,28 @@
 
     </div>
 
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Branches -->
+      <mat-form-field fxFlex>
+        <mat-label>Branches</mat-label>
+        <textarea matInput [(ngModel)]="entidade.branches" placeholder="Branches" name="branches" type="text"
+          appSelectAllText rows="5"></textarea>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+
+      <!-- Solução -->
+      <mat-form-field fxFlex>
+        <mat-label>Solução</mat-label>
+        <textarea matInput [(ngModel)]="entidade.solucao" placeholder="Solução" name="solucao" type="text"
+          appSelectAllText rows="5"></textarea>
+      </mat-form-field>
+
+    </div>
+
     <!-- Check-Lists -->
     <div *ngFor="let checkList of entidade.checkLists" class="mb-4">
       <app-check-list-editavel [checkList]="checkList">
