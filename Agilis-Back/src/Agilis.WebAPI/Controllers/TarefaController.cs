@@ -43,7 +43,9 @@ namespace Agilis.WebAPI.Controllers
             [FromQuery] string sprintId,
             [FromQuery] string relatorId,
             [FromQuery] string solucionadorId,
-            [FromQuery] string clienteId
+            [FromQuery] string clienteId,
+            [FromQuery] string produtoId,
+            [FromQuery] string featureId
             )
         {
             //SituacaoTransacao? situacao = null;
@@ -54,7 +56,7 @@ namespace Agilis.WebAPI.Controllers
             //}
 
             var tarefasViewModel = _tarefaCrudAppService
-                .Pesquisar(sprintId, relatorId, solucionadorId, clienteId);
+                .Pesquisar(sprintId, relatorId, solucionadorId, clienteId, produtoId, featureId);
 
             if (_tarefaCrudAppService.Invalido)
                 return CustomBadRequest(_tarefaCrudAppService);

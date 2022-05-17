@@ -75,6 +75,28 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Produto -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Produto</mat-label>
+      <mat-select [(ngModel)]="filtros.produtoId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let produto of produtos" [value]="produto.id">
+          {{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Feature -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Feature</mat-label>
+      <mat-select [(ngModel)]="filtros.featureId">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let feature of features" [value]="feature.id">
+          {{feature.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button class="ml-2 mb-4 full-width-margin" mat-raised-button color="primary"
       (click)="atualizarDados()">Aplicar</button>
 

@@ -3,4 +3,6 @@ export interface FiltroTarefa {
   relatorId: string;
   solucionadorId: string;
   clienteId: string;
+  produtoId: string;
+  featureId: string;
 }

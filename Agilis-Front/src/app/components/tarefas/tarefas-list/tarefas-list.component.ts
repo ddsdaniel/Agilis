@@ -8,11 +8,15 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { constantes } from 'src/app/consts/constantes';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
+import { Feature } from 'src/app/models/produtos/feature';
+import { Produto } from 'src/app/models/produtos/produto';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Sprint } from 'src/app/models/sprint';
 import { FiltroTarefa } from 'src/app/models/tarefas/filtro-tarefa';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
+import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
+import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
@@ -33,12 +37,16 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   sprints: Sprint[] = [];
   usuarios: UsuarioConsulta[] = [];
   clientes: Cliente[] = [];
+  produtos: Produto[] = [];
+  features: Feature[] = [];
 
   filtros: FiltroTarefa = {
     sprintId: '',
     relatorId: '',
     solucionadorId: '',
-    clienteId: ''
+    clienteId: '',
+    produtoId: '',
+    featureId: ''
   };
 
   constructor(
@@ -46,6 +54,8 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
     private usuarioApiService: UsuarioApiService,
     private bottomSheetService: BottomSheetService,
     private clienteApiService: ClienteApiService,
+    private produtoApiService: ProdutoApiService,
+    private featureApiService: FeatureApiService,
     router: Router,
     tituloService: TituloService,
     public snackBar: MatSnackBar,
@@ -68,6 +78,22 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
       .pipe(
         switchMap(_ => this.obterUsuarios()),
         switchMap(_ => this.obterClientes()),
+        switchMap(_ => this.obterProdutos()),
+        switchMap(_ => this.obterFeatures()),
+      );
+  }
+
+  obterFeatures(): Observable<any> {
+    return this.featureApiService.obterTodos()
+      .pipe(
+        tap(features => this.features = features)
+      );
+  }
+
+  obterProdutos(): Observable<any> {
+    return this.produtoApiService.obterTodos()
+      .pipe(
+        tap(produtos => this.produtos = produtos)
       );
   }
 

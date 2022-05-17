@@ -46,7 +46,9 @@ namespace Agilis.Application.Services.Tarefas
             string sprintId, 
             string relatorId,
             string solucionadorId,
-            string clienteId
+            string clienteId,
+            string produtoId,
+            string featureId
             )
         {
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
@@ -66,7 +68,13 @@ namespace Agilis.Application.Services.Tarefas
                 query = query.Where(t => t.Solucionador.Id == new Guid(solucionadorId));
 
             if (!String.IsNullOrEmpty(clienteId))
-                query = query.Where(t => t.Cliente.Id == new Guid(clienteId));            
+                query = query.Where(t => t.Cliente.Id == new Guid(clienteId));
+
+            if (!String.IsNullOrEmpty(produtoId))
+                query = query.Where(t => t.Feature.Produto.Id == new Guid(produtoId));
+
+            if (!String.IsNullOrEmpty(featureId))
+                query = query.Where(t => t.Feature.Id == new Guid(featureId));
 
             var queryOrdenada = query
                 .Take(300)
