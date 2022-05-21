@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { constantes } from 'src/app/consts/constantes';
+import { AnexoFk } from 'src/app/models/anexo-fk';
 import { Anexo } from 'src/app/models/anexo';
-import { Arquivo } from 'src/app/models/arquivo';
-import { ArquivoApiService } from 'src/app/services/apis/arquivo-api.service';
+import { AnexoApiService } from 'src/app/services/apis/anexo-api.service';
+import { TipoAnexo } from 'src/app/enums/tipo-anexo.enum';
 
 @Component({
   selector: 'app-anexos',
@@ -12,20 +13,20 @@ import { ArquivoApiService } from 'src/app/services/apis/arquivo-api.service';
 })
 export class AnexosComponent {
 
-  novoAnexo: Anexo;
-  @Input() anexos: Anexo[] = [];
-  @Output() anexosChange = new EventEmitter<Anexo[]>();
-  @Output() downloadAnexo = new EventEmitter<Anexo>();
+  novoAnexo: AnexoFk;
+  @Input() anexos: AnexoFk[] = [];
+  @Output() anexosChange = new EventEmitter<AnexoFk[]>();
+  @Output() downloadAnexo = new EventEmitter<AnexoFk>();
 
   constructor(
     private snackBar: MatSnackBar,
-    private arquivoApiService: ArquivoApiService,
+    private anexoApiService: AnexoApiService,
   ) { }
 
   excluir(indice: number) {
     const anexoRemovido = this.anexos[indice];
 
-    this.arquivoApiService.excluir(anexoRemovido.arquivoId)
+    this.anexoApiService.excluir(anexoRemovido.anexoId)
       .subscribe({
         next: _ => {
           this.anexos.removeAt(indice);
@@ -53,13 +54,14 @@ export class AnexosComponent {
 
       reader.onload = () => {
 
-        const arquivo: Arquivo = {
+        const anexo: Anexo = {
           id: constantes.newGuid,
-          base64: reader.result.valueOf().toString(),
-          nome: file.name
+          conteudo: reader.result.valueOf().toString(),
+          nome: file.name,
+          tipo: TipoAnexo.Arquivo// será corrigido no back-end
         };
 
-        this.upload(arquivo, file);
+        this.upload(anexo, file);
 
       };
       reader.onerror = () => {
@@ -69,8 +71,8 @@ export class AnexosComponent {
     }
   }
 
-  upload(arquivo: Arquivo, file: File) {
-    this.arquivoApiService.adicionar(arquivo)
+  upload(anexo: Anexo, file: File) {
+    this.anexoApiService.adicionar(anexo)
       .subscribe({
         next: id => this.anexar(id, file)
       });
@@ -79,15 +81,14 @@ export class AnexosComponent {
   anexar(id: string, file: File): void {
     this.novoAnexo = {
       nome: file.name,
-      arquivoId: id,
-      imagem: false
+      anexoId: id,
     };
     const clone = Object.assign({}, this.novoAnexo);
     this.anexos.push(clone);
     this.anexosChange.emit(this.anexos);
   }
 
-  download(anexo: Anexo): void {
+  download(anexo: AnexoFk): void {
     event.stopPropagation();
     this.downloadAnexo.emit(anexo);
   }

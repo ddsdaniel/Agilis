@@ -7,30 +7,30 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Agilis.Application.Handlers.Arquivos
+namespace Agilis.Application.Handlers.Anexos
 {
-    public class ArquivoExcluidoEventHandler : INotificationHandler<EntidadeExcluidaDomainEvent<Arquivo>>
+    public class AnexoExcluidoEventHandler : INotificationHandler<EntidadeExcluidaDomainEvent<Anexo>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArquivoExcluidoEventHandler(IUnitOfWork unitOfWork)
+        public AnexoExcluidoEventHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(EntidadeExcluidaDomainEvent<Arquivo> notification, CancellationToken cancellationToken)
+        public async Task Handle(EntidadeExcluidaDomainEvent<Anexo> notification, CancellationToken cancellationToken)
         {
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
 
-            var arquivoExcluido = notification.Entidade;
+            var anexoExcluido = notification.Entidade;
 
             var tarefas = tarefaRepository
                 .Consultar()
-                .Where(t => t.Anexos.Any(a => a.ArquivoId == arquivoExcluido.Id));
+                .Where(t => t.Anexos.Any(a => a.AnexoId == anexoExcluido.Id));
 
             foreach (var tarefa in tarefas)
             {
-                tarefa.RemoverAnexo(arquivoExcluido.Id);
+                tarefa.RemoverAnexo(anexoExcluido.Id);
                 await tarefaRepository.AlterarAsync(tarefa);
             }
         }

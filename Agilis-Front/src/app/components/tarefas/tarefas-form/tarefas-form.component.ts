@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
 import { SituacaoTarefa, SituacaoTarefaLabel } from 'src/app/enums/situacao-tarefa.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
-import { Anexo } from 'src/app/models/anexo';
+import { AnexoFk } from 'src/app/models/anexo-fk';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
@@ -178,8 +178,8 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     }
   }
 
-  download(anexo: Anexo): void {
-    const url = `${environment.apiUrl}/arquivo/${anexo.arquivoId}/download`;
+  download(anexo: AnexoFk): void {
+    const url = `${environment.apiUrl}/anexo/${anexo.anexoId}/download`;
     window.open(url, '_blank');
   }
 }

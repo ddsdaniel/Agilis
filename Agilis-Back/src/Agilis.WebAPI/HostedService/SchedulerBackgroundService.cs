@@ -12,20 +12,20 @@ namespace Agilis.WebAPI.HostedService
     public class SchedulerBackgroundService : BackgroundService
     {
         private readonly ILogger<SchedulerBackgroundService> _logger;
-        private readonly LimpezaArquivosNaoAnexadosWorker _limpezaArquivosNaoAnexadosWorker;
+        private readonly LimpezaAnexosOrfaosWorker _limpezaAnexosOrfaosWorker;
 
         public SchedulerBackgroundService(
             ILogger<SchedulerBackgroundService> logger,
-            LimpezaArquivosNaoAnexadosWorker limpezaArquivosNaoAnexadosWorker
+            LimpezaAnexosOrfaosWorker limpezaAnexosOrfaosWorker
             )
         {
             _logger = logger;
-            _limpezaArquivosNaoAnexadosWorker = limpezaArquivosNaoAnexadosWorker;
+            _limpezaAnexosOrfaosWorker = limpezaAnexosOrfaosWorker;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            ExecutarDiariamente(0, 0, _limpezaArquivosNaoAnexadosWorker, stoppingToken);
+            ExecutarDiariamente(0, 0, _limpezaAnexosOrfaosWorker, stoppingToken);
             return Task.CompletedTask;
         }
 

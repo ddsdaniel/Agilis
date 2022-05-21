@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Agilis.Application.Workers
 {
-    public class LimpezaArquivosNaoAnexadosWorker : Worker
+    public class LimpezaAnexosOrfaosWorker : Worker
     {
-        public LimpezaArquivosNaoAnexadosWorker(IServiceProvider serviceProvider)
+        public LimpezaAnexosOrfaosWorker(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
         }
@@ -20,16 +20,16 @@ namespace Agilis.Application.Workers
         {
             using var scope = ServiceProvider.CreateScope();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            var arquivoRepository = unitOfWork.ObterRepository<Arquivo>();
+            var anexoRepository = unitOfWork.ObterRepository<Anexo>();
             var tarefaRepository = unitOfWork.ObterRepository<Tarefa>();
 
             var anexosId = tarefaRepository
                 .Consultar()
                 .SelectMany(t => t.Anexos)
-                .Select(a => a.ArquivoId)
+                .Select(a => a.AnexoId)
                 .ToList();
 
-            await arquivoRepository.ExcluirNotInAsync(anexosId);
+            await anexoRepository.ExcluirNotInAsync(anexosId);
             await unitOfWork.CommitAsync();
         }
     }

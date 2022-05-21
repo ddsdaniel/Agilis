@@ -2,10 +2,9 @@
 
 namespace Agilis.Application.ViewModels
 {
-    public class ArquivoViewModel
+    public class AnexoFKViewModel
     {
-        public Guid Id { get; set; }
-        public string Base64 { get; set; }
+        public Guid AnexoId { get; set; }
         public string Nome { get; set; }
     }
 }

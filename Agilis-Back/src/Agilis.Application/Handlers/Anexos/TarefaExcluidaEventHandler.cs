@@ -6,7 +6,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Agilis.Application.Handlers.Arquivos
+namespace Agilis.Application.Handlers.Anexos
 {
     public class TarefaExcluidaEventHandler : INotificationHandler<EntidadeExcluidaDomainEvent<Tarefa>>
     {
@@ -19,10 +19,10 @@ namespace Agilis.Application.Handlers.Arquivos
 
         public async Task Handle(EntidadeExcluidaDomainEvent<Tarefa> notification, CancellationToken cancellationToken)
         {
-            var arquivoRepository = _unitOfWork.ObterRepository<Arquivo>();
+            var anexoRepository = _unitOfWork.ObterRepository<Anexo>();
             foreach (var anexo in notification.Entidade.Anexos)
             {
-                await arquivoRepository.ExcluirAsync(a => a.Id == anexo.ArquivoId);
+                await anexoRepository.ExcluirAsync(a => a.Id == anexo.AnexoId);
             }
         }
     }

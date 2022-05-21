@@ -7,7 +7,7 @@ namespace Agilis.Infra.CrossCutting.IoC
     {
         public static IServiceCollection AddWorkersIoC(this IServiceCollection services)
         {
-            services.AddSingleton<LimpezaArquivosNaoAnexadosWorker>();
+            services.AddSingleton<LimpezaAnexosOrfaosWorker>();
             return services;
         }
     }
