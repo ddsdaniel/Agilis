@@ -16,6 +16,7 @@ namespace Agilis.WebAPI.Configurations
             services.AddSingleton((provider) => new MapperConfiguration(cfg =>
             {
                 cfg.AddMaps(new[] { "Agilis.Application" });
+                cfg.AddMaps(new[] { "Agilis.Infra.Importacao.Trello" });
                 //cfg.AddProfile<DomainToViewModelProfile>();
                 //cfg.AddProfile<OutrosProfile>();
                 //cfg.AddProfile<DomainToGoogleFcmProfile>();

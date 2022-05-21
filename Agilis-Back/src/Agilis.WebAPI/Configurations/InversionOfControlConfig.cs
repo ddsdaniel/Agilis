@@ -24,6 +24,7 @@ namespace Agilis.WebAPI.Configurations
             services.AddAppServicesIoC();
             services.AddWorkersIoC();
             services.AddEstatisticaIoC();
+            services.AddTrelloIoC();
 
             return services;
         }
