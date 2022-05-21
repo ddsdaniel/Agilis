@@ -38,7 +38,7 @@ namespace Agilis.WebAPI.Controllers
             if (arquivo == null)
                 return NotFound();
 
-            var byteArray = Convert.FromBase64String(arquivo.Base64.Split(',')[1]);
+            var byteArray = Convert.FromBase64String(arquivo.Conteudo.Split(',')[1]);
 
             return File(byteArray, MediaTypeNames.Application.Octet, arquivo.Nome);
         }
