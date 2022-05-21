@@ -25,7 +25,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public int Valor { get; private set; }
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
-        public IEnumerable<Anexo> Anexos { get; private set; }
+        public IEnumerable<AnexoFK> Anexos { get; private set; }
         public Sprint Sprint { get; private set; }
         public SituacaoTarefa Situacao { get; private set; }
         public string Solucao { get; private set; }
@@ -62,7 +62,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             int valor,
             Url urlTicketSAC,
             IEnumerable<Comentario> comentarios,
-            IEnumerable<Anexo> anexos,
+            IEnumerable<AnexoFK> anexos,
             Sprint sprint,
             SituacaoTarefa situacao,
             string solucao,
@@ -143,9 +143,9 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(Sprint);
         }
 
-        public void RemoverAnexo(Guid arquivoid)
+        public void RemoverAnexo(Guid anexoId)
         {
-            Anexos = Anexos.Where(a => a.ArquivoId != arquivoid);
+            Anexos = Anexos.Where(a => a.AnexoId != anexoId);
         }
 
         public override string ToString() => Titulo;

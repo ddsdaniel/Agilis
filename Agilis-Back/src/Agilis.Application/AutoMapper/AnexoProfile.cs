@@ -4,11 +4,11 @@ using AutoMapper;
 
 namespace Agilis.Application.AutoMapper
 {
-    public class ArquivoProfile : Profile
+    public class AnexoProfile : Profile
     {
-        public ArquivoProfile()
+        public AnexoProfile()
         {
-            CreateMap<Arquivo, ArquivoViewModel>()
+            CreateMap<Anexo, AnexoViewModel>()
                 .ReverseMap();
         }
     }

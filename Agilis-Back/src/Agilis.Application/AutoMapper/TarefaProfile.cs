@@ -23,7 +23,7 @@ namespace Agilis.Application.AutoMapper
             CreateMap<Comentario, ComentarioViewModel>()
                 .ReverseMap();
 
-            CreateMap<Anexo, AnexoViewModel>()
+            CreateMap<AnexoFK, AnexoFKViewModel>()
                 .ReverseMap();
         }
     }
