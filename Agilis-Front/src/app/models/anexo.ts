@@ -1,5 +1,8 @@
-export interface Anexo {
+import { TipoAnexo } from '../enums/tipo-anexo.enum';
+import { Entidade } from './entidade';
+
+export interface Anexo extends Entidade {
+  conteudo: string;
   nome: string;
-  arquivoId: string;
-  imagem: boolean;
+  tipo: TipoAnexo;
 }

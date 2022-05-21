@@ -7,7 +7,7 @@ using Agilis.Application.Services.Produtos;
 using Agilis.Application.Services.Clientes;
 using Agilis.Application.Services.Sprints;
 using Agilis.Application.Services.Features;
-using Agilis.Application.Services.Arquivos;
+using Agilis.Application.Services.Anexos;
 
 namespace Agilis.Infra.CrossCutting.IoC
 {
@@ -31,8 +31,8 @@ namespace Agilis.Infra.CrossCutting.IoC
             //Clientes
             services.AddScoped<ClienteCrudAppService>();
 
-            //Arquivos
-            services.AddScoped<ArquivoCrudAppService>();            
+            //Anexos
+            services.AddScoped<AnexoCrudAppService>();            
 
             //Segurança
             services.AddScoped<UsuarioCrudAppService>();

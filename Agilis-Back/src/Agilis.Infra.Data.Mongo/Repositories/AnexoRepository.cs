@@ -5,9 +5,9 @@ using MongoDB.Driver;
 
 namespace Agilis.Infra.Data.Mongo.Repositories
 {
-    public class ArquivoRepository : MongoRepository<Arquivo>, IRepository<Arquivo>
+    public class AnexoRepository : MongoRepository<Anexo>, IRepository<Anexo>
     {
-        public ArquivoRepository(IMongoDatabase mongoDatabase, IClientSessionHandle session) : base(mongoDatabase, session)
+        public AnexoRepository(IMongoDatabase mongoDatabase, IClientSessionHandle session) : base(mongoDatabase, session)
         {
         }
     }
