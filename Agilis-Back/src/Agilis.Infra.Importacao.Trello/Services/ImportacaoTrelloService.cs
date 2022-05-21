@@ -1,4 +1,5 @@
-﻿using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+﻿using Agilis.Core.Domain.Abstractions.Repositories;
+using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
@@ -35,7 +36,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
 
         public async Task ImportarAsync()
         {            
-            await ImportarSprintsAsync();
+            await ImportarTrelloAsync();
 
             await SalvarDados();
 
@@ -50,6 +51,8 @@ namespace Agilis.Infra.Importacao.Trello.Services
 
         private async Task LimparDadosAsync()
         {
+            _logger.LogInformation("Limpando o banco de dados...");
+
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var sprintRepository = _unitOfWork.ObterRepository<Sprint>();
@@ -61,11 +64,11 @@ namespace Agilis.Infra.Importacao.Trello.Services
             Tags.Clear();
         }
 
-        private async Task ImportarSprintsAsync()
+        private async Task ImportarTrelloAsync()
         {
             //TODO: configurar organization id
             const string ORGANIZATION_ID = "erp2113";
-            _logger.LogInformation("Obtendo quadros...");
+            _logger.LogInformation("Obtendo dados do Trello...");
             var boards = _trelloEasyService.GetBoards(ORGANIZATION_ID, BoardFilter.All);
 
             await LimparDadosAsync();
@@ -80,6 +83,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
         private async Task ImportarTarefasAsync(Board board)
         {
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
+            var anexoRepository = _unitOfWork.ObterRepository<Anexo>();
 
             _logger.LogInformation($"Importanto cards...");
 
@@ -87,10 +91,12 @@ namespace Agilis.Infra.Importacao.Trello.Services
             {
                 foreach (var card in list.Cards)
                 {
+                    _logger.LogInformation(new String('-', 50));
+                    _logger.LogInformation($"Importando card {card.ShortUrl}...");
+
                     await ImportarUsuariosAsync(card);
                     ImportarTags(card);
-
-                    _logger.LogInformation($"Importando card {card.ShortUrl}...");
+                    await ImportarAnexos(anexoRepository, card);
 
                     var tarefa = _mapper.Map<Tarefa>(card);
                     if (tarefa.Invalido)
@@ -101,12 +107,25 @@ namespace Agilis.Infra.Importacao.Trello.Services
             }
         }
 
+        private async Task ImportarAnexos(IRepository<Anexo> anexoRepository, Card card)
+        {
+            foreach (var attachment in card.Attachments)
+            {
+                _logger.LogInformation($"Importando anexo {attachment.Name}...");
+
+                var anexo = _mapper.Map<Anexo>(attachment);
+
+                await anexoRepository.AdicionarAsync(anexo);
+
+                attachment.AtualizarId(anexo.Id.ToString());
+            }
+        }
+
         private void ImportarTags(Card card)
         {
-            _logger.LogInformation("Obtendo tags...");
             foreach (var label in card.Labels)
             {
-                _logger.LogInformation($"Importando {label.Name}...");
+                _logger.LogInformation($"Importando #{label.Name}...");
                 if (!Tags.Contains(label.Name))
                     Tags.Add(label.Name);
             }
@@ -129,13 +148,11 @@ namespace Agilis.Infra.Importacao.Trello.Services
 
         private async Task ImportarUsuariosAsync(Card card)
         {
-            _logger.LogInformation("Obtendo membros...");
-
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
 
             foreach (var member in card.Members)
             {
-                _logger.LogInformation($"Importando {member.FullName}...");
+                _logger.LogInformation($"Importando @{member.UserName}...");
                 var usuario = _mapper.Map<Usuario>(member);
 
                 if (usuario.Invalido)

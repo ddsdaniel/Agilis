@@ -34,7 +34,7 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
                     valor: 0,
                     urlTicketSAC: null,
                     comentarios: context.Mapper.Map<Comentario[]>(card.Actions.Where(a => a.Type == "commentCard")),
-                    anexos: context.Mapper.Map<Anexo[]>(card.Attachments),
+                    anexos: context.Mapper.Map<AnexoFK[]>(card.Attachments),
                     sprint: ObterSprint(card),
                     situacao: ObterSituacao(card),
                     solucao: ObterSolucao(card),
@@ -72,9 +72,18 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
                .ConvertUsing((attachment, x, context) =>
                    new Anexo(
                        nome: attachment.Name,
-                       arquivoId: Guid.Empty//TODO: download e persistência
+                       conteudo: attachment.Url
                        )
                    );
+
+            CreateMap<Attachment, AnexoFK>()
+              .ConvertUsing((attachment, x, context) =>
+                  new AnexoFK(
+                      nome: attachment.Name,
+                      anexoId: new Guid(attachment.Id)
+                      )
+                  );
+
         }
 
         private string ObterTitulo(Card card)
