@@ -1,6 +1,6 @@
 ﻿import { SituacaoTarefa } from 'src/app/enums/situacao-tarefa.enum';
 import { TipoTarefa } from '../../enums/tipo-tarefa.enum';
-import { Anexo } from '../anexo';
+import { AnexoFk } from '../anexo-fk';
 import { Cliente } from '../cliente';
 import { Entidade } from '../entidade';
 import { Feature } from '../produtos/feature';
@@ -24,7 +24,7 @@ export interface Tarefa extends Entidade {
   valor: number;
   urlTicketSAC: string;
   comentarios: Comentario[];
-  anexos: Anexo[];
+  anexos: AnexoFk[];
   sprint: Sprint;
   situacao: SituacaoTarefa;
   branches: string;
