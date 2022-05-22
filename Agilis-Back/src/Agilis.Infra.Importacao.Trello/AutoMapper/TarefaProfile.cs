@@ -15,6 +15,8 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 {
     public class TarefaProfile : Profile
     {
+        public static List<Cliente> Clientes { get; internal set; }
+
         public TarefaProfile()
         {
             CreateMap<Card, Tarefa>()
@@ -146,9 +148,7 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 
         private Cliente ObterCliente(Card card)
         {
-            //TODO: obter os clientes cadastrados (memory cache estatico?)
-            var clientes = new List<Cliente>();
-            var cliente = clientes.FirstOrDefault(c => ContemLabel(card, c.Nome));
+            var cliente = Clientes.FirstOrDefault(c => ContemLabel(card, c.Nome));
             return cliente;
         }
 

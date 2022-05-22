@@ -38,7 +38,7 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
         private static string ObterSobrenome(Member membro)
         {
             var nome = ObterNome(membro);
-            return membro.FullName.Substring(nome.Length + 1);
+            return membro.ObterNomeCompleto()[(nome.Length + 1)..];
         }
 
         private static string ObterNome(Member membro)

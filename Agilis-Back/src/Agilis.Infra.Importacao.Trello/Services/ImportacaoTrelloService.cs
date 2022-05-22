@@ -4,6 +4,7 @@ using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Infra.Importacao.Trello.Abstractions.Services;
+using Agilis.Infra.Importacao.Trello.AutoMapper;
 using Agilis.Infra.Importacao.Trello.Extensions;
 using AutoMapper;
 using DDS.Validacoes.Abstractions.Models;
@@ -62,11 +63,13 @@ namespace Agilis.Infra.Importacao.Trello.Services
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var sprintRepository = _unitOfWork.ObterRepository<Sprint>();
+            var clienteRepository = _unitOfWork.ObterRepository<Cliente>();
 
             await tarefaRepository.ExcluirAsync(t => true);
             await sprintRepository.ExcluirAsync(s => true);
             await usuarioRepository.ExcluirAsync(u => true);
 
+            TarefaProfile.Clientes = clienteRepository.Consultar().ToList();
             _usuarios.Clear();
             _tags.Clear();
         }
@@ -79,7 +82,9 @@ namespace Agilis.Infra.Importacao.Trello.Services
             //var boards = _trelloEasyService.GetBoards(ORGANIZATION_ID, BoardFilter.All);
 
             var backlogRede = _trelloEasyService.GetBoard("6203a3dca53d7503af47e6ba");
-            var boards = new List<Board> { backlogRede };
+            var backlogTorus = _trelloEasyService.GetBoard("5d77f635ca4ea17ecf8d6adb");
+            
+            var boards = new List<Board> { backlogTorus };
 
             await LimparDadosAsync();
 
@@ -107,7 +112,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
                     await ImportarUsuariosAsync(card);
                     ImportarTags(card);
                     await ImportarAnexos(anexoRepository, card);
-
+                    
                     var tarefa = _mapper.Map<Tarefa>(card);
                     if (tarefa.Invalido)
                         _logger.LogError("Tarefa inválida");

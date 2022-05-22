@@ -12,6 +12,9 @@ namespace Agilis.Infra.Importacao.Trello.Extensions
             if (source.FullName.Contains('.'))
                 return source.FullName.Replace('.', ' ');
 
+            if (source.FullName.Contains('_'))
+                return source.FullName.Replace('_', ' ');
+
             return source.FullName + " .";
         }
     }
