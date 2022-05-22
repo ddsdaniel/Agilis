@@ -19,5 +19,10 @@ namespace Agilis.Core.Domain.Abstractions.Models.Entities
             DataCriacao = DateTime.Now;
             DataUltimaAlteracao = DataCriacao;
         }
+
+        public void AtualizarId(Guid id)
+        {
+            Id = id;
+        }
     }
 }

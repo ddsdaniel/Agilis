@@ -14,15 +14,25 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
         {
             CreateMap<Member, Usuario>()
                 .ConvertUsing((membro, context) =>
-                    new Usuario(
+                {
+                    var email = membro.FullName == "Daniel Dorneles da Silva"
+                        ? "dds.daniel@gmail.com"
+                        : $"{membro.UserName}@trello.com";
+
+                    var usuario = new Usuario(
                         nome: ObterNome(membro),
                         sobrenome: ObterSobrenome(membro),
                         senha: new Senha("123"),
-                        email: new Email($"{membro.UserName}@trello.com"),
+                        email: new Email(email),
                         ativo: true,
                         regra: RegraUsuario.Usuario
-                        )
-                    );
+                        );
+
+                    if (membro.Id.Contains('-'))
+                        usuario.AtualizarId(new Guid(membro.Id));
+
+                    return usuario;
+                });
         }
 
         private static string ObterSobrenome(Member membro)
