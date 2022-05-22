@@ -24,7 +24,7 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
                     descricao: card.Description,
                     feature: ObterFeature(card),
                     tipo: ObterTipo(card),
-                    relator: context.Mapper.Map<Usuario>(card.Actions.FirstOrDefault()?.MemberCreator),
+                    relator: ObterRelator(card, context),
                     solucionador: context.Mapper.Map<Usuario>(card.Members.FirstOrDefault()),
                     horasPrevistas: ObterHoras(card),
                     horasRealizadas: ObterHoras(card),
@@ -86,11 +86,20 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 
         }
 
+        private static Usuario ObterRelator(Card card, ResolutionContext context)
+        {
+            var relator = context.Mapper.Map<Usuario>(card.Actions.OrderBy(a => a.Date).FirstOrDefault()?.MemberCreator);
+            if (relator == null)
+                return null;
+
+            return relator;
+        }
+
         private string ObterTitulo(Card card)
         {
             var titulo = card.Name;
             var horas = ObterHoras(card);
-            if (horas != null)
+            if (horas is not null)
                 titulo = titulo.Replace($"({horas.Horario})", "").Trim();
 
             return titulo;
@@ -108,7 +117,7 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
         {
             var actionBranch = card.Actions
                 .OrderBy(a => a.Date)
-                .LastOrDefault(a => a.Text.StartsWith("# Branch"));
+                .LastOrDefault(a => a.Text != null && a.Text.StartsWith("# Branch"));
 
             if (actionBranch != null)
             {
@@ -120,16 +129,19 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 
         private string ObterSolucao(Card card)
         {
+            if (!card.Actions.Any())
+                return ".";
+
             var actionSolucao = card.Actions
                 .OrderBy(a => a.Date)
-                .LastOrDefault(a => a.Text.StartsWith("# Solução"));
+                .LastOrDefault(a => a.Text != null && a.Text.StartsWith("# Solução"));
 
             if (actionSolucao != null)
             {
                 return actionSolucao.Text;
             }
             else
-                return String.Empty;
+                return ".";
         }
 
         private Cliente ObterCliente(Card card)

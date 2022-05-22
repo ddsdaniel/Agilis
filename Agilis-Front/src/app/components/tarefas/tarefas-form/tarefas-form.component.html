@@ -47,7 +47,7 @@
       <mat-form-field fxFlex="50" class="mr-1">
         <mat-label>Relator</mat-label>
         <mat-select [(ngModel)]="entidade.relator" [compareWith]="comparadorService.compareById">
-          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nomeCompleto}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -56,7 +56,7 @@
       <mat-form-field fxFlex="50" class="ml-1">
         <mat-label>Solucionador</mat-label>
         <mat-select [(ngModel)]="entidade.solucionador" [compareWith]="comparadorService.compareById">
-          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nome}}
+          <mat-option *ngFor="let usuario of usuarios" [value]="usuario">{{usuario.nomeCompleto}}
           </mat-option>
         </mat-select>
       </mat-form-field>

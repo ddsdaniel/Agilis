@@ -4,6 +4,7 @@ using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Infra.Importacao.Trello.Abstractions.Services;
+using Agilis.Infra.Importacao.Trello.Extensions;
 using AutoMapper;
 using DDS.Validacoes.Abstractions.Models;
 using Microsoft.Extensions.Logging;
@@ -19,7 +20,8 @@ namespace Agilis.Infra.Importacao.Trello.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<ImportacaoTrelloService> _logger;
         private readonly EasyService _trelloEasyService;
-        private readonly List<string> Tags = new List<string>();
+        private readonly List<string> _tags = new List<string>();
+        private readonly List<Usuario> _usuarios = new List<Usuario>();
 
         public ImportacaoTrelloService(
             IMapper mapper,
@@ -35,22 +37,26 @@ namespace Agilis.Infra.Importacao.Trello.Services
         }
 
         public async Task ImportarAsync()
-        {            
+        {
             await ImportarTrelloAsync();
 
             await SalvarDados();
 
+            _logger.LogInformation(new String('-', 50));
             _logger.LogInformation("Importação concluída com sucesso");
+            _logger.LogInformation(new String('-', 50));
         }
 
         private async Task SalvarDados()
         {
+            _logger.LogInformation(new String('-', 50));
             _logger.LogInformation("Salvando os dados...");
             await _unitOfWork.CommitAsync();
         }
 
         private async Task LimparDadosAsync()
         {
+            _logger.LogInformation(new String('-', 50));
             _logger.LogInformation("Limpando o banco de dados...");
 
             var tarefaRepository = _unitOfWork.ObterRepository<Tarefa>();
@@ -61,7 +67,8 @@ namespace Agilis.Infra.Importacao.Trello.Services
             await sprintRepository.ExcluirAsync(s => true);
             await usuarioRepository.ExcluirAsync(u => true);
 
-            Tags.Clear();
+            _usuarios.Clear();
+            _tags.Clear();
         }
 
         private async Task ImportarTrelloAsync()
@@ -69,13 +76,16 @@ namespace Agilis.Infra.Importacao.Trello.Services
             //TODO: configurar organization id
             const string ORGANIZATION_ID = "erp2113";
             _logger.LogInformation("Obtendo dados do Trello...");
-            var boards = _trelloEasyService.GetBoards(ORGANIZATION_ID, BoardFilter.All);
+            //var boards = _trelloEasyService.GetBoards(ORGANIZATION_ID, BoardFilter.All);
+
+            var backlogRede = _trelloEasyService.GetBoard("6203a3dca53d7503af47e6ba");
+            var boards = new List<Board> { backlogRede };
 
             await LimparDadosAsync();
 
             foreach (var board in boards)
             {
-                await ImportarSprintAsync(board);                
+                await ImportarSprintAsync(board);
                 await ImportarTarefasAsync(board);
             }
         }
@@ -92,7 +102,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
                 foreach (var card in list.Cards)
                 {
                     _logger.LogInformation(new String('-', 50));
-                    _logger.LogInformation($"Importando card {card.ShortUrl}...");
+                    _logger.LogInformation($"Importando card {card.Name} - {card.ShortUrl}...");
 
                     await ImportarUsuariosAsync(card);
                     ImportarTags(card);
@@ -126,8 +136,8 @@ namespace Agilis.Infra.Importacao.Trello.Services
             foreach (var label in card.Labels)
             {
                 _logger.LogInformation($"Importando #{label.Name}...");
-                if (!Tags.Contains(label.Name))
-                    Tags.Add(label.Name);
+                if (!_tags.Contains(label.Name))
+                    _tags.Add(label.Name);
             }
         }
 
@@ -150,16 +160,32 @@ namespace Agilis.Infra.Importacao.Trello.Services
         {
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
 
-            foreach (var member in card.Members)
-            {
-                _logger.LogInformation($"Importando @{member.UserName}...");
-                var usuario = _mapper.Map<Usuario>(member);
+            var membros = card.Members.Concat(card.Actions.Select(a => a.MemberCreator));
 
-                if (usuario.Invalido)
-                    _logger.LogError("Usuário inválido");
+            foreach (var membro in membros)
+            {
+                var usuarioJaCadastrado = _usuarios.FirstOrDefault(u => u.NomeCompleto == membro.ObterNomeCompleto());
+                if (usuarioJaCadastrado != null)
+                {
+                    membro.AtualizarId(usuarioJaCadastrado.Id.ToString());
+                }
                 else
-                    await usuarioRepository.AdicionarAsync(usuario);
+                {
+                    _logger.LogInformation($"Importando @{membro.UserName}...");
+                    var novoUsuario = _mapper.Map<Usuario>(membro);
+
+                    if (novoUsuario.Invalido)
+                        _logger.LogError("Usuário inválido");
+                    else
+                    {
+                        await usuarioRepository.AdicionarAsync(novoUsuario);
+                        membro.AtualizarId(novoUsuario.Id.ToString());
+                        _usuarios.Add(novoUsuario);
+                    }
+                }
             }
         }
+
+
     }
 }

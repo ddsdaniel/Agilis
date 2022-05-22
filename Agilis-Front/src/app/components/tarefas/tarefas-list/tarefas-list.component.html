@@ -34,13 +34,15 @@
               code</mat-icon>
             <mat-icon class="icone-pequeno" title="Feito" *ngIf="estaFeito(tarefa)" mat-list-icon color="primary">
               done</mat-icon>
-            <span>{{ tarefa?.solucionador?.nome }}</span>
+              <span>{{ tarefa?.solucionador?.nomeCompleto }}</span>
           </td>
           <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
           <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
         </tr>
       </tbody>
     </table>
+
+    <p class="ml-2">{{ lista.length }} tarefa(s)</p>
 
     <!-- Adicionar -->
     <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/tarefas/new'>
@@ -68,7 +70,7 @@
       <mat-select [(ngModel)]="filtros.relatorId">
         <mat-option value="">Todos</mat-option>
         <mat-option *ngFor="let relator of usuarios" [value]="relator.id">
-          {{relator.nome}}
+          {{relator.nomeCompleto}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -79,7 +81,7 @@
       <mat-select [(ngModel)]="filtros.solucionadorId">
         <mat-option value="">Todos</mat-option>
         <mat-option *ngFor="let solucionador of usuarios" [value]="solucionador.id">
-          {{solucionador.nome}}
+          {{solucionador.nomeCompleto}}
         </mat-option>
       </mat-select>
     </mat-form-field>

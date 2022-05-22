@@ -2,6 +2,7 @@
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.Seguranca;
+using Agilis.Infra.Importacao.Trello.Extensions;
 using AutoMapper;
 using TrelloSharpEasy.Entities;
 
@@ -26,16 +27,13 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 
         private static string ObterSobrenome(Member membro)
         {
-            if (!membro.FullName.Contains(" "))
-                return String.Empty;
-
             var nome = ObterNome(membro);
             return membro.FullName.Substring(nome.Length + 1);
         }
 
         private static string ObterNome(Member membro)
         {
-            return membro.FullName.Split(' ')[0];
+            return membro.ObterNomeCompleto().Split(' ')[0];
         }
     }
 }
