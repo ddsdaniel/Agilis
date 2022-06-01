@@ -49,6 +49,13 @@
 
       <mat-divider></mat-divider>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/tarefas/trello']);">
+        <mat-icon mat-list-icon>groups</mat-icon>
+        <div mat-line>Importação Trello</div>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
       <mat-list-item (click)="menu.close();router.navigate(['/alterar-minha-senha']);">
         <mat-icon mat-list-icon>password</mat-icon>
         <div mat-line>Alterar a minha senha</div>

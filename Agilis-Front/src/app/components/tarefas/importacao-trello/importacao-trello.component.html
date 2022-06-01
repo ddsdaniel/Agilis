@@ -1,0 +1,28 @@
+<app-action-bar [titulo]="'Importação Trello'">
+
+  <div menu class="form-container">
+
+    <!-- Board id -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Board id</mat-label>
+      <input matInput [(ngModel)]="importacaoTrello.boardId" placeholder="Board id" name="boardId" type="text" required
+        appSelectAllText>
+    </mat-form-field>
+
+    <!-- Produto -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Produto</mat-label>
+      <mat-select [(ngModel)]="importacaoTrello.produto" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Limpar dados -->
+    <mat-checkbox color="warn" class="mt-4 full-width-margin" [(ngModel)]="importacaoTrello.limparDados">Limpar dados</mat-checkbox>
+
+    <button mat-raised-button color="primary" class="botao" (click)="importar()">IMPORTAR</button>
+
+  </div>
+
+</app-action-bar>

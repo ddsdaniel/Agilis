@@ -1,15 +1,16 @@
-﻿using Agilis.Core.Domain.Abstractions.Repositories;
+﻿using Agilis.Application.Services.Tarefas;
+using Agilis.Core.Domain.Abstractions.Repositories;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
+using Agilis.Infra.Importacao.Trello.Abstractions.Factories;
 using Agilis.Infra.Importacao.Trello.Abstractions.Services;
-using Agilis.Infra.Importacao.Trello.AutoMapper;
 using Agilis.Infra.Importacao.Trello.Extensions;
+using Agilis.Infra.Importacao.Trello.ViewModels;
 using AutoMapper;
 using DDS.Validacoes.Abstractions.Models;
 using Microsoft.Extensions.Logging;
-using TrelloSharp.Enums;
 using TrelloSharpEasy.Entities;
 using TrelloSharpEasy.Services;
 
@@ -21,25 +22,33 @@ namespace Agilis.Infra.Importacao.Trello.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<ImportacaoTrelloService> _logger;
         private readonly EasyService _trelloEasyService;
-        private readonly List<string> _tags = new List<string>();
-        private readonly List<Usuario> _usuarios = new List<Usuario>();
+        private readonly TarefaCrudAppService _tarefaCrudAppService;
+        private readonly ITarefaFactory _tarefaFactory;
+        private readonly IFeatureFactory _featureFactory;
+        private List<string> _tags = new List<string>();
+        private List<Usuario> _usuarios = new List<Usuario>();
 
         public ImportacaoTrelloService(
             IMapper mapper,
             IUnitOfWork unitOfWork,
             ILogger<ImportacaoTrelloService> logger,
-            EasyService easyService
-            )
+            EasyService easyService,
+            TarefaCrudAppService tarefaCrudAppService,
+            ITarefaFactory tarefaFactory,
+            IFeatureFactory featureFactory)
         {
+            _featureFactory = featureFactory;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _logger = logger;
             _trelloEasyService = easyService;
+            _tarefaCrudAppService = tarefaCrudAppService;
+            _tarefaFactory = tarefaFactory;
         }
 
-        public async Task ImportarAsync()
+        public async Task ImportarAsync(ImportacaoViewModel importacaoViewModel)
         {
-            await ImportarTrelloAsync();
+            await ImportarTrelloAsync(importacaoViewModel);
 
             await SalvarDados();
 
@@ -64,35 +73,66 @@ namespace Agilis.Infra.Importacao.Trello.Services
             var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
             var sprintRepository = _unitOfWork.ObterRepository<Sprint>();
             var clienteRepository = _unitOfWork.ObterRepository<Cliente>();
+            var featureRepository = _unitOfWork.ObterRepository<Feature>();
 
             await tarefaRepository.ExcluirAsync(t => true);
             await sprintRepository.ExcluirAsync(s => true);
             await usuarioRepository.ExcluirAsync(u => true);
-
-            TarefaProfile.Clientes = clienteRepository.Consultar().ToList();
-            _usuarios.Clear();
-            _tags.Clear();
         }
 
-        private async Task ImportarTrelloAsync()
+        private void InicializarCaches(ImportacaoViewModel importacaoViewModel)
         {
-            //TODO: configurar organization id
-            const string ORGANIZATION_ID = "erp2113";
+            var usuarioRepository = _unitOfWork.ObterRepository<Usuario>();
+
+            //TarefaProfile.Features = featureRepository.Consultar().ToList();
+            //TarefaProfile.Clientes = clienteRepository.Consultar().ToList();
+            //TarefaProfile.Produto = _mapper.Map<Produto>(importacaoViewModel.Produto);
+            _usuarios = usuarioRepository.Consultar().ToList();
+            _tags = _tarefaCrudAppService.ConsultarTags().ToList();
+        }
+
+        private async Task ImportarTrelloAsync(ImportacaoViewModel importacaoViewModel)
+        {
             _logger.LogInformation("Obtendo dados do Trello...");
-            //var boards = _trelloEasyService.GetBoards(ORGANIZATION_ID, BoardFilter.All);
 
-            var backlogRede = _trelloEasyService.GetBoard("6203a3dca53d7503af47e6ba");
-            var backlogTorus = _trelloEasyService.GetBoard("5d77f635ca4ea17ecf8d6adb");
-            
-            var boards = new List<Board> { backlogTorus };
+            var backlog = _trelloEasyService.GetBoard(importacaoViewModel.BoardId);
 
-            await LimparDadosAsync();
+            var boards = new List<Board> { backlog };
+
+            if (importacaoViewModel.LimparDados)
+                await LimparDadosAsync();
+
+            InicializarCaches(importacaoViewModel);
+
+            var produto = _mapper.Map<Produto>(importacaoViewModel.Produto);
 
             foreach (var board in boards)
             {
+                await ImportarFeaturesAsync(board, produto);
                 await ImportarSprintAsync(board);
                 await ImportarTarefasAsync(board);
             }
+        }
+
+        private async Task ImportarFeaturesAsync(Board board, Produto produto)
+        {
+            var featureRepository = _unitOfWork.ObterRepository<Feature>();
+            var features = featureRepository.Consultar().ToList();
+            var achou = false;
+
+            foreach (var list in board.Lists)
+            {
+                var feature = _featureFactory.Criar(list, produto);
+                if (!features.Any(f => f.Nome == feature.Nome && f.Produto.Id == produto.Id))
+                {
+                    await featureRepository.AdicionarAsync(feature);
+                    features.Add(feature);
+                    achou = true;
+                }
+            }
+
+            if (achou)
+                _tarefaFactory.AtualizarFeatures(features);
         }
 
         private async Task ImportarTarefasAsync(Board board)
@@ -112,7 +152,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
                     await ImportarUsuariosAsync(card);
                     ImportarTags(card);
                     await ImportarAnexos(anexoRepository, card);
-                    
+
                     var tarefa = _mapper.Map<Tarefa>(card);
                     if (tarefa.Invalido)
                         _logger.LogError("Tarefa inválida");

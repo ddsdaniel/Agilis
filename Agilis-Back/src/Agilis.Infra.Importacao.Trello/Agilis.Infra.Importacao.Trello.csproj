@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\..\..\DDS.Validacoes\DDS.Validacoes\DDS.Validacoes.csproj" />
     <ProjectReference Include="..\..\..\..\TrelloSharpEasy\TrelloSharpEasy\TrelloSharpEasy.csproj" />
     <ProjectReference Include="..\..\..\..\TrelloSharp\TrelloSharp\TrelloSharp.csproj" />
+    <ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
     <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using Agilis.Infra.Importacao.Trello.Abstractions.Services;
+using Agilis.Infra.Importacao.Trello.ViewModels;
 using Agilis.WebAPI.Abstractions.Controllers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -17,11 +17,10 @@ namespace Agilis.WebAPI.Controllers
             _importacaoTrelloService = importacaoTrelloService;
         }
 
-        [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> PostAsync()
+        public async Task<ActionResult> PostAsync(ImportacaoViewModel importacaoViewModel)
         {
-            await _importacaoTrelloService.ImportarAsync();
+            await _importacaoTrelloService.ImportarAsync(importacaoViewModel);
 
             if (_importacaoTrelloService.Invalido)
                 return CustomBadRequest(_importacaoTrelloService);

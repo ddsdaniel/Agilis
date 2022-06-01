@@ -1,9 +1,10 @@
-﻿using DDS.Validacoes.Abstractions.Models;
+﻿using Agilis.Infra.Importacao.Trello.ViewModels;
+using DDS.Validacoes.Abstractions.Models;
 
 namespace Agilis.Infra.Importacao.Trello.Abstractions.Services
 {
     public interface IImportacaoTrelloService : IValidavel
     {
-        Task ImportarAsync();
+        Task ImportarAsync(ImportacaoViewModel importacaoViewModel);
     }
 }

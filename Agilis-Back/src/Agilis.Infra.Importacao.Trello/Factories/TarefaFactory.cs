@@ -1,96 +1,69 @@
-﻿using Agilis.Core.Domain.Enums;
+﻿using Agilis.Core.Domain.Abstractions.Repositories;
+using Agilis.Core.Domain.Abstractions.UnitsOfWork;
+using Agilis.Core.Domain.Enums;
 using Agilis.Core.Domain.Models.Entities;
 using Agilis.Core.Domain.Models.Entities.Seguranca;
 using Agilis.Core.Domain.Models.Entities.Tarefas;
 using Agilis.Core.Domain.Models.ValueObjects;
 using Agilis.Core.Domain.Models.ValueObjects.Tarefas;
+using Agilis.Infra.Importacao.Trello.Abstractions.Factories;
 using AutoMapper;
 using System.Text.RegularExpressions;
 using TrelloSharpEasy.Entities;
-using Action = TrelloSharpEasy.Entities.Action;
 using CheckListAgilis = Agilis.Core.Domain.Models.ValueObjects.Tarefas.CheckList;
-using CheckListTrello = TrelloSharpEasy.Entities.CheckList;
 
-namespace Agilis.Infra.Importacao.Trello.AutoMapper
+namespace Agilis.Infra.Importacao.Trello.Factories
 {
-    public class TarefaProfile : Profile
+    public class TarefaFactory : ITarefaFactory
     {
-        public static List<Cliente> Clientes { get; internal set; }
+        private readonly IMapper _mapper;
+        private readonly List<Cliente> _clientes;
+        public IEnumerable<Feature> _features;
 
-        public TarefaProfile()
+        public TarefaFactory(
+            IMapper mapper,
+            IUnitOfWork unitOfWork
+            )
         {
-            CreateMap<Card, Tarefa>()
-                .ConvertUsing((card, x, context) =>
-                new Tarefa(
-                    titulo: ObterTitulo(card),
-                    descricao: card.Description,
-                    feature: ObterFeature(card),
-                    tipo: ObterTipo(card),
-                    relator: ObterRelator(card, context),
-                    solucionador: context.Mapper.Map<Usuario>(card.Members.FirstOrDefault()),
-                    horasPrevistas: ObterHoras(card),
-                    horasRealizadas: ObterHoras(card),
-                    tags: card.Labels.Select(label => new Tag(label.Name)),
-                    checkLists: context.Mapper.Map<CheckListAgilis[]>(card.CheckLists),
-                    cliente: ObterCliente(card),
-                    valor: 0,
-                    urlTicketSAC: null,
-                    comentarios: context.Mapper.Map<Comentario[]>(card.Actions.Where(a => a.Type == "commentCard")),
-                    anexos: context.Mapper.Map<AnexoFK[]>(card.Attachments),
-                    sprint: ObterSprint(card),
-                    situacao: ObterSituacao(card),
-                    solucao: ObterSolucao(card),
-                    branches: ObterBranches(card)
-                    )
-                );
+            _mapper = mapper;
 
-            CreateMap<CheckListTrello, CheckListAgilis>()
-                .ConvertUsing((checklist, x, context) =>
-                    new CheckListAgilis(
-                        nome: checklist.Name,
-                        itens: context.Mapper.Map<ItemCheckList[]>(checklist.Items)
-                        )
-                    );
-
-            CreateMap<CheckItem, ItemCheckList>()
-                .ConvertUsing((item, x, context) =>
-                    new ItemCheckList(
-                        nome: item.Name,
-                        concluido: item.Checked,
-                        horasPrevistas: null
-                        )
-                    );
-
-            CreateMap<Action, Comentario>()
-                .ConvertUsing((action, x, context) =>
-                    new Comentario(
-                        action.Text,
-                        context.Mapper.Map<Usuario>(action.MemberCreator),
-                        action.Date
-                        )
-                    );
-
-            CreateMap<Attachment, Anexo>()
-               .ConvertUsing((attachment, x, context) =>
-                   new Anexo(
-                       nome: attachment.Name,
-                       conteudo: attachment.Url
-                       )
-                   );
-
-            CreateMap<Attachment, AnexoFK>()
-              .ConvertUsing((attachment, x, context) =>
-                  new AnexoFK(
-                      nome: attachment.Name,
-                      anexoId: new Guid(attachment.Id)
-                      )
-                  );
-
+            var clienteRepository = unitOfWork.ObterRepository<Cliente>();
+            _clientes = clienteRepository.Consultar().ToList();
         }
 
-        private static Usuario ObterRelator(Card card, ResolutionContext context)
+        public void AtualizarFeatures(IEnumerable<Feature> features)
         {
-            var relator = context.Mapper.Map<Usuario>(card.Actions.OrderBy(a => a.Date).FirstOrDefault()?.MemberCreator);
+            _features = features;
+        }
+
+        public Tarefa Criar(Card card)
+        {
+            return new Tarefa(
+                   titulo: ObterTitulo(card),
+                   descricao: card.Description,
+                   feature: ObterFeature(card),
+                   tipo: ObterTipo(card),
+                   relator: ObterRelator(card),
+                   solucionador: _mapper.Map<Usuario>(card.Members.FirstOrDefault()),
+                   horasPrevistas: ObterHoras(card),
+                   horasRealizadas: ObterHoras(card),
+                   tags: card.Labels.Select(label => new Tag(label.Name)),
+                   checkLists: _mapper.Map<CheckListAgilis[]>(card.CheckLists),
+                   cliente: ObterCliente(card),
+                   valor: 0,
+                   urlTicketSAC: null,
+                   comentarios: _mapper.Map<Comentario[]>(card.Actions.Where(a => a.Type == "commentCard")),
+                   anexos: _mapper.Map<AnexoFK[]>(card.Attachments),
+                   sprint: ObterSprint(card),
+                   situacao: ObterSituacao(card),
+                   solucao: ObterSolucao(card),
+                   branches: ObterBranches(card)
+               );
+        }
+
+        private Usuario ObterRelator(Card card)
+        {
+            var relator = _mapper.Map<Usuario>(card.Actions.OrderBy(a => a.Date).FirstOrDefault()?.MemberCreator);
             if (relator == null)
                 return null;
 
@@ -148,14 +121,13 @@ namespace Agilis.Infra.Importacao.Trello.AutoMapper
 
         private Cliente ObterCliente(Card card)
         {
-            var cliente = Clientes.FirstOrDefault(c => ContemLabel(card, c.Nome));
+            var cliente = _clientes.FirstOrDefault(c => ContemLabel(card, c.Nome));
             return cliente;
         }
 
         private Feature ObterFeature(Card card)
         {
-            //TODO: label que não é cliente e nem branch
-            return null;
+            return _features.FirstOrDefault(f => f.Nome.ToUpper() == card.ListName.ToUpper());
         }
 
         private SituacaoTarefa ObterSituacao(Card card)

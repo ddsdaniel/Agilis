@@ -1,4 +1,6 @@
-﻿using Agilis.Infra.Importacao.Trello.Abstractions.Services;
+﻿using Agilis.Infra.Importacao.Trello.Abstractions.Factories;
+using Agilis.Infra.Importacao.Trello.Abstractions.Services;
+using Agilis.Infra.Importacao.Trello.Factories;
 using Agilis.Infra.Importacao.Trello.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,6 +22,8 @@ namespace Agilis.Infra.CrossCutting.IoC
                 return new EasyService(appKey, userToken, logger);
             });
             services.AddScoped<IImportacaoTrelloService, ImportacaoTrelloService>();
+            services.AddScoped<IFeatureFactory, FeatureFactory>();
+            services.AddScoped<ITarefaFactory, TarefaFactory>();
 
             return services;
         }
