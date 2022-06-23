@@ -1,4 +1,5 @@
 ﻿using Agilis.Application.Services.Tarefas;
+using Agilis.Core.Domain.Abstractions.Models.Entities;
 using Agilis.Core.Domain.Abstractions.Repositories;
 using Agilis.Core.Domain.Abstractions.UnitsOfWork;
 using Agilis.Core.Domain.Models.Entities;
@@ -25,6 +26,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
         private readonly TarefaCrudAppService _tarefaCrudAppService;
         private readonly ITarefaFactory _tarefaFactory;
         private readonly IFeatureFactory _featureFactory;
+        private readonly IUsuario _usuarioLogado;
         private List<string> _tags = new List<string>();
         private List<Usuario> _usuarios = new List<Usuario>();
 
@@ -35,9 +37,11 @@ namespace Agilis.Infra.Importacao.Trello.Services
             EasyService easyService,
             TarefaCrudAppService tarefaCrudAppService,
             ITarefaFactory tarefaFactory,
-            IFeatureFactory featureFactory)
+            IFeatureFactory featureFactory,
+            IUsuario usuarioLogado)
         {
             _featureFactory = featureFactory;
+            _usuarioLogado = usuarioLogado;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -77,7 +81,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
 
             await tarefaRepository.ExcluirAsync(t => true);
             await sprintRepository.ExcluirAsync(s => true);
-            await usuarioRepository.ExcluirAsync(u => true);
+            await usuarioRepository.ExcluirAsync(u => u.Id != _usuarioLogado.Id);
         }
 
         private void InicializarCaches(ImportacaoViewModel importacaoViewModel)
@@ -131,7 +135,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
                 }
             }
 
-            if (achou)
+            //if (achou || _tarefaFactory)
                 _tarefaFactory.AtualizarFeatures(features);
         }
 
@@ -153,7 +157,7 @@ namespace Agilis.Infra.Importacao.Trello.Services
                     ImportarTags(card);
                     await ImportarAnexos(anexoRepository, card);
 
-                    var tarefa = _mapper.Map<Tarefa>(card);
+                    var tarefa = _tarefaFactory.Criar(card);
                     if (tarefa.Invalido)
                         _logger.LogError("Tarefa inválida");
                     else

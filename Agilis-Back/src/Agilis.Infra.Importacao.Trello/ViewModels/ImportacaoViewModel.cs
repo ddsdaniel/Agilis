@@ -4,7 +4,7 @@ namespace Agilis.Infra.Importacao.Trello.ViewModels
 {
     public class ImportacaoViewModel
     {
-        public string BoardId { get; private set; }
+        public string BoardId { get; set; }
         public ProdutoViewModel Produto { get; set; }
         public bool LimparDados { get; set; }
     }

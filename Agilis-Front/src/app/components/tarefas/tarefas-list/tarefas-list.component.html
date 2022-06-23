@@ -7,24 +7,18 @@
       <thead>
         <tr>
           <th class="text-left" fxFlex="30%">Título</th>
-          <th class="text-left" fxFlex="25%">Tags</th>
           <th class="text-left" fxFlex="10%">Feature</th>
           <th class="text-right" fxFlex="5%">Valor</th>
           <th class="text-left" fxFlex="10%">Sprint</th>
           <th class="text-left" fxFlex="10%">Solucionador</th>
           <th class="text-left" fxFlex="5%">Horas Prev.</th>
           <th class="text-left" fxFlex="5%">Horas Real.</th>
+          <th class="text-left" fxFlex="25%">Tags</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let tarefa of lista; let i = index" (click)="openBottomSheet(tarefa.id, i)">
           <td fxFlex="30%">{{ tarefa.titulo }}</td>
-          <td fxFlex="25%">
-            <mat-chip-list aria-label="Tags">
-              <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
-              </mat-chip>
-            </mat-chip-list>
-          </td>
           <td fxFlex="10%">{{ tarefa?.feature?.nome }}</td>
           <td fxFlex="5%" class="text-right">{{ tarefa.valor }}</td>
           <td fxFlex="10%">{{ tarefa?.sprint?.nome }}</td>
@@ -33,10 +27,16 @@
               code</mat-icon>
             <mat-icon class="icone-pequeno" title="Feito" *ngIf="estaFeito(tarefa)" mat-list-icon color="primary">
               done</mat-icon>
-            <span>{{ tarefa?.solucionador?.nomeCompleto }}</span>
-          </td>
-          <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
-          <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
+              <span>{{ tarefa?.solucionador?.nomeCompleto }}</span>
+            </td>
+            <td fxFlex="5%">{{ tarefa.horasPrevistas }}</td>
+            <td fxFlex="5%">{{ tarefa.horasRealizadas }}</td>
+            <td fxFlex="25%">
+              <mat-chip-list aria-label="Tags">
+                <mat-chip (click)="filtrarTag(tag)" *ngFor="let tag of tarefa.tags" class="small-chip">{{tag}}
+                </mat-chip>
+              </mat-chip-list>
+            </td>
         </tr>
       </tbody>
     </table>

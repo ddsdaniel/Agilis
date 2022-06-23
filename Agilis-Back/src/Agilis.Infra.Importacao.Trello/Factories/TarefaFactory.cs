@@ -38,9 +38,12 @@ namespace Agilis.Infra.Importacao.Trello.Factories
 
         public Tarefa Criar(Card card)
         {
+            var descricao = card.Description;
+            descricao += $"\n\nImportado de {card.ShortUrl}";
+
             return new Tarefa(
                    titulo: ObterTitulo(card),
-                   descricao: card.Description,
+                   descricao,
                    feature: ObterFeature(card),
                    tipo: ObterTipo(card),
                    relator: ObterRelator(card),
@@ -127,7 +130,7 @@ namespace Agilis.Infra.Importacao.Trello.Factories
 
         private Feature ObterFeature(Card card)
         {
-            return _features.FirstOrDefault(f => f.Nome.ToUpper() == card.ListName.ToUpper());
+            return _features.FirstOrDefault(f => f.Nome.ToUpper() == card?.ListName?.ToUpper());
         }
 
         private SituacaoTarefa ObterSituacao(Card card)
