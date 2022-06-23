@@ -98,8 +98,8 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             if (Descricao == null)
                 Criticar("Descrição inválida.");
 
-            if (Feature == null)
-                Criticar("Feature não deve ser nula");
+            //if (Feature == null)
+            //    Criticar("Feature não deve ser nula");
 
             if (Relator == null)
                 Criticar("Relator não deve ser nulo");

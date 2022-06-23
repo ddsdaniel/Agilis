@@ -8,4 +8,5 @@ export interface UsuarioConsulta extends Entidade {
   email: string;
   ativo: boolean;
   regra: RegraUsuario;
+  nomeCompleto: string;
 }

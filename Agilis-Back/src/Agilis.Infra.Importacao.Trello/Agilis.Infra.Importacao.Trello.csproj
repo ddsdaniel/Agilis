@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DDS.Validacoes\DDS.Validacoes\DDS.Validacoes.csproj" />
+    <ProjectReference Include="..\..\..\..\TrelloSharpEasy\TrelloSharpEasy\TrelloSharpEasy.csproj" />
+    <ProjectReference Include="..\..\..\..\TrelloSharp\TrelloSharp\TrelloSharp.csproj" />
+    <ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
+    <ProjectReference Include="..\Agilis.Core.Domain\Agilis.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

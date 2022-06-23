@@ -32,11 +32,17 @@ namespace Agilis.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}/download")]
-        public async Task<IActionResult> DownloadNexo(Guid id)
+        public async Task<IActionResult> DownloadAnexo(Guid id)
         {
             var anexo = await _anexoCrudAppService.ConsultarPorIdAsync(id);
             if (anexo == null)
                 return NotFound();
+
+            if (anexo.Tipo == Core.Domain.Enums.TipoAnexo.Link)
+            {
+                Response.Redirect(anexo.Conteudo);
+                return Ok();
+            }
 
             var byteArray = Convert.FromBase64String(anexo.Conteudo.Split(',')[1]);
 

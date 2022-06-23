@@ -10,6 +10,7 @@ namespace Agilis.Application.ViewModels.Seguranca
         public string Sobrenome { get; set; }
         public string Email { get; set; }
         public bool Ativo { get; set; }
+        public string NomeCompleto { get; set; }
         public RegraUsuario Regra { get; set; }
     }
 }

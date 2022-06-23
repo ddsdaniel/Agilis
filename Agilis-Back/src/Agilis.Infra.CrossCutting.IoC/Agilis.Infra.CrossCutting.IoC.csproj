@@ -12,9 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TrelloSharpEasy\TrelloSharpEasy\TrelloSharpEasy.csproj" />
     <ProjectReference Include="..\Agilis.Application\Agilis.Application.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Data.Mongo\Agilis.Infra.Data.Mongo.csproj" />
     <ProjectReference Include="..\Agilis.Infra.Email\Agilis.Infra.Emails.csproj" />
+    <ProjectReference Include="..\Agilis.Infra.Importacao.Trello\Agilis.Infra.Importacao.Trello.csproj" />
   </ItemGroup>
 
 </Project>

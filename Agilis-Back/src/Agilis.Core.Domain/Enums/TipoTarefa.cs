@@ -4,6 +4,9 @@ namespace Agilis.Core.Domain.Enums
 {
     public enum TipoTarefa
     {
+        [Description("Não identificado")]
+        NaoIdentificado,
+
         [Description("Melhoria")]
         Melhoria,
 

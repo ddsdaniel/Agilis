@@ -6,6 +6,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { switchMap } from 'rxjs/operators';
 import { constantes } from 'src/app/consts/constantes';
 import { SituacaoTarefa, SituacaoTarefaLabel } from 'src/app/enums/situacao-tarefa.enum';
+import { TipoAnexo } from 'src/app/enums/tipo-anexo.enum';
 import { TipoTarefa, TipoTarefaLabel } from 'src/app/enums/tipo-tarefa.enum';
 import { AnexoFk } from 'src/app/models/anexo-fk';
 import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
@@ -15,6 +16,7 @@ import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
 import { Sprint } from 'src/app/models/sprint';
 import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
+import { AnexoApiService } from 'src/app/services/apis/anexo-api.service';
 import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
@@ -49,6 +51,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     private usuarioApiService: UsuarioApiService,
     private clienteApiService: ClienteApiService,
     private sprintApiService: SprintApiService,
+    private anexoApiService: AnexoApiService,
     private bottomSheetService: BottomSheetService,
     router: Router,
     tarefaApiService: TarefaApiService,
@@ -178,8 +181,17 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
     }
   }
 
-  download(anexo: AnexoFk): void {
-    const url = `${environment.apiUrl}/anexo/${anexo.anexoId}/download`;
-    window.open(url, '_blank');
+  download(anexoFk: AnexoFk): void {
+    this.anexoApiService.obterUm(anexoFk.anexoId)
+      .subscribe({
+        next: anexo => {
+          if (anexo.tipo === TipoAnexo.Link) {
+            window.open(anexo.conteudo, '_blank');
+          } else {
+            const url = `${environment.apiUrl}/anexo/${anexoFk.anexoId}/download`;
+            window.open(url, '_blank');
+          }
+        }
+      });
   }
 }

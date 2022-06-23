@@ -7,6 +7,7 @@ import { TagsComponent } from './tags/tags.component';
 import { TarefasListComponent } from './tarefas-list/tarefas-list.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 import { AnexosComponent } from './anexos/anexos.component';
+import { ImportacaoTrelloComponent } from './importacao-trello/importacao-trello.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { AnexosComponent } from './anexos/anexos.component';
     TarefasListComponent,
     ComentariosComponent,
     AnexosComponent,
+    ImportacaoTrelloComponent,
   ],
   imports: [
     GlobalModule,

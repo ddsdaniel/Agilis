@@ -16,6 +16,9 @@ namespace Agilis.Core.Domain.Models.Entities
         {
             get
             {
+                if (new Url(Conteudo).Valido)
+                    return TipoAnexo.Link;
+
                 var imagens = new List<string>
                 {
                     ".apng",
@@ -33,9 +36,6 @@ namespace Agilis.Core.Domain.Models.Entities
 
                 if (imagens.Contains(Path.GetExtension(Nome).ToLower()))
                     return TipoAnexo.Imagem;
-
-                if (new Url(Conteudo).Valido)
-                    return TipoAnexo.Link;
 
                 return TipoAnexo.Arquivo;
 
