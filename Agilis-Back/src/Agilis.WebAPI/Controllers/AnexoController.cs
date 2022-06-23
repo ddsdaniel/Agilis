@@ -38,12 +38,6 @@ namespace Agilis.WebAPI.Controllers
             if (anexo == null)
                 return NotFound();
 
-            if (anexo.Tipo == Core.Domain.Enums.TipoAnexo.Link)
-            {
-                Response.Redirect(anexo.Conteudo);
-                return Ok();
-            }
-
             var byteArray = Convert.FromBase64String(anexo.Conteudo.Split(',')[1]);
 
             return File(byteArray, MediaTypeNames.Application.Octet, anexo.Nome);
