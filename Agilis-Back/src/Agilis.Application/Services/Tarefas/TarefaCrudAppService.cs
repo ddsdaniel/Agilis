@@ -44,6 +44,7 @@ namespace Agilis.Application.Services.Tarefas
 
         public IEnumerable<TarefaViewModel> Pesquisar(
             string sprintId, 
+            string releaseId, 
             string relatorId,
             string solucionadorId,
             string clienteId,
@@ -61,6 +62,9 @@ namespace Agilis.Application.Services.Tarefas
 
             if (!String.IsNullOrEmpty(sprintId))
                 query = query.Where(t => t.Sprint.Id == new Guid(sprintId));
+
+            if (!String.IsNullOrEmpty(releaseId))
+                query = query.Where(t => t.Release.Id == new Guid(releaseId));
 
             if (!String.IsNullOrEmpty(relatorId))
                 query = query.Where(t => t.Relator.Id == new Guid(relatorId));

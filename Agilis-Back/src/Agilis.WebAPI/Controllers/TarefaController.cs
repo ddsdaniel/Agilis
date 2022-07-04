@@ -40,6 +40,7 @@ namespace Agilis.WebAPI.Controllers
 
         [HttpGet("pesquisa")]
         public ActionResult<IEnumerable<TarefaViewModel>> Consultar(
+            [FromQuery] string releaseId,
             [FromQuery] string sprintId,
             [FromQuery] string relatorId,
             [FromQuery] string solucionadorId,
@@ -57,7 +58,7 @@ namespace Agilis.WebAPI.Controllers
             //}
 
             var tarefasViewModel = _tarefaCrudAppService
-                .Pesquisar(sprintId, relatorId, solucionadorId, clienteId, produtoId, featureId, tag);
+                .Pesquisar(releaseId, sprintId, relatorId, solucionadorId, clienteId, produtoId, featureId, tag);
 
             if (_tarefaCrudAppService.Invalido)
                 return CustomBadRequest(_tarefaCrudAppService);

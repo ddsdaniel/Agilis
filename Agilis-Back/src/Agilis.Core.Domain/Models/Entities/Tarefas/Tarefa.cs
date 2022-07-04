@@ -26,6 +26,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
         public Url UrlTicketSAC { get; private set; }
         public IEnumerable<Comentario> Comentarios { get; private set; }
         public IEnumerable<AnexoFK> Anexos { get; private set; }
+        public Release Release { get; private set; }
         public Sprint Sprint { get; private set; }
         public SituacaoTarefa Situacao { get; private set; }
         public string Solucao { get; private set; }
@@ -63,6 +64,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             Url urlTicketSAC,
             IEnumerable<Comentario> comentarios,
             IEnumerable<AnexoFK> anexos,
+            Release release,
             Sprint sprint,
             SituacaoTarefa situacao,
             string solucao,
@@ -83,6 +85,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             UrlTicketSAC = urlTicketSAC;
             Comentarios = comentarios;
             Anexos = anexos;
+            Release = release;
             Sprint = sprint;
             Situacao = situacao;
             Solucao = solucao;
@@ -140,6 +143,7 @@ namespace Agilis.Core.Domain.Models.Entities.Tarefas
             ImportarCriticas(UrlTicketSAC);
             ImportarCriticas(Comentarios);
             ImportarCriticas(Anexos);
+            ImportarCriticas(Release);
             ImportarCriticas(Sprint);
         }
 

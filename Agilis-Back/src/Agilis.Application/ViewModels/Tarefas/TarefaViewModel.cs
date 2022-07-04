@@ -2,6 +2,7 @@
 using Agilis.Application.ViewModels.Produtos;
 using Agilis.Application.ViewModels.Seguranca;
 using Agilis.Application.ViewModels.Sprints;
+using Agilis.Application.ViewModels.Releases;
 using Agilis.Core.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Agilis.Application.ViewModels.Tarefas
         public IEnumerable<ComentarioViewModel> Comentarios { get; set; }
         public IEnumerable<AnexoFKViewModel> Anexos { get; set; }
         public SprintViewModel Sprint { get; set; }
+        public ReleaseViewModel Release { get; set; }
         public SituacaoTarefa Situacao { get; set; }
         public string Branches { get; set; }
         public string Solucao { get; set; }

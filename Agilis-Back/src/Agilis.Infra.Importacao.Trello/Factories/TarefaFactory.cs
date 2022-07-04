@@ -57,6 +57,7 @@ namespace Agilis.Infra.Importacao.Trello.Factories
                    urlTicketSAC: null,
                    comentarios: _mapper.Map<Comentario[]>(card.Actions.Where(a => a.Type == "commentCard")),
                    anexos: _mapper.Map<AnexoFK[]>(card.Attachments),
+                   release: null,
                    sprint: ObterSprint(card),
                    situacao: ObterSituacao(card),
                    solucao: ObterSolucao(card),
