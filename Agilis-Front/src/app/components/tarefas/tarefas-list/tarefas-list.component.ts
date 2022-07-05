@@ -12,12 +12,14 @@ import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
 import { Produto } from 'src/app/models/produtos/produto';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
+import { Release } from 'src/app/models/release';
 import { Sprint } from 'src/app/models/sprint';
 import { FiltroTarefa } from 'src/app/models/tarefas/filtro-tarefa';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
 import { ProdutoApiService } from 'src/app/services/apis/produtos/produto-api.service';
+import { ReleaseApiService } from 'src/app/services/apis/release-api.service';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
@@ -35,6 +37,7 @@ import { BottomSheetComponent } from '../../widgets/bottom-sheet/bottom-sheet.co
 export class TarefasListComponent extends CrudListComponent<Tarefa> implements OnInit {
 
   // Filtros
+  releases: Release[] = [];
   sprints: Sprint[] = [];
   usuarios: UsuarioConsulta[] = [];
   clientes: Cliente[] = [];
@@ -43,6 +46,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   tags: string;
 
   filtros: FiltroTarefa = {
+    releaseId: '',
     sprintId: '',
     relatorId: '',
     solucionadorId: '',
@@ -53,6 +57,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
   };
 
   constructor(
+    private releaseApiService: ReleaseApiService,
     private sprintApiService: SprintApiService,
     private usuarioApiService: UsuarioApiService,
     private bottomSheetService: BottomSheetService,
@@ -83,6 +88,7 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
         switchMap(_ => this.obterClientes()),
         switchMap(_ => this.obterProdutos()),
         switchMap(_ => this.obterFeatures()),
+        switchMap(_ => this.obterReleases()),
         switchMap(_ => this.obterTags()),
       );
   }
@@ -119,6 +125,13 @@ export class TarefasListComponent extends CrudListComponent<Tarefa> implements O
     return this.usuarioApiService.obterTodos()
       .pipe(
         tap(usuarios => this.usuarios = usuarios)
+      );
+  }
+
+  obterReleases(): Observable<any> {
+    return this.releaseApiService.obterTodos()
+      .pipe(
+        tap(releases => this.releases = releases)
       );
   }
 

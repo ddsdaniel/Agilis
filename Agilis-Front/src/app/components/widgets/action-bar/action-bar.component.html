@@ -37,6 +37,11 @@
         <div mat-line>Sprints</div>
       </mat-list-item>
 
+      <mat-list-item (click)="menu.close();router.navigate(['/releases']);">
+        <mat-icon mat-list-icon>dashboard_customize</mat-icon>
+        <div mat-line>Releases</div>
+      </mat-list-item>
+
       <mat-list-item (click)="menu.close();router.navigate(['/clientes']);">
         <mat-icon mat-list-icon>corporate_fare</mat-icon>
         <div mat-line>Clientes</div>

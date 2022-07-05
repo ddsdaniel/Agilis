@@ -24,6 +24,7 @@ export class TarefaApiService extends CrudApiBaseService<Tarefa> {
     : Observable<Tarefa[]> {
 
     const params = new HttpParams()
+      .append('releaseId', filtro.releaseId)
       .append('sprintId', filtro.sprintId)
       .append('relatorId', filtro.relatorId)
       .append('solucionadorId', filtro.solucionadorId)

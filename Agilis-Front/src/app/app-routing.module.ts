@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'times', loadChildren: () => import('./components/times/times.module').then(m => m.TimesModule) },
   { path: 'tarefas', loadChildren: () => import('./components/tarefas/tarefas.module').then(m => m.TarefasModule) },
   { path: 'produtos', loadChildren: () => import('./components/produtos/produtos.module').then(m => m.ProdutosModule) },
+  { path: 'releases', loadChildren: () => import('./components/releases/releases.module').then(m => m.ReleasesModule) },
   { path: 'sprints', loadChildren: () => import('./components/sprints/sprints.module').then(m => m.SprintsModule) },
   { path: 'clientes', loadChildren: () => import('./components/clientes/clientes.module').then(m => m.ClientesModule) },
 

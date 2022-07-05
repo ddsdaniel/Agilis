@@ -1,0 +1,28 @@
+﻿<app-action-bar [titulo]="'Releases'" [botaoFiltro]="false" [botaoPesquisa]="true" (pesquisaEvent)="onPesquisar($event)">
+
+  <div menu>
+
+    <!-- Grade -->
+    <mat-list role="list">
+
+      <mat-list-item role="listitem" *ngFor="let release of lista; let i = index"
+        (click)="openBottomSheet(release.id, i)">
+
+        <mat-icon mat-list-icon>loop</mat-icon>
+
+        <div mat-line>
+          <span>{{ release.versao }} - {{ release.nome }}</span>
+        </div>
+
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- Adicionar -->
+    <button mat-fab color="accent" title="Adicionar" (click)="adicionar()" routerLink='/releases/new'>
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+
+</app-action-bar>

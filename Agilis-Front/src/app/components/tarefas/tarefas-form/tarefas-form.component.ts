@@ -13,12 +13,14 @@ import { BottomSheetItem } from 'src/app/models/bottom-sheet-item';
 import { Cliente } from 'src/app/models/cliente';
 import { Feature } from 'src/app/models/produtos/feature';
 import { UsuarioConsulta } from 'src/app/models/seguranca/usuario-consulta';
+import { Release } from 'src/app/models/release';
 import { Sprint } from 'src/app/models/sprint';
 import { CheckList } from 'src/app/models/tarefas/check-list';
 import { Tarefa } from 'src/app/models/tarefas/tarefa';
 import { AnexoApiService } from 'src/app/services/apis/anexo-api.service';
 import { ClienteApiService } from 'src/app/services/apis/cliente-api.service';
 import { FeatureApiService } from 'src/app/services/apis/produtos/feature-api.service';
+import { ReleaseApiService } from 'src/app/services/apis/release-api.service';
 import { SprintApiService } from 'src/app/services/apis/sprint-api.service';
 import { TarefaApiService } from 'src/app/services/apis/tarefa-api.service';
 import { UsuarioApiService } from 'src/app/services/apis/usuario-api.service';
@@ -44,12 +46,14 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
   situacoes = Object.keys(SituacaoTarefa);
   features: Feature[] = [];
   clientes: Cliente[] = [];
+  releases: Release[] = [];
   sprints: Sprint[] = [];
 
   constructor(
     private featureApiService: FeatureApiService,
     private usuarioApiService: UsuarioApiService,
     private clienteApiService: ClienteApiService,
+    private releaseApiService: ReleaseApiService,
     private sprintApiService: SprintApiService,
     private anexoApiService: AnexoApiService,
     private bottomSheetService: BottomSheetService,
@@ -69,8 +73,16 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       .pipe(
         switchMap(_ => this.obterFeatures()),
         switchMap(_ => this.obterClientes()),
+        switchMap(_ => this.obterReleases()),
         switchMap(_ => this.obterSprints()),
         switchMap(_ => this.tagsViewChild.obterTags())
+      );
+  }
+
+  obterReleases(): Observable<any> {
+    return this.releaseApiService.obterTodos()
+      .pipe(
+        tap(releases => this.releases = releases)
       );
   }
 
@@ -120,6 +132,7 @@ export class TarefasFormComponent extends CrudFormComponent<Tarefa> implements O
       urlTicketSAC: '',
       comentarios: [],
       anexos: [],
+      release: null,
       sprint: null,
       situacao: SituacaoTarefa.AFazer,
       solucao: '',

@@ -1,4 +1,5 @@
 export interface FiltroTarefa {
+  releaseId: string;
   sprintId: string;
   relatorId: string;
   solucionadorId: string;

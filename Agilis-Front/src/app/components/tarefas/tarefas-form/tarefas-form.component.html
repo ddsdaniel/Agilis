@@ -117,6 +117,16 @@
         </mat-select>
       </mat-form-field>
 
+      <!-- Release -->
+      <mat-form-field fxFlex="50" class="ml-1">
+        <mat-label>Release</mat-label>
+        <mat-select [(ngModel)]="entidade.release" [compareWith]="comparadorService.compareById">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let release of releases" [value]="release">{{release.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <!-- Sprint -->
       <mat-form-field fxFlex="50" class="ml-1">
         <mat-label>Sprint</mat-label>

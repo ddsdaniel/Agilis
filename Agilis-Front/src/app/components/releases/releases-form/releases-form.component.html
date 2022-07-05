@@ -1,0 +1,44 @@
+﻿<app-action-bar [titulo]="'Cadastro da Release'">
+
+  <div menu class="form-container">
+
+    <!-- Versão -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Versão</mat-label>
+      <input matInput [(ngModel)]="entidade.versao" placeholder="Versão" name="versao" type="text" required
+        appSelectAllText>
+    </mat-form-field>
+
+    <!-- Produto -->
+    <mat-form-field class="ml-1" fxFlex="50">
+      <mat-label>Produto</mat-label>
+      <mat-select [(ngModel)]="entidade.produto" [compareWith]="comparadorService.compareById">
+        <mat-option *ngFor="let produto of produtos" [value]="produto">{{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Nome -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="entidade.nome" placeholder="Nome" name="nome" type="text" required appSelectAllText>
+    </mat-form-field>
+
+    <!-- Observações -->
+    <mat-form-field class="mt-4 full-width-margin">
+      <mat-label>Observações</mat-label>
+      <textarea matInput [(ngModel)]="entidade.observacoes" placeholder="Observações" name="observacoes" type="text"
+        appSelectAllText rows="5"></textarea>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Ícones da action-bar -->
+  <div icones>
+    <!-- Salvar -->
+    <button mat-icon-button (click)="salvar()">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+
+</app-action-bar>

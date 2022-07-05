@@ -63,6 +63,17 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Release -->
+    <mat-form-field class="full-width-margin">
+      <mat-label>Release</mat-label>
+      <mat-select [(ngModel)]="filtros.releaseId">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let release of releases" [value]="release.id">
+          {{release.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <!-- Relator -->
     <mat-form-field class="full-width-margin">
       <mat-label>Relator</mat-label>
